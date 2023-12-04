@@ -1,0 +1,60 @@
+<table name="UrzRachunki">
+		<description>Lista rachunków urzędów</description>
+		<column name="URa_URaId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="URa_UrzId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator urzędu</description>
+			<details>Klucz obcy do tabeli Urzedy</details>
+		</column>
+		<column name="URa_Lp" type="SMALLINT" definition="NOT NULL">
+			<description>Numer rachunku dla danego urzędu</description>
+			<details>Określa znaczenie danego rachunku</details>
+		</column>
+		<column name="URa_PraId" type="INTEGER">
+			<description>
+				Identyfikator pracownika (właściciela).
+				Przy URa_Lp != 0 (stare rachunki nie podpięte do listy) jest to NULL, ale NULL może też być
+				dla URa_Lp = 0, co oznacza pozycję Pracownicy.
+			</description>
+		</column>
+		<column name="URa_BNaId" type="INTEGER">
+			<description>Identyfikator banku</description>
+			<details>Klucz obcy do tabeli BnkNazwy</details>
+		</column>
+		<column name="URa_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL" hash="1">
+			<description>Numer rachunku bankowego</description>
+		</column>
+		<column name="URa_RachunekNr0" type="COMPUTED|NVARCHAR(51)" definition="CONVERT(NVARCHAR(51), REPLACE(REPLACE(URA_RACHUNEKNR, '-', ''), ' ', ''), 0)" hash="1">
+			<description>Numer rachunku bankowego bez separatorów</description>
+		</column>
+		<column name="URa_IBAN" type="SMALLINT" definition="NOT NULL">
+			<description>Czy numer rachunku jest w standardzie IBAN</description>
+		</column>
+		<primaryKey name="URa_Primary" columns="URa_URaId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_URaPracownik" localColumns="URa_PraID" refTable="PracKod" refColumns="Pra_PraID" deleteOption="CASCADE">
+			<description>Relacja CDN.UrzRachunki:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_URaUrzad" localColumns="URa_UrzId" refTable="Urzedy" refColumns="Urz_UrzId" deleteOption="CASCADE">
+			<description>Relacja CDN.UrzRachunki:CDN.Urzedy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_URaBank" localColumns="URa_BNaId" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.UrzRachunki:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<index name="URaUrzad" options="UNIQUE NONCLUSTERED" fields="URa_UrzId, URa_Lp, URa_PraID">
+			<description>Wg identyfikatora urzędu</description>
+		</index>
+		<index name="URaBank" options="NONCLUSTERED" fields="URa_BNaId">
+			<description>Wg identyfikatora banku</description>
+		</index>
+		<index name="URaRachunekNr0" options="NONCLUSTERED" fields="URa_RachunekNr0">
+			<description>Wg numeru rachunku</description>
+		</index>
+	</table>
+	

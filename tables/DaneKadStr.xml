@@ -1,0 +1,23 @@
+<table name="DaneKadStr">
+		<description>Dodatkowy słownik danych kadrowych</description>
+		<column name="DKT_DktId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DKT_Kod" type="NVARCHAR(32)" definition="NOT NULL" />
+		<column name="DKT_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj danych w słowniku</description>
+		</column>
+		<column name="DKT_Poziom" type="INTEGER" definition="NOT NULL" />
+		<column name="DKT_Wybieralny" type="INTEGER" definition="NOT NULL" />
+		<column name="DKT_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis kodu</description>
+		</column>
+		<column name="DKT_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_DKT_ZjeId default('')" />
+		<primaryKey name="DKT_Primary" columns="DKT_DktId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DKTZjeLink" options="NONCLUSTERED" fields="DKT_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

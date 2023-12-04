@@ -1,0 +1,144 @@
+<table name="TwrAtrybuty">
+		<description>Lista atrybutów towarów</description>
+		<column name="TwA_TwAId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="TwA_DeAId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator definicji</description>
+			<details>Klucz obcy do tabeli DefAtrybuty</details>
+		</column>
+		<column name="TwA_TwrId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator towaru</description>
+			<details>Klucz obcy do tabeli Towary</details>
+		</column>
+		<column name="TwA_SrUId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator urządzenia</description>
+			<details>Klucz obcy do tabeli SrsUrzadzenia</details>
+		</column>
+		<column name="TwA_SrRId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator rodzaju urządzenia</description>
+			<details>Klucz obcy do tabeli SrsRodzajeU</details>
+		</column>
+		<column name="TwA_SrZId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator zlecenia (dla atrybutu urządzenia)</description>
+			<details>Klucz obcy do tabeli SrsZlecenia</details>
+		</column>
+		<column name="TwA_Zalezny" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy atrybut zalezny (od towaru/kontrahenta)</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_ESklep" type="TINYINT">
+			<description>Czy udostepniac w e-Sklepie</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_WartoscTxt" type="NVARCHAR(100)" definition="NOT NULL" filterVisible="false">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TwA_CzyKopiowac" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy atrybut ma być kopiowany do opisu na dokumentach</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_CzyKod" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy doklejać kod atrybutu do opisu</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_CzyPrzenosic" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy prznosic kod na transakcje</description>
+		</column>
+		<column name="TwA_CzyDrukowac" type="TINYINT" definition="NOT NULL">
+			<description>Czy drukowac na transakcjach</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_DABID" type="INTEGER">
+			<description>Klucz obcy do CDN.DaneBinarne</description>
+		</column>
+		<column name="TwA_CzyObowiazkowySerwis" type="TINYINT" definition="NOT NULL">
+			<description>Czy obowiązkowy dla rodzaju lub urządzenia</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_CzyObowiazkowyDostawy" type="TINYINT" definition="NOT NULL">
+			<description>Czy obowiazkowy na dostawach</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_CzyPrzenosicNaDostawy" type="TINYINT" definition="NOT NULL">
+			<description>Czy przenosic atrybut na dostawy</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwA_RodzajId" type="INTEGER">
+			<description>Atrybut urządzenia skopiowany ze słownika rodzajów</description>
+		</column>
+		<column name="TwA_UrzId" type="INTEGER">
+			<description>Id urządzenia, dla atrybutów skopiownaych z urządzenia</description>
+		</column>
+		<column name="TwA_SourceId" type="INTEGER">
+			<description>Id atrybutu źródłowego</description>
+		</column>
+		<column name="TwA_JezykId" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_TwA_JezykId DEFAULT(1)">
+			<description>Identyfikator jezyka</description>
+			<details>
+				1 -polski
+				2- angielski
+				3 - niemiecki
+			</details>
+		</column>
+		<column name="TwA_Lp" type="INTEGER">
+			<description>Lp atrybuty</description>
+		</column>
+		<column name="TwA_AtrybutGrupujacyFantom" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TwA_AtrybutGrupujacyFantom DEFAULT(0)">
+			<description>Atrybut grupujący dla esklep</description>
+		</column>
+		<primaryKey name="TwA_Primary" columns="TwA_TwAId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TwAZlecenie" localColumns="TwA_SrZId" refTable="SrsZlecenia" refColumns="SrZ_SrZId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrAtrybuty:CDN.SrsZlecenia (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwARodzajU" localColumns="TwA_SrRId" refTable="SrsRodzajeU" refColumns="SrR_SrRId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrAtrybuty:CDN.SrsRodzajeU (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwAUrzadzenie" localColumns="TwA_SrUId" refTable="SrsUrzadzenia" refColumns="SrU_SrUId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrAtrybuty:CDN.SrsUrzadzenia (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwATowar" localColumns="TwA_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrAtrybuty:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwADefAtrybut" localColumns="TwA_DeAId" refTable="DefAtrybuty" refColumns="DeA_DeAId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrAtrybuty:CDN.DefAtrybuty (MANY:1)</description>
+		</foreignKey>
+		<index name="TwATowar" options="NONCLUSTERED" fields="TwA_TwrId">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+		<index name="TwAUrzadzenie" options="NONCLUSTERED" fields="TwA_SrUId" />
+		<index name="TwARodzajU" options="NONCLUSTERED" fields="TwA_SrRId" />
+		<index name="TwADefAtrybut" options="NONCLUSTERED" fields="TwA_DeAId">
+			<description>Klucz obcy do definicji atrybutu</description>
+		</index>
+		<index name="TwAZlecenie" options="NONCLUSTERED" fields="TwA_SrZId" />
+		<index name="TwADefAtrybutTwrWartosc" options="NONCLUSTERED" fields="TwA_DeAId" includedColumns="TwA_TwrId,TwA_DABID,TwA_WartoscTxt" />
+		<index name="TwAtrybutyESklep" options="NONCLUSTERED" fields="TwA_ESklep,TwA_CzyPrzenosicNaDostawy" includedColumns="TwA_DeAId, TwA_TwrId" />
+	</table>
+	

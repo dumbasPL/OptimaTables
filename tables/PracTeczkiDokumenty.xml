@@ -1,0 +1,107 @@
+<table name="PracTeczkiDokumenty">
+		<description>Tabela dokumentów pracownika</description>
+		<column name="PTD_PtdId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+			<details>IDENTITY</details>
+		</column>
+		<column name="PTD_PrtId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator teczki pracownika</description>
+		</column>
+		<column name="PTD_Nazwa" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Nazwa dokumentu</description>
+		</column>
+		<column name="PTD_RodzajLokalizacji" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj lokalizacji</description>
+		</column>
+		<column name="PTD_Sciezka" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Tytuł dokumentu</description>
+		</column>
+		<column name="PTD_DabId" type="INTEGER">
+			<description>Wskazuje na powiązanie z dokumentem pracownika</description>
+		</column>
+		<column name="PTD_Podpis" type="TINYINT" definition="NOT NULL">
+			<description>Czy podpisany</description>
+		</column>
+		<column name="PTD_FileMode" type="SMALLINT" definition="NOT NULL">
+			<description>link \ plik w bazie danych \ skan w bazie danych</description>
+			<details>
+				1- link &lt;br&gt;
+				2- plik &lt;br&gt;
+				3 - skan
+			</details>
+		</column>
+		<column name="PTD_NazwaPliku" type="NVARCHAR(255)">
+			<description>Nazwa skojarzonego pliku</description>
+		</column>
+		<column name="PTD_Wersja" type="SMALLINT" definition="NOT NULL">
+			<description>Kolejny numer wersji pliku po modyfikacji</description>
+		</column>
+		<column name="PTD_Archiwalny" type="INTEGER">
+			<description>Czy archiwalny?</description>
+			<details>
+				0 - NIE &lt;br&gt;
+				1 - TAK
+			</details>
+		</column>
+		<column name="PTD_WBazie" type="SMALLINT">
+			<description>Czy plik zapisany w bazie</description>
+			<details>
+				0 - NIE &lt;br&gt;
+				1 - TAK
+			</details>
+		</column>
+		<column name="PTD_StaEditId" type="INTEGER">
+			<description>Id stanowiska, na którym otwarto plik do edycji</description>
+		</column>
+		<column name="PTD_OpeEditId" type="INTEGER">
+			<description>Id operatora edytującego plik</description>
+		</column>
+		<column name="PTD_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="PTD_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PTD_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PTD_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora, który zmodyfikował plik</description>
+		</column>
+		<column name="PTD_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PTD_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PTD_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PTD_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PTD_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PTD_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PTD_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PTD_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PTD_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PTD_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="PTD_DataPodpisu" type="DATETIME">
+			<description>Data podpisadnia dokumentu</description>
+		</column>
+		<column name="PTD_DataEksportu" type="DATETIME">
+			<description>Data wyeksportowania dokumentu</description>
+		</column>
+		<primaryKey name="PK_PTD_PtdId" columns="PTD_PtdId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PTDPrtLink" localColumns="PTD_PrtId" refTable="PracTeczki" refColumns="PRT_PrtId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracTeczkiDokumenty:CDN.PracTeczki (MANY:1)</description>
+		</foreignKey>
+		<index name="PTDPrtLink" options="UNIQUE NONCLUSTERED" fields="PTD_PrtId, PTD_PtdId">
+			<description>Klucz obcy teczki</description>
+		</index>
+	</table>
+	

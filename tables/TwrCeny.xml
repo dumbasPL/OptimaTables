@@ -1,0 +1,77 @@
+<table name="TwrCeny" filterVisible="false">
+		<description>Lista cen towaru</description>
+		<details>Tabela cen towarów z cennika.</details>
+		<column name="TwC_TwCID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator ceny</description>
+		</column>
+		<column name="TwC_TwrID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do karty towaru</description>
+			<details>Wskaźnik do nagłówka Towary: TwC:TwrId = Twr:TwrId</details>
+		</column>
+		<column name="TwC_TwCNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer ceny</description>
+			<details>Numer ceny zdefiniowany w konfiguracji. Ich numery i nazwy są definiowane globalnie w
+				konfiguracji.</details>
+		</column>
+		<column name="TwC_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ ceny: netto/brutto</description>
+			<details>
+				1 - netto &lt;br&gt;
+				2 - brutto
+			</details>
+		</column>
+		<column name="TwC_Wartosc" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Wartość ceny</description>
+		</column>
+		<column name="TwC_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta ceny</description>
+		</column>
+		<column name="TwC_Aktualizacja" type="TINYINT" definition="NOT NULL">
+			<description>Czy aktualizować ceny przy zakupie</description>
+			<details>
+				0 - nie akutualizuj &lt;br&gt;
+				1 - aktualizuj
+			</details>
+		</column>
+		<column name="TwC_Zaokraglenie" type="DECIMAL( 7,4)" definition="NOT NULL">
+			<description>Sposób zaokrąglania ceny</description>
+		</column>
+		<column name="TwC_Marza" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Zakładana marża</description>
+		</column>
+		<column name="TwC_MarzaWStu" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Marża w stu</description>
+		</column>
+		<column name="TwC_Offset" type="DECIMAL( 7,4)" definition="NOT NULL">
+			<description>O ile zmniejszać cenę po zaokrągleniu</description>
+			<details>Pole wykorzystywane do uzyskiwania cen typu 9.99 zł</details>
+		</column>
+		<column name="TwC_TwrTyp" type="SMALLINT" />
+		<column name="TwC_TwrFirma" type="INTEGER" />
+		<column name="TwC_TwrNumer" type="INTEGER" />
+		<column name="TwC_TwrLp" type="SMALLINT" />
+		<column name="TwC_DokID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwC_DokID DEFAULT(0)">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="TwC_WartoscZakOld" type="DECIMAL(17,4)" definition="NOT NULL CONSTRAINT DF_TwC_WartoscZakOld DEFAULT(0)">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="TwC_Punkty" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwC_Punkty DEFAULT(0)">
+			<description>Punkty dla programu lojalnościowego</description>
+		</column>
+		<primaryKey name="TwC_Primary" columns="TwC_TwCID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TwCTowar" localColumns="TwC_TwrID" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrCeny:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="TwCTowar" options="UNIQUE NONCLUSTERED" fields="TwC_TwrID ,TwC_TwCNumer" includedColumns="TwC_Wartosc, TwC_Waluta">
+			<description>Wg identyfikatora ceny i karty towaru</description>
+		</index>
+		<index name="TwCTwrGID" options="NONCLUSTERED" fields="TwC_TwrTyp ,TwC_TwrFirma ,TwC_TwrNumer ,TwC_TwrLp">
+			<description>Wg identyfikatora GID w CDN-XL</description>
+		</index>
+		<index name="TwrCenyWaluta" options="NONCLUSTERED" fields="TwC_Waluta" />
+		<index name="TwrCenyTwCNumer" options="NONCLUSTERED" fields="TwC_TwCNumer" includedColumns="TwC_TwrID, TwC_Typ, TwC_Wartosc, TwC_Waluta" />
+	</table>
+	

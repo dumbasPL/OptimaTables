@@ -1,0 +1,63 @@
+<table name="Poreczyciele">
+		<description>Tabela poręczycieli pożyczek PKZP</description>
+		<column name="POR_PorId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="POR_DodId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pożyczki</description>
+		</column>
+		<column name="POR_PraId" type="INTEGER">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="POR_Osoba" type="NVARCHAR(129)" definition="NOT NULL" hash="1">
+			<description>Nazwisko i imię poręczyciela</description>
+		</column>
+		<column name="POR_Opis" type="NVARCHAR(512)" definition="NOT NULL" hash="1">
+			<description>Opis PKZP</description>
+		</column>
+		<column name="POR_PoreczycielLista" type="TINYINT" definition="NOT NULL">
+			<description>Poręczyciel z listy pracowników</description>
+		</column>
+		<column name="POR_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="POR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="POR_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="POR_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="POR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="POR_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="POR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_POR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="POR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_POR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="POR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_POR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="POR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_POR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="POR_Primary" columns="POR_PorId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PORDodLink" localColumns="POR_DodId" refTable="Dodatki" refColumns="DOD_DodId" deleteOption="CASCADE">
+			<description>Relacja CDN.Poreczyciele:CDN.Dodatki (MANY:1)</description>
+		</foreignKey>
+		<index name="PORDodLink" options="NONCLUSTERED" fields="POR_DodId">
+			<description>Klucz obcy pożyczki (dodatku)</description>
+		</index>
+	</table>
+	

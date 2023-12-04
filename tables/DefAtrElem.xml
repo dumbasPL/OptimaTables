@@ -1,0 +1,24 @@
+<table name="DefAtrElem">
+		<description>Lista wartości atrybutu</description>
+		<column name="DAE_DAEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="DAE_DeAId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator definicji</description>
+			<details>Klucz obcy do tabeli DefAtrybuty</details>
+		</column>
+		<column name="DAE_Wartosc" type="NVARCHAR(100)" definition="NOT NULL" filterVisible="false">
+			<description>Wartosc atrybutu</description>
+			<details>Dla atrybutów typu lista</details>
+		</column>
+		<column name="DAE_Lp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DAE_Lp DEFAULT(1)" filterVisible="false">
+			<description>Kolejność atrybutów esklep</description>
+		</column>
+		<primaryKey name="DAE_Primary" columns="DAE_DAEId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="TwADefAtrybut" options="NONCLUSTERED" fields="DAE_DeAId">
+			<description>Klucz obcy do definicji atrybutu</description>
+		</index>
+	</table>
+	

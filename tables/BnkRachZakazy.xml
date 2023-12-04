@@ -1,0 +1,94 @@
+<table name="BnkRachZakazy">
+		<description>Zakazy dostępu do rachunków kasowo/bankowych</description>
+		<column name="BRZ_BRZID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="BRZ_BRaID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rachunku kasowo/bankowego</description>
+		</column>
+		<column name="BRZ_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="BRZ_RachL" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz wyświetlania na liście tego rejestru k/b</description>
+		</column>
+		<column name="BRZ_RachP" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz podglądu tego rejestru k/b</description>
+		</column>
+		<column name="BRZ_RachZ" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz modyfikacji tego rejestru k/b</description>
+		</column>
+		<column name="BRZ_RachR" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz rozliczania w tym rejestrze k/b</description>
+		</column>
+		<column name="BRZ_RachU" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz usuwania tego rejestru k/b</description>
+		</column>
+		<column name="BRZ_RachS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BRZ_RachS DEFAULT(0)">
+			<description>Zakaz wprowadzania zapisów powodujących ujemne saldo tym w rejestrze</description>
+		</column>
+		<column name="BRZ_RapD" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz dodawania raportów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_RapP" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz podglądu raportów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_RapZ" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz modyfikacji raportów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_RapZC" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz modyfikacji cudzych raportów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_RapU" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz usuwania raportów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_RapUC" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz usuwania cudzych raportów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZdarzD" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz dodawania zdarzeń k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZdarzP" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz podglądu zdarzeń k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZdarzZ" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz modyfikacji zdarzeń k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZdarzZC" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz modyfikacji cudzych zdarzeń k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZdarzU" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz usuwania zdarzeń k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZdarzUC" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz usuwania cudzych zdarzeń k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZapD" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz dodawania zapisów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZapP" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz podglądu zapisów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZapZ" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz modyfikacji zapisów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZapZC" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz modyfikacji cudzych zapisów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZapU" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz usuwania zapisów k/b w tym rejestrze</description>
+		</column>
+		<column name="BRZ_ZapUC" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz usuwania cudzych zapisów k/b w tym rejestrze</description>
+		</column>
+		<primaryKey name="BRZ_Primary" columns="BRZ_BRZID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BRZRachunek" localColumns="BRZ_BRaID" refTable="BnkRachunki" refColumns="BRa_BRaID" deleteOption="CASCADE">
+			<description>Relacja CDN.BnkRachZakazy:CDN.BnkRachunki (MANY:1)</description>
+		</foreignKey>
+		<index name="BRZRachunek" options="UNIQUE NONCLUSTERED" fields="BRZ_BRaID ,BRZ_OpeID">
+			<description>Według rachunku k/b</description>
+		</index>
+	</table>
+	

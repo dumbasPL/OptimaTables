@@ -1,0 +1,43 @@
+<table name="CfgKurierzyDefPaczki">
+		<description>Konfiguracja kurierzy definicje paczek</description>
+		<column name="CKP_CKPID" type="int" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="CKP_CKKID" type="int" definition=" NOT NULL">
+			<description>Id firmy kurierskiej</description>
+		</column>
+		<column name="CKP_Waga" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Waga</description>
+		</column>
+		<column name="CKP_Wysokosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Wysokość</description>
+		</column>
+		<column name="CKP_Szerokosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Szerokość</description>
+		</column>
+		<column name="CKP_Dlugosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Długość</description>
+		</column>
+		<column name="CKP_SposobPakowania" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sposób Pakowania</description>
+		</column>
+		<column name="CKP_SposobPakowaniaKey" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sposób Pakowania Klucz</description>
+		</column>
+		<column name="CKP_Gabaryt" type="int" definition="NOT NULL CONSTRAINT DF_CKP_Gabaryt DEFAULT(0)">
+			<description>Gabaryt paczki - Poczta Polska</description>
+		</column>
+		<column name="CKP_Ostroznie" type="int" definition="NOT NULL CONSTRAINT DF_CKP_Ostroznie DEFAULT(0)">
+			<description>Ostrożnie - Poczta Polska</description>
+		</column>
+		<column name="CKP_Niestandardowa" type="int" definition="NOT NULL CONSTRAINT DF_CKP_Niestandardowa DEFAULT(0)">
+			<description>Niestandardowa - Poczta Polska</description>
+		</column>
+		<primaryKey name="CKP_Primary" columns="CKP_CKPID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_CKPCKKID" localColumns="CKP_CKKID" refTable="CfgKurierzy" refColumns="CKK_CKKID" deleteOption="CASCADE">
+			<description>Relacja CDN.CfgKurierzyPobranieFormyPlat:CDN.CfgKurierzy (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

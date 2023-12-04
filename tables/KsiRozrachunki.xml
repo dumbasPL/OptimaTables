@@ -1,0 +1,144 @@
+<table name="KsiRozrachunki">
+		<description>Rozrachunki</description>
+		<details>Tabel zawiera rozrachunki dokumentów księgowych</details>
+		<column name="KRo_KRoId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KRo_OObId" type="INTEGER" definition="NULL">
+			<description>Identyfikator okresu obrachunkowego</description>
+		</column>
+		<column name="KRo_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu, 1- dekret, 2 - bilans otwarcia</description>
+			<details>Określa, czy jest to schemat księgowania rejestru Vat, listy płac itp.</details>
+		</column>
+		<column name="KRo_Dokument" type="VARCHAR(256)">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="KRo_NrDziennika" type="NVARCHAR(30)">
+			<description>Numer dziennika</description>
+		</column>
+		<column name="KRo_Dziennik" type="NVARCHAR(30)">
+			<description>Nazwa dziennika cząstkowego</description>
+		</column>
+		<column name="KRo_NumerDziennika" type="INTEGER" definition="NULL">
+			<description>Numer zapisu w dzienniku cząstkowym</description>
+		</column>
+		<column name="KRo_NrKsiegi" type="NVARCHAR(30)">
+			<description>Nr dziennika księgowego</description>
+		</column>
+		<column name="KRo_IdentKsieg" type="VARCHAR(50)">
+			<description>Identyfikator księgowy</description>
+		</column>
+		<column name="KRo_DataDokumentu" type="DATETIME">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="KRo_DataOperacji" type="DATETIME">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="KRo_TerminPlatnosci" type="DATETIME">
+			<description>Termin Platnosci</description>
+		</column>
+		<column name="KRo_DataRozliczenia" type="DATETIME">
+			<description>TimeStamp rozliczenia</description>
+		</column>
+		<column name="KRo_DataRoz" type="DATETIME">
+			<description>Data rozliczenia</description>
+		</column>
+		<column name="KRo_KwotaDok" type="DECIMAL(15,2)">
+			<description>Kwota dokumentu</description>
+		</column>
+		<column name="KRo_Kwota" type="DECIMAL(15,2)">
+			<description>Kwota rozliczenia</description>
+		</column>
+		<column name="KRo_Konto" type="NVARCHAR(50)">
+			<description>Konto księgowe</description>
+		</column>
+		<column name="KRo_SumRozliczen" type="DECIMAL(15,2)">
+			<description>Suma rozliczeń</description>
+		</column>
+		<column name="KRo_KontoIdx" type="NVARCHAR(50)">
+			<description>Konto księgowe idx</description>
+		</column>
+		<column name="KRo_KontoPrzeciw" type="NVARCHAR(50)">
+			<description>Konto przeciwstawne</description>
+		</column>
+		<column name="KRo_DeEId" type="INTEGER">
+			<description>Klucz obcy do tabeli DekretyElem</description>
+		</column>
+		<column name="KRo_Bufor" type="TINYINT">
+			<description>Bufor</description>
+		</column>
+		<column name="KRo_Storno" type="TINYINT">
+			<description>Storno</description>
+		</column>
+		<column name="KRo_BOEId" type="INTEGER">
+			<description>Klucz obcy do tabeli BOElem</description>
+		</column>
+		<column name="KRo_Opis" type="NVARCHAR(50)">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="KRo_RozliczenieId" type="INTEGER">
+			<description>Klucz obcy do pola KsiRozliczenia.KRoID</description>
+		</column>
+		<column name="KRo_ParentId" type="INTEGER">
+			<description>Klucz obcy do pola KsiRozliczenia.KRoID</description>
+		</column>
+		<column name="KRo_Strona" type="INTEGER">
+			<description>Kierunek rozliczenia; 1-Wn, 2-Ma</description>
+		</column>
+		<column name="KRo_KwotaDokWal" type="DECIMAL(15,2)">
+			<description>Kwota dokumnetu w walucie</description>
+		</column>
+		<column name="KRo_KwotaWal" type="DECIMAL(15,2)">
+			<description>Kwota rozliczenia w walucie</description>
+		</column>
+		<column name="KRo_SumRozliczenWal" type="DECIMAL(15,2)">
+			<description>Suma rozliczeń w walucie</description>
+		</column>
+		<column name="KRo_Waluta" type="VARCHAR(3)">
+			<description>Waluta zapisu</description>
+		</column>
+		<column name="KRo_BRKID" type="INTEGER" filterVisible="false">
+			<description>Wskaźnik do tabeli BnkRozKwoty</description>
+		</column>
+		<primaryKey name="KRo_Primary" columns="KRo_KRoId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="KRoBRKID" options="NONCLUSTERED" fields="KRo_BRKID">
+			<description>Wg ID rozliczenia KB (relacja 1:1 CDN.BnkRozKwoty:CDN.KsiRozrachunki)</description>
+		</index>
+		<index name="KroDekretyElem" options="NONCLUSTERED" fields="KRo_Typ ,KRo_DeEId ,KRo_Strona">
+			<description>Klucz do tabeli DekretyElem</description>
+		</index>
+		<index name="KRoBOElem" options="NONCLUSTERED" fields="KRo_Typ ,KRo_BOEId ,KRo_Strona">
+			<description>Klucz do tabeli BOElem</description>
+		</index>
+		<index name="KRoRozliczenie" options="NONCLUSTERED" fields="KRo_RozliczenieId">
+			<description> Self-relacja</description>
+		</index>
+		<index name="KRoKonto" options="NONCLUSTERED" fields="KRo_Konto ,KRo_KontoIdx">
+			<description>Klucz do tabeli Konta</description>
+		</index>
+		<index name="KRoDataDokumentu" options="NONCLUSTERED" fields="KRo_DataDokumentu">
+			<description>Klucz wg daty dokumentu</description>
+		</index>
+		<index name="KRoTerminPlatnosci" options="NONCLUSTERED" fields="KRo_TerminPlatnosci">
+			<description>Klucz wg terminu płatności</description>
+		</index>
+		<index name="KRoDataRozliczenia" options="NONCLUSTERED" fields="KRo_DataRozliczenia">
+			<description>Klucz wg daty rozliczenia</description>
+		</index>
+		<index name="KRoBufor" options="NONCLUSTERED" fields="KRo_Bufor">
+			<description>Klucz wg dokumentow w buforze</description>
+		</index>
+		<index name="KRoDokument" options="NONCLUSTERED" fields="KRo_Dokument ,KRo_IdentKsieg ,KRo_Opis">
+			<description>Klucz wg numeracji dokumentów</description>
+		</index>
+		<index name="KroKwota" options="NONCLUSTERED" fields="KRo_Kwota" />
+		<index name="KRo_DETA" options="NONCLUSTERED" fields="KRo_RozliczenieId, KRo_Typ, KRo_DeEId, KRo_KRoId">
+			<description />
+		</index>
+		<index name="KRoDeEId" options="NONCLUSTERED" fields="KRo_DeEId" includedColumns="KRo_KRoId,KRo_OObId,KRo_Typ,KRo_Dokument,KRo_NrDziennika,KRo_Dziennik,KRo_NumerDziennika,KRo_NrKsiegi,KRo_IdentKsieg,KRo_DataDokumentu,KRo_TerminPlatnosci,KRo_DataRozliczenia,KRo_DataRoz,KRo_Kwota,KRo_Konto,KRo_SumRozliczen,KRo_KontoIdx,KRo_KontoPrzeciw,KRo_Bufor,KRo_Storno,KRo_BOEId,KRo_Opis,KRo_RozliczenieId,KRo_Strona,KRo_KwotaDokWal,KRo_KwotaWal,KRo_SumRozliczenWal,KRo_Waluta" />
+		<index name="KRoBoEId" options="NONCLUSTERED" fields="KRo_BoEId" includedColumns="KRo_KRoId,KRo_OObId,KRo_Typ,KRo_Dokument,KRo_NrDziennika,KRo_Dziennik,KRo_NumerDziennika,KRo_NrKsiegi,KRo_IdentKsieg,KRo_DataDokumentu,KRo_TerminPlatnosci,KRo_DataRozliczenia,KRo_DataRoz,KRo_Kwota,KRo_Konto,KRo_SumRozliczen,KRo_KontoIdx,KRo_KontoPrzeciw,KRo_Bufor,KRo_Storno,KRo_DeEId,KRo_Opis,KRo_RozliczenieId,KRo_Strona,KRo_KwotaDokWal,KRo_KwotaWal,KRo_SumRozliczenWal,KRo_Waluta" />
+	</table>
+	

@@ -1,0 +1,169 @@
+<table name="DlgNag">
+		<column name="DLN_DLNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="DLN_Status" type="SMALLINT" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_DDfId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_NumerString" type="NVARCHAR(31)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(DLN_NumerNr,DLN_NumerString)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DLN_DataDok" type="DateTime" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_ZakId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_PodmiotTyp" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_PodmiotId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_KatId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_Kategoria" type="NVARCHAR(50)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_MiejsceDocelowe" type="NVARCHAR(255)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_DataOd" type="DateTime" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_DataDo" type="DateTime" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_DataRozliczenia" type="DateTime" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_WyjazdZMZ" type="SMALLINT" definition="NOT NULL">
+			<description>Wyjazd z miejsca zamieszkania</description>
+		</column>
+		<column name="DLN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="DLN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="DLN_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="DLN_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="DLN_KwotaSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_KwotaWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLN_Opis" type="NVARCHAR(255)" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLN_BuforData" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_BuforOperatorId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_PolecenieWyjazduData" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_PolecenieWyjazduOperatorId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_WydatkiData" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_WydatkiOperatorId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_ZatwierdzenieData" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_ZatwierdzenieOperatorId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLN_WymagaPrzeliczenia" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLN_WymagaPrzeliczenia DEFAULT(0)">
+			<description>Flaga ustawiania przez aplikacje e-Pracownik. 1 - delegacja wymaga przeliczenia.</description>
+		</column>
+		<column name="DLN_DekId" type="INTEGER">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</column>
+		<column name="DLN_PreDekId" type="INTEGER">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</column>
+		<column name="DLN_KPRId" type="INTEGER">
+			<description>Klucz obcy do tabeli ZapisyKPR</description>
+		</column>
+		<column name="DLN_Zagraniczna" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLN_Zagraniczna DEFAULT(0)">
+			<description>Wyjazd z miejsca zamieszkania</description>
+		</column>
+		<column name="DLN_Zrodlo" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DLN_Zrodlo DEFAULT(0)">
+			<description>Identyfikator aplikacji</description>
+		</column>
+		<column name="DLN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="DLN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DLN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DLN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="DLN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DLN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DLN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DLN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DLN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DLN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DLN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DLN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DLN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DLN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="DLN_Primary" columns="DLN_DLNId">
+			<description />
+		</primaryKey>
+		<index name="DLNNumer" options="UNIQUE NONCLUSTERED" fields="DLN_NumerString ,DLN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="DLNNumerPelny" options="UNIQUE NONCLUSTERED" fields="DLN_NumerPelny">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="DLNDekrety" options="NONCLUSTERED" fields="DLN_DekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="DLNPreDekrety" options="NONCLUSTERED" fields="DLN_PreDekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="DLNKPR" options="NONCLUSTERED" fields="DLN_KPRId">
+			<description>Klucz obcy do tabeli ZapisyKPR</description>
+		</index>
+	</table>
+	

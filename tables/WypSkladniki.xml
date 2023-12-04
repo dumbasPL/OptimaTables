@@ -1,0 +1,169 @@
+<table name="WypSkladniki">
+		<description>Tabela składników wypłat pracowników</description>
+		<column name="WPS_WpsId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator wypłaty</description>
+		</column>
+		<column name="WPS_WplId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator paska do którego jest podpięta wypłata</description>
+		</column>
+		<column name="WPS_WpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator elementu wypłaty</description>
+		</column>
+		<column name="WPS_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="WPS_DzlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wydziału</description>
+		</column>
+		<column name="WPS_PnbId" type="INTEGER">
+			<description>Identyfikator nieobecności pracownika</description>
+		</column>
+		<column name="WPS_TwpId" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj składnika wypłaty</description>
+		</column>
+		<column name="WPS_RodzajZrodla" type="INTEGER" />
+		<column name="WPS_ZrodloId" type="INTEGER" />
+		<column name="WPS_Nazwa" type="NVARCHAR(128)" definition="NOT NULL">
+			<description>Opis wypłaty</description>
+		</column>
+		<column name="WPS_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość składnika wypłaty</description>
+		</column>
+		<column name="WPS_DataDanych" type="DATETIME" definition="NOT NULL">
+			<description>Data naliczenia wypłaty</description>
+		</column>
+		<column name="WPS_DataOd" type="DATETIME">
+			<description>Okres za jaki została naliczona wypłata (data początkowa)</description>
+		</column>
+		<column name="WPS_DataDo" type="DATETIME">
+			<description>Okres za jaki została naliczona wypłata (data końcowa)</description>
+		</column>
+		<column name="WPS_Podstawa" type="DECIMAL(15,2)" />
+		<column name="WPS_OkresDni" type="INTEGER" definition="NOT NULL">
+			<description>Ilość dni, za które została naliczona wypłata</description>
+		</column>
+		<column name="WPS_OkresCzas" type="DATETIME" definition="NOT NULL">
+			<description>Ilość minut, za które została naliczona wypłata</description>
+		</column>
+		<column name="WPS_EkwiwalentIlosc" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="WPS_Procent" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="WPS_Wartosc1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wg której ma być liczony dodatek</description>
+		</column>
+		<column name="WPS_Wartosc2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wg której ma być liczony dodatek</description>
+		</column>
+		<column name="WPS_Splacono" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość spłat zaliczki</description>
+		</column>
+		<column name="WPS_SplaconoAll" type="TINYINT" definition="NOT NULL">
+			<description>Flaga spłacenia całej kwoty zaliczki</description>
+		</column>
+		<column name="WPS_Zaliczka" type="INTEGER">
+			<description>Identyfikator zaliczki dla spłaty</description>
+		</column>
+		<column name="WPS_DstId" type="INTEGER" />
+		<column name="WPS_HrmId" type="INTEGER">
+			<description>Harmonogram (dt spłaty pożyczki)</description>
+		</column>
+		<column name="WPS_Godziny" type="DATETIME" definition="NOT NULL" />
+		<column name="WPS_WartoscWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość składnika wypłaty w przeliczeniu na walutę obcą zastosowaną w wypłacie</description>
+		</column>
+		<column name="WPS_Archiwalny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPS_Archiwalny Default(0)">
+			<description>Flaga: składnik archiwalny</description>
+		</column>
+		<column name="WPS_PracaRodzic" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPS_PracaRodzic Default(0)">
+			<description>Rozliczenie nieobecności w trakcie pracy na url. macierz.</description>
+		</column>
+		<column name="WPS_PracaRodzicPodstawa" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPS_PracaRodzicPodstawa Default(0)">
+			<description>Podstawa zasiłku pomniejszona prop. dla zasiłku do nieob. na url. macierz.</description>
+		</column>
+		<column name="WPS_OkresCzasUmowa" type="DATETIME" definition="NOT NULL CONSTRAINT DF_WPS_OkresCzasUmowa Default(-2)">
+			<description>Ilość minut, za które została naliczona wypłata umowy (zestawienie)</description>
+		</column>
+		<column name="WPS_PodstawaSklWych" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPS_PodstawaSklWych Default(0)">
+			<description>Podstawa składek dla zasiłku wychowawczego</description>
+		</column>
+		<column name="WPS_ZrodloIdExt" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPS_ZrodloIdExt Default(0)">
+			<description>Rozszerzenie informacji o źródle składnika</description>
+		</column>
+		<column name="WPS_WartoscPodst" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPS_WartoscPodst Default(0)">
+			<description>Kwota pierwotnej podstawy oddel.</description>
+		</column>
+		<column name="WPS_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="WPS_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WPS_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WPS_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPS_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WPS_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WPS_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WPS_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="WPS_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WPS_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="WPS_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WPS_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPS_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WPS_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPS_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="WPS_Primary" columns="WPS_WpsId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_WPSDstLink" localColumns="WPS_DstId" refTable="DefinicjeStref" refColumns="DST_DstId">
+			<description>Relacja CDN.WypSkladniki:CDN.DefinicjeStref (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TWPPnbLink" localColumns="WPS_PnbId" refTable="PracNieobec" refColumns="PNB_PnbId">
+			<description>Relacja CDN.WypSkladniki:CDN.PracNieobec (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPSTwpLink" localColumns="WPS_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId">
+			<description>Relacja CDN.WypSkladniki:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPSWpeLink" localColumns="WPS_WpeId" refTable="WypElementy" refColumns="WPE_WpeId" deleteOption="CASCADE">
+			<description>Relacja CDN.WypSkladniki:CDN.WypElementy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPSPraLink" localColumns="WPS_PraId" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.WypSkladniki:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="WPSPraLink" options="NONCLUSTERED" fields="WPS_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="WPLWyplata" options="NONCLUSTERED" fields="WPS_WplId">
+			<description>Odnośnik do wypłaty</description>
+		</index>
+		<index name="WPSWpeLink" options="NONCLUSTERED" fields="WPS_WpeId">
+			<description>Klucz obcy elementu wypłaty</description>
+		</index>
+		<index name="WPSTwpLink" options="NONCLUSTERED" fields="WPS_TwpId">
+			<description>Link do typu składnika</description>
+		</index>
+		<index name="TWPPnbLink" options="NONCLUSTERED" fields="WPS_PnbId">
+			<description>Link do nieobecności pracownika</description>
+		</index>
+		<index name="WpsZrodlo" options="NONCLUSTERED" fields="WPS_ZrodloId ,WPS_RodzajZrodla">
+			<description>Klucz obcy do źródła</description>
+		</index>
+		<index name="WPSDstLink" options="NONCLUSTERED" fields="WPS_DstId">
+			<description>Strefa</description>
+		</index>
+	</table>
+	

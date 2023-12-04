@@ -1,0 +1,31 @@
+<table name="KntScalHist">
+		<description>Tabela historii scalania kart kontrahentów</description>
+		<column name="KSH_KSHID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KSH_NazwaTabeli" type="VARCHAR(100)">
+			<description>Nazwa tabeli, w której podmieniamy kontrahenta</description>
+		</column>
+		<column name="KSH_IDWiersza" type="INTEGER">
+			<description>ID rekordu, w którym dokonujemy podmiany</description>
+		</column>
+		<column name="KSH_NumerDok" type="VARCHAR(100)">
+			<description>Numer dokumentu, na którym podmieniamy kontrahenta</description>
+		</column>
+		<column name="KSH_OldKntID" type="INTEGER">
+			<description>ID kontrahenta, którego podmieniamy (duplikata)</description>
+		</column>
+		<column name="KSH_OldKntKod" type="VARCHAR(50)">
+			<description>Kod kontrahenta, którego podmieniamy (duplikata)</description>
+		</column>
+		<column name="KSH_NewKntID" type="INTEGER">
+			<description>ID kontrahenta, na którego podmieniamy (głównego)</description>
+		</column>
+		<column name="KSH_NewKntKod" type="VARCHAR(50)">
+			<description>Kod kontrahenta, na którego podmieniamy (głównego)</description>
+		</column>
+		<primaryKey name="KSH_Primary" columns="KSH_KSHID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

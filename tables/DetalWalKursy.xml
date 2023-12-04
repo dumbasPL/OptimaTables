@@ -1,0 +1,22 @@
+<table name="DetalWalKursy">
+		<description>Ceny dla stanowiska mobile/detalu</description>
+		<column name="DWK_DWKId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DWK_DStaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DWK_WKuID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator typu kursu</description>
+		</column>
+		<column name="DWK_Domyslny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DWK_Domyslny DEFAULT(0)">
+			<description>Domyslna forma dla detalu</description>
+		</column>
+		<primaryKey name="DWK_Primary" columns="DWK_DWKId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DWKCStanowiskoDetal" options="UNIQUE NONCLUSTERED" fields="DWK_DStaId ,DWK_DWKId">
+			<description>Według stanowiska</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,59 @@
+<table name="DekretyKonta">
+		<description>Powiązanie pomiędzy księgowaniami a kontami</description>
+		<column name="DeK_DeKId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DeK_DeEId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do DekretyElem</description>
+		</column>
+		<column name="DeK_DeNId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do DekretyNag</description>
+		</column>
+		<column name="DeK_DziId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do Dzienniki</description>
+		</column>
+		<column name="DeK_AccId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do Konta</description>
+		</column>
+		<column name="DeK_Strona" type="TINYINT" definition="NOT NULL">
+			<description>Strona księgowania</description>
+			<details>1 - Winien, 2 - Ma</details>
+		</column>
+		<column name="DeK_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="DeK_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota księgowania</description>
+		</column>
+		<column name="DeK_KwotaWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota w walucie</description>
+		</column>
+		<column name="DeK_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta księgowania</description>
+		</column>
+		<column name="DeK_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Zapis w buforze</description>
+		</column>
+		<primaryKey name="DeK_Primary" columns="DeK_DeKId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DeKKonto" localColumns="DeK_AccId" refTable="Konta" refColumns="Acc_AccId">
+			<description>Relacja CDN.DekretyKonta:CDN.Konta (MANY:1)</description>
+		</foreignKey>
+		<index name="DeKElement" options="UNIQUE NONCLUSTERED" fields="DeK_DeEId ,DeK_Strona">
+			<description>Klucz obcy do DekretyElem</description>
+		</index>
+		<index name="DeKNaglowek" options="NONCLUSTERED" fields="DeK_DeNId">
+			<description>Klucz obcy do DekretyNag</description>
+		</index>
+		<index name="DeEDziennik" options="UNIQUE NONCLUSTERED" fields="DeK_DziId ,DeK_AccId ,DeK_DataDok ,DeK_DeEId ,DeK_Strona">
+			<description>Klucz obcy do Dzienniki</description>
+		</index>
+		<index name="DeKKonto" options="UNIQUE NONCLUSTERED" fields="DeK_AccId ,DeK_DataDok ,DeK_DeEId ,DeK_Strona">
+			<description>Klucz obcy do Konta</description>
+		</index>
+		<index name="DeK_DETA" options="NONCLUSTERED" fields="DeK_DeEId, DeK_AccId, DeK_DataDok" includedColumns="DeK_Strona, DeK_Kwota, DeK_KwotaWal, DeK_Bufor">
+			<description />
+		</index>
+	</table>
+	

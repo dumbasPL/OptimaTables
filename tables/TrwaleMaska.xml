@@ -1,0 +1,31 @@
+<table name="TrwaleMaska" filterVisible="false">
+		<description>Maska odliczeń sezonowych dla środka trwałego</description>
+		<details>Dla środków używanych i amortyzowanych sezonowo w tabeli TrwaleMaska wpisywane są
+			rekordy dla miesięcy, w których środek trwały nie jest używany (amortyzowany).</details>
+		<column name="SrM_SrMID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SrM_SrTID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator środka trwałego</description>
+		</column>
+		<column name="SrM_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc w którym nie ma naliczania</description>
+		</column>
+		<column name="SrM_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ amortyzacji (kosztowa/bilansowa)</description>
+			<details>
+				1-amortyzacja kosztowa
+				2-amortyzacja bilansowa
+			</details>
+		</column>
+		<primaryKey name="SrM_Primary" columns="SrM_SrMID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_SrMTrwale" localColumns="SrM_SrTID" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleMaska:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+		<index name="SrMTrwale" options="UNIQUE NONCLUSTERED" fields="SrM_SrTID ,SrM_RokMies ,SrM_Typ">
+			<description>Wg środka trwałego</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,160 @@
+<table name="BnkRaporty">
+		<description>Nagłówki raportów kasowo-bankowych</description>
+		<details>
+			Tabela zawiera nagłówki raportów kasowo-bankowych w rozumieniu księgowym. Wiersz tabeli
+			zawiera informacje o datatch otwarcia i zamknięcia raportu, saldzie początkowym i obrotach.
+			Tabela powiązana jest relacyjnie z tabela BnkRachunki, dzięki czemu raporty bankowe są
+			zorganizowane w rejestry tożsame z rachunkami bankowymi.
+		</details>
+		<column name="BRp_BRpID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="BRp_BRaID" type="INTEGER" filterVisible="false">
+			<description>Wskaźnik do tabeli BnkRachunki</description>
+		</column>
+		<column name="BRp_DDfID" type="INTEGER">
+			<description>Klucz obcy do definicji dokumentu</description>
+		</column>
+		<column name="BRp_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru raportu bankowego</description>
+		</column>
+		<column name="BRp_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru raportu</description>
+		</column>
+		<column name="BRp_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(BRP_NUMERNR,BRP_NUMERSTRING)">
+			<description>Pełny numer raportu bankowego</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="BRp_NumerObcy" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer obcy raportu</description>
+		</column>
+		<column name="BRp_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data otwarcia raportu bankowego</description>
+			<details>Data otwarcia raportu bankowego - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="BRp_DataZam" type="DATETIME">
+			<description>Data zamknięcia raportu bankowego</description>
+			<details>Data zamknięcia raportu bankowego - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="BRp_Zamkniety" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie, czy raport jest zamknięty</description>
+			<details>0 - otwarty; 1 - zamknięty</details>
+		</column>
+		<column name="BRp_DekID" type="INTEGER">
+			<description>Klucz obcy do tabeli dekretów</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada BRp_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRp_DekId = NULL;
+			</details>
+		</column>
+		<column name="BRp_PreDekID" type="INTEGER">
+			<description>Klucz obcy do tabeli predekretów</description>
+		</column>
+		<column name="BRp_SaldoBO" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Bilans otwarcia raportu bankowego</description>
+		</column>
+		<column name="BRp_Przychody" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie przychód</description>
+		</column>
+		<column name="BRp_Rozchody" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie rozchód</description>
+		</column>
+		<column name="BRp_SaldoBOSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Bilans otwarcia w walucie systemowej</description>
+		</column>
+		<column name="BRp_PrzychodySys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie przychód w walucie systemowej</description>
+		</column>
+		<column name="BRp_RozchodySys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie rozchód w walucie systemowej</description>
+		</column>
+		<column name="BRp_RoznicaKursowaSysMW" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Sumaryczna różnica kursowa magazynu walut w walucie systemowej</description>
+		</column>
+		<column name="BRp_CDCWB" type="TINYINT">
+			<description>Czy wyciąg bankowy został zaimportowany z CDC.</description>
+		</column>
+		<column name="BRp_TS_Export" type="DATETIME">
+			<description>TimeSTamp dokonania exportu</description>
+		</column>
+		<column name="BRp_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="BRp_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="BRp_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="BRp_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRp_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="BRp_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRp_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRp_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="BRp_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRp_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BRp_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRp_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BRp_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRp_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRp_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRp_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRp_GIDTyp" type="SMALLINT" filterVisible="false" />
+		<column name="BRp_GIDFirma" type="INTEGER" filterVisible="false" />
+		<column name="BRp_GIDNumer" type="INTEGER" filterVisible="false" />
+		<column name="BRp_GIDLp" type="SMALLINT" filterVisible="false" />
+		<primaryKey name="BRp_Primary" columns="BRp_BRpID" type="CLUSTERED">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BRpDokDefinicja" localColumns="BRp_DDfID" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.BnkRaporty:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BRpRaport" localColumns="BRp_BRaID" refTable="BnkRachunki" refColumns="BRa_BRaID">
+			<description>Relacja CDN.BnkRaporty:CDN.BnkRachunki (MANY:1)</description>
+		</foreignKey>
+		<index name="BRpRaport" options="UNIQUE NONCLUSTERED" fields="BRp_BRaID ,BRp_DataDok">
+			<description>Raport w ramach rachunku bankowego</description>
+		</index>
+		<index name="BRpRaportZam" options="UNIQUE NONCLUSTERED" fields="BRp_BRaID, BRp_DataDok, BRp_Zamkniety">
+			<description>Raport w ramach rachunku bankowego</description>
+		</index>
+		<index name="BRpNumeracja" options="NONCLUSTERED" fields="BRp_NumerString ,BRp_NumerNr">
+			<description>Klucz do potrzeb autonumeracji</description>
+		</index>
+		<index name="BRpNumerPelny" options="NONCLUSTERED" fields="BRp_NumerPelny">
+			<description>Klucz wg numeru pełnego (liczonego na serwerze)</description>
+		</index>
+		<index name="BRpDokDefinicja" options="NONCLUSTERED" fields="BRp_DDfID">
+			<description>Relacja do definicji dokumentu</description>
+		</index>
+		<index name="BRpDekID" options="NONCLUSTERED" fields="BRp_DekID">
+			<description>Wg dekretu</description>
+		</index>
+		<index name="BRpPreDekID" options="NONCLUSTERED" fields="BRp_PreDekID">
+			<description>Wg predekretu</description>
+		</index>
+		<index name="BRpGUID" options="UNIQUE NONCLUSTERED" fields="BRp_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="BRpGID" options="NONCLUSTERED" fields="BRp_GIDTyp ,BRp_GIDFirma ,BRp_GIDNumer">
+			<description>Wg identyfikatora GID w CDN XL</description>
+		</index>
+	</table>
+	

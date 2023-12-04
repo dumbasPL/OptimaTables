@@ -1,0 +1,71 @@
+<table name="BnkFormatyElem">
+		<description>Tabela elementów formatów wymiany elektronicznej z bankami</description>
+		<details>Tabela elementów formatów wymiany elektronicznej z bankami.</details>
+		<column name="BFE_BFEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BFE_BFNId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator rekordu powiązanego w tabeli nagłówków formatów</description>
+			<details>Klucz obcy do tabeli nadrzędnej BnkFormatyNag.</details>
+		</column>
+		<column name="BFE_Poziom" type="SMALLINT" definition="NOT NULL">
+			<description>Nagłówek / detal / stopka</description>
+			<details>Nagłówek / detal / stopka.</details>
+		</column>
+		<column name="BFE_Lp" type="SMALLINT" definition="NOT NULL">
+			<description>Liczba porządkowa pozycji w ramach formatu</description>
+			<details>Liczba porządkowa pozycji w ramach formatu.</details>
+		</column>
+		<column name="BFE_Rodzaj" type="SMALLINT">
+			<description>Rodzaj pola</description>
+			<details>Rodzaj pola.</details>
+		</column>
+		<column name="BFE_Typ" type="SMALLINT">
+			<description>Typ danych</description>
+			<details>Typ danych: 1 - tekst, 2 - liczba całkowita, 3 - liczba niecałkowita z dwoma
+				miejscami dziesiętnymi, 4 - liczba niecałkowita z czterema miejscami dziesiętnymi.</details>
+		</column>
+		<column name="BFE_Wartosc" type="NVARCHAR(2048)">
+			<description>Wartość pola</description>
+			<details>Wartość pola dla pól o stałej lub wyliczanej zapytaniem wartości.</details>
+		</column>
+		<column name="BFE_LaczZPoprzednim" type="SMALLINT">
+			<description>Sposób łączenia pól złożonych</description>
+			<details>
+				Jeśli tak, poprzedzający separator pól zostanie zastąpiony separatorem linii, parametr
+				umożliwi tworzenie jednego pola wynikowego z wielu predefiniowanych.
+				Przyjmuje wartości:
+				- 0 - nowe pole
+				- 1 - łącz z poprzednim (znak podziału wiersza)
+				- 2 - łącz z poprzednim (znak spacji)
+				- 3 - łącz z poprzednim (bez separatora)
+			</details>
+		</column>
+		<column name="BFE_Szerokosc" type="SMALLINT">
+			<description>Domyślna szerokość pola</description>
+			<details>Domyślna szerokość pola.</details>
+		</column>
+		<column name="BFE_FormatRachunku" type="SMALLINT">
+			<description>Format numeru rachunku</description>
+			<details>Format numeru rachunku (dla wartości 1 - usuwaj znaki rozdzielające w numerze
+				rachunku).</details>
+		</column>
+		<column name="BFE_Wymagane" type="SMALLINT">
+			<description>Czy pole jest wymagane</description>
+			<details>Czy pole jest wymagane.</details>
+		</column>
+		<primaryKey name="BFE_Primary" columns="BFE_BFEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_BFEFormat" localColumns="BFE_BFNId" refTable="BnkFormatyNag" refColumns="BFN_BFNId" deleteOption="CASCADE">
+			<description>Relacja CDN.BnkFormatyElem:CDN.BnkFormatyNag (MANY:1)</description>
+		</foreignKey>
+		<index name="BFEFormat" options="UNIQUE NONCLUSTERED" fields="BFE_BFNId ,BFE_Poziom ,BFE_Lp ,BFE_BFEId">
+			<description>Wg formatu</description>
+		</index>
+	</table>
+	

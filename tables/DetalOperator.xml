@@ -1,0 +1,22 @@
+<table name="DetalOperator">
+		<description>Operatorzy dla stanowiska detalu</description>
+		<column name="DOpe_DOpeId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DOpe_DStaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DOpe_OpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<primaryKey name="DOpe_Primary" columns="DOpe_DOpeId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DOpeStanowiskoDetal" localColumns="DOpe_DStaId" refTable="DetalStanowiska" refColumns="DSta_DStaId" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalOperator:CDN.DetalStanowiska (MANY:1)</description>
+		</foreignKey>
+		<index name="DOpeStanowiskoDetal" options="UNIQUE NONCLUSTERED" fields="DOpe_DStaId ,DOpe_OpeId">
+			<description>Według stanowiska</description>
+		</index>
+	</table>
+	

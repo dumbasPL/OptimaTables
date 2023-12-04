@@ -1,0 +1,51 @@
+<table name="DlgTrasy">
+		<column name="DLT_DLTId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="DLT_DLEId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLT_DLDId" type="INTEGER" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_MiejsceOdjazdu" type="nvarchar(127)" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_DataOdjazdu" type="DateTime" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_GodzinaOdjazdu" type="DateTime" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_MiejscePrzyjazdu" type="nvarchar(127)" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_DataPrzyjazdu" type="DateTime" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_GodzinaPrzyjazdu" type="DateTime" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_SrodekLokomocji" type="nvarchar(50)" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_KwotaSys" type="decimal(15,2)" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_KwotaWal" type="decimal(15,2)" definition="NULL">
+			<description>Klucz do tabeli CDN.DlgDokumenty</description>
+		</column>
+		<column name="DLT_Wyjazd" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLT_Wyjazd DEFAULT(0)">
+			<description />
+		</column>
+		<column name="DLT_Zrodlo" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DLT_Zrodlo DEFAULT(0)">
+			<description>Identyfikator aplikacji</description>
+		</column>
+		<primaryKey name="DLT_Primary" columns="DLT_DLTId">
+			<description />
+		</primaryKey>
+		<foreignKey name="FK_DlgTrasyDlgElem" localColumns="DLT_DLEId" refTable="DlgElem" refColumns="DLE_DLEId" deleteOption="CASCADE">
+			<description>Relacja CDN.DlgTrasy:CDN.DlgElem (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

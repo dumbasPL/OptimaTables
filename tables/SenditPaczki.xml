@@ -1,0 +1,71 @@
+<table name="SenditPaczki">
+		<description>Paczki do zlecenia</description>
+		<column name="SPA_SPAID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SPA_LP" type="int" definition="NOT NULL">
+			<description>Lp paczki</description>
+		</column>
+		<column name="SPA_SZLID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka transakcji</description>
+			<details>Klucz obcy do tabeli SenditZleceniePrzesylki</details>
+		</column>
+		<column name="SPA_Waga" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Waga paczki</description>
+		</column>
+		<column name="SPA_Wysokosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Wysokość paczki</description>
+		</column>
+		<column name="SPA_Szerokosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Szerokość paczki</description>
+		</column>
+		<column name="SPA_Dlugosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Długość paczki</description>
+		</column>
+		<column name="SPA_SposobPakowania" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sposób Pakowania</description>
+		</column>
+		<column name="SPA_SposobPakowaniaKey" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sposób Pakowania Klucz</description>
+		</column>
+		<column name="SPA_KwotaUbezpieczenia" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Kwota ubezpieczenia</description>
+		</column>
+		<column name="SPA_NumerListu" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Numer listu</description>
+		</column>
+		<column name="SPA_URL" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>URL</description>
+		</column>
+		<column name="SPA_Zawartosc" type="nvarchar(254)" definition="NOT NULL CONSTRAINT DF_SPA_Zawartosc DEFAULT('')">
+			<description>Opis zawartości paczki</description>
+		</column>
+		<column name="SPA_Gabaryt" type="tinyint" definition="NOT NULL CONSTRAINT DF_SPA_Gabaryt DEFAULT(0)">
+			<description>Gabaryt</description>
+		</column>
+		<column name="SPA_Ostroznie" type="tinyint" definition="NOT NULL CONSTRAINT DF_SPA_Ostroznie DEFAULT(0)">
+			<description>Ostrożnie</description>
+		</column>
+		<column name="SPA_Niestandardowa" type="tinyint" definition="NOT NULL CONSTRAINT DF_SPA_Niestandardowa DEFAULT(0)">
+			<description>Niestandardowa</description>
+		</column>
+		<column name="SPA_DeklarowanaWartosc" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_SPA_DeklarowanaWartosc DEFAULT(0)">
+			<description>Deklarowana Wartosc</description>
+		</column>
+		<column name="SPA_IdentyfikatorUKuriera" type="nvarchar(64)" definition="NOT NULL CONSTRAINT DF_SPA_IdentyfikatorUKuriera DEFAULT('')">
+			<description>Identyfikator u kuriera</description>
+		</column>
+		<primaryKey name="SPA_Primary" columns="SPA_SPAID">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_SPASenditZleceniePrzesylki" localColumns="SPA_SZLID" refTable="SenditZleceniePrzesylki" refColumns="SZL_SZLID" deleteOption="CASCADE">
+			<description>Relacja CDN.SenditPaczki:CDN.SenditZleceniePrzesylki (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

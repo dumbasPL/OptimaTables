@@ -1,0 +1,103 @@
+<table name="TwrESklep">
+		<description>Lista ustawień towaru dla esklepu</description>
+		<column name="Twes_TwesId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="Twes_ESklepId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator stanowiska esklep</description>
+			<details>Klucz obcy do tabeli ESklepStanowiska</details>
+		</column>
+		<column name="Twes_Udostepnij" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator stanowiska esklep</description>
+			<details>Czy towar dostepny w danym sklepie</details>
+		</column>
+		<column name="Twes_TwrID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator towaru</description>
+			<details>Klucz obcy do tabeli Towary</details>
+		</column>
+		<column name="Twes_ESklepBezRabatu" type="SMALLINT" definition="NOT NULL">
+			<description>e-Sklep brak rabatu</description>
+		</column>
+		<column name="Twes_ESklepStatus" type="SMALLINT" definition="NOT NULL">
+			<description>e-Sklep status towaru</description>
+		</column>
+		<column name="Twes_ESklepDostepnosc" type="SMALLINT" definition="NOT NULL">
+			<description>e-Sklep dostępność towaru</description>
+		</column>
+		<column name="Twes_ESklepKalkulacjaDostaw" type="TINYINT" definition="NOT NULL">
+			<description>Indywidualny koszt dostawy</description>
+			<details>
+				0 – nie
+				1 - tak
+				2- konkretna wartość
+			</details>
+		</column>
+		<column name="Twes_ESklepKalkulacjaDostawWartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Indywidualny koszt dostawy wartość</description>
+		</column>
+		<column name="Twes_ESklepFlaga_Nowosc" type="TINYINT" definition="NOT NULL">
+			<description>Flaga nowość</description>
+		</column>
+		<column name="Twes_ESklepFlaga_Promocja" type="TINYINT" definition="NOT NULL">
+			<description>Flaga promocja</description>
+		</column>
+		<column name="Twes_ESklepFlaga_ProduktzGazetki" type="TINYINT" definition="NOT NULL">
+			<description>Flaga produkt z gazetki</description>
+		</column>
+		<column name="Twes_ESklepFlaga_ProduktPolecany" type="TINYINT" definition="NOT NULL">
+			<description>Flaga produkt polecany</description>
+		</column>
+		<column name="Twes_ESklepFlaga_Wyprzedaz" type="TINYINT" definition="NOT NULL">
+			<description>Flaga wyprzedaż</description>
+		</column>
+		<column name="Twes_ESklepFlaga_SuperJakosc" type="TINYINT" definition="NOT NULL">
+			<description>Flaga super jakość</description>
+		</column>
+		<column name="Twes_ESklepFlaga_SuperCena" type="TINYINT" definition="NOT NULL">
+			<description>Flaga super cena</description>
+		</column>
+		<column name="Twes_ESklepFlaga_NajlepiejOceniany" type="TINYINT" definition="NOT NULL">
+			<description>Flaga najlepiej oceniany</description>
+		</column>
+		<column name="Twes_ESklepFlaga_RekomendacjaSprzedawcy" type="TINYINT" definition="NOT NULL">
+			<description>Flaga rekomendacja sprzedawcy</description>
+		</column>
+		<column name="Twes_ESklepFlaga_Nagroda" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twes_ESklepFlaga_Nagroda DEFAULT(0)">
+			<description>Flaga nagroda</description>
+		</column>
+		<column name="Twes_TwGGIDNumer" type="INTEGER" definition="NOT NULL">
+			<description>Grupa główna dla esklepu</description>
+		</column>
+		<column name="Twes_ESklepZapytajOCene" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Twes_ESklepZapytajOCene DEFAULT(0)">
+			<description>e-Sklep zapytaj o cenę</description>
+		</column>
+		<column name="Twes_ESklepNieKontrolujStanow" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Twes_ESklepNieKontrolujStanow DEFAULT(0)">
+			<description>e-Sklep nie kontroluj stanów magazynowych</description>
+		</column>
+		<column name="Twes_ESklepDostepnyOd" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Twes_ESklepDostepnyOd DEFAULT(0)">
+			<description>Czy wysyłac date od kiedy dostepny</description>
+		</column>
+		<column name="Twes_ESklepDataDostepnosci" type="DATETIME" definition="NOT NULL CONSTRAINT DF_Twes_ESklepDataDostepnosci DEFAULT(GetDate())">
+			<description>Od kiedy dostepny towar</description>
+		</column>
+		<column name="Twes_SynchroUdostepnij" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Twes_SynchroUdostepnij DEFAULT(0)">
+			<description>Pole techniczne potrzebne podczas synchronizacji</description>
+		</column>
+		<primaryKey name="Twes_Primary" columns="Twes_TwesId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TwesTowar" localColumns="Twes_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrESklep:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwesESklepStanowiska" localColumns="Twes_ESklepId" refTable="ESklepStanowiska" refColumns="ESS_ESSId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrESklep:CDN.ESklepStanowiska (MANY:1)</description>
+		</foreignKey>
+		<index name="TwesTowar" options="NONCLUSTERED" fields="Twes_TwrId">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+		<index name="TwrESklepTwrId" options="UNIQUE NONCLUSTERED" fields="Twes_ESklepId, Twes_TwrId">
+			<description>Wg sklepu i karty towaru</description>
+		</index>
+		<index name="TwrESklepUdostepnijTowar" options="NONCLUSTERED" fields="Twes_ESklepId, Twes_Udostepnij, Twes_TwrId " />
+	</table>
+	

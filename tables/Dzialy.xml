@@ -1,0 +1,98 @@
+<table name="Dzialy">
+		<description>Tabela wydziałów firmy</description>
+		<column name="DZL_DzlId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator wydziału</description>
+		</column>
+		<column name="DZL_ZrgId" type="INTEGER">
+			<description>Link do zestawu reguł rcp</description>
+		</column>
+		<column name="DZL_Kod" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kod wydziału</description>
+		</column>
+		<column name="DZL_Nazwa" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Nazwa wydziału</description>
+		</column>
+		<column name="DZL_ParentId" type="INTEGER">
+			<description>Identyfikator nadrzędnego węzła</description>
+			<details>NULL dla wydziału brak i Firma, pozostałe wskazują na wydział nadrzędny po DZL_DzlId</details>
+		</column>
+		<column name="DZL_Nieaktywny" type="SMALLINT" definition="NOT NULL">
+			<description>Znacznik aktywności wydziału</description>
+			<details>0- aktywny, 1- nieaktywny</details>
+		</column>
+		<column name="DZL_AdresWezla" type="NVARCHAR(512)" definition="NOT NULL">
+			<details>0-dla brak, 1- Firma</details>
+		</column>
+		<column name="DZL_Poziom" type="SMALLINT" definition="NOT NULL">
+			<details>0-dla brak, 1-dla Firma, powyżej 1 – dla podwydziałów (wskazuje na zagłębienie)</details>
+		</column>
+		<column name="DZL_Lisc" type="INT" definition="NOT NULL" />
+		<column name="DZL_AddMethod" type="TINYINT" definition="NOT NULL" filterVisible="false" />
+		<column name="DZL_ImpId" type="INTEGER" definition="NOT NULL" filterVisible="false" />
+		<column name="DZL_Symbol" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Symbol wydziału (numeracja list płac)</description>
+		</column>
+		<column name="DZL_LokId" type="INTEGER">
+			<description>Klucz obcy do lokalizacji</description>
+			<details>Id lokalizacji w tabeli CDN.Lokalizacje (LOK_LOKId, 1- brak lokalizacji)</details>
+		</column>
+		<column name="DZL_Last" type="TINYINT" definition="NOT NULL" />
+		<column name="DZL_Konto" type="NVARCHAR(51)" definition="NOT NULL" />
+		<column name="DZL_ImportAppId" type="VARCHAR(5)" />
+		<column name="DZL_ImportRowId" type="VARCHAR(36)" />
+		<column name="DZL_TS_Export" type="DATETIME">
+			<description>TimeSTamp dokonania exportu</description>
+		</column>
+		<column name="DZL_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="DZL_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DZL_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DZL_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="DZL_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DZL_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DZL_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DZL_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DZL_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DZL_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DZL_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DZL_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DZL_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DZL_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="DZL_Primary" columns="DZL_DzlId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DZLZrgId" localColumns="DZL_ZrgId" refTable="ZestawyRegul" refColumns="ZRG_ZrgId">
+			<description>Relacja CDN.Dzialy:CDN.ZestawyRegul (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DZLLokId" localColumns="DZL_LokId" refTable="Lokalizacje" refColumns="Lok_LokId">
+			<description>Relacja CDN.Dzialy:CDN.Lokalizacje (MANY:1)</description>
+		</foreignKey>
+		<index name="DZLZrgId" options="NONCLUSTERED" fields="DZL_ZrgId">
+			<description>Klucz obcy do zestawu reguł rcp</description>
+		</index>
+		<index name="DZLInclude" options="UNIQUE NONCLUSTERED" fields="DZL_ParentId ,DZL_Kod">
+			<description>Klucz wewnętrzny</description>
+		</index>
+		<index name="DZLLokId" options="NONCLUSTERED" fields="DZL_LokId" />
+		<index name="DZLGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="DZL_Kod, DZL_DzlId" includedColumns="DZL_Nieaktywny, DZL_Nazwa, DZL_AdresWezla">
+			<description>Gridlookupu działu wg kodu i id działu</description>
+		</index>
+	</table>
+	

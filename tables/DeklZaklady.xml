@@ -1,0 +1,111 @@
+<table name="DeklZaklady">
+		<description>Lista zakładów</description>
+		<details>Lista zakładów na potrzeby deklaracji</details>
+		<column name="DkZ_DkZID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DkZ_NazwaPelna" type="NVARCHAR(240)" definition="NOT NULL" hash="1">
+			<description>Nazwa (pełna) zakładu</description>
+		</column>
+		<column name="DkZ_NazwaSkrocona" type="NVARCHAR(70)" definition="NOT NULL">
+			<description>Nazwa skrócona zakładu</description>
+		</column>
+		<column name="DkZ_Nip" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP do indeksu</description>
+			<details>Numer NIP zakładu po usunięciu separatorów (kresek)</details>
+		</column>
+		<column name="DkZ_Regon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer Regon</description>
+		</column>
+		<column name="DkZ_LiczbaZatrudnionych" type="INT" definition="NOT NULL">
+			<description>Liczba zatrudnionych</description>
+		</column>
+		<column name="DkZ_DataRozpDzial" type="DATETIME" definition="NULL">
+			<description>Data rozpoczęcia działalności</description>
+		</column>
+		<column name="DkZ_Kraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj (adres zakładu)</description>
+		</column>
+		<column name="DkZ_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo (adres zakładu)</description>
+		</column>
+		<column name="DkZ_Powiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat (adres zakładu)</description>
+		</column>
+		<column name="DkZ_Gmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina (adres zakładu)</description>
+		</column>
+		<column name="DkZ_KodGminy" type="VARCHAR(7)" definition="NOT NULL" hash="1">
+			<description>Kod gminy (adres zakładu)</description>
+		</column>
+		<column name="DkZ_Ulica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica (adres zakładu)</description>
+		</column>
+		<column name="DkZ_NrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu (adres zakładu)</description>
+		</column>
+		<column name="DkZ_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu (adres zakładu)</description>
+		</column>
+		<column name="DkZ_Miasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto (adres zakładu)</description>
+		</column>
+		<column name="DkZ_KodP" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy (adres zakładu)</description>
+		</column>
+		<column name="DkZ_Poczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta (adres zakładu)</description>
+		</column>
+		<column name="DkZ_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Czy zakład jest nieaktywny</description>
+		</column>
+		<column name="DkZ_UwzgledniajNaCITST" type="TINYINT" definition="NOT NULL">
+			<description>Czy zakład ma być uwzględniany przy generowaniu CIT-ST</description>
+		</column>
+		<column name="DkZ_UwzgledniajNaCITSTA" type="TINYINT" definition="NOT NULL">
+			<description>Czy zakład ma być uwzględniany przy generowaniu CIT-ST/A</description>
+		</column>
+		<column name="DkZ_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="DkZ_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DkZ_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="DkZ_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="DkZ_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DkZ_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="DkZ_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DkZ_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DkZ_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DkZ_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DkZ_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DkZ_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DkZ_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DkZ_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="DkZ_Primary" columns="DkZ_DkZID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DkZNazwaPelna" options="NONCLUSTERED" fields="DkZ_NazwaPelna">
+			<description>Indeks wg nazwy pełnej</description>
+		</index>
+	</table>
+	

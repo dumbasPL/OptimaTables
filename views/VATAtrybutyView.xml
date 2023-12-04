@@ -1,0 +1,324 @@
+<view name="VATAtrybutyView">
+		<description>Atrybuty w Rejestrach VAT - VIEW</description>
+		<column name="VAV_VAVId" type="NVARCHAR(255)" definition="NO_SQL">
+			<description>Identyfikator rekordu w widoku</description>
+		</column>
+		<column name="VAV_DeAId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu definicji atrybutu</description>
+		</column>
+		<column name="VAV_DeATyp" type="SMALLINT" definition="NO_SQL">
+			<description>Typ atrybutu</description>
+		</column>
+		<column name="VAV_DeAKod" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Kod definicji atrybutu</description>
+		</column>
+		<column name="VAV_DeANazwa" type="NVARCHAR(40)" definition="NO_SQL">
+			<description>Nazwa definicji atrybutu</description>
+		</column>
+		<column name="VAV_DeAFormat" type="SMALLINT" definition="NO_SQL">
+			<description>Format definicji atrybutu</description>
+		</column>
+		<column name="VAV_DeAZalezny" type="TINYINT" definition="NO_SQL">
+			<description>Czy atrybut zależny od kontrahenta</description>
+		</column>
+		<column name="VAV_DeACzyKopiowacFA" type="TINYINT" definition="NO_SQL">
+			<description>Czy atrybut ma być kopiowany do opisu dokumentu</description>
+		</column>
+		<column name="VAV_DeACzyKod" type="TINYINT" definition="NO_SQL">
+			<description>Czy doklejać kod przed wartością</description>
+		</column>
+		<column name="VAV_DeACzyPrzenosic" type="TINYINT" definition="NO_SQL">
+			<description>Czy przenosić na transakcje</description>
+		</column>
+		<column name="VAV_DeACzyDrukowac" type="TINYINT" definition="NO_SQL">
+			<description>Czy drukować atrybut na transakcjach</description>
+		</column>
+		<column name="VAV_DAtId" type="INTEGER" definition="NO_SQL">
+			<description>Klucz obcy do tabeli DokAtrybuty</description>
+		</column>
+		<column name="VAV_DAtWartoscTxt" type="NVARCHAR(1024)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="VAV_VaNID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu dokumentu rejestru VAT</description>
+		</column>
+		<column name="VAV_Typ" type="SMALLINT" definition="NO_SQL">
+			<description>Typ zapisu dokumentu</description>
+		</column>
+		<column name="VAV_Rodzaj" type="TINYINT" definition="NO_SQL">
+			<description>Rodzaj zapisu</description>
+		</column>
+		<column name="VAV_Rejestr" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Nazwa rejestru</description>
+		</column>
+		<column name="VAV_RokMies" type="INTEGER" definition="NO_SQL">
+			<description>Rok i miesiąc zapisu</description>
+		</column>
+		<column name="VAV_Lp" type="INTEGER" definition="NO_SQL">
+			<description>Liczba porządkowa zapisu w rejestrze</description>
+		</column>
+		<column name="VAV_DataZap" type="DATETIME" definition="NO_SQL">
+			<description>Data zapisu w rejestrze</description>
+		</column>
+		<column name="VAV_DataWys" type="DATETIME" definition="NO_SQL">
+			<description>Data wystawienia dokumentu</description>
+		</column>
+		<column name="VAV_DataOpe" type="DATETIME" definition="NO_SQL">
+			<description>Data operacji (zakupu lub sprzedaży)</description>
+		</column>
+		<column name="VAV_DataKur" type="DATETIME" definition="NO_SQL">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="VAV_DeklRokMies" type="INTEGER" definition="NO_SQL">
+			<description>Rok i miesiąc rozliczenia w deklaracji VAT7</description>
+		</column>
+		<column name="VAV_DeklRokMiesKasa" type="INTEGER" definition="NO_SQL">
+			<description>Rok i miesiąc rozliczenia w deklaracji wg metody kasowej</description>
+		</column>
+		<column name="VAV_RozliczacVat7" type="TINYINT" definition="NO_SQL">
+			<description>Czy rozliczać w deklaracji VAT7</description>
+		</column>
+		<column name="VAV_RozliczacVatUE" type="TINYINT" definition="NO_SQL">
+			<description>Czy dokument rozliczać w deklaracji VAT-UE</description>
+		</column>
+		<column name="VAV_AutoVat7Kasa" type="TINYINT" definition="NO_SQL">
+			<description>Automatyczne określanie miesiąca rozliczenia dla metody kasowej</description>
+		</column>
+		<column name="VAV_IdentKsieg" type="VARCHAR(50)" definition="NO_SQL">
+			<description>Identyfikator księgowy</description>
+		</column>
+		<column name="VAV_Dokument" type="VARCHAR(30)" definition="NO_SQL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="VAV_KorektaDo" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer transakcji korygowanej</description>
+		</column>
+		<column name="VAV_Korekta" type="TINYINT" definition="NO_SQL">
+			<description>Czy transakcja korygująca</description>
+		</column>
+		<column name="VAV_Fiskalna" type="TINYINT" definition="NO_SQL">
+			<description>Czy transakcja z kasy fiskalnej</description>
+		</column>
+		<column name="VAV_KorektaVAT" type="TINYINT" definition="NO_SQL">
+			<description>Zapis korekcyjny VAT struktury zakupów</description>
+		</column>
+		<column name="VAV_Detal" type="TINYINT" definition="NO_SQL">
+			<description>Transakcja detaliczna</description>
+		</column>
+		<column name="VAV_Wewnetrzna" type="TINYINT" definition="NO_SQL">
+			<description>Faktura wewnętrzna (nie generuje płatności)</description>
+		</column>
+		<column name="VAV_PodmiotTyp" type="SMALLINT" definition="NO_SQL">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="VAV_PodID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator kontrahenta</description>
+		</column>
+		<column name="VAV_KntNazwa1" type="NVARCHAR(50)" definition="NO_SQL" hash="1">
+			<description>Pierwsza linia nazwy kontrahenta</description>
+		</column>
+		<column name="VAV_KntNazwa2" type="NVARCHAR(50)" definition="NO_SQL" hash="1">
+			<description>Druga linia nazwy kontrahenta</description>
+		</column>
+		<column name="VAV_KntNazwa3" type="NVARCHAR(50)" definition="NO_SQL" hash="1">
+			<description>Trzecia linia nazwy kontrahenta</description>
+		</column>
+		<column name="VAV_KntKraj" type="NVARCHAR(40)" definition="NO_SQL" hash="1">
+			<description>Kraj zamieszkania (siedziby) kontrahenta</description>
+		</column>
+		<column name="VAV_KntWojewodztwo" type="NVARCHAR(40)" definition="NO_SQL">
+			<description>Województwo kontrahenta</description>
+		</column>
+		<column name="VAV_KntPowiat" type="NVARCHAR(40)" definition="NO_SQL" hash="1">
+			<description>Powiat kontrahenta</description>
+		</column>
+		<column name="VAV_KntGmina" type="NVARCHAR(40)" definition="NO_SQL" hash="1">
+			<description>Gmina kontrahenta</description>
+		</column>
+		<column name="VAV_KntUlica" type="NVARCHAR(40)" definition="NO_SQL" hash="1">
+			<description>Pierwsza linia adresu kontrahenta</description>
+		</column>
+		<column name="VAV_KntNrDomu" type="NVARCHAR(10)" definition="NO_SQL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="VAV_KntNrLokalu" type="NVARCHAR(10)" definition="NO_SQL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="VAV_KntMiasto" type="NVARCHAR(40)" definition="NO_SQL" hash="1">
+			<description>Miasto kontrahenta</description>
+		</column>
+		<column name="VAV_KntKodPocztowy" type="VARCHAR(10)" definition="NO_SQL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="VAV_KntPoczta" type="NVARCHAR(40)" definition="NO_SQL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="VAV_KntAdres2" type="NVARCHAR(40)" definition="NO_SQL" hash="1">
+			<description>Druga linia adresu kontrahenta</description>
+		</column>
+		<column name="VAV_KntNipKraj" type="VARCHAR(2)" definition="NO_SQL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="VAV_KntNipE" type="VARCHAR(13)" definition="NO_SQL" hash="1">
+			<description>Numer NIP kontrahenta</description>
+		</column>
+		<column name="VAV_KntKonto" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Konto księgowe kontrahenta</description>
+		</column>
+		<column name="VAV_Finalny" type="TINYINT" definition="NO_SQL">
+			<description>Status kontrahenta</description>
+		</column>
+		<column name="VAV_Export" type="TINYINT" definition="NO_SQL">
+			<description>Transakcja eksportowa</description>
+		</column>
+		<column name="VAV_MalyPod" type="TINYINT" definition="NO_SQL">
+			<description>Kontrahent jest małym podatnikiem</description>
+		</column>
+		<column name="VAV_Rolnik" type="TINYINT" definition="NO_SQL">
+			<description>Czy podatnik jest rolnikiem</description>
+		</column>
+		<column name="VAV_KatID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator kategorii dokumentu</description>
+		</column>
+		<column name="VAV_Kategoria" type="VARCHAR(50)" definition="NO_SQL">
+			<description>Opis kategorii transakcji</description>
+		</column>
+		<column name="VAV_WzID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator wzorca księgowania</description>
+		</column>
+		<column name="VAV_Rozliczono" type="TINYINT" definition="NO_SQL">
+			<description>Status rozliczenia</description>
+		</column>
+		<column name="VAV_FplID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator formy płatności</description>
+		</column>
+		<column name="VAV_Termin" type="DATETIME" definition="NO_SQL">
+			<description>Termin płatności</description>
+		</column>
+		<column name="VAV_RazemNetto" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość łączna netto</description>
+		</column>
+		<column name="VAV_RazemNettoDoVAT" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość łączna netto</description>
+		</column>
+		<column name="VAV_RazemVAT" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość łączna VAT</description>
+		</column>
+		<column name="VAV_RazemVATDoVAT" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość łączna VAT</description>
+		</column>
+		<column name="VAV_RazemBrutto" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość łączna brutto</description>
+		</column>
+		<column name="VAV_RazemBruttoDoVAT" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość łączna brutto</description>
+		</column>
+		<column name="VAV_RazemBruttoWal" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota brutto w walucie</description>
+		</column>
+		<column name="VAV_Waluta" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="VAV_KursNumer" type="INTEGER" definition="NO_SQL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="VAV_KursL" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="VAV_KursM" type="DECIMAL( 5,0)" definition="NO_SQL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="VAV_Zaplata" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota zapłacona</description>
+		</column>
+		<column name="VAV_WartoscZak" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość w cenach zakupu</description>
+		</column>
+		<column name="VAV_PodmiotZalTyp" type="SMALLINT" definition="NO_SQL">
+			<description>Typ podmiotu pobierającego zaliczkę</description>
+		</column>
+		<column name="VAV_PodZalId" type="INTEGER" definition="NO_SQL">
+			<description>ID podmiotu pobierającego zaliczkę</description>
+		</column>
+		<column name="VAV_AppRowID" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Identyfikator transakcji w aplikacji źródłowej</description>
+		</column>
+		<column name="VAV_AppID" type="INTEGER" definition="NO_SQL">
+			<description>Numer unikalny aplikacji źródłowej</description>
+		</column>
+		<column name="VAV_TrnID" type="INTEGER" definition="NO_SQL">
+			<description>Numer rekordu w tabeli transakcji</description>
+		</column>
+		<column name="VAV_VanOrgId" type="INTEGER" definition="NO_SQL">
+			<description>Wskaźnik do zapisu oryginalnego</description>
+		</column>
+		<column name="VAV_CloProc" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Wielkość cła w procentach</description>
+		</column>
+		<column name="VAV_CloWart" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość cła</description>
+		</column>
+		<column name="VAV_AkcyzaProc" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Wielkość akcyzy w procentach</description>
+		</column>
+		<column name="VAV_AkcyzaWart" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość akcyzy</description>
+		</column>
+		<column name="VAV_PodImpProc" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Podatek importowy w procentach</description>
+		</column>
+		<column name="VAV_PodImpWart" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość podatku importowego</description>
+		</column>
+		<column name="VAV_KpRID" type="INTEGER" definition="NO_SQL">
+			<description>Wskaźnik do zapisów KPiR</description>
+		</column>
+		<column name="VAV_RycID" type="INTEGER" definition="NO_SQL">
+			<description>Wskaźnik do ewidencji ryczałtowej</description>
+		</column>
+		<column name="VAV_DekID" type="INTEGER" definition="NO_SQL">
+			<description>Wskaźnik do dekretu</description>
+		</column>
+		<column name="VAV_ImportAppId" type="VARCHAR(5)" definition="NO_SQL">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="VAV_ImportRowId" type="VARCHAR(36)" definition="NO_SQL">
+			<description>Identyfikator wiersza w tabeli źródłowej</description>
+		</column>
+		<column name="VAV_TS_Export" type="DATETIME" definition="NO_SQL">
+			<description>Czas wyeksportowania zapisu</description>
+		</column>
+		<column name="VAV_OpeZalID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="VAV_StaZalId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="VAV_TS_Zal" type="DATETIME" definition="NO_SQL">
+			<description>TmieStamp wprowadzenia zapisu</description>
+		</column>
+		<column name="VAV_OpeModID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="VAV_StaModId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="VAV_TS_Mod" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp ostatniej modyfikacji zapisu</description>
+		</column>
+		<column name="VAV_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_VAV_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="VAV_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_VAV_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="VAV_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_VAV_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="VAV_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_VAV_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="VAV_IdentKsiegStr" type="VARCHAR(50)" definition="NO_SQL" filterVisible="false" />
+		<column name="VAV_IdentKsiegNr" type="INTEGER" definition="NO_SQL" filterVisible="false" />
+	</view>
+	

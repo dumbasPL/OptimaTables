@@ -1,0 +1,60 @@
+<table name="AnkGrupyPytan">
+		<description>Grupy pytań dla Ankiet</description>
+		<column name="AnkGp_AnkGpId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkGp_Nazwa" type="NVARCHAR(250)" definition="NOT NULL">
+			<description>Nazwa grupy pytań</description>
+		</column>
+		<column name="AnkGp_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis dla grupy pytań</description>
+		</column>
+		<column name="AnkGp_Waga" type="INTEGER" definition="NOT NULL">
+			<description>Waga; domyślnie 0 max: 100</description>
+		</column>
+		<column name="AnkGp_Domyslna" type="TINYINT" definition="NOT NULL">
+			<description>Czy ta grupa jest domyślna (1) czy nie (0)</description>
+		</column>
+		<column name="AnkGp_Nieaktywna" type="TINYINT" definition="NOT NULL">
+			<description>Czy ta grupa jest nieaktywna (1) czy aktywna (0)</description>
+		</column>
+		<column name="AnkGp_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="AnkGp_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AnkGp_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AnkGp_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="AnkGp_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AnkGp_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AnkGp_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AnkGp_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AnkGp_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AnkGp_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AnkGp_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AnkGp_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AnkGp_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AnkGp_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="AnkGp_Primary" columns="AnkGp_AnkGpId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="AnkGp_Nazwa_UniqueIx" options="UNIQUE NONCLUSTERED" fields="AnkGp_Nazwa">
+			<description>Unikalna nazwa</description>
+		</index>
+	</table>
+	

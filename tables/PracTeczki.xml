@@ -1,0 +1,112 @@
+<table name="PracTeczki">
+		<description>Tabela dokumentów pracownika</description>
+		<column name="PRT_PrtId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+			<details>IDENTITY</details>
+		</column>
+		<column name="PRT_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika zawierającego umowę</description>
+		</column>
+		<column name="PRT_PraKod" type="NVARCHAR(20)">
+			<description>Kod pracownika zawierającego umowę - akronim</description>
+		</column>
+		<column name="PRT_DdfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator definicji dokumentu</description>
+		</column>
+		<column name="PRT_EteId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator e-Teczki</description>
+		</column>
+		<column name="PRT_DkmId" type="INTEGER" definition="NOT NULL">
+			<description>Relacja do słownika tytułów dokumentów</description>
+		</column>
+		<column name="PRT_EteNazwa" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Nazwa części e-Teczki</description>
+		</column>
+		<column name="PRT_NumerString" type="NVARCHAR(80)" definition="NOT NULL">
+			<description>Symbol dokumentu</description>
+		</column>
+		<column name="PRT_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="PRT_NumerPelny" type="COMPUTED|NVARCHAR(80)" definition="CDN.NUMERPELNYET(PRT_NUMERNR,PRT_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+		</column>
+		<column name="PRT_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="PRT_Tytul" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Tytuł dokumentu</description>
+		</column>
+		<column name="PRT_TytulId" type="INTEGER" definition="NOT NULL">
+			<description>Tytuł dokumentu (słownik)</description>
+		</column>
+		<column name="PRT_Opis" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Tytuł dokumentu</description>
+		</column>
+		<column name="PRT_NumerObcy" type="NVARCHAR(80)" definition="NOT NULL">
+			<description>Numer dokumentu z biblioteki dokumentów</description>
+		</column>
+		<column name="PRT_DabId" type="INTEGER">
+			<description>Wskazuje na powiązanie z dokumentem pracownika</description>
+		</column>
+		<column name="PRT_HrmPraId" type="INTEGER">
+			<description>Identyfikator pracownika dodającego dokument z poziomu Comarch HRM</description>
+		</column>
+		<column name="PRT_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PRT_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRT_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PRT_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRT_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRT_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PRT_OpeModKod" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRT_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PRT_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRT_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PRT_OpeZalKod" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRT_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRT_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRT_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PK_PRT_PrtId" columns="PRT_PrtId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PRTDdfLink" localColumns="PRT_DdfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.PracTeczki:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRTPraLink" localColumns="PRT_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracTeczki:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRTDkmId" localColumns="PRT_DkmId" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.PracTeczki:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<index name="PRTPraLink" options="UNIQUE NONCLUSTERED" fields="PRT_PraId, PRT_NumerPelny">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="PrtNumerPelny" options="UNIQUE NONCLUSTERED" fields="PRT_NumerPelny">
+			<description>Klucz wg numeru dokumentu</description>
+		</index>
+		<index name="PRTEteLink" options="NONCLUSTERED" fields="PRT_EteId">
+			<description>Klucz obcy e-Teczki</description>
+		</index>
+		<index name="PRTDdfLink" options="NONCLUSTERED" fields="PRT_DdfId">
+			<description>Odnośnik do definicji dokumentów</description>
+		</index>
+	</table>
+	

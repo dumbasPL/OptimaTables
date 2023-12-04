@@ -1,0 +1,105 @@
+<table name="DetalZapisyKB">
+		<description>Tabela dokumentów KP/KW detal</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="DZKB_DZKBID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DZKB_DSZKBID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DZKB_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="DZKB_DSFPlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator formy płatności</description>
+			<details>W paragonie lub WZ jest tu TrNId faktury, do której został przekształcony dokument
+				źródłowy</details>
+		</column>
+		<column name="DZKB_TypDokumentu" type="INTEGER" definition="NOT NULL">
+			<description>Typ dokumentu (klasa dokumentu)</description>
+			<details>
+				301 - Faktura Zakupu &lt;br&gt;
+				302 - Faktura sprzedaży &lt;br&gt;
+				303 - Przyjęcie Wewnętrzne &lt;br&gt;
+				304 - Rozchód Wewnętrzny &lt;br&gt;
+				305 - Paragon &lt;br&gt;
+				306 - Wydanie Zewnętrzne &lt;br&gt;
+				307 - Przyjęcie Zewnętrzne &lt;br&gt;
+				308 - Rezerwacja Odbiorcy &lt;br&gt;
+				309 - Zamówienie u Dostawcy &lt;br&gt;
+				310 - Bilans Otwarcia Magazynu &lt;br&gt;
+				311 - Arkusz Inwentaryzacyjny &lt;br&gt;
+				312 - Przesunięcie Międzymagazynowe &lt;br&gt;
+				313 - Przyjęcie kaucji &lt;br&gt;
+				314 - Wydanie kaucji &lt;br&gt;
+				317 - Przyjęcie Wewnętrzne Produktów &lt;br&gt;
+				318 - Rozchód Wewnętrzny Składników &lt;br&gt;
+				320 - Faktura Pro Forma &lt;br&gt;
+				321 - FWS &lt;br&gt;
+				322 - FWZ &lt;br&gt;
+				345 - TaxFree &lt;br&gt;
+				350 - FRR
+			</details>
+		</column>
+		<column name="DZKB_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="DZKB_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="DZKB_NumerPelny" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DZKB_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="DZKB_PodID" type="INTEGER">
+			<description>Identyfikator podmiotu (płatnika)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="DZKB_RazemBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna brutto</description>
+		</column>
+		<column name="DZKB_StanSynchronizacji" type="INTEGER">
+			<description>Stan synchronizacji kontrahenta</description>
+		</column>
+		<column name="DZKB_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="DZKB_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="DZKB_OptimaId" type="INTEGER" />
+		<column name="DZKB_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu danych</description>
+		</column>
+		<column name="DZKB_DDfID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DZKB_DDfID DEFAULT(0)">
+			<description>ID definicji numeratora</description>
+		</column>
+		<column name="DZKB_Typ" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DZKB_Typ DEFAULT(1)">
+			<description>Gotowka/przelew/karta</description>
+		</column>
+		<primaryKey name="DZKB_Primary" columns="DZKB_DZKBID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="DZKBIDPodmiot" options="UNIQUE NONCLUSTERED" fields="DZKB_PodID ,DZKB_DZKBID" />
+		<index name="DZKBIDOperator" options="UNIQUE NONCLUSTERED" fields="DZKB_DZKBID ,DZKB_OpeID" />
+		<index name="DetalZapisyKBDSZKBID" options="NONCLUSTERED" fields="DZKB_DSZKBID, DZKB_StanDetalID,DZKB_StanSynchronizacji" />
+	</table>
+	

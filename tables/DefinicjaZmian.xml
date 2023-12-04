@@ -1,0 +1,50 @@
+<table name="DefinicjaZmian">
+		<description>Tabela zmian seryjnych danych kadrowych</description>
+		<column name="DFZ_DfzId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DFZ_Nazwa" type="NVARCHAR(128)" definition="NOT NULL">
+			<description>Opis definicji zmiany</description>
+		</column>
+		<column name="DFZ_Pole1" type="INTEGER">
+			<description>Pole 1</description>
+		</column>
+		<column name="DFZ_Pole2" type="INTEGER">
+			<description>Pole 2</description>
+		</column>
+		<column name="DFZ_Pole3" type="INTEGER">
+			<description>Pole 3</description>
+		</column>
+		<column name="DFZ_Wzor1" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Wzór 1</description>
+		</column>
+		<column name="DFZ_Wzor2" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Wzór 2</description>
+		</column>
+		<column name="DFZ_Wzor3" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Wzór 3</description>
+		</column>
+		<column name="DFZ_Wzor" type="NVARCHAR(2048)" definition="NOT NULL">
+			<description>Wzór</description>
+		</column>
+		<column name="DFZ_Interaktywna" type="TINYINT" definition="NOT NULL">
+			<description>Zmiana interaktywna</description>
+		</column>
+		<column name="DFZ_Aktualizacja" type="TINYINT" definition="NOT NULL">
+			<description>Zmiana z aktualizacją</description>
+		</column>
+		<column name="DFZ_Standardowy" type="INTEGER" definition="NOT NULL">
+			<description>Standardowy</description>
+		</column>
+		<column name="DFZ_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Nieaktywny</description>
+		</column>
+		<column name="DFZ_Zaawansowany" type="TINYINT" definition="NOT NULL">
+			<description>Zaawansowany</description>
+		</column>
+		<primaryKey name="DFZ_Primary" columns="DFZ_DfzId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DFZNazwa" options="UNIQUE NONCLUSTERED" fields="DFZ_Nazwa" />
+	</table>
+	

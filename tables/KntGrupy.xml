@@ -1,0 +1,13 @@
+<table name="KntGrupy">
+		<column name="KnG_Akronim" type="" definition="NO_SQL" />
+		<column name="KnG_CzasModyfikacji" type="" definition="NO_SQL" />
+		<column name="KnG_GIDFirma" type="" definition="NO_SQL" />
+		<column name="KnG_GIDLp" type="" definition="NO_SQL" />
+		<column name="KnG_GIDNumer" type="" definition="NO_SQL" />
+		<column name="KnG_GIDTyp" type="" definition="NO_SQL" />
+		<column name="KnG_GrOFirma" type="" definition="NO_SQL" />
+		<column name="KnG_GrOLp" type="" definition="NO_SQL" />
+		<column name="KnG_GrONumer" type="" definition="NO_SQL" />
+		<column name="KnG_GrOTyp" type="" definition="NO_SQL" />
+	</table>
+	

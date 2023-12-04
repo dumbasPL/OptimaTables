@@ -1,0 +1,34 @@
+<table name="OAtrybutyKlasy">
+		<description>Lista klas atrybutów</description>
+		<column name="ATK_AtkId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator</description>
+		</column>
+		<column name="ATK_Nazwa" type="VARCHAR(41)" definition="NOT NULL" />
+		<column name="ATK_Typ" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_Opis" type="NVARCHAR(256)" definition="NOT NULL" />
+		<column name="ATK_Format" type="NVARCHAR(21)" definition="NOT NULL" />
+		<column name="ATK_ZListy" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_Zamknieta" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_Wymagany" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_Controlling" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_Automat" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_Nieaktywny" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_Historia" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_SQL" type="NVARCHAR(2049)" definition="NOT NULL" />
+		<column name="ATK_Domyslna" type="NVARCHAR(101)" definition="NOT NULL" />
+		<column name="ATK_DomyslnaApi" type="NVARCHAR(101)" definition="NOT NULL" />
+		<column name="ATK_DomyslnaSQL" type="NVARCHAR(2049)" definition="NOT NULL" />
+		<column name="ATK_DomyslnaAPISQL" type="NVARCHAR(2049)" definition="NOT NULL" />
+		<column name="ATK_TypDom" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_TypDomApi" type="TINYINT" definition="NOT NULL" />
+		<column name="ATK_CharSet" type="INTEGER" definition="NOT NULL" />
+		<column name="ATK_Maska" type="NVARCHAR(20)" definition="NOT NULL" />
+		<column name="ATK_SynchronizowanyXL" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ATK_SynchronizowanyXL DEFAULT(1)" />
+		<column name="ATK_SynchronizowanyAltum" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ATK_SynchronizowanyAltum DEFAULT(0)" />
+		<column name="ATK_ImportRowId" type="nvarchar(36)" definition="NULL CONSTRAINT DF_ATK_ImportRowId DEFAULT(newid())" />
+		<primaryKey name="ATK_Primary" columns="ATK_AtkId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="AtkNazwa" options="UNIQUE NONCLUSTERED" fields="ATK_Nazwa" />
+	</table>
+	

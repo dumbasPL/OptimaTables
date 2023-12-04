@@ -1,0 +1,35 @@
+<table name="KorektaPodatkuDochodowegoZD">
+		<description>Korekta podatku dochodowego za złe długi</description>
+		<column name="KZD_KZDID" type="INTEGER" definition="IDENTITY(1,1) NOT NULL" />
+		<column name="KZD_NumerDokumentu" type="NVARCHAR(256)" definition="NOT NULL" />
+		<column name="KZD_Kontrahent" type="NVARCHAR(352)" definition="NOT NULL" />
+		<column name="KZD_NIP" type="NVARCHAR(20)" definition="NOT NULL" />
+		<column name="KZD_DataWystawienia" type="DATETIME" definition="NOT NULL" />
+		<column name="KZD_TerminPlatnosci" type="DATETIME" definition="NULL" />
+		<column name="KZD_KwotaPlatnosci" type="NUMERIC(15,2)" definition="NOT NULL" />
+		<column name="KZD_RozliczonaKwota" type="NUMERIC(15,2)" definition="NOT NULL" />
+		<column name="KZD_KwotaDoKorekty" type="NUMERIC(15,2)" definition="NOT NULL" />
+		<column name="KZD_Skorygowano" type="NUMERIC(15,2)" definition="NOT NULL" />
+		<column name="KZD_InfoDodatkowe" type="NVARCHAR(MAX)" definition="NOT NULL" />
+		<column name="KZD_DokumentID" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_DokumentTyp" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_BZdID" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_KontrahentID" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_Kierunek" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_Rodzaj" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_DkNID" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_PraID" type="INTEGER" definition="NULL" />
+		<column name="KZD_Pierwszy" type="INTEGER" definition="NOT NULL" />
+		<column name="KZD_Reczny" type="INTEGER" definition="NOT NULL CONSTRAINT DF_KZD_Reczny DEFAULT(0)" />
+		<column name="KZD_DataZaplaty" type="DATETIME" definition="NULL" />
+		<column name="KZD_Uregulowane" type="INTEGER" definition="NOT NULL CONSTRAINT DF_KZD_Uregulowane DEFAULT(0)" />
+		<column name="KZD_RodzajDzial" type="INTEGER" definition="NOT NULL CONSTRAINT DF_KZD_RodzajDzial DEFAULT(0)" />
+		<column name="KZD_SkorygowanoMc" type="NUMERIC(15,2)" definition="NOT NULL CONSTRAINT DF_KZD_SkorygowanoMc DEFAULT(0)" />
+		<primaryKey name="KZD_Primary" columns="KZD_KZDID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_KZDDeklNag" localColumns="KZD_DkNID" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.KorektaPodatkuDochodowegoZD:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

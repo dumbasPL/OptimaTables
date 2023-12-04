@@ -1,0 +1,16 @@
+<table name="WszystkoPLParametryaDefWartosci">
+		<description>Możliwe wartości parametrów z wszystko.pl</description>
+		<column name="WPLPDW_WPLPDWId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WPLPDW_WPLPId" type="INTEGER" definition="NOT NULL">
+			<description>Id parametru wszystko.pl</description>
+		</column>
+		<column name="WPLPDW_Wartosc" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Wartość parametru</description>
+		</column>
+		<column name="WPLPDW_WPLKId" type="INT" definition="NOT NULL CONSTRAINT DF_WPLPDW_WPLKId DEFAULT(0)">
+			<description>Id kategorii wszystko.pl</description>
+		</column>
+	</table>
+	

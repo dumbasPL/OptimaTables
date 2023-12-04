@@ -1,0 +1,43 @@
+<table name="KntESklepyPrzedstawiciele">
+		<description>Tabela powiązań kontrahentow,eSklep-ów, przedstawicieli</description>
+		<column name="KESP_KESPID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="KESP_KntID" type="INTEGER" definition="NOT NULL">
+			<description>ID kontrahenta e-Sklepu</description>
+		</column>
+		<column name="KESP_PrzedstawicielID" type="INTEGER" definition="NOT NULL">
+			<description>ID przedstawiciela kontrahenta</description>
+		</column>
+		<column name="KESP_eSklepID" type="INTEGER" definition="NOT NULL">
+			<description>ID e-Sklepu</description>
+		</column>
+		<column name="KESP_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Głowny login w e-sklepie</description>
+		</column>
+		<column name="KESP_NieAktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KESP_NieAktywny DEFAULT(0)">
+			<description>Login nieaktywny</description>
+		</column>
+		<column name="KESP_PrzedstawicieleSklepID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_KESP_PrzedstawicieleSklepID DEFAULT(0)">
+			<description>ID przedstawiciela kontrahenta w eklepie</description>
+		</column>
+		<column name="KESP_Email" type="nvarchar(127)" definition="NOT NULL" hash="1">
+			<description>EMail przedstawiciela</description>
+		</column>
+		<column name="KESP_Nazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko</description>
+		</column>
+		<primaryKey name="KESP_Primary" columns="KESP_KESPID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="KESPKntESS" options="UNIQUE NONCLUSTERED" fields="KESP_KntID, KESP_eSklepID,KESP_PrzedstawicielID">
+			<description>Według kontrahenta i nazwy</description>
+		</index>
+		<foreignKey name="FK_KESPKnt" localColumns="KESP_KntID" refTable="Kontrahenci" refColumns="Knt_KntID">
+			<description>Relacja CDN.Kontrahenci:CDN.KntESklepyPrzedstawiciele (1:MANY)</description>
+		</foreignKey>
+		<foreignKey name="FK_KESPESS" localColumns="KESP_eSklepID" refTable="eSklepStanowiska" refColumns="ESS_ESSId">
+			<description>Relacja CDN.eSklepStanowiska:CDN.KntESklepyPrzedstawiciele (1:MANY)</description>
+		</foreignKey>
+	</table>
+	

@@ -1,0 +1,161 @@
+<table name="DetalStanowiska">
+		<description>Tabela ze stanowiskami detalu</description>
+		<column name="DSta_DStaId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator towaru (numer rekordu)</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSta_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa stanowiska detalu</description>
+		</column>
+		<column name="DSta_Opis" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="DSta_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ stanowiska: 1 - Detal, 2 - Mobile</description>
+		</column>
+		<column name="DSta_GenerujWZ" type="TINYINT" definition="NOT NULL">
+			<description>Generuj WZ</description>
+		</column>
+		<column name="DSta_TypNettoBrutto" type="TINYINT" definition="NOT NULL">
+			<description>Typ stanowiska: 1 - Netto, 2 - Brutto</description>
+		</column>
+		<column name="DSta_TwGGIDNumer" type="INTEGER" definition="NOT NULL">
+			<description>Id grupy towarow dla stanowiska</description>
+			<details>pole jest not null - wartość 0 oznacza przynależność do roota (grupy głównej)</details>
+		</column>
+		<column name="DSta_DDfIdPA" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdPAKor" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdFS" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdFSKor" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdMM" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdRO" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdKP" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdKW" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdPKA" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdCRM" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdWZ" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DSta_DDfIdWZ DEFAULT(0)">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_DDfIdPF" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DSta_DDfIdPF DEFAULT(0)">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_BRaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli BnkRachunki</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSta_Seria" type="NVARCHAR(5)" definition="NOT NULL">
+			<description>Seria dla definicji</description>
+		</column>
+		<column name="DSta_MagId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="DSta_KntGrupa" type="NVARCHAR(20)" definition="CONSTRAINT DF_DSta_KntGrupa DEFAULT('')">
+			<description>Grupa do której należy kontrahent</description>
+		</column>
+		<column name="DSta_MagIdZwrotny" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="DSta_TwCNumer" type="INTEGER" definition="NOT NULL">
+			<description>Domyślna cena dla stanowiska</description>
+			<details>Numer domyślnej ceny, związany z tabelą TwrCeny</details>
+		</column>
+		<column name="DSta_Nieaktywne" type="TINYINT" definition="NOT NULL">
+			<description>Czy stanowisko jest nieaktywne</description>
+		</column>
+		<column name="DSta_TS_Synchro" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroTwr" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroKnt" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroTraNag" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroZapisKB" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroImportKnt" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroOpak" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroKntPotw" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroTwrPotw" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroPotw" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroGrup" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_TS_SynchroGrupPotw" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSta_EdycjaKnt" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DSta_EdycjaKnt DEFAULT(1)">
+			<description>mozliwość edycji kontrahenta w Mobile</description>
+		</column>
+		<column name="DSta_KntOpiekun" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DSta_KntOpiekun DEFAULT(0)">
+			<description>Kontrahenta w Mobile według opiekuna</description>
+		</column>
+		<column name="DSta_PobieranieSkladnikowFSUslugaZlozona" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DSta_DSta_PobieranieSkladnikowFSUslugaZlozona DEFAULT(0)">
+			<description>Dodaj składniki usług złożonych</description>
+		</column>
+		<primaryKey name="DSta_Primary" columns="DSta_DStaId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

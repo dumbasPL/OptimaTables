@@ -1,0 +1,94 @@
+<table name="WyposazenieAINag">
+		<description>Tabela z nagłówkami arkuszy inwentaryzacyjnych wyposażenia</description>
+		<column name="WypAIN_WypAINID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WypAIN_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Czy arkusz jest w buforze</description>
+		</column>
+		<column name="WypAIN_DDfID" type="INTEGER">
+			<description>Identyfikator definicji dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="WypAIN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="WypAIN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="WypAIN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(WypAIN_NUMERNR,WypAIN_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="WypAIN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data wystawienia</description>
+			<details>
+				Data wystawienia arkusza
+			</details>
+		</column>
+		<column name="WypAIN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii arkusza</description>
+		</column>
+		<column name="WypAIN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis kategorii</description>
+		</column>
+		<column name="WypAIN_Opis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Dodatkowy opis na arkuszu</description>
+		</column>
+		<column name="WypAIN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego arkusz</description>
+		</column>
+		<column name="WypAIN_StaZalID" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WypAIN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="WypAIN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego arkusza</description>
+		</column>
+		<column name="WypAIN_StaModID" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WypAIN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji arkusza</description>
+		</column>
+		<column name="WypAIN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WypAIN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="WypAIN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WypAIN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="WypAIN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WypAIN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="WypAIN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WypAIN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="WypAIN_Primary" columns="WypAIN_WypAINID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_WypAINKategoria" localColumns="WypAIN_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.WyposazenieAINag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WypAINDokDefinicja" localColumns="WypAIN_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.WyposazenieAINag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="WypAINKategoria" options="UNIQUE NONCLUSTERED" fields="WypAIN_KatID ,WypAIN_DataDok ,WypAIN_WypAINID">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="WypAINDokDefinicja" options="NONCLUSTERED" fields="WypAIN_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="WypAINNumer" options="UNIQUE NONCLUSTERED" fields="WypAIN_NumerString ,WypAIN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="WypAINNumerPelny" options="UNIQUE NONCLUSTERED" fields="WypAIN_NumerPelny">
+			<description>Wg pełnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+	</table>
+	

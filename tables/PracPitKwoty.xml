@@ -1,0 +1,22 @@
+<table name="PracPitKwoty">
+		<column name="PPK_PPKId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator</description>
+		</column>
+		<column name="PPK_PPMId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do PracPitMies</description>
+		</column>
+		<column name="PPK_Numer" type="INTEGER" definition="NOT NULL">
+			<description>Numer zmiennej</description>
+		</column>
+		<column name="PPK_Wartosc" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Wartość zmiennej</description>
+		</column>
+		<primaryKey name="PPK_Primary" columns="PPK_PPKId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PPKPitKwoty" localColumns="PPK_PPMId" refTable="PracPitMies" refColumns="PPM_PPMId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPitKwoty:CDN.PracPitMies (MANY:1)</description>
+		</foreignKey>
+		<index name="PPKPitKwoty" options="UNIQUE NONCLUSTERED" fields="PPK_PPMId ,PPK_Numer" />
+	</table>
+	

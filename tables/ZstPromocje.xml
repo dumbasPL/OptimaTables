@@ -1,0 +1,10 @@
+<table name="ZstPromocje">
+		<column name="ZPR_ID" type="" definition="NO_SQL" />
+		<column name="ZPR_Nazwa" type="" definition="NO_SQL" />
+		<column name="ZPR_PrmID" type="" definition="NO_SQL" />
+		<column name="ZPR_TwrFirma" type="" definition="NO_SQL" />
+		<column name="ZPR_TwrLp" type="" definition="NO_SQL" />
+		<column name="ZPR_TwrNumer" type="" definition="NO_SQL" />
+		<column name="ZPR_TwrTyp" type="" definition="NO_SQL" />
+	</table>
+	

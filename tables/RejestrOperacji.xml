@@ -1,0 +1,35 @@
+<table name="RejestrOperacji">
+		<description>Rejestr operacji na dokumentach</description>
+		<column name="ROP_ROPID" type="BIGINT" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ROP_ObiektTyp" type="INTEGER" definition="NOT NULL">
+			<description>Typ obiektu</description>
+		</column>
+		<column name="ROP_ObiektSubTyp" type="INTEGER" definition="NULL">
+			<description>SubTyp obiektu</description>
+		</column>
+		<column name="ROP_ObiektID" type="INTEGER" definition="NULL">
+			<description>Id obiektu</description>
+		</column>
+		<column name="ROP_ObiektNazwa" type="NVARCHAR(300)" definition="NULL" hash="1">
+			<description>Nazwa obiektu, np. numerator dokumentu</description>
+		</column>
+		<column name="ROP_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data i czas operacji</description>
+		</column>
+		<column name="ROP_Operator" type="NVARCHAR(50)" definition="NULL" hash="1">
+			<description>Nazwisko lub arkonim operatora</description>
+		</column>
+		<column name="ROP_OperacjaTyp" type="INTEGER" definition="NOT NULL">
+			<description>Typ operacji</description>
+		</column>
+		<column name="ROP_Opis" type="NVARCHAR(1000)" definition="NULL" hash="1">
+			<description>Opis operacji</description>
+		</column>
+		<primaryKey name="ROP_Primary" columns="ROP_ROPID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="ROP_IdTypObiektu" options="NONCLUSTERED" fields="ROP_ObiektID, ROP_ObiektTyp" />
+	</table>
+	

@@ -1,0 +1,31 @@
+<table name="RodzinaZwolOkresy">
+		<description>Tabela okresów zwolnień z FP/FGŚP</description>
+		<column name="RZO_RzoId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RZO_RdzId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do członka rodziny</description>
+		</column>
+		<column name="RZO_OkresOd" type="DATETIME" definition="NOT NULL">
+			<description>Początek okresu</description>
+		</column>
+		<column name="RZO_OkresDo" type="DATETIME" definition="NOT NULL">
+			<description>Koniec okresu</description>
+		</column>
+		<column name="RZO_PnbId" type="INTEGER" definition="NULL">
+			<description>Id nieobecnosci</description>
+		</column>
+		<column name="RZO_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="RZO_Primary" columns="RZO_RzoId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_RZORdzLink" localColumns="RZO_RdzId" refTable="Rodzina" refColumns="RDZ_RdzId" deleteOption="CASCADE">
+			<description>Relacja CDN.RodzinaZwolOkresy:CDN.Rodzina (MANY:1)</description>
+		</foreignKey>
+		<index name="RZORdzId" options="NONCLUSTERED" fields="RZO_RdzId">
+			<description>Wg id członka rodziny</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,107 @@
+<view name="DokumentyKBView">
+		<description>Lista dokumentów kasowo bankowych</description>
+		<column name="DKB_DKBId" type="INTEGER" definition="NO_SQL" filterVisible="false">
+			<description>Identyfikator rekordu w tabeli źródłowej</description>
+		</column>
+		<column name="DKB_TypDokumentuKB" type="SMALLINT" definition="NO_SQL">
+			<description>Typ dokumentu</description>
+			<details>1 - BnkZdarzenia; 2 - BnkZapis</details>
+		</column>
+		<column name="DKB_BRaId" type="INTEGER" definition="NO_SQL">
+			<description>Klucz obcy do BnkRachunki</description>
+		</column>
+		<column name="DKB_PodmiotTyp" type="SMALLINT" definition="NO_SQL">
+			<description>Typ podmiotu powiązanego z dokumentem</description>
+		</column>
+		<column name="DKB_PodmiotId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator podmiotu w tabeli źródłowej</description>
+		</column>
+		<column name="DKB_DataDok" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Data dokumentu źródłowego</description>
+		</column>
+		<column name="DKB_Termin" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Termin płatności</description>
+		</column>
+		<column name="DKB_DataReal" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Data realizacji płatności</description>
+		</column>
+		<column name="DKB_NumerPelny" type="VARCHAR(26)" definition="NO_SQL">
+			<description>Numer pełny na dokumencie</description>
+		</column>
+		<column name="DKB_Numer" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer dokumentu</description>
+			<details>Numer obcy lub numer pełny</details>
+		</column>
+		<column name="DKB_Kwota" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota dokumentu</description>
+		</column>
+		<column name="DKB_KwotaKierunkowa" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota z uwzględnieniem znaku</description>
+		</column>
+		<column name="DKB_KwotaRoz" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota rozliczona</description>
+		</column>
+		<column name="DKB_Waluta" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Waluta zapisu</description>
+		</column>
+		<column name="DKB_WalutaDok" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Waluta dokumentu</description>
+		</column>
+		<column name="DKB_KursNumer" type="INTEGER" definition="NO_SQL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="DKB_KursL" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="DKB_KursM" type="DECIMAL( 5,0)" definition="NO_SQL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="DKB_KwotaSys" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota w walucie systemowej</description>
+		</column>
+		<column name="DKB_KwotaKierunkowaSys" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota ze znakiem w walucie systemowej</description>
+		</column>
+		<column name="DKB_KwotaRozSys" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota rozliczona w walucie systemowej</description>
+		</column>
+		<column name="DKB_Kierunek" type="SMALLINT" definition="NO_SQL">
+			<description>Kierunek przepływu pieniędzy</description>
+		</column>
+		<column name="DKB_Rozliczono" type="SMALLINT" definition="NO_SQL">
+			<description>Status rozliczenia</description>
+			<details>
+				0 - dokument w ogóle nie rozliczony lub rozliczony częściowo;
+				1 - dokument rozliczony całkowicie
+			</details>
+		</column>
+		<column name="DKB_Rozliczono2" type="SMALLINT" definition="NO_SQL">
+			<description>Status rozliczenia</description>
+			<details>
+				0 - dokument w ogóle nie rozliczony;
+				1 - dokument rozliczony częściowo lub całkowicie
+			</details>
+		</column>
+		<column name="DKB_Stan" type="SMALLINT" definition="NO_SQL">
+			<description>Stan dokumentu - tylko dla Zdarzeń</description>
+		</column>
+		<column name="DKB_KontoPrzeciwstawne" type="INTEGER" definition="NO_SQL">
+			<description>Konto przeciwstawne dla prostych księgowań</description>
+		</column>
+		<column name="DKB_DataRoz" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Data rozliczenia</description>
+		</column>
+		<column name="DKB_Opis" type="NVARCHAR(254)" definition="NO_SQL">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="DKB_Wynagrodzenie" type="SMALLINT" definition="NO_SQL">
+			<description>Czy dokument KB stanowi wynagrodzenie pracownika</description>
+		</column>
+		<column name="DKB_KatID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli Kategorie</description>
+		</column>
+		<column name="DKB_DokumentID" type="INTEGER" definition="NO_SQL">
+			<description>ID dokumentu</description>
+		</column>
+	</view>
+	

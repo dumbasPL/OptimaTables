@@ -1,0 +1,151 @@
+<table name="KntOsoby">
+		<description>Tabela z danymi przedstawicieli kontrahenta</description>
+		<column name="KnO_KnOId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator (numer) rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="KnO_KntId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator kontrahenta</description>
+			<details>Klucz obcy do tabeli Kontrahenci</details>
+		</column>
+		<column name="KnO_Tytul" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Tytuł przedstawiciela firmy</description>
+		</column>
+		<column name="KnO_Plec" type="TINYINT" definition="NOT NULL">
+			<description>Płeć przedstawiciela</description>
+			<details>
+				Pole przyjmuje wartości:
+				0 - inna
+				1 - mężczyzna
+				2 - kobieta
+			</details>
+		</column>
+		<column name="KnO_Nazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Imię i nazwisko przedstawiciela</description>
+		</column>
+		<column name="KnO_Kraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="KnO_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="KnO_Powiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="KnO_Gmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="KnO_Ulica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia adresu kontrahenta (ulica)</description>
+		</column>
+		<column name="KnO_NrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="KnO_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="KnO_Miasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość</description>
+		</column>
+		<column name="KnO_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="KnO_Poczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="KnO_Adres2" type="NVARCHAR(256)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu kontrahenta</description>
+		</column>
+		<column name="KnO_Telefon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon przedstawiciela</description>
+		</column>
+		<column name="KnO_TelefonSms" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KnO_TelefonSms DEFAULT('')" hash="1">
+			<description>Telefon przedstawiciela</description>
+		</column>
+		<column name="KnO_GSM" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon GSM przedstawiciela</description>
+		</column>
+		<column name="KnO_Email" type="NVARCHAR(60)" definition="NOT NULL" hash="1">
+			<description>Adres elektroniczny e-mail przedstawiciela</description>
+		</column>
+		<column name="KnO_EmailESklep" type="NVARCHAR(60)" definition="NOT NULL CONSTRAINT DF_KnO_EmailESklep DEFAULT('')" hash="1">
+			<description>Adres elektroniczny e-mail przedstawiciela dla e-Sklepu</description>
+		</column>
+		<column name="KnO_Mailing" type="TINYINT" definition="NOT NULL constraint DF_KnO_Mailing default(1)">
+			<description>Mail seryjny do przedstawiciela</description>
+			<details>
+				Pole przyjmuje wartości:
+				0 - nie wysyłaj seryjnego maila
+				1 - wysyłał seryjny mail
+			</details>
+		</column>
+		<column name="KnO_Informacje" type="TINYINT" definition="NOT NULL">
+			<description>Czy wysyłać informacje (uwzględniać w korespondencji seryjnej, itp)</description>
+			<details>
+				0 - nie wysyłać &lt;br&gt;
+				1- wysyłać
+			</details>
+		</column>
+		<column name="KnO_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Domyślny przedstawiciel drukowany na fakturach</description>
+			<details>
+				Czy domyslny &lt;br&gt;
+				0 - nie &lt;br&gt;
+				1- tak
+			</details>
+		</column>
+		<column name="KnO_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KnO_Nieaktywny DEFAULT(0)">
+			<description>Czy przedstawiciel nieaktywny</description>
+		</column>
+		<column name="KnO_LpAnonimizacji" type="INTEGER" definition="NOT NULL CONSTRAINT DF_KnO_LpAnonimizacji DEFAULT(0)">
+			<description>Lp anonimizacji</description>
+		</column>
+		<column name="KnO_DataAnonimizacji" type="DATETIME">
+			<description>Data anonimizacji</description>
+		</column>
+		<column name="KnO_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="KnO_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KnO_TS_Zal" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KnO_TS_Zal DEFAULT(GetDate())">
+			<description>TimeStamp założenia</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="KnO_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego</description>
+		</column>
+		<column name="KnO_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KnO_TS_Mod" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KnO_TS_Mod DEFAULT(GetDate())">
+			<description>TimeStamp modyfikacji</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="KnO_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KnO_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="KnO_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KnO_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="KnO_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KnO_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="KnO_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KnO_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="KnO_Primary" columns="KnO_KnOId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KnOKontrahent" localColumns="KnO_KntId" refTable="Kontrahenci" refColumns="Knt_KntId" deleteOption="CASCADE">
+			<description>Relacja CDN.KntOsoby:CDN.Kontrahenci (MANY:1)</description>
+		</foreignKey>
+		<index name="KnOKontrahent" options="UNIQUE NONCLUSTERED" fields="KnO_KntId ,KnO_KnOId">
+			<description>Wg kontrahenta</description>
+		</index>
+	</table>
+	

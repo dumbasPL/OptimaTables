@@ -1,0 +1,136 @@
+<table name="BnkBOMW">
+		<description>Lista bilansów otwarcia rejestrów K/B</description>
+		<details>Tabela zawiera bilansy otwarcia magazynu walut rejestrów K/B</details>
+		<column name="BOMW_BOMWID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BOMW_Kierunek" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_BOMW_Kierunek DEFAULT(1) CONSTRAINT CK_BOMW_Kierunek CHECK(BOMW_Kierunek IN (-1,1))">
+			<description>Kierunek przepływu pieniędzy</description>
+		</column>
+		<column name="BOMW_BRaID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli BnkRachunki</description>
+		</column>
+		<column name="BOMW_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="BOMW_NumerPelny" type="VARCHAR(30)">
+			<description>Pełny numer dokumentu</description>
+		</column>
+		<column name="BOMW_NumerObcy" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu obcego</description>
+		</column>
+		<column name="BOMW_Numer" type="NVARCHAR(30)">
+			<description>Numer wyświetlany na liście</description>
+		</column>
+		<column name="BOMW_KatID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli Kategorie</description>
+		</column>
+		<column name="BOMW_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BOMW_KwotaSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu w walucie systemowej</description>
+		</column>
+		<column name="BOMW_KwotaRozSysMW" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BOMW_KwotaRozSysMW CHECK(BOMW_KWOTAROZSYSMW&gt;=0)">
+			<description>Kwota rozliczona w walucie systemowej</description>
+		</column>
+		<column name="BOMW_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wyrażona w walucie rozliczenia</description>
+		</column>
+		<column name="BOMW_KwotaRozMW" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BOMW_KwotaRozMW CHECK(BOMW_KWOTAROZMW&gt;=0)">
+			<description>Kwota rozliczona w walucie</description>
+		</column>
+		<column name="BOMW_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="BOMW_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="BOMW_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="BOMW_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="BOMW_WgKursuMW" type="TINYINT" definition="NOT NULL">
+			<description>Sposób rozliczenia operacji (wg kursu bieżącego/historycznego)</description>
+		</column>
+		<column name="BOMW_RozliczonoMW" type="SMALLINT" definition="NOT NULL">
+			<description>Status rozliczenia</description>
+		</column>
+		<column name="BOMW_Rozliczono2MW" type="SMALLINT" definition="NOT NULL">
+			<description>Status rozliczenia częściowego</description>
+		</column>
+		<column name="BOMW_DataRozMW" type="DATETIME">
+			<description>Data rozliczenia MW</description>
+			<details>Jeżeli Zapis k/b jest rozliczany więcej niż jednym dokumentem - najpóźniejsza data
+				rozliczenia. Jeżeli dokument jest nierozliczony pole przyjmuje wartość NULL. Reprezentacja
+				pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BOMW_DataKur" type="DATETIME" definition="NOT NULL">
+			<description>Data kursu waluty</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BOMW_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="BOMW_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="BOMW_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BOMW_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BOMW_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="BOMW_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BOMW_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BOMW_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BOMW_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BOMW_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BOMW_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BOMW_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BOMW_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BOMW_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BOMW_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="BOMW_Primary" columns="BOMW_BOMWID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BOMWChron" localColumns="BOMW_BRaID" refTable="BnkRachunki" refColumns="BRa_BRaID">
+			<description>Relacja CDN.BnkBOMW:CDN.BnkRachunki (MANY:1)</description>
+		</foreignKey>
+		<index name="BOMWChron" options="UNIQUE NONCLUSTERED" fields="BOMW_BRaID ,BOMW_DataDok ,BOMW_BOMWID">
+			<description>Wg rejestru K/B</description>
+		</index>
+		<index name="BOMWNumeracja" options="UNIQUE NONCLUSTERED" fields="BOMW_BRaID, BOMW_Kierunek, BOMW_NumerNr">
+			<description>Klucz do autonumeracji numeru dokumentu</description>
+		</index>
+		<index name="BOMWKategoria" options="UNIQUE NONCLUSTERED" fields="BOMW_KatID ,BOMW_DataDok ,BOMW_BOMWID">
+			<description>Lista zapisów wg kategorii</description>
+		</index>
+		<index name="BOMWRozliczono" options="UNIQUE NONCLUSTERED" fields="BOMW_RozliczonoMW ,BOMW_DataDok ,BOMW_BOMWID">
+			<description>Wg rozliczenia</description>
+		</index>
+		<index name="BOMWRozliczono2" options="UNIQUE NONCLUSTERED" fields="BOMW_Rozliczono2MW ,BOMW_DataDok ,BOMW_BOMWID">
+			<description>Wg rozliczenia z flagą rozliczenia częściowego</description>
+		</index>
+	</table>
+	

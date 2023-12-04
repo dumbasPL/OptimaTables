@@ -1,0 +1,209 @@
+<table name="DetalTraNag">
+		<description>Tabela dokumentów</description>
+		<details>Nagłówki dokumentów (faktur, paragonów itp).</details>
+		<column name="DTrN_DTrNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DTrN_TypNB" type="TINYINT" definition="NOT NULL">
+			<description>Typ faktury (od netto lub od brutto)</description>
+			<details>
+				1 - od netto &lt;br&gt;
+				2 - od brutto
+			</details>
+		</column>
+		<column name="DTrN_DSTrNID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DTrN_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="DTrN_FaId" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do faktury wykorzystywany przy przekształacaniu paragonów</description>
+			<details>W paragonie lub WZ jest tu TrNId faktury, do której został przekształcony dokument
+				źródłowy</details>
+		</column>
+		<column name="DTrN_MagId" type="INTEGER" definition="CONSTRAINT DF_DTrN_MagId DEFAULT(0)">
+			<description>Wskaźnik magazynu</description>
+		</column>
+		<column name="DTrN_ZwrId" type="INTEGER">
+			<description>Identyfikator dokumentu źrodlowego dla dokumentów korygujących</description>
+		</column>
+		<column name="DTrN_TypDokumentu" type="INTEGER" definition="NOT NULL">
+			<description>Typ dokumentu (klasa dokumentu)</description>
+			<details>
+				301 - Faktura Zakupu &lt;br&gt;
+				302 - Faktura sprzedaży &lt;br&gt;
+				303 - Przyjęcie Wewnętrzne &lt;br&gt;
+				304 - Rozchód Wewnętrzny &lt;br&gt;
+				305 - Paragon &lt;br&gt;
+				306 - Wydanie Zewnętrzne &lt;br&gt;
+				307 - Przyjęcie Zewnętrzne &lt;br&gt;
+				308 - Rezerwacja Odbiorcy &lt;br&gt;
+				309 - Zamówienie u Dostawcy &lt;br&gt;
+				310 - Bilans Otwarcia Magazynu &lt;br&gt;
+				311 - Arkusz Inwentaryzacyjny &lt;br&gt;
+				312 - Przesunięcie Międzymagazynowe &lt;br&gt;
+				313 - Przyjęcie kaucji &lt;br&gt;
+				314 - Wydanie kaucji &lt;br&gt;
+				317 - Przyjęcie Wewnętrzne Produktów &lt;br&gt;
+				318 - Rozchód Wewnętrzny Składników &lt;br&gt;
+				320 - Faktura Pro Forma &lt;br&gt;
+				321 - FWS &lt;br&gt;
+				322 - FWZ &lt;br&gt;
+				345 - TaxFree &lt;br&gt;
+				350 - FRR
+			</details>
+		</column>
+		<column name="DTrN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="DTrN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="DTrN_NumerPelny" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DTrN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="DTrN_Fiskalna" type="TINYINT" definition="NOT NULL">
+			<description>Czy transakcja z kasy fiskalnej</description>
+			<details>
+				0 - dokument niefiskalny &lt;br&gt;
+				1 - dokument fiskalny
+			</details>
+		</column>
+		<column name="DTrN_PodID" type="INTEGER">
+			<description>Identyfikator podmiotu (płatnika)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="DTrN_OdbID" type="INTEGER">
+			<description>Identyfikator odbiorcy</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez OdbiorcaTyp,
+				lub jest równy 0 (NULL) dla odbiorcy wpisanego "z ręki"</details>
+		</column>
+		<column name="DTrN_RazemBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna brutto</description>
+		</column>
+		<column name="DTrN_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat na fakturze</description>
+			<details>Domyślny rabat dla elementów</details>
+		</column>
+		<column name="DTrN_StanSynchronizacji" type="INTEGER">
+			<description>Stan synchronizacji kontrahenta</description>
+		</column>
+		<column name="DTrN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="DTrN_OsobaOdbierajaca" type="NVARCHAR(40)" hash="1">
+			<description>Osoba odbierajaca</description>
+		</column>
+		<column name="DTrN_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="DTrN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DTrN_IloscElementow" type="INTEGER" definition="NOT NULL">
+			<description>Ilosc elementow</description>
+			<details>Domyślny rabat dla elementów</details>
+		</column>
+		<column name="DTrN_IloscPlatnosci" type="INTEGER" definition="NOT NULL">
+			<description>Ilosc platnosci</description>
+			<details>Domyślny rabat dla elementów</details>
+		</column>
+		<column name="DTrN_OptimaId" type="INTEGER">
+			<description>Identyfikator dokumentu w Optimie</description>
+		</column>
+		<column name="DTrN_FPlId" type="INTEGER">
+			<description>Identyfikator formy płatności</description>
+		</column>
+		<column name="DTrN_Korekta" type="TINYINT">
+			<description>Faktura korygująca</description>
+			<details>
+				Określa, czy faktura jest fakturą korygującą, oraz typ korekty: &lt;br&gt;
+				0 - faktura zwykła &lt;br&gt;
+				1 - korekta ilości &lt;br&gt;
+				2 - korekta wartości (ceny) &lt;br&gt;
+				3 - korekta Vat &lt;br&gt;
+				4 - nota korygująca &lt;br&gt;
+				5 - korekta graniczna &lt;br&gt;
+				6 - korekta graniczna UE
+			</details>
+		</column>
+		<column name="DTrN_PARodzajKor" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DTrN_PARodzajKor DEFAULT(0)">
+			<description>Typ korekty do Paragonu pomyłka czy zwrot</description>
+		</column>
+		<column name="DTrN_StanKorekta" type="TINYINT">
+			<description>Faktura korygująca</description>
+		</column>
+		<column name="DTrN_Opis" type="NVARCHAR(1024)" definition="CONSTRAINT DF_DTrN_Opis DEFAULT('')">
+			<description>Dodatkowy opis na fakturze</description>
+		</column>
+		<column name="DTrN_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu danych</description>
+		</column>
+		<column name="DTrN_DataRealizacji" type="DATETIME">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="DTrN_DataPlatnosci" type="DATETIME">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="DTrN_AdresId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DTrN_AdresId DEFAULT(0)">
+			<description>Adres kontahenta w mobile</description>
+		</column>
+		<column name="DTrN_MagKod" type="NVARCHAR(30)" definition="NOT NULL CONSTRAINT DF_DTrN_MagKod DEFAULT('')">
+			<description>Symbol magazynu w numeratorze</description>
+		</column>
+		<column name="DTrN_DDfID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DTrN_DDfID DEFAULT(0)">
+			<description>ID definicji numeratora</description>
+		</column>
+		<column name="DTrN_StawkaNPOO" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DTrN_StawkaNPOO DEFAULT(0)">
+			<description>Stawka NP dla odwrotnego obciążenia</description>
+		</column>
+		<column name="DTrN_Anulowanie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DTrN_Anulowanie DEFAULT(0)">
+			<description>Czy anulować dokument</description>
+		</column>
+		<column name="DTrN_PlatnikID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DTrN_PlatnikID DEFAULT(0)">
+			<description>Identyfikator płatnika</description>
+		</column>
+		<column name="DTrN_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DTrN_SplitPay DEFAULT(0)">
+			<description>Mechanizm podzielonej płatności</description>
+		</column>
+		<primaryKey name="DTrN_Primary" columns="DTrN_DSTrNID,DTrN_StanDetalID" />
+		<index name="DTrNID" options="UNIQUE NONCLUSTERED" fields="DTrN_DTrNID">
+			<description>Wg identyfikatora</description>
+		</index>
+		<index name="DTrNIDPodmiot" options="UNIQUE NONCLUSTERED" fields="DTrN_PodID ,DTrN_DTrNID" />
+		<index name="DTrNIDOdbiorca" options="UNIQUE NONCLUSTERED" fields="DTrN_DTrNID ,DTrN_OdbID" />
+		<index name="DTrNIDOperator" options="UNIQUE NONCLUSTERED" fields="DTrN_DTrNID ,DTrN_OpeID" />
+		<index name="DetalTraNagTypDokumentu" options="NONCLUSTERED" fields="DTrN_TypDokumentu, DTrN_StanDetalID,DTrN_StanSynchronizacji" />
+	</table>
+	

@@ -1,0 +1,81 @@
+<table name="ProdSkladniki">
+		<description>Składniki receptury produktu</description>
+		<details>Zawiera składniki receptur produktów</details>
+		<column name="PdS_PdSId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="PdS_PdRId" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do procedury</description>
+		</column>
+		<column name="PdS_ProdId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator produktu</description>
+			<details>
+				Redundantny wskaźnik do produktu, którego dotyczy składnik
+				Nie ma klucza obcego, bo cascsade on delete i tak idzie poprzez nagłówek.
+				Jest trigger kontrolujący zgodność nagłówka ze składnikiem
+			</details>
+		</column>
+		<column name="PdS_TwrId" type="INTEGER">
+			<description>Identyfikator towaru</description>
+			<details>Wskaźnik do tabeli towary - nie może być wskaźnikiem do towaru określonego w nagłówku
+				(tzn. produkt nie może być składnikiem samego siebie)</details>
+		</column>
+		<column name="PdS_MagId" type="INTEGER">
+			<description>Wskaźnik do magazynu</description>
+			<details>Wskaźnik, z jakiego magazynu ma być ściągany składnik (null - oznacza dowolny
+				magazyn)</details>
+		</column>
+		<column name="PdS_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość składnika potrzebnego do wyprodukowania jednostki produktu</description>
+		</column>
+		<column name="PdS_Jm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary składnika</description>
+			<details>Na podstawie jednostki brany jest pod uwagę przelicznik pobrany z karty magazynowej</details>
+		</column>
+		<column name="PdS_JMCalkowite" type="TINYINT" definition="NOT NULL">
+			<description>Ilość towaru wyrażana w wielkościach całkowitych</description>
+		</column>
+		<column name="PdS_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Przelicznik jednostki miary pomocniczej - licznik</description>
+		</column>
+		<column name="PdS_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL">
+			<description>Przelicznik jednostki miary pomocniczej - mianownik</description>
+		</column>
+		<column name="PdS_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość w jednostkach pomocniczych</description>
+		</column>
+		<column name="PdS_Lp" type="INT">
+			<description>Numer kolejny elementu</description>
+		</column>
+		<primaryKey name="PdS_Primary" columns="PdS_PdSId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_PdSTowar" localColumns="PdS_TwrId" refTable="Towary" refColumns="Twr_TwrId">
+			<description>Relacja CDN.ProdSkladniki:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PdSReceptura" localColumns="PdS_PdRId" refTable="ProdReceptury" refColumns="PdR_PdRId" deleteOption="CASCADE">
+			<description>Relacja CDN.ProdSkladniki:CDN.ProdReceptury (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PdSMagazyn" localColumns="PdS_MagId" refTable="Magazyny" refColumns="Mag_MagId">
+			<description>Relacja CDN.ProdSkladniki:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<index name="PdSTowar" options="NONCLUSTERED" fields="PdS_TwrId">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+		<index name="PdSReceptura" options="UNIQUE NONCLUSTERED" fields="PdS_PdRId ,PdS_PdSId">
+			<description>Klucz obcy do nagłówka receptury</description>
+		</index>
+		<index name="PdSMagazyn" options="NONCLUSTERED" fields="PdS_MagId">
+			<description>Klucz obcy do magazynu</description>
+		</index>
+		<index name="PdSProdukt" options="NONCLUSTERED" fields="PdS_ProdId">
+			<description>Wg identyfikatora produktu</description>
+		</index>
+	</table>
+	

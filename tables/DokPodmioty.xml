@@ -1,0 +1,31 @@
+<table name="DokPodmioty">
+		<description>Tabela z danymi przedstawicieli kontrahenta</description>
+		<column name="DoP_DoPId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator (numer) rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DoP_PodmiotTyp" type="INTEGER">
+			<description>Typ podmiotu</description>
+			<details>
+				1 - kontrahent &lt;br&gt;
+				2 - bank &lt;br&gt;
+				3 - pracownik, wspólnik
+				5 - urząd
+			</details>
+		</column>
+		<column name="DoP_PodmiotID" type="INTEGER">
+			<description>Identyfikator podmiotu</description>
+			<details>Z tabeli CDN.DokPodmioty</details>
+		</column>
+		<column name="DoP_DoNID" type="INTEGER">
+			<description>Klucz obcy do DokNag</description>
+		</column>
+		<primaryKey name="DoP_Primary" columns="DoP_DoPId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DoPDokNag" options="NONCLUSTERED" fields="DoP_DoNID" />
+	</table>
+	

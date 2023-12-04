@@ -1,0 +1,59 @@
+<table name="SentHistoria">
+		<description>Tabela historii komunikacji z PUESC dla zgłoszenia SENT</description>
+		<column name="SentH_SentHID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SentH_SentID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli SentZgloszenia</description>
+		</column>
+		<column name="SentH_Korelacja" type="varchar(50)" definition="NOT NULL">
+			<description>Korelacja ID zgłoszenia SENT na PUESC</description>
+		</column>
+		<column name="SentH_CheckSum" type="varchar(50)" definition="NOT NULL">
+			<description>Suma kontrolna dokumentu</description>
+		</column>
+		<column name="SentH_ModificationDate" type="datetime" definition="NOT NULL">
+			<description>Data modyfikacji zgłoszenia na PUESC</description>
+		</column>
+		<column name="SentH_SentTyp" type="INTEGER" definition="NOT NULL">
+			<details>Typ zgłoszenia SENT</details>
+		</column>
+		<column name="SentH_Rodzaj" type="INTEGER" definition="NOT NULL">
+			<details>Rodzaj operacji wysłano/pobrano z PUESC</details>
+		</column>
+		<column name="SentH_Status" type="INTEGER" definition="NOT NULL">
+			<details>Status</details>
+		</column>
+		<column name="SentH_DataOperacji" type="DateTime" definition="NOT NULL">
+			<description>Data wysłania/odebrania komunikatu z PUESC</description>
+		</column>
+		<column name="SentH_Plik" type="varchar(255)" definition="NOT NULL" hash="1">
+			<description>Plik z treścią komunikatu PUESC</description>
+		</column>
+		<column name="SentH_Opis" type="nvarchar(1000)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="SentH_OpeID" type="INTEGER" definition="NULL">
+			<details>ID operatora</details>
+		</column>
+		<column name="SentH_OpeKod" type="varchar(20)" definition="NOT NULL" hash="1">
+			<description>Kod operatora</description>
+		</column>
+		<column name="SentH_OpeNazwisko" type="nvarchar(50)" definition="NOT NULL" hash="1">
+			<description>Nazwisko operatora</description>
+		</column>
+		<primaryKey name="SentHistoria_Primary" columns="SentH_SentHID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SentHistoriaSentZgloszenia" localColumns="SentH_SentID" refTable="SentZgloszenia" refColumns="Sent_SentID">
+			<description>Relacja CDN.SentHistoria:CDN.SentZgloszenia (MANY:1)</description>
+		</foreignKey>
+		<index name="SentHDataOperacji" options="NONCLUSTERED" fields="SentH_DataOperacji">
+			<description>Wg daty operacji</description>
+		</index>
+	</table>
+	

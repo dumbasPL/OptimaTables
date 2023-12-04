@@ -1,0 +1,363 @@
+<table name="TypWyplata">
+		<description>Tabela typów wypłat</description>
+		<column name="TWP_TwpId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator typu wypłaty</description>
+		</column>
+		<column name="TWP_PdpId" type="INTEGER" definition="NOT NULL">
+			<description>Link do deklaracji PIT</description>
+		</column>
+		<column name="TWP_PdzId" type="INTEGER" definition="NOT NULL">
+			<description>Link do deklaracji ZUS</description>
+		</column>
+		<column name="TWP_ParentId" type="INTEGER">
+			<description>Relacja do samej siebie</description>
+		</column>
+		<column name="TWP_Nazwa" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa typu wypłaty</description>
+		</column>
+		<column name="TWP_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa 2 typu wypłaty</description>
+		</column>
+		<column name="TWP_NazwaPelna" type="NVARCHAR(127)" definition="NOT NULL">
+			<description>Pełna nazwa typu wypłaty</description>
+		</column>
+		<column name="TWP_Skrot" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Skrót typu wypłaty</description>
+		</column>
+		<column name="TWP_Skrot2" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Skrót 2 typu wypłaty</description>
+		</column>
+		<column name="TWP_RodzajZrodla" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj źródła wypłaty</description>
+			<details>
+				0 - Brak&lt;BR&gt;
+				1 - wynagrodzenie zasadnicze (miesięczne/godzinowe), Dochód deklarowany
+		właściciela&lt;BR&gt;
+				2 - Dopłata do nadgodzin w święta&lt;BR&gt;
+				3 - Dopłata za pracę w nocy&lt;BR&gt;
+				4 – Dodatki&lt;BR&gt;
+				5 - Wynagr. zasad. powyżej normy/ Wynagr. zasad. poniżej normy/ Wynagrodzenie poniżej normy/
+		Wynagrodzenie powyżej normy&lt;BR&gt;
+				6 - Rozliczenie nieobecności (np. Wynagrodzenie za czas urlopu/Zasiłek opiekuńczy)&lt;BR&gt;
+		7 - Pomniejszenie proporcjonalne/Pomniejszenie o 1/30/ Pomn. kalend. dla właśc.&lt;BR&gt;
+				8 – umowy cywilnoprawne&lt;BR&gt;
+				10 - Dopłata do nadgodzin 50%&lt;BR&gt;
+				11 - Dopłata do nadgodzin 100%&lt;BR&gt;
+				14 - Zaliczka netto, Zaliczka brutto &lt;BR&gt;
+				15 - Spłata zaliczki, Spłata zaliczki brutto&lt;BR&gt;
+				18 – Akord&lt;BR&gt;
+				20 - Pożyczka&lt;BR&gt;
+				21 - Zaniechanie pożyczki/ Spłata pożyczki – odsetki/ Spłata pożyczki - rata
+		kapitałowa&lt;BR&gt;
+				22 - BO&lt;BR&gt;
+				23 - Korekta netto wypłaty&lt;BR&gt;
+				24 - Spłata korekty netto wypłaty&lt;BR&gt;
+			</details>
+		</column>
+		<column name="TWP_ZalPodat" type="INTEGER" definition="NOT NULL">
+			<description>Algorytm naliczania zaliczki podatku</description>
+		</column>
+		<column name="TWP_ImPrzelZalPodat" type="TINYINT" definition="NOT NULL">
+			<description>Imienny przelew zaliczki podatku</description>
+		</column>
+		<column name="TWP_Koszty" type="INTEGER" definition="NOT NULL">
+			<description>Algorytm sposobu naliczania kosztów uzyskania</description>
+		</column>
+		<column name="TWP_KodRNA" type="INTEGER" definition="NOT NULL">
+			<description>Kod na deklaracji RNA</description>
+		</column>
+		<column name="TWP_SklZUS" type="INTEGER" definition="NOT NULL">
+			<description>Algorytm naliczania składek ZUS</description>
+		</column>
+		<column name="TWP_SklZdrow" type="INTEGER" definition="NOT NULL">
+			<description>Algorytm naliczania składki na ubezpieczenie zdrowotne</description>
+		</column>
+		<column name="TWP_NiePomniejszZdrow" type="TINYINT" definition="NOT NULL">
+			<description>Nie pomniejszać podatku o składkę zdrowotną</description>
+		</column>
+		<column name="TWP_Korygowana" type="TINYINT" definition="NOT NULL">
+			<description>Określa możliwość korekty wypłaty</description>
+		</column>
+		<column name="TWP_WchodziDoWyplaty" type="TINYINT" definition="NOT NULL">
+			<description>Wpływa na kwotę do wypłaty</description>
+		</column>
+		<column name="TWP_UwzglMin" type="TINYINT" definition="NOT NULL">
+			<description>Uwzględniać przy minimalnej płacy</description>
+		</column>
+		<column name="TWP_UwzglNadgodz" type="TINYINT" definition="NOT NULL">
+			<description>Uwzględnij przy wynagradzaniu za nadgodziny</description>
+		</column>
+		<column name="TWP_OkresWyplaty" type="INTEGER" definition="NOT NULL">
+			<description>Okres wypłaty</description>
+		</column>
+		<column name="TWP_WplywaZalPodat" type="TINYINT" definition="NOT NULL">
+			<description>Wpływa na podstawę liczenia zaliczki podatku</description>
+		</column>
+		<column name="TWP_WliczUrlop" type="INTEGER" definition="NOT NULL">
+			<description>Wliczać do urlopu</description>
+			<details>
+				1 - nie wliczać, &lt;BR&gt;
+				2 - wliczać,&lt;BR&gt;
+				3 - wliczać jak zasadnicze,&lt;BR&gt;
+				4 - Wliczać po przeliczeniu, &lt;BR&gt;
+				5 - Wliczać aktualną wartość
+			</details>
+		</column>
+		<column name="TWP_WliczChor" type="INTEGER" definition="NOT NULL">
+			<description>Wliczać do podstawy chorobowego</description>
+		</column>
+		<column name="TWP_WliczEkwiwal" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_StOkrWartosc" type="NVARCHAR(41)" definition="NOT NULL" />
+		<column name="TWP_StOkrTyp" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_ZaOkrZwolLek" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgAlgorytm" type="INTEGER" definition="NOT NULL">
+			<description>Algorytm naliczania wartości</description>
+		</column>
+		<column name="TWP_AlgPotracenie" type="TINYINT" definition="NOT NULL">
+			<description>Czy wypłata jest potrąceniem</description>
+		</column>
+		<column name="TWP_AlgZaokraglenie" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wypłata może być zaokrąglana</description>
+		</column>
+		<column name="TWP_AlgPotrNieobec" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgOdchylki" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgProcWynagr" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="TWP_AlgStaz" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgStOkrTyp" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_AlgStOkrWartosc" type="NVARCHAR(41)" definition="NOT NULL" />
+		<column name="TWP_AlgWspolcz" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="TWP_AlgLiczbaDni" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_AlgLiczbaGodz" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_AlgBrutto" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgUrlop" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgAutomat" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgProcent" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="TWP_AlgKwota" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="TWP_AlgUzyjKwota" type="TINYINT" />
+		<column name="TWP_AlgStdWspolcz" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgIlosc" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="TWP_AlgIloscMies" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_AlgStdIloscMies" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_KosztyProc" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="TWP_Zmienna1" type="NVARCHAR(128)" definition="NOT NULL" />
+		<column name="TWP_Zmienna2" type="NVARCHAR(128)" definition="NOT NULL" />
+		<column name="TWP_AktPoWyp1" type="TINYINT" definition="NOT NULL">
+			<description>Aktualizować po wypłacie 1</description>
+		</column>
+		<column name="TWP_AktPoWyp2" type="TINYINT" definition="NOT NULL">
+			<description>Aktualizować po wypłacie 2</description>
+		</column>
+		<column name="TWP_PriorytetZUS" type="SMALLINT" definition="NOT NULL" />
+		<column name="TWP_PriorytetFIS" type="SMALLINT" definition="NOT NULL" />
+		<column name="TWP_PriorytetKoszty" type="SMALLINT" definition="NOT NULL" />
+		<column name="TWP_RodzajFIS" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj zaliczki podatku</description>
+			<details>
+				1 - Nie naliczać;
+				2 - Naliczać wg progów;
+				3 - Procent;
+				4 - Procent jak dla umów;
+			</details>
+		</column>
+		<column name="TWP_Kategoria" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_Podstawowe" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_Standardowy" type="SMALLINT" definition="NOT NULL" />
+		<column name="TWP_Zasadnicze" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_RodzajPotracenia" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_Wycofany" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgSposobZaokr" type="TINYINT" definition="NOT NULL">
+			<description>Sposób zaokrąglenia</description>
+		</column>
+		<column name="TWP_Priorytet" type="INTEGER" definition="NOT NULL">
+			<description>Priorytet typu składnika</description>
+		</column>
+		<column name="TWP_AlgStOkrPlusTyp" type="INTEGER" definition="NOT NULL" />
+		<column name="TWP_AlgStOkrPlusWartosc" type="NVARCHAR(40)" definition="NOT NULL" />
+		<column name="TWP_AlgStazSposob" type="TINYINT" definition="NOT NULL">
+			<description>Określa sposób naliczania stażu (algorytm 3)</description>
+		</column>
+		<column name="TWP_Ulga" type="SMALLINT" definition="NOT NULL">
+			<description>Naliczanie ulgi podatkowej</description>
+		</column>
+		<column name="TWP_WzrId" type="INTEGER">
+			<description>Wzorzec</description>
+		</column>
+		<column name="TWP_AlgWzorzec" type="NVARCHAR(2048)" definition="NOT NULL" />
+		<column name="TWP_AlgRodzaj12" type="SMALLINT" definition="NOT NULL" />
+		<column name="TWP_AlgSposobPomn" type="SMALLINT" definition="NOT NULL" />
+		<column name="TWP_Nieaktywny" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgPodstDzielGodz" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_AlgGodziny" type="DATETIME" definition="NOT NULL" />
+		<column name="TWP_WliczPFRON" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_KosztFirma" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_OpisAnalitCzasPracy" type="TINYINT" definition="NOT NULL" />
+		<column name="TWP_Kopia" type="INTEGER" />
+		<column name="TWP_PozycjaRP7" type="INTEGER" definition="NOT NULL">
+			<description>Pozycja na deklaracji RP7</description>
+			<details>
+				1 - Nie wchodzi
+				2 - Stały składnik wynagrodzenia
+				3 - Zmienny składnik wynagrodzenia
+				4 - Inna wypłata
+				5 - Świadczenie w naturze
+				6 - Świadczenia pieniężne z ubezpieczenia społecznego
+			</details>
+		</column>
+		<column name="TWP_Wskaznik" type="TINYINT" definition="NOT NULL">
+			<description>Typ wypłaty będący wskaźnikiem</description>
+		</column>
+		<column name="TWP_Umowa" type="TINYINT" definition="NOT NULL">
+			<description>Flaga oznaczająca typ wypłaty dla umów cywilnoprawnych</description>
+			<details>
+				0 – standardowe (te, które są ukryte, które nie są umową i pożyczką)
+				1 – umowy-zlecenia
+				2 – dodatki
+				3 - pożyczki
+			</details>
+		</column>
+		<column name="TWP_WliczanyDoGUS" type="SMALLINT" definition="NOT NULL">
+			<description>Typ wypłaty wliczany do GUS</description>
+			<details>
+				0 – nie wliczać&lt;BR&gt;
+				1 - wynagrodzenia osobowe&lt;BR&gt;
+				2 – wynagrodzenia osobowe (nadgodziny)&lt;BR&gt;
+				3 - wynagrodzenia bezosobowe (umowy)&lt;BR&gt;
+				4 – honoraria&lt;BR&gt;
+				5 – wynagrodzenia prowizyjno - agencyjne&lt;BR&gt;
+			</details>
+		</column>
+		<column name="TWP_ZalPodProc" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="TWP_PKZP" type="TINYINT" definition="NOT NULL">
+			<description>Udostępniany w PKZP</description>
+			<details>
+				Jeśli TWP_RodzajZrodla = 4 i dodatkowo TWP_PKZP ma wartość z zakresu 1-4 – jest to związane
+		z PKZP.
+				0 – nie jest związane z PKZP
+				1 – Wpisowe PKZP
+				2 – Składka PKZP
+				3 – Zapomoga PKZP
+				4 - Pożyczka PKZP
+			</details>
+		</column>
+		<column name="TWP_SwiadczFS" type="TINYINT" definition="NOT NULL">
+			<description>Świadczenie z funduszu socjalnego</description>
+		</column>
+		<column name="TWP_TypWaluty" type="TINYINT" definition="NOT NULL">
+			<description>Ustawienie parametru ‘Waluta w wypłacie’ w typie wypłaty – wskazanie opcji: ‘PLN’
+		czy ‘Waluta z etatu pracownika’</description>
+		</column>
+		<column name="TWP_NieZapisujZerowego" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_NieZapisujZerowego DEFAULT(0)">
+			<description>Flaga decydująca czy zapisywać element wypłaty wyliczony w kwocie zero</description>
+		</column>
+		<column name="TWP_AlgIloscMiesWszystkie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_AlgIloscMiesWszystkie DEFAULT(0)">
+			<description>Flaga decydująca o sposobie liczenia średniej do urlopu/ekwiwalentu</description>
+		</column>
+		<column name="TWP_AlgGodzinyDni" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_AlgGodzinyDni DEFAULT(0)">
+			<description>Flaga decydująca o sposobie przeliczania wynagrodzenia za urlop</description>
+		</column>
+		<column name="TWP_ZajecieWynagr" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_ZajecieWynagr DEFAULT(0)">
+			<description>Flaga decydująca czy typ wypłaty jest zajęciem komorniczym</description>
+		</column>
+		<column name="TWP_DoliczNaKoncu" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_DoliczNaKoncu DEFAULT(0)">
+			<description>Flaga decydująca czy typ wypłaty, będący zajęciem komorniczym, będzie doliczany
+		na końcu wypłaty</description>
+		</column>
+		<column name="TWP_AlgKnfWspolcz" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_AlgKnfWspolcz DEFAULT(0)">
+			<description>Flaga dt współczynnika ekwiwalentu za urlop (pobranie z konfiguracji)</description>
+		</column>
+		<column name="TWP_WliczChorPodwojnie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_WliczChorPodwojnie DEFAULT(0)">
+			<description>Flaga dt wliczania do chorobowego w podwójnej wysokości</description>
+		</column>
+		<column name="TWP_NieZapisujZerowegoPKZP" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_NieZapisujZerowegoPKZP DEFAULT(1)">
+			<description>Flaga decydująca czy zapisywać element wypłaty wyliczony w kwocie zero (spłata
+		PKZP)</description>
+		</column>
+		<column name="TWP_WykazZUSRPA" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_WykazZUSRPA DEFAULT(0)">
+			<description>Wykaż na ZUS RPA jako element wypłacany obok zasiłków</description>
+		</column>
+		<column name="TWP_SkladkaCzlonkowskaZZ" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_SkladkaCzlonkowskaZZ DEFAULT(0)">
+			<description>Składka członkowska na rzecz związków zawodowych</description>
+		</column>
+		<column name="TWP_PrzychodPPKUmowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_PrzychodPPKUmowa DEFAULT(0)">
+			<description>Flaga decydująca czy typ wypłaty jest przychodem PPK dla umów</description>
+		</column>
+		<column name="TWP_PPKUmowaId" type="INTEGER">
+			<description>Relacja do samej siebie</description>
+		</column>
+		<column name="TWP_WliczLimitZwolZFSS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_WliczLimitZwolZFSS DEFAULT(0)">
+			<description>Wliczaj do limitu zwolnienia z opodatkowania ZFŚS</description>
+		</column>
+		<column name="TWP_UwzglZasadPowNormy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_UwzglZasadPowNormy DEFAULT(0)">
+			<description>Uwzględnij przy wynagrodzeniu zasadniczym powyżej normy</description>
+		</column>
+		<column name="TWP_UwzglZasadPonNormy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TWP_UwzglZasadPonNormy DEFAULT(0)">
+			<description>Uwzględnij przy wynagrodzeniu zasadniczym poniżej normy</description>
+		</column>
+		<column name="TWP_ImportAppId" type="VARCHAR(5)" />
+		<column name="TWP_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej (taki sam we wszystkich db)</description>
+		</column>
+		/&gt;
+		<column name="TWP_ImportRowId2" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej (indywidualny dla każdej db)</description>
+		</column>
+		/&gt;
+		<column name="TWP_TS_Export" type="DATETIME">
+			<description>TimeSTamp dokonania exportu</description>
+		</column>
+		<column name="TWP_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="TWP_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TWP_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="TWP_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="TWP_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TWP_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="TWP_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TWP_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="TWP_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TWP_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="TWP_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TWP_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="TWP_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TWP_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="TWP_Primary" columns="TWP_TwpId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_TWPPdpLink" localColumns="TWP_PdpId" refTable="PozDeklPIT" refColumns="PDP_PdpId">
+			<description>Relacja CDN.TypWyplata:CDN.PozDeklPIT (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TWPPdzLink" localColumns="TWP_PdzId" refTable="PozDeklZUS" refColumns="PDZ_PdzId">
+			<description>Relacja CDN.TypWyplata:CDN.PozDeklZUS (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TWPPPKUmowa" localColumns="TWP_PPKUmowaId" refTable="TypWyplata" refColumns="TWP_TwpId">
+			<description>Self-Relacja do CDN.TypWyplata</description>
+		</foreignKey>
+		<index name="TWYNazwa" options="UNIQUE NONCLUSTERED" fields="TWP_Nazwa" />
+		<index name="TWPPdpLink" options="NONCLUSTERED" fields="TWP_PdpId">
+			<description>Link do PozDeklPIT</description>
+		</index>
+		<index name="TWPPdzLink" options="NONCLUSTERED" fields="TWP_PdzId">
+			<description>Link do PozDeklZUS</description>
+		</index>
+		<index name="TWPWzorzec" options="NONCLUSTERED" fields="TWP_WzrId" />
+		<index name="TWPPPKUmowaLink" options="UNIQUE NONCLUSTERED" fields="TWP_PPKUmowaId, TWP_Nazwa">
+			<description>Klucz wewnętrzny</description>
+		</index>
+		<index name="TWPStandardowy" options="NONCLUSTERED" fields="TWP_Standardowy" />
+	</table>
+	

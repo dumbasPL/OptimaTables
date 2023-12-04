@@ -1,0 +1,9 @@
+<table name="BRpAgregaty">
+		<column name="BAg_BAgId" type="" definition="NO_SQL" />
+		<column name="BAg_BRpId" type="" definition="NO_SQL" />
+		<column name="BAg_PrzychodySys" type="" definition="NO_SQL" />
+		<column name="BAg_RozchodySys" type="" definition="NO_SQL" />
+		<column name="BAg_SaldoBOSys" type="" definition="NO_SQL" />
+		<column name="BAg_Typ" type="" definition="NO_SQL" />
+	</table>
+	

@@ -1,0 +1,59 @@
+<table name="TraVat" filterVisible="false">
+		<description>Tabelka Vat dla dokumentów handlowych</description>
+		<details>Tabela Vat dla dokumentów handlowych.</details>
+		<column name="TrV_TrVID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator zapisu</description>
+		</column>
+		<column name="TrV_TrNID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Wskaźnik do nagłówka TraNag</details>
+		</column>
+		<column name="TrV_TrNidFinalna" type="INTEGER">
+			<description>Wskaźnik do nagłówka dokumentu finalnego</description>
+		</column>
+		<column name="TrV_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="TrV_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="TrV_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawi zaniżonej</description>
+		</column>
+		<column name="TrV_Netto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota netto</description>
+		</column>
+		<column name="TrV_VAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota VAT</description>
+		</column>
+		<column name="TrV_NettoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto w walucie</description>
+		</column>
+		<column name="TrV_VATWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość VAT w walucie</description>
+		</column>
+		<column name="TrV_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Flaga techniczna</description>
+			<details>
+				0 - zapis standartowy
+				1 - rozliczenie fa zaliczkowej.
+			</details>
+		</column>
+		<primaryKey name="TrV_Primary" columns="TrV_TrVID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_VaTTraNag" localColumns="TrV_TrNID" refTable="TraNag" refColumns="TrN_TrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraVat:CDN.TraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="VaTTraNag" options="NONCLUSTERED" fields="TrV_TrNID">
+			<description>Wg identyfikatora i stawki VAT</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,60 @@
+<table name="JpkFa">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="ID" type="int" definition="NO_SQL" />
+		<column name="JpNID" type="int" definition="NO_SQL" />
+		<column name="TrNID" type="int" definition="NO_SQL" />
+		<column name="Typ" type="int" definition="NO_SQL" />
+		<column name="P_1" type="date" definition="NO_SQL" />
+		<column name="P_2A" type="nvarchar(30)" definition="NO_SQL" />
+		<column name="P_3A" type="nvarchar(350)" definition="NO_SQL" />
+		<column name="P_3B" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_3C" type="nvarchar(1024)" definition="NO_SQL" />
+		<column name="P_3D" type="nvarchar(1024)" definition="NO_SQL" />
+		<column name="P_4A" type="varchar(2)" definition="NO_SQL" />
+		<column name="P_4B" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_5A" type="varchar(2)" definition="NO_SQL" />
+		<column name="P_5B" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_6" type="date" definition="NO_SQL" />
+		<column name="P_13_1" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_14_1" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_13_2" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_14_2" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_13_3" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_14_3" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_13_4" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_14_4" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_13_5" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_14_5" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_13_6" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_13_7" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_15" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_16" type="tinyint" definition="NO_SQL" />
+		<column name="P_17" type="tinyint" definition="NO_SQL" />
+		<column name="P_18" type="tinyint" definition="NO_SQL" />
+		<column name="P_19" type="tinyint" definition="NO_SQL" />
+		<column name="P_19A" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_19B" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_19C" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_20" type="tinyint" definition="NO_SQL" />
+		<column name="P_20A" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_20B" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_21" type="tinyint" definition="NO_SQL" />
+		<column name="P_21A" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_21B" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_21C" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_22" type="tinyint" definition="NO_SQL" />
+		<column name="P_22A" type="date" definition="NO_SQL" />
+		<column name="P_22B" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_22C" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_23" type="tinyint" definition="NO_SQL" />
+		<column name="P_106E_2" type="tinyint" definition="NO_SQL" />
+		<column name="P_106E_3" type="tinyint" definition="NO_SQL" />
+		<column name="P_106E_3A" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="RodzajFaktury" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="PrzyczynaKorekty" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="NrFaKorygowanej" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="OkresFaKorygowanej" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="ZALZaplata" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="ZALPodatek" type="decimal(15, 2)" definition="NO_SQL" />
+	</table>
+	

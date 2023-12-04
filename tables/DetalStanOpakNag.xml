@@ -1,0 +1,31 @@
+<table name="DetalStanOpakNag">
+		<description>Tabela schamatów opakowań</description>
+		<column name="DSON_DSONId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DSON_OptimaId" type="INTEGER" definition="NOT NULL">
+			<description>Id kontrahenta w optimie</description>
+		</column>
+		<column name="DSON_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Schemat nieaktywny</description>
+		</column>
+		<column name="DSON_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod schematu</description>
+		</column>
+		<column name="DSON_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa schematu opakowania</description>
+		</column>
+		<column name="DSON_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DSON_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji karty</description>
+		</column>
+		<primaryKey name="DSON_Primary" columns="DSON_DSONId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DSONKod" options="UNIQUE NONCLUSTERED" fields="DSON_Kod ,DSON_StanDetalID">
+			<description>Klucz wg kodu</description>
+		</index>
+	</table>
+	

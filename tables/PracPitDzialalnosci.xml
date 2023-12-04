@@ -1,0 +1,182 @@
+<table name="PracPitDzialalnosci">
+		<description>Tabela działalności kwot do deklaracji</description>
+		<column name="PPD_PPDId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator działalności</description>
+		</column>
+		<column name="PPD_PPMID" type="INTEGER" definition="NULL">
+			<description>ID miesiąca kwoty do deklaracji</description>
+		</column>
+		<column name="PPD_DkNID" type="INTEGER" definition="NULL">
+			<description>ID deklaracji dotyczacej kwoty do deklaracji</description>
+		</column>
+		<column name="PPD_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ działalności</description>
+		</column>
+		<column name="PPD_Glowna" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PPD_Glowna DEFAULT(0)">
+			<description>Działalnośc główna</description>
+		</column>
+		<column name="PPD_Wygenerowana" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PPD_Wygenerowana DEFAULT(0)">
+			<description>Działalnośc wygenerowana podczas konwersji</description>
+		</column>
+		<column name="PPD_Malzonek" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PPD_Malzonek DEFAULT(0)">
+			<description>Czy działalności dotyczą małżonka</description>
+		</column>
+		<column name="PPD_Numer" type="INTEGER" definition="NOT NULL">
+			<description>Numer działalności (wg. starej numeracji)</description>
+		</column>
+		<column name="PPD_Lp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PPD_Lp DEFAULT(0)">
+			<description>Numer porządkowy działalności</description>
+		</column>
+		<column name="PPD_Nazwa" type="NVARCHAR(256)" definition=" NOT NULL CONSTRAINT DF_PPD_Nazwa DEFAULT('')" hash="1">
+			<description>Nazwa działalności</description>
+		</column>
+		<column name="PPD_Miejsce" type="NVARCHAR(50)" definition=" NOT NULL CONSTRAINT DF_PPD_Miejsce DEFAULT('')" hash="1">
+			<description>Adres działalności</description>
+		</column>
+		<column name="PPD_NIP" type="NVARCHAR(20)" definition=" NOT NULL CONSTRAINT DF_PPD_NIP DEFAULT('')" hash="1">
+			<description>NIP działalności</description>
+		</column>
+		<column name="PPD_REGON" type="NVARCHAR(20)" definition=" NOT NULL CONSTRAINT DF_PPD_REGON DEFAULT('')" hash="1">
+			<description>REGON działalności</description>
+		</column>
+		<column name="PPD_Rodzaj" type="NVARCHAR(50)" definition=" NOT NULL CONSTRAINT DF_PPD_Rodzaj DEFAULT('')">
+			<description>Rodzaj strefy w działalności</description>
+		</column>
+		<column name="PPD_ZezwNr" type="NVARCHAR(50)" definition=" NOT NULL CONSTRAINT DF_PPD_ZezwNr DEFAULT('')" hash="1">
+			<description>Numer zezwolenia strefy w działalności</description>
+		</column>
+		<column name="PPD_ZezwData" type="NVARCHAR(50)" definition=" NOT NULL CONSTRAINT DF_PPD_ZezwData DEFAULT('')">
+			<description>Data zezwolenia strefy w działalności</description>
+		</column>
+		<column name="PPD_ZezwDataOLD" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PPD_ZezwDataOLD DEFAULT('')">
+			<description>Data zezwolenia strefy w działalności OLD</description>
+		</column>
+		<column name="PPD_DataRozpocz" type="NVARCHAR(50)" definition=" NOT NULL CONSTRAINT DF_PPD_DataRozpocz DEFAULT('')">
+			<description>Data rozpoczęcia strefy w działalności</description>
+		</column>
+		<column name="PPD_DataRozpoczOLD" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PPD_DataRozpoczOLD DEFAULT('')">
+			<description>Data rozpoczęcia strefy w działalności OLD</description>
+		</column>
+		<column name="PPD_Zasady" type="INTEGER" definition=" NOT NULL CONSTRAINT DF_PPD_Zasady DEFAULT(0)">
+			<description>Numer zasady</description>
+		</column>
+		<column name="PPD_ZBazy" type="TINYINT" definition=" NOT NULL CONSTRAINT DF_PPD_ZBazy DEFAULT(0)">
+			<description>Czy dane są pobrane z innej bazy danych</description>
+		</column>
+		<column name="PPD_BazaID" type="NVARCHAR(50)" definition=" NOT NULL CONSTRAINT DF_PPD_BazaID DEFAULT('')">
+			<description>ID bazy danych</description>
+		</column>
+		<column name="PPD_UdzialL" type="DECIMAL(15,3)" definition=" NOT NULL CONSTRAINT DF_PPD_UdzialL DEFAULT(0)">
+			<description>Udział w działalności </description>
+		</column>
+		<column name="PPD_UdzialM" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_UdzialM DEFAULT(0)">
+			<description>Udział w działalności </description>
+		</column>
+		<column name="PPD_Przychody" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Przychody DEFAULT(0)">
+			<description>Przychody działalności </description>
+		</column>
+		<column name="PPD_Koszty" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Koszty DEFAULT(0)">
+			<description>Koszty działalności </description>
+		</column>
+		<column name="PPD_Dochod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Dochod DEFAULT(0)">
+			<description>Dochód działalności </description>
+		</column>
+		<column name="PPD_Strata" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Strata DEFAULT(0)">
+			<description>Strata działalności </description>
+		</column>
+		<column name="PPD_DochodZwolniony" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_DochodZwolniony DEFAULT(0)">
+			<description>Dochód zwolniony działalności </description>
+		</column>
+		<column name="PPD_ZwiekszenieDochodu" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_ZwiekszenieDochodu DEFAULT(0)">
+			<description>Zwiększenie dochodu działalności </description>
+		</column>
+		<column name="PPD_DodatkowePrzychody" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_DodatkowePrzychody DEFAULT(0)">
+			<description>Dodatkowe przychody działalności </description>
+		</column>
+		<column name="PPD_DodatkoweKoszty" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_DodatkoweKoszty DEFAULT(0)">
+			<description>Dodatkowe koszty działalności </description>
+		</column>
+		<column name="PPD_Stawka1Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka1Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 1 </description>
+		</column>
+		<column name="PPD_Stawka2Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka2Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 2 </description>
+		</column>
+		<column name="PPD_Stawka3Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka3Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 3 </description>
+		</column>
+		<column name="PPD_Stawka4Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka4Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 4 </description>
+		</column>
+		<column name="PPD_Stawka5Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka5Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 5 </description>
+		</column>
+		<column name="PPD_Stawka6Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka6Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 6 </description>
+		</column>
+		<column name="PPD_Stawka7Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka7Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 7 </description>
+		</column>
+		<column name="PPD_Stawka8Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka8Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka9Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka9Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 9 </description>
+		</column>
+		<column name="PPD_Stawka10Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka10Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 10 </description>
+		</column>
+		<column name="PPD_Stawka11Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka11Przychod DEFAULT (0)">
+			<description>Przychody dla stawki 11 </description>
+		</column>
+		<column name="PPD_Stawka1PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka1PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka2PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka2PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka3PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka3PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka4PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka4PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka5PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka5PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka6PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka6PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka7PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka7PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka8PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka8PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 8 </description>
+		</column>
+		<column name="PPD_Stawka9PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka9PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 9 </description>
+		</column>
+		<column name="PPD_Stawka10PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka10PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 10 </description>
+		</column>
+		<column name="PPD_Stawka11PrzychodDodatkowy" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPD_Stawka11PrzychodDodatkowy DEFAULT (0)">
+			<description>Dodatkowe przychody dla stawki 11 </description>
+		</column>
+		<column name="PPD_OkresOd" type="DATETIME" definition="">
+			<description>Data rozpoczęcia udziału </description>
+		</column>
+		<column name="PPD_OkresDo" type="DATETIME" definition="">
+			<description>Data zakończenia udziału </description>
+		</column>
+		<primaryKey name="PPD_Primary" columns="PPD_PPDId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PPDPPMID" localColumns="PPD_PPMID" refTable="PracPitMies" refColumns="PPM_PPMID" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPitDzialalnosci:CDN.PracPitMies (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PPDDkNID" localColumns="PPD_DkNID" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPitDzialalnosci:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="PPDGlowna" options="NONCLUSTERED" fields="PPD_PPDID, PPD_Glowna" />
+	</table>
+	

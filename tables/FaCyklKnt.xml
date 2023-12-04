@@ -1,0 +1,101 @@
+<table name="FaCyklKnt">
+		<description>Tabela z listą kontrahentów skojarzonych z fakturą cykliczną</description>
+		<column name="FCK_FcKID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="FCK_FcNID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka dokumentu</description>
+		</column>
+		<column name="FCK_TypKnt" type="TINYINT" definition="NOT NULL">
+			<description>1 - grupa; 2 - kontrahent</description>
+		</column>
+		<column name="FCK_LpDlaTypKnt" type="INTEGER" definition="NOT NULL">
+			<description>Lp dla kontrahenta / grupy</description>
+		</column>
+		<column name="FCK_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				0 - Grupa &lt;br&gt;
+				1 - Kontrahent
+			</details>
+		</column>
+		<column name="FCK_PodmiotID" type="INTEGER">
+			<description>Identyfikator podmiotu lub grupy</description>
+		</column>
+		<column name="FCK_Kod" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Akronim podmiotu lub grupy</description>
+		</column>
+		<column name="FCK_Nazwa" type="NVARCHAR(350)" definition="NOT NULL" hash="1">
+			<description>Nazwa podmiotu lub grupy</description>
+		</column>
+		<column name="FCK_OdbiorcaTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				0 - Grupa &lt;br&gt;
+				1 - Kontrahent
+			</details>
+		</column>
+		<column name="FCK_OdbiorcaID" type="INTEGER">
+			<description>Identyfikator podmiotu lub grupy</description>
+		</column>
+		<column name="FCK_OdbiorcaKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_FCK_OdbiorcaKod DEFAULT('')" hash="1">
+			<description>Akronim podmiotu lub grupy</description>
+		</column>
+		<column name="FCK_OdbiorcaNazwa" type="NVARCHAR(352)" definition="NOT NULL CONSTRAINT DF_FCK_OdbiorcaNazwa DEFAULT('')" hash="1">
+			<description>Nazwa podmiotu lub grupy</description>
+		</column>
+		<column name="FCK_ObowiazujeOd" type="TINYINT" definition="NOT NULL">
+			<description>Aktywny bezterminowao, czy w okresie</description>
+			<details>
+				0 - nie obowiązuje &lt;br&gt;
+				1 - obowiązuje od
+			</details>
+		</column>
+		<column name="FCK_TerminOd" type="DATETIME">
+			<description>Data początkowa okresu obowiązywania</description>
+			<details>
+				Jeśli w polu Obowiazujeod = 0 wtedy NULL &lt;br&gt;
+				Pole to występuje na serwerze MS SQL.
+			</details>
+		</column>
+		<column name="FCK_ObowiazujeDo" type="TINYINT" definition="NOT NULL">
+			<description>Czy określono datę końcową</description>
+			<details>
+				0 - nie obowiązuje &lt;br&gt;
+				1 - obowiązuje do
+			</details>
+		</column>
+		<column name="FCK_TerminDo" type="DATETIME">
+			<description>Data zakończenia okresu obowiązywania</description>
+			<details>
+				Jeśli w polu Obowiazujedo = 0 wtedy NULL &lt;br&gt;
+				Pole to występuje na serwerze MS SQL
+			</details>
+		</column>
+		<column name="FCK_OpisNaFakturze" type="NVARCHAR(1024)" definition="NULL">
+			<description>Dodatkowy opis na fakturze dla wybranego kontrahenta</description>
+		</column>
+		<primaryKey name="FCK_Primary" columns="FCK_FcKID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_FCKNaglowek" localColumns="FCK_FcNID" refTable="FaCyklNag" refColumns="FCN_FcNID" deleteOption="CASCADE">
+			<description>Relacja CDN.FaCyklKnt:CDN.FaCyklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="FCKNaglowek" options="UNIQUE NONCLUSTERED" fields="FCK_FcNID ,FCK_FcKID">
+			<description>Wskaźnik do nagłówka definicji</description>
+			<details>Klucz obcy do tabeli FaCyklNag</details>
+		</index>
+		<index name="FcKKontrahent" options="NONCLUSTERED" fields="FCK_TypKnt,FCK_PodmiotTyp,FCK_PodmiotID,FCK_FcNID">
+			<description>Indeks wg podmiotów</description>
+			<details>Klucz obcy do tabeli PodmiotyView lub Grupy</details>
+		</index>
+		<index name="FCKKod" options="NONCLUSTERED" fields="FCK_TypKnt ,FCK_Kod">
+			<description>Wg kodu grupy/kontrahenta</description>
+		</index>
+		<index name="FaCyklKnt" options="NONCLUSTERED" fields="FCK_PodmiotTyp,FCK_PodmiotID" includedColumns="FCK_Kod" />
+	</table>
+	

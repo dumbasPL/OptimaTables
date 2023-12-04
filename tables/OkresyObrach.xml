@@ -1,0 +1,103 @@
+<table name="OkresyObrach">
+		<description>Tabela z okresami obrachunkowymi</description>
+		<details>Tabela jest ogólno-systemowym slownikiem okresów obrachunkowych. Jej zadaniem jest
+			okreslenie stosowanych przez księgowość firmy okresów obrachunkowych. Symbol okresu służy
+			również jako jeden ze składników wykorzystywanych w numeracji dokumentów</details>
+		<column name="OOb_OObID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="OOb_Symbol" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Symbol okresu obrachunkowego</description>
+		</column>
+		<column name="OOb_DataOtw" type="DATETIME" definition="NOT NULL">
+			<description>Data otwarcia okresu obrachunkowego</description>
+			<details>Data otwarcia okresu obrachunkowego - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="OOb_Dlugosc" type="SMALLINT" definition="NOT NULL">
+			<description>Długość okresu obrachunkowego w miesiącach</description>
+		</column>
+		<column name="OOb_DataKoncowa" type="DATETIME" definition="NOT NULL">
+			<description>Data zakończenia okresu obrachunkowego</description>
+		</column>
+		<column name="OOb_DataZam" type="DATETIME">
+			<description>Data zamknięcia okresu obrachunkowego</description>
+			<details>Data do której zamknięty jest okres obrachunkowy - reprezentacja na potrzeby serwera
+				MS SQL</details>
+		</column>
+		<column name="OOb_CiaglaNumeracjaDC" type="INT" definition="NOT NULL">
+			<description>Numeracja dziennika cząstkowego ciągła w roku</description>
+			<details>
+				0 - nie
+				1 - tak
+				default - 1
+			</details>
+		</column>
+		<column name="OOb_ZaliczkiUproszczone" type="INT" definition="NOT NULL CONSTRAINT DF_OOb_ZaliczkiUproszczone DEFAULT(0)">
+			<description>Zaliczki uproszczone</description>
+			<details>
+				0 - nie
+				1 - tak
+				default - 1
+			</details>
+		</column>
+		<column name="OOb_Stan" type="SMALLINT" definition="NOT NULL">
+			<description>Stan okresu (otwarty / zamknięty)</description>
+		</column>
+		<column name="OOb_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis okresu obrachunkowego</description>
+		</column>
+		<column name="OOb_DziIdRK" type="INTEGER" definition="NULL">
+			<description>Domyślny dziennik dla różnic kursowych</description>
+		</column>
+		<column name="OOb_DziIdKomp" type="INTEGER" definition="NULL">
+			<description>Domyślny dziennik dla kompensat</description>
+		</column>
+		<column name="OOb_DataKsiRk" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_OOb_DataKsiRk default(1)">
+			<description>Data księgowania dla różnic kursowych</description>
+		</column>
+		<column name="OOb_DataKsiKomp" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_OOb_DataKsiKomp default(1)">
+			<description>Data księgowania dla kompensat</description>
+		</column>
+		<column name="OOb_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="OOb_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="OOb_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="OOb_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="OOb_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="OOb_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="OOb_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OOb_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="OOb_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_OOb_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="OOb_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OOb_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="OOb_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_OOb_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="OOb_Primary" columns="OOb_OObID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="OObSymbol" options="UNIQUE NONCLUSTERED" fields="OOb_Symbol">
+			<description>Wg symbolu okresu obrachunkowego</description>
+		</index>
+		<index name="OObData" options="UNIQUE NONCLUSTERED" fields="OOb_DataOtw">
+			<description>Wg daty otwarcia</description>
+		</index>
+	</table>
+	

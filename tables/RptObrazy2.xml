@@ -1,0 +1,34 @@
+<table name="RptObrazy2">
+		<description>Obrazy wydruków</description>
+		<column name="RPO2_RPO2ID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RPO2_ZrodloID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>ID źródła wydruku</description>
+		</column>
+		<column name="RPO2_RpWID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>ID zestawu wydruków</description>
+		</column>
+		<column name="RPO2_RpFID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>ID formatu wydruku</description>
+		</column>
+		<column name="RPO2_DokumentTyp" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Typ dokumentu</description>
+		</column>
+		<column name="RPO2_DokumentID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>ID dokumentu</description>
+		</column>
+		<column name="RPO2_Wartosc" type="IMAGE">
+			<description>Dane binarne obrazu</description>
+		</column>
+		<column name="RPO2_Rozmiar" type="INTEGER">
+			<description>Rozmiar obrazu</description>
+		</column>
+		<primaryKey name="RPO2_Primary" columns="RPO2_RPO2ID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="RPO2Dokument" options="UNIQUE NONCLUSTERED" fields="RPO2_DokumentTyp ,RPO2_DokumentID ,RPO2_ZrodloID ,RPO2_RpWID ,RPO2_RpFID ,RPO2_RPO2ID">
+			<description>Wg dokumentu</description>
+		</index>
+	</table>
+	

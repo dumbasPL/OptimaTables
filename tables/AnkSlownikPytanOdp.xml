@@ -1,0 +1,34 @@
+<table name="AnkSlownikPytanOdp">
+		<description>szablony odpowiedzi</description>
+		<column name="AnkSpO_AnkSpOId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkSpO_AnkSpId" type="INTEGER" definition="NOT NULL">
+			<description>Słownik pytań, do którego należy pytanie. Link do nagłówka</description>
+		</column>
+		<column name="AnkSpO_AnkSoNId" type="INTEGER" definition="NULL">
+			<description>Szablon, do którego należy pytanie. Link do nagłówka szablonu</description>
+		</column>
+		<column name="AnkSpO_AnkSoEId" type="INTEGER" definition="NULL">
+			<description>Id odp. w szablonie</description>
+		</column>
+		<column name="AnkSpO_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dla odpowiedzi</description>
+		</column>
+		<column name="AnkSpO_Mode" type="TINYINT" definition="NOT NULL">
+			<description> 0 - zwykła odp. 1- odp typu inne</description>
+		</column>
+		<column name="AnkSpO_Punkty" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Punkty za odpowiedź</description>
+		</column>
+		<column name="AnkSpO_Wartosc" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Wartosc odpowiedzi</description>
+		</column>
+		<primaryKey name="AnkSpO_Primary" columns="AnkSpO_AnkSpOId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AnkSpO_AnkSp" localColumns="AnkSpO_AnkSpId" refTable="AnkSlownikPytan" refColumns="AnkSp_AnkSpId" deleteOption="CASCADE">
+			<description>Relacja CDN.AnkSlownikPytanOdp:CDN.AnkSlownikPytan (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

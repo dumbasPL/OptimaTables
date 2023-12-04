@@ -1,0 +1,32 @@
+<table name="KntWeryfRachHist">
+		<description>Tabela historii weryfikacji numerów rachunków kontrahentów</description>
+		<column name="KWRH_KWRHID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KWRH_KntID" type="INTEGER" definition="NOT NULL">
+			<description>klucz obcy do tabeli cdn.Kontrahenci</description>
+		</column>
+		<column name="KWRH_Nip" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Weryfikowano dla numeru NIP</description>
+		</column>
+		<column name="KWRH_RachunekNr" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Weryfikowany numer rachunku rachunek</description>
+		</column>
+		<column name="KWRH_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data weryfikacji</description>
+		</column>
+		<column name="KWRH_IdOdpytania" type="NVARCHAR(16)" definition="NOT NULL" hash="1">
+			<description>Identyfikator odpytania zwrócony z serwisu sprawdzającego</description>
+		</column>
+		<column name="KWRH_Status" type="INTEGER" definition="NOT NULL">
+			<description>Wynik weryfikacji</description>
+		</column>
+		<primaryKey name="KWRH_Primary" columns="KWRH_KWRHID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_KWRHKNT" localColumns="KWRH_KntID" refTable="Kontrahenci" refColumns="Knt_KntID" deleteOption="CASCADE">
+			<description>Relacja CDN.KntWeryfRachHist:CDN.Kontrahenci (MANY:1)</description>
+		</foreignKey>
+		<index name="KWRHChron" options="UNIQUE NONCLUSTERED" fields="KWRH_KntID, KWRH_RachunekNr, KWRH_Nip, KWRH_Data" />
+	</table>
+	

@@ -1,0 +1,37 @@
+<table name="DetalKntOsoby">
+		<description>Osoby kontaktowe detal</description>
+		<column name="DKnO_DKnOId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="DKnO_OptimaId" type="INTEGER" definition="NOT NULL">
+			<description>id osoby knt w optimie</description>
+		</column>
+		<column name="DKnO_DSKnOId" type="INTEGER" definition="NOT NULL">
+			<description>Id osoby kontaktowej</description>
+		</column>
+		<column name="DKnO_DSKntId" type="INTEGER" definition="NOT NULL">
+			<description>Id kntrahenta</description>
+		</column>
+		<column name="DKnO_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Id stanowiska</description>
+		</column>
+		<column name="DKnO_Telefon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon</description>
+		</column>
+		<column name="DKnO_GSM" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon</description>
+		</column>
+		<column name="DKnO_Informacje" type="tinyint" definition="NOT NULL">
+			<description>Informacje</description>
+		</column>
+		<column name="DKnO_Email" type="NVARCHAR(60)" definition="NOT NULL" hash="1">
+			<description>Email</description>
+		</column>
+		<column name="DKnO_Nazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko</description>
+		</column>
+		<primaryKey name="DKnO_Primary" columns="DKnO_DKnOId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

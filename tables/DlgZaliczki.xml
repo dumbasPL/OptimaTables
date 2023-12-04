@@ -1,0 +1,60 @@
+<table name="DlgZaliczki">
+		<column name="DLZ_DLZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="DLZ_DLEId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLZ_Typ" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_BZpId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_FPlID" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_Dokument" type="NVARCHAR(256)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_DataDok" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_DataKur" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_Data" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_Waluta" type="VARCHAR(3)" definition="NULL">
+			<description>Waluta</description>
+		</column>
+		<column name="DLZ_KursNumer" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_KursL" type="DECIMAL(15,4)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_KursM" type="DECIMAL( 5,0)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_KwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_KwotaWal" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_KwotaRozliczenia" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLZ_Zrodlo" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DLZ_Zrodlo DEFAULT(0)">
+			<description>Identyfikator aplikacji</description>
+		</column>
+		<primaryKey name="DLZ_Primary" columns="DLZ_DLZId">
+			<description />
+		</primaryKey>
+		<foreignKey name="FK_DlgZaliczkiDlgElem" localColumns="DLZ_DLEId" refTable="DlgElem" refColumns="DLE_DLEId" deleteOption="CASCADE">
+			<description>Relacja CDN.DlgZaliczki:CDN.DlgElem (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

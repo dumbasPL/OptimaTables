@@ -1,0 +1,66 @@
+<table name="PracPlanDni">
+		<description>Tabela dni w kalendarzu (norma pracownika)</description>
+		<column name="PPL_PplId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PPL_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PPL_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PPL_TypDnia" type="INTEGER" definition="NOT NULL">
+			<description>Typ dnia</description>
+		</column>
+		<column name="PPL_OdwId" type="INTEGER" />
+		<column name="PPL_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PPL_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PPL_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PPL_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PPL_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PPL_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PPL_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PPL_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PPL_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PPL_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PPL_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PPL_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PPL_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PPL_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="PPL_Zrodlo" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PPL_Zrodlo DEFAULT(0)" />
+		<column name="PPL_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PPL_Primary" columns="PPL_PplId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PPLData" localColumns="PPL_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPlanDni:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PPLOdwLink" localColumns="PPL_OdwId" refTable="OpisyDniWolne" refColumns="ODW_OdwId">
+			<description>Relacja CDN.PracPlanDni:CDN.OpisyDniWolne (MANY:1)</description>
+		</foreignKey>
+		<index name="PPLData" options="UNIQUE NONCLUSTERED" fields="PPL_PraId ,PPL_Data">
+			<description>Unikalny indeks po id pracownika i dacie</description>
+		</index>
+	</table>
+	

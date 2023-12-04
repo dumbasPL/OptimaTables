@@ -1,0 +1,24 @@
+<table name="JpkOiS">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="Id" type="int" definition="NO_SQL" />
+		<column name="JpNId" type="int" definition="NO_SQL" />
+		<column name="AccId" type="int" definition="NO_SQL" />
+		<column name="KodKonta" type="varchar(50)" definition="NO_SQL" />
+		<column name="OpisKonta" type="varchar(256)" definition="NO_SQL" />
+		<column name="TypKonta" type="varchar(50)" definition="NO_SQL" />
+		<column name="KodZespolu" type="varchar(50)" definition="NO_SQL" />
+		<column name="OpisZespolu" type="varchar(50)" definition="NO_SQL" />
+		<column name="KodKategorii" type="varchar(50)" definition="NO_SQL" />
+		<column name="OpisKategorii" type="varchar(50)" definition="NO_SQL" />
+		<column name="KodPodkategorii" type="varchar(50)" definition="NO_SQL" />
+		<column name="OpisPodkategorii" type="varchar(256)" definition="NO_SQL" />
+		<column name="BilansOtwarciaWinien" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="BilansOtwarciaMa" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="ObrotyWinien" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="ObrotyMa" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="ObrotyWinienNarast" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="ObrotyMaNarast" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="SaldoWinien" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="SaldoMa" type="decimal(15, 2)" definition="NO_SQL" />
+	</table>
+	

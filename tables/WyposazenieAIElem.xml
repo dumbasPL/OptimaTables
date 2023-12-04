@@ -1,0 +1,73 @@
+<table name="WyposazenieAIElem">
+		<description>Tabela z elementami arkusza inwentaryzacyjnego wyposażenia</description>
+		<column name="WypAIE_WypAIEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WypAIE_WypAINID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka arkusza</description>
+		</column>
+		<column name="WypAIE_WypID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator wyposażenia</description>
+			<details>Wskaźnik do kartoteki wyposażenia, którego dotyczy element</details>
+		</column>
+		<column name="WypAIE_Lp" type="INT" definition="NOT NULL">
+			<description>Lp</description>
+		</column>
+		<column name="WypAIE_NrInwent" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Numer inwentarzowy wyposażenia</description>
+		</column>
+		<column name="WypAIE_KodKreskowy" type="VARCHAR(128)" definition="NOT NULL">
+			<description>Kod kreskowy wyposażenia</description>
+		</column>
+		<column name="WypAIE_UniqueKodKreskowyBuster" type="COMPUTED|INTEGER" definition="CASE WHEN WypAIE_KodKreskowy = '' THEN WypAIE_WypAIEID ELSE 0 END">
+			<description>Pole techniczne zapewniające warunkową unikalność kodu kreskowego</description>
+			<details>Chodzi o to aby dopuścić wiele pozycji o pustym kodzie kreskowym, ale równocześnie
+				zabronić duplikacji kodu kreskowego w każdym innym przypadku.</details>
+		</column>
+		<column name="WypAIE_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa wyposażenia</description>
+		</column>
+		<column name="WypAIE_JednostkaMiary" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary wyposażenia</description>
+		</column>
+		<column name="WypAIE_WartoscZak" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość zakupu wyposażenia</description>
+		</column>
+		<column name="WypAIE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość wg spisu</description>
+		</column>
+		<column name="WypAIE_StanBiez" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Stan bieżący</description>
+		</column>
+		<column name="WypAIE_Roznica" type="COMPUTED|DECIMAL(15,4)" definition="WypAIE_Ilosc - WypAIE_StanBiez">
+			<description>Róznica pomiędzy ilością wg spisu a stanem bieżącym</description>
+		</column>
+		<primaryKey name="WypAIE_Primary" columns="WypAIE_WypAIEID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_WypAIENaglowek" localColumns="WypAIE_WypAINID" refTable="WyposazenieAINag" refColumns="WypAIN_WypAINID" deleteOption="CASCADE">
+			<description>Relacja CDN.WyposazenieAIElem:CDN.WyposazenieAINag (MANY:1)</description>
+		</foreignKey>
+		
+		<index name="WypAIENaglowek" options="UNIQUE NONCLUSTERED" fields="WypAIE_WypAINID, WypAIE_WypAIEID">
+			<description>Wskaźnik do nagłówka arkusza</description>
+			<details>Indeks wg nagłówka</details>
+		</index>
+		<index name="WypAIEWyposazenie" options="UNIQUE NONCLUSTERED" fields="WypAIE_WypID, WypAIE_WypAIEID">
+			Indeks wg środka trwałego
+		</index>
+		<index name="WypAIENrInwent" options="UNIQUE NONCLUSTERED" fields="WypAIE_WypAINID, WypAIE_NrInwent">
+			<description>Indeks wg nagłówka nr-u inwentarzowego środka</description>
+		</index>
+		<index name="WypAIEKodKreskowy" options="UNIQUE NONCLUSTERED" fields="WypAIE_WypAINID, WypAIE_KodKreskowy, WypAIE_UniqueKodKreskowyBuster">
+			<description>Indeks wg nagłówka i kodu kreskowego środka</description>
+		</index>
+		<index name="WypAIELp" options="UNIQUE NONCLUSTERED" fields="WypAIE_WypAINID, WypAIE_Lp">
+			<description>Indeks wg nagłówka i Lp</description>
+		</index>
+	</table>
+	

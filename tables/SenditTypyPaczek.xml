@@ -1,0 +1,13 @@
+<table name="SenditTypyPaczek">
+		<description>Typy paczek</description>
+		<column name="STP_Data" type="datetime" definition="NOT NULL">
+			<description>Data wystawienia</description>
+		</column>
+		<column name="STP_SposobPakowaniaKey" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sposób Pakowania klucz</description>
+		</column>
+		<column name="STP_SposobPakowania" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sposób Pakowania opis</description>
+		</column>
+	</table>
+	

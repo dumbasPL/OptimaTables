@@ -1,0 +1,34 @@
+<table name="ZestKsiKol">
+		<description>Kolumny zestawień księgowych</description>
+		<column name="ZKK_ZKKId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZKK_ZKNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka zestawienia</description>
+		</column>
+		<column name="ZKK_Lp" type="SMALLINT" definition="NOT NULL">
+			<description>Numer kolumny</description>
+		</column>
+		<column name="ZKK_Nazwa" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa kolumny</description>
+		</column>
+		<column name="ZKK_Okres" type="TINYINT" definition="NOT NULL">
+			<description>Okres za jaki jest obliczane zestawienie</description>
+		</column>
+		<column name="ZKK_DataOd" type="DATETIME">
+			<description>Data początkowa okresu obliczeń</description>
+		</column>
+		<column name="ZKK_DataDo" type="DATETIME">
+			<description>Data końcowa okresu obliczeń</description>
+		</column>
+		<primaryKey name="ZKK_Primary" columns="ZKK_ZKKId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ZKKZestawienie" localColumns="ZKK_ZKNId" refTable="ZestKsiNag" refColumns="ZKN_ZKNId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZestKsiKol:CDN.ZestKsiNag (MANY:1)</description>
+		</foreignKey>
+		<index name="ZKKZestawienie" options="NONCLUSTERED" fields="ZKK_ZKNId ,ZKK_Lp">
+			<description>Wg nagłówka zestawienia</description>
+		</index>
+	</table>
+	

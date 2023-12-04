@@ -1,0 +1,100 @@
+<table name="SenditAdresyNadawcze">
+		<description>Sendit Adresy Nadawcze</description>
+		<column name="SAN_SANID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SAN_Kod" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Nazwa</description>
+		</column>
+		<column name="SAN_Nazwa" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Nazwa</description>
+		</column>
+		<column name="SAN_Ulica" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Ulica</description>
+		</column>
+		<column name="SAN_NrDomu" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Nr Domu</description>
+		</column>
+		<column name="SAN_NrMieszkania" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Nr Mieszkania</description>
+		</column>
+		<column name="SAN_Miasto" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Miasto</description>
+		</column>
+		<column name="SAN_KodPocztowy" type="VARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Kod Pocztowy</description>
+		</column>
+		<column name="SAN_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Domyślny adres</description>
+		</column>
+		<column name="SAN_Korespondencyjny" type="TINYINT" definition="NOT NULL">
+			<description>Korespondencyjny adres</description>
+		</column>
+		<column name="SAN_PunktOdbioruOsobistego" type="TINYINT" definition="NOT NULL  CONSTRAINT DF_SAN_PunktOdbioruOsobistego DEFAULT(0)">
+			<description>Korespondencyjny adres</description>
+		</column>
+		<column name="SAN_Nazwa2" type="NVARCHAR(254)" definition="NOT NULL  CONSTRAINT DF_SAN_Nazwa2 DEFAULT('')">
+			<description>Dane Firmy Nazwa</description>
+		</column>
+		<column name="SAN_KrajISO" type="NVARCHAR(2)" definition="NOT NULL  CONSTRAINT DF_SAN_KrajISO DEFAULT('')">
+			<description>Kraj ISO</description>
+		</column>
+		<column name="SAN_Wojewodztwo" type="NVARCHAR(50)" definition="NOT NULL  CONSTRAINT DF_SAN_Wojewodztwo DEFAULT('')">
+			<description>Wojewodztwo</description>
+		</column>
+		<column name="SAN_Telefon" type="NVARCHAR(20)" definition="NOT NULL  CONSTRAINT DF_SAN_Telefon DEFAULT('')">
+			<description>Telefon</description>
+		</column>
+		<column name="SAN_TelefonGSM" type="NVARCHAR(20)" definition="NOT NULL  CONSTRAINT DF_SAN_TelefonGSM DEFAULT('')">
+			<description>TelefonGSM</description>
+		</column>
+		<column name="SAN_DlugoscGeograficzna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_SAN_DlugoscGeograficzna DEFAULT('')">
+			<description>Długość geograficzna</description>
+		</column>
+		<column name="SAN_SzerokoscGeograficzna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_SAN_SzerokoscGeograficzna DEFAULT('')">
+			<description>Szerokość geograficzna</description>
+		</column>
+		<column name="SAN_UrzadNadaniaKod" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SAN_UrzadNadaniaKod DEFAULT('')">
+			<description>Kod urzędu nadania</description>
+		</column>
+		<column name="SAN_UrzadNadaniaAdres" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SAN_UrzadNadaniaAdres DEFAULT('')">
+			<description>Adres urzędu nadania</description>
+		</column>
+		<column name="SAN_PaczkomatKod" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SAN_PaczkomatKod DEFAULT('')">
+			<description>Paczkomat Kod</description>
+		</column>
+		<column name="SAN_PaczkomatAdres" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SAN_PaczkomatAdres DEFAULT('')">
+			<description>Paczkomat Adres</description>
+		</column>
+		<column name="SAN_IdMiejscaDostawy" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SAN_IdMiejscaDostawy DEFAULT('')">
+			<description>Id miejsca dostawy</description>
+		</column>
+		<column name="SAN_IdUrzadzenGrzewczych" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SAN_IdUrzadzenGrzewczych DEFAULT('')">
+			<description>Id urządzeń grzewczych</description>
+		</column>
+		<column name="SAN_OsobaImie" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SAN_OsobaImie DEFAULT('')" hash="1">
+			<description>Osoba odbierająca - Imię i nazwisko</description>
+		</column>
+		<column name="SAN_OsobaTelefon" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SAN_OsobaTelefon DEFAULT('')" hash="1">
+			<description>Osoba odbierająca - Telefon</description>
+		</column>
+		<column name="SAN_OsobaEmail" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SAN_OsobaEmail DEFAULT('')" hash="1">
+			<description>Osoba odbierająca - Email</description>
+		</column>
+		<column name="SAN_MagId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_SAN_MagId DEFAULT(0)">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="SAN_UrzadSkarbowyWlasciwy" type="NVARCHAR(8)">
+			<description>Urząd właściwy w miejscu wysyłki dla DD</description>
+		</column>
+		<primaryKey name="SAN_Primary" columns="SAN_SANId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+	</table>
+	

@@ -1,0 +1,52 @@
+<table name="DzialZakazy">
+		<description>Tabela zakazów do wydziałów</description>
+		<column name="DZA_DzaId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DZA_DzlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wydziału</description>
+		</column>
+		<column name="DZA_OpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="DZA_Edycja" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_Podglad" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_Usuwanie" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_WyplatyInsDel" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_WyplatyView" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_WyplatyEdit" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_DeklaracjeInsDel" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_DeklaracjeView" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_DeklaracjeEdit" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracIns" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracDel" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracEdit" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracView" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracEtat" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracUmowy" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracDodatki" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_RptKadry" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_RptPlace" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracPlace" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_PracKadry" type="TINYINT" definition="NOT NULL" />
+		<column name="DZA_ListyPlac" type="TINYINT" definition="NOT NULL" />
+		<primaryKey name="DZA_Primary" columns="DZA_DzaId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DZADzialy" localColumns="DZA_DzlId" refTable="Dzialy" refColumns="DZL_DzlId" deleteOption="CASCADE">
+			<description>Relacja CDN.DzialZakazy:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<index name="DZADzialy" options="UNIQUE NONCLUSTERED" fields="DZA_DzlId ,DZA_OpeId">
+			<description>Klucz obcy do wydziałów</description>
+		</index>
+		<index name="DZAZakazPrac" options="UNIQUE NONCLUSTERED" fields="DZA_DzlId ,DZA_OpeId, DZA_PracView">
+			<description>Klucz obcy do wydziałów</description>
+		</index>
+		<index name="DZAZakazWyp" options="UNIQUE NONCLUSTERED" fields="DZA_DzlId ,DZA_OpeId, DZA_WyplatyView">
+			<description>Klucz obcy do wydziałów</description>
+		</index>
+		<index name="DZAZakazDek" options="UNIQUE NONCLUSTERED" fields="DZA_DzlId ,DZA_OpeId, DZA_DeklaracjeView">
+			<description>Klucz obcy do wydziałów</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,32 @@
+<table name="BnkZdarzeniaPodpisy">
+		<description>Tabela z podpisami płatności wykonanymi za pomocą certyfikatów banków</description>
+		<column name="BZdP_BZdPID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="BZdP_BZdID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zdarzenia</description>
+			<details>Klucz obcy do tabeli cdn.BnkZdarzenia</details>
+		</column>
+		<column name="BZdP_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator podpisującego operatora</description>
+		</column>
+		<column name="BZdP_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data podpisu</description>
+		</column>
+		<column name="BZdP_CertyfikatNazwa" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Nazwa certyfikatu, którym podpisano</description>
+		</column>
+		<column name="BZdP_Podpis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Wartość podpisu zakodowana w Base64</description>
+		</column>
+		<primaryKey name="BZdP_Primary" columns="BZdP_BZdPID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BZdPBZd" localColumns="BZdP_BZdID" refTable="BnkZdarzenia" refColumns="BZd_BZdID" deleteOption="CASCADE">
+			<description>Relacja CDN.BnkZdarzeniaPodpisy:CDN.BnkZdarzenia (MANY:1)</description>
+		</foreignKey>
+		<index name="BZdPOperator" options="UNIQUE NONCLUSTERED" fields="BZdP_BZdID, BZdP_OpeID">
+			<description>Wg operatora</description>
+		</index>
+	</table>
+	

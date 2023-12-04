@@ -1,0 +1,25 @@
+<table name="KntOdbiorcy">
+		<description>Odbiorcy kontrahenta</description>
+		<column name="Odb_OdbID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Odb_KntOdbID" type="INTEGER">
+			<description>Klucz obcy do kontrahentów</description>
+		</column>
+		<column name="Odb_OdbKntID" type="INTEGER">
+			<description>Identyfikator kontrahenta bedacego odbiorca</description>
+		</column>
+		<column name="Odb_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Domyślny odbiorca</description>
+		</column>
+		<primaryKey name="Odb_Primary" columns="Odb_OdbID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="KeyOdbKntID" options="NONCLUSTERED" fields="Odb_OdbKntID">
+			<description>Klucz obcy do tabeli Kontrahenci</description>
+		</index>
+		<index name="KeyKntOdbID" options="NONCLUSTERED" fields="Odb_KntOdbID">
+			<description>Klucz obcy do tabeli Kontrahenci</description>
+		</index>
+	</table>
+	

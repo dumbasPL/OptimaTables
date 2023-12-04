@@ -1,0 +1,97 @@
+<table name="Magazyny">
+		<description>Lista magazynów</description>
+		<details>Lista magazynów prowadzonych przez program</details>
+		<column name="Mag_MagId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Mag_GIDNumer" type="INTEGER" />
+		<column name="Mag_MagazynZwrotnyXL" type="TINYINT">
+			<description>Czy magazyn zwrotny XL</description>
+		</column>
+		<column name="Mag_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ magazynu</description>
+			<details>1 - magazyn lokalny, 2 - magazyn odległy, 3 - magazyn serwisowy</details>
+		</column>
+		<column name="Mag_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol magazynu</description>
+			<details>Unikalny symbol magazynu</details>
+		</column>
+		<column name="Mag_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa magazynu</description>
+		</column>
+		<column name="Mag_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dodatkowy opis</description>
+		</column>
+		<column name="Mag_Rejestr" type="NVARCHAR(5)" definition="NOT NULL">
+			<description>Domyślna seria dla magazynu</description>
+		</column>
+		<column name="Mag_NieAktywny" type="TINYINT" definition="NOT NULL">
+			<description>Wskaźnik, czy magazyn jest aktualnie używany</description>
+		</column>
+		<column name="Mag_MagIdXL" type="INTEGER">
+			<description>Identyfikator magazynu w systemie CDN XL</description>
+			<details>Potrzebne do modelu pracy oddziałowej z CDN XL</details>
+		</column>
+		<column name="Mag_Unijny" type="TINYINT" definition="NOT NULL">
+			<description>Magazyn w ramach UE poza granicami Polski</description>
+		</column>
+		<column name="Mag_UEKraj" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Kod kraju, jeśli magazyn unijny</description>
+		</column>
+		<column name="Mag_KodTransakcji" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Kod transakcji (domyślny dla danego magazynu do zaproponowania na MM-LO i MM-OL,
+				jeśli magazyn odległy jest unijny poza PL )</description>
+		</column>
+		<column name="Mag_Konto" type="VARCHAR(50)" definition="NULL" />
+		<column name="Mag_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="Mag_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Mag_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="Mag_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="Mag_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Mag_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="Mag_TwCNumer" type="INTEGER" definition="NOT NULL  CONSTRAINT DF_Mag_TwCNumer DEFAULT(0)">
+			<description>Domyślna cena dla towaru</description>
+			<details>Numer domyślnej ceny, związany z tabelą TwrCeny</details>
+		</column>
+		<column name="Mag_Adres" type="INTEGER" definition="NOT NULL  CONSTRAINT DF_Mag_Adres DEFAULT(0)">
+			<description>Domyślny adres dla magazynu</description>
+			<details>Numer domyślnego adresu, związany z tabelą SenditAdresyNadawcze</details>
+		</column>
+		<column name="Mag_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Mag_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Mag_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Mag_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Mag_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Mag_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Mag_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Mag_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Mag_Primary" columns="Mag_MagId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="MagSymbol" options="UNIQUE NONCLUSTERED" fields="Mag_Symbol">
+			<description>Indeks wg akronimu banku</description>
+		</index>
+	</table>
+	

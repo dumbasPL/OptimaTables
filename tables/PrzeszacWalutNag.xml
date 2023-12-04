@@ -1,0 +1,106 @@
+<table name="PrzeszacWalutNag">
+		<description>Dokumenty Przeszacowania walut, nagłówki</description>
+		<column name="PWN_PWNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="PWN_OObId" type="INTEGER" definition="NOT NULL">
+			<description>ID okresu obrachunkowego</description>
+		</column>
+		<column name="PWN_NextOObId" type="INTEGER">
+			<description>ID następnego okresu obrachunkowego</description>
+		</column>
+		<column name="PWN_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>1 - bufor, 0 - zatwierdzony</description>
+		</column>
+		<column name="PWN_PrzezBufor" type="TINYINT" definition="NOT NULL">
+			<description>Czy księgować przez bufor</description>
+		</column>
+		<column name="PWN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="PWN_Numer" type="NVARCHAR(256)" definition="NOT NULL" />
+		<column name="PWN_KatID" type="INTEGER" />
+		<column name="PWN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Kategoria opis</description>
+		</column>
+		<column name="PWN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="PWN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="PWN_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik kursu waluty</description>
+		</column>
+		<column name="PWN_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik kursu waluty</description>
+		</column>
+		<column name="PWN_AccWnId" type="INTEGER" definition="NOT NULL">
+			<description>ID konta Wn</description>
+		</column>
+		<column name="PWN_AccMaId" type="INTEGER" definition="NOT NULL">
+			<description>ID konta Ma</description>
+		</column>
+		<column name="PWN_KontoWn" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Symbol konta Wn</description>
+		</column>
+		<column name="PWN_KontoMa" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Symbol konta Ma</description>
+		</column>
+		<column name="PWN_DziID" type="INTEGER">
+			<description>ID Dziennika</description>
+		</column>
+		<column name="PWN_NextDziID" type="INTEGER">
+			<description>ID dziennika w kolejnym okresie obrachunkowym</description>
+		</column>
+		<column name="PWN_Dziennik" type="VARCHAR(20)">
+			<description>Symbol dziennika księgowań</description>
+		</column>
+		<column name="PWN_NextDziennik" type="VARCHAR(20)">
+			<description>Symbol dziennika księgowań w następnym okresie obrachunkowym</description>
+		</column>
+		<column name="PWN_DekID" type="INTEGER">
+			<description>ID zapisu księgowego w bieżącym okresie</description>
+		</column>
+		<column name="PWN_NextDekID" type="INTEGER">
+			<description>ID zapisu księgowego w następnym okresie</description>
+		</column>
+		<column name="PWN_OpeZalID" type="INTEGER" />
+		<column name="PWN_StaZalId" type="INTEGER" />
+		<column name="PWN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp dodania dokumentu</description>
+		</column>
+		<column name="PWN_OpeModID" type="INTEGER" />
+		<column name="PWN_StaModId" type="INTEGER" />
+		<column name="PWN_TS_Mod" type="DATETIME" definition="NOT NULL" />
+		<column name="PWN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PWN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PWN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PWN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PWN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PWN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PWN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PWN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PWN_Primary" columns="PWN_PWNID">
+			<description>Unikalny identyfikator rekordu</description>
+		</primaryKey>
+		<index name="PWNOkres" options="NONCLUSTERED" fields="PWN_OObId ,PWN_NextOObId" />
+		<index name="PWNBufor" options="NONCLUSTERED" fields="PWN_Bufor ,PWN_PrzezBufor" />
+		<index name="PWNWaluta" options="NONCLUSTERED" fields="PWN_Waluta ,PWN_KursNumer ,PWN_KursL ,PWN_KursM" />
+		<index name="PWNDokument" options="NONCLUSTERED" fields="PWN_DataDok ,PWN_Numer ,PWN_Dziennik ,PWN_DziID ,PWN_NextDziennik ,PWN_NextDziID" />
+		<index name="PWNKonto" options="NONCLUSTERED" fields="PWN_AccWnId ,PWN_KontoWn ,PWN_AccMaId ,PWN_KontoMa" />
+		<index name="PWNDekret" options="NONCLUSTERED" fields="PWN_DekID ,PWN_NextDekID" />
+		<index name="PWNKategoria" options="NONCLUSTERED" fields="PWN_KatID ,PWN_Kategoria" />
+		<index name="PWNView" options="NONCLUSTERED" fields="PWN_DataDok ,PWN_PWNID">
+			<description>Index dla list w clarionie</description>
+		</index>
+	</table>
+	

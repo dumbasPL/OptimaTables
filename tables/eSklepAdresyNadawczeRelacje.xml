@@ -1,0 +1,25 @@
+<table name="eSklepAdresyNadawczeRelacje">
+		<description>Tabela powiązań punktow odbioru esklep i optima</description>
+		<column name="ESAN_ESANId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="ESAN_SANOptimaID" type="INTEGER" definition="NOT NULL">
+			<description>id POO optima</description>
+		</column>
+		<column name="ESAN_SANeSklepID" type="INTEGER" definition="NOT NULL">
+			<description>Id POO e-Sklepu</description>
+		</column>
+		<column name="ESAN_eSklepID" type="INTEGER" definition="NOT NULL">
+			<description>Id e-Sklepu</description>
+		</column>
+		<column name="ESAN_TS" type="DATETIME" definition="NOT NULL">
+			<description>data dodania</description>
+		</column>
+		<primaryKey name="ESAN_Primary" columns="ESAN_ESANId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_eSklepAdresyNadawczeRelacje" localColumns="ESAN_SANOptimaID" refTable="SenditAdresyNadawcze" refColumns="SAN_SANID" deleteOption="CASCADE">
+			<description>Relacja CDN.eSklepAdresyNadawczeRelacje:CDN.SenditAdresyNadawcze (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

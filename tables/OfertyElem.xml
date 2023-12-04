@@ -1,0 +1,173 @@
+<table name="OfertyElem">
+		<description>Ofertowanie - pozycje oferty</description>
+		<column name="OfL_OfLId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator tabeli</description>
+		</column>
+		<column name="OfL_OfDId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator oferty</description>
+		</column>
+		<column name="OfL_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp elementu na ofercie</description>
+		</column>
+		<column name="OfL_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator towaru</description>
+		</column>
+		<column name="OfL_TwrKod" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod elementu</description>
+		</column>
+		<column name="OfL_TwrNazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa elementu</description>
+		</column>
+		<column name="OfL_TwrOpis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Opis elementu</description>
+		</column>
+		<column name="OfL_CenyKontrahenta" type="INTEGER" definition="NOT NULL CONSTRAINT DF_OfL_CenyKontrahenta DEFAULT(0)">
+			<description>Czy są indywidualne ustawiena dla każdego podmiotu</description>
+		</column>
+		<column name="OfL_Atr1_DeAId" type="INTEGER">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr1_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OfL_Atr1_Kod DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr1_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_OfL_Atr1_Wartosc DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr2_DeAId" type="INTEGER">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr2_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OfL_Atr2_Kod DEFAULT('')">
+			<description>K[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr2_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_OfL_Atr2_Wartosc DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr3_DeAId" type="INTEGER">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr3_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OfL_Atr3_Kod DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr3_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_OfL_Atr3_Wartosc DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr4_DeAId" type="INTEGER">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr4_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OfL_Atr4_Kod DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr4_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_OfL_Atr4_Wartosc DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr5_DeAId" type="INTEGER">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr5_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OfL_Atr5_Kod DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_Atr5_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_OfL_Atr5_Wartosc DEFAULT('')">
+			<description>[DEPRECATED] - pole nieobsługiwane</description>
+		</column>
+		<column name="OfL_AtrUtworzony" type="INTEGER" definition="NOT NULL CONSTRAINT DF_OfL_AtrUtworzony DEFAULT(0)">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="OfC_TwrId" type="INTEGER">
+			<description>Identyfikator towaru</description>
+		</column>
+		<column name="OfC_KntId" type="INTEGER">
+			<description>Identyfikator podmiotu oferty</description>
+		</column>
+		<column name="OfC_TypNB" type="TINYINT" definition="NOT NULL">
+			<description>Typ faktury (od netto lub od brutto)</description>
+			<details>
+				0 - od netto &lt;br&gt;
+				1 - od brutto
+			</details>
+		</column>
+		<column name="OfC_Cena0" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena początkowa w walucie</description>
+		</column>
+		<column name="OfC_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat na elemencie oferty</description>
+			<details>Rabat dla pozycji</details>
+		</column>
+		<column name="OfC_CenaW" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie</description>
+		</column>
+		<column name="OfC_Cena0WD" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena0 wyrażona w walucie dokumentu</description>
+		</column>
+		<column name="OfC_CenaWWD" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>CenaW wyrażona w walucie dokumentu po rabacie</description>
+		</column>
+		<column name="OfC_KosztKGO" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OfL_KosztKGO DEFAULT(0)">
+			<description>Koszt KGO</description>
+		</column>
+		<column name="OfC_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="OfC_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="OfC_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Kurs waluty - licznik</description>
+		</column>
+		<column name="OfC_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Kurs waluty - mianownik</description>
+		</column>
+		<column name="OfC_CenaT" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="OfC_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych</description>
+		</column>
+		<column name="OfC_Jm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="OfC_JmZ" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary zastępcza</description>
+		</column>
+		<column name="OfC_JmCalkowite" type="TINYINT" definition="NOT NULL">
+			<description>Format jednostki miary</description>
+			<details>Format przeliczania jednostek miar. 1 oznacza, że przelicznik będzie całkowity</details>
+		</column>
+		<column name="OfC_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Licznik przelicznika JM</description>
+			<details>Licznik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="OfC_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL">
+			<description>Mianownik przelicznika JM</description>
+			<details>Mianownik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="OfC_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="OfC_WartoscNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji</description>
+		</column>
+		<column name="OfC_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="OfC_WartoscNettoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji w walucie</description>
+		</column>
+		<column name="OfC_WartoscBruttoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji w walucie</description>
+		</column>
+		<column name="OfC_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka podatku vat</description>
+		</column>
+		<column name="OfC_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Flaga podatku (zwolniony, opodatkowany, zaniżony, nie podlega)</description>
+		</column>
+		<column name="OFC_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OFC_ELEM_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>cena z czterema miejscami</description>
+		</column>
+		<primaryKey name="OfL_Primary" columns="OfL_OfLId" />
+		<foreignKey name="FK_OfLOfertyDok" localColumns="OfL_OfDId" refTable="OfertyDok" refColumns="OfD_OfDId" deleteOption="CASCADE">
+			<description>Relacja CDN.OfertyElem:CDN.OfertyDok (MANY:1)</description>
+		</foreignKey>
+		<index name="OfertyElemOfDId" options="NONCLUSTERED" fields="OfL_OfDId" />
+	</table>
+	

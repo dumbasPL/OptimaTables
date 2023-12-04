@@ -1,0 +1,23 @@
+<table name="WszystkoPLKategorie">
+		<description>Kategorie z wszystko.pl</description>
+		<column name="WPLK_WPLKId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WPLK_ParentId" type="INTEGER" definition="NOT NULL">
+			<description>Id parenta wszystko.pl</description>
+		</column>
+		<column name="WPLK_Nazwa" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Wartość w słowniku</description>
+		</column>
+		<column name="WPLK_Aktywna" type="TINYINT" definition="NOT NULL">
+			<description>Nieaktywność wartości</description>
+		</column>
+		<column name="WPLK_MaPodKategorie" type="TINYINT" definition="NOT NULL">
+			<description>CZy posiada podkategorie</description>
+		</column>
+		<index name="WPLKWPLKId" options="UNIQUE NONCLUSTERED" fields="WPLK_Nazwa ,WPLK_WPLKId">
+			<description>Wg nazwy i id</description>
+			<details>Klucz ma zapewnioną unikalność poprzez WPLK_WPLKId i Nazwę.</details>
+		</index>
+	</table>
+	

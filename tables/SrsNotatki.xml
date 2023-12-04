@@ -1,0 +1,45 @@
+<table name="SrsNotatki">
+		<description>Czynności przypisane do zlecenia</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="SrN_SrNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrN_SrZId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zlecenia</description>
+			<details>Klucz obcy do tabeli SrSZlecenia</details>
+		</column>
+		<column name="SrN_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer pozycji</description>
+		</column>
+		<column name="SrN_Tresc" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Treść notatki</description>
+		</column>
+		<column name="SrN_SerwisantTyp" type="INTEGER">
+			<description>Serwisant - operator/pracownik</description>
+			<details>
+				3 - pracownik (CDN.PracIdx) &lt;br&gt;
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej)
+			</details>
+		</column>
+		<column name="SrN_SerwisantId" type="INTEGER">
+			<description>Serwisant</description>
+		</column>
+		<column name="SrN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data</description>
+			<details>Pole to występuje na serwerze MS SQL.</details>
+		</column>
+		<primaryKey name="SrN_Primary" columns="SrN_SrNId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrNZlecenia" localColumns="SrN_SrZId" refTable="SrsZlecenia" refColumns="SrZ_SrZId" deleteOption="CASCADE">
+			<description>Relacja CDN.SrsNotatki:CDN.SrsZlecenia (MANY:1)</description>
+		</foreignKey>
+		<index name="SrNZlecenia" options="UNIQUE NONCLUSTERED" fields="SrN_SrZId ,SrN_Lp ,SrN_SrNId">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+	</table>
+	

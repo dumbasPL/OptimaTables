@@ -1,0 +1,110 @@
+<table name="RemanentNag">
+		<description>Nagłówek spisu z natury</description>
+		<details>Remanent jest zapisywany w strukturze dwupoziomowej: W RemanentNag zapisywane są
+			informacje dotyczące daty sporządzenia spisu, numeru spisu itp, natomiast w RemanentElem
+			znajdują się pozycje spisu z natury</details>
+		<column name="ReN_ReNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="ReN_Rok" type="SMALLINT" definition="NOT NULL">
+			<description>Rok spisu z natury</description>
+		</column>
+		<column name="ReN_Numer" type="SMALLINT" definition="NOT NULL">
+			<description>Numer kolejny spisu z natury w roku</description>
+		</column>
+		<column name="ReN_DataSpi" type="DATETIME" definition="NOT NULL">
+			<description>Data wykonania spisu z natury</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ReN_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość spisu z natury</description>
+		</column>
+		<column name="ReN_WartoscKorekta" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_ReN_WartoscKorekta DEFAULT(0)">
+			<description>Wartość spisu z natury z uwzględnieniem korekt</description>
+		</column>
+		<column name="ReN_KatId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) remanentu może zostac wpisany "z ręki" (ReN:KatId = 0) lub zostac pobrany z
+				listy kategorii (ReN:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="ReN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis remanentu</description>
+		</column>
+		<column name="ReN_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Uwagi dodatkowe</description>
+		</column>
+		<column name="ReN_KPRId" type="INTEGER">
+			<description>Wskaźnik do zapisu księgowego (KPiR)</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada ReN_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada ReN_KPRId = NULL;
+			</details>
+		</column>
+		<column name="ReN_WartoscZbiorcza" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ReN_WartoscZbiorcza DEFAULT(0)">
+			<description>Wartość remanentu została wpisana ręcznie - bez dodawania pozycji</description>
+		</column>
+		<column name="ReN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="ReN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ReN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ReN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartę</description>
+		</column>
+		<column name="ReN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ReN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ReN_Korekta" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ReN_Korekta DEFAULT(0)">
+			<description>Wskazuje, czy są uwzględniane korekty podatku dochodowego</description>
+		</column>
+		<column name="ReN_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="ReN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ReN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ReN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ReN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ReN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ReN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ReN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ReN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="ReN_Primary" columns="ReN_ReNID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ReNKategoria" localColumns="ReN_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.RemanentNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="ReNKategoria" options="NONCLUSTERED" fields="ReN_KatId">
+			<description>Indeks wg Kategorii</description>
+			<details>Remanenty wg kodu kategorii (indeks wiążący tabelę Kategorie z tabelą RemanentNag)</details>
+		</index>
+		<index name="ReNNumer" options="UNIQUE NONCLUSTERED" fields="ReN_Rok ,ReN_Numer">
+			<description>Wg numeru spisu z natury w roku</description>
+		</index>
+		<index name="ReNKPR" options="UNIQUE NONCLUSTERED" fields="ReN_KPRId ,ReN_ReNID">
+			<description>Wg zapisu księgowego</description>
+			<details>Indeks do relacji pomiędzy zapisem w księdze (ZapisyKPR) a nagłówkiem remanentu</details>
+		</index>
+	</table>
+	

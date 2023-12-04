@@ -1,0 +1,50 @@
+<table name="CrmUczestnicy">
+		<description>Tabela uczestników dla zadania</description>
+		<column name="CrU_CrUId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="CrU_CrKId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do CRMKontakty</description>
+			<details>Wpisywane jest ID z tabeli CRMKontakty z pola CRK_CRKId</details>
+		</column>
+		<column name="CrU_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId: &lt;br&gt;
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="CrU_PodmiotId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="CrU_Organizator" type="TINYINT" definition="NOT NULL" />
+		<column name="CrU_Akronim" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Akronim podmiotu</description>
+		</column>
+		<column name="CrU_Nazwisko" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Imię i nazwisko podmiotu</description>
+		</column>
+		<column name="CrU_AutomatycznePrzypomnienia" type="TINYINT" definition="NOT NULL CONSTRAINT DF_CrU_AutomatycznePrzypomnienia DEFAULT(0)">
+			<description>Generowanie automatycznych przypomnień do zadania</description>
+		</column>
+		<column name="CrU_Email" type="NVARCHAR(127)" hash="1">
+			<description>Email operatora</description>
+		</column>
+		<column name="CrU_TelefonSms" type="VARCHAR(20)" hash="1">
+			<description>Telefon SMS</description>
+		</column>
+		<primaryKey name="CrU_Primary" columns="CrU_CrUId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<index name="CruCrmKontakty" options="NONCLUSTERED" fields="CrU_CrKId ,CrU_CrUId">
+			<description>Klucz obcy do CRMKontakty</description>
+		</index>
+	</table>
+	

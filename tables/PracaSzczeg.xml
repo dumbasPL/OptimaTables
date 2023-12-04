@@ -1,0 +1,20 @@
+<table name="PracaSzczeg">
+		<description>Słownik pracy szczególnej</description>
+		<column name="SZP_SZPId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SZP_Szczeg2" type="INTEGER" definition="NOT NULL" />
+		<column name="SZP_Poziom" type="INTEGER" definition="NOT NULL" />
+		<column name="SZP_Wybieralny" type="INTEGER" definition="NOT NULL" />
+		<column name="SZP_Opis" type="NVARCHAR(510)" definition="NOT NULL">
+			<description>Opis kodu</description>
+		</column>
+		<column name="SZP_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_SZP_ZjeId default('')" />
+		<primaryKey name="SZP_Primary" columns="SZP_SZPId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="SZPZjeLink" options="NONCLUSTERED" fields="SZP_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

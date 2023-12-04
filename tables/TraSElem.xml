@@ -1,0 +1,101 @@
+<table name="TraSElem">
+		<description>Tabela z subelementami dokumentów</description>
+		<details>Subelementy dokumentów (faktur, paragonów itp) wiążą element transakcji z zasobem
+			magazynowym</details>
+		<column name="TrS_TrSID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="TrS_TrEId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator elementu transakcji</description>
+			<details>Klucz obcy do tabeli TraElem</details>
+		</column>
+		<column name="TrS_TrSIdDost" type="INTEGER">
+			<description>Wskaźnik do TraSElem zakładającego dostawę</description>
+			<details>NULL - dla dokumentów nie generujących dostaw</details>
+		</column>
+		<column name="TrS_WyborDostaw" type="TINYINT" definition="CONSTRAINT DF_TrS_WyborDostaw DEFAULT(0)">
+			<description>Czy wybor dostaw reczny</description>
+			<details>
+				0 - Brak dostaw
+				1 - Wybor dostaw
+			</details>
+		</column>
+		<column name="TrS_TrEIdWydania" type="INTEGER" definition="CONSTRAINT DF_TrS_TrEIdWydania DEFAULT(0)">
+			<description>ID powiązanego elementu wydania z tabeli CDN.TraElem. Wartość 0 oznacza brak
+				powiązanego wydania</description>
+		</column>
+		<column name="TrS_ZwrId" type="INTEGER">
+			<description>Wskaźnik do subelementu oryginalnego</description>
+		</column>
+		<column name="TrS_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli Towary</description>
+		</column>
+		<column name="TrS_MagId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli Magazyny</description>
+		</column>
+		<column name="TrS_Rodzaj" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj dokumentu</description>
+			<details>&lt;a href= "TypyRodzajeDoKHAMAG.htm" &gt;Typy i rodzaje dokumentów HAMAG &lt;/a&gt;</details>
+		</column>
+		<column name="TrS_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ subelementu</description>
+			<details>
+				1 - dostawa &lt;br&gt;
+				2 - rozchód &lt;br&gt;
+				3 - rezerwacja &lt;br&gt;
+				4 - zamówienie
+			</details>
+		</column>
+		<column name="TrS_Metoda" type="TINYINT" definition="NOT NULL">
+			<description>Metoda ściągnięcia towaru z magazynu</description>
+			<details>
+				1=FIFO
+				2=LIFO
+				3=AVCO
+				4=QUAN
+			</details>
+		</column>
+		<column name="TrS_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji, dzidziczona z elementu</description>
+		</column>
+		<column name="TrS_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych</description>
+		</column>
+		<column name="TrS_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji w cenach zakupu</description>
+		</column>
+		<column name="TrS_Cena" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena zakupu pobrana z zasobu</description>
+		</column>
+		<column name="TrS_SrCId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrS_SrCId DEFAULT(0)">
+			<description>ID powiązaneje częsci</description>
+		</column>
+		<primaryKey name="TrS_Primary" columns="TrS_TrSID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_TrSTowar" localColumns="TrS_TwrId" refTable="Towary" refColumns="Twr_TwrId">
+			<description>Relacja CDN.TraSElem:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="TrSTrEIdWydania" options="NONCLUSTERED" fields="TrS_TrEIdWydania" includedColumns="TrS_Ilosc" />
+		<index name="TrSZwrot" options="UNIQUE NONCLUSTERED" fields="TrS_ZwrId ,TrS_TrSID" />
+		<index name="TrSTraElem" options="UNIQUE NONCLUSTERED" fields="TrS_TrEId ,TrS_TrSID" includedColumns="TrS_Rodzaj,TrS_Ilosc,TrS_Wartosc,TrS_ZwrId">
+			<description>Wg elementu faktury</description>
+		</index>
+		<index name="TrSTowar" options="NONCLUSTERED" fields="TrS_TwrId ,TrS_MagId ,TrS_DataOpe">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+		<index name="TrSDostawa" options="NONCLUSTERED" fields="TrS_TrSIdDost">
+			<description>Wskaźnik do TraSElem zakładającego dostawę</description>
+		</index>
+		<index name="TraSElemTrSIdWartosc" options="NONCLUSTERED" fields="TrS_TrSID" includedColumns="TrS_Wartosc,TrS_TrEId">
+			<description>Wg id, wartosci</description>
+		</index>
+		<index name="TraSElemTrEIdWartosc" options="UNIQUE NONCLUSTERED" fields="TrS_TrEId ,TrS_TrSID,TrS_Wartosc">
+			<description>Wg elementu faktury, wartosci</description>
+		</index>
+	</table>
+	

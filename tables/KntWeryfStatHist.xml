@@ -1,0 +1,29 @@
+<table name="KntWeryfStatHist">
+		<description>Tabela historii weryfikacji statusu kontrahenta</description>
+		<column name="KWSH_KWSHID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KWSH_KntID" type="INTEGER" definition="NOT NULL">
+			<description>ID weryfikowanego kontrahenta</description>
+		</column>
+		<column name="KWSH_Nip" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Weryfikowany numer NIP</description>
+		</column>
+		<column name="KWSH_TypWeryfikacji" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KWSH_TypWeryfikacji DEFAULT(0)">
+			<description>Typ weryfikacji; VAT: 0, VIES: 1</description>
+		</column>
+		<column name="KWSH_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data i czas weryfikacji</description>
+		</column>
+		<column name="KWSH_Status" type="INTEGER" definition="NOT NULL">
+			<description>Wynik weryfikacji - status kontrahenta</description>
+		</column>
+		<primaryKey name="KWSH_Primary" columns="KWSH_KWSHID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_WgKnt" localColumns="KWSH_KntID" refTable="Kontrahenci" refColumns="Knt_KntID" deleteOption="CASCADE">
+			<description>Relacja CDN.KntWeryfStat:CDN.Kontrahenci (MANY:1)</description>
+		</foreignKey>
+		<index name="KWSHKntChron" options="NONCLUSTERED" fields="KWSH_KntID, KWSH_Data" />
+	</table>
+	

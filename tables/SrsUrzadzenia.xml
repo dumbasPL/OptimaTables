@@ -1,0 +1,122 @@
+<table name="SrsUrzadzenia">
+		<description>Lista serwisowanych urządzeń</description>
+		<details>Lista serwisowanych urządzeń (Moduł Serwis)</details>
+		<column name="SrU_SrUId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrU_Kod" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Kod urządzenia</description>
+		</column>
+		<column name="SrU_Nazwa" type="NVARCHAR(251)" definition="NOT NULL">
+			<description>Nazwa urządzenia</description>
+		</column>
+		<column name="SrU_EAN" type="VARCHAR(128)">
+			<description>Kod kreskowy</description>
+		</column>
+		<column name="SrU_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId: &lt;br&gt;
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="SrU_PodmiotId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="SrU_OdbiorcaTyp" type="SMALLINT">
+			<details>
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="SrU_OdbID" type="INTEGER">
+			<description>Id kontrahenta - odbiorcy</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez OdbiorcaTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="SrU_SrRId" type="INTEGER">
+			<description>Link do tabeli SrsRodzajeU</description>
+		</column>
+		<column name="SrU_TwRId" type="INTEGER">
+			<description>Link do karty cennikowej</description>
+		</column>
+		<column name="SrU_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis urządzenia</description>
+		</column>
+		<column name="SrU_FCzynnosci" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrU_FCzynnosci DEFAULT(1)">
+			<description>Fakturowanie czynności</description>
+		</column>
+		<column name="SrU_FCzesci" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrU_FCzesci DEFAULT(0)">
+			<description>Fakturowanie części</description>
+		</column>
+		<column name="SrU_OpeZalId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego</description>
+		</column>
+		<column name="SrU_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrU_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrU_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego</description>
+		</column>
+		<column name="SrU_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrU_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrU_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrU_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SrU_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrU_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SrU_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrU_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SrU_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrU_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SrU_Primary" columns="SrU_SrUId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrUPodmiot" localColumns="SrU_PodmiotId,SrU_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.SrsUrzadzenia:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrUOdbiorca" localColumns="SrU_OdbID,SrU_OdbiorcaTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.SrsUrzadzenia:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<index name="SrUTwrId" options="NONCLUSTERED" fields="SrU_TwRId">
+			<description>Relacja do tabeli Towary</description>
+		</index>
+		<index name="SrUPodmiot" options="NONCLUSTERED" fields="SrU_PodmiotId ,SrU_PodmiotTyp">
+			<description>Wg podmiotu dla którego wydano urządzenie</description>
+		</index>
+		<index name="SrUKod" options="UNIQUE NONCLUSTERED" fields="SrU_Kod">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="SrUNazwa" options="NONCLUSTERED" fields="SrU_Nazwa ,SrU_Kod">
+			<description>Wg nazwy</description>
+		</index>
+		<index name="SrUEAN" options="UNIQUE NONCLUSTERED" fields="SrU_EAN ,SrU_SrUId">
+			<description>Wg kodu EAN</description>
+		</index>
+		<index name="SrURodzaj" options="NONCLUSTERED" fields="SrU_SrRId" />
+		<index name="SrUOdbiorca" options="NONCLUSTERED" fields="SrU_OdbID, SrU_OdbiorcaTyp" />
+	</table>
+	

@@ -1,0 +1,68 @@
+<table name="DetalStanZmiany">
+		<description>Tabela zmiany</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="DSZ_DSZID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSZ_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="DSZ_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="DSZ_NumerPelny" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Pełny numer dokumentu</description>
+		</column>
+		<column name="DSZ_OpeIdOtw" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="DSZ_OpeIdZamk" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="DSZ_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Stan dokumentu</description>
+			<details>
+				1 - bufor, &lt;br&gt;
+				0 - zatwierdzony, &lt;br&gt;
+				-1 - anulowany
+			</details>
+		</column>
+		<column name="DSZ_DataOtw" type="DATETIME" definition="NOT NULL">
+			<description>Data otwarcia</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="DSZ_DataZamk" type="DATETIME" definition="NOT NULL">
+			<description>Data zamkniecia</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSZ_IloscAnulowanychParagonow" type="INTEGER" definition="NOT NULL">
+			<description>Ilosc Anulowanych Paragonow</description>
+		</column>
+		<column name="DSZ_StanKasy" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Stan Kasy</description>
+		</column>
+		<column name="DSZ_KPOtw" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>KPOtw</description>
+		</column>
+		<column name="DSZ_KWZamk" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>KWZamk</description>
+		</column>
+		<column name="DSZ_KwotaZPrzeniesienia" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>KwotaZPrzeniesienia</description>
+		</column>
+		<primaryKey name="DSZ_Primary" columns="DSZ_DSZID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="DSZIDOperatorZam" options="UNIQUE NONCLUSTERED" fields="DSZ_OpeIdZamk ,DSZ_DSZID" />
+		<index name="DSZIDOperatorOtw" options="UNIQUE NONCLUSTERED" fields="DSZ_OpeIdOtw ,DSZ_DSZID" />
+	</table>
+	

@@ -1,0 +1,20 @@
+<table name="DokNagEtapyKolejne">
+		<description>Kolejne etapy schematów obiegu dokumentów</description>
+		<column name="DnEK_DnEkID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DnEK_DnPrID" type="INTEGER">
+			<description>Identyfikator etapu schematu</description>
+		</column>
+		<column name="DnEK_DnPrIDKolejny" type="INTEGER">
+			<description>Identyfikator kolejnego etapu schematu</description>
+		</column>
+		<primaryKey name="DnEK_Primary" columns="DnEK_DnEkID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DnEKEtap" options="UNIQUE NONCLUSTERED" fields="DnEK_DnPrID ,DnEK_DnEkID">
+			<description>Klucz obcy do etapu</description>
+		</index>
+		<index name="DnEKKolejny" options="UNIQUE NONCLUSTERED" fields="DnEK_DnPrIDKolejny ,DnEK_DnEkID" />
+	</table>
+	

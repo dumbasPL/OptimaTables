@@ -1,0 +1,36 @@
+<table name="PaczkiPrzelewowAkceptacje">
+		<description>Tabela z akceptacjami paczek przelewów</description>
+		<column name="PcPA_PcPAID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PcPA_PcPNID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka paczki zdarzeń</description>
+			<details>Klucz obcy do tabeli cdn.PaczkiPrzelewowNag</details>
+		</column>
+		<column name="PcPA_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data i czas akceptacji</description>
+		</column>
+		<column name="PcPA_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="PcPA_TypAkceptacji" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PcPA_TypAkceptacji DEFAULT(1)">
+			<description>Typ akceptacji; 1 - SMS, 2 - Token, 3 - Certyfikat</description>
+		</column>
+		<column name="PcPA_Dodatkowe" type="NVARCHAR(256)">
+			<description>Dodatkowe informacje o narzędziu akceptacji (np. nazwa certyfikatu, którym
+				podpisano</description>
+		</column>
+		<primaryKey name="PcPA_Primary" columns="PcPA_PcPAID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_PcPANaglowek" localColumns="PcPA_PcPNID" refTable="PaczkiPrzelewowNag" refColumns="PcPN_PcPNID" deleteOption="CASCADE">
+			<description>Relacja CDN.PaczkiPrzelewowAkceptacje:CDN.PaczkiPrzelewowNag (MANY:1)</description>
+		</foreignKey>
+		<index name="PcPAWgNagDataOpe" options="UNIQUE NONCLUSTERED" fields="PcPA_PcPNID, PcPA_Data, PcPA_OpeID">
+			<description>Wg nagłówka</description>
+		</index>
+		<index name="PcPAWgNagOpe" options="UNIQUE NONCLUSTERED" fields="PcPA_PcPNID, PcPA_OpeID">
+			<description>Wg nagłówka</description>
+		</index>
+	</table>
+	

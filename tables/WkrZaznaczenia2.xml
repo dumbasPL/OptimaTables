@@ -1,0 +1,25 @@
+<table name="WkrZaznaczenia2" filterVisible="false">
+		<description>Tabela zaznaczeń rekordów do wykresów</description>
+		<column name="WkZ2_GUID" type="VARCHAR(50)">
+			<description>Losowany identyfikator wykonywanego zadania wykresu</description>
+		</column>
+		<column name="WkZ2_RekordLp" type="INTEGER">
+			<description>Numer kolejny zaznaczonego rekordu wg porządku sortowania z aplikacji</description>
+		</column>
+		<column name="WkZ2_GIDTyp" type="SMALLINT">
+			<description>Identyfikator rekordu - Typ</description>
+		</column>
+		<column name="WkZ2_GIDFirma" type="INTEGER">
+			<description>Identyfikator rekordu - Firma</description>
+		</column>
+		<column name="WkZ2_GIDNumer" type="INTEGER">
+			<description>Identyfikator rekordu - Numer lub ID</description>
+		</column>
+		<column name="WkZ2_GIDLp" type="SMALLINT">
+			<description>Identyfikator rekordu - Lp</description>
+		</column>
+		<primaryKey name="WkZ2_Primary" columns="WkZ2_GUID,WkZ2_RekordLp">
+			<description>Podstawowy</description>
+		</primaryKey>
+	</table>
+	

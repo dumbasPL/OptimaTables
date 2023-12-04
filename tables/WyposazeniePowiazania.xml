@@ -1,0 +1,39 @@
+<table name="WyposazeniePowiazania">
+		<description>Tabela powiązań wyposażeń z dokumentami</description>
+		<details>Tabela powiązań wyposażeń z dokumentami (rejestru VAT i ewidencji dodatkowej)</details>
+		<column name="WypP_WypPID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WypP_WypID" type="INTEGER">
+			<description>Identyfikator wyposażenia</description>
+		</column>
+		<column name="WypP_DokumentTyp" type="INTEGER">
+			<description>Typ dokumentu związanego z wyposażeniem</description>
+		</column>
+		<column name="WypP_DokumentID" type="INTEGER">
+			<description>ID dokumentu związanego z wyposażeniem</description>
+		</column>
+		<column name="WypP_DataDok" type="DATETIME">
+			<description>Data dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WypP_Numer" type="NVARCHAR(256)">
+			<description>Numer dokumentu związanego ze środkiem trwałym</description>
+		</column>
+		<column name="WypP_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu przypadająca na dane wyposażenie</description>
+		</column>
+		<column name="WypP_Opis" type="NVARCHAR(255)">
+			<description>Opis</description>
+		</column>
+		<primaryKey name="WypP_Primary" columns="WypP_WypPID">
+			<description>Wg ID</description>
+		</primaryKey>
+		<foreignKey name="FK_WypPDok" localColumns="WypP_WypID" refTable="Wyposazenie" refColumns="Wyp_WypID" deleteOption="CASCADE">
+			<description>Relacja CDN.WyposazeniePowiazania:CDN.Wyposazenie (MANY:1)</description>
+		</foreignKey>
+		<index name="WypPDok" options="UNIQUE NONCLUSTERED" fields="WypP_WypID ,WypP_DokumentID ,WypP_DokumentTyp ,WypP_Numer">
+			<description>Wg zestawu</description>
+		</index>
+	</table>
+	

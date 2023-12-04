@@ -1,0 +1,33 @@
+<table name="TwrStawkiVAT" filterVisible="false">
+		<description>Lista stawek zagranicznych towaru</description>
+		<details>Tabela stawek zagranicznych towarów.</details>
+		<column name="TwV_TwVId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator EAN</description>
+		</column>
+		<column name="TwV_TwrID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do karty towaru</description>
+			<details>Wskaźnik do nagłówka Towary: TwV:TwrId = Twr:TwrId</details>
+		</column>
+		<column name="TwV_KodKraju" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Kod kraju</description>
+		</column>
+		<column name="TwV_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="TwV_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+		</column>
+		<column name="TwV_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawki zaniżonej</description>
+		</column>
+		<primaryKey name="TwV_Primary" columns="TwV_TwVID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TwVTowar" localColumns="TwV_TwrID" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrCeny:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="TwVTowar" options="UNIQUE NONCLUSTERED" fields="TwV_TwrID ,TwV_KodKraju">
+			<description>Wg stawki i karty towaru</description>
+		</index>
+	</table>
+	

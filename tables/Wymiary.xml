@@ -1,0 +1,378 @@
+<table name="Wymiary">
+		<description>Tabela z definicjami Wymiarów Analitycznych</description>
+		<column name="Wyy_WyyID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Wyy_ParentID" type="INT" filterVisible="false">
+			<description>ID nadrzędnego wymiaru</description>
+		</column>
+		<column name="Wyy_RootID" type="INT" filterVisible="false">
+			<description>ID roota wymiaru</description>
+		</column>
+		<column name="Wyy_TypWymiaru" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Typ wymiaru</description>
+			<details>
+				1 - wymiar tekstowy
+				2 - wymiar z planu kont
+				3 - wymiar z kategori
+				4 - wymiar słownikowy
+			</details>
+		</column>
+		<column name="Wyy_Typ" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Typ wymiaru</description>
+			<details>
+				1 - Wymiar
+				2 - Podwymiar
+				3 - Element
+			</details>
+		</column>
+		<column name="Wyy_KatId" type="INT" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+		</column>
+		<column name="Wyy_SlownikTyp" type="SMALLINT" filterVisible="false">
+			<description>Słownik typ</description>
+		</column>
+		<column name="Wyy_SlownikId" type="INT" filterVisible="false">
+			<description>Słownik ID</description>
+		</column>
+		<column name="Wyy_Wartosc" type="VARCHAR(255)" filterVisible="false">
+			<description>Wartosc wymiaru</description>
+		</column>
+		<column name="Wyy_Kod" type="VARCHAR(20)" definition="NOT NULL" filterVisible="false">
+			<description>Kod wymiaru</description>
+		</column>
+		<column name="Wyy_Nazwa" type="VARCHAR(128)">
+			<description>Nazwa wymiaru</description>
+		</column>
+		<column name="Wyy_Opis" type="VARCHAR(255)">
+			<description>Opis wymiaru</description>
+		</column>
+		<column name="Wyy_Systemowy" type="TINYINT" definition="NOT NULL">
+			<description>Czy wymiar podlega edycji</description>
+		</column>
+		<column name="Wyy_Aktywny" type="TINYINT" definition="NOT NULL">
+			<description>Czy wymiar jest aktywny</description>
+		</column>
+		<column name="Wyy_KontoNumer" type="VARCHAR(50)" />
+		<column name="Wyy_D001" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D002" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D003" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D004" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D005" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D006" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D007" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D008" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D009" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D010" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D011" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D012" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D013" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D014" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D015" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D016" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D017" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D018" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D019" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D020" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D021" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D022" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D023" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D024" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D025" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D026" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D027" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D028" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D029" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D030" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D031" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D032" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D033" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D034" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D035" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D036" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D037" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D038" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D039" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_D040" type="TINYINT" definition="NULL">
+			<description>Czy występuje na dokumencie zdefiniowanym w funkcji
+				CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W001" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W002" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W003" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W004" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W005" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W006" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W007" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W008" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W009" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W010" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W011" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W012" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W013" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W014" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W015" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W016" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W017" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W018" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W019" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W020" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W021" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W022" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W023" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W024" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W025" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W026" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W027" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W028" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W029" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W030" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W031" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W032" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W033" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W034" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W035" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W036" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W037" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W038" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W039" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_W040" type="TINYINT" definition="NULL">
+			<description>Czy wymagany na dokumencie CDN.ListaDokumentowWymiarowanych()</description>
+		</column>
+		<column name="Wyy_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="Wyy_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Wyy_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp założenia kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Wyy_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikujacego kartotekę</description>
+		</column>
+		<column name="Wyy_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Wyy_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Wyy_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Wyy_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Wyy_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Wyy_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Wyy_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Wyy_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Wyy_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Wyy_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Wyy_Primary" columns="Wyy_WyyID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="WyyParentId" options="NONCLUSTERED" fields="Wyy_ParentID" />
+	</table>
+	

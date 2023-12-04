@@ -1,0 +1,7 @@
+<table name="TrSBladOper">
+		<description>Błąd w TrasElem operatorzy</description>
+		<column name="TrSBladOper_OpeId" type="int" definition="NOT NULL">
+			<description>Id operatora</description>
+		</column>
+	</table>
+	

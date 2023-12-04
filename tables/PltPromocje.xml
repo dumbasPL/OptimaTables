@@ -1,0 +1,7 @@
+<table name="PltPromocje" visibleForPrefixSearch="false">
+		<column name="PPr_ID" type="" definition="NO_SQL" />
+		<column name="PPr_PltID" type="" definition="NO_SQL" />
+		<column name="PPr_PrmID" type="" definition="NO_SQL" />
+		<column name="PPr_Wartosc" type="" definition="NO_SQL" />
+	</table>
+	

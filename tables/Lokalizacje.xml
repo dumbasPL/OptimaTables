@@ -1,0 +1,66 @@
+<table name="Lokalizacje">
+		<description>Słownik lokalizacji wydziałów</description>
+		<column name="Lok_LokId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Lok_Kod" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kod lokalizacji</description>
+		</column>
+		<column name="Lok_Nazwa" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Opis lokalizacji</description>
+		</column>
+		<column name="Lok_Symbol" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Symbol listy płac</description>
+		</column>
+		<column name="Lok_Konto" type="NVARCHAR(51)" definition="NOT NULL" />
+		<column name="Lok_Nieaktywny" type="SMALLINT" definition="NOT NULL">
+			<description>Znacznik aktywności lokalizacji</description>
+		</column>
+		<column name="LOK_ImportAppId" type="VARCHAR(5)" />
+		<column name="LOK_ImportRowId" type="VARCHAR(36)" />
+		<column name="LOK_TS_Export" type="DATETIME">
+			<description>TimeSTamp dokonania exportu</description>
+		</column>
+		<column name="Lok_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="Lok_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Lok_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Lok_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="Lok_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Lok_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Lok_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Lok_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Lok_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Lok_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Lok_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Lok_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Lok_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Lok_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Lok_Primary" columns="Lok_LokId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="LokKod" options="UNIQUE NONCLUSTERED" fields="Lok_Kod">
+			<description>Indeks wg kodu lokalizacji</description>
+		</index>
+		<index name="LokGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="Lok_Kod, Lok_LokId" includedColumns="Lok_Nieaktywny, Lok_Nazwa">
+			<description>Gridlookupu lokalizacji wg kodu i id lokalizacji</description>
+		</index>
+	</table>
+	

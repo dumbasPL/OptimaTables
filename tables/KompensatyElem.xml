@@ -1,0 +1,33 @@
+<table name="KompensatyElem">
+		<description>Tabela z elementami kompensat</description>
+		<column name="KPE_KPEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="KPE_KPNID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka dokumentu</description>
+		</column>
+		<column name="KPE_BRKID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli BnkRozKwoty</description>
+		</column>
+		<primaryKey name="KPE_Primary" columns="KPE_KPEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_KPENaglowek" localColumns="KPE_KPNID" refTable="KompensatyNag" refColumns="KPN_KPNID" deleteOption="CASCADE">
+			<description>Relacja CDN.KompensatyElem:CDN.KompensatyNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KPERozliczenie" localColumns="KPE_BRKID" refTable="BnkRozKwoty" refColumns="BRK_BRKID">
+			<description>Relacja CDN.KompensatyElem:CDN.BnkRozKwoty (MANY:1)</description>
+		</foreignKey>
+		<index name="KPENaglowek" options="UNIQUE NONCLUSTERED" fields="KPE_KPNID ,KPE_KPEID">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Indeks do tabeli KompensatyNag</details>
+		</index>
+		<index name="KPERozliczenie" options="UNIQUE NONCLUSTERED" fields="KPE_BRKID">
+			<description>Indeks do tabeli BnkRozKwoty</description>
+		</index>
+	</table>
+	

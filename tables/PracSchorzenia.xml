@@ -1,0 +1,63 @@
+<table name="PracSchorzenia">
+		<description>Tabela schorzeń pracownika</description>
+		<column name="PRS_PrsId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PRS_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika posiadającego schorzenie</description>
+		</column>
+		<column name="PRS_DkmId" type="INTEGER" definition="NOT NULL">
+			<description>Relacja do słownika schorzeń</description>
+		</column>
+		<column name="PRS_DataOd" type="DATETIME" definition="NOT NULL" />
+		<column name="PRS_DataDo" type="DATETIME" definition="NOT NULL" />
+		<column name="PRS_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PRS_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRS_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="PRS_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="PRS_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRS_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="PRS_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRS_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PRS_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRS_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PRS_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRS_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRS_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRS_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRS_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PRS_Primary" columns="PRS_PrsId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PRSPraLink" localColumns="PRS_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracSchorzenia:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRSDkmId" localColumns="PRS_DkmId" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.PracSchorzenia:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<index name="PRSPraLink" options="NONCLUSTERED" fields="PRS_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="PRSDkmId" options="UNIQUE NONCLUSTERED" fields="PRS_DkmId ,PRS_PraId">
+			<description>Słownik schorzeń</description>
+		</index>
+	</table>
+	

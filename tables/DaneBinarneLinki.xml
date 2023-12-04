@@ -1,0 +1,98 @@
+<table name="DaneBinarneLinki">
+		<description>Pliki skojarzone z dokumentem</description>
+		<column name="DBL_DBLID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DBL_DokumentTyp" type="INTEGER">
+			<description>Typ bazowego dokumentu (parenta) </description>
+		</column>
+		<column name="DBL_DokumentId" type="INTEGER">
+			<description>Id bazowego dokumentu (parenta)</description>
+		</column>
+		<column name="DBL_TwrID" type="INTEGER" definition="NOT NULL">
+			<description>Id nagłówka CDN.Towary</description>
+		</column>
+		<column name="DBL_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp danej</description>
+		</column>
+		<column name="DBL_Typ" type="INTEGER">
+			<description>link \ plik w bazie danych \ skan w bazie danych</description>
+			<details>
+				1- zdjecie
+				2- dokument
+				3 - inne
+			</details>
+		</column>
+		<column name="DBL_NazwaPliku" type="NVARCHAR(255)">
+			<description>Nazwa skojarzonego pliku</description>
+		</column>
+		<column name="DBL_Sciezka" type="NVARCHAR(255)">
+			<description>Scieżka do skojarzonego pliku</description>
+		</column>
+		<column name="DBL_WBazie" type="SMALLINT">
+			<description>Czy plik zapisany w bazie</description>
+			<details>
+				0 - NIE &lt;br&gt;
+				1 - TAK
+			</details>
+		</column>
+		<column name="DBL_DabId" type="INTEGER">
+			<description>Wskaźnik do danych binarnych</description>
+		</column>
+		<column name="DBL_FileMode" type="SMALLINT" definition="NOT NULL">
+			<description>link \ plik w bazie danych \ skan w bazie danych</description>
+			<details>
+				1- link &lt;br&gt;
+				2- plik &lt;br&gt;
+				3 - skan
+			</details>
+		</column>
+		<column name="DBL_ESklep" type="SMALLINT">
+			<description>Czy wysyłać do esklep</description>
+		</column>
+		<column name="DBL_WszystkoPL" type="SMALLINT">
+			<description>Czy wysyłać do wszystko.pl</description>
+		</column>
+		<column name="DBL_JezykId" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DBL_JezykId DEFAULT(1)">
+			<description>Identyfikator jezyka</description>
+			<details>
+				1 -polski
+				2- angielski
+				3 - niemiecki
+			</details>
+		</column>
+		<column name="DBL_TagLink" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_DBL_TagLink DEFAULT('')">
+			<description>TagLink</description>
+		</column>
+		<column name="DBL_TagAlt" type="NVARCHAR(500)" definition="NOT NULL CONSTRAINT DF_DBL_TagAlt DEFAULT('')">
+			<description>TagAlt</description>
+		</column>
+		<column name="DBL_TagRel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DBL_TagRel DEFAULT(0)">
+			<description>TagRel</description>
+		</column>
+		<column name="DBL_TagTitle" type="NVARCHAR(500)" definition="NOT NULL CONSTRAINT DF_DBL_TagTitle DEFAULT('')">
+			<description>TagTitle</description>
+		</column>
+		<column name="DBL_eSklepZalVerID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator ze sklepu</description>
+		</column>
+		<column name="DBL_eSklepJezykID" type="INT">
+			<description>Unikalny identyfikator jezyk</description>
+		</column>
+		<primaryKey name="DBL_Primary" columns="DBL_DBLID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DBL_TwrId_Index" options="NONCLUSTERED" fields="DBL_TwrID">
+			<description>Wg twrId</description>
+		</index>
+		<index name="DBL_Dokument_Index" options="NONCLUSTERED" fields="DBL_DokumentTyp, DBL_DokumentId">
+			<description>Wg dokumentu</description>
+		</index>
+		<index name="DaneBinarneLinkiDabIdESklep" options="NONCLUSTERED" fields="DBL_DabId ,DBL_ESklep" includedColumns="DBL_TwrID,DBL_Lp" />
+		<index name="DaneBinarneLinkiESklepDabId" options="NONCLUSTERED" fields="DBL_ESklep, DBL_DabId" includedColumns="DBL_TwrID,DBL_Lp" />
+	</table>
+	

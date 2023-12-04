@@ -1,0 +1,22 @@
+<table name="DetalRaporty">
+		<description>Raporty dla stanowiska detalu</description>
+		<column name="DRap_DRapId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DRap_DStaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DRap_DSRapId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator raportu</description>
+		</column>
+		<column name="DRap_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu danych</description>
+		</column>
+		<primaryKey name="DRap_Primary" columns="DRap_DRapId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DFplStanowiskoDetal" options="UNIQUE NONCLUSTERED" fields="DRap_DStaId ,DRap_DSRapId">
+			<description>Według stanowiska</description>
+		</index>
+	</table>
+	

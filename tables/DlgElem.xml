@@ -1,0 +1,384 @@
+<table name="DlgElem">
+		<column name="DLE_DLEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="DLE_DLNId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLE_RodzajEtapu" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLE_RodzajEtapu DEFAULT(1)">
+			<description>1 - delegacja krajowa; 2 - delegacja zagraniczna.</description>
+		</column>
+		<column name="DLE_KatId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_Kategoria" type="NVARCHAR(50)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_DataOd" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_DataDo" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_GodzinaOd" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_GodzinaDo" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_Kraj" type="nvarchar(255)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_StawkaDiety" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_StawkaTyp" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_WyplataZaliczkiSys" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLE_WyplataZaliczkiSys DEFAULT(0)">
+			<description />
+		</column>
+		<column name="DLE_RozliczenieSYS" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLE_RozliczenieSYS DEFAULT(0)">
+			<description />
+		</column>
+		<column name="DLE_DataPoniesieniaKosztu" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLE_DataPoniesieniaKosztu DEFAULT(1)">
+			<description />
+		</column>
+		<column name="DLE_KursRozliczenia" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLE_KursRozliczenia DEFAULT(1)">
+			<description />
+		</column>
+		<column name="DLE_DataDok" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_DataKur" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="DLE_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="DLE_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="DLE_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="DLE_KwotaSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLE_KwotaWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiDataDok" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiDataKur" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiWaluta" type="VARCHAR(3)" definition="NULL">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="DLE_KsiKursNumer" type="INTEGER" definition="NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="DLE_KsiKursL" type="DECIMAL(15,4)" definition="NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="DLE_KsiKursM" type="DECIMAL( 5,0)" definition="NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="DLE_KsiKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiKwotaWal" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_TerminPlatnosci" type="DATETIME" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_FPlId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_ZapisKbBRaAkronim" type="varchar(20)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_GenerujPlatnoscKB" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_GenerujZapisKB" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_SumujWyjazdPrzyjazd" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLE_SumujWyjazdPrzyjazd DEFAULT(0)">
+			<description>Flaga ustawiania przez aplikacje e-Pracownik. 1 - delegacja wymaga przeliczenia.</description>
+		</column>
+		<column name="DLE_IloscGodzinWyjazd" type="DATETIME" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_IloscGodzinPrzyjazd" type="DATETIME" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_IloscGodzinDelegacji" type="DATETIME" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_DietyIlosc" type="DECIMAL(15,4)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_DietyKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_DietyKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiDietyKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiDietyKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemDiety" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemDietySys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemDiety" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemDietySys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyIlosc" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltDojazdyKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltDojazdyKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltNoclegiIlosc" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltNoclegiKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltNoclegiKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltNoclegiKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltNoclegiKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltNoclegiAuto" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyAuto" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyDworzecAuto" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyDworzecIlosc" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyDworzecKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltDojazdyDworzecKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltDojazdyDworzecKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltDojazdyDworzecKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltPobytSzpitalAuto" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltPobytSzpitalIlosc" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltPobytSzpitalKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RyczaltPobytSzpitalKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltPobytSzpitalKwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRyczaltPobytSzpitalKwotaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_NumerRejestracyjny" type="VARCHAR(20)" definition="NULL" hash="1">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="DLE_TypPojazdu" type="SMALLINT" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_PojazdStawkaZaKilometr" type="DECIMAL(15,4)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_PojazdIloscKilometrow" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_PojazdKoszt" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_PojazdKosztSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiPojazdKoszt" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiPojazdKosztSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_IloscSniadan" type="INTEGER" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLE_IloscObiadow" type="INTEGER" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLE_IloscKolacji" type="INTEGER" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLE_RazemRyczaltDojazdy" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemRyczaltDojazdySys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemRyczaltNoclegi" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemRyczaltNoclegiSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemRyczaltDiety" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemRyczaltDietySys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemInneWydatki" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemInneWydatkiSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemWydatki" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemWydatkiSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemZaliczka" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemZaliczkaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemWydatkiBilety" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemWydatkiNoclegi" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemWydatkiInne" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RazemWydatkiBiletyIlosc" type="INTEGER" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLE_RazemWydatkiNoclegiIlosc" type="INTEGER" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLE_RazemWydatkiInneIlosc" type="INTEGER" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLE_Rozliczono" type="DECIMAL(15,2)" definition="NULL">
+			<description>Kwota którą rozliczono</description>
+		</column>
+		<column name="DLE_Pozostaje" type="DECIMAL(15,2)" definition="NULL">
+			<description>Kwota którą rozliczono</description>
+		</column>
+		<column name="DLE_KsiRazemRyczaltDojazdy" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemRyczaltDojazdySys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemRyczaltNoclegiSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemRyczaltNoclegi" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemRyczaltDietySys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemRyczaltDiety" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemInneWydatkiSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemInneWydatki" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemWydatki" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemWydatkiSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemZaliczkaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiRazemZaliczka" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_RoznicaKursowa" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KwotaRozliczenia" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KwotaRozliczeniaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiKwotaRozliczenia" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_KsiKwotaRozliczeniaSys" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DLE_Opis" type="NVARCHAR(255)" definition="NULL">
+			<description>Opis delegacji</description>
+		</column>
+		<column name="DLE_WymagaPrzeliczenia" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DLE_WymagaPrzeliczenia DEFAULT(0)">
+			<description>Flaga ustawiania przez aplikacje e-Pracownik. 1 - delegacja wymaga przeliczenia.</description>
+		</column>
+		<column name="DLE_Zrodlo" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DLE_Zrodlo DEFAULT(0)">
+			<description>Identyfikator aplikacji</description>
+		</column>
+		<primaryKey name="DLE_Primary" columns="DLE_DLEId">
+			<description />
+		</primaryKey>
+		<foreignKey name="FK_DlgElemDlgNag" localColumns="DLE_DLNId" refTable="DlgNag" refColumns="DLN_DLNId" deleteOption="CASCADE">
+			<description>Relacja CDN.DlgElem:CDN.DlgNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

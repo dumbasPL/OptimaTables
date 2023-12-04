@@ -1,0 +1,21 @@
+<table name="AwizoWarunkiDostawy">
+		<description>Warunki dostawy dla Awizo</description>
+		<details>Warunki dostawy dla awizo dla EDI</details>
+		<column name="AWWD_AWWDId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AWWD_Kod" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Kod warunku dostawy</description>
+		</column>
+		<column name="AWWD_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa warunku dostawy</description>
+		</column>
+		<primaryKey name="AWWD_Primary" columns="AWWD_AWWDId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

@@ -1,0 +1,31 @@
+<table name="RejestracjaZgodTrescESklepy">
+		<description>Tabela powiązań treści zgód a eSklep-ów</description>
+		<column name="RZTES_RZTESID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="RZTES_RZTID" type="INTEGER" definition="NOT NULL">
+			<description>ID treści zgody e-Sklepu</description>
+		</column>
+		<column name="RZTES_eSklepID" type="INTEGER" definition="NOT NULL">
+			<description>ID e-Sklepu</description>
+		</column>
+		<column name="RZTES_eSklepWyslana" type="TINYINT" definition="NOT NULL CONSTRAINT DF_RZTES_eSklepWyslana DEFAULT(0)">
+			<description>Czy treść wysłana do esklep</description>
+		</column>
+		<column name="RZTES_PrzyszlaZeSklep" type="TINYINT" definition="NOT NULL CONSTRAINT DF_RZTES_PrzyszlaZeSklep DEFAULT(0)">
+			<description>Czy zgoda przyszła z esklep</description>
+		</column>
+		<primaryKey name="RZTES_Primary" columns="RZTES_RZTESID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="RZTESRZTESS" options="UNIQUE NONCLUSTERED" fields="RZTES_RZTID, RZTES_eSklepID">
+			<description>Według tresci i esklep</description>
+		</index>
+		<foreignKey name="FK_RZTESRZT" localColumns="RZTES_RZTID" refTable="RejestracjaZgodTresc" refColumns="RZT_RZTId" deleteOption="CASCADE">
+			<description>Relacja CDN.RejestracjaZgodTrescESklepy:CDN.RejestracjaZgodTresc (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_RZTESS" localColumns="RZTES_eSklepID" refTable="eSklepStanowiska" refColumns="ESS_ESSId">
+			<description>Relacja CDN.eSklepStanowiska:CDN.RejestracjaZgodTrescESklepy (1:MANY)</description>
+		</foreignKey>
+	</table>
+	

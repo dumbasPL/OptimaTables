@@ -1,0 +1,184 @@
+<table name="NotyOdsNag">
+		<description>Tabela z nagłówkami not odsetkowych</description>
+		<column name="NON_NONId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="NON_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Stan dokumentu</description>
+			<details>1 - bufor, 0 - zatwierdzony</details>
+		</column>
+		<column name="NON_DDfId" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="NON_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="NON_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="NON_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(NON_NUMERNR,NON_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="NON_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="NON_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu (płatnika) z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - Kontrahenci;
+				2 - BnkNazwy;
+				3 - Pracownicy;
+				4 - WspolNag;
+				5 - Urzedy
+			</details>
+		</column>
+		<column name="NON_PodmiotID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu (płatnika)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="NON_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="NON_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="NON_FPlId" type="INTEGER">
+			<description>Identyfikator formy płatności</description>
+		</column>
+		<column name="NON_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="NON_OdsetkiTyp" type="TINYINT" definition="NOT NULL">
+			<description>Sposób naliczania odsetek</description>
+			<details>1-odsetki ustawowe; 2-odsetki indywidualne</details>
+		</column>
+		<column name="NON_OdsetkiStopa" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Wielkość odsetek indywidualnych</description>
+		</column>
+		<column name="NON_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="NON_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="NON_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="NON_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="NON_RazemKwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna wartość w walucie, od której są naliczane odsetki</description>
+		</column>
+		<column name="NON_RazemKwotaSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna wartość w walucie systemowej, od której są naliczane odsetki</description>
+		</column>
+		<column name="NON_RazemOdsetki" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna naliczonych odsetek w walucie</description>
+		</column>
+		<column name="NON_RazemOdsetkiSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna naliczonych odsetek w walucie systemowej</description>
+		</column>
+		<column name="NON_Uwagi" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="NON_DekId" type="INTEGER">
+			<description>Identyfikator zapisu księgowego</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada NON_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada NON_DekId = NULL;
+			</details>
+		</column>
+		<column name="NON_PreDekId" type="INTEGER">
+			<description>Identyfikator zapisu księgowego</description>
+		</column>
+		<column name="NON_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="NON_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="NON_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="NON_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="NON_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="NON_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="NON_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_NON_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="NON_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_NON_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="NON_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_NON_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="NON_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_NON_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="NON_Primary" columns="NON_NONId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_NONPodmiot" localColumns="NON_PodmiotID,NON_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.NotyOdsNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_NONKategoria" localColumns="NON_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.NotyOdsNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_NONDokDefinicja" localColumns="NON_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.NotyOdsNag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_NONPlatnosc" localColumns="NON_FPlId" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.NotyOdsNag:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<index name="NONPodmiot" options="UNIQUE NONCLUSTERED" fields="NON_PodmiotID ,NON_PodmiotTyp ,NON_DataDok ,NON_NONId">
+			<description>Wg podmiotu dla którego wystawiono notę</description>
+		</index>
+		<index name="NONKategoria" options="UNIQUE NONCLUSTERED" fields="NON_KatID ,NON_DataDok ,NON_NONId">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="NONDokDefinicja" options="NONCLUSTERED" fields="NON_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="NONNumer" options="UNIQUE NONCLUSTERED" fields="NON_NumerString ,NON_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="NONNumerPelny" options="UNIQUE NONCLUSTERED" fields="NON_NumerPelny">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="NONPlatnosc" options="NONCLUSTERED" fields="NON_FPlId">
+			<description>Wg identyfikatora formy płatności</description>
+		</index>
+		<index name="NONDekrety" options="NONCLUSTERED" fields="NON_DekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="NONPreDekrety" options="NONCLUSTERED" fields="NON_PreDekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+	</table>
+	

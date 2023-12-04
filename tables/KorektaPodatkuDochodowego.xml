@@ -1,0 +1,41 @@
+<table name="KorektaPodatkuDochodowego">
+		<description>Dokumenty korekcyjne spisu z natury</description>
+		<column name="KPD_KPDID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KPD_Numer" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="KPD_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data</description>
+		</column>
+		<column name="KPD_Koszty" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty</description>
+		</column>
+		<column name="KPD_Przychody" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Przychody</description>
+		</column>
+		<column name="KPD_ReNID" type="INTEGER">
+			<description>Identyfikator nagłówka spisu z natury</description>
+			<details>
+				Pole wiążące nagłówek spisu z natury z elementami spisu.
+			</details>
+		</column>
+		<column name="KPD_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Czy dokument jest w buforze</description>
+			<details>
+				0 - dokument zamknięty
+				1 - dokument w buforze
+			</details>
+		</column>
+		<column name="KPD_KPRID" type="INTEGER">
+			<description>Identyfikator zapisu KPiR</description>
+		</column>
+		<primaryKey name="KPD_Primary" columns="KPD_KPDID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KPDLp" localColumns="KPD_ReNID" refTable="RemanentNag" refColumns="ReN_ReNID">
+			<description>Relacja CDN.KorektaPodatkuDochodowego:CDN.RemanentNag</description>
+		</foreignKey>
+	</table>
+	

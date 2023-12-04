@@ -1,0 +1,36 @@
+<table name="WyposazenieOsobyOdpowiedzialne">
+		<description>Osoby odpowiedzialne za wyposażenie w ujęciu historycznym</description>
+		<details />
+		<column name="WyOO_WyOOID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WyOO_WypID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator wyposażenia</description>
+		</column>
+		<column name="WyOO_DataOd" type="DATETIME">
+			<description>Data początkowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="WyOO_DataDo" type="DATETIME">
+			<description>Data końcowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="WyOO_PrcID" type="INTEGER">
+			<description>ID pracownika odpowiedzialnego</description>
+		</column>
+		<column name="WyOO_PrcImieNazwisko" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Imię i nazwisko osoby odpowiedzialnej</description>
+		</column>
+		<primaryKey name="WyOOPrimary" columns="WyOO_WyOOID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="WyOOWyp" options="UNIQUE NONCLUSTERED" fields="WyOO_WypID, WyOO_DataOd">
+			<description>Wg środka trwałego</description>
+		</index>
+		<foreignKey name="FK_WyOOWyp" localColumns="WyOO_WypID" refTable="Wyposazenie" refColumns="Wyp_WypID" deleteOption="CASCADE">
+			<description>Relacja CDN.WyposazenieOsobyOdpowiedzialne:CDN.Wyposazenie (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

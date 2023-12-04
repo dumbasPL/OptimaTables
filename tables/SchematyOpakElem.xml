@@ -1,0 +1,34 @@
+<table name="SchematyOpakElem">
+		<description>Tabela elementów schematów opakowań</description>
+		<column name="SOE_SOEId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SOE_SONId" type="INTEGER">
+			<description>FK do nagłówka</description>
+		</column>
+		<column name="SOE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp elementu schematu</description>
+		</column>
+		<column name="SOE_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>FK do towaru</description>
+		</column>
+		<column name="SOE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość opakowania dla jednostki podst.</description>
+		</column>
+		<primaryKey name="SOE_Primary" columns="SOE_SOEId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_SOENaglowek" localColumns="SOE_SONId" refTable="SchematyOpakNag" refColumns="SON_SONId" deleteOption="CASCADE">
+			<description>Relacja CDN.SchematyOpakElem:CDN.SchematyOpakNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SOETowar" localColumns="SOE_TwrId" refTable="Towary" refColumns="Twr_TwrId">
+			<description>Relacja CDN.SchematyOpakElem:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="SOENaglowek" options="UNIQUE NONCLUSTERED" fields="SOE_SONId ,SOE_SOEId">
+			<description>Klucz do nagłówka</description>
+		</index>
+		<index name="SOETowar" options="UNIQUE NONCLUSTERED" fields="SOE_TwrId ,SOE_SOEId">
+			<description>Klucz do towaru</description>
+		</index>
+	</table>
+	

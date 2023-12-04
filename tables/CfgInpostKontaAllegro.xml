@@ -1,0 +1,19 @@
+<table name="CfgInpostKontaAllegro">
+		<description>Konta Inpost Allegro</description>
+		<column name="CIKA_CIKAID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="CIKA_Login" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Login</description>
+		</column>
+		<column name="CIKA_UserId" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>UserID</description>
+		</column>
+		<column name="CIKA_Domyslne" type="tinyint" definition="NOT NULL">
+			<description>Domyślne</description>
+		</column>
+		<primaryKey name="CIKA_Primary" columns="CIKA_CIKAID">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

@@ -1,0 +1,28 @@
+<table name="KntESklepy">
+		<description>Tabela powiązań kontrahentow i eSklep-ów</description>
+		<column name="KES_KESID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="KES_KntID" type="INTEGER" definition="NOT NULL">
+			<description>ID kontrahenta e-Sklepu</description>
+		</column>
+		<column name="KES_eSklepID" type="INTEGER" definition="NOT NULL">
+			<description>ID e-Sklepu</description>
+		</column>
+		<column name="KES_TypCenyDomyslnej" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_KES_TypCenyDomyslnej DEFAULT(0)">
+			<description>Typ ceny domyślnej w e-sklepie</description>
+		</column>
+		<primaryKey name="KES_Primary" columns="KES_KESID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="KESKntESS" options="UNIQUE NONCLUSTERED" fields="KES_KntID, KES_eSklepID">
+			<description>Według kontrahenta i nazwy</description>
+		</index>
+		<foreignKey name="FK_KESKnt" localColumns="KES_KntID" refTable="Kontrahenci" refColumns="Knt_KntID">
+			<description>Relacja CDN.Kontrahenci:CDN.KntESklepy (1:MANY)</description>
+		</foreignKey>
+		<foreignKey name="FK_KESESS" localColumns="KES_eSklepID" refTable="eSklepStanowiska" refColumns="ESS_ESSId">
+			<description>Relacja CDN.eSklepStanowiska:CDN.KntESklepy (1:MANY)</description>
+		</foreignKey>
+	</table>
+	

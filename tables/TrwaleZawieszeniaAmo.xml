@@ -1,0 +1,29 @@
+<table name="TrwaleZawieszeniaAmo" filterVisible="false">
+		<description>Maska zawieszeń amortyzacji środków trwałych</description>
+		<column name="SrZA_SrZAID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SrZA_SrTID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator środka trwałego</description>
+		</column>
+		<column name="SrZA_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc w którym jest zawieszenie</description>
+		</column>
+		<column name="SrZA_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ amortyzacji (kosztowa/bilansowa)</description>
+			<details>
+				1-amortyzacja kosztowa
+				2-amortyzacja bilansowa
+			</details>
+		</column>
+		<primaryKey name="SrZA_Primary" columns="SrZA_SrZAID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_SrZASrT" localColumns="SrZA_SrTID" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleZawieszenia:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+		<index name="SrZASrT" options="UNIQUE NONCLUSTERED" fields="SrZA_SrTID ,SrZA_RokMies ,SrZA_Typ">
+			<description>Wg środka trwałego</description>
+		</index>
+	</table>
+	

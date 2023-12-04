@@ -1,0 +1,55 @@
+<table name="TwrZasoby">
+		<description>Ilości towarów z poszczególnych dostaw z podziałem na magazyny</description>
+		<column name="TwZ_TwZId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Klucz własny tabeli</description>
+		</column>
+		<column name="TwZ_TrSIdDost" type="INTEGER">
+			<description>Wskaźnik do subelementu dokumentu źródłowego</description>
+		</column>
+		<column name="TwZ_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="TwZ_MagId" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do magazynu</description>
+		</column>
+		<column name="TwZ_Data" type="DATETIME">
+			<description>Data powstania dostawy</description>
+		</column>
+		<column name="TwZ_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru na magazynie</description>
+			<details>Ilość nie może być &lt; 0 - jeśli Ilość jest mniejsza od 0, to jest wykazywana jako
+				Braki</details>
+		</column>
+		<column name="TwZ_Quan" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość pomocnicza do obsługi okresowego naliczania kosztów</description>
+		</column>
+		<column name="TwZ_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość towaru na magazynie</description>
+		</column>
+		<column name="TwZ_Cena" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena zakupu towaru (informacyjnie)</description>
+		</column>
+		<primaryKey name="TwZ_Primary" columns="TwZ_TwZId">
+			<description>Klucz własny tabeli</description>
+		</primaryKey>
+		<foreignKey name="FK_TwZTowar" localColumns="TwZ_TwrId" refTable="Towary" refColumns="Twr_TwrId">
+			<description>Relacja CDN.TwrZasoby:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwZMagazyn" localColumns="TwZ_MagId" refTable="Magazyny" refColumns="Mag_MagId">
+			<description>Relacja CDN.TwrZasoby:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<index name="TwZTowar" options="UNIQUE NONCLUSTERED" fields="TwZ_TwrId ,TwZ_MagId ,TwZ_Data ,TwZ_TrSIdDost">
+			<description>Wg towaru</description>
+		</index>
+		<index name="TwZMagazyn" options="NONCLUSTERED" fields="TwZ_MagId">
+			<description>Wgmagazynu</description>
+		</index>
+		<index name="TwZTraSElem" options="UNIQUE NONCLUSTERED" fields="TwZ_TrSIdDost ,TwZ_MagId ,TwZ_TwrId">
+			<description>Wg subelementu zakładającego dostawę</description>
+		</index>
+	</table>
+	

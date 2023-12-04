@@ -1,0 +1,102 @@
+<table name="Uprawnienia">
+		<description>Tabela uprawnień pracownika</description>
+		<column name="UPR_UprId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="UPR_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="UPR_DkmId" type="INTEGER">
+			<description>Identyfikator słownika kwalifikacji</description>
+		</column>
+		<column name="UPR_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj rekordu (1-uprawnienie,2-język obcy)</description>
+		</column>
+		<column name="UPR_Nazwa" type="NVARCHAR(250)" definition="NOT NULL">
+			<description>Nazwa kursu</description>
+		</column>
+		<column name="UPR_WymagLubMowa" type="TINYINT" definition="NOT NULL">
+			<description>Kurs wymagany lub znajomość języka w mowie</description>
+		</column>
+		<column name="UPR_UkonLubPismo" type="TINYINT" definition="NOT NULL">
+			<description>Kurs ukończony lub znajomość języka w piśmie</description>
+		</column>
+		<column name="UPR_StMowa" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>Stopień znajomości języka w mowie</description>
+		</column>
+		<column name="UPR_StPismo" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>Stopień znajomości języka w piśmie</description>
+		</column>
+		<column name="UPR_KursOd" type="DATETIME">
+			<description>Data rozpoczęcia kursu</description>
+		</column>
+		<column name="UPR_KursDo" type="DATETIME">
+			<description>Data ukończenia kursu</description>
+		</column>
+		<column name="UPR_KursTermin" type="DATETIME">
+			<description>Termin ważności kursu</description>
+		</column>
+		<column name="UPR_Opis" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="UPR_Przypomnienie" type="TINYINT" definition="NOT NULL">
+			<description>Przypomnienie o terminie ważności</description>
+		</column>
+		<column name="UPR_Zrodlo" type="TINYINT" definition="NOT NULL CONSTRAINT DF_UPR_Zrodlo DEFAULT(0)">
+			<description>Źródło dodania uprawnienia</description>
+		</column>
+		<column name="UPR_Nieaktywne" type="TINYINT" definition="NOT NULL CONSTRAINT DF_UPR_Nieaktywne DEFAULT(0)">
+			<description>Uprawnienie nieaktywne</description>
+		</column>
+		<column name="UPR_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="UPR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="UPR_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="UPR_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="UPR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="UPR_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="UPR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_UPR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="UPR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_UPR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="UPR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_UPR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="UPR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_UPR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="UPR_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="UPR_Primary" columns="UPR_UprId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_UPRDkmLink" localColumns="UPR_DkmId" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.Uprawnienia:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_UPRPraLink" localColumns="UPR_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.Uprawnienia:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="UPRPraLink" options="NONCLUSTERED" fields="UPR_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="UPRDkmLink" options="NONCLUSTERED" fields="UPR_DkmId">
+			<description>Klucz obcy słownika uprawnień</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,28 @@
+<table name="PodtypWyplata">
+		<description>Tabela typów składników do zaawansowanej definicji wypłaty</description>
+		<column name="PTW_PtwId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PTW_TwpId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do typu wypłaty</description>
+		</column>
+		<column name="PTW_ParentSTS" type="INTEGER" definition="NOT NULL">
+			<description>Symbol Standardowego Typu Składnika</description>
+		</column>
+		<column name="PTW_ParentNazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa typu składnika</description>
+		</column>
+		<column name="PTW_ParentId" type="INTEGER" definition="NOT NULL">
+			<description>ID typu składnika</description>
+		</column>
+		<primaryKey name="PTW_Primary" columns="PTW_PtwId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PTWTwpLink" localColumns="PTW_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId" deleteOption="CASCADE">
+			<description>Relacja CDN.PodtypWyplata:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<index name="PTWTwpLink" options="NONCLUSTERED" fields="PTW_TwpId">
+			<description>Klucz obcy typu wypłaty</description>
+		</index>
+	</table>
+	

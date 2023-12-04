@@ -1,0 +1,57 @@
+<table name="DetalStanFormyPlatnosci">
+		<description>Formy platnosci w detalu</description>
+		<column name="DSFPl_DSFPlId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DSFPl_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detal</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSFPl_OptimaId" type="INTEGER" definition="NOT NULL">
+			<description>Id kontrahenta w optimie</description>
+		</column>
+		<column name="DSFPl_Nazwa" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa</description>
+		</column>
+		<column name="DSFPl_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Nieaktywny</description>
+		</column>
+		<column name="DSFPl_Domyslna" type="TINYINT" definition="NOT NULL">
+			<description>Domyslna forma platnosci</description>
+		</column>
+		<column name="DSFPl_Gotowka" type="TINYINT" definition="NOT NULL">
+			<description>Czy forma platnosci gotowkowa</description>
+		</column>
+		<column name="DSFPl_TypGotowka" type="TINYINT" definition="NOT NULL">
+			<description>Czy forma platnosci jest typu gotowkowa</description>
+		</column>
+		<column name="DSFPl_Termin" type="SMALLINT" definition="NOT NULL CONSTRAINT CK_DSFPl_Termin CHECK(DSFPL_TERMIN&gt;=0)">
+			<description>Domyślny termin płatności</description>
+		</column>
+		<column name="DSFPl_DFNr" type="INTEGER">
+			<description>Numer na drukarce</description>
+		</column>
+		<column name="DSFPl_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSFPl_BnkNazwa" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza część nazwy banku</description>
+		</column>
+		<column name="DSFPl_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL" hash="1">
+			<description>Numer rachunku</description>
+		</column>
+		<column name="DSFPl_TerminalPlatniczy" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DSFPl_TerminalPlatniczy DEFAULT(0)">
+			<description>Czy wysyłać płatność na terminal płatniczy</description>
+		</column>
+		<primaryKey name="DSFPl_Primary" columns="DSFPl_DSFPlId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DSFPlIdDetalStanOptimaId" options="UNIQUE NONCLUSTERED" fields="DSFPl_OptimaId ,DSFPl_StanDetalID">
+			<description>Według stanowiska</description>
+		</index>
+	</table>
+	

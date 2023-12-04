@@ -1,0 +1,33 @@
+<table name="DetalStanStawkiVAT">
+		<description>Towary w detalu</description>
+		<column name="DSSVAT_DSSVATId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DSSVAT_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detal</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSSVAT_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="DSSVAT_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="DSSVAT_DFSymbol" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Kod dla drukarki</description>
+		</column>
+		<primaryKey name="DSSVAT_Primary" columns="DSSVAT_DSSVATId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

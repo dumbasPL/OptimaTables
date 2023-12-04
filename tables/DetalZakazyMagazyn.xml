@@ -1,0 +1,22 @@
+<table name="DetalZakazyMagazyn">
+		<description>Zakazy dostępu do magazynu</description>
+		<column name="DZM_DZMId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DZM_MagId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="DZM_DStaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<primaryKey name="DZM_Primary" columns="DZM_DZMId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DZMMagazyn" localColumns="DZM_MagId" refTable="Magazyny" refColumns="Mag_MagId" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalZakazyMagazyn:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<index name="DZMMagazyn" options="UNIQUE NONCLUSTERED" fields="DZM_MagId ,DZM_DStaId">
+			<description>Według magazynu</description>
+		</index>
+	</table>
+	

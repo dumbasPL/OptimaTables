@@ -1,0 +1,33 @@
+<table name="DlgDokumenty">
+		<column name="DLD_DLDId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="DLD_DLEId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLD_Rozliczac" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLD_Typ" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLD_DokumentTyp" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLD_DokumentId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLD_KwotaRozliczenia" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DLD_Opis" type="NVARCHAR(255)" definition="NOT NULL">
+			<description />
+		</column>
+		<primaryKey name="DLD_Primary" columns="DLD_DLDId">
+			<description />
+		</primaryKey>
+		<foreignKey name="FK_DlgDokumentyDlgElem" localColumns="DLD_DLEId" refTable="DlgElem" refColumns="DLE_DLEId" deleteOption="CASCADE">
+			<description>Relacja CDN.DlgDokumenty:CDN.DlgElem (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

@@ -1,0 +1,16 @@
+<table name="ZestawyRegul">
+		<description>Lista zestawów reguł</description>
+		<column name="ZRG_ZrgId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false" />
+		<column name="ZRG_Akronim" type="VARCHAR(8)" definition="NOT NULL" />
+		<column name="ZRG_Nazwa" type="NVARCHAR(50)" definition="NOT NULL" />
+		<primaryKey name="ZRG_Primary" columns="ZRG_ZrgId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="ZRGZrgAkronim" options="UNIQUE NONCLUSTERED" fields="ZRG_Akronim">
+			<description>Unikalny klucz akronim</description>
+		</index>
+		<index name="ZRGZrgNazwa" options="UNIQUE NONCLUSTERED" fields="ZRG_Nazwa">
+			<description>Klucz po nazwie</description>
+		</index>
+	</table>
+	

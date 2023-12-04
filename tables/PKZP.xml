@@ -1,0 +1,60 @@
+<table name="PKZP">
+		<description>Tabela zapisów PKZP</description>
+		<column name="KZP_KzpId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KZP_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika posiadającego dany dodatek</description>
+		</column>
+		<column name="KZP_Opis" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Opis PKZP</description>
+		</column>
+		<column name="KZP_OkresOd" type="DATETIME" definition="NOT NULL">
+			<description>Data początkowa obowiązywania PKZP</description>
+		</column>
+		<column name="KZP_OkresDo" type="DATETIME" definition="NOT NULL">
+			<description>Data końcowa obowiązywania PKZP</description>
+		</column>
+		<column name="KZP_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="KZP_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KZP_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KZP_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="KZP_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KZP_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KZP_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KZP_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="KZP_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KZP_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="KZP_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KZP_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="KZP_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KZP_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="KZP_Primary" columns="KZP_KzpId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_KZPPraLink" localColumns="KZP_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PKZP:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="KZPPraLink" options="NONCLUSTERED" fields="KZP_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+	</table>
+	

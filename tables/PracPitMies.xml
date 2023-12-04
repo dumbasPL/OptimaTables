@@ -1,0 +1,25 @@
+<table name="PracPitMies">
+		<column name="PPM_PPMId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PPM_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do pracownika</description>
+		</column>
+		<column name="PPM_Rok" type="SMALLINT" definition="NOT NULL">
+			<description>Rok</description>
+		</column>
+		<column name="PPM_Miesiac" type="SMALLINT" definition="NOT NULL">
+			<description>Miesiąc</description>
+		</column>
+		<column name="PPM_Zablokowane" type="TINYINT" definition="NOT NULL">
+			<description>Miesiąc zablokowany</description>
+		</column>
+		<primaryKey name="PPM_Primary" columns="PPM_PPMId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PPMPraId" localColumns="PPM_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPitMies:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="PPMPraId" options="UNIQUE NONCLUSTERED" fields="PPM_PraId ,PPM_Rok ,PPM_Miesiac" />
+	</table>
+	

@@ -1,0 +1,19 @@
+<table name="JpkKontoZapis">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="Id" type="int" definition="NO_SQL" />
+		<column name="JpNId" type="int" definition="NO_SQL" />
+		<column name="DeEId" type="int" definition="NO_SQL" />
+		<column name="LpZapisu" type="int" definition="NO_SQL" />
+		<column name="NrZapisu" type="varchar(50)" definition="NO_SQL" />
+		<column name="KodKontaWinien" type="varchar(50)" definition="NO_SQL" />
+		<column name="KwotaWinien" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="KwotaWinienWaluta" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="KodWalutyWinien" type="varchar(3)" definition="NO_SQL" />
+		<column name="OpisZapisuWinien" type="varchar(256)" definition="NO_SQL" />
+		<column name="KodKontaMa" type="varchar(50)" definition="NO_SQL" />
+		<column name="KwotaMa" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="KwotaMaWaluta" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="KodWalutyMa" type="varchar(3)" definition="NO_SQL" />
+		<column name="OpisZapisuMa" type="varchar(256)" definition="NO_SQL" />
+	</table>
+	

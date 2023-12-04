@@ -1,0 +1,111 @@
+<table name="Harmonogram">
+		<description>Tabela zapisów harmonogramów spłat pożyczki</description>
+		<column name="HRM_HrmId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="HRM_DodId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pożyczki</description>
+		</column>
+		<column name="HRM_DkmId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wzoru naliczania odsetek</description>
+		</column>
+		<column name="HRM_KwotaZadluzenia" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zadłużenia</description>
+		</column>
+		<column name="HRM_DataNaliczenia" type="DATETIME" definition="NOT NULL">
+			<description>Data naliczenia harmonogramu</description>
+		</column>
+		<column name="HRM_Zablokowany" type="TINYINT" definition="NOT NULL">
+			<description>Zablokowany</description>
+		</column>
+		<column name="HRM_RataKapitalowa" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota raty kapitałowej</description>
+		</column>
+		<column name="HRM_TerminSplaty" type="DATETIME" definition="NOT NULL">
+			<description>Termin spłaty pierwszej raty kapitałowej</description>
+		</column>
+		<column name="HRM_SplataKapitalu" type="TINYINT" definition="NOT NULL">
+			<description>Spłata kapitału</description>
+		</column>
+		<column name="HRM_RatyKapitalowe" type="TINYINT" definition="NOT NULL">
+			<description>Raty kapitałowe</description>
+		</column>
+		<column name="HRM_LiczbaRat" type="INTEGER" definition="NOT NULL">
+			<description>Liczba rat kapitałowych</description>
+		</column>
+		<column name="HRM_NiepelnaRata" type="SMALLINT" definition="NOT NULL">
+			<description>Niepełna rata potrącana</description>
+		</column>
+		<column name="HRM_NaliczacOdsetki" type="TINYINT" definition="NOT NULL">
+			<description>Naliczać odsetki</description>
+		</column>
+		<column name="HRM_Procent" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Procent</description>
+		</column>
+		<column name="HRM_SplataOdsetek" type="TINYINT" definition="NOT NULL">
+			<description>Spłata odsetek</description>
+		</column>
+		<column name="HRM_OdsetkiPotracane" type="SMALLINT" definition="NOT NULL">
+			<description>Potracane odsetki</description>
+		</column>
+		<column name="HRM_Rok" type="INTEGER" definition="NOT NULL">
+			<description>Rok</description>
+		</column>
+		<column name="HRM_Miesiac" type="SMALLINT" definition="NOT NULL">
+			<description>Miesiąc</description>
+		</column>
+		<column name="HRM_Uzyty" type="TINYINT" definition="NOT NULL">
+			<description>Harmonogram był użyty w wypłacie</description>
+		</column>
+		<column name="HRM_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="HRM_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="HRM_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="HRM_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="HRM_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="HRM_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="HRM_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="HRM_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_HRM_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="HRM_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_HRM_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="HRM_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_HRM_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="HRM_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_HRM_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="HRM_Primary" columns="HRM_HrmId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_HRMDodLink" localColumns="HRM_DodId" refTable="Dodatki" refColumns="DOD_DodId" deleteOption="CASCADE">
+			<description>Relacja CDN.Harmonogram:CDN.Dodatki (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_HRMDkmLink" localColumns="HRM_DkmId" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.Harmonogram:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<index name="HRMDodLink" options="NONCLUSTERED" fields="HRM_DodId">
+			<description>Klucz obcy pożyczki</description>
+		</index>
+		<index name="HRMDkmLink" options="NONCLUSTERED" fields="HRM_DkmId">
+			<description>Klucz obcy wzoru naliczania odsetek</description>
+		</index>
+	</table>
+	

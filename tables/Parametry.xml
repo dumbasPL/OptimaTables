@@ -1,0 +1,28 @@
+<table name="Parametry">
+		<description>Tabela parametrów dla wzorców płacowych</description>
+		<column name="PRM_PrmId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PRM_WzrId" type="INTEGER" definition="NOT NULL" />
+		<column name="PRM_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa parametru</description>
+		</column>
+		<column name="PRM_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ parametru</description>
+		</column>
+		<column name="PRM_Wartosc1" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="PRM_Wartosc2" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="PRM_WartoscInt1" type="INTEGER" definition="NOT NULL" />
+		<column name="PRM_WartoscInt2" type="INTEGER" definition="NOT NULL" />
+		<column name="PRM_Wzor" type="NVARCHAR(256)" definition="NOT NULL" />
+		<column name="PRM_Dodatkowe" type="NVARCHAR(128)" definition="NOT NULL" />
+		<column name="PRM_Numer" type="INTEGER" definition="NOT NULL" />
+		<primaryKey name="PRM_Primary" columns="PRM_PrmId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PTWWzorzec" localColumns="PRM_WzrId" refTable="Wzorce" refColumns="WZR_WzrId" deleteOption="CASCADE">
+			<description>Relacja CDN.Parametry:CDN.Wzorce (MANY:1)</description>
+		</foreignKey>
+		<index name="PTWWzorzec" options="NONCLUSTERED" fields="PRM_WzrId" />
+	</table>
+	

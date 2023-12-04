@@ -1,0 +1,57 @@
+<table name="DeklElem">
+		<description>Elementy wyliczonych deklaracji</description>
+		<details>
+			Deklaracje podatkowe zapisywane są w trzech tabelach:
+			DeklNag zawiera informacje o rodzaju deklaracji, roku i miesiącu, którego dotyczy deklaracja,
+			wspólniku itp.
+			DeklElem zawiera obliczone pozycje deklaracji
+			DeklWydr zawiera przygotowany zestaw danych do wydrukowania deklaracji
+
+			Tabela DeklElem zawiera w układzie "pionowym" elementy obliczonej deklaracji - tzn. każdej
+			wartości obliczonej na deklaracji odpowiada jeden rekord w tabeli DeklElem.
+			Znaczenie rekordu określa wartość pola DkE:Numer. Dodatkowo na polu DkE:Opis znajduje się opis
+			znaczenia rekordu
+		</details>
+		<column name="DkE_DkEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DkE_DkNID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Wskaźnik do nagłówka deklaracji</description>
+			<details>Relacja do nagłówka deklaracji DeklNag (DkE:DkNId = DkN:DkNId)</details>
+		</column>
+		<column name="DkE_Numer" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator znaczenia rekordu</description>
+			<details>
+				Wartość tego pola określa znaczenie rekordu.
+				Każdemu polu zapamiętywanemu w obliczonej deklaracji odpowiada jeden rekord w DeklElem o
+				określonym DkE:Numer
+			</details>
+		</column>
+		<column name="DkE_WartoscL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość rekordu (licznik)</description>
+		</column>
+		<column name="DkE_WartoscM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Wartość rekordu (mianownik)</description>
+		</column>
+		<column name="DkE_WartoscTekst" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Wartość, jeżeli pole jest typu tekstowego</description>
+		</column>
+		<column name="DkE_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis rekordu</description>
+		</column>
+		<primaryKey name="DkE_Primary" columns="DkE_DkEID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DkEDeklNag" localColumns="DkE_DkNID" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DeklElem:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DkEDeklNag" options="UNIQUE NONCLUSTERED" fields="DkE_DkNID ,DkE_Numer">
+			<description>Wg nagłówka deklaracji</description>
+			<details>Indeks określający zestaw elementów dla jednej deklaracji (jednego nagłówka)</details>
+		</index>
+	</table>
+	

@@ -1,0 +1,46 @@
+<table name="AkordyHistWartosci">
+		<description>Wartosci dla zapisu historycznego akordu</description>
+		<column name="AHW_AhwId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AHW_AkhId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do zapisu historycznego akordu</description>
+		</column>
+		<column name="AHW_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość</description>
+		</column>
+		<column name="AHW_Czas" type="DATETIME">
+			<description>Czas</description>
+		</column>
+		<column name="AHW_Miesiac" type="SMALLINT" definition="NOT NULL">
+			<description>Miesiąc</description>
+		</column>
+		<column name="AHW_Rok" type="INTEGER" definition="NOT NULL">
+			<description>Rok</description>
+		</column>
+		<column name="AHW_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota</description>
+		</column>
+		<column name="AHW_Udzial" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Udział</description>
+		</column>
+		<column name="AHW_Zmiana" type="INTEGER" definition="NOT NULL">
+			<description>Zmiana</description>
+		</column>
+		<column name="AHW_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="AHW_Primary" columns="AHW_AhwId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AHWAkhLink" localColumns="AHW_AkhId" refTable="AkordyHist" refColumns="AKH_AkhId" deleteOption="CASCADE">
+			<description>Relacja CDN.AkordyHistWartosci:CDN.AkordyHist (MANY:1)</description>
+		</foreignKey>
+		<index name="AHWAkhLink" options="NONCLUSTERED" fields="AHW_AkhId">
+			<description>Klucz obcy typu akordu</description>
+		</index>
+		<index name="AHWWartosci" options="UNIQUE NONCLUSTERED" fields="AHW_AkhId ,AHW_Miesiac ,AHW_Rok">
+			<description>Klucz unikalny (rok i miesiąc)</description>
+		</index>
+	</table>
+	

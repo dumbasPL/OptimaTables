@@ -1,0 +1,19 @@
+<table name="JpkEwp">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="ID" type="int" definition="NO_SQL" />
+		<column name="JpNID" type="int" definition="NO_SQL" />
+		<column name="RycID" type="int" definition="NO_SQL" />
+		<column name="K_1" type="int" definition="NO_SQL" />
+		<column name="K_2" type="date" definition="NO_SQL" />
+		<column name="K_3" type="date" definition="NO_SQL" />
+		<column name="K_4" type="varchar(256)" definition="NO_SQL" />
+		<column name="K_5" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="K_6" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="K_7" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="K_8" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="K_9" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="K_10" type="decimal(22, 2)" definition="NO_SQL" />
+		<column name="K_11" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="K_12" type="varchar(50)" definition="NO_SQL" />
+	</table>
+	

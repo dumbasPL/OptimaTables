@@ -1,0 +1,23 @@
+<table name="DaneKad">
+		<description>Słownik danych kadrowych</description>
+		<column name="DKD_DkdId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DKD_Kod" type="INTEGER" definition="NOT NULL" />
+		<column name="DKD_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj danych w słowniku</description>
+		</column>
+		<column name="DKD_Poziom" type="INTEGER" definition="NOT NULL" />
+		<column name="DKD_Wybieralny" type="INTEGER" definition="NOT NULL" />
+		<column name="DKD_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis kodu</description>
+		</column>
+		<column name="DKD_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_DKD_ZjeId default('')" />
+		<primaryKey name="DKD_Primary" columns="DKD_DkdId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DKDZjeLink" options="NONCLUSTERED" fields="DKD_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

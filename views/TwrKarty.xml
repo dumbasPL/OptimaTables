@@ -1,0 +1,363 @@
+<view name="TwrKarty">
+		<description>Karta magazynowa</description>
+		<column name="Twr1_GIDTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_GIDFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_GIDNumer" type="INTEGER" definition="NO_SQL">
+			<details>Unikalny automatycznie nadawany numer elementu.</details>
+		</column>
+		<column name="Twr1_GIDLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_Typ" type="TINYINT" definition="NO_SQL">
+			<description>Typ elementu, Towar, Koszt,...</description>
+			<details>
+				Możliwe wartosci:
+				Jest polem relacyjnym łącznie z polem KOD
+			</details>
+		</column>
+		<column name="Twr1_Kod" type="NVARCHAR(40)" definition="NO_SQL">
+			<description>Kod elementu</description>
+			<details>
+				Kod towaru w karcie magazynowej. Kod jest równierz polem relacyjnym dla wszelkich plików
+				opisujących towar.
+				Nie jest zapisany dużymi literami ponieważ nie widzę takiej potrzeby. A ze względu na
+				powiązanie z grupami i potrzebą przepisywania go komplikowało by algorytm. (Nazwa grupy
+				dużymi a elementu małymi)
+			</details>
+		</column>
+		<column name="Twr1_KodFormat" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Sposób wyświetlania kodu towaru</description>
+			<details>maska według specyfikacji Clariona</details>
+		</column>
+		<column name="Twr1_FPPKod" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Kod towaru pochodzący z FPP</description>
+		</column>
+		<column name="Twr1_Nazwa" type="NVARCHAR(255)" definition="NO_SQL">
+			<description>Pełna nazwa elementu</description>
+			<details>Opis słowny towaru (rozwinięcie kodu)</details>
+		</column>
+		<column name="Twr1_Nazwa1" type="NVARCHAR(255)" definition="NO_SQL">
+			<description>Zastępcza nazwa</description>
+			<details>Opis słowny towaru (rozwinięcie kodu)</details>
+		</column>
+		<column name="Twr1_Certyfikat" type="NVARCHAR(40)" definition="NO_SQL">
+			<description>Nazwa w oryginale lub certyfikat</description>
+			<details>Nazwa w oryginale lub certyfikat</details>
+		</column>
+		<column name="Twr1_Sww" type="VARCHAR(20)" definition="NO_SQL">
+			<description>Sww</description>
+			<details>Sww elementu jeśli posiada.</details>
+		</column>
+		<column name="Twr1_Ean" type="VARCHAR(20)" definition="NO_SQL">
+			<description>Kod Ean</description>
+			<details>Kod kreskowy elementu. (Znakowo)</details>
+		</column>
+		<column name="Twr1_Jm" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Jednostka podstawowa</description>
+			<details>Nazwa jednostki miary. Wybór z listy, ale zapisywana jest nazwa a nie ID</details>
+		</column>
+		<column name="Twr1_Waga" type="DECIMAL( 7,3)" definition="NO_SQL">
+			<description>Waga jednostkowa</description>
+			<details>Waga jednostkowa.</details>
+		</column>
+		<column name="Twr1_WJm" type="NVARCHAR(5)" definition="NO_SQL">
+			<description>Jednostka miary wagi</description>
+			<details>Nazwa jednostki miary. Wybór z listy słownika, ale zapisywana jest nazwa, a nie ID</details>
+		</column>
+		<column name="Twr1_JmFormat" type="TINYINT" definition="NO_SQL">
+			<description>Ilość miejsc po przecinku</description>
+		</column>
+		<column name="Twr1_IloscZam" type="DECIMAL(11,4)" definition="NO_SQL">
+			<description>Ile zwykle zamawiamy?</description>
+			<details>Ustalona ilość jaką zwykle zamawiamy.</details>
+		</column>
+		<column name="Twr1_IloscMin" type="DECIMAL(11,4)" definition="NO_SQL">
+			<description>Kiedy sygnalizować niedobór?</description>
+			<details>Ilość minimalna towaru przy jakiej program informuje użytkownika o niedoborze.</details>
+		</column>
+		<column name="Twr1_IloscMax" type="DECIMAL(11,4)" definition="NO_SQL">
+			<description>Kiedy sygnalizować nadmiar</description>
+			<details>Ilość maksymalna przy jakiej program informuje o nadmiarze.</details>
+		</column>
+		<column name="Twr1_Ubytek" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Ubytek na towarze w %</description>
+		</column>
+		<column name="Twr1_Prog" type="TINYINT" definition="NO_SQL">
+			<description>Typ progu upustu</description>
+			<details>nie obsługiwany od wersji 2.0</details>
+		</column>
+		<column name="Twr1_Upust" type="TINYINT" definition="NO_SQL">
+			<description>Typ upustu</description>
+			<details>
+				1 - procentowy,
+				2 - wartościowy
+			</details>
+		</column>
+		<column name="Twr1_UpustData" type="TINYINT" definition="NO_SQL">
+			<description>Czy upust okresowy?</description>
+		</column>
+		<column name="Twr1_UpustDataOd" type="INTEGER" definition="NO_SQL">
+			<description>Data od której upust obowiązuje</description>
+		</column>
+		<column name="Twr1_UpustDataDo" type="INTEGER" definition="NO_SQL">
+			<description>Data do której upust obowiązuje</description>
+		</column>
+		<column name="Twr1_UpustGodz" type="TINYINT" definition="NO_SQL">
+			<description>Czy upust godzinowy?</description>
+		</column>
+		<column name="Twr1_UpustGodzOd" type="INTEGER" definition="NO_SQL">
+			<description>Godzina od której upust obowiązuje</description>
+		</column>
+		<column name="Twr1_UpustGodzDo" type="INTEGER" definition="NO_SQL">
+			<description>Godzina do której upust obowiązuje</description>
+		</column>
+		<column name="Twr1_AutoZam" type="TINYINT" definition="NO_SQL">
+			<description>Zaznacz jeśli towar automatycznie zamawiany</description>
+			<details>Czy zamawiać towar automatycznie.</details>
+		</column>
+		<column name="Twr1_IloscAZam" type="DECIMAL(11,4)" definition="NO_SQL">
+			<description>Od jakiej ilości automatycznie zamawiać?</description>
+			<details>
+				Od jakiej minimalnej ilości powinno się generować automatyczne zamówienie.
+				Pole wyliczane na podstawie CzasDost*SprDni
+			</details>
+		</column>
+		<column name="Twr1_CzasDst" type="TINYINT" definition="NO_SQL">
+			<description>Średni czas dostawy</description>
+		</column>
+		<column name="Twr1_CenaSpr" type="SMALLINT" definition="NO_SQL">
+			<description>Ustalona - podpowiadana cena sprzedaży</description>
+			<details>Podpowiadana cena sprzedaży z pliku CENYELE</details>
+		</column>
+		<column name="Twr1_JmDomyslna" type="SMALLINT" definition="NO_SQL">
+			<description>Ustalona - podpowiadana jm sprzedaży</description>
+		</column>
+		<column name="Twr1_DstDomyslny" type="SMALLINT" definition="NO_SQL">
+			<description>Ustalony - podpowiadany dostawca</description>
+			<details>Podpowiadana cena sprzedaży z pliku CENYELE</details>
+		</column>
+		<column name="Twr1_RozliczMag" type="TINYINT" definition="NO_SQL">
+			<description>Sposób sprzedaży z magazynu</description>
+		</column>
+		<column name="Twr1_Zakup" type="TINYINT" definition="NO_SQL">
+			<description>Wymuszać przy zakupie</description>
+		</column>
+		<column name="Twr1_Sprzedaz" type="TINYINT" definition="NO_SQL">
+			<description>Wymuszać przy sprzedaży</description>
+			<details>
+				0 - nie wymuszać
+				3 - z zasobu
+			</details>
+		</column>
+		<column name="Twr1_GrupaPod" type="NVARCHAR(1)" definition="NO_SQL">
+			<description>Grupa do jakiej należy podatek</description>
+			<details>Grupa podatkowa (A,B,C,D,E,F)</details>
+		</column>
+		<column name="Twr1_Akcyza" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Stawka podatku akcyzowego(%)</description>
+			<details>Stawka podatku wyrażona liczbą (22)</details>
+		</column>
+		<column name="Twr1_OpeTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_OpeFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_OpeNumer" type="INTEGER" definition="NO_SQL">
+			<details>Unikalny numer kontrahenta.</details>
+		</column>
+		<column name="Twr1_OpeLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_PrcTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_PrcFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_PrcNumer" type="INTEGER" definition="NO_SQL">
+			<details>Unikalny numer kontrahenta.</details>
+		</column>
+		<column name="Twr1_PrcLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_KontaktTyp" type="TINYINT" definition="NO_SQL">
+			<description>Typ kontaktu</description>
+			<details>0=Brak kontaktu</details>
+		</column>
+		<column name="Twr1_KontaktZa" type="SMALLINT" definition="NO_SQL">
+			<description>Ilość jednostek czasu</description>
+		</column>
+		<column name="Twr1_KontaktJC" type="TINYINT" definition="NO_SQL">
+			<description>Jednostka czasu</description>
+		</column>
+		<column name="Twr1_Okresowy" type="TINYINT" definition="NO_SQL">
+			<description>Kontakt okresowy</description>
+		</column>
+		<column name="Twr1_Cel" type="NVARCHAR(200)" definition="NO_SQL">
+			<description>Cel kontaktu</description>
+		</column>
+		<column name="Twr1_Atrybut1" type="NVARCHAR(15)" definition="NO_SQL">
+			<description>Nazwa atrybutu</description>
+		</column>
+		<column name="Twr1_Format1" type="TINYINT" definition="NO_SQL">
+			<description>Format atrybutu</description>
+		</column>
+		<column name="Twr1_Wartosc1" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="Twr1_Atrybut2" type="NVARCHAR(15)" definition="NO_SQL">
+			<description>Nazwa atrybutu</description>
+		</column>
+		<column name="Twr1_Format2" type="TINYINT" definition="NO_SQL">
+			<description>Format atrybutu</description>
+		</column>
+		<column name="Twr1_Wartosc2" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="Twr1_Atrybut3" type="NVARCHAR(15)" definition="NO_SQL">
+			<description>Nazwa atrybutu</description>
+		</column>
+		<column name="Twr1_Format3" type="TINYINT" definition="NO_SQL">
+			<description>Format atrybutu</description>
+		</column>
+		<column name="Twr1_Wartosc3" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="Twr1_Punkty" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Punktacja towaru</description>
+		</column>
+		<column name="Twr1_Koncesja" type="INTEGER" definition="NO_SQL">
+			<description>Koncesja na handel towarem</description>
+		</column>
+		<column name="Twr1_Konto1" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Konto dla programu księgowego</description>
+			<details>Konto dla programów księgujących.</details>
+		</column>
+		<column name="Twr1_Konto2" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Konto dla programu księgowego</description>
+			<details>Konto dla programów księgujących.</details>
+		</column>
+		<column name="Twr1_Konto3" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Konto dla programu księgowego</description>
+			<details>Konto dla programów księgujących.</details>
+		</column>
+		<column name="Twr1_Polozenie" type="NVARCHAR(64)" definition="NO_SQL">
+			<description>Położenie w magazynie</description>
+			<details>W programie znajduje sie na zakładce {opakowanie}</details>
+		</column>
+		<column name="Twr1_Katalog" type="NVARCHAR(40)" definition="NO_SQL">
+			<description>Numer katalogowy</description>
+		</column>
+		<column name="Twr1_WCenniku" type="TINYINT" definition="NO_SQL">
+			<description>Udostępniaj w cenniku</description>
+		</column>
+		<column name="Twr1_EdycjaNazwy" type="TINYINT" definition="NO_SQL">
+			<description>Edycja nazwy przu transakcjach</description>
+		</column>
+		<column name="Twr1_BezRabatu" type="TINYINT" definition="NO_SQL">
+			<description>Rabaty nie obowiązują</description>
+		</column>
+		<column name="Twr1_KopiujOpis" type="TINYINT" definition="NO_SQL">
+			<description>Kopiuj opis do transakcji</description>
+		</column>
+		<column name="Twr1_URL" type="VARCHAR(255)" definition="NO_SQL">
+			<description>Strona w internecie</description>
+			<details>Adres internetowy</details>
+		</column>
+		<column name="Twr1_Warunek" type="NVARCHAR(254)" definition="NO_SQL">
+			<description>Warunek dla generowania zdarzenia</description>
+			<details>W programie dotyczy pola Warunek: na zakładce {inne}</details>
+		</column>
+		<column name="Twr1_ObjetoscL" type="DECIMAL( 5,0)" definition="NO_SQL">
+			<description>Licznik objetosci</description>
+			<details>Przelicznik waluty w stosunku do 1zł.</details>
+		</column>
+		<column name="Twr1_ObjetoscM" type="DECIMAL( 5,0)" definition="NO_SQL">
+			<description>Mianownik objetosci</description>
+			<details>Przelicznik waluty w stosunku do 1zł.</details>
+		</column>
+		<column name="Twr1_LastModL" type="INTEGER" definition="NO_SQL">
+			<description>Data ostatniej modyfikacji lokalnej</description>
+			<details>Data ostatniej modyfikacji kontrahenta. Jeśli nie był modyfikowany to pole to ma
+				wartość 0.</details>
+		</column>
+		<column name="Twr1_LastModO" type="INTEGER" definition="NO_SQL">
+			<description>Data ostatniej modyfikacji oddziałowej</description>
+			<details>Data ostatniej modyfikacji kontrahenta. Jeśli nie był modyfikowany to pole to ma
+				wartość 0.</details>
+		</column>
+		<column name="Twr1_LastModC" type="INTEGER" definition="NO_SQL">
+			<description>Data ostatniej modyfikacji centralnej</description>
+			<details>Data ostatniej modyfikacji kontrahenta. Jeśli nie był modyfikowany to pole to ma
+				wartość 0.</details>
+		</column>
+		<column name="Twr1_TerminZwrotu" type="INTEGER" definition="NO_SQL">
+			<description>Termin zwrotu towaru (kaucje)</description>
+		</column>
+		<column name="Twr1_ZakupAutoryz" type="TINYINT" definition="NO_SQL">
+			<description>Czy zakup towaru dostępny tylko od określonych kontrahentów</description>
+		</column>
+		<column name="Twr1_MagTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_MagFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_MagNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_MagLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_MarzaMin" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Minimalna marża</description>
+		</column>
+		<column name="Twr1_KosztUslugi" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Koszt usługi</description>
+		</column>
+		<column name="Twr1_KosztUTyp" type="TINYINT" definition="NO_SQL">
+			<description>Typ kosztu usługi (%, wartość)</description>
+		</column>
+		<column name="Twr1_Clo" type="DECIMAL( 7,2)" definition="NO_SQL">
+			<description>Procentowa stawka celna</description>
+		</column>
+		<column name="Twr1_PodatekImp" type="DECIMAL( 7,2)" definition="NO_SQL">
+			<description>Stawka podatku importowego</description>
+		</column>
+		<column name="Twr1_StanInfoLimit" type="TINYINT" definition="NO_SQL">
+			<description>Czy limitować wyświetlany stan magazynowy towaru, domyślnie 0=Nie</description>
+		</column>
+		<column name="Twr1_StanInfoMax" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Górny pułap wyświetlanych stanów, domyslnie 0</description>
+		</column>
+		<column name="Twr1_StanInfoProcent" type="DECIMAL( 3,0)" definition="NO_SQL">
+			<description>Ile procentowo wyświetlać (zakres 0-100%), domyślnie 100</description>
+		</column>
+		<column name="Twr1_Aktywna" type="INTEGER" definition="NO_SQL">
+			<description>Czy karta magazynowa jest aktywna?</description>
+			<details>Czy karta magazynowa jest aktywna czy też zablokowana na czas wystawienia lub
+				poprawy.</details>
+		</column>
+		<column name="Twr1_Wsk" type="TINYINT" definition="NO_SQL">
+			<description>Wskaźnik do zaznaczania</description>
+			<details>Wskaźnik do zaznaczania rekordu. Zaznaczanie odbywa się na bitach. Dlatego też jest
+				możliwe oddzielne zaznaczanie dla poszczególnych 8 użytkowników.</details>
+		</column>
+		<column name="Twr1_CCKTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_CCKFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_CCKNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_CCKLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_PrdTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_PrdFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_PrdNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_PrdLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_OpeTypM" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_OpeFirmaM" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_OpeNumerM" type="INTEGER" definition="NO_SQL" />
+		<column name="Twr1_OpeLpM" type="SMALLINT" definition="NO_SQL" />
+		<column name="Twr1_PCN" type="NVARCHAR(9)" definition="NO_SQL">
+			<description>Kod PCN</description>
+		</column>
+		<column name="Twr1_Notowania" type="INTEGER" definition="NO_SQL">
+			<description>Kategoria rynkowa</description>
+			<details>Jeśli 0 to kategoria nieokreślona</details>
+		</column>
+		<column name="Twr1_WagaBrutto" type="DECIMAL( 7,3)" definition="NO_SQL">
+			<description>Waga jednostkowa brutto</description>
+			<details>Waga jednostkowa brutto</details>
+		</column>
+		<column name="Twr1_WJmBrutto" type="NVARCHAR(5)" definition="NO_SQL">
+			<description>Jednostka miary wagi brutto</description>
+			<details>Jednostka miary wagi brutto.</details>
+		</column>
+		<column name="Twr1_GrupaPodSpr" type="NVARCHAR(1)" definition="NO_SQL">
+			<description>Grupa do jakiej należy podatek (dla sprzedaży)</description>
+			<details>Grupa podatkowa (A,B,C,D,E,F)</details>
+		</column>
+		<column name="Twr1_Licencja" type="SMALLINT" definition="NO_SQL">
+			<details>Określenie dla towaru, produktu, usługi</details>
+		</column>
+		<column name="Twr1_Blokada" type="SMALLINT" definition="NO_SQL">
+			<description>Blokada karty towaru</description>
+		</column>
+	</view>
+	

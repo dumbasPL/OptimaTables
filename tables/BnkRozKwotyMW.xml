@@ -1,0 +1,218 @@
+<table name="BnkRozKwotyMW">
+		<description>Lista rozrachunków MW zapisów kasowo-bankowych</description>
+		<details>Tabela zawiera listę dokonanych rozrachunków MW pomiędzy zapisami KB</details>
+		<column name="BRKMW_BRKMWID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BRKMW_BRaID" type="INTEGER">
+			<description>Identyfikator rachunku, do którego należa dokumenty uczestniczące w rozliczeniu</description>
+		</column>
+		<column name="BRKMW_Kwota" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BRKMW_Kwota CHECK(BRKMW_KWOTA&gt;0)">
+			<description>Kwota rozrachunku w walucie</description>
+			<details>W przypadku rozrachunków walutowych - kwota rozrachunku wyrażona w walucie</details>
+		</column>
+		<column name="BRKMW_KwotaSysL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota rozrachunku lewego dokumentu w walucie systemowej</description>
+			<details>Dla rozrachunków walutowych kwota rozrachunku wyrażona w walucie systemowej,
+				przeliczona wg kursu z "lewego" dokumentu</details>
+		</column>
+		<column name="BRKMW_KwotaSysP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota rozrachunku prawego dokumentu w walucie systemowej</description>
+			<details>Dla rozrachunków walutowych kwota rozrachunku wyrażona w walucie systemowej,
+				przeliczona wg kursu z "prawego" dokumentu</details>
+		</column>
+		<column name="BRKMW_RoznicaKursowaSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Różnica kursowa</description>
+			<details>Różnica kursowa z uwzględnieniem znaku wynikającego z różnicy kursów na lewym i
+				prawym dokumencie oraz z kierunku tych dokumentów</details>
+		</column>
+		<column name="BRKMW_DDfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator definicji dokumentu</description>
+		</column>
+		<column name="BRKMW_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Schemat numeracji dla dokumentu</description>
+		</column>
+		<column name="BRKMW_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny w ramach schematu numeracji</description>
+		</column>
+		<column name="BRKMW_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(BRKMW_NUMERNR,BRKMW_NUMERSTRING)">
+			<description>Numer pełny dokumentu</description>
+		</column>
+		<column name="BRKMW_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data rozrachunku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRKMW_LDokTyp" type="SMALLINT">
+			<description>Typ rozliczanego dokumentu KP</description>
+			<details>Określa, czy rozrachowywany zapis po lewej stronie znajduje się w tabeli BnkZapisy
+				(2) czy BnkBOMW (3).</details>
+		</column>
+		<column name="BRKMW_LDokID" type="INTEGER">
+			<description>Identyfikator dokumentu uczestniczącego w rozrachunku po lewej stronie</description>
+			<details>Określa ID rozliczanego zapisu w tabeli BnkZapisy lub BnkBOMW.</details>
+		</column>
+		<column name="BRKMW_PDokTyp" type="SMALLINT">
+			<description>Typ rozliczającego dokumentu KW</description>
+			<details>Zawsze 2 (tabela BnkZapisy)</details>
+		</column>
+		<column name="BRKMW_PDokID" type="INTEGER">
+			<description>Identyfikator dokumentu uczestniczącego w rozrachunku po prawej stronie</description>
+			<details>Określa ID rozliczanego zapisu w tabeli BnkZapisy.</details>
+		</column>
+		<column name="BRKMW_Waluta" type="VARCHAR(3)">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="BRKMW_LPodTyp" type="INTEGER">
+			<description>Typ podmiotu lewego dokumentu</description>
+		</column>
+		<column name="BRKMW_LPodID" type="INTEGER">
+			<description>ID podmiotu lewego dokumentu</description>
+		</column>
+		<column name="BRKMW_PPodTyp" type="INTEGER">
+			<description>Typ podmiotu prawego dokumentu</description>
+		</column>
+		<column name="BRKMW_PPodID" type="INTEGER">
+			<description>ID podmiotu prawego dokumentu</description>
+		</column>
+		<column name="BRKMW_LNumer" type="NVARCHAR(256)">
+			<description>Numer lewego dokumentu wyświetlany na liście</description>
+		</column>
+		<column name="BRKMW_PNumer" type="NVARCHAR(256)">
+			<description>Numer prawego dokumentu wyświetlany na liście</description>
+		</column>
+		<column name="BRKMW_DekId" type="INTEGER">
+			<description>Identyfikator zapisu księgowego</description>
+			<details>
+				Referencja do tabeli DekretyNag dla księgowania różnic kursowych.&lt;br&gt;
+				Zapis zaksięgowany posiada BRKMW_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRKMW_DekId = NULL;
+			</details>
+		</column>
+		<column name="BRKMW_Dek2Id" type="INTEGER">
+			<description>Identyfikator zapisu księgowego II</description>
+			<details>
+				Referencja do tabeli DekretyNag dla księgowania rozliczeń (kompensat).&lt;br&gt;
+				Zapis zaksięgowany posiada BRKMW_Dek2Id = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRKMW_Dek2Id = NULL;
+			</details>
+		</column>
+		<column name="BRKMW_PreDekID" type="INTEGER">
+			<description>Klucz obcy do tabeli predekretów</description>
+		</column>
+		<column name="BRKMW_KPRId" type="INTEGER">
+			<description>Identyfikator zapisu księgowego w KPiR</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada BRKMW_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRKMW_KPRId = NULL;
+			</details>
+		</column>
+		<column name="BRKMW_KolumnaKPR" type="TINYINT" definition="NOT NULL">
+			<description>Numer kolumny w KPiR, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="BRKMW_RycID" type="INTEGER">
+			<description>Identyfikator zapisu księgowego w ewidencji ryczałtowej</description>
+			<details>
+				Referencja do tabeli Ryczalt.&lt;br&gt;
+				Zapis zaksięgowany posiada BRKMW_RycID = RYC_RycId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRKMW_RycID = NULL;
+			</details>
+		</column>
+		<column name="BRKMW_KolumnaRyc" type="TINYINT" definition="NOT NULL">
+			<description>Numer kolumny w ewidencji ryczałtowej, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="BRKMW_KontoWn1" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Wn dla księgowania różnicy kursowej</description>
+		</column>
+		<column name="BRKMW_KontoMa1" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Ma dla księgowania różnicy kursowej</description>
+		</column>
+		<column name="BRKMW_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="BRKMW_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRKMW_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRKMW_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="BRKMW_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRKMW_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRKMW_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRKMW_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BRKMW_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRKMW_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BRKMW_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRKMW_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRKMW_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRKMW_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRKMW_LWynagrodzenie" type="" definition="NO_SQL" />
+		<column name="BRKMW_PWynagrodzenie" type="" definition="NO_SQL" />
+		<column name="BRKMW_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<primaryKey name="BRKMW_Primary" columns="BRKMW_BRKMWID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BRKMWDokDef" localColumns="BRKMW_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.BnkRozKwotyMW:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="BRKMWDokDef" options="NONCLUSTERED" fields="BRKMW_DDfId">
+			<description>Klucz obcy do definicji dokumentu</description>
+		</index>
+		<index name="BRKMWNumer" options="NONCLUSTERED" fields="BRKMW_NumerString ,BRKMW_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="BRKMWNumerPelny" options="UNIQUE NONCLUSTERED" fields="BRKMW_NumerPelny ,BRKMW_BRKMWID">
+			<description>Wg numeru pełnego dokumentu</description>
+		</index>
+		<index name="BRKMWDekrety" options="NONCLUSTERED" fields="BRKMW_DekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="BRKMWDekrety2" options="NONCLUSTERED" fields="BRKMW_Dek2Id">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="BRKMWPreDekrety" options="NONCLUSTERED" fields="BRKMW_PreDekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="BRKMWKPR" options="NONCLUSTERED" fields="BRKMW_KPRId">
+			<description>Klucz obcy do tabeli ZapisyKPR</description>
+		</index>
+		<index name="BRKMWRyc" options="NONCLUSTERED" fields="BRKMW_RycID">
+			<description>Klucz obcy do tabeli Ryczalt</description>
+		</index>
+		<index name="BRKMWChrono" options="UNIQUE NONCLUSTERED" fields="BRKMW_BRaID ,BRKMW_DataDok ,BRKMW_BRKMWID" />
+		<index name="BRKMWDokL" options="NONCLUSTERED" fields="BRKMW_LDokID">
+			<description>Wg lewego dokumentu</description>
+		</index>
+		<index name="BRKMWDokP" options="NONCLUSTERED" fields="BRKMW_PDokTyp">
+			<description>Wg prawego dokumentu</description>
+		</index>
+		<index name="BRKMWDokDataL" options="NONCLUSTERED" fields="BRKMW_LDokID ,BRKMW_DataDok">
+			<description>Wg lewego dokumentu i daty</description>
+		</index>
+		<index name="BRKMWDokDataP" options="NONCLUSTERED" fields="BRKMW_PDokTyp ,BRKMW_PDokID ,BRKMW_DataDok">
+			<description>Wg prawego dokumentu i daty</description>
+		</index>
+		<index name="BRKMWRozKur" options="UNIQUE NONCLUSTERED" fields="BRKMW_RoznicaKursowaSys ,BRKMW_NumerPelny ,BRKMW_BRKMWID">
+			<description>Wg różnicy kursowej</description>
+		</index>
+	</table>
+	

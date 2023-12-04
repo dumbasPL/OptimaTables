@@ -1,0 +1,19 @@
+<table name="IGaleriaDefAtrWartosci">
+		<description>Predefiniowane wartości atrybutów z iGaleria24</description>
+		<column name="IGDW_IGDWId" type="INTEGER" definition="NOT NULL">
+			<description>Id</description>
+		</column>
+		<column name="IGDW_IGAId" type="INTEGER" definition="NOT NULL">
+			<description>Id atrybutu</description>
+		</column>
+		<column name="IGDW_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>wartość</description>
+		</column>
+		<column name="IGDW_Aktywna" type="TINYINT" definition="NOT NULL">
+			<description>czy wartość atrybutu jest aktywna</description>
+		</column>
+		<index name="IGaleriaDefAtrWartosci" options="CLUSTERED" fields="IGDW_IGAId">
+			<description>Wg id</description>
+		</index>
+	</table>
+	

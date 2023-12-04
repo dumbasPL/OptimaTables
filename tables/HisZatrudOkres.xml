@@ -1,0 +1,67 @@
+<table name="HisZatrudOkres">
+		<description>Okresy niewliczane do zatrudnienia pracownika (poza firmą)</description>
+		<column name="HZO_HzoId" type="INTEGER" definition="IDENTITY(1,1) NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="HZO_HztId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator historii zatrudnienia</description>
+		</column>
+		<column name="HZO_DkmId" type="INTEGER" definition="NOT NULL">
+			<description>Relacja do słownika rodzajów okresów niewliczanych</description>
+		</column>
+		<column name="HZO_OkresOd" type="DATETIME" definition="NOT NULL">
+			<description>Okres niewliczany (data początkowa)</description>
+		</column>
+		<column name="HZO_OkresDo" type="DATETIME" definition="NOT NULL">
+			<description>Okres niewliczany (data końcowa)</description>
+		</column>
+		<column name="HZO_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="HZO_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="HZO_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="HZO_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="HZO_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="HZO_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="HZO_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_HZO_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="HZO_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_HZO_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="HZO_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_HZO_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="HZO_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_HZO_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="HZO_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="HZO_Primary" columns="HZO_HzoId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_HZOHztLink" localColumns="HZO_HztId" refTable="HisZatrud" refColumns="HZT_HztId" deleteOption="CASCADE">
+			<description>Relacja CDN.HisZatrudOkres:CDN.HisZatrud (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_HZODkmId" localColumns="HZO_DkmId" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.HisZatrudOkres:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<index name="HZOHztLink" options="NONCLUSTERED" fields="HZO_HztId">
+			<description>Klucz obcy historii zatrudnienia (poza firmą)</description>
+		</index>
+		<index name="HZODkmId" options="NONCLUSTERED" fields="HZO_DkmId">
+			<description>Słownik rodzajów okresów niewliczanych</description>
+		</index>
+	</table>
+	

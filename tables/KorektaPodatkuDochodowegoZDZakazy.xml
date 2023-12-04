@@ -1,0 +1,11 @@
+<table name="KorektaPodatkuDochodowegoZDZakazy">
+		<description>Korekta podatku dochodowego za złe długi - usunięte pozycje</description>
+		<column name="KZa_KZaID" type="INTEGER" definition="IDENTITY(1,1) NOT NULL" />
+		<column name="KZa_PraID" type="INTEGER" definition="NULL" />
+		<column name="KZa_BZdID" type="INTEGER" definition="NOT NULL" />
+		<column name="KZa_Rodzaj" type="INTEGER" definition="NOT NULL CONSTRAINT DF_KZa_Rodzaj DEFAULT(0)" />
+		<primaryKey name="KZa_Primary" columns="KZa_KZaID">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

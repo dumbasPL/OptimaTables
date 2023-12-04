@@ -1,0 +1,28 @@
+<table name="TwrPrzeceny" filterVisible="false">
+		<description>Historia przeceny towaru</description>
+		<details>Historia zmiany cen towarów</details>
+		<column name="TPC_TwrID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do karty towaru</description>
+			<details>Wskaźnik do nagłówka Towary</details>
+		</column>
+		<column name="TPC_TwCNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer ceny</description>
+			<details>Numer ceny zdefiniowany w konfiguracji.</details>
+		</column>
+		<column name="TPC_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data dokonania przeceny</description>
+		</column>
+		<column name="TPC_Wartosc" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Wartość ceny</description>
+		</column>
+		<column name="TPC_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta ceny</description>
+		</column>
+		<foreignKey name="FK_TPCTowar" localColumns="TPC_TwrID" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrPrzeceny:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="TPCTowar" options="UNIQUE NONCLUSTERED" fields="TPC_TwrID ,TPC_TwCNumer ,TPC_Data">
+			<description>Wg identyfikatora ceny i karty towaru</description>
+		</index>
+	</table>
+	

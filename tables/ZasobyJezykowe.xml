@@ -1,0 +1,16 @@
+<table name="ZasobyJezykowe">
+		<description>Słownik komunikatów wraz tłumaczeniami dla tabel serwera SQL</description>
+		<column name="ZJE_Id" type="NVARCHAR(448)" definition="NOT NULL">
+			<description>Klasa/Grupa komunikatu</description>
+		</column>
+		<column name="ZJE_Jezyk" type="INT" definition="NOT NULL CONSTRAINT DF_ZJE_Jezyk DEFAULT(1045)">
+			<description>Identyfikator tłumaczenia; 1045 - PL; 1033 - EN-US</description>
+		</column>
+		<column name="ZJE_Komunikat" type="NVARCHAR(max)" definition="NOT NULL">
+			<description>Komunikat</description>
+		</column>
+		<primaryKey name="ZJE_Primary" columns="ZJE_Id, ZJE_Jezyk">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

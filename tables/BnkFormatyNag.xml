@@ -1,0 +1,122 @@
+<table name="BnkFormatyNag">
+		<description>Tabela formatów wymiany elektronicznej z bankami - nagłówek</description>
+		<details>Tabela formatów wymiany elektronicznej z bankami - nagłówek. Rekordy o ID=1,...,4
+			odpowiadają dotychczas stosowanym, predefiniowanym formatom: Elixir, Bresok, KredytBank i
+			Videotel. Rekordy o ID&gt;=5 odpowiadają formatom zdefiniowanym przez Użytkownika.</details>
+		<column name="BFN_BFNId" type="INTEGER" definition="IDENTITY(5,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+				Rekordy o wartościach tego pola równych 1,...,4 odpowiadają dotychczas stosowanym,
+				predefiniowanym formatom: Elixir, Bresok, KredytBank i Videotel. Rekordy o wartościach tego
+				pola większych, bądź równych 5 odpowiadają formatom zdefiniowanym przez Użytkownika.
+			</details>
+		</column>
+		<column name="BFN_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa formatu</description>
+			<details>Nazwa formatu.</details>
+		</column>
+		<column name="BFN_Standardowy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BFN_Standardowy DEFAULT(0)">
+			<description>Czy format jest standardowy (dostarczany przez producenta oprogramowania)</description>
+		</column>
+		<column name="BFN_CDC" type="TINYINT">
+			<description>Czy import za pomocą CDC</description>
+		</column>
+		<column name="BFN_CDCAdres" type="NVARCHAR(255)">
+			<description>Adres usługi sieciowej CDC</description>
+		</column>
+		<column name="BFN_CDCWariant" type="TINYINT">
+			<description>Wariant formatu CDC</description>
+		</column>
+		<column name="BFN_CDCRodzajCertyfikatow" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BFN_CDCRodzajCertyfikatow DEFAULT(0)">
+			<description>Rodzaj certyfikatów, jakie są potrzebne do wykonywania operacji CDC (0 - brak, 1
+				- per operator, 2 - per firma)</description>
+		</column>
+		<column name="BFN_XML" type="TINYINT">
+			<description>Format XML</description>
+		</column>
+		<column name="BFN_XML_Rodzaj" type="TINYINT">
+			<description>Typ formatu XML - Domestic = 0, Foreign = 1, SEPA = 2</description>
+		</column>
+		<column name="BFN_ObslugaEksportu" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BFN_ObslugaEksportu DEFAULT(1)">
+			<description>Czy format obsługuje eksport</description>
+		</column>
+		<column name="BFN_ObslugaImportu" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BFN_ObslugaImportu DEFAULT(1)">
+			<description>Czy format obsługuje import</description>
+		</column>
+		<column name="BFN_SepDzies" type="NVARCHAR(1)">
+			<description>Separator dziesiętny</description>
+			<details>Separator dziesiętny oddzielający część całkowitą od ułamkowej. Wartość pusta oznacza
+				brak separator, tj. wartość zapisaną w groszach.</details>
+		</column>
+		<column name="BFN_SepDziesSplitPay" type="NVARCHAR(1)">
+			<description>Separator dziesiętny dla kwoty VAT (split payment)</description>
+		</column>
+		<column name="BFN_FormatDaty" type="NVARCHAR(20)">
+			<description>Format daty</description>
+			<details>Format daty do wyboru z listy (np. RRRR-MM-DD)</details>
+		</column>
+		<column name="BFN_UsunSpacje" type="TINYINT">
+			<description>Czy usuwać z wartości spacje wiodące i końcowe</description>
+			<details>Flaga określająca, czy przy zapisywaniu wartości usuwać spacje wiodące i końcowe. Dla
+				stałej szerokości pól wartość ta powinna być równa zero.</details>
+		</column>
+		<column name="BFN_OddzielajPola" type="TINYINT">
+			<description>Czy oddzielać od siebie wartości pól wybranym separatorem</description>
+			<details>Flaga określająca, czy przy zapisywaniu oddzielać wartości podanym separatorem
+				(SepPol). Wartość FALSE oznacza, że format operuje stałymi szerokościami pól.</details>
+		</column>
+		<column name="BFN_SepPol" type="NVARCHAR(3)">
+			<description>Separator pól</description>
+			<details>Separator oddzielający wartości pól. Uwzględniany jeśli OddzielajPola=TRUE.</details>
+		</column>
+		<column name="BFN_SepOpisuZb" type="NVARCHAR(3)">
+			<description>Separator pól</description>
+			<details>Separator w opisie przelewów zbiorczych.</details>
+		</column>
+		<column name="BFN_SepGrup" type="NVARCHAR(1)">
+			<description>Separator grup dziesiętnych</description>
+			<details>Separator oddzielający w wartości grupy dziesiętne od siebie.</details>
+		</column>
+		<column name="BFN_OgrTekstu" type="NVARCHAR(3)">
+			<description>Ograniczniki tekstu</description>
+			<details>Sekwencje wskazujące początek i koniec ciągu wartości znakowej (np. cudzysłowy).
+				Wszystkie znaki wewnątrz ograniczników są traktowane jak tekst i nie są interpretowane (np.
+				nie są wśród nich poszukiwane separatory pól).</details>
+		</column>
+		<column name="BFN_OgrTekstuEsc" type="NVARCHAR(3)">
+			<description>Sekwencja escapująca ograniczniki tekstu w tekście</description>
+			<details>Sekwencje zastępujące (escapujące) ograniczniki tekstu w tekście.</details>
+		</column>
+		<column name="BFN_PodzPolaNaWiersze" type="NVARCHAR(3)">
+			<description>Sekwencja podziału pola na wiersze</description>
+			<details>Sekwencja podziału pola na wiersze.</details>
+		</column>
+		<column name="BFN_SepWierszy" type="NVARCHAR(2)">
+			<description>Separator wierszy</description>
+			<details>Separator wierszy (najczęściej Enter, czyli sekwencja znaków o kodach ASCII 13,10).</details>
+		</column>
+		<column name="BFN_RozszerzeniePliku" type="NVARCHAR(3)">
+			<description>Rozszerzenie pliku</description>
+			<details>Rozszerzenie pliku.</details>
+		</column>
+		<column name="BFN_StronaKodowa" type="SMALLINT">
+			<description>Strona kodowa</description>
+			<details>Strona kodowa zapisywania wartości tekstowych.</details>
+		</column>
+		<column name="BFN_TylkoWielkieLitery" type="TINYINT">
+			<description>Czy zamieniać małe litery na wielkie</description>
+			<details>Zamieniaj małe litery na wielkie.</details>
+		</column>
+		<column name="BFN_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BFN_Nieaktywny DEFAULT(0)">
+			<description>Czy format jest nieaktywny</description>
+		</column>
+		<primaryKey name="BFN_Primary" columns="BFN_BFNId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="BFNNazwa" options="UNIQUE NONCLUSTERED" fields="BFN_Standardowy, BFN_Nazwa">
+			<description>Wg nazwy formatu</description>
+		</index>
+	</table>
+	

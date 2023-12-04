@@ -1,0 +1,88 @@
+<table name="DetalStanKonfiguracja">
+		<description>Tabela ze stanowiskami detalu</description>
+		<column name="DSKnf_DSKnfId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSKnf_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detal</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSKnf_NazwaStanowiska" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa stanowiska detalu</description>
+		</column>
+		<column name="DSKnf_TS_Synchro" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_TS_SynchroTwr" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_TS_SynchroKnt" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_TS_SynchroTraNag" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_TS_SynchroZapisKB" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_TS_SynchroImportKnt" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_TS_SynchroOpak" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_TS_SynchroOptima" type="DATETIME" definition="NOT NULL CONSTRAINT DF_DSKnf_TS_SynchroOptima DEFAULT(0)">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSKnf_NumeracjaPA" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>NumeracjaPA</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSKnf_NumeracjaPAKor" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>NumeracjaPAKor</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSKnf_NumeracjaFS" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>NumeracjaFS</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSKnf_NumeracjaFSKor" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>NumeracjaFSKor</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSKnf_NumeracjaKP" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Numeracja KP</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSKnf_NumeracjaKW" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>NumeracjaKW</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSKnf_NumeracjaPKA" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>NumeracjaPKA</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="DSKnf_Oddzial" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DSKnf_Oddzial Default(0)">
+			<description>Oddzial</description>
+			<details>Czy detal z optimy wspolpracujacej z XL.</details>
+		</column>
+		<primaryKey name="DSKnf_Primary" columns="DSKnf_DSKnfId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

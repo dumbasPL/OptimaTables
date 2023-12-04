@@ -1,0 +1,40 @@
+<table name="TrwaleHistPowiazania">
+		<description>Tabela powiązań dokumentów środków trwałych z dokumentami</description>
+		<details>Tabela powiązań dokumentów środków trwałych z dokumentami (rejestru VAT i ewidencji
+			dodatkowej)</details>
+		<column name="SrHP_SrHPID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SrHP_SrHID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator dokumentu środka trwałego</description>
+		</column>
+		<column name="SrHP_DokumentTyp" type="INTEGER" filterVisible="false">
+			<description>Typ dokumentu związanego z dokumentem środka trwałego</description>
+		</column>
+		<column name="SrHP_DokumentID" type="INTEGER" filterVisible="false">
+			<description>ID dokumentu związanego z dokumentem środka trwałego</description>
+		</column>
+		<column name="SrHP_DataDok" type="DATETIME">
+			<description>Data dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrHP_Numer" type="NVARCHAR(256)">
+			<description>Numer dokumentu związanego z dokumentem środka trwałego</description>
+		</column>
+		<column name="SrHP_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu przypadająca na dany dokument środka trwałego</description>
+		</column>
+		<column name="SrHP_Opis" type="NVARCHAR(255)">
+			<description>Opis</description>
+		</column>
+		<primaryKey name="SrHP_Primary" columns="SrHP_SrHPID">
+			<description>Wg ID</description>
+		</primaryKey>
+		<foreignKey name="FK_SrHPDok" localColumns="SrHP_SrHID" refTable="TrwaleHist" refColumns="SrH_SrHID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleHistPowiazania:CDN.TrwaleHist (MANY:1)</description>
+		</foreignKey>
+		<index name="SrHPDok" options="UNIQUE NONCLUSTERED" fields="SrHP_SrHID ,SrHP_DokumentID ,SrHP_DokumentTyp ,SrHP_Numer">
+			<description>Wg zestawu</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,43 @@
+<table name="PracZestawElem">
+		<description>Zestawienia czasu pracy</description>
+		<column name="PZD_PzdId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PZD_PzeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zestawienia</description>
+		</column>
+		<column name="PZD_Ilosc" type="INTEGER" definition="NOT NULL">
+			<description>Ilość przepracowanych dni</description>
+		</column>
+		<column name="PZD_Czas" type="DATETIME" definition="NOT NULL">
+			<description>Przepracowany czas</description>
+		</column>
+		<column name="PZD_CzasNoc" type="DATETIME" definition="NOT NULL" />
+		<column name="PZD_CzasWolne" type="DATETIME" definition="NOT NULL" />
+		<column name="PZD_CzasSW" type="DATETIME" definition="NOT NULL" />
+		<column name="PZD_Nadgodziny50" type="DATETIME" definition="NOT NULL" />
+		<column name="PZD_Nadgodziny100" type="DATETIME" definition="NOT NULL" />
+		<column name="PZD_NadgodzinySW" type="DATETIME" definition="NOT NULL" />
+		<column name="PZD_DstId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator strefy</description>
+		</column>
+		<column name="PZD_PrjId" type="INTEGER">
+			<description>Identyfikator projektu</description>
+		</column>
+		<column name="PZD_DzlId" type="INTEGER">
+			<description>Identyfikator działu</description>
+		</column>
+		<column name="PZD_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PZD_Primary" columns="PZD_PzdId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PZDPzeLink" localColumns="PZD_PzeId" refTable="PracZestaw" refColumns="PZE_PzeId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracZestawElem:CDN.PracZestaw (MANY:1)</description>
+		</foreignKey>
+		<index name="PZDPzeLink" options="NONCLUSTERED" fields="PZD_PzeId">
+			<description>Iindeks po id zestawienia</description>
+		</index>
+	</table>
+	

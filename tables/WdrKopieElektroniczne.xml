@@ -1,0 +1,126 @@
+<table name="WdrKopieElektroniczne">
+		<description>Kopie elektroniczne wydruków</description>
+		<details>Kopie elektroniczne wydruków.</details>
+		<column name="WdKE_WdKEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WdKE_CallProcId" type="INTEGER">
+			<description>Identyfikator procedury wykonującej wydruk</description>
+		</column>
+		<column name="WdKE_CallProcName" type="NVARCHAR(255)">
+			<description>Nazwa procedury wykonującej wydruk</description>
+		</column>
+		<column name="WdKE_ProcId" type="INTEGER">
+			<description>Identyfikator procedury - skojarzonego formularza drukowanego obiektu</description>
+		</column>
+		<column name="WdKE_ProcName" type="NVARCHAR(255)">
+			<description>Nazwa procedury - skojarzonego formularza drukowanego obiektu</description>
+		</column>
+		<column name="WdKE_ObjType" type="INTEGER">
+			<description>Typ obiektu</description>
+		</column>
+		<column name="WdKE_ObjSubType" type="INTEGER">
+			<description>Podtyp obiektu</description>
+		</column>
+		<column name="WdKE_ObjId" type="INTEGER">
+			<description>Identyfikator obiektu</description>
+		</column>
+		<column name="WdKE_ObjName" type="NVARCHAR(512)" hash="1">
+			<description>Nazwa/numer obiektu</description>
+		</column>
+		<column name="WdKE_ObjDescription" type="NVARCHAR(1024)" hash="1">
+			<description>Dodatkowe informacje o obiekcie</description>
+		</column>
+		<column name="WdKE_ObjDate" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Data związana z obiektem (np. data dokumentu)</details>
+		</column>
+		<column name="WdKE_ObjSubjectType" type="INTEGER">
+			<description>Typ podmiotu związanego z obiektem</description>
+		</column>
+		<column name="WdKE_ObjSubjectId" type="INTEGER">
+			<description>Identyfikator podmiotu związanego z obiektem</description>
+		</column>
+		<column name="WdKE_ObjModOpeId" type="INTEGER">
+			<description>Identyfikator operatora, który ostatnio zmodyfikował obiekt</description>
+		</column>
+		<column name="WdKE_PrnId" type="INTEGER">
+			<description>Identyfikator wydruku</description>
+		</column>
+		<column name="WdKE_PrnName" type="NVARCHAR(255)" definition="NOT NULL CONSTRAINT DF_WdKE_PrnName DEFAULT('')" hash="1">
+			<description>Nazwa wydruku</description>
+		</column>
+		<column name="WdKE_PrnFileName" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa pliku - kopii elektronicznej wydruku</description>
+		</column>
+		<column name="WdKE_PrnDate" type="DATETIME" definition="NOT NULL CONSTRAINT DF_WdKE_PrnDate DEFAULT(GetDate())">
+			<description>Data i czas wydruku (zapisu kopii elektronicznej do bazy)</description>
+		</column>
+		<column name="WdKE_PrnOpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora, który dokonał wydruku (zapisu kopii elektronicznej do
+				bazy)</description>
+		</column>
+		<column name="WdKE_PrnOpeNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WdKE_PrnOpeNazwisko DEFAULT('')" hash="1">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="WdKE_PrnContent" type="IMAGE">
+			<description>Zawartość pliku - kopii elektronicznej wydruku</description>
+		</column>
+		<column name="WdKE_PrnContentLen" type="INTEGER" definition="NOT NULL">
+			<description>Długość (w bajtach) zawartości pliku - kopii elektronicznej wydruku</description>
+		</column>
+		<column name="WdKE_Flaga" type="INTEGER">
+			<description>Flaga: 1-podpisano cyfrowo</description>
+		</column>
+		<column name="WdKE_ePracownik" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WdKE_ePracownik DEFAULT(0)">
+			<description>
+				1– wartość oznacza, że wydruk dostępny w e-Pracowniku
+			</description>
+		</column>
+		<column name="WdKE_ePracownikDate" type="DATETIME">
+			<description>Data i czas udostępnienia wydruku w HRM</description>
+		</column>
+		<column name="WdKE_BIPoint" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WdKE_BIPoint DEFAULT(0)">
+			<description>
+				1– wartość oznacza, że wydruk dostępny w BI-Point
+			</description>
+		</column>
+		<column name="WdKE_IBardId" type="BIGINT">
+			<description>Id pliku w IBard24</description>
+		</column>
+		<column name="WdKE_iBardSciezka" type="NVARCHAR(MAX)" hash="1">
+			<description>Ścieżka w iBard24</description>
+		</column>
+		<column name="WdKE_iBardLink" type="NVARCHAR(MAX)" hash="1">
+			<description>Link do pliku w iBard24</description>
+		</column>
+		<column name="WdKE_Udostepnil_LoginSSO" type="NVARCHAR(128)" hash="1">
+			<description>Login udostępniającego w iBard24</description>
+		</column>
+		<column name="WdKE_DostepnyDla_LoginSSO" type="NVARCHAR(128)" hash="1">
+			<description>Login klienta dla którego udostępniono plik w iBard24</description>
+		</column>
+		<primaryKey name="WdKE_Primary" columns="WdKE_WdKEId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="WdKE_ByCallProcId" options="NONCLUSTERED" fields="WdKE_CallProcId">
+			<description>Wg procedury wykonującej wydruk</description>
+		</index>
+		<index name="WdKE_ByProcId" options="NONCLUSTERED" fields="WdKE_ProcId">
+			<description>Wg procedury - skojarzonego formularza drukowanego obiektu</description>
+		</index>
+		<index name="WdKE_ByPrnDate" options="NONCLUSTERED" fields="WdKE_PrnDate">
+			<description>Wg daty wydruku</description>
+		</index>
+		<index name="WdKE_ByObjDate" options="NONCLUSTERED" fields="WdKE_ObjDate">
+			<description>Wg daty obiektu</description>
+		</index>
+		<index name="WdKE_ByObj" options="NONCLUSTERED" fields="WdKE_ObjType, WdKE_ObjSubType, WdKE_ObjId">
+			<description>Wg identyfikacji obiektu</description>
+		</index>
+	</table>
+	

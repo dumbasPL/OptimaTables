@@ -1,0 +1,185 @@
+<table name="WypElementyPodstawaElem">
+		<description>Elementy logów z wyliczania podstawy chorobowego i urlopów</description>
+		<column name="WEE_WeeId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Unikalne Id rekordu</description>
+		</column>
+		<column name="WEE_WepId" type="INTEGER" definition="NOT NULL">
+			<description>Id rekordu "nagłówka" danej podstawy z tabeli CDN.WypElementyPodstawa</description>
+		</column>
+		<column name="WEE_Nazwa" type="NVARCHAR(128)" definition="NOT NULL">
+			<details>
+				Nazwa elementu wypłaty - wliczanego do podstawy - przy liczeniu podstawy z wypłat;
+				Nazwa elementu wypłaty z którego przepisano podstawę - jeśli podstawa jest dziedziczona z
+				poprzedniego rozliczenia nieobecności;
+				Nazwa typu wypłaty przypisanego pracownikowi w kadrach - przy liczeniu podstawy z kadr;
+				Puste pole - w przypadku zerowego rekordu dopisanego jako informacja o pominięciu w
+				obliczeniach danego miesiąca
+			</details>
+		</column>
+		<column name="WEE_NumerPelny" type="VARCHAR(100)" definition="NOT NULL">
+			<details>
+				Numer listy płac na której wypłacono "element" - jeśli podstaw liczona z wypłat bądź
+				dziedziczona z poprzedniego rozliczenia;
+				Pusta wartość - jeśli podstawa liczona z danych kadrowych i dla "elementów zerowych"
+			</details>
+		</column>
+		<column name="WEE_Wlicz" type="TINYINT" definition="NOT NULL">
+			<description>Metoda wg jakiej wliczono "element" do podstawy</description>
+			<details>
+				0 (zero) - dla "elementu" z którego została przepisana podstawa - jeśli podstawa była
+				dziedziczona oraz dla "elementu zerowego";
+				* Podstawa chorobowego:
+				12 - ustawienie "wliczać" w typie wypłaty zgodnym z "elementem";
+				13 - "dopełniać wg godzin" w typie wypłaty;
+				14 - "dopełniać wg dni";
+				15 - "wliczać w pełnej wysokości"
+				16 - "wliczać jak zasadnicze"
+				* Podstawa urlopu:
+				22 - ustawienie "wliczać" w typie wypłaty zgodnym z "elementem";
+				23 - ustawienie "wliczać jak zasadnicze" w typie wypłaty;
+				24 - "wliczać po przeliczeniu"
+				25 - "wliczać aktualną wartość"
+				* Podstawa ekwiwalentu:
+				32 - ustawienie "wliczać" w typie wypłaty zgodnym z "elementem";
+				33 - "wliczać jak zasadnicze" w typie wypłaty
+				34 - "wliczać po dopełnieniu"
+				36 - "wliczać po przeliczeniu"
+				37 - "wliczać aktualną wartość"
+			</details>
+		</column>
+		<column name="WEE_WliczMetoda" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie, czy "element" wliczono do podstawy, czy pominięto miesiąc z "zerowym
+				elementem"</description>
+			<details>
+				11 - "element" uwzględniony w podstawie chorobowego;
+				10 - "element zerowy" dla podstawy chorobowego (dla miesiąca w którym, pracownik
+				przepracował mniej niż połowę miesiąca), oraz dla elementu z którego została przepisana
+				podstawa - w przypadku dziedziczenia podstawy z poprzedniego rozliczenia;
+				21 - "element" uwzględniony w podstawie urlopu;
+				20 - "element zerowy" dla podstawy urlopu
+				31 - "element" uwzględniony w podstawie ekwiwalentu;
+				30 - "element zerowy" dla podstawy ekwiwalentu
+			</details>
+		</column>
+		<column name="WEE_RodzajElem" type="TINYINT" definition="NOT NULL">
+			<description>Podział na "elementy" wliczane jako składniki "należne za 1 miesiąc" / "dodatki
+				okresowe"; oraz na wyliczone ze średniej / wliczane z bieżącego miesiąca</description>
+			<details>
+				* Podst. chor
+				10 - "element" z którego przepisano podstawę chorobowego (dziedziczy z poprzedniego
+				rozliczenia) oraz "element zerowy"
+				11 - "element" wliczany jako należny z 1 miesiąc;
+				12 - dodatek okresowy (okres wypłaty - co 2 mies)
+				13 - dodatek okresowy (okres wypłaty - co 3 mies)
+				14 - dodatek okresowy (okres wypłaty - co 4 mies)
+				16 - dodatek okresowy (okres wypłaty - co 6 mies)
+				17 - dodatek okresowy (okres wyp. - co 12 mies);
+				* Podst. url.:
+				20 - "element zerowy"
+				21 - "element" wliczony do podstawy z bieżącej wypłaty (z bieżącego mies.)
+				22 - "element" wliczony do podstawy w średniej z poprzednich miesięcy
+				* Podst.ekw.:
+				30 - "element zerowy"
+				31 - "element" wliczony do podstawy z bieżącej wypłaty (z bieżącego mies.)
+				32 - "element" wliczony do podstawy w średniej z poprzednich miesięcy
+				33 - wliczony jako dodatek okresowy (co 3 mies)
+				34 - dodatek okresowy (co 4 mies)
+				36 - dodatek okresowy (co 6 mies)
+				37 - dodatek okresowy (co 12 mies)
+				38 - dodatek okresowy (co 2 mies
+			</details>
+		</column>
+		<column name="WEE_Kwota1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto "elementu" wliczanego do podstawy</description>
+			<details>
+				Wartość z elementu wypłaty - przy liczeniu podstawy z wypłat;
+				Kwota zapisana w dodatku pracownika bądź zasadnicze nominalne - przy liczeniu podstawy z
+				danych kadrowych
+				0.00 - dla "zerowego elementu"
+			</details>
+		</column>
+		<column name="WEE_Kwota2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość "elementu" pomniejszona o składki ZUS</description>
+			<details>
+				Wartość z elementu wypłaty pomniejszona o KosztyZUS z tego elementu - przy liczeniu podstawy
+				chorobowego z wypłat;
+				Kwota zapisana w dodatku pracownika (bądź kwota zasadniczego nominalnego) pomniejszona o
+				18.71% (procent składek ZUS pracownika) - przy liczeniu podstawy chorobowego z danych
+				kadrowych
+				0,00 (zero) - dla "zerowego elementu";
+				Wartość równa WEP_Kwota1 - dla podstawy urlopu i ekwiwalentu, a także dla "elementu" z
+				którego nastąpiło przepisanie podstawy dla chorobowego
+			</details>
+		</column>
+		<column name="WEE_Wspolczynnik" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Mnożnik zastosowany przy dopełnieniu / przeliczeniu "element" do podstawy</description>
+			<details>
+				Dla WEE_Wlicz=13 - współczynnik wg jakiego dopełniono "element" wg godzin (czas normatywny
+				podzielony przez czas pracy "dopełniany" w godzinach);
+				Dla WEE_Wlicz=14 - współczynnik wg jakiego dopełniono "element" wg dni (czas normatywny
+				podzielony przez czas pracy "dopełniany" w dniach);
+				Dla WEE_Wlicz=16 współczynnik wg jakiego dopełniono "element" - różny od 1 dla pracownika ze
+				stawką godzinową
+				Dla WEE_Wlicz=23 - współczynnik o jaki zmieniła się wartość stałej okresowej ustawionej jako
+				"przelicznik" w typie wypłaty (wartość stałej z bieżącego miesiąca podzielona przez wartość
+				stałej z miesiąca w którym wypłacono "element") - różny od 1 dla pracownika ze stawką
+				godzinową;
+				Dla WEE_Wlicz=24 - współczynnik o jaki zmieniła się wartość stałej okresowej ustawionej jako
+				"przelicznik";
+				Dla WEE_Wlicz=33 - współczynnik o jaki zmieniła się wartość stałej okresowej ustawionej jako
+				"przelicznik" - różny od 1 dla pracownika ze stawką godzinową;
+				Dla WEE_Wlicz=34 - współczynnik wg jakiego dopełnion
+			</details>
+		</column>
+		<column name="WEE_Kwota3" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wliczona do podstawy - kwota po dopełnieniu / przeliczeniu</description>
+			<details>
+				Kwota dopełniona - dla "elementów" wliczanych do podstawy wg WEP_Wlicz=
+				13, 14, 16, 34 - przy liczeniu podstawy z wypłat
+				Kwota przeliczona - dla "elementów" wliczanych do podstawy wg WEP_Wlicz=
+				23, 24, 33 - przy liczeniu podstawy z wypłat
+				Dla pozostałych "elementów" wartość równa wartości z pola WEP_Kwota2
+			</details>
+		</column>
+		<column name="WEE_GodzDni" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Czas przepracowany w miesiącu za który wypłacono "element"</description>
+			<details>
+				Czas przepracowany - dla "elementów wliczonych do podstaw urlopu i ekwiwalentu;
+				Czas "dopełniany" (czas przepracowany powiększony o czas nieobecności "niedopełnianych" do
+				chorobowego (np. urlop) - dal "elementów" wliczonych do podstawy chorobowego;
+				Puste pole - dla "elementów" wliczonych do podstawy chorobowego z kadr, dla "elementów" z
+				których przepisano podstawę chorobowego i dla "elementów zerowych"
+			</details>
+		</column>
+		<column name="WEE_OkresOd" type="DATETIME">
+			<details>
+				Data Od z listy płac na której wypłacono "element" - gdy podstawa liczona z wypłat, również
+				dla "elementu zerowego";
+				Data Od z elementu wypłaty "elementu" - gdy podstawa dziedziczona z poprzedniego rozliczenia
+				nieobecności;
+				NULL - jeśli podstawa liczona z danych kadrowych
+			</details>
+		</column>
+		<column name="WEE_OkresDo" type="DATETIME">
+			<details>
+				Data Do z listy płac na której wypłacono "element" - gdy podstawa liczona z wypłat, również
+				dla "elementu zerowego";
+				Data Do z elementu wypłaty "elementu" - gdy podstawa dziedziczona z poprzedniego rozliczenia
+				nieobecności;
+				NULL - jeśli podstawa liczona z danych kadrowych
+			</details>
+		</column>
+		<column name="WEE_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="WEE_Primary" columns="WEE_WeeId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_WEEWepId" localColumns="WEE_WepId" refTable="WypElementyPodstawa" refColumns="WEP_WepId" deleteOption="CASCADE">
+			<description>Relacja CDN.WypElementyPodstawaElem:CDN.WypElementyPodstawa (MANY:1)</description>
+		</foreignKey>
+		<index name="WEEWepId" options="NONCLUSTERED" fields="WEE_WepId">
+			<description>Klucz do elementu wypłaty</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,83 @@
+<table name="FormyPlatnosci">
+		<description>Tabela z listą form płatności</description>
+		<column name="FPl_FPlId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator formy płatności</description>
+		</column>
+		<column name="FPl_Nazwa" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa formy płatności</description>
+			<details>Nazwa powinna być zablokowana, jeśli dana płatność jest używana na dokumentach</details>
+		</column>
+		<column name="FPl_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ płatności</description>
+			<details>
+				Zgodny z BRaTyp.
+				1 - oznacza Kasę (płatności gotówkowe); 2 - bank (płatności przelewami); 3 - karta kredytowa
+			</details>
+		</column>
+		<column name="FPl_BRaId" type="INTEGER">
+			<description>Klucz obcy do tabeli BnkRachunki</description>
+			<details>Identyfikator rachunku bankowego lub kasy, do której trafia zapis związany z tą formą
+				płatności</details>
+		</column>
+		<column name="FPl_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu płatnika, z którym skojarzona jest forma płatności</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - Kontrahent;
+				2 - Bank;
+				3 - Pracownik;
+				4 - Wspólnik;
+				5 - Urząd
+			</details>
+		</column>
+		<column name="FPl_PodmiotID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu płatnika, z którym skojarzona jest forma płatności</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy NULL w przypadku formy bez ustawionego płatnika</details>
+		</column>
+		<column name="FPl_Termin" type="SMALLINT" definition="NOT NULL CONSTRAINT CK_FPl_Termin CHECK(FPL_TERMIN&gt;=0)">
+			<description>Domyślny termin płatności</description>
+		</column>
+		<column name="FPl_NieAktywny" type="SMALLINT" definition="NOT NULL">
+			<description>Czy forma płatności ma być wyświetlana na liście dostępnych form</description>
+		</column>
+		<column name="FPl_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu</description>
+		</column>
+		<column name="FPl_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji/bazy z której pochodzi zapis</description>
+		</column>
+		<column name="FPl_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie oryginalnej</description>
+		</column>
+		<column name="FPl_XLID" type="INTEGER">
+			<description>ID formy płatności w CDN XL</description>
+			<details>Potrzebne do off-line z CDN-XL</details>
+		</column>
+		<column name="FPl_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat powiązany z formą płatności</description>
+			<details>Potrzebne do off-line z CDN-XL</details>
+		</column>
+		<column name="FPl_TerminalPlatniczy" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_FPl_TerminalPlatniczy DEFAULT(0)">
+			<description>Czy wysyłać płatność na terminal płatniczy</description>
+		</column>
+		<column name="FPl_KSeFId" type="INT" definition="NOT NULL CONSTRAINT DF_FPl_KSeFId DEFAULT(0)">
+			<description>Id formy płatności w KSeF</description>
+		</column>
+		<primaryKey name="FPl_Primary" columns="FPl_FPlId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_FplRachunek" localColumns="FPl_BRaId" refTable="BnkRachunki" refColumns="BRa_BRaID">
+			<description>Relacja CDN.FormyPlatnosci:CDN.BnkRachunki (MANY:1)</description>
+		</foreignKey>
+		<index name="FPlNazwa" options="UNIQUE NONCLUSTERED" fields="FPl_Nazwa">
+			<description>Wg nazwy formy płatności</description>
+		</index>
+		<index name="FplRachunek" options="NONCLUSTERED" fields="FPl_BRaId">
+			<description>Klucz obcy do tabeli BnkRachunki</description>
+		</index>
+		<index name="FPlGUID" options="UNIQUE NONCLUSTERED" fields="FPl_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

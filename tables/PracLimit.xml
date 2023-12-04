@@ -1,0 +1,151 @@
+<table name="PracLimit">
+		<description>Tabela limitów nieobecności pracowika</description>
+		<column name="PLN_PlnId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PLN_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do pracownika</description>
+		</column>
+		<column name="PLN_LnbId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator limitu nieobecności</description>
+		</column>
+		<column name="PLN_ParentId" type="INTEGER">
+			<description>Id ojca limitu</description>
+		</column>
+		<column name="PLN_LimitDodatkowy" type="TINYINT" definition="NOT NULL">
+			<description>Czy przysługuje pracownikowi dodatkowy limit</description>
+		</column>
+		<column name="PLN_LimitDodatkowyDni" type="INTEGER" definition="NOT NULL" />
+		<column name="PLN_Rok" type="INTEGER" definition="NOT NULL">
+			<description>Rok w którym ważny jest limit</description>
+		</column>
+		<column name="PLN_OkresOd" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_WaznyOd" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_OkresDo" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_PrzeniesienieF" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Liczba dni z przeniesienia</description>
+		</column>
+		<column name="PLN_PrzeniesienieCzas" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_KorektaPomniejszajaca" type="TINYINT" definition="NOT NULL">
+			<description>Flaga mówiąca czy wartość korekty pomniejsza ogólny czas limitu</description>
+		</column>
+		<column name="PLN_KorektaRecznaF" type="DECIMAL(15,4)" definition="NOT NULL" />
+		<column name="PLN_KorektaRecznaCzas" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_ProporcjonalnyF" type="DECIMAL(15,4)" definition="NOT NULL" />
+		<column name="PLN_ProporcjonalnyCzas" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_NalezneF" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Należna liczba dni limitu</description>
+		</column>
+		<column name="PLN_NalezneCzas" type="DATETIME" definition="NOT NULL">
+			<description>Należny urlop w godzinach</description>
+		</column>
+		<column name="PLN_NalezneLacznieF" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Łączna należna liczba dni limitu</description>
+		</column>
+		<column name="PLN_NalezneLacznieCzas" type="DATETIME" definition="NOT NULL">
+			<description>Łączny należny urlop w godzinach</description>
+		</column>
+		<column name="PLN_WykorzystaneF" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Wykorzystana liczba dni limitu</description>
+		</column>
+		<column name="PLN_WykorzystaneCzas" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_NaZadanie" type="INTEGER" definition="NOT NULL">
+			<description>W tym dni wykorzystane na żądanie</description>
+		</column>
+		<column name="PLN_NaZadaniePoprzedni" type="INTEGER" definition="NOT NULL">
+			<description>W tym dni wykorzystane na żądanie w poprzednich firmach</description>
+		</column>
+		<column name="PLN_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa wzorcowego typu limitu</description>
+		</column>
+		<column name="PLN_PozostaloF" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Liczb dni pozostałych do wykorzystania</description>
+		</column>
+		<column name="PLN_PozostaloCzas" type="DATETIME" definition="NOT NULL" />
+		<column name="PLN_Opis" type="NVARCHAR(200)" definition="NOT NULL">
+			<description>Opis Nieobecności pracownika</description>
+		</column>
+		<column name="PLN_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PLN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PLN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="PLN_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="PLN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PLN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="PLN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PLN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PLN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PLN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PLN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PLN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PLN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PLN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="PLN_PlanowanyF" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_PLN_PlanowanyF default(0.0000)">
+			<description>Informacja o zaplanowanych nieobecnościach (zaplanowane to te, które mają
+				TNB_Planowany=1)</description>
+		</column>
+		<column name="PLN_PlanowanyCzas" type="DATETIME" definition="NOT NULL CONSTRAINT DF_PLN_PlanowanyCzas default(-2)" />
+		<column name="PLN_EkwiwalentF" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_PLN_EkwiwalentF default(0.0000)">
+			<description>Liczba dni, za jaką wypłacono ekwiwalent, wpisywane ręcznie wpływające na
+				wyliczenie limitu ‘Pozostało’</description>
+		</column>
+		<column name="PLN_EkwiwalentCzas" type="DATETIME" definition="NOT NULL CONSTRAINT DF_PLN_EkwiwalentCzas default(-2)" />
+		<column name="PLN_KorektaOkres" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PLN_KorektaOkres default(0)">
+			<description>Flaga ręcznej edycji okresu w limicie pracownika</description>
+		</column>
+		<column name="PLN_Zakonczony" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PLN_Zakonczony default(0)">
+			<description>Oznaczenie, że dany limit kończy pełny miesięczny okres, za który przysługuje
+				urlop należny, wartość niewidoczna i nieedytowalna z poziomu programu</description>
+		</column>
+		<column name="PLN_Miesiac30" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PLN_Miesiac30 default(0)">
+			<description>Oznaczenie, z jaką regułą na długość miesiąca przeliczył sie Limit na urlop
+				Tymczasowy</description>
+		</column>
+		<column name="PLN_PierwszaPraca" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PLN_PierwszaPraca default(0)">
+			<description>Oznaczenie, czy limit liczony przy pomocy algorytmu dla pierwszej pracy </description>
+		</column>
+		<column name="PLN_LicznikMies" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PLN_LicznikMies default(0)">
+			<description>Licznik miesięcy jakie użyto przy Liczeniu Limitu dla Pierwszej Pracy. Przy
+				zmianie etatu startuje od 1</description>
+		</column>
+		<column name="PLN_EkwiwalentDodatkowyCzas" type="DATETIME">
+			<description>Ilość godzin wypłaconego ekwiwalentu za urlop dodatkowy</description>
+		</column>
+		<column name="PLN_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PLN_Primary" columns="PLN_PlnId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PLNPraLink" localColumns="PLN_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracLimit:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PLNLnbLink" localColumns="PLN_LnbId" refTable="LimitNieobec" refColumns="LNB_LnbId">
+			<description>Relacja CDN.PracLimit:CDN.LimitNieobec (MANY:1)</description>
+		</foreignKey>
+		<index name="PLNLnbOkrNazwa" options="NONCLUSTERED" fields="PLN_Nazwa ,PLN_OkresOd ,PLN_WaznyOd">
+			<description>Sortowanie wg typu i okresu</description>
+		</index>
+		<index name="PLNPraLink" options="NONCLUSTERED" fields="PLN_PraId">
+			<description>Link do pracownik</description>
+		</index>
+		<index name="PLNLnbLink" options="NONCLUSTERED" fields="PLN_LnbId">
+			<description>Link do LimitNieobec</description>
+		</index>
+	</table>
+	

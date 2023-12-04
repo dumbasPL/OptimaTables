@@ -1,0 +1,68 @@
+<table name="SprawozdaniaFinansowePodpisy">
+		<description>Sprawozdania finansowe - podpisy</description>
+		<column name="SFP_SFPId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SFP_SFNId" type="INT">
+			<description>Klucz obcy do tabeli CDN.SprawozdaniaFinansowe</description>
+			<details />
+		</column>
+		<column name="SFP_Nazwa" type="nvarchar(255)">
+			<description>Nazwa</description>
+			<details />
+		</column>
+		<column name="SFP_Podpis" type="INT">
+			<description>Podpis</description>
+			<details />
+		</column>
+		<column name="SFP_Odmowa" type="INT">
+			<description>Odmowa</description>
+			<details />
+		</column>
+		<column name="SFP_Odcisk" type="nvarchar(255)">
+			<description>Odcisk</description>
+			<details />
+		</column>
+		<column name="SFP_TS_Oblicz" type="DATETIME">
+			<description>Data i godzina obliczenia zestawienia</description>
+		</column>
+		<column name="SFP_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="SFP_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SFP_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SFP_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="SFP_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SFP_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SFP_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SFP_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SFP_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SFP_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SFP_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SFP_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SFP_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SFP_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SFP_Primary" columns="SFP_SFPId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="SFPSFNId" options="NONCLUSTERED" fields="SFP_SFNId">
+			<description>Według SFP_SFNId</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,28 @@
+<table name="AnkSzablonOdpElem">
+		<description>szablony odpowiedzi</description>
+		<column name="AnkSoE_AnkSoeId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkSoE_AnkSonId" type="INTEGER" definition="NOT NULL">
+			<description>Szablon, do którego należy pytanie. Link do nagłówka szablonu</description>
+		</column>
+		<column name="AnkSoE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dla odpowiedzi</description>
+		</column>
+		<column name="AnkSoE_Mode" type="TINYINT" definition="NOT NULL">
+			<description> 0 - zwykła odp. 1- odp typu inne</description>
+		</column>
+		<column name="AnkSoE_Punkty" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Punkty za odpowiedź</description>
+		</column>
+		<column name="AnkSoE_Wartosc" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Wartosc odpowiedzi</description>
+		</column>
+		<primaryKey name="AnkSoE_Primary" columns="AnkSOE_AnkSoeId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AnkSoe_AnkSon" localColumns="AnkSoE_AnkSonId" refTable="AnkSzablonOdpNag" refColumns="AnkSoN_AnkSonId" deleteOption="CASCADE">
+			<description>Relacja CDN.AnkSzablonOdpElem:CDN.AnkSzablonOdpNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

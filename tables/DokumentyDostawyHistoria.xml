@@ -1,0 +1,59 @@
+<table name="DokumentyDostawyHistoria">
+		<description>Tabela historii komunikacji z PUESC dla zgłoszenia eDD</description>
+		<column name="DDH_DDHID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DDH_DDNID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokumentyDostawyNag</description>
+		</column>
+		<column name="DDH_Korelacja" type="varchar(50)" definition="NOT NULL">
+			<description>Korelacja ID zgłoszenia eDD na PUESC</description>
+		</column>
+		<column name="DDH_CheckSum" type="varchar(50)" definition="NOT NULL">
+			<description>Suma kontrolna dokumentu</description>
+		</column>
+		<column name="DDH_ModificationDate" type="datetime" definition="NOT NULL">
+			<description>Data modyfikacji zgłoszenia na PUESC</description>
+		</column>
+		<column name="DDH_DDTyp" type="nvarchar(10)" definition="NOT NULL">
+			<details>Typ zgłoszenia eDD</details>
+		</column>
+		<column name="DDH_Rodzaj" type="INTEGER" definition="NOT NULL">
+			<details>Rodzaj operacji wysłano/pobrano z PUESC</details>
+		</column>
+		<column name="DDH_Status" type="INTEGER" definition="NOT NULL">
+			<details>Status</details>
+		</column>
+		<column name="DDH_DataOperacji" type="DateTime" definition="NOT NULL">
+			<description>Data wysłania/odebrania komunikatu z PUESC</description>
+		</column>
+		<column name="DDH_Plik" type="varchar(255)" definition="NOT NULL" hash="1">
+			<description>Plik z treścią komunikatu PUESC</description>
+		</column>
+		<column name="DDH_Opis" type="nvarchar(1000)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="DDH_OpeID" type="INTEGER" definition="NULL">
+			<details>ID operatora</details>
+		</column>
+		<column name="DDH_OpeKod" type="varchar(20)" definition="NOT NULL" hash="1">
+			<description>Kod operatora</description>
+		</column>
+		<column name="DDH_OpeNazwisko" type="nvarchar(50)" definition="NOT NULL" hash="1">
+			<description>Nazwisko operatora</description>
+		</column>
+		<primaryKey name="DDH_Primary" columns="DDH_DDHID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_DokumentyDostawyHistoriaDokumentDostawyNag" localColumns="DDH_DDNID" refTable="DokumentyDostawyNag" refColumns="DDN_DDNID">
+			<description>Relacja CDN.DokumentyDostawyHistoria:CDN.DokumentyDostawyNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DDHDataOperacji" options="NONCLUSTERED" fields="DDH_DataOperacji">
+			<description>Wg daty operacji</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,139 @@
+<table name="VatTab" filterVisible="false">
+		<description>Kwoty VAT dla rejestru VAT</description>
+		<details>
+			Tabela elementów (pozycji) dokumentu w rejestrze Vat.
+			Tabela VatNag zawiera informacje o dacie dokumentu, kontrahencie itp, tabela VatTab zawiera
+			informacje o pozycjach dokumentu, zagregowanych do poszczególnych stawek Vat
+		</details>
+		<column name="VaT_VaTID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator zapisu</description>
+		</column>
+		<column name="VaT_VaNID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Wskaźnik do nagłówka VatNag: VaT:VaNId = VaN:VaNId</details>
+		</column>
+		<column name="VaT_VaTOrgId" type="INTEGER">
+			<description>Wskaźnik do oryginalnej pozycji przy klonowaniu</description>
+		</column>
+		<column name="VaT_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="VaT_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="VaT_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawi zaniżonej</description>
+		</column>
+		<column name="VaT_RodzajZakupu" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj zakupu (towary, inne, środki trwałe)</description>
+			<details>
+				Rodzaj zakupu/sprzedaży (towary, inne, środki trwałe)
+				Przyjmuje wartości:
+				1 - towary
+				2 - inne
+				3 - środki trwałe
+				4 - usługi
+				5 - środki transportu
+				6 - nieruchomości
+				7 - paliwo
+			</details>
+		</column>
+		<column name="VaT_Odliczenia" type="SMALLINT" definition="NOT NULL">
+			<description>Odliczenia VAT</description>
+			<details>
+				Sposób odliczania Vat od zakupów. Przyjmuje wartości:
+				Nie odliczać Vat - 0 (e_mk_OdliczeniaVAT_Nie)
+				Odliczać Vat - 1 (e_mk_OdliczeniaVAT_Tak)
+				Odliczać Vat warunkowo (zakupy opodatkowane związane ze sprzedażą mieszaną) - 2
+				(e_mk_OdliczeniaVAT_Warunkowo)
+			</details>
+		</column>
+		<column name="VaT_Netto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota netto (do kursu do księgowania)</description>
+		</column>
+		<column name="VaT_NettoDoVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota netto (do kursu do VAT)</description>
+		</column>
+		<column name="VaT_VAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota VAT (do kursu do księgowania)</description>
+		</column>
+		<column name="VaT_VATDoVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota VAT (do kursu do VAT)</description>
+		</column>
+		<column name="VaT_NettoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota netto w walucie</description>
+		</column>
+		<column name="VaT_VATWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota VAT w walucie</description>
+		</column>
+		<column name="VaT_NettoOSS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaT_NettoOSS DEFAULT(0)">
+			<description>Kwota netto (do OSS)</description>
+		</column>
+		<column name="VaT_VATOSS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaT_VATOSS DEFAULT(0)">
+			<description>Kwota VAT (do OSS)</description>
+		</column>
+		<column name="VaT_KatID" type="INTEGER">
+			<description>Identyfikator kategorii</description>
+			<details>Wskaźnik do tabeli Kategorie (VaT:KatId = Kat:KatId)</details>
+		</column>
+		<column name="VaT_KatOpis" type="NVARCHAR(50)">
+			<description>Opis faktury rejestru</description>
+		</column>
+		<column name="VaT_Kat2ID" type="INTEGER">
+			<description>Identyfikator drugiej kategorii</description>
+			<details>Wskaźnik do tabeli Kategorie (VaT:Kat2Id = Kat:KatId)</details>
+		</column>
+		<column name="VaT_Kat2Opis" type="NVARCHAR(50)">
+			<description>Drugi opis faktury rejestru</description>
+		</column>
+		<column name="VaT_KolumnaKPR" type="TINYINT" definition="NOT NULL">
+			<description>Kolumna w KPiR, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="VaT_KolumnaRYC" type="TINYINT" definition="NOT NULL">
+			<description>Kolumna w ewidencji ryczałtowej, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="VaT_Lp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_VaT_Lp DEFAULT(0)">
+			<description>Liczba porządkowa elementu w rejestrze</description>
+		</column>
+		<column name="VaT_KwotaNKUP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaT_KwotaNKUP DEFAULT(0)">
+			<description>Liczba porządkowa elementu w rejestrze</description>
+		</column>
+		<column name="VaT_VATNKUP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaT_VATNKUP DEFAULT(0)">
+			<description>Liczba porządkowa elementu w rejestrze</description>
+		</column>
+		<column name="VaT_StawkaSymbol" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_VaT_StawkaSymbol DEFAULT('')">
+			<description>Symbol stawki vat</description>
+		</column>
+		<column name="VaT_KodKrajuOSS" type="VARCHAR(2)" definition="NOT NULL CONSTRAINT DF_VaT_KodKrajuOSS DEFAULT('')">
+			<description>Kod kraju stawki dla OSS</description>
+		</column>
+		<primaryKey name="VaT_Primary" columns="VaT_VaTID" type="NONCLUSTERED">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_VaTKategorie" localColumns="VaT_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.VatTab:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_VaTKategorie2" localColumns="VaT_Kat2ID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.VatTab:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_VaTVatNag" localColumns="VaT_VaNID" refTable="VatNag" refColumns="VaN_VaNID" deleteOption="CASCADE">
+			<description>Relacja CDN.VatTab:CDN.VatNag (MANY:1)</description>
+		</foreignKey>
+		<index name="VaTNettoStawka" options="NONCLUSTERED" fields="VaT_Netto, VaT_StawkaSymbol" includedColumns="VaT_VaTID">
+			<description>Wg kwoty netto i stawki VAT</description>
+		</index>
+		<index name="VaTVatNag" options="CLUSTERED" fields="VaT_VaNID">
+			<description>Wg identyfikatora i stawki VAT</description>
+		</index>
+		<index name="VaTKategorie" options="NONCLUSTERED" fields="VaT_KatID">
+			<description>Wg kategorii</description>
+		</index>
+	</table>
+	

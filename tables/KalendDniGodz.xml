@@ -1,0 +1,38 @@
+<table name="KalendDniGodz">
+		<description>Wejścia/wyjścia kalendarzy</description>
+		<column name="KDG_KdgId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KDG_KadId" type="INTEGER" definition="NOT NULL">
+			<description>We/wy w dniu</description>
+		</column>
+		<column name="KDG_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer porządkowy</description>
+		</column>
+		<column name="KDG_OdGodziny" type="DATETIME" definition="NOT NULL">
+			<description>Godzina wejścia</description>
+		</column>
+		<column name="KDG_DoGodziny" type="DATETIME" definition="NOT NULL">
+			<description>Godzina wyjścia</description>
+		</column>
+		<column name="KDG_Strefa" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator strefy</description>
+		</column>
+		<column name="KDG_DzlId" type="INTEGER" definition="NULL">
+			<description>Pole techniczne, wymagane w strukturze</description>
+		</column>
+		<column name="KDG_PrjId" type="INTEGER" definition="NULL">
+			<description>Pole techniczne, wymagane w strukturze</description>
+		</column>
+		<column name="KDG_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="KDG_Primary" columns="KDG_KdgId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="KDGLp" options="NONCLUSTERED" fields="KDG_Lp" />
+		<index name="PDGKadLink" options="NONCLUSTERED" fields="KDG_KadId">
+			<description>Klucz obcy dnia kalendarza</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,77 @@
+<table name="ProdReceptury">
+		<description>Receptury produktów</description>
+		<details>Zawiera definicje receptur produktów</details>
+		<column name="PdR_PdRId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="PdR_TwrId" type="INTEGER">
+			<description>Identyfikator produktu</description>
+			<details>Wskaźnik do tabeli towary - odpowiedni towar musi być produktem</details>
+		</column>
+		<column name="PdR_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod receptury</description>
+		</column>
+		<column name="PdR_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa receptury</description>
+		</column>
+		<column name="PdR_Domyslna" type="TINYINT" definition="NOT NULL">
+			<description>Znacznik receptury domyślnej dla towaru</description>
+		</column>
+		<column name="PdR_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Na jaką ilość produktu przewidziana receptura</description>
+		</column>
+		<column name="PdR_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary dla ilości</description>
+		</column>
+		<column name="PdR_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Informacja dodatkowe</description>
+		</column>
+		<column name="PdR_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="PdR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PdR_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PdR_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="PdR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PdR_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PdR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PdR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PdR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PdR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PdR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PdR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PdR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PdR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PdR_Primary" columns="PdR_PdRId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_PdRTwrKod" localColumns="PdR_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.ProdReceptury:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="PdRTwrKod" options="UNIQUE NONCLUSTERED" fields="PdR_TwrId ,PdR_Kod">
+			<description>Lista receptur produktu wg kodu</description>
+		</index>
+	</table>
+	

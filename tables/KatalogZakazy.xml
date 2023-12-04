@@ -1,0 +1,37 @@
+<table name="KatalogZakazy">
+		<description>Zakazy dostępu do katalogów dokumentów</description>
+		<column name="KtZ_KtZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KtZ_KtlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dziennika</description>
+		</column>
+		<column name="KtZ_OpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="KtZ_Dodawanie" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz dodawania zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="KtZ_Podglad" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz podglądu zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="KtZ_ZmianaWlas" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz zmiany własnych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="KtZ_ZmianaInne" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz zmiany cudzych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="KtZ_KasowanieWlas" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz kasowania własnych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="KtZ_KasowanieInne" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz kasowania cudzych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<primaryKey name="KtZ_Primary" columns="KtZ_KtZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="KtZKatalog" options="UNIQUE NONCLUSTERED" fields="KtZ_KtlId ,KtZ_OpeId">
+			<description>Według katalogu</description>
+		</index>
+	</table>
+	

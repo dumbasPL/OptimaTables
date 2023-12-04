@@ -1,0 +1,16 @@
+<table name="CentraLink">
+		<description>Tabela pomocnicza hierarchii centrów</description>
+		<column name="CNL_CntId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator centrum</description>
+		</column>
+		<column name="CNL_ParentId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator parenta centrum</description>
+		</column>
+		<index name="CNLCnt" options="NONCLUSTERED" fields="CNL_CntId">
+			<description>Klucz wewnętrzny</description>
+		</index>
+		<index name="CNLParent" options="NONCLUSTERED" fields="CNL_CntId, CNL_ParentId">
+			<description>Klucz wewnętrzny</description>
+		</index>
+	</table>
+	

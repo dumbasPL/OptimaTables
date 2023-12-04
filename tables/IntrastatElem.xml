@@ -1,0 +1,52 @@
+<table name="IntrastatElem">
+		<description>Elementy deklaracji Intrastat</description>
+		<column name="IsE_IsEId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="IsE_IsNId" type="INTEGER">
+			<description>Klucz obcy do nagłówka deklaracji</description>
+		</column>
+		<column name="IsE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa</description>
+		</column>
+		<column name="IsE_Kraj" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Kod kraju wysyłki lub przeznaczenia</description>
+		</column>
+		<column name="IsE_Opis" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Opis towaru wg CN</description>
+		</column>
+		<column name="IsE_RodzajTransakcji" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Rodzaj transakcji z TraNag</description>
+		</column>
+		<column name="IsE_CN" type="NVARCHAR(8)" definition="NOT NULL">
+			<description>Kod CN towaru</description>
+		</column>
+		<column name="IsE_KrajPochodzenia" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Kod kraju pochodzenia towaru</description>
+		</column>
+		<column name="IsE_MasaNetto" type="DECIMAL(15,3)" definition="NOT NULL">
+			<description>Masa w kg dla niektórych kodów CN</description>
+		</column>
+		<column name="IsE_JmUzup" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Ilość w jednostce uzupełniającej</description>
+		</column>
+		<column name="IsE_Netto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto w PLN</description>
+		</column>
+		<column name="IsE_Automatyczny " type="TINYINT" definition="NOT NULL CONSTRAINT DF_IsE_Automatyczny DEFAULT(0)">
+			<description>Czy rekord wygenerowany automatycznie</description>
+		</column>
+		<column name="IsE_NumerIdentKnt" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT DF_IsE_NumerIdentKnt DEFAULT('')">
+			<description>Opis towaru wg CN</description>
+		</column>
+		<primaryKey name="IsE_Primary" columns="IsE_IsEId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_IsENaglowek" localColumns="IsE_IsNId" refTable="IntrastatNag" refColumns="IsN_IsNId" deleteOption="CASCADE">
+			<description>Relacja CDN.IntrastatElem:CDN.IntrastatNag (MANY:1)</description>
+		</foreignKey>
+		<index name="IsENaglowek" options="UNIQUE NONCLUSTERED" fields="IsE_IsNId ,IsE_IsEId">
+			<description>Klucz obcy do nagłówka</description>
+		</index>
+	</table>
+	

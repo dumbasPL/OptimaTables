@@ -1,0 +1,55 @@
+<table name="CfgWartosci">
+		<description>Tabela konfiguracyjna</description>
+		<column name="CFW_CfwId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="CFW_CfkId" type="INTEGER" definition="NOT NULL" />
+		<column name="CFW_Nazwa" type="VARCHAR(32)" definition="NOT NULL">
+			<description>Nazwa</description>
+		</column>
+		<column name="CFW_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ danych zapisywanych w polu CFW_Wartosc</description>
+			<details>3-integer, 5-double, 6-currency, 7-date, 8-string, 11-bool</details>
+		</column>
+		<column name="CFW_Wartosc" type="NVARCHAR(4000)" definition="NOT NULL" />
+		<column name="CFW_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="CFW_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CFW_TS_Zal" type="DATETIME">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CFW_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="CFW_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CFW_TS_Mod" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CFW_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CFW_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="CFW_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CFW_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="CFW_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CFW_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="CFW_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CFW_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="CFW_Primary" columns="CFW_CfwId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_CFWCfkLink" localColumns="CFW_CfkId" refTable="CfgKlucze" refColumns="CFK_CfkId" deleteOption="CASCADE">
+			<description>Relacja CDN.CfgWartosci:CDN.CfgKlucze (MANY:1)</description>
+		</foreignKey>
+		<index name="CFWCfkLink" options="UNIQUE NONCLUSTERED" fields="CFW_CfkId ,CFW_Nazwa" />
+	</table>
+	

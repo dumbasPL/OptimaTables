@@ -1,0 +1,17 @@
+<table name="JpkMag">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="ID" type="int" definition="NO_SQL" />
+		<column name="JpNID" type="int" definition="NO_SQL" />
+		<column name="TrNID" type="int" definition="NO_SQL" />
+		<column name="Typdok" type="int" definition="NO_SQL" />
+		<column name="NumerDok" type="nvarchar(30)" definition="NO_SQL" />
+		<column name="Data" type="date" definition="NO_SQL" />
+		<column name="Wartosc" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="DataOtrzymaniaWydania" type="date" definition="NO_SQL" />
+		<column name="DostawcaOdbiorca" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="NumerFaktury" type="nvarchar(30)" definition="NO_SQL" />
+		<column name="DataFaktury" type="date" definition="NO_SQL" />
+		<column name="Skad" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="Dokad" type="nvarchar(256)" definition="NO_SQL" />
+	</table>
+	

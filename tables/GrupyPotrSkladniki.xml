@@ -1,0 +1,46 @@
+<table name="GrupyPotrSkladniki">
+		<description>Tabela typów składników dla grup potrąceń</description>
+		<column name="GPS_GpsId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="GPS_GprId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do grupy potrąceń</description>
+			<details>Odnośnik do GPR_GprId w tabeli CDN.GrupyPotracen, klucz obcy</details>
+		</column>
+		<column name="GPS_ParentSTS" type="INTEGER" definition="NOT NULL">
+			<description>Symbol standardowej grupy potrąceń</description>
+			<details>TWP_Standardowy z tablicy CDN.TypWyplata</details>
+		</column>
+		<column name="GPS_ParentNazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa grupy potrąceń</description>
+			<details>TWP_Nazwa z tablicy CDN.TypWyplata</details>
+		</column>
+		<column name="GPS_ParentId" type="INTEGER" definition="NOT NULL">
+			<description>ID grupy potrąceń</description>
+			<details>TWP_TwpId z tablicy CDN.TypWyplata</details>
+		</column>
+		<column name="GPS_Rodzaj" type="TINYINT">
+			<description>Rodzaj składnika</description>
+			<details>
+				Rodzaj składnika:
+				1 - składnik z pierwszej listy,&lt;BR&gt;
+				2 - składnik z drugiej listy, &lt;BR&gt;
+				3 - potrącenie
+			</details>
+		</column>
+		<column name="GPS_Priorytet" type="INTEGER" definition="NOT NULL" />
+		<column name="GPS_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="GPS_Primary" columns="GPS_GpsId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_GPSGprLink" localColumns="GPS_GprId" refTable="GrupyPotracen" refColumns="GPR_GprId" deleteOption="CASCADE">
+			<description>Relacja CDN.GrupyPotrSkladniki:CDN.GrupyPotracen (MANY:1)</description>
+		</foreignKey>
+		<index name="GPSGprLink" options="NONCLUSTERED" fields="GPS_GprId">
+			<description>Klucz obcy grupy potrąceń</description>
+		</index>
+		<index name="GPSRodzaj" options="NONCLUSTERED" fields="GPS_Rodzaj ,GPS_GprId" />
+	</table>
+	

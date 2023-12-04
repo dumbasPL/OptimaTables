@@ -1,0 +1,74 @@
+<view name="DokNagView">
+		<description>Nagłówki dokumentów z biblioteki</description>
+		<column name="DNV_DoNID" type="INTEGER" definition="NO_SQL" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DNV_DDfId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="DNV_SSID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator schematu obiegu dokumentów w tabeli SekSchematy</description>
+		</column>
+		<column name="DNV_NumerObcy" type="VARCHAR(30)" definition="NO_SQL">
+			<description>Numer obcy dokumentu</description>
+		</column>
+		<column name="DNV_NumerString" type="VARCHAR(31)" definition="NO_SQL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="DNV_NumerPelny" type="VARCHAR(30)" definition="NO_SQL">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DNV_NumerNr" type="INTEGER" definition="NO_SQL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="DNV_Tytul" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Tytuł dokumentu</description>
+		</column>
+		<column name="DNV_Dotyczy" type="NVARCHAR(1024)" definition="NO_SQL">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="DNV_DataDok" type="DATETIME" definition="NO_SQL">
+			<description>Data wprowadzenia dokumentu</description>
+		</column>
+		<column name="DNV_OpiekunID" type="INTEGER" definition="NO_SQL">
+			<description>ID opiekuna</description>
+		</column>
+		<column name="DNV_OpiekunTyp" type="INTEGER" definition="NO_SQL">
+			<description>Typ opiekuna</description>
+		</column>
+		<column name="DNV_Status" type="INTEGER" definition="NO_SQL">
+			<description>Status dokumentu</description>
+		</column>
+		<column name="DNV_Typ" type="INTEGER" definition="NO_SQL">
+			<description>Typ dokumentu</description>
+		</column>
+		<column name="DNV_Katalog" type="INTEGER" definition="NO_SQL">
+			<description>Katolog do którego należy dokument</description>
+		</column>
+		<column name="DNV_OpeZalID" type="INTEGER" definition="NO_SQL" filterVisible="false">
+			<description>Identyfikator operatora wprowadzajacego zapis</description>
+		</column>
+		<column name="DNV_StaZalId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DNV_TS_Zal" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DNV_OpeModID" type="INTEGER" definition="NO_SQL" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="DNV_StaModId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DNV_TS_Mod" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+	</view>
+	

@@ -1,0 +1,36 @@
+<table name="TwrEan" filterVisible="false">
+		<description>Lista ean towaru</description>
+		<details>Tabela EAN towarów.</details>
+		<column name="TwE_TwEId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator EAN</description>
+		</column>
+		<column name="TwE_TwrID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do karty towaru</description>
+			<details>Wskaźnik do nagłówka Towary: TwC:TwrId = Twr:TwrId</details>
+		</column>
+		<column name="TwE_EAN" type="VARCHAR(40)" definition="NOT NULL">
+			<description>EAN</description>
+		</column>
+		<column name="TwE_Opis" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="TwE_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Domyslna forma platnosci</description>
+		</column>
+		<column name="TwE_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa jednostki miary</description>
+		</column>
+		<primaryKey name="TwE_Primary" columns="TwE_TwEID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TwETowar" localColumns="TwE_TwrID" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrCeny:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="TwEEan" fields="TwE_EAN">
+			<description>Wg EAN </description>
+		</index>
+		<index name="TwETowar" options="UNIQUE NONCLUSTERED" fields="TwE_TwrID ,TwE_EAN">
+			<description>Wg EAN i karty towaru</description>
+		</index>
+	</table>
+	

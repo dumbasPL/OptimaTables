@@ -1,0 +1,254 @@
+<table name="SentZgloszenia">
+		<description>Tabela z dokumentów SENT</description>
+		<column name="Sent_SentID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Sent_DDfId" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="Sent_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="Sent_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="Sent_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(Sent_NUMERNR,Sent_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="Sent_Rodzaj" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj dokumentu</description>
+			<details>
+				0 - zgłoszenie wysyłki towaru, &lt;br&gt;
+				1 - zgłoszenie odbioru towaru &lt;br&gt;
+			</details>
+		</column>
+		<column name="Sent_Status" type="INTEGER" definition="NOT NULL">
+			<description>Status dokumentu</description>
+		</column>
+		<column name="Sent_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Sent_SANID" type="int" definition="NULL">
+			<description>Id adresu nadawczego</description>
+		</column>
+		<column name="Sent_SANUlica" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>ulica z adresu nadawczego</description>
+		</column>
+		<column name="Sent_SANNrDomu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu z adresu nadawczego</description>
+		</column>
+		<column name="Sent_SANNrLokalu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu z adresu nadawczego</description>
+		</column>
+		<column name="Sent_SANMiasto" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Miasto z adresu nadawczego</description>
+		</column>
+		<column name="Sent_SANKodPocztowy" type="varchar(10)" definition="NOT NULL">
+			<description>Kod pocztowy z adresu nadawczego</description>
+		</column>
+		<column name="Sent_SANTelefon" type="varchar(20)" definition="NULL" hash="1">
+			<description>Telefon odbiorcy</description>
+		</column>
+		<column name="Sent_SANEmail" type="nvarchar(40)" definition="NULL" hash="1">
+			<description>Email odbiorcy</description>
+		</column>
+		<column name="Sent_SANWojewodztwo" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Sent_SANWojewodztwo DEFAULT('')">
+			<description>Województwo</description>
+		</column>
+		<column name="Sent_SANDlugoscGeograficzna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Sent_SANDlugoscGeograficzna DEFAULT('')" hash="1">
+			<description>Długość geograficzna</description>
+		</column>
+		<column name="Sent_SANSzerokoscGeograficzna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Sent_SANSzerokoscGeograficzna DEFAULT('')" hash="1">
+			<description>Szerokość geograficzna</description>
+		</column>
+		<column name="Sent_PodmiotTyp" type="smallint" definition="NULL">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy OdbId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="Sent_PodID" type="int" definition="NULL">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="Sent_PodNazwa" type="nvarchar(250)" definition="NOT NULL" hash="1">
+			<description>nazwy podmiotu</description>
+		</column>
+		<column name="Sent_PodUlica" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Ulica podmiotu</description>
+		</column>
+		<column name="Sent_PodNrDomu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu podmiotu</description>
+		</column>
+		<column name="Sent_PodNrLokalu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu podmiotu</description>
+		</column>
+		<column name="Sent_PodMiasto" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Miasto podmiotu</description>
+		</column>
+		<column name="Sent_PodKodPocztowy" type="varchar(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy podmiotu</description>
+		</column>
+		<column name="Sent_PodNipKraj" type="varchar(2)" definition="NOT NULL CONSTRAINT DF_Sent_PodNipKraj DEFAULT('')">
+			<description>Nip kraj</description>
+		</column>
+		<column name="Sent_PodNipE" type="nvarchar(20)" definition="NOT NULL CONSTRAINT DF_Sent_PodNipE DEFAULT('')" hash="1">
+			<description>Nip</description>
+		</column>
+		<column name="Sent_PodKraj" type="nvarchar(40)" definition="NOT NULL CONSTRAINT DF_Sent_PodKraj DEFAULT('')" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="Sent_IdSisc" type="VARCHAR(17)" definition="NOT NULL CONSTRAINT DF_Sent_IdSisc DEFAULT('')" hash="1">
+			<description>Id Sisc</description>
+		</column>
+		<column name="Sent_DataPrzewozu" type="DATETIME" definition="NOT NULL">
+			<description>Planowana data przewozu towaru</description>
+		</column>
+		<column name="Sent_TwrId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_TwrId  DEFAULT(0)">
+			<description>Id towaru którego dotyczy zgłoszenie sent, jeśli jest powiązane tylko z jednym
+				towarem</description>
+		</column>
+		<column name="Sent_DokumentZrodlowyTyp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_DokumentZrodlowyTyp  DEFAULT(0)">
+			<description>Typ dokumentu źródłowego</description>
+		</column>
+		<column name="Sent_KodCN" type="VARCHAR(8)" definition="NOT NULL">
+			<description>Kolumna nieużywana</description>
+		</column>
+		<column name="Sent_Ilosc" type="decimal(15,2)" definition="NOT NULL">
+			<description>Kolumna nieużywana</description>
+		</column>
+		<column name="Sent_JM" type="nvarchar(20)" definition="NOT NULL">
+			<description>Kolumna nieużywana</description>
+		</column>
+		<column name="Sent_Masa" type="decimal(15,2)" definition="NOT NULL">
+			<description>Kolumna nieużywana</description>
+		</column>
+		<column name="Sent_Opis" type="nvarchar(2000)" definition="NULL">
+			<description>Opis</description>
+		</column>
+		<column name="Sent_Uwagi" type="nvarchar(2000)" definition="NULL">
+			<description>uwagi</description>
+		</column>
+		<column name="Sent_NumerSentPuesc" type="VARCHAR(200)" definition="NOT NULL" hash="1">
+			<description>Numer zgłoszenia nadany przez SEND po złożeniu dokumentu</description>
+		</column>
+		<column name="Sent_StatusPuesc" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Kod statusu zgłoszenia SENT</description>
+		</column>
+		<column name="Sent_DokumentPuescChecksum" type="VARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Sent_DokumentPuescChecksum DEFAULT('')">
+			<description>Suma kontrolna ostatniego dokumetnu na PUESC</description>
+		</column>
+		<column name="Sent_DokumentPuescTyp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_DokumentPuescTyp DEFAULT(0)">
+			<description>Typ ostatniego dokumetnu na PUESC</description>
+		</column>
+		<column name="Sent_DokumentPuescModificationDate" type="DATETIME" definition="NULL">
+			<description>Ostatnia data modyfikacji dokumentu na PUESC</description>
+		</column>
+		<column name="Sent_DataWyslaniaPuesc" type="DATETIME" definition="NULL">
+			<description>Data wysłania zgłoszenia do Puesc</description>
+		</column>
+		<column name="Sent_SenderKey" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Sent_SenderKey DEFAULT('')" hash="1">
+			<description>SenderKey otrzymany z PUESC</description>
+		</column>
+		<column name="Sent_RecipientKey" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Sent_RecipientKey DEFAULT('')" hash="1">
+			<description>RecipientKey otrzymany z PUESC</description>
+		</column>
+		<column name="Sent_CarrierKey" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Sent_CarrierKey DEFAULT('')" hash="1">
+			<description>CarrierKey otrzymany z PUESC</description>
+		</column>
+		<column name="Sent_ImiePuesc" type="nvarchar(50)" definition="NULL" hash="1">
+			<description>Imię osoby wysyłającej zgłoszenie SENT w systemie Puesc</description>
+		</column>
+		<column name="Sent_NazwiskoPuesc" type="nvarchar(50)" definition="NULL" hash="1">
+			<description>Nazwisko osoby wysyłającej zgłoszenie SENT w systemie Puesc</description>
+		</column>
+		<column name="Sent_TypeOfTransport" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_TypeOfTransport DEFAULT(1)">
+			<description>Typ transportu</description>
+		</column>
+		<column name="Sent_PlaceOfControl" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_PlaceOfControl DEFAULT(0)">
+			<description>Informacja o miejscu planowanej kontroli zgłoszenia</description>
+		</column>
+		<column name="Sent_RecommendationsForControl" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_Sent_RecommendationsForControl DEFAULT('')">
+			<description>Zalecenia dla planowanej kontroli zgłoszenia</description>
+		</column>
+		<column name="Sent_TypZgloszenia" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_TypZgloszenia DEFAULT(0)">
+			<description>Typ zgloszenia</description>
+		</column>
+		<column name="Sent_NrUmowyOlej" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Sent_NrUmowyOlej DEFAULT('')">
+			<description>Numer umowy - dostarczenie oleju</description>
+		</column>
+		<column name="Sent_OswiadczenieUmowaOlej" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_OswiadczenieUmowaOlej DEFAULT(0)">
+			<description>Oświadczenie - zużycie oleju</description>
+		</column>
+		<column name="Sent_OswiadczeniePosrednikOlej" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_OswiadczeniePosrednikOlej DEFAULT(0)">
+			<description>Oświadczenie - pośredniczenie w sprzedaży oleju</description>
+		</column>
+		<column name="Sent_RodzajIdentyfikatoraPodatkowego" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Sent_RodzajIdentyfikatoraPodatkowego DEFAULT(0)">
+			<description>Rodzaj identyfikatora podatkowego</description>
+		</column>
+		<column name="Sent_IdMiejscaDostawy" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Sent_IdMiejscaDostawy DEFAULT('')">
+			<description>Id miejsca dostawy</description>
+		</column>
+		<column name="Sent_IdUrzadzenGrzewczych" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_Sent_IdUrzadzenGrzewczych DEFAULT('')">
+			<description>Id urządzeń grzewczych</description>
+		</column>
+		<column name="Sent_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="Sent_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Sent_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Sent_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Sent_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="Sent_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Sent_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Sent_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="Sent_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Sent_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Sent_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Sent_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Sent_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Sent_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<primaryKey name="Sent_Primary" columns="Sent_SentID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SentDokDef" localColumns="Sent_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.SentZgloszenia:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SentPodmiot" localColumns="Sent_PodID,Sent_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.SentPodmiot:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<index name="SentDokDef" options="NONCLUSTERED" fields="Sent_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="SentNumer" options="UNIQUE NONCLUSTERED" fields="Sent_NumerString ,Sent_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+	</table>
+	

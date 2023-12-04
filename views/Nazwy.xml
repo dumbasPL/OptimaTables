@@ -1,0 +1,21 @@
+<view name="Nazwy">
+		<description>Plik z nazwami</description>
+		<column name="Naz_GIDTyp" type="SMALLINT" definition="NO_SQL">
+			<description>Typ obiektu</description>
+		</column>
+		<column name="Naz_GIDFirma" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator firmy</description>
+		</column>
+		<column name="Naz_GIDNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Naz_GIDLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Naz_Nazwa" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Nazwa parametru</description>
+		</column>
+		<column name="Naz_Nazwa1" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Pomocnicza nazwa</description>
+		</column>
+		<column name="Naz_Opis" type="NVARCHAR(60)" definition="NO_SQL">
+			<description>Opis do nazwy</description>
+		</column>
+	</view>
+	

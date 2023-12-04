@@ -1,0 +1,83 @@
+<table name="ZestKsiNag">
+		<description>Nagłówki definicji zestawień księgowych</description>
+		<column name="ZKN_ZKNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZKN_Nieaktywne" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_ZKN_Nieaktywne DEFAULT(0)">
+			<description>Czy aktywne / nieaktywne</description>
+			<details>0 - aktywne; 1 - nieaktywne</details>
+		</column>
+		<column name="ZKN_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol zestawienia</description>
+			<details>Symbol dziennika księgowego</details>
+		</column>
+		<column name="ZKN_TypZestawienia" type="INT" definition="NULL">
+			<description>Typ zestawienia dla sprawozdan finansowych</description>
+			<details>Typ zestawienia dla sprawozdan finansowych</details>
+		</column>
+		<column name="ZKN_TypJednostki" type="INT" definition="NULL">
+			<description>Typ jednostki</description>
+			<details>1 - duża; 2 - mała; 3 - mikro</details>
+		</column>
+		<column name="ZKN_TypZest" type="SMALLINT" definition="NOT NULL">
+			<description>Typ zestawienia</description>
+			<details>0 - zestawienie użytkownika; 1 - PIT-5; 2 - CIT-2</details>
+		</column>
+		<column name="ZKN_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa zestawienia</description>
+		</column>
+		<column name="ZKN_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dodatkowy opis zestawienia</description>
+		</column>
+		<column name="ZKN_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Czy uwzględniać zapisy w buforze</description>
+		</column>
+		<column name="ZKN_Numeracja" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Schemat numeracji zestawienia</description>
+		</column>
+		<column name="ZKN_TS_Oblicz" type="DATETIME">
+			<description>Data i godzina obliczenia zestawienia</description>
+		</column>
+		<column name="ZKN_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="ZKN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZKN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="ZKN_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="ZKN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZKN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="ZKN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZKN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ZKN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZKN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ZKN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZKN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ZKN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZKN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="ZKN_Primary" columns="ZKN_ZKNId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="ZKNSymbol" options="UNIQUE NONCLUSTERED" fields="ZKN_Symbol">
+			<description>Według symbolu zestawienia</description>
+		</index>
+		<index name="ZKNTyp" options="UNIQUE NONCLUSTERED" fields="ZKN_TypZest ,ZKN_Symbol">
+			<description>Wg typu zestawienia i symbolu</description>
+		</index>
+	</table>
+	

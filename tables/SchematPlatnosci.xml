@@ -1,0 +1,117 @@
+<table name="SchematPlatnosci">
+		<description>Tabela schematów płatności</description>
+		<column name="SPL_SplId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SPL_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu będącego włascicielem schematu</description>
+			<details>
+				1-kontrahent &lt;br&gt;
+				3-pracownik
+			</details>
+		</column>
+		<column name="SPL_PodmiotID" type="INTEGER" definition="NOT NULL">
+			<description>ID właściciela schematu płatności</description>
+		</column>
+		<column name="SPL_OdbPodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu odbiorcy płatności</description>
+			<details>
+				1-kontrahent &lt;br&gt;
+				3-pracownik
+			</details>
+		</column>
+		<column name="SPL_OdbPodmiotID" type="INTEGER">
+			<description>ID podmiotu - odbiorcy płatności</description>
+		</column>
+		<column name="SPL_FplId" type="INTEGER">
+			<description>ID formy płatności</description>
+		</column>
+		<column name="SPL_BnaId" type="INTEGER">
+			<description>ID banku</description>
+		</column>
+		<column name="SPL_Rodzaj" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj płatności</description>
+		</column>
+		<column name="SPL_Kwota" type="DECIMAL(14,2)" definition="NOT NULL">
+			<description>Kwota</description>
+		</column>
+		<column name="SPL_Procent" type="DECIMAL(14,2)" definition="NOT NULL">
+			<description>Procent</description>
+		</column>
+		<column name="SPL_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL" hash="1">
+			<description>Numer rachunku</description>
+		</column>
+		<column name="SPL_RachunekNr0" type="COMPUTED|NVARCHAR(51)" definition="CONVERT(NVARCHAR(51), REPLACE(REPLACE(SPL_RACHUNEKNR, '-', ''), ' ', ''), 0)">
+			<description>Numer rachunku bankowego bez separatorów</description>
+		</column>
+		<column name="SPL_IBAN" type="TINYINT" definition="NOT NULL">
+			<description>IBAN</description>
+		</column>
+		<column name="SPL_LiczbaPorz" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa</description>
+		</column>
+		<column name="SPL_Reszta" type="TINYINT" definition="NOT NULL">
+			<description>Pole rozrzucania reszty</description>
+		</column>
+		<column name="SPL_PPK" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SPL_PPK DEFAULT(0)">
+			<description>Czy rachunek jest ustawiony jako rachunek do wpłat składek PPK</description>
+		</column>
+		<column name="SPL_Opis" type="NVARCHAR(50)" hash="1">
+			<description>Opis elementu</description>
+		</column>
+		<column name="SPL_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="SPL_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SPL_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SPL_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="SPL_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SPL_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SPL_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SPL_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SPL_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SPL_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SPL_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SPL_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SPL_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SPL_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="SPL_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="SPL_Primary" columns="SPL_SplId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_SPLFplLink" localColumns="SPL_FplId" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.SchematPlatnosci:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SPLBnaLink" localColumns="SPL_BnaId" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.SchematPlatnosci:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<index name="SPLFplLink" options="NONCLUSTERED" fields="SPL_FplId">
+			<description>Klucz obcy formy płatności</description>
+		</index>
+		<index name="SPLBnaLink" options="NONCLUSTERED" fields="SPL_BnaId">
+			<description>Klucz obcy banku</description>
+		</index>
+		<index name="SPLLiczbaPorz" options="NONCLUSTERED" fields="SPL_LiczbaPorz ,SPL_PodmiotTyp ,SPL_PodmiotID" />
+		<index name="SplRachunekNr0" options="NONCLUSTERED" fields="SPL_RachunekNr0">
+			<description>Wg numeru rachunku</description>
+		</index>
+	</table>
+	

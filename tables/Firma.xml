@@ -1,0 +1,30 @@
+<table name="Firma" filterVisible="false">
+		<description>Dane firmy</description>
+		<details>
+			Tabela zawiera w układzie "pionowym" dane zawarte w konfiguracji firmy - tzn. każdemu
+			parametrowi w konfiguracji firmy odpowiada jeden rekord w tabeli Firma.
+			Znaczenie rekordu określa wartość pola Fir:Numer. Dodatkowo na polu Fir:Opis znajduje się opis
+			znaczenia rekordu (parametru)
+		</details>
+		<column name="Fir_FirID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="Fir_Numer" type="INTEGER" definition="NOT NULL">
+			<description>Określenie znaczenia rekordu</description>
+			<details>Wartość tego pola określa znaczenie rekordu, tzn. każdemu parametrowi w konfiguracji
+				firmy odpowiada jeden rekord w tabeli Firma.</details>
+		</column>
+		<column name="Fir_Wartosc" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Wartość parametru</description>
+		</column>
+		<column name="Fir_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis parametru</description>
+		</column>
+		<primaryKey name="Fir_Primary" columns="Fir_FirID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="FirNumer" options="UNIQUE NONCLUSTERED" fields="Fir_Numer">
+			<description>Wg numeru parametru</description>
+		</index>
+	</table>
+	

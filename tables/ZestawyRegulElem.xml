@@ -1,0 +1,33 @@
+<table name="ZestawyRegulElem">
+		<description>Korekty do formatu rcp</description>
+		<column name="ZRE_ZreId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Klucz główny</description>
+		</column>
+		<column name="ZRE_Lp" type="INTEGER" definition="NOT NULL" />
+		<column name="ZRE_ZrgId" type="INTEGER">
+			<description>Klucz obcy do zestawu reguł</description>
+		</column>
+		<column name="ZRE_RrgId" type="INTEGER">
+			<description>Klucz obcy do reguły importu rcp</description>
+		</column>
+		<column name="ZRE_IloscMinZrodlo" type="INTEGER" definition="NOT NULL" />
+		<column name="ZRE_Akcja" type="INTEGER" definition="NOT NULL" />
+		<column name="ZRE_MetodaModyf" type="TINYINT" definition="NOT NULL" />
+		<column name="ZRE_IloscMinCel" type="INTEGER" definition="NOT NULL" />
+		<primaryKey name="ZRE_Primary" columns="ZRE_ZreId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_FRERrgId" localColumns="ZRE_RrgId" refTable="RegulyRcp" refColumns="RRG_RrgId">
+			<description>Relacja CDN.ZestawyRegulElem:CDN.RegulyRcp (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_FREForId" localColumns="ZRE_ZrgId" refTable="ZestawyRegul" refColumns="ZRG_ZrgId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZestawyRegulElem:CDN.ZestawyRegul (MANY:1)</description>
+		</foreignKey>
+		<index name="FREForId" options="NONCLUSTERED" fields="ZRE_ZrgId">
+			<description>Foreign key do zestawu reguł rcp</description>
+		</index>
+		<index name="FRERrgId" options="NONCLUSTERED" fields="ZRE_RrgId">
+			<description>Klucz obcy do reguły formatu rcp</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,62 @@
+<table name="JpkNag">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="Id" type="int" definition="NO_SQL" />
+		<column name="Typ" type="tinyint" definition="NO_SQL" />
+		<column name="CelZlozenia" type="int" definition="NO_SQL" />
+		<column name="DataWytworzenia" type="datetime" definition="NO_SQL" />
+		<column name="ZakresDat" type="tinyint" definition="NO_SQL" />
+		<column name="DataOd" type="date" definition="NO_SQL" />
+		<column name="DataDo" type="date" definition="NO_SQL" />
+		<column name="Waluta" type="varchar(3)" definition="NO_SQL" />
+		<column name="Magazyn" type="nvarchar(50)" definition="NO_SQL" />
+		<column name="KodUrzedu" type="varchar(4)" definition="NO_SQL" />
+		<column name="PodPelnaNazwa" type="varchar(512)" definition="NO_SQL" />
+		<column name="PodNIP" type="nvarchar(50)" definition="NO_SQL" />
+		<column name="PodRegon" type="varchar(16)" definition="NO_SQL" />
+		<column name="PodAdrKodKraju" type="varchar(2)" definition="NO_SQL" />
+		<column name="PodAdrWojewodztwo" type="nvarchar(40)" definition="NO_SQL" />
+		<column name="PodAdrPowiat" type="nvarchar(40)" definition="NO_SQL" />
+		<column name="PodAdrGmina" type="nvarchar(40)" definition="NO_SQL" />
+		<column name="PodAdrMiejscowosc" type="nvarchar(40)" definition="NO_SQL" />
+		<column name="PodAdrUlica" type="nvarchar(40)" definition="NO_SQL" />
+		<column name="PodAdrNrDomu" type="nvarchar(10)" definition="NO_SQL" />
+		<column name="PodAdrNrLokalu" type="nvarchar(10)" definition="NO_SQL" />
+		<column name="PodAdrKodP" type="nvarchar(10)" definition="NO_SQL" />
+		<column name="PodAdrPoczta" type="nvarchar(40)" definition="NO_SQL" />
+		<column name="LiczbaWierszy" type="int" definition="NO_SQL" />
+		<column name="Suma" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Pkpir_P_1" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Pkpir_P_2" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Pkpir_P_3" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Pkpir_P_4" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Wb_NumerRachunkuRejestruKB" type="varchar(51)" definition="NO_SQL" />
+		<column name="Wb_SaldoPoczatkowe" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Wb_SumaObciazen" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Wb_SumaUznan" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Wb_SaldoKoncowe" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="LiczbaWierszyPZ" type="int" definition="NO_SQL" />
+		<column name="SumaPZ" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="LiczbaWierszyWZ" type="int" definition="NO_SQL" />
+		<column name="SumaWZ" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="LiczbaWierszyRW" type="int" definition="NO_SQL" />
+		<column name="SumaRW" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="LiczbaWierszyMM" type="int" definition="NO_SQL" />
+		<column name="SumaMM" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="LiczbaWierszyFAElem" type="int" definition="NO_SQL" />
+		<column name="SumaFAElem" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Bufor" type="tinyint" definition="NO_SQL" />
+		<column name="OObId" type="int" definition="NO_SQL" />
+		<column name="WspolczynnikSprzedazy" type="decimal(5, 2)" definition="NO_SQL" />
+		<column name="Wersja" type="int" definition="NO_SQL" />
+		<column name="PodEMail" type="nvarchar(255)" definition="NO_SQL" />
+		<column name="NazwaSystemu" type="nvarchar(255)" definition="NO_SQL" />
+		<column name="LiczbaWierszyZamowienie" type="int" definition="NO_SQL" />
+		<column name="SumaZamowienie" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="Mode" type="tinyint" definition="NO_SQL" />
+		<column name="OsobaFizyczna" type="int" definition="NO_SQL" />
+		<column name="Imie" type="nvarchar(255)" definition="NO_SQL" />
+		<column name="Nazwisko" type="nvarchar(255)" definition="NO_SQL" />
+		<column name="Telefon" type="nvarchar(255)" definition="NO_SQL" />
+		<column name="DataUrodzenia" type="nvarchar(10)" definition="NO_SQL" />
+	</table>
+	

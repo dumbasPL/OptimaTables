@@ -1,0 +1,185 @@
+<table name="KsiDokNag">
+		<description>Tabela z nagłówkami dokumentów księgowych</description>
+		<column name="KDN_KDNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="KDN_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu</description>
+			<details>222-ponaglenie zapłaty; 223-potwierdzenie salda</details>
+		</column>
+		<column name="KDN_OObID" type="INTEGER" definition="NOT NULL">
+			<description>ID okresu obrachunkowego</description>
+		</column>
+		<column name="KDN_DDfId" type="INTEGER">
+			<description>Identyfikator definicji dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="KDN_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Stan dokumentu: nota odsetkowa 1 - bufor, 0 - zatwierdzony, -1 - anulowany;
+				potwierdzenie salda i ponaglenie zapłaty zapłaty zawsze =1</description>
+		</column>
+		<column name="KDN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="KDN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="KDN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(KDN_NUMERNR,KDN_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="KDN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="KDN_Termin" type="DATETIME" />
+		<column name="KDN_KontoNumer" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Konto księgowe - numer</description>
+		</column>
+		<column name="KDN_KontoNumerIdx" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Konto księgowe - numer techniczny</description>
+		</column>
+		<column name="KDN_KontoNazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Konto księgowe - nazwa</description>
+		</column>
+		<column name="KDN_AccID" type="INTEGER">
+			<description>Identyfikator konta księgowego w tabeli Konta</description>
+			<details>SQL_NOTNULL</details>
+		</column>
+		<column name="KDN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="KDN_Kategoria" type="VARCHAR(50)">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="KDN_FPlID" type="INTEGER">
+			<description>Identyfikator formy płatności w tabeli FormyPlatnosci</description>
+		</column>
+		<column name="KDN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="KDN_DataKur" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="KDN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="KDN_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="KDN_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="KDN_RazemKwota1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Dt; Dla ponaglenia zapłaty: łączna kwota
+				zaległości</details>
+		</column>
+		<column name="KDN_RazemKwotaSys1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie systemowej)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Dt; Dla ponaglenia zapłaty: łączna kwota
+				zaległości</details>
+		</column>
+		<column name="KDN_RazemKwota2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Ct; dla ponaglenia zapłaty: łączna kwota
+				odsetek</details>
+		</column>
+		<column name="KDN_RazemKwotaSys2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie systemowej)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Ct; dla ponaglenia zapłaty: łączna kwota
+				odsetek</details>
+		</column>
+		<column name="KDN_OdsetkiTyp" type="INT" definition="NOT NULL">
+			<description>Sposób naliczania odsetek</description>
+			<details>1-odsetki ustawowe; 2-odsetki indywidualne</details>
+		</column>
+		<column name="KDN_OdsetkiStopa" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Wysokość stopy odsetek indywidualnych</description>
+		</column>
+		<column name="KDN_Opis" type="NVARCHAR(254)">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="KDN_DekID" type="INTEGER">
+			<description>Identyfikator zapisu księgowego. Referencja do tabeli DekretyNag. Zapis
+				zaksięgowany posiada KDN_DekId = Dek_DekId; Zapis niezaksięgowany posiada KDN_DekId = NULL;</description>
+		</column>
+		<column name="KDN_PreDekID" type="INTEGER">
+			<description>Identyfikator zapisu preksięgowego. Referencja do tabeli DekretyNag. Zapis
+				prezaksięgowany posiada KDN_PreDekId = Dek_DekId; Zapis niezapreksięgowany posiada
+				KDN_PreDekId = NULL;</description>
+		</column>
+		<column name="KDN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="KDN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KDN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KDN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="KDN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KDN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KDN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KDN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="KDN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KDN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="KDN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KDN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="KDN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KDN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="KDN_Primary" columns="KDN_KDNId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_KDNDokDefinicja" localColumns="KDN_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.KsiDokNag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="KDNPodmiot" options="UNIQUE NONCLUSTERED" fields="KDN_KontoNumer ,KDN_Typ ,KDN_DataDok ,KDN_KDNId">
+			<description>Wg podmiotu dla którego wystawiono notę</description>
+		</index>
+		<index name="KDNKategoria" options="UNIQUE NONCLUSTERED" fields="KDN_KatID ,KDN_Typ ,KDN_DataDok ,KDN_KDNId">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="KDNDokDefinicja" options="NONCLUSTERED" fields="KDN_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="KDNNumer" options="UNIQUE NONCLUSTERED" fields="KDN_NumerString ,KDN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="KDNNumerPelny" options="UNIQUE NONCLUSTERED" fields="KDN_Typ ,KDN_NumerPelny">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="KDNViewOrder" options="NONCLUSTERED" fields="KDN_DataDok ,KDN_NumerPelny" />
+		<index name="KDNDekret" options="NONCLUSTERED" fields="KDN_DekID">
+			<description>Klucz do tabeli CDN.DekretyNag</description>
+			<details>Index do tabeli CDN.DekretyNag</details>
+		</index>
+		<index name="KDNPreDekret" options="NONCLUSTERED" fields="KDN_PreDekID">
+			<description>Klucz do tabeli CDN.DekretyNag</description>
+			<details>Index do tabeli CDN.DekretyNag</details>
+		</index>
+	</table>
+	

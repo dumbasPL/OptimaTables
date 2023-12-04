@@ -1,0 +1,444 @@
+<table name="BnkZapisy">
+		<description>Lista dokumentów kasowo-bankowych</description>
+		<details>Tabela zawiera dokumenty w postaci wyciągow bankowych oraz innych dokumentów
+			rejestrowanych w kasach gotówkowych.</details>
+		<column name="BZp_BZpID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BZp_RelTyp" type="SMALLINT">
+			<description>Typ relacji do skojarzonego zapisu lub zdarzenia</description>
+			<details>Określa, czy skojarzony zapis (np. przelew z kasy na rachunek bankowy firmy generuje
+				dwa związane ze sobą zdarzenia: w kasie i w banku) znajduje się w tabeli BnkZapisy czy
+				BnkZdarzenia. Pole nadmiarowe. Przyjmuje zawsze wartość 0</details>
+		</column>
+		<column name="BZp_RelID" type="INTEGER">
+			<description>Identyfikator skojarzonego zapisu lub zdarzenia</description>
+			<details>Określa ID skojarzonego zapisu (np. przelew z kasy na rachunek bankowy firmy generuje
+				dwa związane ze sobą zdarzenia: w kasie i w banku) w tabeli BnkZapisy lub BnkZdarzenia. Pole
+				nadmiarowe. Przyjmuje zawsze wartość 0</details>
+		</column>
+		<column name="BZp_BRpID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli BnkRaporty</description>
+		</column>
+		<column name="BZp_BRpLP" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny dokumentu w ramach raportu</description>
+		</column>
+		<column name="BZp_BRaID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli BnkRachunki</description>
+		</column>
+		<column name="BZp_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ operacji na rachunku</description>
+			<details>
+				Typ operacji na rachunku.
+				1 - wpłata/wypłata gotówki
+				2 - przelew na konto/z konta
+				3 - obciążenie/uznanie karty
+			</details>
+		</column>
+		<column name="BZp_KKrID" type="INTEGER">
+			<description>Typ karty kredytowej</description>
+		</column>
+		<column name="BZp_KartaNr" type="NVARCHAR(16)" definition="NOT NULL" hash="1">
+			<description>Numer karty kredytowej</description>
+		</column>
+		<column name="BZp_KartaDW" type="DATETIME">
+			<description>Data ważności karty kredytowej</description>
+			<details>Reprezentacja pola typu datetime na serwerze MS SQL</details>
+		</column>
+		<column name="BZp_DDfID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli DokDefinicje</description>
+		</column>
+		<column name="BZp_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="BZp_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="BZp_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(BZP_NUMERNR,BZP_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="BZp_NumerObcy" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu obcego</description>
+		</column>
+		<column name="BZp_Numer" type="COMPUTED|NVARCHAR(256)" definition="CASE WHEN BZP_NUMEROBCY&lt;&gt;'' THEN BZP_NUMEROBCY ELSE CDN.FN_NUMERPELNY(BZP_NUMERNR,BZP_NUMERSTRING) END">
+			<description>Numer wyświetlany na liście</description>
+		</column>
+		<column name="BZp_PodmiotTyp" type="SMALLINT">
+			<description>Typ związanego podmiotu</description>
+			<details>
+				Typ związanego podmiotu. Pole techniczne, wskazujące do jakiego rodzaju podmiotu odwołuje
+				się relacja:
+				1 - Kontrahent (tabela: Kontrahenci)
+				2 - Bank (tabela: BnkNazwy)
+				3 - Pracownik/Wspólnik (tabela: PracEtaty)
+				5 - Urząd (tabela: Urzedy)
+			</details>
+		</column>
+		<column name="BZp_PodmiotID" type="INTEGER">
+			<description>Identyfikator związanego podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="BZp_PodmiotRachunekLp" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny rachunku podmiotu wielorachunkowego</description>
+			<details>
+				Numer kolejny rachunku podmiotu wielorachunkowego lub jego ID.
+				0 - dla podmiotu, dla którego nie ma wyboru rachunku na zdarzeniu K/B lub dla podmiotu typu
+				Urząd lub Kontrahent, dla którego pole z wyborem rachunku pozostało puste
+				lub dla podmiotu typu Urząd (obecnie tylko ZUS), dla którego wybrano rachunek z dodatkowej
+				listy (pozycja Pracownicy lub związana z rachunkiem pracownika-właściciela) -
+				wówczas w BZp_URaID jest wartość URa_URaID
+				1 - Rachunek Urzędu Skarbowego: podatek od osób fizycznych, rachunek ZUS: ubezpieczenie
+				społeczne,
+				2 - US: podatek od osób prawnych, ZUS: ubezpieczenie zdrowotne,
+				3 - US: podatek od towarów i usług, ZUS: FP i FGŚP,
+				4 - US: zaliczki podatku od wynagrodzeń.
+			</details>
+		</column>
+		<column name="BZp_URaID" type="INTEGER">
+			<description>ID(entity) dodatkowego rachunku urzędu, wybranego z listy rachunków danego urzędu
+				ZUS (nienulowe tylko gdy BZp_PodmiotRachunekLp = 0)</description>
+		</column>
+		<column name="BZp_BNaID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli BnkNazwy</description>
+		</column>
+		<column name="BZp_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL" hash="1">
+			<description>Numer konta rachunku bankowego podmiotu</description>
+		</column>
+		<column name="BZp_IBAN" type="SMALLINT" definition="NOT NULL">
+			<description>Czy numer rachunku jest typu IBAN</description>
+		</column>
+		<column name="BZp_Nazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza część nazwy podmiotu</description>
+		</column>
+		<column name="BZp_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga część nazwy podmiotu</description>
+		</column>
+		<column name="BZp_Nazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy podmiotu</description>
+		</column>
+		<column name="BZp_Kraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj (adres podmiotu)</description>
+		</column>
+		<column name="BZp_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo (adres podmiotu)</description>
+		</column>
+		<column name="BZp_Powiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat (adres podmiotu)</description>
+		</column>
+		<column name="BZp_Gmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina (adres podmiotu)</description>
+		</column>
+		<column name="BZp_Ulica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica (adres podmiotu)</description>
+		</column>
+		<column name="BZp_NrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu (adres podmiotu)</description>
+		</column>
+		<column name="BZp_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu (adres podmiotu)</description>
+		</column>
+		<column name="BZp_Miasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto (adres podmiotu)</description>
+		</column>
+		<column name="BZp_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy (adres podmiotu)</description>
+		</column>
+		<column name="BZp_Poczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta (adres podmiotu)</description>
+		</column>
+		<column name="BZp_Adres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa część adresu podmiotu</description>
+		</column>
+		<column name="BZp_KatID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli Kategorie</description>
+		</column>
+		<column name="BZp_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BZp_KwotaSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu w walucie systemowej</description>
+		</column>
+		<column name="BZp_KwotaRozSys" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BZp_KwotaRozSys CHECK(BZP_KWOTAROZSYS&gt;=0)">
+			<description>Kwota rozliczona w walucie systemowej</description>
+		</column>
+		<column name="BZp_KwotaRozSysMW" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BZp_KwotaRozSysMW CHECK(BZP_KWOTAROZSYSMW&gt;=0)">
+			<description>Kwota MW rozliczona w walucie systemowej</description>
+		</column>
+		<column name="BZp_DataRoz" type="DATETIME">
+			<description>Data rozliczenia</description>
+			<details>Jeżeli Zapis k/b jest rozliczany więcej niż jednym dokumentem - najpóźniejsza data
+				rozliczenia. Jeżeli dokument jest nierozliczony pole przyjmuje wartość NULL. Reprezentacja
+				pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BZp_DataRozMW" type="DATETIME">
+			<description>Data rozliczenia MW</description>
+			<details>Jeżeli Zapis k/b jest rozliczany więcej niż jednym dokumentem - najpóźniejsza data
+				rozliczenia. Jeżeli dokument jest nierozliczony pole przyjmuje wartość NULL. Reprezentacja
+				pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BZp_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wyrażona w walucie rozliczenia</description>
+		</column>
+		<column name="BZp_KwotaRoz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BZp_KwotaRoz CHECK(BZP_KWOTAROZ&gt;=0)">
+			<description>Kwota rozliczona w walucie</description>
+		</column>
+		<column name="BZp_KwotaRozMW" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BZp_KwotaRozMW CHECK(BZP_KWOTAROZMW&gt;=0)">
+			<description>Kwota rozliczona MW w walucie</description>
+		</column>
+		<column name="BZp_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="BZp_WalutaDok" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty dokumentu</description>
+		</column>
+		<column name="BZp_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="BZp_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="BZp_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="BZp_Kierunek" type="SMALLINT" definition="NOT NULL CONSTRAINT CK_BZp_Kierunek CHECK(BZP_KIERUNEK IN (-1,0,1))">
+			<description>Kierunek przepływu pieniędzy</description>
+			<details>
+				Kierunek przepływu pieniędzy
+				1 - przychód,
+				-1 - rozchód
+			</details>
+		</column>
+		<column name="BZp_Rozliczono" type="SMALLINT" definition="NOT NULL">
+			<description>Status rozliczenia</description>
+			<details>
+				Status rozliczenia &lt;br&gt;
+				Rozliczone BZp_Rozliczono2=2 i BZp_Rozliczono=2, &lt;br&gt;
+				Nie rozliczone BZp_Rozliczono=1, &lt;br&gt;
+				Nie podlega BZp_Rozliczono2=0 i BZp_Rozliczono=0 &lt;br&gt;
+				Rozliczony czesciowo BZp_Rozliczono2=2 i BZp_Rozliczono=1
+			</details>
+		</column>
+		<column name="BZp_RozliczonoMW" type="SMALLINT" definition="NOT NULL">
+			<description>Status rozliczenia MW</description>
+			<details>
+				Status rozliczenia MW &lt;br&gt;
+				Rozliczone BZp_Rozliczono2MW=2 i BZp_RozliczonoMW=2, &lt;br&gt;
+				Nie rozliczone BZp_RozliczonoMW=1, &lt;br&gt;
+				Nie podlega BZp_Rozliczono2MW=0 i BZp_RozliczonoMW=0 &lt;br&gt;
+				Rozliczony czesciowo BZp_Rozliczono2MW=2 i BZp_RozliczonoMW=1
+			</details>
+		</column>
+		<column name="BZp_Rozliczono2" type="SMALLINT" definition="NOT NULL">
+			<description>Status rozliczenia częściowego</description>
+			<details>
+				Status rozliczenia &lt;br&gt;
+				Rozliczone BZp_Rozliczono2=2 i BZp_Rozliczono=2, &lt;br&gt;
+				Nie rozliczone BZp_Rozliczono=1, &lt;br&gt;
+				Nie podlega BZp_Rozliczono2=0 i BZp_Rozliczono=0 &lt;br&gt;
+				Rozliczony czesciowo BZp_Rozliczono2=2 i BZp_Rozliczono=1
+			</details>
+		</column>
+		<column name="BZp_Rozliczono2MW" type="SMALLINT" definition="NOT NULL">
+			<description>Status rozliczenia częściowego MW</description>
+			<details>
+				Status rozliczenia MW &lt;br&gt;
+				Rozliczone BZp_Rozliczono2MW=2 i BZp_RozliczonoMW=2, &lt;br&gt;
+				Nie rozliczone BZp_RozliczonoMW=1, &lt;br&gt;
+				Nie podlega BZp_Rozliczono2MW=0 i BZp_RozliczonoMW=0 &lt;br&gt;
+				Rozliczony czesciowo BZp_Rozliczono2MW=2 i BZp_RozliczonoMW=1
+			</details>
+		</column>
+		<column name="BZp_DataKur" type="DATETIME" definition="NOT NULL">
+			<description>Data kursu waluty</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BZp_Opis" type="NVARCHAR(1024)" definition="NOT NULL" hash="1">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="BZp_ZapisAutomatyczny" type="SMALLINT" definition="NOT NULL">
+			<description>Czy zapis został wygenerowany automatycznie (np. przez managera płatności)</description>
+		</column>
+		<column name="BZp_Importowany" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BZp_Importowany DEFAULT(0)">
+			<description>Czy zapis został zaimportowany mechanizmem importu wg formatów wymiany (nie
+				poprzez PR)</description>
+		</column>
+		<column name="BZp_AutoOffLine" type="SMALLINT" definition="NOT NULL">
+			<description>Czy zapis został wygenerowany przez mechanizm off-line</description>
+		</column>
+		<column name="BZp_KontoPrzeciwstawne" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto przeciwstawne dla potrzeb prostych księgowań</description>
+		</column>
+		<column name="BZp_MagazynWalut" type="SMALLINT" definition="NOT NULL">
+			<description>Czy zapis należy do magazynu walut</description>
+		</column>
+		<column name="BZp_WgKursuMW" type="SMALLINT" definition="NOT NULL">
+			<description>Sposób rozliczenia operacji (wg kursu bieżącego/historycznego)</description>
+		</column>
+		<column name="BZp_Wynagrodzenie" type="TINYINT" definition="NOT NULL">
+			<description>Zapis stanowi wynagrodzenie pracownika</description>
+		</column>
+		<column name="BZp_KolumnaKPR" type="INT" definition="NOT NULL CONSTRAINT DF_BZp_KolumnaKPR DEFAULT(0)">
+			<description>Kolumna KP do której księgowany będzie zapis.</description>
+		</column>
+		<column name="BZp_KPRID" type="INT">
+			<description>ID powiązanego zapisu księgowego.</description>
+		</column>
+		<column name="BZp_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu</description>
+		</column>
+		<column name="BZp_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator bazy źródłowej</description>
+		</column>
+		<column name="BZp_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator zapisu źródłowego</description>
+		</column>
+		<column name="BZp_TypDokumentuKB" type="COMPUTED|INTEGER" definition="2">
+			<description>Typ dokumentu</description>
+			<details>Pole techniczne. Dla zapisu kasowego/bankowego zawsze 2.</details>
+		</column>
+		<column name="BZp_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="BZp_CDC" type="TINYINT">
+			<description>Czy zapis powstał z importu CDC.</description>
+		</column>
+		<column name="BZp_CDCIdentPrzelewuBank" type="NVARCHAR(35)">
+			<description>Identyfikator CDC OrgnlInstrId, generowany po stronie banku przy wysyłaniu
+				przelewu.</description>
+		</column>
+		<column name="BZp_CDCBnkAddInfo" type="NVARCHAR(256)">
+			<description>Dodatkowe informacje o przelewie w systemie bankowym (np. wartość infocode dla
+				Citi).</description>
+		</column>
+		<column name="BZp_CDCOpis" type="NVARCHAR(255)">
+			<description>Opis zwrócony z CDC przy imporcie zapisu. Wartość nieedytowalna przez
+				użytkownika, służąca do odrzucania duplikatów.</description>
+		</column>
+		<column name="BZp_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BZp_SplitPay DEFAULT(0)">
+			<description>Split Payment</description>
+		</column>
+		<column name="BZp_SplitPayZapisVAT" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BZp_SplitPayZapisVAT DEFAULT(0)">
+			<description>Split Payment</description>
+		</column>
+		<column name="BZp_ExpImpID" type="VARCHAR(18)">
+			<description>Identyfikator operacji eksport/import</description>
+		</column>
+		<column name="BZp_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="BZp_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BZp_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BZp_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="BZp_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BZp_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BZp_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BZp_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BZp_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BZp_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BZp_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BZp_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BZp_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BZp_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="BZp_Primary" columns="BZp_BZpID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BZpPodmiot" localColumns="BZp_PodmiotID,BZp_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.BnkZapisy:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BZpKartaTyp" localColumns="BZp_KKrID" refTable="KartyKredytowe" refColumns="KKr_KKrId">
+			<description>Relacja CDN.BnkZapisy:CDN.KartyKredytowe (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BZpRaport" localColumns="BZp_BRpID" refTable="BnkRaporty" refColumns="BRp_BRpID">
+			<description>Relacja CDN.BnkZapisy:CDN.BnkRaporty (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BZpRachunek" localColumns="BZp_BRaID" refTable="BnkRachunki" refColumns="BRa_BRaID">
+			<description>Relacja CDN.BnkZapisy:CDN.BnkRachunki (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BZpBank" localColumns="BZp_BNaID" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.BnkZapisy:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BZpKategoria" localColumns="BZp_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.BnkZapisy:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BZpDokDefinicja" localColumns="BZp_DDfID" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.BnkZapisy:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="BZpRaport" options="UNIQUE NONCLUSTERED" fields="BZp_BRpID, BZp_BRpLP, BZp_BZpID" includedColumns="BZp_KwotaSys, BZp_Kwota, BZp_Kierunek">
+			<description>Lista zapisów w raporcie</description>
+		</index>
+		<index name="BZpRachunek" options="UNIQUE NONCLUSTERED" fields="BZp_BRaID, BZp_DataDok, BZp_BZpID">
+			<description>Lista zapisów na rachunku bankowycm</description>
+		</index>
+		<index name="BZpNumeracja" options="UNIQUE NONCLUSTERED" fields="BZp_NumerString ,BZp_NumerNr">
+			<description>Klucz do autonumeracji numeru dokumentu</description>
+		</index>
+		<index name="BZpNumerPelny" options="UNIQUE NONCLUSTERED" fields="BZp_NumerPelny">
+			<description>Indeks wg numeru pełnego</description>
+		</index>
+		<index name="BZpPodmiot" options="UNIQUE NONCLUSTERED" fields="BZp_PodmiotID ,BZp_PodmiotTyp ,BZp_DataDok ,BZp_BZpID">
+			<description>Lista zapisów dla podmiotu</description>
+		</index>
+		<index name="BZpBank" options="NONCLUSTERED" fields="BZp_BNaID">
+			<description>do relacji z bankami</description>
+		</index>
+		<foreignKey name="FK_BZpUrzRachunek" localColumns="BZp_URaID" refTable="UrzRachunki" refColumns="URa_URaID">
+			<description>Relacja CDN.BnkZapisy:CDN.UrzRachunki (MANY:1)</description>
+		</foreignKey>
+		<index name="BZpKategoria" options="UNIQUE NONCLUSTERED" fields="BZp_KatID ,BZp_DataDok ,BZp_BZpID">
+			<description>Lista zapisów wg kategorii</description>
+		</index>
+		<index name="BZpDokDefinicja" options="NONCLUSTERED" fields="BZp_DDfID">
+			<description>do relacji z definicją dokumentu</description>
+		</index>
+		<index name="BZpRozliczono" options="UNIQUE NONCLUSTERED" fields="BZp_PodmiotID ,BZp_PodmiotTyp ,BZp_Rozliczono ,BZp_DataDok ,BZp_BZpID">
+			<description>Wg rozliczenia</description>
+		</index>
+		<index name="BZpRozliczono2" options="UNIQUE NONCLUSTERED" fields="BZp_PodmiotID ,BZp_PodmiotTyp ,BZp_Rozliczono2 ,BZp_DataDok ,BZp_BZpID">
+			<description>Wg rozliczenia z flagą rozliczenia częściowego</description>
+		</index>
+		<index name="BZpKartaTyp" options="NONCLUSTERED" fields="BZp_KKrID">
+			<description>Klucz obcy do tabeli kart kredytowych</description>
+		</index>
+		<index name="BZpData" options="UNIQUE NONCLUSTERED" fields="BZp_DataDok ,BZp_BZpID">
+			<description>Wg daty</description>
+		</index>
+		<index name="BZpGUID" options="UNIQUE NONCLUSTERED" fields="BZp_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="BZpKntLista" options="NONCLUSTERED" fields="BZp_PodmiotTyp,BZp_Kierunek,BZp_Rozliczono" includedColumns="BZp_PodmiotID,BZp_Kwota,BZp_KwotaRoz,BZp_Waluta,BZp_BZpID,BZp_BRaID,BZp_Wynagrodzenie">
+			<description>Wg podmiotu z flagą rozliczenia częściowego; Indeks dla listy kontrahentów</description>
+		</index>
+		<index name="BZpBRaKierRozWyna" options="NONCLUSTERED" fields="BZp_BRaID, BZp_Kierunek, BZp_Rozliczono, BZp_Wynagrodzenie" includedColumns="BZp_BZpID, BZp_BRpID, BZp_PodmiotTyp, BZp_PodmiotID, BZp_DataDok, BZp_KwotaSys, BZp_KwotaRozSys, BZp_Kwota, BZp_KwotaRoz, BZp_NumerPelny, BZp_KPRID">
+			<description>Wg rejestru, kierunku, rzoliczenia i wynagrodzenia</description>
+		</index>
+		<index name="BZpZapisAuto" options="NONCLUSTERED" fields="BZp_ZapisAutomatyczny" includedColumns="BZp_BZpID, BZp_BRpID">
+			<description>Wg zapisu automatycznego</description>
+		</index>
+		<index name="BZpExpImpID" options="UNIQUE NONCLUSTERED" fields="BZp_ExpImpID, BZp_BZpID">
+			<description>Wg identyfikatora operacji eksport/import</description>
+		</index>
+	</table>
+	

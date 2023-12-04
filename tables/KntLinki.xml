@@ -1,0 +1,14 @@
+<table name="KntLinki">
+		<column name="KnL_GIDFirma" type="" definition="NO_SQL" />
+		<column name="KnL_GIDLp" type="" definition="NO_SQL" />
+		<column name="KnL_GIDNumer" type="" definition="NO_SQL" />
+		<column name="KnL_GIDTyp" type="" definition="NO_SQL" />
+		<column name="KnL_GrOFirma" type="" definition="NO_SQL" />
+		<column name="KnL_GrOLp" type="" definition="NO_SQL" />
+		<column name="KnL_GrONumer" type="" definition="NO_SQL" />
+		<column name="KnL_GrOTyp" type="" definition="NO_SQL" />
+		<column name="KnL_LiczbaPowtorzen" type="" definition="NO_SQL" />
+		<column name="KnL_Lisc" type="" definition="NO_SQL" />
+		<column name="KnL_TStampDataMod" type="" definition="NO_SQL" />
+	</table>
+	

@@ -1,0 +1,36 @@
+<table name="TraElemKwotyCelne">
+		<description>Tabela z listą kwot celnych</description>
+		<details>Tabela zawiera wybrane kwoty celne</details>
+		<column name="TKC_TKCId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TKC_KCeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator definicji kwoty celnej</description>
+		</column>
+		<column name="TKC_TrEId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka transakcji</description>
+			<details>Klucz obcy do tabeli TraElem</details>
+		</column>
+		<column name="TKC_Nazwa" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Nazwa kwoty celnej</description>
+		</column>
+		<column name="TKC_Wartosc" type="Decimal(15,2)" definition="NOT NULL">
+			<description>Wartosc kwoty celnej waluta</description>
+		</column>
+		<column name="TKC_WartoscPLN" type="Decimal(15,2)" definition="NOT NULL">
+			<description>Wartosc kwoty celnej PLN</description>
+		</column>
+		<column name="TKC_WplywNaWartoscVAT" type="SMALLINT" definition="NOT NULL">
+			<description>Czy wpływa na wartośc magazynu</description>
+		</column>
+		<column name="TKC_WplywNaPlatnosc" type="SMALLINT" definition="NOT NULL">
+			<description>Czy wpływa na płatność</description>
+		</column>
+		<primaryKey name="TKC_Primary" columns="TKC_TKCId">
+			<description>Wg numeru rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TKCTraElem" localColumns="TKC_TrEId" refTable="TraElem" refColumns="TrE_TrEID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraElemKwotyCelne:CDN.TraElem (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

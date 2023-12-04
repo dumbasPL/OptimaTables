@@ -1,0 +1,48 @@
+<table name="DeklVUEK">
+		<column name="DVU_DVUID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="DVU_ByloJest" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DVU_ByloJestString" type="NVARCHAR(4)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DVU_DkNID" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DVU_Kraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DVU_Kwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="DVU_LP" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DVU_NIP" type="VARCHAR(255)" definition="NOT NULL" hash="1">
+			<description />
+		</column>
+		<column name="DVU_NIP2" type="VARCHAR(255)" definition="NULL" hash="1">
+			<description />
+		</column>
+		<column name="DVU_TT" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DVU_TTString" type="NVARCHAR(3)" definition="NULL">
+			<description />
+		</column>
+		<column name="DVU_Typ" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="DVU_ZNumer" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<primaryKey name="DVU_Primary" columns="DVU_DVUID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DVUDeklNag" localColumns="DVU_DkNID" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DeklVUEK:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

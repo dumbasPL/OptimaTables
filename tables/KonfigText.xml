@@ -1,0 +1,13 @@
+<table name="KonfigText">
+		<description>tabela konfiguracyjna pracy rozproszonej</description>
+		<column name="KTx_Key" type="NVARCHAR(49)">
+			<description>Cetyfikaty do uwierzytelniania wymiany danych</description>
+		</column>
+		<column name="KTx_Value" type="NVARCHAR(MAX)">
+			<description>Cetyfikaty do uwierzytelniania wymiany danych</description>
+		</column>
+		<primaryKey name="KTx_Primary" columns="KTx_Key">
+			<description>wg Key</description>
+		</primaryKey>
+	</table>
+	

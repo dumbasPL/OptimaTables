@@ -1,0 +1,74 @@
+<view name="ZasobyView">
+		<description>Lista zasobów towarów</description>
+		<column name="TwZV_RpT2Id" type="INTEGER" definition="NO_SQL" />
+		<column name="TwZV_TwrId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator towaru</description>
+		</column>
+		<column name="TwZV_TwrTyp" type="TINYINT" definition="NO_SQL">
+			<description>Typ towaru (towar/usługa)</description>
+		</column>
+		<column name="TwZV_Produkt" type="SMALLINT" definition="NO_SQL">
+			<description>Czy towar jest produktem</description>
+		</column>
+		<column name="TwZV_Kod" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Kod towaru</description>
+		</column>
+		<column name="TwZV_NumerKat" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Numer katalogowy towaru</description>
+		</column>
+		<column name="TwZV_Nazwa" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Nazwa towaru</description>
+		</column>
+		<column name="TwZV_Grupa" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Grupa towarowa</description>
+		</column>
+		<column name="TwZV_KatId" type="INTEGER" definition="NO_SQL">
+			<description>Kategoria towaru</description>
+		</column>
+		<column name="TwZV_Kategoria" type="VARCHAR(50)" definition="NO_SQL">
+			<description>Kategoria towaru</description>
+		</column>
+		<column name="TwZV_KatZakId" type="INTEGER" definition="NO_SQL">
+			<description>Kategoria zakupu towaru</description>
+		</column>
+		<column name="TwZV_Opis" type="NVARCHAR(254)" definition="NO_SQL">
+			<description>Opis towaru</description>
+		</column>
+		<column name="TwZV_Jm" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="TwZV_JmZ" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Pomocnicza jednostka miary</description>
+		</column>
+		<column name="TwZV_TwCNumer" type="INTEGER" definition="NO_SQL">
+			<description>Numer ceny domyślnej</description>
+		</column>
+		<column name="TwZV_MagId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="TwZV_Data" type="DATETIME" definition="NO_SQL">
+			<description>Data zasobu</description>
+		</column>
+		<column name="TwZV_Ilosc" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Ilość towaru</description>
+		</column>
+		<column name="TwZV_Braki" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Braki towaru</description>
+		</column>
+		<column name="TwZV_Rezerwacje" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Ilość zarezerwowana</description>
+		</column>
+		<column name="TwZV_Zamowienia" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Ilość zamówiona</description>
+		</column>
+		<column name="TwZV_Wartosc" type="DECIMAL(17,4)" definition="NO_SQL">
+			<description>Wartość towaru</description>
+		</column>
+		<column name="TwZV_Cena" type="DECIMAL(17,4)" definition="NO_SQL">
+			<description>Wartość ceny domyślnej</description>
+		</column>
+		<column name="TwZV_Waluta" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Waluta ceny domyślnej</description>
+		</column>
+	</view>
+	

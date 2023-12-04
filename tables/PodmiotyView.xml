@@ -1,0 +1,144 @@
+<table name="PodmiotyView">
+		<description>Lista wszystkich podmiotów</description>
+		<details>Jest to view serwerowe zawierające listę wszystkich podmiotów</details>
+		<column name="Pod_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu</description>
+			<details>
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="Pod_PodId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator rekordu w tabeli źródłowej</description>
+		</column>
+		<column name="Pod_Kod" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Kod podmiotu</description>
+			<details>Unikalny kod podmiotu, do szybkiego wyszukiwania</details>
+		</column>
+		<column name="Pod_Nazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza część nazwy podmiotu</description>
+		</column>
+		<column name="Pod_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga część nazwy podmiotu</description>
+		</column>
+		<column name="Pod_Nazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia liia nazwy podmiotu</description>
+		</column>
+		<column name="Pod_Kraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj (adres podmiotu)</description>
+		</column>
+		<column name="Pod_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo (adres podmiotu)</description>
+		</column>
+		<column name="Pod_Powiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat (adres podmiotu)</description>
+		</column>
+		<column name="Pod_Gmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina (adres podmiotu)</description>
+		</column>
+		<column name="Pod_Ulica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica (adres podmiotu)</description>
+		</column>
+		<column name="Pod_NrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu (adres podmiotu)</description>
+		</column>
+		<column name="Pod_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu (adres podmiotu)</description>
+		</column>
+		<column name="Pod_Miasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto (adres podmiotu)</description>
+		</column>
+		<column name="Pod_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy (adres podmiotu)</description>
+		</column>
+		<column name="Pod_Poczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta (adres podmiotu)</description>
+		</column>
+		<column name="Pod_Telefon1" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer telefonu</description>
+		</column>
+		<column name="Pod_Telefon2" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Drugi numer telefonu</description>
+		</column>
+		<column name="Pod_TelefonSms" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_POD_TelefonSms DEFAULT ('')" hash="1">
+			<description>Telefon dla SMS numer telefonu</description>
+		</column>
+		<column name="Pod_Adres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa część adresu podmiotu</description>
+		</column>
+		<column name="Pod_Email" type="NVARCHAR(127)" definition="NOT NULL CONSTRAINT PodmiotyView_EmailDefault DEFAULT ('')" hash="1">
+			<description>Email podmiotu</description>
+		</column>
+		<column name="Pod_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT PodmiotyView_Nieaktywny DEFAULT (0)">
+			<description>Czy podmiot jest nieaktywny</description>
+		</column>
+		<column name="Pod_Rodzaj" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj kontrahenta</description>
+			<details>
+				1-odbiorca;
+				2-dostawca;
+				3-konkurencja;
+				4-partner;
+				-2-bank;
+				-3-pracownik;
+				-4-wspólnik;
+				-5-urząd
+			</details>
+		</column>
+		<column name="Pod_RodzajOpis" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Pole Rodzaj wyrażone opisowo</description>
+		</column>
+		<column name="Pod_Grupa" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Grupa kontrahentów</description>
+		</column>
+		<column name="Pod_NipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="Pod_NIP" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP (dla kontrahentów i pracowników)</description>
+		</column>
+		<column name="Pod_Regon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer REGON (dla kontrahentów)</description>
+		</column>
+		<column name="Pod_Pesel" type="NVARCHAR(11)" definition="NOT NULL" hash="1">
+			<description>Numer PESEL (dla kontrahentów i pracowników)</description>
+		</column>
+		<column name="Pod_LimitKredytu" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Limit kredytowy dla kontrahentów</description>
+			<details>Dla podmiotów innych niż kontrahenci pole przyjmuje wartość 0</details>
+		</column>
+		<column name="Pod_ImportRowId" type="VARCHAR(36)" definition="NOT NULL">
+			<description>Identyfikator importu</description>
+		</column>
+		<column name="Pod_KontoOdb" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto odbiorcy</description>
+		</column>
+		<column name="Pod_KontoDost" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto dostawcy</description>
+		</column>
+		<column name="Pod_NadID" type="INT">
+			<description>Identyfikator podmiotu nadrzędnego dla danego podmiotu</description>
+		</column>
+		<column name="Pod_GlID" type="INT">
+			<description>Identyfikator podmiotu głównego dla danego podmiotu</description>
+		</column>
+		<column name="Pod_GlKod" type="VARCHAR(20)">
+			<description>Kod podmiotu głównego dla danego podmiotu</description>
+		</column>
+		<column name="Pod_GlNazwa12" type="NVARCHAR(101)" hash="1">
+			<description>Nazwa łączna (połączone człony nazwa1 i nazwa2) podmiotu głównego dla danego
+				podmiotu</description>
+		</column>
+		<primaryKey name="Pod_Primary" columns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="PodKod" options="NONCLUSTERED" fields="Pod_Kod ,Pod_PodmiotTyp">
+			<description>Wg kodu podmiotu</description>
+		</index>
+		<index name="PodGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="Pod_Kod, Pod_PodmiotTyp, Pod_PodId" includedColumns="Pod_Nazwa1, Pod_Email">
+			<description>Gridlookupu podmiotu wg nazwy i adresu email</description>
+		</index>
+	</table>
+	

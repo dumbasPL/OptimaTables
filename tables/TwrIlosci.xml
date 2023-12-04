@@ -1,0 +1,67 @@
+<table name="TwrIlosci">
+		<description>Agregaty zawierające stany magazynowe</description>
+		<column name="TwI_TwIId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TwI_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli Towary</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="TwI_MagId" type="INTEGER">
+			<description>Wskaźnik do magazynu</description>
+			<details>Null oznacza agregat zasobów we wszystkich magazynach</details>
+		</column>
+		<column name="TwI_Data" type="DATETIME">
+			<description>Data na którą obowiązuje stan</description>
+			<details>Null - oznacza stan końcowy</details>
+		</column>
+		<column name="TwI_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru na magazynie</description>
+			<details>Ilość nie może być &lt; 0 - jeśli Ilość jest mniejsza od 0, to jest wykazywana jako
+				Braki</details>
+		</column>
+		<column name="TwI_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość towaru na magazynie</description>
+		</column>
+		<column name="TwI_Braki" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość brakująca</description>
+		</column>
+		<column name="TwI_Rezerwacje" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość zarezerwowana</description>
+		</column>
+		<column name="TwI_Zamowienia" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość zamówiona</description>
+		</column>
+		<column name="TwI_RezerwacjeZlecenia" type="DECIMAL(15,4)" definition="NOT NULL constraint DF_TwI_RezerwacjeZlecenia DEFAULT (0)">
+			<description>Ilość zarezerwowana dla zleceń</description>
+		</column>
+		<primaryKey name="TwI_Primary" columns="TwI_TwIId" />
+		<foreignKey name="FK_TwIMagazyn" localColumns="TwI_MagId" refTable="Magazyny" refColumns="Mag_MagId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrIlosci:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwITowar" localColumns="TwI_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrIlosci:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="TwITowar" options="UNIQUE NONCLUSTERED" fields="TwI_TwrId ,TwI_MagId ,TwI_Data DESC" includedColumns="TwI_Ilosc, TwI_Wartosc, TwI_Braki, TwI_Rezerwacje, TwI_Zamowienia">
+			<description>Wg towaru</description>
+		</index>
+		<index name="TwIMagazyn" options="NONCLUSTERED" fields="TwI_MagId" includedColumns="TwI_TwrId, TwI_Data, TwI_Ilosc, TwI_Wartosc, TwI_Braki, TwI_Rezerwacje, TwI_Zamowienia">
+			<description>Wg magazynu</description>
+		</index>
+		<index name="TwIMagazynData" options="NONCLUSTERED" fields="TwI_MagId,TwI_Data" includedColumns="TwI_TwrId, TwI_Ilosc, TwI_Wartosc, TwI_Braki, TwI_Rezerwacje, TwI_Zamowienia">
+			<description>Wg magazynu, daty</description>
+		</index>
+		<index name="TwIMagazynIlosc" options="NONCLUSTERED" fields="TwI_MagId,TwI_Ilosc" includedColumns="TwI_TwrId, TwI_Data, TwI_Wartosc, TwI_Braki, TwI_Rezerwacje, TwI_Zamowienia">
+			<description>Wg magazynu, ilości</description>
+		</index>
+		<index name="TwITowarData" options="NONCLUSTERED" fields="TwI_TwrId,TwI_Data" includedColumns="TwI_MagId, TwI_Braki">
+			<description>Wg towaru, daty</description>
+		</index>
+		<index name="TwIData" options="NONCLUSTERED" fields="TwI_Data" includedColumns="TwI_TwrId, TwI_MagId, TwI_Ilosc, TwI_Rezerwacje">
+			<description>Wg daty</description>
+		</index>
+	</table>
+	

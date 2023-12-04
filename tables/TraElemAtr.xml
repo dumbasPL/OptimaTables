@@ -1,0 +1,47 @@
+<table name="TraElemAtr">
+		<description>Tabela z atrybutami elementu</description>
+		<details>Atrybuty Elementu dokumentów (faktur, paragonów itp).</details>
+		<column name="TrA_TrAID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="TrA_TrEId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator elementu transakcji</description>
+			<details>Klucz obcy do TraElem</details>
+		</column>
+		<column name="TrA_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer atrybutu</description>
+		</column>
+		<column name="TrA_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TrA_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TrA_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TrA_ESklep" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_TrA_ESklep DEFAULT(0)">
+			<description>Czy atrybut esklepowy</description>
+		</column>
+		<column name="TrA_DokTyp" type="INTEGER" definition="NULL">
+			<description>Identyfikator typu dokumentu źródłowego
+				(901-SrsCzesci;902-SrsCzynnosci;907-SrsElementy)</description>
+		</column>
+		<column name="TrA_DokId" type="INTEGER" definition="NULL">
+			<description>Identyfikator dokumentu źródłowego</description>
+		</column>
+		<column name="TrA_TwrId" type="INTEGER" definition="NULL">
+			<description>Identyfikator towaru, z którego pochodzi atrybut</description>
+		</column>
+		<primaryKey name="TrA_Primary" columns="TrA_TrAID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="TrATraElemAtr" options="NONCLUSTERED" fields="TrA_TrEId,TrA_Lp">
+			<description>Indeks dla atrybutów HA-MAG</description>
+		</index>
+		<index name="TrA_Dok_Index" options="NONCLUSTERED" fields="TrA_DokTyp,TrA_DokId,TrA_Lp">
+			<description>Indeks dla atrybutów innych niż HA-MAG </description>
+		</index>
+	</table>
+	

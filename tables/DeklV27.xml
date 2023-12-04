@@ -1,0 +1,36 @@
+<table name="DeklV27">
+		<column name="V27_V27ID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="V27_DkNID" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="V27_Kwota" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="V27_LP" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="V27_NIP" type="VARCHAR(255)" definition="NOT NULL" hash="1">
+			<description />
+		</column>
+		<column name="V27_Nazwa" type="VARCHAR(350)" definition="NULL" hash="1">
+			<description />
+		</column>
+		<column name="V27_Numer" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="V27_Zmiana" type="TINYINT" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="V27_Typ" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<primaryKey name="V27_Primary" columns="V27_V27ID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_V27DeklNag" localColumns="V27_DkNID" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DeklV27:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

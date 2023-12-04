@@ -1,0 +1,72 @@
+<table name="Zaniechania">
+		<description>Tabela zaniechań podatkowych pracownika</description>
+		<column name="ZAN_ZanId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZAN_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika posiadającego zaniechanie</description>
+		</column>
+		<column name="ZAN_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa zaniechania</description>
+		</column>
+		<column name="ZAN_Sposob" type="INTEGER" definition="NOT NULL">
+			<description>Sposób zaniechania</description>
+			<details>1 – zaniechanie zaliczki podatku (bez umów), 2 – zaniechanie zaliczki podatku
+				(wszystkie przychody)</details>
+		</column>
+		<column name="ZAN_KwotaZan" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zaniechania</description>
+		</column>
+		<column name="ZAN_KwotaRoz" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota rozliczona</description>
+		</column>
+		<column name="ZAN_KwotaTemp" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Tymczasowa kwota rozliczona</description>
+		</column>
+		<column name="ZAN_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data zaniechania</description>
+		</column>
+		<column name="ZAN_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="ZAN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZAN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="ZAN_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="ZAN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZAN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="ZAN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZAN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ZAN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZAN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ZAN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZAN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ZAN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZAN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="ZAN_Primary" columns="ZAN_ZanId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_ZANPraLink" localColumns="ZAN_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.Zaniechania:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="ZANPraLink" options="NONCLUSTERED" fields="ZAN_PraId ,ZAN_Data">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="ZANTwpLink" options="NONCLUSTERED" fields="ZAN_Sposob">
+			<description>Klucz obcy typu wyplaty</description>
+		</index>
+	</table>
+	

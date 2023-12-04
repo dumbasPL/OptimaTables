@@ -1,0 +1,45 @@
+<view name="WalNag">
+		<description>Nagłówki walut</description>
+		<column name="WaN_Symbol" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Symbol waluty</description>
+			<details>Symbol waluty</details>
+		</column>
+		<column name="WaN_KontoPlus" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer konta księgowania dodatnich różnic kursowych</description>
+			<details>Numer konta w banku.</details>
+		</column>
+		<column name="WaN_KontoMinus" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer konta księgowania ujemnych różnic kursowych</description>
+		</column>
+		<column name="WaN_Nazwa" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Nazwa waluty</description>
+			<details>Pełna nazwa waluty.</details>
+		</column>
+		<column name="WaN_Panstwo" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Państwo z jakiego pochodzi waluta</description>
+			<details>Państwo do jakiego należy waluta</details>
+		</column>
+		<column name="WaN_Slownie1" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Słownie waluty większej</description>
+		</column>
+		<column name="WaN_Slownie2" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Słownie waluty mniejszej</description>
+		</column>
+		<column name="WaN_Aktywna" type="INTEGER" definition="NO_SQL">
+			<description>Czy waluta jest aktywna?</description>
+			<details>Czy karta magazynowa jest aktywna czy też zablokowana na czas wystawienia lub
+				poprawy.</details>
+		</column>
+		<column name="WaN_Wsk" type="TINYINT" definition="NO_SQL">
+			<description>Wskaźnik do zaznaczania</description>
+			<details>Wskaźnik do zaznaczania rekordu. Zaznaczanie odbywa się na bitach. Dlatego też jest
+				możliwe oddzielne zaznaczanie dla poszczególnych 8 użytkowników.</details>
+		</column>
+		<column name="WaN_SymbolEMU" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Międzynarodowy symbol waluty Europejskiej Unii Walutowej</description>
+		</column>
+		<column name="WaN_Parytet" type="DECIMAL(10,6)" definition="NO_SQL">
+			<description>Przelicznik waluty na euro</description>
+		</column>
+	</view>
+	

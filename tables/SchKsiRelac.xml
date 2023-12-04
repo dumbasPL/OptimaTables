@@ -1,0 +1,29 @@
+<table name="SchKsiRelac">
+		<description>Schematy księgowe powiązane</description>
+		<column name="SKR_SKRId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SKR_SKNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator schematu nadrzędnego</description>
+		</column>
+		<column name="SKR_SKNRelId" type="INTEGER">
+			<description>Identyfikaotr schematu zależnego</description>
+		</column>
+		<column name="SKR_Lp" type="SMALLINT" definition="NOT NULL">
+			<description>Lp na liście schematów zależnych</description>
+			<details>Określa w jakiej kolejności uruchamiane są księgowania zależne</details>
+		</column>
+		<primaryKey name="SKR_Primary" columns="SKR_SKRId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_SKRSchemat" localColumns="SKR_SKNId" refTable="SchKsiNag" refColumns="SKN_SKNId" deleteOption="CASCADE">
+			<description>Relacja CDN.SchKsiRelac:CDN.SchKsiNag (MANY:1)</description>
+		</foreignKey>
+		<index name="SKRSchemat" options="NONCLUSTERED" fields="SKR_SKNId">
+			<description>Wg nagłowka schematu nadrzędnego</description>
+		</index>
+		<index name="SKRZalezny" options="NONCLUSTERED" fields="SKR_SKNRelId ,SKR_Lp">
+			<description>Wg schematu związanego</description>
+		</index>
+	</table>
+	

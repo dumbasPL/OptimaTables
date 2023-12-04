@@ -1,0 +1,249 @@
+<table name="TrwaleHist">
+		<description>Dokumenty środków trwałych</description>
+		<details>Tabela zawiera wszystkie dokumenty związane ze środkiem trwałym - amortyzacje,
+			przeszacowania i ulepszenia (zmiany wartości)</details>
+		<column name="SrH_SrHID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrH_SrTID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator środka trwałego</description>
+			<details>Wskaźnik do kartoteki środka trwałego, którego dotyczy dokument (relacja do Trwale:
+				SrH:SrTId = SrT:SrTId)</details>
+		</column>
+		<column name="SrH_Typ" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Rodzaj środka trwałego</description>
+			<details>
+				Przyjmuje wartości:
+				11 (e_mk_SrT_Typ_ST) - środek trwały
+				12 (e_mk_SrT_Typ_WN) - wartość niematerialna i prawna
+			</details>
+		</column>
+		<column name="SrH_Grupa" type="VARCHAR(32)" definition="NOT NULL">
+			<description>Nazwa księgi inwentarzowej</description>
+		</column>
+		<column name="SrH_TypDokumentu" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj dokumentu</description>
+			<details>
+				Przyjmuje wartości:
+				1 (e_mk_SrH_ZmianaWartosci) - zmiana wartości środka trwałego (ulepszenie)
+				2 (e_mk_SrH_Przeszacowanie) - przeszacowanie
+				3 (e_mk_SrH_Amortyzacja) - amortyzacja
+			</details>
+		</column>
+		<column name="SrH_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj dokumentu w ramach określonego typu</description>
+			<details>Obecnie wykorzystany przy likwidacji: 0-likwidacja częściowa, 1-likwidacja pełna,
+				2-zbycie</details>
+		</column>
+		<column name="SrH_DataOpe" type="DATETIME">
+			<description>Data operacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrH_KwotaKoszt" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zmiany wartości kosztowej</description>
+		</column>
+		<column name="SrH_KwotaBilan" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zmiany wartości bilansowej</description>
+		</column>
+		<column name="SrH_KwotaUm" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota umorzenia</description>
+		</column>
+		<column name="SrH_KwotaAm" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota amortyzacji do zaliczenia w koszty</description>
+		</column>
+		<column name="SrH_DokumentTyp" type="INTEGER">
+			<details>Typ dokumentu zakupu dla dokumentów ulepszenia. Dokument ulepszenia może zostać
+				wprowadzony "z ręki" lub pobrany z listy rejestrów Vat lub ewidencji dodatkowej</details>
+		</column>
+		<column name="SrH_DokumentID" type="INTEGER">
+			<details>Identyfikator dokumentu zakupu dla dokumentów ulepszenia. Dokument ulepszenia może
+				zostać wprowadzony "z ręki" lub pobrany z listy rejestrów Vat lub ewidencji dodatkowej</details>
+		</column>
+		<column name="SrH_Numer" type="NVARCHAR(256)" definition="NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="SrH_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) dokumentu środka trwałego może zostac wpisany "z ręki" (SrH:KatId = 0) lub
+				zostac pobrany z listy kategorii (SrH:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="SrH_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="SrH_Metoda" type="TINYINT" definition="NOT NULL">
+			<description>Metoda amortyzacji</description>
+			<details>
+				Przyjmuje wartości:
+				1 (e_mk_SrT_MetodaAmortyzacji_Liniowa) - metoda liniowa
+				2 (e_mk_SrT_MetodaAmortyzacji_Degresywna) - metoda degresywna
+				3 (e_mk_SrT_MetodaAmortyzacji_Jednorazowa) - odpis jednorazowy
+				4 (e_mk_SrT_MetodaAmortyzacji_Naturalna) - metoda naturalna
+				5 (e_mk_SrT_MetodaAmortyzacji_NieAmortyzowac) - środek nie amortyzowany
+
+				Uwaga: dla dokumentów wprowadzanych "z ręki" pole SrH:Metoda = 4
+			</details>
+		</column>
+		<column name="SrH_MetodaBil" type="TINYINT" definition="NOT NULL">
+			<description>Metoda umorzenia</description>
+			<details>
+				Przyjmuje wartości:
+				1 (e_mk_SrT_MetodaAmortyzacji_Liniowa) - metoda liniowa
+				2 (e_mk_SrT_MetodaAmortyzacji_Degresywna) - metoda degresywna
+				3 (e_mk_SrT_MetodaAmortyzacji_Jednorazowa) - odpis jednorazowy
+				4 (e_mk_SrT_MetodaAmortyzacji_Naturalna) - metoda naturalna
+				5 (e_mk_SrT_MetodaAmortyzacji_NieAmortyzowac) - środek nie amortyzowany
+
+				Uwaga: dla dokumentów wprowadzanych "z ręki" pole SrH:Metoda = 4
+			</details>
+		</column>
+		<column name="SrH_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka amortyzacji</description>
+		</column>
+		<column name="SrH_StawkaBil" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka umorzenia</description>
+		</column>
+		<column name="SrH_Wspolczynnik" type="DECIMAL(7,4)" definition="NOT NULL">
+			<description>Współczynnik podwyższenia stawki</description>
+		</column>
+		<column name="SrH_WspolczynnikBil" type="DECIMAL(7,4)" definition="NOT NULL">
+			<description>Współczynnik podwyższenia stawki</description>
+		</column>
+		<column name="SrH_Ulga" type="TINYINT" definition="NOT NULL">
+			<description>Odpis amortyzacyjny stanowiący ulgę</description>
+		</column>
+		<column name="SrH_KPRId" type="INTEGER">
+			<description>Wskaźnik do zapisów księgowych KPR</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada SrH_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada SrH_KPRId = NULL;
+			</details>
+		</column>
+		<column name="SrH_DekId" type="INTEGER">
+			<description>Wskaźnik do dokumentów księgowych w dekrety</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada SrH_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada SrH_DekId = NULL;
+			</details>
+		</column>
+		<column name="SrH_DataPrzekazaniaOd" type="DATETIME">
+			<description>Data od obowiązywania przekazania</description>
+		</column>
+		<column name="SrH_DataPrzekazaniaDo" type="DATETIME">
+			<description>Data do obowiązywania przekazania</description>
+		</column>
+		<column name="SrH_PrcID1" type="INTEGER">
+			<description>ID poprzedniej osoby odpowiedzialnej w dokumencie przekazania</description>
+		</column>
+		<column name="SrH_PrcImieNazwisko1" type="NVARCHAR(255)" hash="1">
+			<description>Imię i nazwisko poprzedniej osoby odpowiedzialnej w dokumencie przekazania</description>
+		</column>
+		<column name="SrH_MiejsceUzytkowania1" type="NVARCHAR(255)">
+			<description>Nazwa (opis) poprzedniego miejsca użytkowania w dokumencie przekazania</description>
+		</column>
+		<column name="SrH_PrcID2" type="INTEGER">
+			<description>ID nowej osoby odpowiedzialnej w dokumencie przekazania</description>
+		</column>
+		<column name="SrH_PrcImieNazwisko2" type="NVARCHAR(255)" hash="1">
+			<description>Imię i nazwisko nowej osoby odpowiedzialnej w dokumencie przekazania</description>
+		</column>
+		<column name="SrH_MiejsceUzytkowania2" type="NVARCHAR(255)">
+			<description>Nazwa (opis) nowego miejsca użytkowania w dokumencie przekazania</description>
+		</column>
+		<column name="SrH_LTDataAmo" type="DATETIME">
+			<description>Data rozpoczęcia uwzględniania dokumentu LT w amortyzacji kosztowej</description>
+		</column>
+		<column name="SrH_LTDataAmoBil" type="DATETIME">
+			<description>Data rozpoczęcia uwzględniania dokumentu LT w amortyzacji bilansowej</description>
+		</column>
+		<column name="SrH_LTWyliczUm" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrH_LTWyliczUm DEFAULT(0)">
+			<description>Wyliczenie umorzenia dla dokumentu LT</description>
+		</column>
+		<column name="SrH_UwzglKsgBadRozw" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrH_UwzglKsgBadRozw DEFAULT(0)">
+			<description>Uwzględniaj przy księgowaniu w kosztach na badania i rozwój</description>
+		</column>
+		<column name="SrH_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="SrH_Opis" type="NVARCHAR(MAX)">
+			<description>Informacja dodatkowe</description>
+		</column>
+		<column name="SrH_PreDekId" type="INTEGER">
+			<description>Wskaźnik do dokumentów księgowych w predekrety</description>
+		</column>
+		<column name="SrH_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="SrH_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrH_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrH_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="SrH_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrH_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrH_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrH_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SrH_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrH_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SrH_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrH_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SrH_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrH_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SrH_Primary" columns="SrH_SrHID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_SrHKategoria" localColumns="SrH_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.TrwaleHist:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrHTrwale" localColumns="SrH_SrTID" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleHist:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+		<index name="SrHTrwale" options="UNIQUE NONCLUSTERED" fields="SrH_SrTID ,SrH_DataOpe ,SrH_SrHID">
+			<description>Lista dokumentów dla wybranego środka trwałego</description>
+		</index>
+		<index name="SrHChrono" options="UNIQUE NONCLUSTERED" fields="SrH_Typ ,SrH_TypDokumentu ,SrH_DataOpe ,SrH_SrTID ,SrH_SrHID">
+			<description>Chronologicznie w ramach grupy środków trwałych</description>
+		</index>
+		<index name="SrHChronoGrupa" options="UNIQUE NONCLUSTERED" fields="SrH_Typ ,SrH_Grupa ,SrH_TypDokumentu ,SrH_DataOpe ,SrH_SrTID ,SrH_SrHID" />
+		<index name="SrHKPR" options="UNIQUE NONCLUSTERED" fields="SrH_KPRId ,SrH_SrHID">
+			<description>Wg dokumentu księgowego KPiR</description>
+			<details>Relacja do zapisu księgowego w (ZapisyKPR)</details>
+		</index>
+		<index name="SrHDekrety" options="UNIQUE NONCLUSTERED" fields="SrH_DekId ,SrH_SrHID">
+			<description>Wg dokumentu księgowego Dekrety</description>
+			<details>Relacja do zapisu księgowego w Dekrety</details>
+		</index>
+		<index name="SrHPreDekret" options="NONCLUSTERED" fields="SrH_PreDekID">
+			<description>Klucz do tabeli CDN.DekretyNag</description>
+			<details>Index do tabeli CDN.DekretyNag</details>
+		</index>
+		<index name="SrHDokument" options="NONCLUSTERED" fields="SrH_DokumentTyp ,SrH_DokumentID" />
+		<index name="SrHKategoria" options="UNIQUE NONCLUSTERED" fields="SrH_KatID ,SrH_DataOpe ,SrH_SrHID">
+			<description>Wg kategorii</description>
+			<details>Zapisy w historii środków trwałych wg identyfikatora kategorii (indeks wiążący
+				TrwaleHist z Kategorie)</details>
+		</index>
+	</table>
+	

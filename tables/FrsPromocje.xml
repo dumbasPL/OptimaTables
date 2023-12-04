@@ -1,0 +1,6 @@
+<table name="FrsPromocje">
+		<column name="FPR_FrsId" type="" definition="NO_SQL" />
+		<column name="FPR_Id" type="" definition="NO_SQL" />
+		<column name="FPR_PrmId" type="" definition="NO_SQL" />
+	</table>
+	

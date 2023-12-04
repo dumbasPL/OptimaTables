@@ -1,0 +1,288 @@
+<table name="IntrastatNag">
+		<description>Nagłówki deklaracji Intrastat</description>
+		<column name="IsN_IsNId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="IsN_ZwrId" type="INTEGER">
+			<description>Identyfikator deklaracji oryginalnej</description>
+			<details>Wypełniane tylko dla korekt</details>
+		</column>
+		<column name="IsN_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ deklaracji</description>
+			<details>401-przywóz, 402-wywóz</details>
+		</column>
+		<column name="IsN_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj deklaracji</description>
+			<details>1-pełna, 2-korygująca (całość), 3-korekta (pozycji); w CDN OPT!MA tylko 1 i 2</details>
+		</column>
+		<column name="IsN_Czesciowa" type="TINYINT" definition="NOT NULL">
+			<description>Czy deklaracja jest częściowa</description>
+			<details>0 - całościowa miesięczna, 1 - częściowa;</details>
+		</column>
+		<column name="IsN_Automatyczna" type="TINYINT" definition="NOT NULL">
+			<description>1- wyliczona automatem (nie można edytować ręcznie); 2-wyliczona ręcznie (nie
+				można wyliczać automatycznie)</description>
+		</column>
+		<column name="IsN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Typ kursu</description>
+		</column>
+		<column name="IsN_UrzadCelnyKod" type="NVARCHAR(8)" definition="NOT NULL">
+			<description>Kod urzędu celnego</description>
+		</column>
+		<column name="IsN_Rok" type="SMALLINT" definition="NOT NULL">
+			<description>Rok deklaracji</description>
+		</column>
+		<column name="IsN_Miesiac" type="TINYINT" definition="NOT NULL">
+			<description>Miesiąc deklaracji</description>
+		</column>
+		<column name="IsN_Numer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny deklaracji</description>
+		</column>
+		<column name="IsN_Wersja" type="INTEGER" definition="NOT NULL">
+			<description>Kolejny Lp w ramach deklaracji pierwotnej</description>
+			<details>Kolejny Lp w ramach deklaracji pierwotnej i korekt do niej wystawionych; deklaracja
+				pierwotna ma zawsze 1. (np. 1-deklaracja pierwotna, 2-pierwsza korekta, 3-druga korekta,
+				4-trzecia korekta, …)</details>
+		</column>
+		<column name="IsN_Blokada" type="TINYINT" definition="NOT NULL">
+			<description>Blokada deklaracji przed zmianami</description>
+		</column>
+		<column name="IsN_PodNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwa podmiotu</description>
+		</column>
+		<column name="IsN_PodNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwa podmiotu</description>
+		</column>
+		<column name="IsN_PodNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Nazwa podmiotu</description>
+		</column>
+		<column name="IsN_PodKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="IsN_PodWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="IsN_PodPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="IsN_PodGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="IsN_PodUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="IsN_PodNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="IsN_PodNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>NumerLokalu</description>
+		</column>
+		<column name="IsN_PodMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto</description>
+		</column>
+		<column name="IsN_PodKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="IsN_PodPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="IsN_PodAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Adres - c.d.</description>
+		</column>
+		<column name="IsN_PodNipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Prefiks kraju</description>
+		</column>
+		<column name="IsN_PodNipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP</description>
+		</column>
+		<column name="IsN_PodRegon" type="VARCHAR(14)" definition="NOT NULL" hash="1">
+			<description>Regon</description>
+		</column>
+		<column name="IsN_ZglTyp" type="SMALLINT">
+			<description>Typ podmiotu zgłaszającego</description>
+		</column>
+		<column name="IsN_ZglId" type="INTEGER">
+			<description>Id podmiotu zgłaszającego</description>
+		</column>
+		<column name="IsN_ZglNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwa zgłaszającego</description>
+		</column>
+		<column name="IsN_ZglNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwa zgłaszającego</description>
+		</column>
+		<column name="IsN_ZglNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Nazwa zgłaszającego</description>
+		</column>
+		<column name="IsN_ZglKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="IsN_ZglWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="IsN_ZglPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="IsN_ZglGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="IsN_ZglUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="IsN_ZglNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="IsN_ZglNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="IsN_ZglMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto</description>
+		</column>
+		<column name="IsN_ZglKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="IsN_ZglPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="IsN_ZglAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Adres c.d.</description>
+		</column>
+		<column name="IsN_ZglRegon" type="VARCHAR(14)" definition="NOT NULL" hash="1">
+			<description>Regon</description>
+		</column>
+		<column name="IsN_ZglNipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Prefiks kraju</description>
+		</column>
+		<column name="IsN_ZglNipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP</description>
+		</column>
+		<column name="IsN_Netto" type="COMPUTED|DECIMAL(15,2)" definition="CDN.FNISN_WARTOSC(ISN_ISNID)">
+			<description>Wartość netto wszystkich transkacji ujętych w deklaracji</description>
+		</column>
+		<column name="IsN_IloscPozycji" type="COMPUTED|INTEGER" definition="CDN.FNISN_ILOSC(ISN_ISNID)">
+			<description>Ilość pozycji deklaracji</description>
+		</column>
+		<column name="IsN_WypImie" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Imię osoby wypełniającej deklarację</description>
+		</column>
+		<column name="IsN_WypNazwisko" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwisko osoby wypełniającej deklarację</description>
+		</column>
+		<column name="IsN_WypTelefon" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Telefon osoby wypełniającej deklarację</description>
+		</column>
+		<column name="IsN_WypFax" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Numer faxu osoby wypełniającej deklarację</description>
+		</column>
+		<column name="IsN_WypEmail" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Adres e-mail osoby wypełniającej deklarację</description>
+		</column>
+		<column name="IsN_Miejscowosc" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Miejscowość wypełnienia deklaracji</description>
+		</column>
+		<column name="IsN_TS_Export" type="DATETIME">
+			<description>Data i godzina wykonania eksportu deklaracji</description>
+		</column>
+		<column name="IsN_DataWypelnienia" type="DATETIME">
+			<description>Data wpełnienia deklaracji</description>
+		</column>
+		<column name="IsN_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="IsN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="IsN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="IsN_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="IsN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="IsN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="IsN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_IsN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="IsN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_IsN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="IsN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_IsN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="IsN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_IsN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="IsN_EDekl_RefID" type="NVARCHAR(240)" hash="1">
+			<description>Identyfikator przetwarzanej wiaadomości</description>
+		</column>
+		<column name="IsN_EDekl_Status" type="INTEGER">
+			<description>Status przetwarzania dokumentu</description>
+		</column>
+		<column name="IsN_EDekl_StatusOpis" type="NVARCHAR(1000)">
+			<description>Opis słowny statusu przetwarzania dokumentu</description>
+		</column>
+		<column name="IsN_EDekl_Podmiot" type="NVARCHAR(1000)" hash="1">
+			<description>Nazwa podmiotu, który przyjął deklarację</description>
+		</column>
+		<column name="IsN_EDekl_DokumentID" type="VARCHAR(240)">
+			<description>Numer złożonego dokumentu</description>
+		</column>
+		<column name="IsN_EDekl_DataWplyniecia" type="NVARCHAR(50)">
+			<description>Data wpłynięcia dokumentu do ministerstwa</description>
+		</column>
+		<column name="IsN_EDekl_SkrotDokumentu" type="NVARCHAR(240)">
+			<description>Skrót przesłanej deklaracji</description>
+		</column>
+		<column name="IsN_EDekl_SkrotStruktury" type="NVARCHAR(240)">
+			<description>Skrót przesłanej struktury</description>
+		</column>
+		<column name="IsN_EDekl_StrukturaLogiczna" type="NVARCHAR(240)">
+			<description>Nazwa struktury logicznej przesłanej deklaracji</description>
+		</column>
+		<column name="IsN_EDekl_NIP1" type="VARCHAR(50)" hash="1">
+			<description>Nip osoby wpisanej na deklaracji jako pierwszej</description>
+		</column>
+		<column name="IsN_EDekl_NIP2" type="VARCHAR(50)" hash="1">
+			<description>Nip osoby wpisanej na deklaracji jako drugiej</description>
+		</column>
+		<column name="IsN_EDekl_SigningTime" type="NVARCHAR(50)">
+			<description>Czas wykonania podpisu elektronicznego deklaracji</description>
+		</column>
+		<column name="IsN_EDekl_StempelCzasu" type="NVARCHAR(240)">
+			<description>Stempel czasu wpłynięcia dokumentu</description>
+		</column>
+		<column name="IsN_EDekl_OperatorWysylajacy" type="INTEGER">
+			<description>Identyfikator operatora wysyłającego deklarację</description>
+		</column>
+		<column name="IsN_EDekl_OperatorPobierajacyUPO" type="INTEGER">
+			<description>Identyfikator operatora który pobrał UPO</description>
+		</column>
+		<column name="IsN_EDekl_DataWyslania" type="DATETIME">
+			<description>Data wyslania deklaracji do ministerstwa</description>
+		</column>
+		<column name="IsN_EDekl_DataOdebraniaUPO" type="DATETIME" />
+		<column name="IsN_EDekl_KodUrzedu" type="VARCHAR(6)">
+			<description>Kod urzędu, do którego została złożona deklaracja</description>
+		</column>
+		<column name="IsN_EDekl_NrWlasny" type="NVARCHAR(240)">
+			<description>NrWlasny</description>
+		</column>
+		<primaryKey name="IsN_Primary" columns="IsN_IsNId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_IsNZglaszajacy" localColumns="IsN_ZglId,IsN_ZglTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.IntrastatNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<index name="IsNNumer" options="UNIQUE NONCLUSTERED" fields="IsN_Typ ,IsN_Rok ,IsN_Miesiac ,IsN_Numer ,IsN_Wersja">
+			<description>Wg numeru deklaracji</description>
+		</index>
+		<index name="IsNZglaszajacy" options="NONCLUSTERED" fields="IsN_ZglId ,IsN_ZglTyp">
+			<description>Wg podmiou zgłaszającego</description>
+		</index>
+	</table>
+	

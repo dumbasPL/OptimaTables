@@ -1,0 +1,18 @@
+<table name="AwizoTypyTransportu">
+		<description>Typ transportu dla Awizo</description>
+		<details>Typy transportów dla awizo dla EDI</details>
+		<column name="AWTT_AWTTId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AWTT_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa typu transportu</description>
+		</column>
+		<primaryKey name="AWTT_Primary" columns="AWTT_AWTTId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

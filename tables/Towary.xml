@@ -1,0 +1,743 @@
+<table name="Towary">
+		<description>Tabela z danymi o towarach</description>
+		<column name="Twr_TwrId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator towaru (numer rekordu)</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Twr_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ karty: 0 - usługa, 1 - towar</description>
+		</column>
+		<column name="Twr_Produkt" type="SMALLINT" definition="NOT NULL">
+			<description>Czy kartoteka jest produktem</description>
+			<details>
+				0 - prosty &lt;br&gt;
+				1 - złożony
+			</details>
+		</column>
+		<column name="Twr_Kod" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Unikalny kod towaru</description>
+		</column>
+		<column name="Twr_AutoKodGrupaTowarowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_AutoKodGrupaTowarowa DEFAULT(0)">
+			<description>Autonumeracja kodu towaru zawiera nazwę grupy 0 - nie, 1 - tak</description>
+		</column>
+		<column name="Twr_AutoKodSeria" type="VARCHAR(40)" definition="NOT NULL CONSTRAINT DF_Twr_AutoKodSeria DEFAULT('')">
+			<description>Autonumeracja kodu towaru seria</description>
+		</column>
+		<column name="Twr_AutoKodWartosc" type="VARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Twr_AutoKodWartosc DEFAULT('')">
+			<description>Autonumeracja kodu towaru wartosc</description>
+		</column>
+		<column name="Twr_AutoKodNumer" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Twr_AutoKodNumer DEFAULT(0)">
+			<description>Autonumeracja numer serii</description>
+		</column>
+		<column name="Twr_PLU" type="NVARCHAR(18)" definition="NOT NULL CONSTRAINT DF_Twr_PLU DEFAULT('')" hash="1">
+			<description>Unikalny kod PLU</description>
+		</column>
+		<column name="Twr_NumerKat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Numer katalogowy</description>
+			<details>Pole indeksowane, pozwalające na prowadzenie równoległego, drugiego kodowania</details>
+		</column>
+		<column name="Twr_SWW" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol PKWiU</description>
+		</column>
+		<column name="Twr_EAN" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Kod EAN</description>
+		</column>
+		<column name="Twr_Nazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Pełna nazwa towaru</description>
+		</column>
+		<column name="Twr_NazwaFiskalna" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT DF_Twr_NazwaFiskalna DEFAULT('')">
+			<description>Nazwa towaru dla drukarek/kas fiskalnych</description>
+		</column>
+		<column name="Twr_TwGGIDNumer" type="INTEGER" definition="NOT NULL">
+			<description>Id grupy domyślnej</description>
+			<details>pole jest not null - wartość 0 oznacza przynależność do roota (grupy głównej)</details>
+		</column>
+		<column name="Twr_URL" type="VARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Adres strony w Internecie</description>
+		</column>
+		<column name="Twr_KatId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) towaru może zostać wpisany "z ręki" (Twr:KatId = 0) lub zostac pobrany z
+				listy kategorii (Twr:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="Twr_Kategoria" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Opis kategorii sprzedaży</description>
+		</column>
+		<column name="Twr_KatZakId" type="INTEGER">
+			<description>Identyfikator dla kategorii przy zakupie</description>
+		</column>
+		<column name="Twr_KategoriaZak" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Opis kategorii zakupu</description>
+		</column>
+		<column name="Twr_Opis" type="NVARCHAR(MAX)" definition="NOT NULL" hash="1">
+			<description>Opis towaru</description>
+		</column>
+		<column name="Twr_EdycjaNazwy" type="TINYINT" definition="NOT NULL">
+			<description>Zezwolenie na edycję nazwy po skopiowaniu do transakcji</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="Twr_KopiujOpis" type="TINYINT" definition="NOT NULL">
+			<description>Zezwolenie na kopiowanie opisu do transakcji</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="Twr_EdycjaOpisu" type="TINYINT" definition="NOT NULL">
+			<description>Zezwolenie na edycję opisu po skopiowaniu do transakcji</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="Twr_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa podstawowej jednostki miary</description>
+		</column>
+		<column name="Twr_JMCalkowite" type="TINYINT" definition="NOT NULL">
+			<description>Format jednostki miary</description>
+			<details>Format przeliczania jednostek miar. 1 oznacza, że przelicznik będzie całkowity</details>
+		</column>
+		<column name="Twr_JMZ" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Twr_JMZ DEFAULT('')">
+			<description>Nazwa zbiorczej jednostki miary</description>
+		</column>
+		<column name="Twr_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_JMPrzelicznikL DEFAULT(1)">
+			<description>Licznik przelicznika JM</description>
+			<details>Licznik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="Twr_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL CONSTRAINT DF_Twr_JMPrzelicznikM DEFAULT(1)">
+			<description>Mianownik przelicznika JM</description>
+			<details>Mianownik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="Twr_Kaucja" type="TINYINT" definition="NOT NULL">
+			<description>Czy towar jest opakowaniem/kaucją</description>
+			<details>
+				0 - towar zwykły &lt;br&gt;
+				1 - opakowanie
+			</details>
+		</column>
+		<column name="Twr_TwCNumer" type="INTEGER" definition="NOT NULL">
+			<description>Domyślna cena dla towaru</description>
+			<details>Numer domyślnej ceny, związany z tabelą TwrCeny</details>
+		</column>
+		<column name="Twr_UdostepniajWCenniku" type="TINYINT" definition="NOT NULL">
+			<description>Czy towar ma być udostępniany w cenniku</description>
+			<details>
+				0 - nie udostępniaj
+				1 - udostępniaj
+			</details>
+		</column>
+		<column name="Twr_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta ostatniej ceny zakupu</description>
+		</column>
+		<column name="Twr_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu, po którym nastapił ostatni zakup towaru</description>
+		</column>
+		<column name="Twr_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania ostatniej ceny zakupu</description>
+		</column>
+		<column name="Twr_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania ostatniej ceny zakupu</description>
+		</column>
+		<column name="Twr_MinCenaMarza" type="DECIMAL(15,3)" definition="NOT NULL">
+			<description>Wartość minimalnej ceny sprzedaży lub minimalnej marży</description>
+		</column>
+		<column name="Twr_TypMinimum" type="TINYINT" definition="NOT NULL">
+			<description>Typ minimum</description>
+			<details>0-brak, 1-minimalna marża, 2-minimalna cena</details>
+		</column>
+		<column name="Twr_KosztUslugiWal" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Koszt usługi wyrażony w walucie, dla kosztów kwotowych</description>
+		</column>
+		<column name="Twr_KosztUslugi" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Koszt usługi</description>
+		</column>
+		<column name="Twr_KosztUslugiTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ kosztu usługi: 1 - kwotowy, 2 - procentowy</description>
+		</column>
+		<column name="Twr_KosztKGO" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_KosztKGO DEFAULT(0)">
+			<description>KGO</description>
+		</column>
+		<column name="Twr_SONId" type="INTEGER">
+			<description>Wskaźnik do słownika schematów opakowań</description>
+		</column>
+		<column name="Twr_KntId" type="INTEGER">
+			<description>Identyfikator dostawcy towaru</description>
+			<details>Wskaźnik do tabeli Kontrahenci</details>
+		</column>
+		<column name="Twr_KodDostawcy" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod towaru u dostawcy</description>
+		</column>
+		<column name="Twr_ProducentKod" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Twr_ProducentKod DEFAULT('')" hash="1">
+			<description>Kod towaru producenta</description>
+		</column>
+		<column name="Twr_IloscMin" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość minimalna towaru na magazynie</description>
+		</column>
+		<column name="Twr_IloscMinJM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary dla ilości minimalnej</description>
+		</column>
+		<column name="Twr_IloscMax" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość maksymalna towaru na magazynie</description>
+		</column>
+		<column name="Twr_IloscMaxJM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary dla ilości maksymalnej</description>
+		</column>
+		<column name="Twr_IloscZam" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość zamawiana jednorazowo</description>
+		</column>
+		<column name="Twr_IloscZamJM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>jednostka miary dla zamówień</description>
+		</column>
+		<column name="Twr_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="Twr_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="Twr_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawki zaniżonej</description>
+		</column>
+		<column name="Twr_StawkaExport" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka Vat dla eksportu</description>
+		</column>
+		<column name="Twr_FlagaExport" type="SMALLINT" definition="NOT NULL">
+			<description>Flaga Vat dla eksportu</description>
+		</column>
+		<column name="Twr_ZrodlowaExport" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawki zaniżonej</description>
+		</column>
+		<column name="Twr_StawkaZak" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość sawki Vat przy zakupie</description>
+		</column>
+		<column name="Twr_FlagaZak" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki przy zakupie</description>
+		</column>
+		<column name="Twr_ZrodlowaZak" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa</description>
+		</column>
+		<column name="Twr_Prog" type="TINYINT" definition="NOT NULL">
+			<description>Typ progu upustu</description>
+		</column>
+		<column name="Twr_Upust" type="TINYINT" definition="NOT NULL">
+			<description>Typ upustu</description>
+			<details>
+				1 - procentowy,
+				2 - wartościowy
+			</details>
+		</column>
+		<column name="Twr_UpustData" type="TINYINT" definition="NOT NULL">
+			<description>Upust ważny okresowo</description>
+		</column>
+		<column name="Twr_UpustDataOd" type="INTEGER">
+			<description>Data od której obowiązuje upust</description>
+		</column>
+		<column name="Twr_UpustDataDo" type="INTEGER">
+			<description>Data do której obowiązuje upust</description>
+		</column>
+		<column name="Twr_UpustGodz" type="TINYINT" definition="NOT NULL">
+			<description>Upust ważny w godzinach</description>
+		</column>
+		<column name="Twr_UpustGodzOd" type="INTEGER">
+			<description>Godzina od której obowiązuje upust</description>
+		</column>
+		<column name="Twr_UpustGodzDo" type="INTEGER">
+			<description>Godzina do której obowiązuje upust</description>
+		</column>
+		<column name="Twr_BezRabatu" type="TINYINT" definition="NOT NULL">
+			<description>Rabaty nie obowiązują</description>
+			<details>Potrzebne do współpracy z CDN-XL</details>
+		</column>
+		<column name="Twr_MarzaMin" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Marża minimalna</description>
+			<details>Potrzebne do współpracy z CDN-XL</details>
+		</column>
+		<column name="Twr_NieAktywny" type="TINYINT" definition="NOT NULL">
+			<description>Karta nieaktywna</description>
+			<details>Kartoteka nie wyświetlana na listach lookupowych</details>
+		</column>
+		<column name="Twr_ESklep" type="TINYINT">
+			<description>Czy eksportować do e-Sklepu</description>
+			<details>
+				0- nieudostępniaj &lt;br&gt;
+				1- udostępniaj
+			</details>
+		</column>
+		<column name="Twr_KCNId" type="INTEGER">
+			<description>Wskaźnik do słownika kodów CN</description>
+		</column>
+		<column name="Twr_Masa" type="DECIMAL(15,3)" definition="NOT NULL">
+			<description>Masa towaru</description>
+		</column>
+		<column name="Twr_Sent" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_Sent DEFAULT(0)">
+			<description>Towar objęty monitorowaniem przewozu</description>
+		</column>
+		<column name="Twr_JMSentPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_JMSentPrzelicznikL DEFAULT(1)">
+			<description>Licznik przelicznika JM Sent</description>
+		</column>
+		<column name="Twr_JMSentPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL CONSTRAINT DF_Twr_JMSentPrzelicznikM DEFAULT(1)">
+			<description>Mianownik przelicznika JM Sent</description>
+		</column>
+		<column name="Twr_SentMasaBrutto" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_SentMasaBrutto DEFAULT(0)">
+			<description>Masa towaru brutto</description>
+		</column>
+		<column name="Twr_SentKodOdpadu" type="NVARCHAR(6)" definition="NOT NULL CONSTRAINT DF_Twr_SentKodOdpadu DEFAULT('')">
+			<description>Kod odpadu</description>
+		</column>
+		<column name="Twr_PrdID" type="INTEGER">
+			<description>ID Producenta</description>
+		</column>
+		<column name="Twr_MrkID" type="INTEGER">
+			<description>ID Marki</description>
+		</column>
+		<column name="Twr_ESklepBezRabatu" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Twr_EsklepBezRabatu DEFAULT(0)">
+			<description>e-Sklep brak rabatu</description>
+		</column>
+		<column name="Twr_ESklepStatus" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Twr_EsklepStatus DEFAULT(1)">
+			<description>e-Sklep status towaru</description>
+		</column>
+		<column name="Twr_ESklepDostepnosc" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Twr_EsklepDostepnosc DEFAULT(0)">
+			<description>e-Sklep dostępność towaru</description>
+		</column>
+		<column name="Twr_ESklepKalkulacjaDostaw" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepKalkulacjaDostaw DEFAULT(0)">
+			<description>Indywidualny koszt dostawy</description>
+			<details>
+				0 – nie
+				1 - tak
+				2- konkretna wartość
+			</details>
+		</column>
+		<column name="Twr_ESklepKalkulacjaDostawWartosc" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_ESklepKalkulacjaDostawWartosc DEFAULT(0)">
+			<description>Indywidualny koszt dostawy wartość</description>
+		</column>
+		<column name="Twr_ESklepFlaga_Nowosc" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_Nowosc DEFAULT(0)">
+			<description>Flaga nowość</description>
+		</column>
+		<column name="Twr_ESklepFlaga_Promocja" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_Promocja DEFAULT(0)">
+			<description>Flaga promocja</description>
+		</column>
+		<column name="Twr_ESklepFlaga_ProduktzGazetki" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_ProduktzGazetki DEFAULT(0)">
+			<description>Flaga produkt z gazetki</description>
+		</column>
+		<column name="Twr_ESklepFlaga_ProduktPolecany" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_ProduktPolecany DEFAULT(0)">
+			<description>Flaga produkt polecany</description>
+		</column>
+		<column name="Twr_ESklepFlaga_Wyprzedaz" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_Wyprzedaz DEFAULT(0)">
+			<description>Flaga wyprzedaż</description>
+		</column>
+		<column name="Twr_ESklepFlaga_SuperJakosc" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_SuperJakosc DEFAULT(0)">
+			<description>Flaga super jakość</description>
+		</column>
+		<column name="Twr_ESklepFlaga_SuperCena" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_SuperCena DEFAULT(0)">
+			<description>Flaga super cena</description>
+		</column>
+		<column name="Twr_ESklepFlaga_NajlepiejOceniany" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_NajlepiejOceniany DEFAULT(0)">
+			<description>Flaga najlepiej oceniany</description>
+		</column>
+		<column name="Twr_ESklepFlaga_RekomendacjaSprzedawcy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_ESklepFlaga_RekomendacjaSprzedawcy DEFAULT(0)">
+			<description>Flaga rekomendacja sprzedawcy</description>
+		</column>
+		<column name="Twr_ESklepFantomID" type="INTEGER">
+			<description>ID fantoma</description>
+		</column>
+		<column name="Twr_WagaKG" type="DECIMAL(15,4)" definition="CONSTRAINT DF_Twr_WagaKG DEFAULT(0)">
+			<description>Waga w kilogramach</description>
+		</column>
+		<column name="Twr_KrajPochodzenia" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Kraj pochodzenia towaru (do deklaracji INTRASTAT)</description>
+		</column>
+		<column name="Twr_JmPomPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Przelicznik dla jednostki pomocniczej</description>
+		</column>
+		<column name="Twr_JmPomPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL">
+			<description>Przelicznik dla jednostki pomocniczej</description>
+		</column>
+		<column name="Twr_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="Twr_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Twr_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp założenia karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Twr_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartę</description>
+		</column>
+		<column name="Twr_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Twr_TS_XL" type="DATETIME">
+			<description>Time Stamp importu z XL-a</description>
+		</column>
+		<column name="Twr_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Twr_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Twr_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Twr_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Twr_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Twr_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Twr_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Twr_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Twr_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="Twr_GIDTyp" type="SMALLINT" filterVisible="false">
+			<description>Wg identyfikatora GIDTyp w CDN-XL</description>
+		</column>
+		<column name="Twr_GIDFirma" type="INTEGER" filterVisible="false">
+			<description>Wg identyfikatora GIDFirma w CDN-XL lub 1 jeśli wysłano do eSklep, 2 jeśli
+				wysłano do Detal</description>
+		</column>
+		<column name="Twr_GIDNumer" type="INTEGER" filterVisible="false">
+			<description>Wg identyfikatora GIDNumer w CDN-XL</description>
+		</column>
+		<column name="Twr_GIDLp" type="SMALLINT" filterVisible="false">
+			<description>Wg identyfikatora GIDLp w CDN-XL</description>
+		</column>
+		<column name="Twr_Akcyza" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_Akcyza DEFAULT(0)">
+			<description>Akcyza na wyroby węglowe</description>
+		</column>
+		<column name="Twr_AkcyzaJMPomPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_AkcyzaJMPomPrzelicznikL DEFAULT(1)">
+			<description>Akcyza Przelicznik Licznik dla jednostki pomocniczej</description>
+		</column>
+		<column name="Twr_AkcyzaJMPomPrzelicznikM" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Twr_AkcyzaJMPomPrzelicznikM DEFAULT(1)">
+			<description>Akcyza Przelicznik Mianownik dla jednostki pomocniczej</description>
+		</column>
+		<column name="Twr_AkcyzaOpal" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_AkcyzaOpal DEFAULT(0)">
+			<description>Akcyza Wartość opałowa w GJ/1000 kg</description>
+		</column>
+		<column name="Twr_AkcyzaStawka" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_AkcyzaStawka DEFAULT(0)">
+			<description>Stawka akcyzy</description>
+		</column>
+		<column name="Twr_SJRodzajPaliwa" type="NVARCHAR(500)" definition="NOT NULL CONSTRAINT DF_Twr_SJRodzajPaliwa DEFAULT('')">
+			<description>Świadectwo jakości - Rodzaj paliwa stałego</description>
+		</column>
+		<column name="Twr_SJSystemCertyfikacji" type="NVARCHAR(500)" definition="NOT NULL CONSTRAINT DF_Twr_SJSystemCertyfikacji DEFAULT('')">
+			<description>Świadectwo jakości - Systme certyfikacji</description>
+		</column>
+		<column name="Twr_SJPopiol" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJPopiol DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość popiołu </description>
+		</column>
+		<column name="Twr_SJPopiolMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJPopiolMin DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość popiołu Min</description>
+		</column>
+		<column name="Twr_SJPopiolMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJPopiolMax DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość popiołu Max</description>
+		</column>
+		<column name="Twr_SJSiarka" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJSiarka DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość siarki </description>
+		</column>
+		<column name="Twr_SJSiarkaMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJSiarkaMin DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość siarki Min</description>
+		</column>
+		<column name="Twr_SJSiarkaMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJSiarkaMax DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość siarki Max</description>
+		</column>
+		<column name="Twr_SJCzesciLotne" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJCzesciLotne DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość części lotnych </description>
+		</column>
+		<column name="Twr_SJCzesciLotneMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJCzesciLotneMin DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość części lotnych Min</description>
+		</column>
+		<column name="Twr_SJCzesciLotneMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJCzesciLotneMax DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość części lotnych Max</description>
+		</column>
+		<column name="Twr_SJWartoscOpalowa" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJWartoscOpalowa DEFAULT('')">
+			<description>Świadectwo jakości - Wartość opałowa </description>
+		</column>
+		<column name="Twr_SJWartoscOpalowaMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJWartoscOpalowaMin DEFAULT('')">
+			<description>Świadectwo jakości - Wartość opałowa Min</description>
+		</column>
+		<column name="Twr_SJWartoscOpalowaMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJWartoscOpalowaMax DEFAULT('')">
+			<description>Świadectwo jakości - Wartość opałowa Max</description>
+		</column>
+		<column name="Twr_SJZdolnoscSpiekania" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJZdolnoscSpiekania DEFAULT('')">
+			<description>Świadectwo jakości - Zdolność spiekania </description>
+		</column>
+		<column name="Twr_SJZdolnoscSpiekaniaMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZdolnoscSpiekaniaMin DEFAULT('')">
+			<description>Świadectwo jakości - Zdolność spiekania Min</description>
+		</column>
+		<column name="Twr_SJZdolnoscSpiekaniaMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZdolnoscSpiekaniaMax DEFAULT('')">
+			<description>Świadectwo jakości - Zdolność spiekania Max</description>
+		</column>
+		<column name="Twr_SJWymiarZiarna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJWymiarZiarna DEFAULT('')">
+			<description>Świadectwo jakości - Wymiar ziarna </description>
+		</column>
+		<column name="Twr_SJWymiarZiarnaMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJWymiarZiarnaMin DEFAULT('')">
+			<description>Świadectwo jakości - Wymiar ziarna Min</description>
+		</column>
+		<column name="Twr_SJWymiarZiarnaMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJWymiarZiarnaMax DEFAULT('')">
+			<description>Świadectwo jakości - Wymiar ziarna Max</description>
+		</column>
+		<column name="Twr_SJZawartoscPodziarna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscPodziarna DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość podziarna </description>
+		</column>
+		<column name="Twr_SJZawartoscPodziarnaMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscPodziarnaMin DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość podziarna Min</description>
+		</column>
+		<column name="Twr_SJZawartoscPodziarnaMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscPodziarnaMax DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość podziarna Max</description>
+		</column>
+		<column name="Twr_SJZawartoscNadziarna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscNadziarna DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość nadziarna </description>
+		</column>
+		<column name="Twr_SJZawartoscNadziarnaMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscNadziarnaMin DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość nadziarna Min</description>
+		</column>
+		<column name="Twr_SJZawartoscNadziarnaMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscNadziarnaMax DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość nadziarna Max</description>
+		</column>
+		<column name="Twr_SJZawartoscWilgoci" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscWilgoci DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość wilgoci całkowitej </description>
+		</column>
+		<column name="Twr_SJZawartoscWilgociMin" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscWilgociMin DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość wilgoci całkowitej Min</description>
+		</column>
+		<column name="Twr_SJZawartoscWilgociMax" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT DF_Twr_SJZawartoscWilgociMax DEFAULT('')">
+			<description>Świadectwo jakości - Zawartość wilgoci całkowitej Max</description>
+		</column>
+		<column name="Twr_OdwrotneObciazenie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_OdwrotneObciazenie DEFAULT(0)">
+			<description>odwrotne obciążenie</description>
+		</column>
+		<column name="Twr_Mobile" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_Mobile DEFAULT(1)">
+			<description>Czy eksportować do Mobile</description>
+			<details>
+				0- nieudostępniaj &lt;br&gt;
+				1- udostępniaj
+			</details>
+		</column>
+		<column name="Twr_PobieranieSkladnikowFSUslugaZlozona" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_PobieranieSkladnikowFSUslugaZlozona DEFAULT(0)">
+			<description>Pobieranie składników na FA dla usługi złożonej</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TwR_KosztUslugiOld" type="DECIMAL(17,4)" definition="NOT NULL CONSTRAINT DF_TwR_KosztUslugiOld DEFAULT(0)">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="TwR_WalutaZakOld" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_TwR_WalutaZakOld DEFAULT('')">
+			<description>Waluta starej ceny zakupu</description>
+		</column>
+		<column name="TwR_KursLZakOld" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_TwR_KursLZakOld DEFAULT(0)">
+			<description>Licznik notowania starej ceny zakupu</description>
+		</column>
+		<column name="TwR_KursMZakOld" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_TwR_KursMZakOld DEFAULT(0)">
+			<description>Mianownik notowania starej ceny zakupu</description>
+		</column>
+		<column name="Twr_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<column name="Twr_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_SplitPay DEFAULT(0)">
+			<description>Split Payment - płatność z zastosowaniem mechanizmu podzielonej płatności</description>
+		</column>
+		<column name="Twr_KV7ID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Twr_KV7ID DEFAULT(0)">
+			<description>Id słownika z typami dla JPK_V7</description>
+		</column>
+		<column name="Twr_OpiekunTyp" type="SMALLINT">
+			<description>Typ opiekuna</description>
+		</column>
+		<column name="Twr_OpiekunId" type="INTEGER">
+			<description>Id opiekuna</description>
+		</column>
+		<column name="Twr_JMWysCm" type="SMALLINT">
+			<description>Wysokość towaru w jednostce opakowania (cm)</description>
+		</column>
+		<column name="Twr_JMSzerCm" type="SMALLINT">
+			<description>Szerokość towaru w jednostce opakowania (cm)</description>
+		</column>
+		<column name="Twr_JMDlugCm" type="SMALLINT">
+			<description>Długość towaru w jednostce opakowania (cm)</description>
+		</column>
+		<column name="Twr_OplataCukrowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowa DEFAULT(0)">
+			<description>Opłata cukrowa</description>
+		</column>
+		<column name="Twr_OplataCukrowaPrzelicznikML" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaPrzelicznikML DEFAULT(0)">
+			<description>Opłata cukrowa Przelicznik</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdCukrowZawartoscSokow20" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdCukrowZawartoscSokow20 DEFAULT(0)">
+			<description>Opłata cukrowa od cukrów</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdSubstancjiSlodzacych" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdSubstancjiSlodzacych DEFAULT(0)">
+			<description>Opłata cukrowa od substancji słodzoncych</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdCukrowStala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdCukrowStala DEFAULT(0)">
+			<description>Wartość opłaty cukrowej stała</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdCukrowZmienna" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdCukrowZmienna DEFAULT(0)">
+			<description>Wartość opłaty cukrowej zmienna</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdKofeinyTauryny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdKofeinyTauryny DEFAULT(0)">
+			<description>Opłata cukrowa od Kofeiny, Tauryny</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdKofeinyTaurynyStala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdKofeinyTaurynyStala DEFAULT(0)">
+			<description>Wartość opłaty od Kofeiny, Tauryny</description>
+		</column>
+		<column name="Twr_OplataCukrowaSuma" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaSuma DEFAULT(0)">
+			<description>Suma opłaty cukrowej</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdCukrowZawartoscGram" type="DECIMAL(15,3)" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdCukrowZawartoscGram DEFAULT(0)">
+			<description>ZAwartość cukwu w gramach</description>
+		</column>
+		<column name="Twr_OplataCukrowaOdCukrowZawartoscRoztwor" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Twr_OplataCukrowaOdCukrowZawartoscRoztwor DEFAULT(0)">
+			<description>Opłata cukrowa od cukrów</description>
+		</column>
+		<column name="TwR_WszystkoPLUdostepnij" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLUdostepnij DEFAULT(0)">
+			<description>Udostępnij ofertę do wszystko.pl</description>
+		</column>
+		<column name="TwR_WszystkoPLUdostepnijTyp" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLUdostepnijTyp DEFAULT(0)">
+			<description>Czy wysłać szkic czy oderta aktywna</description>
+		</column>
+		<column name="TwR_WszystkoPLNazwa" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLNazwa DEFAULT('')">
+			<description>Nazwa oferty</description>
+		</column>
+		<column name="TwR_WszystkoPLOpis" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLOpis DEFAULT('')">
+			<description>Opis oferty</description>
+		</column>
+		<column name="TwR_WszystkoPLCena" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLCena DEFAULT(0)">
+			<description>Rodzaj ceny oferty</description>
+		</column>
+		<column name="TwR_WszystkoPLCenaWartosc" type="decimal(15,2)" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLCenaWartosc DEFAULT(0)">
+			<description>Wartość ceny oferty</description>
+		</column>
+		<column name="TwR_WszystkoPLIlosc" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLIlosc DEFAULT(0)">
+			<description>Ilość na ofercie</description>
+		</column>
+		<column name="TwR_WszystkoPLIloscWartosc" type="decimal(15,4)" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLIloscWartosc DEFAULT(0)">
+			<description>Wartość ilości na ofercie</description>
+		</column>
+		<column name="TwR_WszystkoPLKategoria" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLKategoria DEFAULT(0)">
+			<description>Kategoria dla wszystko.pl</description>
+		</column>
+		<column name="TwR_WszystkoPLCzasRealizacji" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLCzasRealizacji DEFAULT(0)">
+			<description>Czas realizacji</description>
+		</column>
+		<column name="TwR_WszystkoPLCennikDostaw" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLCennikDostaw DEFAULT(0)">
+			<description>Rodzaj cennika dostaw</description>
+		</column>
+		<column name="TwR_WszystkoPLZwrot" type="INTEGER" definition="NOT NULL  CONSTRAINT DF_TwR_WszystkoPLZwrot DEFAULT(0)">
+			<description>Rodzaj zwrotu</description>
+		</column>
+		<column name="TwR_WszystkoPLReklamacja" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLReklamacja DEFAULT(0)">
+			<description>Rodzaj reklamacji</description>
+		</column>
+		<column name="TwR_WszystkoPLGwarancja" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLGwarancja DEFAULT(0)">
+			<description>Rodzaj gwarancji</description>
+		</column>
+		<column name="TwR_WszystkoPLLink" type="NVARCHAR(2048)" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLLink  DEFAULT('')">
+			<description>Link do oferty</description>
+		</column>
+		<column name="TwR_WszystkoPLDataZmianyDanych" type="DateTime" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLDataZmianyDanych DEFAULT(0)">
+			<description>Data zmiany parametrów dla wszystko.pl</description>
+		</column>
+		<column name="TwR_WszystkoPLDataZmianyUdostepnij" type="DateTime" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLDataZmianyUdostepnij DEFAULT(0)">
+			<description>Data ustawienia udostępniaj</description>
+		</column>
+		<column name="TwR_WszystkoPLDataZmianyDanychOpis" type="DateTime" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLDataZmianyDanychOpis DEFAULT(0)">
+			<description>Data zmiany opisu dla wszystko.pl</description>
+		</column>
+		<column name="TwR_WszystkoPLDataAktualizacji" type="DateTime" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLDataAktualizacji DEFAULT(0)">
+			<description>Data aktualizacji aktywnej oferty we wszystko.pl</description>
+		</column>
+		<column name="TwR_WszystkoPLStatus" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLStatus DEFAULT(0)">
+			<description>Status oferty we wszystko.pl</description>
+		</column>
+		<column name="TwR_WszystkoPLId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwR_WszystkoPLId DEFAULT(0)">
+			<description>Id oferty we wszystko.pl</description>
+		</column>
+		<primaryKey name="Twr_Primary" columns="Twr_TwrId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TwrKodCN" localColumns="Twr_KCNId" refTable="KodyCN" refColumns="KCN_KCNId">
+			<description>Relacja CDN.Towary:CDN.KodyCN (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TwrDostawca" localColumns="Twr_KntId" refTable="Kontrahenci" refColumns="Knt_KntId">
+			<description>Relacja CDN.Towary:CDN.Kontrahenci (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_Twrkategoria" localColumns="Twr_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Towary:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="TwrKod" options="UNIQUE NONCLUSTERED" fields="Twr_Kod">
+			<description>Wg kodu towaru</description>
+		</index>
+		<index name="TwrGrupKod" options="UNIQUE NONCLUSTERED" fields="Twr_TwGGIDNumer ,Twr_Kod">
+			<description>Wg kodu towaru w ramach grupy</description>
+		</index>
+		<index name="TwrEAN" options="UNIQUE NONCLUSTERED" fields="Twr_EAN ,Twr_TwrId">
+			<description>Wg numeru EAN</description>
+			<details>Klucz ma zapewnioną unikalność poprzez TwrId. Zabezpieczenie przed wstawieniem wielu
+				rekordów o tym samym EAN jest realizowane triggerem.</details>
+		</index>
+		<index name="TwrNrKat" options="UNIQUE NONCLUSTERED" fields="Twr_NumerKat ,Twr_TwrId">
+			<description>Wg numeru katalogowego</description>
+			<details>Klucz ma zapewnioną unikalność poprzez TwrId. Zabezpieczenie przed wstawieniem wielu
+				rekordów o tym samym NumerKat jest realizowane triggerem.</details>
+		</index>
+		<index name="TwrNazwa" options="UNIQUE NONCLUSTERED" fields="Twr_Nazwa ,Twr_TwrId">
+			<description>Wg nazwy towaru</description>
+		</index>
+		<index name="TwrGrupaDomyslna" options="NONCLUSTERED" fields="Twr_TwGGIDNumer">
+			<description>Wg Id grupy domyślnej</description>
+		</index>
+		<index name="Twrkategoria" options="NONCLUSTERED" fields="Twr_KatId">
+			<description>Klucz obcy do tabeli Kategorie</description>
+		</index>
+		<index name="TwrKategoriaZak" options="NONCLUSTERED" fields="Twr_KatZakId">
+			<description>Klucz obcy do tabeli Kategorie</description>
+		</index>
+		<index name="TwrProduktTyp" options="NONCLUSTERED" fields="Twr_Produkt ,Twr_Typ">
+			<description>Wg produktów</description>
+		</index>
+		<index name="TwrNieaktywne" options="NONCLUSTERED" fields="Twr_NieAktywny" includedColumns="Twr_TwrId, Twr_Kod, Twr_Typ, Twr_Produkt, Twr_GIDNumer,Twr_TS_Mod, Twr_TwCNumer, Twr_Nazwa,Twr_EAN, Twr_OpiekunID, Twr_OpiekunTyp">
+			<description>Wg aktywne/nieaktywne</description>
+		</index>
+		<index name="TwrESklepFantomID" options="NONCLUSTERED" fields="Twr_ESklepFantomID" includedColumns="Twr_NieAktywny">
+			<description>Wg eSklep fantom</description>
+		</index>
+		<index name="TwrGIDNumer" options="NONCLUSTERED" fields="Twr_GIDNumer" includedColumns="Twr_TwrId, Twr_Kod, Twr_Typ, Twr_Produkt">
+			<description>Wg GIDNumer</description>
+		</index>
+		<index name="TwrDostawca" options="NONCLUSTERED" fields="Twr_KntId">
+			<description>Klucz obcy do tabeli kontrahenci (dostawcy)</description>
+		</index>
+		<index name="TwrKodDostawcy" options="UNIQUE NONCLUSTERED" fields="Twr_KodDostawcy ,Twr_TwrId">
+			<details>Wg kodów towarów u dostawcy</details>
+		</index>
+		<index name="TwrGID" options="NONCLUSTERED" fields="Twr_GIDTyp ,Twr_GIDNumer">
+			<description>Wg identyfikatora GID w CDN-XL</description>
+		</index>
+		<index name="TwrKodCN" options="NONCLUSTERED" fields="Twr_KCNId" />
+		<index name="TwrSON" options="NONCLUSTERED" fields="Twr_SONId">
+			<description>Klucz do schematów opakowań</description>
+		</index>
+		<index name="TwrProducent" options="NONCLUSTERED" fields="Twr_PrdId" />
+		<index name="TwrMarka" options="NONCLUSTERED" fields="Twr_MrkId" />
+		<index name="TwrGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="Twr_Kod, Twr_TwrId" includedColumns="Twr_NieAktywny, Twr_Nazwa, Twr_EAN">
+			<description>Gridlookupu towaru wg kodu i id towaru</description>
+		</index>
+		<index name="TwrAutoKodNr" options="NONCLUSTERED" fields="Twr_AutoKodSeria ,Twr_AutoKodNumer">
+			<description>Numer dla serii w kodzie towaru</description>
+		</index>
+	</table>
+	

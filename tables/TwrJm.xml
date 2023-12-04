@@ -1,0 +1,82 @@
+<table name="TwrJm">
+		<description>Przeliczniki opakowań</description>
+		<details>Tabela jednostek pomocniczych - zaślepka do współpracy z CDN XL</details>
+		<column name="TwJ_TwrTyp" type="SMALLINT" />
+		<column name="TwJ_TwrFirma" type="INTEGER" />
+		<column name="TwJ_TwrNumer" type="INTEGER">
+			<details>Unikalny automatycznie nadawany numer elementu.</details>
+		</column>
+		<column name="TwJ_TwrLp" type="SMALLINT" />
+		<column name="TwJ_KcaTyp" type="SMALLINT" />
+		<column name="TwJ_KcaFirma" type="INTEGER" />
+		<column name="TwJ_KcaNumer" type="INTEGER">
+			<details>Unikalny automatycznie nadawany numer elementu.</details>
+		</column>
+		<column name="TwJ_KcaLp" type="SMALLINT" />
+		<column name="TwJ_JmZ" type="NVARCHAR(8)">
+			<description>Jednostka pomocnicza</description>
+		</column>
+		<column name="TwJ_JmFormat" type="TINYINT">
+			<description>Miejsca po przecinku</description>
+		</column>
+		<column name="TwJ_TypJm" type="TINYINT">
+			<description>Przelicznik (ciągły, dyskretny)</description>
+			<details>
+				Typ jednostki miary, a właściwie przelicznik:
+				Ciągły 12 / 5 = 2.4
+				Dyskretny 12 / 5 = 2 reszty 2
+			</details>
+		</column>
+		<column name="TwJ_Calkowita" type="TINYINT">
+			<description>Sprzedaż opakowań całkowitych</description>
+		</column>
+		<column name="TwJ_PrzeliczM" type="DECIMAL(15,0)">
+			<description>Mianownik przelicznika</description>
+			<details>Przelicznik waluty w stosunku do 1zł.</details>
+		</column>
+		<column name="TwJ_PrzeliczL" type="DECIMAL(15,0)">
+			<description>Licznik przelicznika</description>
+		</column>
+		<column name="TwJ_Prog" type="DECIMAL(11,4)">
+			<description>Ilość od jakiej należy wydać kaucję</description>
+		</column>
+		<column name="TwJ_Obowiazek" type="TINYINT">
+			<description>Obowiązkowo wydawać kaucję</description>
+		</column>
+		<column name="TwJ_Waga" type="DECIMAL( 7,3)">
+			<description>Waga jednostki</description>
+		</column>
+		<column name="TwJ_WJm" type="NVARCHAR(5)">
+			<description>Jednostka miary wagi</description>
+		</column>
+		<column name="TwJ_EAN" type="VARCHAR(20)">
+			<description>Ean</description>
+		</column>
+		<column name="TwJ_WyliczPrzySpr" type="SMALLINT">
+			<description>Czy przelicznik wyliczany przy sprzedaży</description>
+		</column>
+		<column name="TwJ_ObjetoscL" type="DECIMAL( 5,0)">
+			<description>Licznik objętości</description>
+			<details>Licznik jednostki objętości w stosunku do 1m3</details>
+		</column>
+		<column name="TwJ_ObjetoscM" type="DECIMAL( 5,0)">
+			<description>Mianownik objętości</description>
+			<details>Mianownik jednostki objętości w stosunku do 1m3</details>
+		</column>
+		<column name="TwJ_WagaBrutto" type="DECIMAL( 7,3)">
+			<description>Waga jednostki brutto</description>
+		</column>
+		<column name="TwJ_WJmBrutto" type="NVARCHAR(5)">
+			<description>Jednostka miary wagi brutto</description>
+		</column>
+		<primaryKey name="TwJ_Primary" columns="TwJ_TwrTyp,TwJ_TwrFirma,TwJ_TwrNumer,TwJ_TwrLp">
+			<description>Wg towaru</description>
+		</primaryKey>
+		<index name="TwJKaucja" options="NONCLUSTERED" fields="TwJ_KcaTyp ,TwJ_KcaFirma ,TwJ_KcaNumer">
+			<description>Wg kaucji</description>
+		</index>
+		<index name="TwjEAN" options="NONCLUSTERED" fields="TwJ_EAN">
+			<description>Wg kodu EAN</description>
+		</index>
+	</table>
+	

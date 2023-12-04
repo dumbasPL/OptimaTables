@@ -1,0 +1,85 @@
+<table name="AkordDefinicja">
+		<description>Definicje (typy) akordów</description>
+		<column name="ADF_AdfId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ADF_TwpId" type="INTEGER" definition="NOT NULL">
+			<description>Typ składnika wypłaty</description>
+		</column>
+		<column name="ADF_Nazwa" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa akordu</description>
+		</column>
+		<column name="ADF_Skrot" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Skrót akordu</description>
+		</column>
+		<column name="ADF_Jednostka" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Jednostka akordu</description>
+		</column>
+		<column name="ADF_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Nieaktywny</description>
+		</column>
+		<column name="ADF_Pomniejszenie" type="TINYINT" definition="NOT NULL">
+			<description>Pomniejszenie</description>
+		</column>
+		<column name="ADF_Rodzaj" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj akordu</description>
+		</column>
+		<column name="ADF_Godzinowe" type="TINYINT" definition="NOT NULL">
+			<description>Godzinowe</description>
+		</column>
+		<column name="ADF_Stawka" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Stawka</description>
+		</column>
+		<column name="ADF_Progresywny" type="TINYINT" definition="NOT NULL">
+			<description>Progresywny</description>
+		</column>
+		<column name="ADF_WgNajwStawki" type="TINYINT" definition="NOT NULL">
+			<description>Liczony wg najwyższej stawki</description>
+		</column>
+		<column name="ADF_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="ADF_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="ADF_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ADF_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="ADF_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="ADF_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ADF_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="ADF_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ADF_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ADF_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ADF_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ADF_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ADF_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ADF_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ADF_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="ADF_Primary" columns="ADF_AdfId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_ADFTwpId" localColumns="ADF_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId">
+			<description>Relacja CDN.AkordDefinicja:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<index name="ADFNazwa" options="UNIQUE NONCLUSTERED" fields="ADF_Nazwa">
+			<description>Klucz po nazwie akordu</description>
+		</index>
+		<index name="ADFTwpId" options="NONCLUSTERED" fields="ADF_TwpId">
+			<description>Relacja do TypWyplata</description>
+		</index>
+	</table>
+	

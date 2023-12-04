@@ -1,0 +1,74 @@
+<table name="WyplatyElem" filterVisible="false">
+		<description>Składniki wypłaty w uproszczonej ewidencji wynagrodzeń</description>
+		<details>
+			Elementy wypłaty.
+			Informacje o wypłacie zapisywane są w tabelach:
+			WyplatyNag - sumaryczne kwoty wypłaty
+			WyplatyElem - kwoty składników wypłaty
+		</details>
+		<column name="WyE_WyEId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WyE_WyNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu nagłówka wynagrodzenia</description>
+			<details>Relacja do tabeli WyplatyElem</details>
+		</column>
+		<column name="WyE_KatID" type="INTEGER">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) elementu wypłaty może zostac wpisany "z ręki" (WyE:KatId = 0) lub zostac
+				pobrany z listy kategorii (WyE:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="WyE_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Kategoria (opis)</description>
+		</column>
+		<column name="WyE_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wynagrodzenia</description>
+		</column>
+		<column name="WyE_Koszt" type="TINYINT" definition="NOT NULL">
+			<description>Składnik stanowi koszt uzyskania pracodawcy</description>
+		</column>
+		<column name="WyE_Gotowka" type="TINYINT" definition="NOT NULL">
+			<description>Składnik wpływa na kwotę do wypłaty (wynagrodzenie w gotówce)</description>
+		</column>
+		<column name="WyE_Opodatkowany" type="TINYINT" definition="NOT NULL">
+			<description>Składnik opodatkowany</description>
+		</column>
+		<column name="WyE_UbEmeryt" type="TINYINT" definition="NOT NULL">
+			<description>Składnik stanowi podstawę składek ubezpieczenia emerytalnego</description>
+		</column>
+		<column name="WyE_UbRentow" type="TINYINT" definition="NOT NULL">
+			<description>Składnik stanowi podstawę składek ubezpieczenia rentowego</description>
+		</column>
+		<column name="WyE_UbChorob" type="TINYINT" definition="NOT NULL">
+			<description>Składnik stanowi podstawę składek ubezpieczenia chorobowego</description>
+		</column>
+		<column name="WyE_UbWypadk" type="TINYINT" definition="NOT NULL">
+			<description>Składnik stanowi podstawę składek ubezpieczenia wypadkowego</description>
+		</column>
+		<column name="WyE_UbZdrowo" type="TINYINT" definition="NOT NULL">
+			<description>Składnik stanowi podstawę składek ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="WyE_Potracenie" type="TINYINT" definition="NOT NULL">
+			<description>Składnik jest potrąceniem od wypłaty</description>
+		</column>
+		<primaryKey name="WyE_Primary" columns="WyE_WyEId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_WyEKategoria" localColumns="WyE_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.WyplatyElem:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WyENaglowek" localColumns="WyE_WyNId" refTable="WyplatyNag" refColumns="WyN_WyNId" deleteOption="CASCADE">
+			<description>Relacja CDN.WyplatyElem:CDN.WyplatyNag (MANY:1)</description>
+		</foreignKey>
+		<index name="WyEKategoria" options="NONCLUSTERED" fields="WyE_KatID">
+			<description>Wg identyfikatora kategorii</description>
+			<details>Indeks wiążący WyplatyElem z Kategorie</details>
+		</index>
+		<index name="WyENaglowek" options="UNIQUE NONCLUSTERED" fields="WyE_WyNId ,WyE_WyEId">
+			<description>Wg identyfikatora nagłówka wypłaty</description>
+		</index>
+	</table>
+	

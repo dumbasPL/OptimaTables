@@ -1,0 +1,13 @@
+<table name="JpkWb">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="ID" type="int" definition="NO_SQL" />
+		<column name="JpNID" type="int" definition="NO_SQL" />
+		<column name="BZpID" type="int" definition="NO_SQL" />
+		<column name="NumerWiersza" type="int" definition="NO_SQL" />
+		<column name="DataOperacji" type="date" definition="NO_SQL" />
+		<column name="NazwaPodmiotu" type="nvarchar(352)" definition="NO_SQL" />
+		<column name="OpisOperacji" type="nvarchar(1024)" definition="NO_SQL" />
+		<column name="KwotaOperacji" type="decimal(18, 2)" definition="NO_SQL" />
+		<column name="SaldoPoOperacji" type="decimal(18, 2)" definition="NO_SQL" />
+	</table>
+	

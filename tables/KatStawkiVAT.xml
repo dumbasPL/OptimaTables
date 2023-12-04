@@ -1,0 +1,33 @@
+<table name="KatStawkiVAT" filterVisible="false">
+		<description>Lista stawek zagranicznych kategorii</description>
+		<details>Tabela stawek zagranicznych kategorii.</details>
+		<column name="KaV_KaVID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KaV_KatID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do kategorii</description>
+		</column>
+		<column name="KaV_KodKraju" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Kod kraju</description>
+		</column>
+		<column name="KaV_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="KaV_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+		</column>
+		<column name="KaV_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawki zaniżonej</description>
+		</column>
+		<column name="KaV_Rodzaj" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj stawki</description>
+		</column>
+		<primaryKey name="KaV_Primary" columns="KaV_KaVID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KaVKategoria" localColumns="KaV_KatID" refTable="Kategorie" refColumns="Kat_KatID" deleteOption="CASCADE" />
+		<index name="KaVKategoria" options="UNIQUE NONCLUSTERED" fields="KaV_KatID, KaV_KodKraju">
+			<description>Wg kategorii i kodu kraju</description>
+		</index>
+	</table>
+	

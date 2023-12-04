@@ -1,0 +1,32 @@
+<table name="SerieKalPozGodz">
+		<description>Wejścia/wyjścia serii kalendarzy</description>
+		<column name="SKP_SkpId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SKP_SlpId" type="INTEGER" definition="NOT NULL">
+			<description>We/wy w dniu</description>
+		</column>
+		<column name="SKP_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer porządkowy</description>
+		</column>
+		<column name="SKP_OdGodziny" type="DATETIME" definition="NULL">
+			<description>Godzina wejścia</description>
+		</column>
+		<column name="SKP_DoGodziny" type="DATETIME" definition="NULL">
+			<description>Godzina wyjścia</description>
+		</column>
+		<column name="SKP_Strefa" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator strefy</description>
+		</column>
+		<primaryKey name="SKP_Primary" columns="SKP_SkpId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="SKPLp" options="NONCLUSTERED" fields="SKP_Lp" />
+		<index name="SKPSlpLink" options="NONCLUSTERED" fields="SKP_SlpId">
+			<description>Klucz obcy serii kalendarza</description>
+		</index>
+		<foreignKey name="FK_SKPSlpLink" localColumns="SKP_SlpId" refTable="SerieKalPoz" refColumns="Slp_SlpId" deleteOption="CASCADE">
+			<description>Relacja CDN.SerieKalPozGodz:CDN.SerieKalDni (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

@@ -1,0 +1,22 @@
+<table name="OkresoweHarmonogram">
+		<description />
+		<column name="OkH_OkHId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="OkH_OkEId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli OkresoweElem</description>
+		</column>
+		<column name="OkH_Data" type="DateTime" definition="NOT NULL">
+			<description>Data ksigowania okresowego</description>
+		</column>
+		<column name="OkH_Kwota" type="Decimal(15,2)" definition="NOT NULL">
+			<description>Wartość księgowania okresowego</description>
+		</column>
+		<primaryKey name="OkH_Primary" columns="OkH_OkHId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_OkHElement" localColumns="OkH_OkEId" refTable="OkresoweElem" refColumns="OkE_OkEId" deleteOption="CASCADE">
+			<description>Relacja CDN.OkresoweHarmonogram:CDN.OkresoweElem (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

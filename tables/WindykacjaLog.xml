@@ -1,0 +1,64 @@
+<table name="WindykacjaLog">
+		<description>Schematy windykacji</description>
+		<column name="WiL_WiLId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WiL_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji</description>
+		</column>
+		<column name="WiL_Akcja" type="INTEGER" definition="NOT NULL">
+			<description>Typ operacji</description>
+		</column>
+		<column name="WiL_AkcjaId" type="INTEGER" definition="NOT NULL">
+			<description>Id etapu windykacji</description>
+		</column>
+		<column name="WiL_Blad" type="INTEGER" definition="NOT NULL">
+			<description>Błąd, czy opis</description>
+		</column>
+		<column name="WiL_NumerDok" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="WiL_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId: &lt;br&gt;
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="WiL_PodmiotId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="WiL_Opis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Opis dodatkowy</description>
+		</column>
+		<column name="WiL_DokumentTyp" type="INTEGER" definition="NOT NULL">
+			<description>Typ utworzonego dokumentu</description>
+		</column>
+		<column name="WiL_DokumentId" type="INTEGER" definition="NOT NULL">
+			<description>Id utworzonego dokumentu</description>
+		</column>
+		<column name="WiL_PlatnoscId" type="INTEGER" definition="NOT NULL">
+			<description>Id zdarzenia KB</description>
+		</column>
+		<column name="WiL_Source" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WiL_Source DEFAULT(0)">&gt; <description>0-windykacja
+			automatyczna 1-windykacja na żądanie</description>
+		</column>
+		<column name="WiL_DokumentGUID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator dokumentu nadrzędnego</description>
+		</column>
+		<primaryKey name="WiL_Primary" columns="WiL_WiLId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="WiL_DataIndex" options="NONCLUSTERED" fields="WiL_Data">
+			<description>Indeks wg daty</description>
+		</index>
+		<index name="WiL_PodmiotIndex" options="NONCLUSTERED" fields="WiL_PodmiotTyp, WiL_PodmiotId">
+			<description>Indeks wg daty</description>
+		</index>
+	</table>
+	

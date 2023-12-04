@@ -1,0 +1,54 @@
+<table name="DokNagEtapyHistoria">
+		<description>Historia etapów obiegu dokumentu</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="DnEH_DnEHID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu. &lt;br&gt;
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DnEH_DoNID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu</description>
+			<details>Identyfikator do tabeli CDN.DokNag</details>
+		</column>
+		<column name="DnEH_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ operacji</description>
+			<details>
+				1 - dodanie nowego &lt;br&gt;
+				2 - przejście do kolejengo etapu &lt;br&gt;
+				3 - wycofanie do poprzedniego &lt;br&gt;
+				4 - powrót do poprzedniego etapu &lt;br&gt;
+				5 - oznacza zakończenie procesu
+			</details>
+		</column>
+		<column name="DnEH_SymbolPrzed" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol etapu przed</description>
+		</column>
+		<column name="DnEH_SymbolPo" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol etapu po zmianie</description>
+		</column>
+		<column name="DnEH_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Operator przypisany do etapu;</description>
+		</column>
+		<column name="DnEH_OpeKod" type="VARCHAR(20)">
+			<description>Kod operatora (akronim)</description>
+		</column>
+		<column name="DnEH_DataZmiany" type="DATETIME" definition="NOT NULL">
+			<description>Data i godzina zmiany</description>
+		</column>
+		<column name="DnEH_Komentarz" type="NVARCHAR(1024)">
+			<description>Komentarz</description>
+		</column>
+		<primaryKey name="DnEH_Primary" columns="DnEH_DnEHID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_DnEHDokumenty" localColumns="DnEH_DoNID" refTable="DokNag" refColumns="DoN_DoNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DokNagEtapyHistoria:CDN.DokNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DnEHDokumenty" options="UNIQUE NONCLUSTERED" fields="DnEH_DoNID ,DnEH_Typ ,DnEH_DnEHID">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="DnEKDataZmiany" options="NONCLUSTERED" fields="DnEH_DoNID ,DnEH_DataZmiany" />
+	</table>
+	

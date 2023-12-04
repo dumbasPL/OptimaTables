@@ -1,0 +1,130 @@
+<table name="DokDefinicje">
+		<description>Definicje schematow numeracji dokumentów</description>
+		<details>Ogólno systemowy słownik definiowanych dokumentów.</details>
+		<column name="DDf_DDfID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DDf_Klasa" type="INTEGER" definition="NOT NULL">
+			<description>Predefiniowana klasa dokumentu</description>
+			<details>
+				101 - Ewid.dod. przych. &lt;br&gt; 102 - Ewid.dod. kosztów &lt;br&gt; 201 - Deklaracje,
+				RejestrVAT Zakupu, Wypłata &lt;br&gt; 202 - RejestrVAT sprz., Wpłata &lt;br&gt; 211 - RKB
+				&lt;br&gt; 221- Nota odsetkowa &lt;br&gt; 222 - Ponaglenie zapłaty &lt;br&gt; 223 -
+				Potwierdzenie salda &lt;br&gt; 224 - RKUR &lt;br&gt; 301 - FZ , FZKOR, FZKG, FZ NotaKor
+				&lt;br&gt; 302 - FA, FAKOR &lt;br&gt; 303 - PW, PWKOR, PWAI &lt;br&gt;
+				304 - RW, RWKOR, RW z AI &lt;br&gt; 305 - PA, PAKOR &lt;br&gt; 306 - WZ, WZKOR, WZKK
+				&lt;br&gt; 307 - PZ, PZKOR &lt;br&gt; 308 - RO &lt;br&gt; 309 - ZD &lt;br&gt; 310 - BOM,
+				BOMKOR, BZM &lt;br&gt; 311 - AI &lt;br&gt; 312 - MM &lt;br&gt; 313 - PKA, PKAKOR &lt;br&gt;
+				314 - WKA, WKAKOR &lt;br&gt; 317 - PWP, PWPKOR &lt;br&gt; 318 - RWS, RWSKOR &lt;br&gt; 320 -
+				FPF &lt;br&gt; 321 - FWS &lt;br&gt; 322 - FWS &lt;br&gt; 345 - Tax Free &lt;br&gt; 350 - FRR
+				&lt;br&gt; 400 - Umowa &lt;br&gt; 500 - Bilans otwarcia &lt;br&gt; 600 - Bilans otwarcia,
+				Etat, Inna wypłata, Pożyczka, Umowa zlecenie, Właściciel,Zaliczki &lt;br&gt;650 - Etat
+				korygująca, 700 - Kontakt &lt;Br&gt; 800 - Oferta MS Word &lt;br&gt; 900 - Zlecenie
+				serwisowe
+			</details>
+		</column>
+		<column name="DDf_Symbol" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Symbol definicji dokumentu</description>
+			<details>Symbol uzywany jest w schematach numeracji dokumentów</details>
+		</column>
+		<column name="DDf_PrevSymbol" type="VARCHAR(5)" definition="NULL">
+			<description>Symbol definicji dokumentu w bazie źródłowej</description>
+			<details>Symbol definicji dokumentu w bazie źródłowej, z której wykonywany jest import danych</details>
+		</column>
+		<column name="DDf_Nazwa" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Nazwa definicji dokumentu</description>
+		</column>
+		<column name="DDf_Nieaktywna" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DDf_Nieaktywna DEFAULT(0)">
+			<description>Czy definicja jest nieaktywna</description>
+		</column>
+		<column name="DDf_Numeracja" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Schemat numeracji dokumentu</description>
+		</column>
+		<column name="DDf_PrevNumeracja" type="NVARCHAR(50)" definition="NULL">
+			<description>Schemat numeracji dokumentu w bazie źródłowej, z której wykonywany jest import
+				danych</description>
+		</column>
+		<column name="DDf_SeriaOperatora" type="TINYINT" definition="NOT NULL">
+			<description>Pobierać serię domyślną z operatora</description>
+		</column>
+		<column name="DDf_KierunekOrg" type="COMPUTED|INTEGER" definition="CASE WHEN DDF_KLASA IN (102,114,117,201,224,301,307,313,600,650) THEN -1 WHEN DDF_KLASA IN (101,202,221,302,305,306,308,314) THEN 1 ELSE 0 END">
+			<description>Funkcja pokazująca kierunek dla defincji dokumentu</description>
+			<details>
+				-1 - rozchód &lt;br&gt;
+				0 - brak &lt;br&gt;
+				1 - przychód
+			</details>
+		</column>
+		<column name="DDf_PowDDfID" type="INTEGER">
+			<description>Identyfikator skojarzonej definicji dokumentu</description>
+		</column>
+		<column name="DDf_PowSeria" type="NVARCHAR(5)">
+			<description>Seria dla skojarzonej definicji dokumentu</description>
+		</column>
+		<column name="DDf_KatalogObdId" type="INTEGER">
+			<description>Id skojarzonego katalogu OBD</description>
+		</column>
+		<column name="DDf_TS_Export" type="DATETIME">
+			<description>Czas wykonania eksportu</description>
+		</column>
+		<column name="DDf_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy z której dokonano importu</description>
+		</column>
+		<column name="DDf_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza oryginalnego (taki sam we wszystkich db)</description>
+		</column>
+		<column name="DDf_ImportRowId2" type="VARCHAR(36)">
+			<description>Identyfikator wiersza oryginalnego (indywidualny dla każdej db)</description>
+		</column>
+		<column name="DDf_ImportSchematID" type="INTEGER">
+			<description>Identyfikator pomocniczy</description>
+		</column>
+		<column name="DDf_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="DDf_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DDf_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="DDf_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="DDf_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DDf_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="DDf_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DDf_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DDf_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DDf_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DDf_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DDf_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DDf_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DDf_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="DDf_Primary" columns="DDf_DDfID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DDfSymbol" options="NONCLUSTERED" fields="DDf_Symbol">
+			<description>Według symbolu dokumentu</description>
+		</index>
+		<index name="DDfKlasa" options="NONCLUSTERED" fields="DDf_Klasa ,DDf_Symbol">
+			<description>Według klasy dokumentu</description>
+		</index>
+		<index name="DDfGUID" options="UNIQUE NONCLUSTERED" fields="DDf_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="DDfGUID2" options="UNIQUE NONCLUSTERED" fields="DDf_ImportRowId2">
+			<description>Wg unikalnego identyfikatora 2</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,98 @@
+<table name="ZestawyTwr">
+		<description>Zestawy towarów</description>
+		<details>Zawiera definicje zestawów towarów</details>
+		<column name="ZTw_ZTwId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="ZTw_TwrId" type="INTEGER">
+			<description>Identyfikator produktu</description>
+			<details>Wskaźnik do tabeli towary - odpowiedni towar musi być produktem</details>
+		</column>
+		<column name="ZTw_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod zestawu</description>
+		</column>
+		<column name="ZTw_Nazwa" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Nazwa zestawu</description>
+		</column>
+		<column name="ZTw_TypRabatu" type="tinyint" definition="NOT NULL">
+			<description>Typ rabatu</description>
+		</column>
+		<column name="ZTw_Wartosc" type="decimal(17, 4)" definition="NOT NULL">
+			<description>Wartosc</description>
+		</column>
+		<column name="ZTw_Waluta" type="varchar(3)" definition="NOT NULL">
+			<description>Waluta</description>
+		</column>
+		<column name="ZTw_DataOd" type="datetime" definition="NOT NULL">
+			<description>Od Daty</description>
+		</column>
+		<column name="ZTw_DataDo" type="datetime" definition="NOT NULL">
+			<description>Do Daty</description>
+		</column>
+		<column name="ZTw_GodzinaOd" type="datetime" definition="NOT NULL">
+			<description>Od godziny</description>
+		</column>
+		<column name="ZTw_GodzinaDo" type="datetime" definition="NOT NULL">
+			<description>Do godziny</description>
+		</column>
+		<column name="ZTw_ESklep" type="tinyint" definition="NOT NULL">
+			<description>czy wysyłać do isklep24</description>
+		</column>
+		<column name="ZTw_CzyOgraniczacDaty" type="tinyint" definition="NOT NULL">
+			<description>czy obowiązywanie zestawu ograniczone datami</description>
+		</column>
+		<column name="ZTw_CzyOgraniczacCzas" type="tinyint" definition="NOT NULL">
+			<description>czy obowiązywanie zestawu ograniczone godzinami</description>
+		</column>
+		<column name="ZTw_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Informacja dodatkowe</description>
+		</column>
+		<column name="ZTw_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="ZTw_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZTw_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ZTw_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="ZTw_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZTw_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ZTw_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZTw_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ZTw_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZTw_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ZTw_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZTw_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ZTw_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZTw_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="ZTw_Primary" columns="ZTw_ZTwId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_ZTwTwrKod" localColumns="ZTw_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZestawyTwr:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="ZTwTwrKod" options="UNIQUE NONCLUSTERED" fields="ZTw_TwrId ,ZTw_Kod">
+			<description>Lista receptur produktu wg kodu</description>
+		</index>
+	</table>
+	

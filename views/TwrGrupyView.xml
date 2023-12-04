@@ -1,0 +1,13 @@
+<view name="TwrGrupyView">
+		<description>Lista grup towarowycg</description>
+		<column name="TwGV_TwGId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TwGV_Sciezka" type="NVARCHAR(100)" definition="NO_SQL" />
+		<column name="TwGV_Nazwa" type="NVARCHAR(255)" definition="NO_SQL" />
+		<column name="TwGV_Kod" type="NVARCHAR(40)" definition="NO_SQL" />
+		<column name="TwGV_Poziom" type="INTEGER" definition="NO_SQL" />
+		<column name="TwGV_GIDNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="TwGV_GRONumer" type="INTEGER" definition="NO_SQL" />
+	</view>
+	

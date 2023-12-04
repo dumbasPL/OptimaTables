@@ -1,0 +1,19 @@
+<table name="RejestrOperacjiTypyObiektow">
+		<description>Rejestr operacji typy obiektow</description>
+		<column name="ROPTOb_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ obiektu</description>
+		</column>
+		<column name="ROPTOb_SubTyp" type="INTEGER" definition="NOT NULL">
+			<description>Podtyp obiektu</description>
+		</column>
+		<column name="ROPTOb_Nazwa" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>nazwa obiektu</description>
+		</column>
+		<column name="ROPTOb_Jezyk" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ROPTOb_Jezyk DEFAULT(1045)">
+			<description>Jezyk interfejsu 1-PL; 2-EN</description>
+		</column>
+		<primaryKey name="ROPTOb_Primary" columns="ROPTOb_Typ, ROPTOb_SubTyp, ROPTOb_Jezyk">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

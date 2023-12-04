@@ -1,0 +1,53 @@
+<table name="CfgKlucze">
+		<description>Tabela konfiguracyjna</description>
+		<column name="CFK_CfkId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="CFK_ParentId" type="INTEGER" definition="NOT NULL" />
+		<column name="CFK_Nazwa" type="VARCHAR(32)" definition="NOT NULL">
+			<description>Nazwa</description>
+		</column>
+		<column name="CFK_OkresOd" type="DATETIME" definition="NOT NULL">
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CFK_OkresDo" type="DATETIME" definition="NOT NULL">
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CFK_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="CFK_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CFK_TS_Zal" type="DATETIME">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CFK_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="CFK_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CFK_TS_Mod" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CFK_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CFK_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="CFK_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CFK_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="CFK_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CFK_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="CFK_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CFK_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="CFK_Primary" columns="CFK_CfkId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="CFKParent" options="UNIQUE NONCLUSTERED" fields="CFK_ParentId ,CFK_Nazwa ,CFK_OkresOd" />
+	</table>
+	

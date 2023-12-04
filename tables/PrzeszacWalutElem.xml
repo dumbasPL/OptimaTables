@@ -1,0 +1,44 @@
+<table name="PrzeszacWalutElem">
+		<description>Dokumenty Przeszacowania walut, elementy</description>
+		<column name="PWE_PWEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Unikalny identyfikator rekordu w tabeli</description>
+		</column>
+		<column name="PWE_PWNId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli PrzeszacWalutNag</description>
+		</column>
+		<column name="PWE_AccWnId" type="INTEGER">
+			<description>Identyfikator konta Wn</description>
+		</column>
+		<column name="PWE_AccMaId" type="INTEGER">
+			<description>Identyfikator konta Ma</description>
+		</column>
+		<column name="PWE_KontoWn" type="VARCHAR(50)">
+			<description>Symbol konta Ma</description>
+		</column>
+		<column name="PWE_KontoMa" type="VARCHAR(50)">
+			<description>Symbol konta Ma</description>
+		</column>
+		<column name="PWE_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota różnicy bilansowej</description>
+		</column>
+		<column name="PWE_SaldoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Saldo walutowe przeszacowywanego konta</description>
+		</column>
+		<column name="PWE_SaldoSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Saldo złotówkowe przeszacowywanego konta</description>
+		</column>
+		<primaryKey name="PWE_Primary" columns="PWE_PWEId">
+			<description>Unikalny identyfikator rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_PWEPWNID" localColumns="PWE_PWNId" refTable="PrzeszacWalutNag" refColumns="PWN_PWNID" deleteOption="CASCADE">
+			<description>Relacja CDN.PrzeszacWalutElem:CDN.PrzeszacWalutNag (MANY:1)</description>
+		</foreignKey>
+		<index name="PWEPWNID" options="NONCLUSTERED" fields="PWE_PWNId">
+			<description>Klucz obcy do tabeli PrzeszacWalutNag</description>
+		</index>
+		<index name="PWEKonto" options="NONCLUSTERED" fields="PWE_AccWnId ,PWE_KontoWn ,PWE_AccMaId ,PWE_KontoMa">
+			<description>Klucz konta</description>
+		</index>
+		<index name="PWEKwota" options="NONCLUSTERED" fields="PWE_Kwota ,PWE_SaldoWal ,PWE_SaldoSys" />
+	</table>
+	

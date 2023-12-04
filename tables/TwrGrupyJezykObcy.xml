@@ -1,0 +1,50 @@
+<table name="TwrGrupyJezykObcy" filterVisible="false">
+		<description>Grupy towarów</description>
+		<details>Tabela zawierająca strukturę drzewiastą towarów - dla potrzeb współpracy z CDN XL</details>
+		<column name="TwGJ_TwGJID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator grupy</description>
+		</column>
+		<column name="TwGJ_TwGID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator grupy</description>
+		</column>
+		<column name="TwGJ_JezykID" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_TwGJ_JezykID DEFAULT(1)">
+			<description>id jezyka obcego</description>
+		</column>
+		<column name="TwGJ_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa grupy lub elementu</description>
+			<details>
+				Nazwa grupy lub elementu, zależnie od ustawienia pola GRUPA.
+				Jeśli jest to element to nazwa powinna być NOENTRY a wartość winna pochodzić z relacji.
+			</details>
+		</column>
+		<column name="TwGJ_OpisHTML" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis ze znacznikami HTML</description>
+		</column>
+		<column name="TwGJ_OpisKrotki" type="NVARCHAR(500)" definition="NOT NULL">
+			<description>Opis krótki</description>
+		</column>
+		<column name="TwGJ_MetaTytul" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Meta Tytul</description>
+		</column>
+		<column name="TwGJ_MetaSlowaKluczowe" type="NVARCHAR(500)" definition="NOT NULL">
+			<description>Meta słowa kluczowe</description>
+		</column>
+		<column name="TwGJ_MetaOpis" type="NVARCHAR(320)" definition="NOT NULL">
+			<description>Meta Opis</description>
+		</column>
+		<column name="TwGJ_Link" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TwGJ_Link DEFAULT('')">
+			<description>URLTitle</description>
+		</column>
+		<column name="TwGJ_Szukaj" type="NVARCHAR(512)" definition="NOT NULL CONSTRAINT DF_TwGJ_Szukaj DEFAULT('')">
+			<description>Słowa kluczowe wykorzystywane do wyszukiwania</description>
+		</column>
+		<column name="TwGJ_NazwaNag" type="NVARCHAR(250)" definition="NOT NULL CONSTRAINT DF_TwGJ_NazwaNag DEFAULT('')">
+			<description>Nazwa grupy wyświetlana w nagłówku listy</description>
+		</column>
+		<primaryKey name="TwGJ_Primary" columns="TwGJ_TwGID,TwGJ_JezykID" />
+		<foreignKey name="FK_TwGJOdoTwrGrup" localColumns="TwGJ_TwGID" refTable="TwrGrupy" refColumns="TwG_TwGID" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrGrupyJezykObcy:CDN.TwrGrupy (MANY:1)</description>
+		</foreignKey>
+		<index name="TwGJOID" options="UNIQUE NONCLUSTERED" fields="TwGJ_TwGJID" />
+	</table>
+	

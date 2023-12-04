@@ -1,0 +1,165 @@
+<table name="KompensatyNag">
+		<description>Tabela z nagłówkami kompensat</description>
+		<column name="KPN_KPNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="KPN_DDfID" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="KPN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="KPN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="KPN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(KPN_NUMERNR,KPN_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="KPN_NumerObcy" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu obcego</description>
+		</column>
+		<column name="KPN_Numer" type="COMPUTED|VARCHAR(30)" definition="CASE WHEN KPN_NUMEROBCY&lt;&gt;'' THEN KPN_NUMEROBCY ELSE CDN.FN_NUMERPELNY(KPN_NUMERNR,KPN_NUMERSTRING) END">
+			<description>Numer wyświetlany na listach</description>
+		</column>
+		<column name="KPN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="KPN_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu (płatnika) z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - Kontrahenci;
+				2 - BnkNazwy;
+				3 - Pracownicy;
+				4 - WspolNag;
+				5 - Urzedy
+			</details>
+		</column>
+		<column name="KPN_PodmiotID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu (płatnika)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="KPN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="KPN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="KPN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="KPN_KontoWn" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Wn dla księgowania dokumentu kompensaty</description>
+		</column>
+		<column name="KPN_KontoMa" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Ma dla księgowania dokumentu kompensaty</description>
+		</column>
+		<column name="KPN_DekID" type="INTEGER">
+			<description>Identyfikator zapisu księgowego</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada KPN_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada KPN_DekId = NULL;
+			</details>
+		</column>
+		<column name="KPN_PreDekID" type="INTEGER">
+			<description>Identyfikator zapisu księgowego</description>
+		</column>
+		<column name="KPN_Opis" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="KPN_RazemKwotaRoz" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Suma kwot podpiętych rozliczeń</description>
+		</column>
+		<column name="KPN_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="KPN_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w tabeli źródłowej</description>
+		</column>
+		<column name="KPN_TS_Export" type="DATETIME">
+			<description>Czas wyeksportowania zapisu</description>
+		</column>
+		<column name="KPN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="KPN_StaZalID" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KPN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KPN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="KPN_StaModID" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KPN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KPN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KPN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="KPN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KPN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="KPN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KPN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="KPN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KPN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="KPN_Primary" columns="KPN_KPNID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_KPNPodmiot" localColumns="KPN_PodmiotID,KPN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.KompensatyNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KPNKategoria" localColumns="KPN_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.KompensatyNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KPNDokDefinicja" localColumns="KPN_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.KompensatyNag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="KPNPodmiot" options="UNIQUE NONCLUSTERED" fields="KPN_PodmiotID ,KPN_PodmiotTyp ,KPN_DataDok ,KPN_KPNId">
+			<description>Wg podmiotu dla którego wystawiono kompensatę</description>
+		</index>
+		<index name="KPNKategoria" options="UNIQUE NONCLUSTERED" fields="KPN_KatID ,KPN_DataDok ,KPN_KPNId">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="KPNDokDefinicja" options="NONCLUSTERED" fields="KPN_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="KPNNumer" options="UNIQUE NONCLUSTERED" fields="KPN_NumerString ,KPN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="KPNNumerPelny" options="UNIQUE NONCLUSTERED" fields="KPN_NumerPelny">
+			<description>Wg pełnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="KPNDekrety" options="NONCLUSTERED" fields="KPN_DekId">
+			<description>Indeks do tabeli DekretyNag</description>
+		</index>
+		<index name="KPNPreDekrety" options="NONCLUSTERED" fields="KPN_PreDekId">
+			<description>Indeks do tabeli DekretyNag</description>
+		</index>
+		<index name="KPNGUID" options="UNIQUE NONCLUSTERED" fields="KPN_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

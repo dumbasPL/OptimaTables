@@ -1,0 +1,41 @@
+<table name="DokumentyDostawyElem">
+		<description>Tabela elementów dokumentu dostawy</description>
+		<column name="DDE_DDEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DDE_DDNID" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu dostawy</description>
+		</column>
+		<column name="DDE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp</description>
+		</column>
+		<column name="DDE_KodCN" type="VARCHAR(8)" definition="NOT NULL">
+			<description>Kod CN zgłaszanej grupy towarów</description>
+		</column>
+		<column name="DDE_Ilosc" type="decimal(15,2)" definition="NOT NULL">
+			<description>Ilosc w kg</description>
+		</column>
+		<column name="DDE_JM" type="nvarchar(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="DDE_MasaNetto" type="decimal(15,2)" definition="NOT NULL">
+			<description>Masa netto</description>
+		</column>
+		<column name="DDE_MasaBrutto" type="decimal(15,2)" definition="NOT NULL">
+			<description>Masa brutto</description>
+		</column>
+		<column name="DDE_Opis" type="nvarchar(2000)" definition="NULL">
+			<description>Opis</description>
+		</column>
+		<primaryKey name="DDE_Primary" columns="DDE_DDEID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_DokumentyDostawyElemDokumentyDostawyNag" localColumns="DDE_DDNID" refTable="DokumentyDostawyNag" refColumns="DDN_DDNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DokumentyDostawyElem:CDN.DokumentyDostawyNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

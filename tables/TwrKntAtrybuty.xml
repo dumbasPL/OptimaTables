@@ -1,0 +1,42 @@
+<table name="TwrKntAtrybuty">
+		<description>Lista atrybutów towarów dla kontrahentów</description>
+		<column name="TKA_TKAId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="TKA_TwAId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator atrybutu towaru</description>
+			<details>Klucz obcy do tabeli Towary</details>
+		</column>
+		<column name="TKA_PodmiotTyp" type="SMALLINT" filterVisible="false">
+			<description>Typ podmiotu (dla atrybutów kontrtahentów)</description>
+			<details>
+				1 - Kontrahenci &lt;br&gt;
+				2 - BnkNazwy &lt;br&gt;
+				3 - PracKod &lt;br&gt;
+				5 - Urzedy
+			</details>
+		</column>
+		<column name="TKA_PodmiotId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>Klucz obcy do tabel Kontrahenci, BnkNazwy, PracKod, Urzedy (zaleznie od PodmiotTyp)</details>
+		</column>
+		<column name="TKA_WartoscTxt" type="NVARCHAR(100)" definition="NOT NULL" filterVisible="false">
+			<description>Wartosc atrybutu</description>
+		</column>
+		<primaryKey name="TKA_Primary" columns="TKA_TKAId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TKAPodmiot" localColumns="TKA_PodmiotId,TKA_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrKntAtrybuty:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TKATwrAtrybut" localColumns="TKA_TwAId" refTable="TwrAtrybuty" refColumns="TwA_TwAId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrKntAtrybuty:CDN.TwrAtrybuty (MANY:1)</description>
+		</foreignKey>
+		<index name="TKAPodmiot" options="NONCLUSTERED" fields="TKA_PodmiotId ,TKA_PodmiotTyp">
+			<description>Klucz obcy do podmiotów</description>
+		</index>
+		<index name="TKATwrAtrybut" options="NONCLUSTERED" fields="TKA_TwAId">
+			<description>Klucz obcy do tabeli TwrAtrybuty</description>
+		</index>
+	</table>
+	

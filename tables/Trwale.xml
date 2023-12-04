@@ -1,0 +1,303 @@
+<table name="Trwale">
+		<description>Ewidencja środków trwałych</description>
+		<details>Ewidencja zawierająca kartoteki środków trwałych oraz wartości niematerialnych i
+			prawnych.</details>
+		<column name="SrT_SrTID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrT_Typ" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Rodzaj kartoteki</description>
+			<details>
+				Przyjmuje wartości:
+				11 (e_mk_SrT_Typ_ST) - środek trwały
+				12 (e_mk_SrT_Typ_WN) - wartość niematerialna i prawna
+			</details>
+		</column>
+		<column name="SrT_Grupa" type="VARCHAR(32)" definition="NOT NULL">
+			<description>Nazwa księgi inwentarzowej</description>
+		</column>
+		<column name="SrT_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny w księdze</description>
+		</column>
+		<column name="SrT_VaNID" type="INTEGER">
+			<description>Identyfikator dokumentu zakupu</description>
+			<details>
+				Identyfikator dokumentu zakupu środka trwałego w rejestrze Vat (VatNag).
+				Dokument zakupu może być wprowadzony "z ręki" (SrT:VaNId = 0) lub zostac pobrany z listy
+				rejestrów Vat (SrT:VaNId = VaN:VaNId)
+			</details>
+		</column>
+		<column name="SrT_Dokument" type="VARCHAR(30)" definition="NOT NULL" filterVisible="false">
+			<description>Numer dokumentu zakupu</description>
+		</column>
+		<column name="SrT_DataZak" type="DATETIME" definition="NOT NULL">
+			<description>Data zakupu środka trwałego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrT_DataPrz" type="DATETIME">
+			<description>Data przyjęcia do ewidencji środka trwałego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrT_DataAmo" type="DATETIME">
+			<description>Data rozpoczęcia amortyzacji środka trwałego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrT_DataUmo" type="DATETIME">
+			<description>Data rozpoczęcia umorzenia środka trwałego</description>
+			<details>Data dla potrzeb umorzenia bilansowego</details>
+		</column>
+		<column name="SrT_Nazwa" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Nazwa środka trwałego</description>
+		</column>
+		<column name="SrT_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) środka trwałego może zostac wpisany "z ręki" (SrT:KatId = 0) lub zostac
+				pobrany z listy kategorii (SrT:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="SrT_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis środka trwałego</description>
+		</column>
+		<column name="SrT_KRST" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Numer KRŚT środka trwałego</description>
+		</column>
+		<column name="SrT_NrInwent" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Numer inwentarzowy środka trwałego</description>
+		</column>
+		<column name="SrT_UniqueNrInwBuster" type="COMPUTED|INTEGER" definition="CASE WHEN SrT_WBudowie&lt;&gt;0 AND SrT_NrInwent = '' THEN SrT_SrTID ELSE 0 END">
+			<description>Pole techniczne zapewniające warunkową unikalność numeru inwentarzowego</description>
+			<details>Chodzi o to aby dopuścić wiele środków w budowie o pustym numerze inwentarzowym, ale
+				równocześnie zabronić duplikacji numeru w każdym innym przypadku.</details>
+		</column>
+		<column name="SrT_KodKreskowy" type="VARCHAR(128)" definition="NOT NULL CONSTRAINT DF_SrT_KodKreskowy DEFAULT('')">
+			<description>Kod kreskowy</description>
+		</column>
+		<column name="SrT_UniqueKodKreskowyBuster" type="COMPUTED|INTEGER" definition="CASE WHEN SrT_KodKreskowy = '' THEN SrT_SrTID ELSE 0 END">
+			<description>Pole techniczne zapewniające warunkową unikalność kodu kreskowego</description>
+			<details>Chodzi o to aby dopuścić wiele środków o pustym kodzie kreskowym, ale równocześnie
+				zabronić duplikacji kodu kreskowego w każdym innym przypadku.</details>
+		</column>
+		<column name="SrT_WartoscBilan" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość nabycia środka trwałego</description>
+		</column>
+		<column name="SrT_WartoscKoszt" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość nabycia środka trwałego do zaliczenia w koszty</description>
+		</column>
+		<column name="SrT_Bilansowa" type="TINYINT" definition="NOT NULL">
+			<description>Różna amortyzacja bilansowa i kosztowa</description>
+			<details>Jeżeli SrT:Bilansowa = 1 program pozwala na wpisanie różnych kwot SrT:WartoscBilan i
+				SrT:WartoscKoszt i generowanie różnych kwot odpisów dla potrzeb amortyzacji bilansowej i
+				kosztowej</details>
+		</column>
+		<column name="SrT_UlgaInwestyc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość zaliczona w ulgę inwestycyjną</description>
+		</column>
+		<column name="SrT_Metoda" type="TINYINT" definition="NOT NULL">
+			<description>Metoda amortyzacji</description>
+			<details>
+				Przyjmuje wartości:
+				1 (e_mk_SrT_MetodaAmortyzacji_Liniowa) - metoda liniowa
+				2 (e_mk_SrT_MetodaAmortyzacji_Degresywna) - metoda degresywna
+				3 (e_mk_SrT_MetodaAmortyzacji_Jednorazowa) - odpis jednorazowy
+				4 (e_mk_SrT_MetodaAmortyzacji_Naturalna) - metoda naturalna
+				5 (e_mk_SrT_MetodaAmortyzacji_NieAmortyzowac) - środek nie amortyzowany
+
+				Uwaga: metoda naturalna różni się od jednorazowej tym, że generuje równe odpisy co miesiąc
+				niezależnie od wartości wygenerowanych odpisów w poprzednich miesiącach.
+			</details>
+		</column>
+		<column name="SrT_MetodaBil" type="TINYINT" definition="NOT NULL">
+			<description>Metoda umorzenia</description>
+			<details>
+				Przyjmuje wartości:
+				1 (e_mk_SrT_MetodaAmortyzacji_Liniowa) - metoda liniowa
+				2 (e_mk_SrT_MetodaAmortyzacji_Degresywna) - metoda degresywna
+				3 (e_mk_SrT_MetodaAmortyzacji_Jednorazowa) - odpis jednorazowy
+				4 (e_mk_SrT_MetodaAmortyzacji_Naturalna) - metoda naturalna
+				5 (e_mk_SrT_MetodaAmortyzacji_NieAmortyzowac) - środek nie amortyzowany
+
+				Uwaga: metoda naturalna różni się od jednorazowej tym, że generuje równe odpisy co miesiąc
+				niezależnie od wartości wygenerowanych odpisów w poprzednich miesiącach.
+			</details>
+		</column>
+		<column name="SrT_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka amortyzacji</description>
+		</column>
+		<column name="SrT_StawkaBil" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka umorzenia</description>
+		</column>
+		<column name="SrT_Wspolczynnik" type="DECIMAL(7,4)" definition="NOT NULL">
+			<description>Współczynnik podwyższenia stawki</description>
+		</column>
+		<column name="SrT_WspolczynnikBil" type="DECIMAL(7,4)" definition="NOT NULL">
+			<description>Współczynnik podwyższenia stawki dla amortyzacji bilansowej</description>
+		</column>
+		<column name="SrT_Sezonowy" type="TINYINT" definition="NOT NULL">
+			<description>Środek używany sezonowo</description>
+			<details>Jeżeli SrT:Sezonowy = 1, wówczas można wypełnić tabele TrwaleMaska, która określa w
+				jakich miesiącach amortyzowany jest środek trwały</details>
+		</column>
+		<column name="SrT_SezonowyBil" type="TINYINT" definition="NOT NULL">
+			<description>Środek używany sezonowo (umorzenia bilansowe)</description>
+			<details>Jeżeli SrT:Sezonowy = 1, wówczas można wypełnić tabele TrwaleMaska, która określa w
+				jakich miesiącach amortyzowany jest środek trwały</details>
+		</column>
+		<column name="SrT_ZawieszenieAmoKst" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrT_ZawieszenieAmoKst DEFAULT(0)">
+			<description>Środek o zawieszonej czasowo amortyzacji kosztowej</description>
+		</column>
+		<column name="SrT_ZawieszenieAmoBil" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrT_ZawieszenieAmoBil DEFAULT(0)">
+			<description>Środek o zawieszonej czasowo amortyzacji bilansowej</description>
+		</column>
+		<column name="SrT_PrcID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator osoby odpowiedzialnej materialnie</description>
+			<details>
+				Wskaźnik do tabeli Pracownicy.
+				Osoba odpowiedzialna materialnie może zostać wpisana "z ręki" (SrT:PrcId = 0) lub pobrana z
+				listy pracowników (SrT:PrcId = Prc:PrcId)
+			</details>
+		</column>
+		<column name="SrT_PrcNazwisko" type="NVARCHAR(100)" definition="NOT NULL" hash="1">
+			<description>Nazwisko osoby odpowiedzialnej materialnie</description>
+		</column>
+		<column name="SrT_KontoGl" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Konto główne środka trwałego</description>
+		</column>
+		<column name="SrT_KontoUm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Konto umorzenia środka trwałego</description>
+		</column>
+		<column name="SrT_KontoAmKoszt" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Konto amortyzacji w części stanowiącej koszt</description>
+			<details>Konto służące do księgowania amortyzacji srodka trwałego w części stanowiącej koszt
+				uzyskania przychodu</details>
+		</column>
+		<column name="SrT_KontoAmRozn" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Konto amortyzacji w części nie stanowiącej kosztu</description>
+			<details>Konto służące do księgowania amortyzacji srodka trwałego w części nie stanowiącej
+				kosztu uzyskania przychodu</details>
+		</column>
+		<column name="SrT_DataLikw" type="DATETIME">
+			<description>Data likwidacji (zbycia) środka trwałego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrT_Stan" type="TINYINT" definition="NOT NULL">
+			<description>Stan środka</description>
+			<details>
+				Przyjmuje wartości:
+				0 (e_mk_SrT_Stan_W_Uzyciu) - środek trwały w użyciu
+				1 (e_mk_SrT_Stan_Zlikwidowany) - środek trwały zlikwidowany
+				2 (e_mk_SrT_Stan_Zbyty) - środek trwały zbyty
+			</details>
+		</column>
+		<column name="SrT_Likwidacja" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Przyczyna likwidacji</description>
+		</column>
+		<column name="SrT_LikwDokument" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu likwidacji</description>
+		</column>
+		<column name="SrT_LikwDekID" type="INTEGER">
+			<description>Identyfikator księgowania likwidacji</description>
+			<details>Identyfikator dokumentu w Dekretach, będącego skutkiem zaksięgowania likwidacji
+				środka trwałego</details>
+		</column>
+		<column name="SrT_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj środka: prosty / zestaw / część</description>
+		</column>
+		<column name="SrT_WZestawie" type="TINYINT" definition="NOT NULL">
+			<description>Czy środek jest częścią w jakimś zestawie</description>
+		</column>
+		<column name="SrT_WBudowie" type="TINYINT" definition="NOT NULL">
+			<description>Czy środek jest w budowie</description>
+		</column>
+		<column name="SrT_UwzglKsgBadRozw" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrT_UwzglKsgBadRozw DEFAULT(0)">
+			<description>Uwzględniaj przy księgowaniu w kosztach na badania i rozwój</description>
+		</column>
+		<column name="SrT_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="SrT_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Informacja dodatkowe</description>
+		</column>
+		<column name="SrT_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="SrT_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="SrT_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="SrT_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrT_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrT_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego</description>
+		</column>
+		<column name="SrT_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrT_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrT_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrT_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SrT_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrT_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SrT_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrT_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SrT_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrT_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SrT_Primary" columns="SrT_SrTID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_SrTPracownik" localColumns="SrT_PrcID" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.Trwale:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrTKategoria" localColumns="SrT_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Trwale:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="SrTKategoria" options="NONCLUSTERED" fields="SrT_KatID">
+			<description>Wg kategorii</description>
+			<details>Środki trwale wg identyfikatora kategorii (indeks wiążący tabelę Trwale z Kategorie)</details>
+		</index>
+		<index name="SrTPracownik" options="NONCLUSTERED" fields="SrT_PrcID">
+			<description>Wg pracownika odpowiedzialnego</description>
+			<details>Wg identyfikatora pracownika odpowiedzialnego materialnie za środek trwały (indeks
+				wiążący tabelę Trwale z Pracownicy)</details>
+		</index>
+		<index name="SrTLp" options="UNIQUE NONCLUSTERED" fields="SrT_Typ, SrT_Grupa, SrT_Lp">
+			<description>Wg liczby porządkowej środka trwałego w grupie</description>
+		</index>
+		<index name="SrTNazwa" options="UNIQUE NONCLUSTERED" fields="SrT_Typ, SrT_Nazwa, SrT_SrTID">
+			<description>Wg nazwy środka trwałego w grupie</description>
+		</index>
+		<index name="SrTNazwaGrupa" options="UNIQUE NONCLUSTERED" fields="SrT_Typ, SrT_Grupa, SrT_Nazwa, SrT_Lp" />
+		<index name="SrTDekrety" options="UNIQUE NONCLUSTERED" fields="SrT_LikwDekID, SrT_SrTID">
+			<description>Wg dokumentu księgowania likwidacji</description>
+			<details>Relacja do dekretu księgującego likwidację środka trwałego</details>
+		</index>
+		<index name="SrTNrInwent" options="UNIQUE NONCLUSTERED" fields="SrT_NrInwent, SrT_UniqueNrInwBuster">
+			<description>Wg numeru inwentarzowego</description>
+		</index>
+		<index name="SrTKodKreskowy" options="UNIQUE NONCLUSTERED" fields="SrT_KodKreskowy, SrT_UniqueKodKreskowyBuster">
+			<description>Wg kodu kreskowego</description>
+		</index>
+		<index name="SrTGUID" options="UNIQUE NONCLUSTERED" fields="SrT_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

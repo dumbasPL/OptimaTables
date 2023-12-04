@@ -1,0 +1,142 @@
+<table name="Konta">
+		<description>Lista kont księgowych</description>
+		<column name="Acc_AccId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Acc_PrevAccId" type="INTEGER" definition="NULL">
+			<description>Kolumna techniczna wykożystywana do sprawnego kopiowania struktru</description>
+		</column>
+		<column name="Acc_KorektaKosztow" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Acc_KorektaKosztow DEFAULT(0)">
+			<description>Aktywana korekta kosztow, (0,1)</description>
+		</column>
+		<column name="Acc_KontrolaBudzetu" type="TINYINT" definition="NOT NULL">
+			<description>Kontrola bidzetu konta, (0,1,2)</description>
+		</column>
+		<column name="Acc_ParId" type="INTEGER">
+			<description>Identyfikator konta nadrzędnego ("ojca")</description>
+		</column>
+		<column name="Acc_Numer" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Numer konta</description>
+		</column>
+		<column name="Acc_NumerIdx" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Numer konta dla indeksu (bez znaków '-')</description>
+		</column>
+		<column name="Acc_Segment" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Numer konta</description>
+			<details>Numer segmentu konta (pojedynczego poziomu)</details>
+		</column>
+		<column name="Acc_Nazwa" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwa konta</description>
+		</column>
+		<column name="Acc_Nazwa2" type="NVARCHAR(50)" hash="1">
+			<description>Druga nazwa konta</description>
+		</column>
+		<column name="Acc_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta konta</description>
+		</column>
+		<column name="Acc_OObId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator okresu obrachunkowego</description>
+		</column>
+		<column name="Acc_TypKonta" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj konta</description>
+		</column>
+		<column name="Acc_Rozrachunkowe" type="TINYINT" definition="NOT NULL">
+			<description>Konto rozrachunkowe</description>
+		</column>
+		<column name="Acc_BezRozliczenia" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Acc_BezRozliczenia DEFAULT(0)">
+			<description>Konto bez rozrachunkowe</description>
+		</column>
+		<column name="Acc_KontrolaSalda" type="TINYINT" definition="NOT NULL">
+			<description>Kontrola salda na koncie</description>
+		</column>
+		<column name="Acc_Slownik" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzja słownika podpięty do konta</description>
+		</column>
+		<column name="Acc_SlownikGrupa" type="TINYINT" definition="NOT NULL">
+			<description>Wskaźnik, czy konto słownikowe ma podział na grupy</description>
+		</column>
+		<column name="Acc_NextAccId" type="INTEGER">
+			<description>Identyfikator konta w następnym okresie obrachunkowym</description>
+		</column>
+		<column name="Acc_SlownikTyp" type="SMALLINT">
+			<description>Typ słownika (konto słownikowe)</description>
+		</column>
+		<column name="Acc_SlownikId" type="INTEGER">
+			<description>Identyfikator wiersza w słowniku</description>
+		</column>
+		<column name="Acc_NieAktywne" type="TINYINT" definition="NOT NULL">
+			<description>Czy konto jest aktywne</description>
+		</column>
+		<column name="Acc_Poziom" type="SMALLINT" definition="NOT NULL">
+			<description>Poziom zagłebienia konta</description>
+		</column>
+		<column name="Acc_Analityka" type="TINYINT" definition="NOT NULL">
+			<description>Czy konto jest analityczne</description>
+		</column>
+		<column name="Acc_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="Acc_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Acc_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="Acc_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="Acc_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Acc_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="Acc_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Acc_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Acc_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Acc_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Acc_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Acc_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Acc_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Acc_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Acc_Primary" columns="Acc_AccId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_AccNumer" localColumns="Acc_OObId" refTable="OkresyObrach" refColumns="OOb_OObID" deleteOption="CASCADE">
+			<description>Relacja CDN.Konta:CDN.OkresyObrach (MANY:1)</description>
+		</foreignKey>
+		<index name="AccOObId" options="NONCLUSTERED" fields="Acc_OObId,Acc_AccId, Acc_NieAktywne" includedColumns="Acc_ParId, Acc_Numer, Acc_Nazwa, Acc_Segment, Acc_KorektaKosztow, Acc_Analityka">
+			<description>Index kontroli budżetu</description>
+		</index>
+		<index name="AccBudzet" options="NONCLUSTERED" fields="Acc_KontrolaBudzetu">
+			<description>Index kontroli budżetu</description>
+		</index>
+		<index name="AccParrent" options="UNIQUE NONCLUSTERED" fields="Acc_ParId ,Acc_Segment ,Acc_AccId">
+			<description>Klucz wg konta nadrzędnego</description>
+		</index>
+		<index name="AccNumer" options="UNIQUE NONCLUSTERED" fields="Acc_OObId ,Acc_NumerIdx">
+			<description>Wg numeru konta</description>
+		</index>
+		<index name="AccPodmiot" options="NONCLUSTERED" fields="Acc_SlownikId ,Acc_SlownikTyp ,Acc_ParId">
+			<description>Wg podmiotu</description>
+		</index>
+		<index name="AccNazwa" options="UNIQUE NONCLUSTERED" fields="Acc_OObId ,Acc_Nazwa ,Acc_AccId">
+			<description>Wg nazwy</description>
+		</index>
+		<index name="AccNextOkres" options="NONCLUSTERED" fields="Acc_NextAccId">
+			<description>powiązanie z planem kont w następnym okresie</description>
+		</index>
+		<index name="AccKorektaKosztow" options="UNIQUE NONCLUSTERED" fields="Acc_KorektaKosztow, Acc_AccId">
+			<description>Index Korekta Kosztow</description>
+		</index>
+		<index name="AccGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="Acc_Numer, Acc_AccId" includedColumns="Acc_NieAktywne, Acc_OObId">
+			<description>Gridlookupu konta wg numeru i id konta</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,113 @@
+<table name="DetalTraElem">
+		<description>Tabela z elementami dokumentów detal</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="DTrE_DTrEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DTrE_DSTrEID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DTrE_DSTrNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka transakcji</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="DTrE_StanDetalId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska</description>
+		</column>
+		<column name="DTrE_ZwrId" type="INTEGER">
+			<description>Identyfikator elementu oryginalnego (dla zwrotów)</description>
+		</column>
+		<column name="DTrE_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator towaru</description>
+			<details>Klucz obcy do tabeli Towary</details>
+		</column>
+		<column name="DTrE_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka podatku vat</description>
+		</column>
+		<column name="DTrE_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Flaga podatku (zwolniony, opodatkowany, zaniżony, nie podlega)</description>
+		</column>
+		<column name="DTrE_Cena" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena</description>
+		</column>
+		<column name="DTrE_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat na elemencie faktury</description>
+			<details>Rabat dla pozycji</details>
+		</column>
+		<column name="DTrE_CenaPoRabacie" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena po rabacie</description>
+		</column>
+		<column name="DTrE_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="DTrE_Kaucja" type="TINYINT" definition="NOT NULL">
+			<description>Czy element jest kaucja</description>
+			<details>
+				0 - towar zwykły &lt;br&gt;
+				1 - towar kaucyjny
+			</details>
+		</column>
+		<column name="DTrE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych</description>
+		</column>
+		<column name="DTrE_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_DTrE_IloscJM DEFAULT(1)">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="DTrE_Jm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="DTrE_JmCalkowite" type="TINYINT" definition="NOT NULL">
+			<description>Ilość towaru wyrażana w wielkościach całkowitych</description>
+		</column>
+		<column name="DTrE_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_DTrE_JMPrzelicznikL DEFAULT(1)">
+			<description>Licznik przelicznika JM</description>
+			<details>Licznik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="DTrE_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL CONSTRAINT DF_DTrE_JMPrzelicznikM DEFAULT(1)">
+			<description>Mianownik przelicznika JM</description>
+			<details>Mianownik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="DTrE_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="DTrE_Opis" type="NVARCHAR(1024)" definition="CONSTRAINT DF_DTrE_Opis DEFAULT('')">
+			<description>Dodatkowy opis na elemencie faktury</description>
+		</column>
+		<column name="DTrE_JMZ" type="NVARCHAR(20)" definition=" NOT NULL CONSTRAINT DF_DTrE_JMZ DEFAULT('')">
+			<description>Jednostka miary pomocnicza</description>
+		</column>
+		<column name="DTrE_UslugaZlozona" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DTrE_UslugaZlozona DEFAULT(0)">
+			<description>Czy usługa złożona</description>
+		</column>
+		<column name="DTrE_UslugaZlozonaRecepturaID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DTrE_UslugaZlozonaRecepturaID DEFAULT(0)">
+			<description>Id receptury dla usługi złożonej</description>
+		</column>
+		<column name="DTre_OdwrotneObciazenie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DTre_OdwrotneObciazenie DEFAULT(0)">
+			<description>odwrotne obciążenie</description>
+		</column>
+		<column name="DTre_TwCNumer" type="INT" definition="NOT NULL CONSTRAINT DF_DTre_TwCNumer DEFAULT(-1)">
+			<description>Numer ceny</description>
+		</column>
+		<primaryKey name="DTrE_Primary" columns="DTrE_DTrEID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_DTrETraNag" localColumns="DTrE_DSTrNId,DTrE_StanDetalId" refTable="DetalTraNag" refColumns="DTrN_DSTrNID,DTrN_StanDetalID" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalTraElem:CDN.DetalTraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DTrETraNag" options="UNIQUE NONCLUSTERED" fields="DTrE_DSTrNId ,DTrE_StanDetalId ,DTrE_DSTrEID">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="DTrETowar" options="UNIQUE NONCLUSTERED" fields="DTrE_TwrId ,DTrE_DTrEID">
+			<description>Wg towaru</description>
+		</index>
+		<index name="DetalTraElemDSTrEID" options="NONCLUSTERED" fields="DTrE_DSTrEID, DTrE_StanDetalId" />
+	</table>
+	

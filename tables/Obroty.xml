@@ -1,0 +1,51 @@
+<table name="Obroty">
+		<description>Zagregowane obroty na kontach księgowych</description>
+		<column name="Obr_AccId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do Konta</description>
+		</column>
+		<column name="Obr_RokMies" type="INTEGER">
+			<description>Rok i miesiąc agregatu</description>
+		</column>
+		<column name="Obr_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj agregatu</description>
+			<details>
+				0 - zwykły;
+				1 - bilans otwarcia;
+				2 - korekta bilansu zamknięcia
+			</details>
+		</column>
+		<column name="Obr_ObrotyWn" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Winien</description>
+		</column>
+		<column name="Obr_ObrotyMa" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Ma</description>
+		</column>
+		<column name="Obr_ObrotyWnBufor" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Winien z uwzględnieniem bufora</description>
+		</column>
+		<column name="Obr_ObrotyMaBufor" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Ma z uwzględnieniem bufora</description>
+		</column>
+		<column name="Obr_ObrotyWnWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Winien w walucie</description>
+		</column>
+		<column name="Obr_ObrotyMaWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Ma w walucie</description>
+		</column>
+		<column name="Obr_ObrotyWnBuforWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Winien z uwzględnieniem bufora w walucie</description>
+		</column>
+		<column name="Obr_ObrotyMaBuforWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Obroty po stronie Ma z uwzględnieniem bufora w walucie</description>
+		</column>
+		<foreignKey name="FK_ObrKonto" localColumns="Obr_AccId" refTable="Konta" refColumns="Acc_AccId" deleteOption="CASCADE">
+			<description>Relacja CDN.Obroty:CDN.Konta (MANY:1)</description>
+		</foreignKey>
+		<index name="ObrKonto" options="UNIQUE NONCLUSTERED" fields="Obr_AccId ,Obr_Typ ,Obr_RokMies">
+			<description>Klucz obcy do Konta</description>
+		</index>
+		<index name="ObrData" options="UNIQUE NONCLUSTERED" fields="Obr_Typ ,Obr_RokMies ,Obr_AccId">
+			<description>Wg daty</description>
+		</index>
+	</table>
+	

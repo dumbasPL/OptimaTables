@@ -1,0 +1,73 @@
+<table name="TwrGrupy" filterVisible="false">
+		<description>Grupy towarów</description>
+		<details>Tabela zawierająca strukturę drzewiastą towarów - dla potrzeb współpracy z CDN XL</details>
+		<column name="TwG_TwGID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator grupy</description>
+		</column>
+		<column name="TwG_GIDTyp" type="SMALLINT" definition="NOT NULL">
+			<details>
+				-16 - oznacza grupę towarową &lt;br&gt;
+				16 - oznacza towar
+			</details>
+		</column>
+		<column name="TwG_GIDFirma" type="INTEGER">
+			<details>Nie wykorzystywane w standardowej instalacji. Pole przysyłane z CDN XL w przypadku
+				Offline</details>
+		</column>
+		<column name="TwG_GIDNumer" type="INTEGER" definition="NOT NULL">
+			<details>Numer grupy. W przypadku Offline pole przysyłane w synchronizacji. W standardowej
+				instalacji pole równe Twg_TwgId</details>
+		</column>
+		<column name="TwG_GIDLp" type="SMALLINT">
+			<details>Nie wykorzystywane w standardowej instalacji. Pole przysyłane z CDN XL w przypadku
+				Offline</details>
+		</column>
+		<column name="TwG_GrOTyp" type="SMALLINT" definition="NOT NULL">
+			<details>
+				-16 - oznacza grupę towarową (jeśli GIDTyp = -16 i GroTyp=-16) &lt;br&gt;
+				-16 - oznacza wpięcie towaru do grupy (jeśli GIDTyp = 16 i GroTyp=-16)
+			</details>
+		</column>
+		<column name="TwG_GrOFirma" type="INTEGER">
+			<details>Nie wykorzystywane w standardowej instalacji. Pole przysyłane z CDN XL w przypadku
+				Offline</details>
+		</column>
+		<column name="TwG_GrONumer" type="INTEGER" definition="NOT NULL">
+			<details>
+				W przypadku GIDTyp = -16 i GroTyp=-16, pole to oznacza ojca danej grupy - odwołanie do pola
+				GIDNumer. &lt;br&gt;
+				Jeśli grupa wpięta jest do "Grupy Głównej" to GroNumer = 0
+			</details>
+		</column>
+		<column name="TwG_GrOLp" type="SMALLINT">
+			<details>Nie wykorzystywane w standardowej instalacji. Pole przysyłane z CDN XL w przypadku
+				Offline</details>
+		</column>
+		<column name="TwG_Kod" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Kod grupy lub elementu</description>
+		</column>
+		<column name="TwG_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa grupy lub elementu</description>
+			<details>
+				Nazwa grupy lub elementu, zależnie od ustawienia pola GRUPA.
+				Jeśli jest to element to nazwa powinna być NOENTRY a wartość winna pochodzić z relacji.
+			</details>
+		</column>
+		<column name="TwG_CzasModyfikacji" type="INTEGER">
+			<details>Czas modyfikacji (update, delete, insert) grupy lub towaru, zapisywany w sekundach</details>
+		</column>
+		<column name="TwG_eSklepLp" type="INTEGER" />
+		<primaryKey name="TwG_Primary" columns="TwG_TwGID" />
+		<index name="TwGGID" options="NONCLUSTERED" fields="TwG_GIDTyp, TwG_GIDNumer, TwG_GrOTyp, TwG_GrONumer" includedColumns="TwG_TwGID, TwG_Kod, TwG_Nazwa">
+			<description>Wg numeru GID</description>
+		</index>
+		<index name="TwGKod" options="UNIQUE NONCLUSTERED" fields="TwG_GrOTyp ,TwG_GrONumer ,TwG_GIDTyp ,TwG_Kod">
+			<description>Wg kodu</description>
+		</index>
+		<index name="TwGGIDKod" options="NONCLUSTERED" fields="TwG_GIDTyp ,TwG_Kod" />
+		<index name="TwGNazwa" options="UNIQUE NONCLUSTERED" fields="TwG_GrOTyp ,TwG_GrONumer ,TwG_GIDTyp ,TwG_Nazwa ,TwG_GIDNumer">
+			<description>Wg nazwy</description>
+		</index>
+		<index name="TwGGIDTyp" options="NONCLUSTERED" fields="TwG_GIDTyp" includedColumns="TwG_GIDNumer, TwG_CzasModyfikacji" />
+	</table>
+	

@@ -1,0 +1,85 @@
+<table name="DefinicjeStref" filterVisible="false">
+		<description>Definicje stref</description>
+		<details>
+			Tabela z definicjami wejść/wyjść.
+
+			Podstawowe są 4 strefy :
+			-Podstawowa
+			-Przestój
+			-Przerwa
+			-Akord
+
+			Pole Standardowy mówi czy definicja jest kreowana ze skryptu != 0
+			Czy dodawana przez użytkownika = 0
+		</details>
+		<column name="DST_DstId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="DST_Akronim" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Akronim strefy</description>
+		</column>
+		<column name="DST_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa strefy</description>
+		</column>
+		<column name="DST_UwzglCzasPracy" type="TINYINT" definition="NOT NULL">
+			<description>Czy względniać strefę przy liczeniu czasu pracy</description>
+		</column>
+		<column name="DST_Symbol" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Dwuliterowy symbol strefy</description>
+		</column>
+		<column name="DST_ProcentWynZas" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Procent wynagrodzenia zasadniczego</description>
+		</column>
+		<column name="DST_Standardowy" type="TINYINT" definition="NOT NULL">
+			<description>Standardowy typ strefy</description>
+		</column>
+		<column name="DST_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DST_Nieaktywny DEFAULT(0)">
+			<description>Pozycja słownika jest nieużywana</description>
+		</column>
+		<column name="DST_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="DST_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska operatora wprowadzającego zapis</description>
+		</column>
+		<column name="DST_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="DST_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora zmieniającego zapis</description>
+		</column>
+		<column name="DST_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska operatora zmieniającego zapis</description>
+		</column>
+		<column name="DST_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji zapisu</description>
+		</column>
+		<column name="DST_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DST_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DST_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DST_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DST_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DST_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DST_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DST_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="DST_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="DST_Primary" columns="DST_DstId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DstNazwa" options="UNIQUE NONCLUSTERED" fields="DST_Nazwa">
+			<description>Klucz wg nazwy</description>
+		</index>
+		<index name="DstAkronim" options="UNIQUE NONCLUSTERED" fields="DST_Akronim">
+			<description>Klucz wg akronimu</description>
+		</index>
+		<index name="DstSymbol" options="UNIQUE NONCLUSTERED" fields="DST_Symbol">
+			<description>Unikalny indeks symboli stref</description>
+		</index>
+	</table>
+	

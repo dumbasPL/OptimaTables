@@ -1,0 +1,43 @@
+<table name="TrwaleAtrybuty">
+		<description>Wartości atrybutów środków trwałych, dokumentów, wyposażenia</description>
+		<details>Wartości atrybutów środków trwałych, dokumentów, wyposażenia</details>
+		<column name="SrA_SrAId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Unikalny idntyfikator rekordu</description>
+		</column>
+		<column name="SrA_DeAId" type="INTEGER" filterVisible="false">
+			<description>Klucz obcy do tabeli CDN.DefAtrybuty</description>
+		</column>
+		<column name="SrA_SrTId" type="INTEGER" filterVisible="false">
+			<description>Klucz obcy do tabeli CDN.Trwale</description>
+		</column>
+		<column name="SrA_WypID" type="INTEGER" filterVisible="false">
+			<description>Klucz obcy do tabeli CDN.Wyposazenie</description>
+		</column>
+		<column name="SrA_Typ" type="INTEGER">
+			<description>[11,12] 11 - srodek trwaly, 12-wyposazenie</description>
+		</column>
+		<column name="SrA_WartoscTxt" type="NVARCHAR(255)" definition="NOT NULL" />
+		<primaryKey name="SrA_Primary" columns="SrA_SrAId">
+			<details>Klucz podstawowy</details>
+		</primaryKey>
+		<foreignKey name="FK_SrTId" localColumns="SrA_SrTId" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleAtrybuty:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrADeAId" localColumns="SrA_DeAId" refTable="DefAtrybuty" refColumns="DeA_DeAId" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleAtrybuty:CDN.DefAtrybuty (MANY:1)</description>
+		</foreignKey>
+		<index name="UniqueDeAID" options="UNIQUE NONCLUSTERED" fields="SrA_SrTId ,SrA_DeAId ,SrA_WypID ,SrA_Typ" />
+		<index name="DeAId" options="NONCLUSTERED" fields="SrA_DeAId">
+			<description>Indeks do tabeli DefAtrybuty</description>
+			<details>Indeks do tabeli DefAtrybuty</details>
+		</index>
+		<index name="SrTId" options="NONCLUSTERED" fields="SrA_SrTId">
+			<description>Indeks do tabeli Trwale</description>
+			<details>Indeks do tabeli Trwale</details>
+		</index>
+		<index name="WypID" options="NONCLUSTERED" fields="SrA_WypID">
+			<description>Indeks dotabeli Wyposazenie</description>
+			<details>Indeks dotabeli Wyposazenie</details>
+		</index>
+	</table>
+	

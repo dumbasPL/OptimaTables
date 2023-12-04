@@ -1,0 +1,160 @@
+<table name="Pieczatki">
+		<description>Historia pieczątki</description>
+		<column name="PC_PCID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PC_Aktualna" type="COMPUTED|TINYINT" definition="CASE WHEN PC_DataDo = CONVERT(DATETIME, '2999-12-31', 120) THEN 1 ELSE 0 END">
+			<description>Identyfikator podmiotu PUESC</description>
+		</column>
+		<column name="PC_DataOd" type="DATETIME" definition="NOT NULL">
+			<description>Początek okresu obowiązywania</description>
+		</column>
+		<column name="PC_DataDo" type="DATETIME" definition="NOT NULL">
+			<description>Koniec okresu obowiązywania</description>
+		</column>
+		<column name="PC_Nazwa1" type="NVARCHAR(50)" hash="1">
+			<description>Nazwa firmy - pierwsza linia</description>
+		</column>
+		<column name="PC_Nazwa2" type="NVARCHAR(50)" hash="1">
+			<description>Nazwa firmy - druga linia</description>
+		</column>
+		<column name="PC_Nazwa3" type="NVARCHAR(512)" hash="1">
+			<description>Nazwa firmy - trzecia linia</description>
+		</column>
+		<column name="PC_NipKraj" type="VARCHAR(2)">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="PC_NipE" type="NVARCHAR(20)" hash="1">
+			<description>NIP firmy</description>
+		</column>
+		<column name="PC_Regon" type="NVARCHAR(20)" hash="1">
+			<description>Regon firmy</description>
+		</column>
+		<column name="PC_Kraj" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Kraj</description>
+		</column>
+		<column name="PC_KrajISO" type="NVARCHAR(2)">
+			<description>Adres firmy - Kod ISO kraju</description>
+		</column>
+		<column name="PC_Wojewodztwo" type="NVARCHAR(40)">
+			<description>Adres firmy - Województwo</description>
+		</column>
+		<column name="PC_Powiat" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Powiat</description>
+		</column>
+		<column name="PC_Gmina" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Gmina</description>
+		</column>
+		<column name="PC_KodGminy" type="VARCHAR(7)" hash="1">
+			<description>Adres firmy - Kod gminy</description>
+		</column>
+		<column name="PC_Miasto" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Miasto</description>
+		</column>
+		<column name="PC_Ulica" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Ulica</description>
+		</column>
+		<column name="PC_NrDomu" type="NVARCHAR(10)">
+			<description>Adres firmy - Numer domu</description>
+		</column>
+		<column name="PC_NrLokalu" type="NVARCHAR(10)">
+			<description>Adres firmy - Numer lokalu</description>
+		</column>
+		<column name="PC_UlicaNrDomLok" type="COMPUTED|NVARCHAR(64)" definition="CASE WHEN IsNull(PC_Ulica, '')&lt;&gt;'' THEN (CASE WHEN IsNull(PC_NrLokalu, '')&lt;&gt;'' THEN PC_Ulica + ' ' + IsNull(PC_NrDomu, '') + '/' + PC_NrLokalu ELSE PC_Ulica + ' ' + IsNull(PC_NrDomu, '') END) ELSE (CASE WHEN IsNull(PC_NrLokalu, '')&lt;&gt;'' THEN IsNull(PC_NrDomu, '') + '/' + PC_NrLokalu ELSE IsNull(PC_NrDomu, '') END) END">
+			<description>Ulica + numer domu + numer lokalu</description>
+		</column>
+		<column name="PC_KodP" type="VARCHAR(10)" hash="1">
+			<description>Adres firmy - Kod pocztowy</description>
+		</column>
+		<column name="PC_Poczta" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Poczta</description>
+		</column>
+		<column name="PC_Telefon" type="VARCHAR(20)" hash="1">
+			<description>Numer telefonu</description>
+		</column>
+		<column name="PC_Email" type="VARCHAR(127)" hash="1">
+			<description>Adres email poczty elektronicznej</description>
+		</column>
+		<column name="PC_URL" type="VARCHAR(254)" hash="1">
+			<description>Adres URL strony internetowej</description>
+		</column>
+		<column name="PC_Opis" type="NVARCHAR(50)">
+			<description>Opis</description>
+		</column>
+		<column name="PC_KRS_Sad" type="NVARCHAR(100)">
+			<description>KRS - Sąd</description>
+		</column>
+		<column name="PC_KRS_Numer" type="NVARCHAR(10)" hash="1">
+			<description>KRS - Numer</description>
+		</column>
+		<column name="PC_KRS_KapitalZak" type="NVARCHAR(20)">
+			<description>KRS - Kapitał zakładowy</description>
+		</column>
+		<column name="PC_KRS_KapitalWpl" type="NVARCHAR(20)">
+			<description>KRS - Kapitał wpłacony</description>
+		</column>
+		<column name="PC_ILNGLNWlasny" type="VARCHAR(13)">
+			<description>ILN/GLN własny</description>
+		</column>
+		<column name="PC_ILNGLNCentrali" type="VARCHAR(13)">
+			<description>ILN/GLN centrali</description>
+		</column>
+		<column name="PC_PUESC" type="NVARCHAR(50)" hash="1">
+			<description>Identyfikator podmiotu PUESC</description>
+		</column>
+		<column name="PC_BDO" type="NVARCHAR(20)" hash="1">
+			<description>Numer rejestrowy w BDO</description>
+		</column>
+		<column name="PC_AktDok" type="TINYINT">
+			<description>Czy aktualizować dokumenty (pole techniczne)</description>
+		</column>
+		<column name="PC_TS_Export" type="DATETIME">
+			<description>TimeStamp wykonania eksportu</description>
+		</column>
+		<column name="PC_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="PC_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="PC_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora dodającego zapis</description>
+		</column>
+		<column name="PC_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PC_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp dodania zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PC_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PC_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PC_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PC_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PC_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PC_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PC_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PC_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PC_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PC_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PC_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PC_Primary" columns="PC_PCID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="PCChron" options="NONCLUSTERED" fields="PC_DataOd" />
+		<index name="PCGUID" options="UNIQUE NONCLUSTERED" fields="PC_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

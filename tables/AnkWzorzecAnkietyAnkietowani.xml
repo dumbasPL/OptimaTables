@@ -1,0 +1,43 @@
+<table name="AnkWzorzecAnkietyAnkietowani">
+		<description>Pytania dla wzorca ankiet</description>
+		<column name="AnkWaA_AnkWaAId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkWaA_AnkWaNId" type="INTEGER" definition="NOT NULL">
+			<description>Id wzorca ankiety</description>
+		</column>
+		<column name="AnkWaA_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dla podmiotu</description>
+		</column>
+		<column name="AnkWaA_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="AnkWaA_PodID" type="INTEGER" definition="NOT NULL">
+			<description>Id podmiotu</description>
+		</column>
+		<column name="AnkWaA_OsobaId" type="INTEGER" definition="NULL">
+			<description>Id przedstawiciela</description>
+		</column>
+		<column name="AnkWaA_OsobaNazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko przedstawiciela</description>
+		</column>
+		<column name="AnkWaA_OsobaTelefon" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Telefon przedstawiciela</description>
+		</column>
+		<column name="AnkWaA_KntKod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod kontrahenta</description>
+		</column>
+		<column name="AnkWaA_KntNazwa" type="NVARCHAR(352)" definition="NOT NULL" hash="1">
+			<description>Nazwa kontrahenta</description>
+		</column>
+		<primaryKey name="AnkWaA_Primary" columns="AnkWaA_AnkWaAId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="AnkWaA_Lp_UniqueIx" options="UNIQUE NONCLUSTERED" fields="AnkWaA_AnkWaNId, AnkWaA_Lp">
+			<description>Unikalne Lp</description>
+		</index>
+		<foreignKey name="FK_AnkWaA_AnkWaN" localColumns="AnkWaA_AnkWaNId" refTable="AnkWzorzecAnkietyNag" refColumns="AnkWaN_AnkWaNId" deleteOption="CASCADE">
+			<description>Relacja CDN.AnkWzorzecAnkietyAnkietowani:CDN.AnkWzorzecAnkietyNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

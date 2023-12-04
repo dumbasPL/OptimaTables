@@ -1,0 +1,120 @@
+<table name="WypElementyPodstawa">
+		<description>Zapis logów z wyliczania podstawy chorobowego i urlopów</description>
+		<column name="WEP_WepId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Unikalne Id rekordu</description>
+		</column>
+		<column name="WEP_WpeId" type="INTEGER">
+			<description>Id elementu wypłaty (zasiłku, dodatku urlopowego) dla którego została policzona
+				podstawa</description>
+		</column>
+		<column name="WEP_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Id pracownika dla którego zapisano podstawę</description>
+		</column>
+		<column name="WEP_Nazwa" type="NVARCHAR(128)" definition="NOT NULL">
+			<description>Nazwa z elementu wypłaty - do którego liczymy podstawę</description>
+		</column>
+		<column name="WEP_NumerPelny" type="VARCHAR(100)" definition="NOT NULL">
+			<description>Numer listy płac na której wypłacono "nagłówek"</description>
+		</column>
+		<column name="WEP_Wlicz" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie typu podstawy</description>
+			<details>
+				10 - dla "nagłówka" liczona podstawa chorobowego;
+				20 - dla "nagłówka" liczona podstawa urlopu wypoczynkowego;
+				30 - dla "nagłówka" liczona podstawa ekwiwalentu
+				40 - dla "nagłówka" liczona podstawa algorytmem dla urlopu okolicznościowego;
+			</details>
+		</column>
+		<column name="WEP_WliczMetoda" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie jaką metodą policzono podstawę</description>
+			<details>
+				11 - podst. chorobowego wyliczona z wypłat;
+				12 - podstawa chorobowego wyliczona z danych kadrowych
+				13 - podstawa przepisana z poprzedniego rozliczenia
+				21 - podstawa urlopu wyliczona z wypłat
+				31 - podstawa ekwiwalentu wyliczona z wypłat;
+			</details>
+		</column>
+		<column name="WEP_RodzajElem" type="TINYINT" definition="NOT NULL">
+			<description>Informacja o tym czy wyliczona podstawa została wyrównana do minimalnej</description>
+			<details>
+				10 - podstawa chorobowego nie została wyrównana (podwyższona) do aktualnej minimalnej
+				11 - podstawa chorobowego została wyrównana do minimalnej;
+				20 - podstawa urlopu;
+				30 - podstawa ekwiwalentu
+			</details>
+		</column>
+		<column name="WEP_Kwota1" type="DECIMAL(15,6)" definition="NOT NULL">
+			<description>Wyliczona podstawa (bez dopełnienia do minimalnej)</description>
+			<details>
+				Podstawa chorobowego - wyliczona podstawa "miesięczna";
+				Podstawa urlopu - stawka za godzinę wyliczona z bieżącego miesiąca
+				Podstawa ekwiwalentu - podstawa "miesięczna" wyliczona z bieżącej wypłaty
+			</details>
+		</column>
+		<column name="WEP_Kwota2" type="DECIMAL(15,6)" definition="NOT NULL">
+			<description>Podstawa po przyrównaniu do minimalnej</description>
+			<details>
+				Podstawa chorobowego - taka sama wartość jak WEP_Kwota1 jeśli wyliczona podstawa
+				"miesięczna" nie była niższa od minimalnej; jest jeśli wyliczona podstawa była niższa od
+				minimalnej i nastąpiło przyrównanie, to w polu WEP_Kwota2 ma być dopełniona podstawa
+				Podstawa urlopu - stawka za godzinę wyliczona ze średniej z poprzednich miesięcy; Podstawa
+				ekwiwalentu - podstawa "miesięczna" wyliczona ze średniej z poprzednich miesięcy;
+			</details>
+		</column>
+		<column name="WEP_Wspolczynnik" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Współczynnik ekwiwalentu / Procent zasiłku</description>
+			<details>
+				Dla podstawy ekwiwalentu - wartość współczynnika pobrana z definicji typu wypłaty bądź
+				wyliczona jako "standardowa" średnia liczba dni pracy/mies.
+				Dla podstawy urlopu - wartość ustawiona na 1 (bez wpływu na obliczenia)
+				Dla podstawy chorobowego - procent z elementu wypłaty (procent zasiłku: 70, 80 czy 100)
+			</details>
+		</column>
+		<column name="WEP_Kwota3" type="DECIMAL(15,6)" definition="NOT NULL">
+			<description>Kwota wypłaconego dodatku / zasiłku</description>
+			<details>Wartość brutto elementu wypłaty będącego "nagłówkiem"</details>
+		</column>
+		<column name="WEP_GodzDni" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Liczba dni / godzin - za jaką naliczono element wypłaty będący "nagłówkiem"</description>
+			<details>
+				Liczba dni z elementu wypłaty - dla podstawy chorobowego;
+				Liczba godzin (z minutami) - dla podstaw urlopu i ekwiwalentu
+			</details>
+		</column>
+		<column name="WEP_NormaGodz" type="DATETIME" definition="NULL">
+			<description>Norma godzinowa</description>
+		</column>
+		<column name="WEP_IloscMies" type="INTEGER">
+			<description>Ilość miesięcy z jakiej policzona została podstawa ekwiwalentu/zasiłku dla
+				dodatków okresowych</description>
+		</column>
+		<column name="WEP_OkresOd" type="DATETIME">
+			<description>Data Od z elementu wypłaty - "nagłówka"</description>
+		</column>
+		<column name="WEP_OkresDo" type="DATETIME">
+			<description>Data Do z elementu wypłaty - "nagłówka"</description>
+		</column>
+		<column name="WEP_ParentId" type="INTEGER">
+			<description>Identyfikator rekordu z którego przepisywane są dane</description>
+		</column>
+		<column name="WEP_StawkaGodz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WEP_StawkaGodz DEFAULT(0)">
+			<description>Stawka godzinowa pracownika</description>
+		</column>
+		<column name="WEP_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="WEP_Primary" columns="WEP_WepId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_WEPWpeId" localColumns="WEP_WpeId" refTable="WypElementy" refColumns="WPE_WpeId" deleteOption="CASCADE">
+			<description>Relacja CDN.WypElementyPodstawa:CDN.WypElementy (MANY:1)</description>
+		</foreignKey>
+		<index name="WEPPraId" options="NONCLUSTERED" fields="WEP_PraId">
+			<description>Klucz obcy do pracownika</description>
+		</index>
+		<index name="WEPWpeId" options="NONCLUSTERED" fields="WEP_WpeId">
+			<description>Klucz do elementu wypłaty</description>
+		</index>
+	</table>
+	

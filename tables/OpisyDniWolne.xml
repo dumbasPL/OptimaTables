@@ -1,0 +1,61 @@
+<table name="OpisyDniWolne">
+		<description>Tabela opisów dni wolnych</description>
+		<column name="ODW_OdwId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ODW_Symbol" type="NVARCHAR(2)" definition="NOT NULL CONSTRAINT DF_ODW_Symbol DEFAULT('')">
+			<description>Symbol opisu</description>
+		</column>
+		<column name="ODW_Nazwa" type="NVARCHAR(45)" definition="NOT NULL CONSTRAINT DF_ODW_Nazwa DEFAULT('')">
+			<description>Nazwa opisu</description>
+		</column>
+		<column name="ODW_Standardowy" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_ODW_Standardowy DEFAULT(0)">
+			<description>Wpis standardowy lub użytkownika</description>
+		</column>
+		<column name="ODW_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ODW_Nieaktywny DEFAULT(0)">
+			<description>Nieaktywny</description>
+		</column>
+		<column name="ODW_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="ODW_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ODW_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="ODW_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="ODW_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ODW_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="ODW_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ODW_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ODW_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ODW_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ODW_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ODW_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ODW_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ODW_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="ODW_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="ODW_Primary" columns="ODW_OdwId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="ODWNazwa" options="UNIQUE NONCLUSTERED" fields="ODW_Nazwa">
+			<description>Unikalny indeks nazwy</description>
+		</index>
+		<index name="ODWSymbol" options="UNIQUE NONCLUSTERED" fields="ODW_Symbol">
+			<description>Unikalny indeks symbolu</description>
+		</index>
+	</table>
+	

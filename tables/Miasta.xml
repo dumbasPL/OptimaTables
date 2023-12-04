@@ -1,0 +1,14 @@
+<table name="Miasta">
+		<description>Słownik miejscowości</description>
+		<column name="MST_MstId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="MST_Nazwa" type="NVARCHAR(127)" definition="NOT NULL">
+			<description>Nazwa miejscowości</description>
+		</column>
+		<primaryKey name="MST_Primary" columns="MST_MstId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="MSTNazwa" options="NONCLUSTERED" fields="MST_Nazwa" />
+	</table>
+	

@@ -1,0 +1,69 @@
+<table name="PodArkuszInwenNag">
+		<description>Podarkusz inwentaryzacyjny</description>
+		<details>Podarkusz inwentaryzacyjny</details>
+		<column name="PAI_PAIId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Id recordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="PAI_TrNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka transakcji</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="PAI_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>numer dokumentu</description>
+		</column>
+		<column name="PAI_Status" type="SMALLINT" definition="NOT NULL">
+			<description>Status arkusza pomocniczego</description>
+		</column>
+		<column name="PAI_Opis" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_PAI_Opis DEFAULT('')">
+			<description>Opis arkusza</description>
+		</column>
+		<column name="PAI_AINumerPelny" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT DF_PAI_AINumerPelny DEFAULT('')">
+			<description>Numer pełny arkusza inwentaryzacyjnego</description>
+		</column>
+		<column name="PAI_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="PAI_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PAI_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PAI_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="PAI_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PAI_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PAI_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PAI_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PAI_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PAI_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PAI_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PAI_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PAI_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PAI_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PAI_Primary" columns="PAI_PAIId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_PAITraNag" localColumns="PAI_TrNId" refTable="TraNag" refColumns="TrN_TrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.PodArkuszInwenNag:CDN.TraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="PAITraNag" options="UNIQUE NONCLUSTERED" fields="PAI_TrNId ,PAI_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+	</table>
+	

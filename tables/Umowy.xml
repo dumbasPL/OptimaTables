@@ -1,0 +1,292 @@
+<table name="Umowy">
+		<description>Tabela umów pracowników</description>
+		<column name="UMW_UmwId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+			<details>IDENTITY</details>
+		</column>
+		<column name="UMW_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika zawierającego umowę</description>
+		</column>
+		<column name="UMW_DzlId" type="INTEGER" definition="CONSTRAINT DF_UMW_DzlId DEFAULT(3)">
+			<description>Identyfikator wydziału pracownika zawierającego umowę</description>
+		</column>
+		<column name="UMW_DdfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator definicji dokumentu</description>
+		</column>
+		<column name="UMW_TwpId" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj składnika</description>
+		</column>
+		<column name="UMW_TumId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator tytułu umowy</description>
+		</column>
+		<column name="UMW_TyuId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do tytułu ubezpieczenia</description>
+		</column>
+		<column name="UMW_ListaPlacSymbol" type="INTEGER">
+			<description>Identyfikator symbolu listy płac</description>
+			<details>ID z DokDefinicje</details>
+		</column>
+		<column name="UMW_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Symbol umowy</description>
+		</column>
+		<column name="UMW_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Numer umowy</description>
+		</column>
+		<column name="UMW_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(UMW_NUMERNR,UMW_NUMERSTRING)">
+			<description>Pełny numer umowy</description>
+		</column>
+		<column name="UMW_DataDok" type="DATETIME" definition="NOT NULL" />
+		<column name="UMW_DataOd" type="DATETIME" definition="NOT NULL">
+			<description>Data rozpoczęcia umowy</description>
+		</column>
+		<column name="UMW_DataDo" type="DATETIME" definition="NOT NULL">
+			<description>Data zakończenia umowy</description>
+		</column>
+		<column name="UMW_DataZawarcia" type="DATETIME">
+			<description>Data zawarcia umowy</description>
+		</column>
+		<column name="UMW_Tytul" type="NVARCHAR(127)" definition="NOT NULL">
+			<description>Tytuł umowy (1)</description>
+		</column>
+		<column name="UMW_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość umowy</description>
+		</column>
+		<column name="UMW_Rodzaj" type="NVARCHAR(127)" definition="NOT NULL">
+			<description>Rodzaj umowy</description>
+		</column>
+		<column name="UMW_Splacono" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota na jaką spłacono umowę</description>
+		</column>
+		<column name="UMW_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta</description>
+		</column>
+		<column name="UMW_WgBrutto" type="TINYINT" definition="NOT NULL">
+			<description>Wg brutto</description>
+		</column>
+		<column name="UMW_JestZUS" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie ubezpieczenia umowy</description>
+		</column>
+		<column name="UMW_Brutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto umowy</description>
+		</column>
+		<column name="UMW_Fis" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość podatku od umowy</description>
+		</column>
+		<column name="UMW_Zus" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek ZUS</description>
+		</column>
+		<column name="UMW_PomnZUS" type="TINYINT" definition="NOT NULL">
+			<description>Koszty uzyskania liczone od kwoty pomniejszonej o składki ZUS</description>
+		</column>
+		<column name="UMW_StawkaPodatku" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Stawka podatku</description>
+		</column>
+		<column name="UMW_KosztyKwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota kosztów uzyskania</description>
+		</column>
+		<column name="UMW_KosztyProc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Procent kosztów uzyskania</description>
+		</column>
+		<column name="UMW_KodZawodu" type="VARCHAR(7)" definition="NULL">
+			<description>Symbol kodu zawodu</description>
+		</column>
+		<column name="UMW_ZusOd" type="DATETIME">
+			<description>Data rozpoczęcia obowiązkowych ubezpieczeń społecznych</description>
+		</column>
+		<column name="UMW_JestEmerytal" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega obowiązkowemu ubezpieczeniu emerytalnemu</description>
+		</column>
+		<column name="UMW_JestRentowe" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega obowiązkowemu ubezpieczeniu rentowemu</description>
+		</column>
+		<column name="UMW_JestChorobowe" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega obowiązkowemu ubezpieczeniu chorobowemu</description>
+		</column>
+		<column name="UMW_JestWypad" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega obowiązkowemu ubezpieczeniu wypadkowemu</description>
+		</column>
+		<column name="UMW_EmerOd" type="DATETIME">
+			<description>Data rozpoczęcia dobrowolnego ubezpieczenia emerytalnego</description>
+		</column>
+		<column name="UMW_EmerDo" type="DATETIME">
+			<description>Data rozwiązania dobrowolnego ubezpieczenia emerytalnego</description>
+		</column>
+		<column name="UMW_RentOd" type="DATETIME">
+			<description>Data powstania dobrowolnego ubezpieczenia rentowego</description>
+		</column>
+		<column name="UMW_RentDo" type="DATETIME">
+			<description>Data rozwiązania dobrowolnego ubezpieczenia rentowego</description>
+		</column>
+		<column name="UMW_ChorOd" type="DATETIME">
+			<description>Data powstania dobrowolnego ubezpieczenia chorobowe</description>
+		</column>
+		<column name="UMW_ChorDo" type="DATETIME">
+			<description>Data rozwiązania dobrowolnego ubezpieczenia chorobowego</description>
+		</column>
+		<column name="UMW_WypadDo" type="DATETIME">
+			<description>Data zakończenia ubezpieczenia wypadkowego</description>
+		</column>
+		<column name="UMW_EmerKod" type="INTEGER" definition="NOT NULL">
+			<description>Kod przyczyny rozwiązania ubezpieczenia emerytalnego</description>
+		</column>
+		<column name="UMW_RentKod" type="INTEGER" definition="NOT NULL">
+			<description>Kod przyczyny rozwiązania ubezpieczenia rentowego</description>
+		</column>
+		<column name="UMW_ChorKod" type="INTEGER" definition="NOT NULL">
+			<description>Kod przyczyny rozwiązania ubezpieczenia chorobowego</description>
+		</column>
+		<column name="UMW_WypadKod" type="INTEGER" definition="NOT NULL">
+			<description>Kod przyczyny rozwiązania ubezpieczenia wypadkowego</description>
+		</column>
+		<column name="UMW_ZdrowOd" type="DATETIME">
+			<description>Data rozpoczęcia obowiązkowego ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="UMW_ZdrowDobrOd" type="DATETIME">
+			<description>Data rozpoczęcia dobrowolnego ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="UMW_ZdrowDo" type="DATETIME">
+			<description>Data zakończenia ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="UMW_ZdrowKwotaPierwSkl" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota pierwszej składki dobrowolnego ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="UMW_ZdrowKod" type="INTEGER" definition="NOT NULL">
+			<description>Kod przyczyny rozwiązania ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="UMW_TytKontZUS" type="INTEGER" definition="NOT NULL">
+			<description>Tytuł konta ZUS</description>
+		</column>
+		<column name="UMW_ZusKontoOd" type="DATETIME">
+			<description>Data przypisania umowy do konta ZUS</description>
+		</column>
+		<column name="UMW_JestDobrEmerytal" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega dobrowolnemu ubezpieczeniu emerytalnemu</description>
+		</column>
+		<column name="UMW_JestDobrRentowe" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega dobrowolnemu ubezpieczeniu rentowemu</description>
+		</column>
+		<column name="UMW_JestDobrChorobowe" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega dobrowolnemu ubezpieczeniu chorobowemu</description>
+		</column>
+		<column name="UMW_JestDobrZdrow" type="TINYINT" definition="NOT NULL">
+			<description>Umowa podlega dobrowolnemu ubezpieczeniu zdrowotnemu</description>
+		</column>
+		<column name="UMW_PrzekroczRok" type="INTEGER" />
+		<column name="UMW_PrzekroczMiesiac" type="TINYINT" />
+		<column name="UMW_PrzekroczKwota" type="DECIMAL(15,2)" />
+		<column name="UMW_PrzekroczInformacja" type="NVARCHAR(40)" />
+		<column name="UMW_Przekroczenie" type="TINYINT" />
+		<column name="UMW_OgraniczSklZdrow" type="TINYINT" definition="NOT NULL">
+			<description>Składka zdrowotna ograniczona do wys. podatku</description>
+		</column>
+		<column name="UMW_KwotaNastWyp" type="DECIMAL(15,2)" />
+		<column name="UMW_Splacona" type="TINYINT" definition="NOT NULL">
+			<description>Flaga informująca o tym czy umowa jest spłacona</description>
+		</column>
+		<column name="UMW_Symbol" type="VARCHAR(40)" definition="NOT NULL" />
+		<column name="UMW_Opis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Opis umowy</description>
+			<details>
+				Przy dodawaniu nowej umowy - pole domyślnie puste.&lt;BR&gt;
+				Pole uzupełniane przy migracji umów w przypadku, gdy w arkuszu wpisany ciąg znaków, w
+				kolumnach Numer_pierwotny i Wartosc_brutto_pierwotna, w przeciwnym przypadku również puste.
+			</details>
+		</column>
+		<column name="UMW_NaliczajFundusze" type="TINYINT" definition="NOT NULL">
+			<description>Zawsze naliczaj FP i FGŚP</description>
+		</column>
+		<column name="UMW_WliczChorZakonczona" type="TINYINT" definition="NOT NULL CONSTRAINT DF_UMW_WliczChorZakonczona DEFAULT(0)">
+			<description>Wliczać do podstawy zasiłku chorobowego również po dacie zakończenia umowy</description>
+		</column>
+		<column name="UMW_UwzglMin" type="TINYINT" definition="NOT NULL CONSTRAINT DF_UMW_UwzglMin DEFAULT(0)">
+			<description>Wypłata umowy przyrównywana do stawki minimalnej</description>
+		</column>
+		<column name="UMW_CzasPracy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_UMW_CzasPracy DEFAULT(0)">
+			<description>Czas pracy dla umowy - opcja ewidencji czasu pracy</description>
+		</column>
+		<column name="UMW_StawkaGodz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_UMW_StawkaGodz DEFAULT(0)">
+			<description>Stawka za godzinę</description>
+		</column>
+		<column name="UMW_UlgaMnoznikL" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_UMW_UlgaMnoznikL DEFAULT(0)">
+			<description>Mnożnik ulgi podatkowej - licznik</description>
+		</column>
+		<column name="UMW_UlgaMnoznikM" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_UMW_UlgaMnoznikM DEFAULT(12)">
+			<description>Mnożnik ulgi podatkowej - mianownik</description>
+		</column>
+		<column name="UMW_NiepobierajZaliczkiPodatku" type="TINYINT" definition="NOT NULL CONSTRAINT DF_UMW_NiepobierajZaliczkiPodatku DEFAULT(0)">
+			<description>Nie pobierać zaliczki podatku na wniosek pracownika</description>
+		</column>
+		<column name="UMW_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="UMW_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="UMW_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="UMW_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="UMW_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="UMW_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="UMW_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_UMW_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="UMW_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_UMW_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="UMW_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_UMW_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="UMW_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_UMW_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="UMW_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="UMW_Primary" columns="UMW_UmwId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_UMWTyuLink" localColumns="UMW_TyuId" refTable="TytUbezp" refColumns="TYU_TyuId">
+			<description>Relacja CDN.Umowy:CDN.TytUbezp (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_UMWDdfLink" localColumns="UMW_DdfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.Umowy:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_UMWDzlLink" localColumns="UMW_DzlId" refTable="Dzialy" refColumns="DZL_DzlId">
+			<description>Relacja CDN.Umowy:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_UMWPraLink" localColumns="UMW_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.Umowy:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="UMWPraLink" options="UNIQUE NONCLUSTERED" fields="UMW_PraId ,UMW_NumerPelny">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="UmwNumerPelny" options="UNIQUE NONCLUSTERED" fields="UMW_NumerPelny">
+			<description>Klucz wg numeru umowy</description>
+		</index>
+		<index name="UMWDzlLink" options="NONCLUSTERED" fields="UMW_DzlId">
+			<description>Klucz obcy działu</description>
+		</index>
+		<index name="UMWDdfLink" options="NONCLUSTERED" fields="UMW_DdfId">
+			<description>Odnośnik do definicji dokumentów</description>
+		</index>
+		<index name="UMWTyuLink" options="NONCLUSTERED" fields="UMW_TyuId">
+			<description>Relacja do tytułu ubezpieczenia</description>
+		</index>
+		<index name="UMWTwpLink" options="NONCLUSTERED" fields="UMW_TwpId">
+			<description>Klucz obcy do TypWyplata</description>
+		</index>
+		<index name="UMWLPLink" options="NONCLUSTERED" fields="UMW_ListaPlacSymbol" />
+		<index name="UMWDataOdDataDo" options="NONCLUSTERED" fields="UMW_DataOd, UMW_DataDo" includedColumns="UMW_PraId">
+			<description>Wg daty umowy</description>
+		</index>
+	</table>
+	

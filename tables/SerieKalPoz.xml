@@ -1,0 +1,23 @@
+<table name="SerieKalPoz">
+		<description>Pozycje serii kalendarzy</description>
+		<column name="SLP_SlpId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SLP_SlnId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka serii kalendarzy</description>
+		</column>
+		<column name="SLP_TypDnia" type="INTEGER" definition="NOT NULL" />
+		<column name="SLP_Lp" type="INTEGER" definition="NOT NULL" />
+		<column name="SLP_OdwId" type="INTEGER" />
+		<primaryKey name="SLP_Primary" columns="SLP_SlpId" />
+		<foreignKey name="FK_SlpNaglowek" localColumns="SLP_SlnId" refTable="SerieKalNag" refColumns="SLN_SlnId" deleteOption="CASCADE">
+			<description>Relacja CDN.SerieKalPoz:CDN.SerieKalNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SLPOdwLink" localColumns="SLP_OdwId" refTable="OpisyDniWolne" refColumns="ODW_OdwId">
+			<description>Relacja CDN.SerieKalPoz:CDN.OpisyDniWolne (MANY:1)</description>
+		</foreignKey>
+		<index name="SlpNaglowek" options="UNIQUE NONCLUSTERED" fields="SLP_SlnId ,SLP_SlpId">
+			<description>Odnośnik do nagłówka serii</description>
+		</index>
+	</table>
+	

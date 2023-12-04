@@ -1,0 +1,144 @@
+<table name="AutoPrzejazd">
+		<description>Ewidencja przejazdów samochodu</description>
+		<details>Tabela zawierająca zestawienie wykonanych przejazdów służbowych samochodem prywatnym</details>
+		<column name="AuP_AuPID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AuP_AuEID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator samochodu</description>
+			<details>
+				Identyfikator pojazdu.
+				Relacja do tabeli AutoEwid (AuP:AuE:Id = AuE:AuEId)
+			</details>
+		</column>
+		<column name="AuP_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc przejazdu</description>
+			<details>
+				Rok i miesiąc wpisu dokumentu, obliczany jako:
+				100 * YEAR(DataZapData) + MONTH(DataZapData)
+			</details>
+		</column>
+		<column name="AuP_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dokumentu</description>
+		</column>
+		<column name="AuP_DataZap" type="DATETIME" definition="NOT NULL">
+			<description>Data zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuP_AuTId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator trasy</description>
+			<details>
+				Relacja do tabeli listy pomocniczej tras i celów podróży (AutoTrasy)
+				Trasa i cel może być wpisana "z ręki" (AuP:AuTId = 0) lub pobrana z listy pomocniczej
+				(AuP:AuTId = AuT:AuTId)
+			</details>
+		</column>
+		<column name="AuP_Trasa" type="NVARCHAR(1000)">
+			<description>Opis trasy przejazdu</description>
+		</column>
+		<column name="AuP_Cel" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Opis celu wyjazdu</description>
+		</column>
+		<column name="AuP_Dlugosc" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Długość trasy w km</description>
+		</column>
+		<column name="AuP_Miasto" type="TINYINT" definition="NOT NULL">
+			<description>Przejazd objęty limitem jazd miejskich</description>
+		</column>
+		<column name="AuP_Stawka" type="DECIMAL( 7,4)" definition="NOT NULL">
+			<description>Stawka za kilometr</description>
+		</column>
+		<column name="AuP_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="AuP_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuP_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuP_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego</description>
+		</column>
+		<column name="AuP_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuP_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuP_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuP_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AuP_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuP_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AuP_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuP_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuP_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuP_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuP_PoczStanL" type="DECIMAL(14,2)">
+			<description>Początkowy stan licznika</description>
+		</column>
+		<column name="AuP_KonStanL" type="DECIMAL(14,2)">
+			<description>Końcowy stan licznika</description>
+		</column>
+		<column name="AuP_PrcId" type="INTEGER">
+			<description>ID pracownika</description>
+		</column>
+		<column name="AuP_PrcNazwisko" type="NVARCHAR(100)" hash="1">
+			<description>Nazwisko pracownika</description>
+		</column>
+		<column name="AuP_PrcAdres" type="NVARCHAR(100)" hash="1">
+			<description>Adres pracownika</description>
+		</column>
+		<column name="AuP_PrcTyp" type="INTEGER">
+			<description>Typ pracownika</description>
+		</column>
+		<column name="AuP_OpiekunTyp" type="INTEGER">
+			<description>Typ opiekuna</description>
+		</column>
+		<column name="AuP_OpiekunId" type="INTEGER">
+			<description>ID opiekuna</description>
+		</column>
+		<column name="AuP_Potwierdzil" type="INTEGER" definition="not null constraint DF_AuP_Potwierdzil default(0)">
+			<description>Czy zapis jest potwierdzony</description>
+		</column>
+		<column name="AuP_DataPotw" type="DATETIME">
+			<description>Data potwierdzenia</description>
+		</column>
+		<primaryKey name="AuP_Primary" columns="AuP_AuPID">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_AuPAutoTrasa" localColumns="AuP_AuTId" refTable="AutoTrasy" refColumns="AuT_AuTID">
+			<description>Relacja CDN.AutoPrzejazd:CDN.AutoTrasy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_AuPLp" localColumns="AuP_AuEID" refTable="AutoEwid" refColumns="AuE_AuEID">
+			<description>Relacja CDN.AutoPrzejazd:CDN.AutoEwid (MANY:1)</description>
+		</foreignKey>
+		<index name="AuPAutoTrasa" options="UNIQUE NONCLUSTERED" fields="AuP_AuTId ,AuP_DataZap ,AuP_AuPID">
+			<description>Przejazdy wg trasy przejazdu</description>
+			<details>Indeks porządkujący przejazdy wg identyfikatora trasy (wiążący zapisy w tabeli
+				AutoPrzejazdy z tabelą AutoTrasy)</details>
+		</index>
+		<index name="AuPLp" options="UNIQUE NONCLUSTERED" fields="AuP_AuEID ,AuP_RokMies ,AuP_Lp ,AuP_AuPID">
+			<description>Wg liczby porządkowej</description>
+			<details>Indeks według liczby porządkowej zapisu w danym miesiącu w ramach zapisów dotyczących
+				jednego samochodu</details>
+		</index>
+		<index name="AuPChrono" options="UNIQUE NONCLUSTERED" fields="AuP_AuEID ,AuP_RokMies ,AuP_DataZap ,AuP_AuPID">
+			<description>Chronologicznie dla samochodu</description>
+			<details>Indeks chronologiczny w ramach zapisów dotyczących jednego samochodu. Służy do
+				renumeracji listy.</details>
+		</index>
+	</table>
+	

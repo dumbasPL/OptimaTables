@@ -1,0 +1,41 @@
+<table name="PracDiety">
+		<description>Tabela kwot diet kierowcy międzynarodowego</description>
+		<column name="PDI_PdiId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="PDI_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PDI_OkresOd" type="DATETIME" definition="NOT NULL">
+			<description>Data od</description>
+		</column>
+		<column name="PDI_OkresDo" type="DATETIME" definition="NOT NULL">
+			<description>Data do</description>
+		</column>
+		<column name="PDI_KwotaDiety" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PDI_KwotaDiety DEFAULT(0)">
+			<details>Kwota diety</details>
+		</column>
+		<column name="PDI_Kraj" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT DF_PDI_Kraj DEFAULT('')">
+			<details>Kraj oddelegowania</details>
+		</column>
+		<column name="PDI_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PDI_Primary" columns="PDI_PdiId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_PDI_PraId" localColumns="PDI_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracDiety:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="PDIPraId" options="NONCLUSTERED" fields="PDI_PraId">
+			<description>Wg id pracownika</description>
+		</index>
+		<index name="PDIOkresDo" options="NONCLUSTERED" fields="PDI_OkresDo">
+			<description>Wg daty do</description>
+		</index>
+	</table>
+	

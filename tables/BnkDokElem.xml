@@ -1,0 +1,66 @@
+<table name="BnkDokElem">
+		<description>Tabela z elementami dokumentów bazowych</description>
+		<column name="BDE_BDEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BDE_BDNId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka dokumentu</description>
+		</column>
+		<column name="BDE_DokTyp" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Rodzaj dokumentu źródłowego</description>
+			<details>1- BnkZdarzenia; 2- BnkZapisy</details>
+		</column>
+		<column name="BDE_DokId" type="INTEGER">
+			<description>Identyfikator dokumentu źródłowego</description>
+			<details>Klucz obcy do tabeli BnkZdarzenia lub BnkZapisy</details>
+		</column>
+		<column name="BDE_Numer" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>Numer dokumentu źródłowego</description>
+		</column>
+		<column name="BDE_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="BDE_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="BDE_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności dokumentu źródłowego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="BDE_Kwota1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu</description>
+			<details>Dla potwierdzenia salda: Kwota Dt; Dla ponaglenia zapłaty: kwota zaległości</details>
+		</column>
+		<column name="BDE_Kwota2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu</description>
+			<details>Dla potwierdzenia salda: Kwota Ct; Dla ponaglenia zapłaty: kwota odsetek</details>
+		</column>
+		<column name="BDE_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu</description>
+			<details>Dla potwierdzenia salda: Kwota Ct; Dla ponaglenia zapłaty: kwota odsetek</details>
+		</column>
+		<primaryKey name="BDE_Primary" columns="BDE_BDEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_BDENaglowek" localColumns="BDE_BDNId" refTable="BnkDokNag" refColumns="BDN_BDNId" deleteOption="CASCADE">
+			<description>Relacja CDN.BnkDokElem:CDN.BnkDokNag (MANY:1)</description>
+		</foreignKey>
+		<index name="BDENaglowek" options="UNIQUE NONCLUSTERED" fields="BDE_BDNId ,BDE_BDEId">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Klucz obcy do tabeli NotyOdsNag</details>
+		</index>
+		<index name="BDEDokument" options="NONCLUSTERED" fields="BDE_DokId ,BDE_DokTyp">
+			<description>Wskaźnik do dokumentu źródłowego</description>
+			<details>Klucz obcy do tabeli BnkZdarzenia lub BnkZapisy</details>
+		</index>
+	</table>
+	

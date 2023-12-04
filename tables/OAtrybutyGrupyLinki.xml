@@ -1,0 +1,21 @@
+<table name="OAtrybutyGrupyLinki">
+		<description>Encja łącząca klasy atrybutów z grupą</description>
+		<column name="AGL_AglId" type="INTEGER" definition="IDENTITY(1,1)" />
+		<column name="AGL_AtgId" type="INTEGER" definition="NOT NULL" />
+		<column name="AGL_AtkId" type="INTEGER" definition="NOT NULL" />
+		<column name="AGL_Lp" type="INTEGER" definition="NOT NULL" />
+		<column name="AGL_NazwaKlasy" type="NVARCHAR(41)" definition="NOT NULL" />
+		<primaryKey name="AGL_Primary" columns="AGL_AglId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AGLAtgId" localColumns="AGL_AtgId" refTable="OAtrybutyGrupy" refColumns="ATG_AtgId" deleteOption="CASCADE">
+			<description>Relacja CDN.OAtrybutyGrupyLinki:CDN.OAtrybutyGrupy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_AGLAtkId" localColumns="AGL_AtkId" refTable="OAtrybutyKlasy" refColumns="ATK_AtkId">
+			<description>Relacja CDN.OAtrybutyGrupyLinki:CDN.OAtrybutyKlasy (MANY:1)</description>
+		</foreignKey>
+		<index name="AGLAtkId" options="NONCLUSTERED" fields="AGL_AtkId" />
+		<index name="AGLAtgId" options="NONCLUSTERED" fields="AGL_AtgId" />
+		<index name="AGLAtkIdAtgId" options="UNIQUE NONCLUSTERED" fields="AGL_AtgId ,AGL_AtkId" />
+	</table>
+	

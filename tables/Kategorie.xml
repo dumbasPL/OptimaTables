@@ -1,0 +1,206 @@
+<table name="Kategorie">
+		<description>Tabela z listami pomocniczymi kategorii</description>
+		<column name="Kat_KatID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Kat_Typ" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Typ kategorii</description>
+			<details>
+				1 - kategoria kosztów
+				2 - kategoria przychodów
+			</details>
+		</column>
+		<column name="Kat_Poziom" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Poziom kategorii</description>
+			<details>
+				Poziom kategorii:
+				1 - kategoria ogólna
+				2 - kategoria szczegółowa
+			</details>
+		</column>
+		<column name="Kat_ParentID" type="INT" filterVisible="false">
+			<description>ID nadrzędnej kategorii ogólnej</description>
+		</column>
+		<column name="Kat_KodOgolny" type="VARCHAR(20)" definition="NOT NULL" filterVisible="false">
+			<description>Kod kategorii ogólnej (nadrzędnej)</description>
+		</column>
+		<column name="Kat_KodSzczegol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod kategorii szczegółowej (podrzędnej)</description>
+			<details>Dla kategorii ogólnej (Kat:Poziom = 1) Kat:KodSzczegol = Kat:KodOgolny</details>
+		</column>
+		<column name="Kat_Opis" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Treść opisu katgorii</description>
+		</column>
+		<column name="Kat_KolumnaKPIR" type="TINYINT" definition="NOT NULL">
+			<description>Numer kolumny KPIR</description>
+			<details>
+				Numer kolumny w księdze przychodów i rozchodów do której zostanie zaksięgowany zapis z
+				rejestru Vat:
+				- Nie księgować - 0 (e_mk_KolumnaKP_NieKsiegowac)
+				- Sprzedaż (kolumna 7) - 1 (e_mk_KolumnaKP_Sprzedaz)
+				- Pozostałe przychody (kolumna 8) - 2 (e_mk_KolumnaKP_Pozostale)
+				- Zakupy towarów (kolumna 10) - 3 (e_mk_KolumnaKP_Towary)
+				- Koszty uboczne (kolumna 11) - 4 (e_mk_KolumnaKP_Uboczne)
+				- Reprezentacja i reklama (kolumna 12) - 5 (e_mk_KolumnaKP_Reklama)
+				- Wynagrodzenia (kolumna 13) - 6 (e_mk_KolumnaKP_Wynagrodzenia)
+				- Pozostałe wydatki (kolumna 14) - 7 (e_mk_KolumnaKP_Inne)
+			</details>
+		</column>
+		<column name="Kat_KolumnaRycz" type="TINYINT" definition="NOT NULL">
+			<description>Kolumna ewidencji ryczałtowej</description>
+			<details>Numer kolumny w ewidencji ryczałtowej do której zostanie zaksięgowany zapis z
+				rejestru Vat (przyjmuje wartości 1, 2 lub 3)</details>
+		</column>
+		<column name="Kat_WzID" type="SMALLINT" filterVisible="false">
+			<description>Identyfikator wzorca księgowań</description>
+		</column>
+		<column name="Kat_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki</description>
+		</column>
+		<column name="Kat_Flaga" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="Kat_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL" filterVisible="false">
+			<description>Źródłowa stawka VAT dla stawki zaniżonej</description>
+		</column>
+		<column name="Kat_Odliczenia" type="SMALLINT" definition="NOT NULL">
+			<description>Odliczenia VAT</description>
+			<details>
+				Sposób odliczania Vat od zakupów. Przyjmuje wartości:
+				Nie odliczać Vat - 0 (e_mk_OdliczeniaVAT_Nie)
+				Odliczać Vat - 1 (e_mk_OdliczeniaVAT_Tak)
+				Odliczać Vat warunkowo (zakupy opodatkowane związane ze sprzedażą mieszaną) - 2
+				(e_mk_OdliczeniaVAT_Warunkowo)
+			</details>
+		</column>
+		<column name="Kat_RodzajZakupu" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj zakupu (towary, inne, środki trwałe)</description>
+			<details>
+				Rodzaj zakupu. Przyjmuje wartości:
+				- Zakupy towarów - 1 (e_mk_RodzajZakupow_Towary)
+				- Zakupy inne (kosztowe) - 2 (e_mk_RodzajZakupow_Inne)
+				- Zakupy środków trwałych - 3 (e_mk_RodzajZakupow_Trwale)
+				- usługi - 4
+				- środki transportu - 5
+				- nieruchomości - 6
+				- paliwo - 7
+			</details>
+		</column>
+		<column name="Kat_Fiskalny" type="TINYINT" definition="NOT NULL">
+			<description>Sprzedaż fiskalna</description>
+		</column>
+		<column name="Kat_Detal" type="TINYINT" definition="NOT NULL">
+			<description>Sprzedaż detaliczna</description>
+			<details>Sprzedaż podlegająca rozliczeniu strukturą zakupów</details>
+		</column>
+		<column name="Kat_Kwota" type="DECIMAL(15,2)" definition="NOT NULL" filterVisible="false">
+			<details>Nie wykorzystane</details>
+		</column>
+		<column name="Kat_Udzial" type="DECIMAL( 5,2)" definition="NOT NULL" filterVisible="false">
+			<details>Nie wykorzystane</details>
+		</column>
+		<column name="Kat_Budzet" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Zakładany budżet / plan</description>
+		</column>
+		<column name="Kat_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Wskaźnik nieaktywności rekordu</description>
+		</column>
+		<column name="Kat_KontoSegmentWN" type="VARCHAR(50)" definition="NOT NULL" />
+		<column name="Kat_KontoSegmentMA" type="VARCHAR(50)" definition="NOT NULL" />
+		<column name="Kat_TS_Uzyc" type="DATETIME">
+			<description>Time Stamp ostatniego użycia</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Kat_ElixirO1" type="VARCHAR(35)" definition="NOT NULL">
+			<description>Pierwsza linia opisu Elixir-O</description>
+		</column>
+		<column name="Kat_ElixirO2" type="VARCHAR(35)" definition="NOT NULL">
+			<description>Druga linia opisu Elixir-O</description>
+		</column>
+		<column name="Kat_ElixirO3" type="VARCHAR(35)" definition="NOT NULL">
+			<description>Trzecia linia opisu Elixir-O</description>
+		</column>
+		<column name="Kat_ElixirO4" type="VARCHAR(35)" definition="NOT NULL">
+			<description>Czwarta linia opisu Elixir-O</description>
+		</column>
+		<column name="Kat_PodzielOdliczenia" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Kat_PodzielOdliczenia DEFAULT(0)" />
+		<column name="Kat_PodzielOdliczeniaProcent" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_Kat_PodzielOdliczeniaProcent DEFAULT(50.00)" />
+		<column name="Kat_KsiegujWKoszty" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Kat_KsiegujWKoszty DEFAULT(0)" />
+		<column name="Kat_KsiegujWKosztyProcent" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_Kat_KsiegujWKosztyProcent DEFAULT(75.00)" />
+		<column name="Kat_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu</description>
+		</column>
+		<column name="Kat_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="Kat_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="Kat_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="Kat_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Kat_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp założenia kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Kat_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikujacego kartotekę</description>
+		</column>
+		<column name="Kat_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Kat_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Kat_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Kat_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Kat_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Kat_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Kat_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Kat_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Kat_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Kat_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Kat_Primary" columns="Kat_KatID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="KatKod" options="UNIQUE NONCLUSTERED" fields="Kat_Typ ,Kat_KodOgolny ,Kat_Poziom ,Kat_KodSzczegol">
+			<description>Wg kodów kategorii</description>
+			<details>
+				Indeks służy do wyświetlania danego rodzaju kategorii (przychodów lub kosztów) w układzie:
+				Kategoria ogólna
+				- Podrzędne kategorie szczegółowe
+			</details>
+		</index>
+		<index name="KatOgolny" options="UNIQUE NONCLUSTERED" fields="Kat_Typ ,Kat_Poziom ,Kat_KodOgolny ,Kat_KodSzczegol">
+			<description>Wg kategorii ogólnej</description>
+			<details>Indeks służy do wyświetlania wyłącznie kategorii ogólnych</details>
+		</index>
+		<index name="KatSzczegol" options="UNIQUE NONCLUSTERED" fields="Kat_KodSzczegol">
+			<description>Wg kodu szczegółowego</description>
+			<details>Indeks identyfikujący kategorię wg kodu szczegółowego - służący do pobierania
+				kategorii z list pomocniczych</details>
+		</index>
+		<index name="KatGUID" options="UNIQUE NONCLUSTERED" fields="Kat_ImportRowId">
+			<description>Wg unikalnego identyfikaotora</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,31 @@
+<table name="TwrLinki" filterVisible="false">
+		<description>Linki do grup towarów</description>
+		<details>Tabela zawierająca strukturę drzewiastą towarów - dla potrzeb współpracy z CDN XL</details>
+		<column name="TwL_GIDTyp" type="SMALLINT" definition="NOT NULL">
+			<details>
+				-16 - oznacza grupę towarową &lt;br&gt;
+				16 - oznacza towar
+			</details>
+		</column>
+		<column name="TwL_GIDFirma" type="INTEGER" definition="NOT NULL" />
+		<column name="TwL_GIDNumer" type="INTEGER" definition="NOT NULL">
+			<description>Pole przysyłane z CDN XL</description>
+		</column>
+		<column name="TwL_GIDLp" type="SMALLINT" />
+		<column name="TwL_GrOTyp" type="SMALLINT" definition="NOT NULL">
+			<details>
+				-16 - oznacza grupę towarową (jeśli GIDTyp = -16 i GroTyp=-16)
+				-16 - oznacza wpięcie towaru do grupy (jeśli GIDTyp = 16 i GroTyp=-16)
+			</details>
+		</column>
+		<column name="TwL_GrOFirma" type="INTEGER" definition="NOT NULL" />
+		<column name="TwL_GrONumer" type="INTEGER" definition="NOT NULL" />
+		<column name="TwL_GrOLp" type="SMALLINT" />
+		<column name="TwL_Lisc" type="SMALLINT" />
+		<column name="TwL_LiczbaPowtorzen" type="SMALLINT" />
+		<column name="TwL_TStampDataMod" type="INTEGER" />
+		<primaryKey name="TwL_Primary" columns="TwL_GIDTyp,TwL_GrONumer,TwL_GIDNumer">
+			<description>Wg numeru grupy</description>
+		</primaryKey>
+	</table>
+	

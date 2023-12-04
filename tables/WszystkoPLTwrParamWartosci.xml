@@ -1,0 +1,31 @@
+<table name="WszystkoPLTwrParamWartosci">
+		<description>Wartości atrybutów dla towaru z wszystko.pl</description>
+		<column name="WPLTPW_WPLTPWId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WPLTPW_WPLPId" type="INTEGER" definition="NOT NULL">
+			<description>Id parametru</description>
+		</column>
+		<column name="WPLTPW_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Id towaru</description>
+		</column>
+		<column name="WPLTPW_Wartosc" type="NVARCHAR(max)" definition="NOT NULL">
+			<description>wartość</description>
+		</column>
+		<column name="WPLTPW_Zakres" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPLTPW_Zakres  DEFAULT (0)">
+			<description>Czy parametr z zakresem od do</description>
+		</column>
+		<column name="WPLTPW_WPLPDWId" type="NVARCHAR(max)" definition="NOT NULL CONSTRAINT DF_WPLTPW_WPLPDWId DEFAULT('')">
+			<description>id wartosci parametru</description>
+		</column>
+		<primaryKey name="WPLTPW_Primary" columns="WPLTPW_WPLTPWId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_WPLTPWTowar" localColumns="WPLTPW_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.WszystkoPLTwrParamWartosci:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="WPLTPWTowar" options="NONCLUSTERED" fields="WPLTPW_TwrId">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+	</table>
+	

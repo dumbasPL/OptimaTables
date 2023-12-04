@@ -1,0 +1,72 @@
+<table name="Rabaty">
+		<description>Lista rabatów dla kontrahentów/towarów</description>
+		<column name="Rab_RabId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Rab_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ rabatu</description>
+			<details>
+				1 = grupa kontrahenta / wszystkie towary &lt;br&gt;
+				2 = jeden kontrahent / wszystkie towary &lt;br&gt;
+				3 = grupa kontrahenta / grupa towarowa &lt;br&gt;
+				4 = grupa kontrahenta / jeden towar &lt;br&gt;
+				5 = jeden kontrahent / grupa towarowa &lt;br&gt;
+				6 = jeden kontrahent / jeden towar &lt;br&gt;
+				7 = grupa towarowa / wszyscy kontrahenci &lt;br&gt;
+				8 = jeden towar / wszyscy kontrahenci&lt;br&gt;
+				Stała cena:&lt;br&gt;
+				11- wszyscy kontrahenci&lt;br&gt;
+				12 - grupa kontrahentów&lt;br&gt;
+				13 - jeden kontrahent
+			</details>
+		</column>
+		<column name="Rab_TypCenyNB" type="TINYINT" definition="NOT NULL">
+			<description>Typ ceny dla rabatu typu Stała cena</description>
+			<details>
+				1 - netto &lt;br&gt;
+				2 - brutto
+			</details>
+		</column>
+		<column name="Rab_TwrId" type="INTEGER">
+			<description>Identyfikator towaru lub grupy towarowej</description>
+		</column>
+		<column name="Rab_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="Rab_PodmiotId" type="INTEGER">
+			<description>Identyfikator podmiotu lub grupy podmiotów (kontrahentów)</description>
+		</column>
+		<column name="Rab_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wielkość rabatu</description>
+		</column>
+		<column name="Rab_RabatISklep" type="DECIMAL( 5,2)" definition="NOT NULL CONSTRAINT DF_Rab_RabatISklep DEFAULT (0.00)">
+			<description>Wielkość rabatu dla ISklepu</description>
+		</column>
+		<column name="Rab_Cena" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Stała cena</description>
+			<details>Wartość ceny w przypadku rabatu Rodzaj=2</details>
+		</column>
+		<column name="Rab_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta</description>
+			<details>Waluta dla rabatu typu stała cena (Rodzaj=2)</details>
+		</column>
+		<column name="Rab_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis rabatu</description>
+		</column>
+		<primaryKey name="Rab_Primary" columns="Rab_RabId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="RabTowar" options="UNIQUE NONCLUSTERED" fields="Rab_TwrId ,Rab_Typ ,Rab_PodmiotTyp ,Rab_PodmiotId">
+			<description>Klucz wg towaru (grupy towarowej)</description>
+		</index>
+		<index name="RabPodmiot" options="UNIQUE NONCLUSTERED" fields="Rab_PodmiotId ,Rab_PodmiotTyp ,Rab_Typ ,Rab_TwrId">
+			<description>Klucz wg podmiotu (grupy kontrahentów)</description>
+		</index>
+	</table>
+	

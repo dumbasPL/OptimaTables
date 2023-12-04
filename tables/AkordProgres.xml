@@ -1,0 +1,31 @@
+<table name="AkordProgres">
+		<description>Progi dla akordu progresywnego</description>
+		<column name="AKP_AkpId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AKP_AdfId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do typu akordu</description>
+		</column>
+		<column name="AKP_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość</description>
+		</column>
+		<column name="AKP_Stawka" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Stawka</description>
+		</column>
+		<column name="AKP_Czas" type="DATETIME">
+			<description>Czas</description>
+		</column>
+		<column name="AKP_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="AKP_Primary" columns="AKP_AkpId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AKPAdfLink" localColumns="AKP_AdfId" refTable="AkordDefinicja" refColumns="ADF_AdfId" deleteOption="CASCADE">
+			<description>Relacja CDN.AkordProgres:CDN.AkordDefinicja (MANY:1)</description>
+		</foreignKey>
+		<index name="AKPAdfLink" options="NONCLUSTERED" fields="AKP_AdfId">
+			<description>Klucz obcy typu akordu</description>
+		</index>
+	</table>
+	

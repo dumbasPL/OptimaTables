@@ -1,0 +1,162 @@
+<view name="TrwaleAtrybutyView">
+		<description>View - Atrybuty środków trwałych i wyposażenia</description>
+		<column name="SrAV_SrAVID" type="NVARCHAR(255)" definition="NO_SQL">
+			<description>Klucz unikalny</description>
+		</column>
+		<column name="SrAV_SrAId" type="INTEGER" definition="NO_SQL">
+			<description>Klucz obcy TrwaleAtrybuty</description>
+		</column>
+		<column name="SrAV_DeAId" type="INTEGER" definition="NO_SQL">
+			<description>Klusz obcy DefAtrybuty</description>
+		</column>
+		<column name="SrAV_SrTId" type="INTEGER" definition="NO_SQL">
+			<description>Klusz obcy Trwale</description>
+		</column>
+		<column name="SrAV_WypID" type="INTEGER" definition="NO_SQL">
+			<description>Klusz obcy Wyposazenie</description>
+		</column>
+		<column name="SrAV_AtrybutFormat" type="TINYINT" definition="NO_SQL" />
+		<column name="SrAV_AtrybutKod" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Kod definicji atrybutu</description>
+		</column>
+		<column name="SrAV_AtrybutNazwa" type="NVARCHAR(40)" definition="NO_SQL">
+			<description>Nazwa definicji atrybutu</description>
+		</column>
+		<column name="SrAV_AtrybutWartosc" type="NVARCHAR(255)" definition="NO_SQL">
+			<description>Wartosc atrybutu</description>
+		</column>
+		<column name="SrAV_Typ" type="SMALLINT" definition="NO_SQL">
+			<description>Rodzaj kartoteki</description>
+		</column>
+		<column name="SrAV_Grupa" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Nazwa księgi inwentarzowej</description>
+		</column>
+		<column name="SrAV_Lp" type="INTEGER" definition="NO_SQL">
+			<description>Numer kolejny w księdze</description>
+		</column>
+		<column name="SrAV_VaNID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator dokumentu zakupu</description>
+		</column>
+		<column name="SrAV_Dokument" type="VARCHAR(30)" definition="NO_SQL" filterVisible="false">
+			<description>Numer dokumentu zakupu</description>
+		</column>
+		<column name="SrAV_DataZak" type="DATETIME" definition="NO_SQL">
+			<description>Data zakupu środka trwałego</description>
+		</column>
+		<column name="SrAV_DataPrz" type="DATETIME" definition="NO_SQL">
+			<description>Data przyjęcia do ewidencji środka trwałego</description>
+		</column>
+		<column name="SrAV_DataAmo" type="DATETIME" definition="NO_SQL">
+			<description>Data rozpoczęcia amortyzacji środka trwałego</description>
+		</column>
+		<column name="SrAV_DataUmo" type="DATETIME" definition="NO_SQL">
+			<description>Data rozpoczęcia umorzenia środka trwałego</description>
+		</column>
+		<column name="SrAV_Nazwa" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Nazwa środka trwałego</description>
+		</column>
+		<column name="SrAV_KatID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator kategorii</description>
+		</column>
+		<column name="SrAV_Kategoria" type="VARCHAR(50)" definition="NO_SQL">
+			<description>Opis środka trwałego</description>
+		</column>
+		<column name="SrAV_KRST" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Numer KRŚT środka trwałego</description>
+		</column>
+		<column name="SrAV_NrInwent" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Numer inwentarzowy środka trwałego</description>
+		</column>
+		<column name="SrAV_WartoscBilan" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość nabycia środka trwałego</description>
+		</column>
+		<column name="SrAV_WartoscKoszt" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość nabycia środka trwałego do zaliczenia w koszty</description>
+		</column>
+		<column name="SrAV_Bilansowa" type="TINYINT" definition="NO_SQL">
+			<description>Różna amortyzacja bilansowa i kosztowa</description>
+		</column>
+		<column name="SrAV_UlgaInwestyc" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość zaliczona w ulgę inwestycyjną</description>
+		</column>
+		<column name="SrAV_Metoda" type="TINYINT" definition="NO_SQL">
+			<description>Metoda amortyzacji</description>
+		</column>
+		<column name="SrAV_MetodaBil" type="TINYINT" definition="NO_SQL">
+			<description>Metoda umorzenia</description>
+		</column>
+		<column name="SrAV_Stawka" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Stawka amortyzacji</description>
+		</column>
+		<column name="SrAV_StawkaBil" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Stawka umorzenia</description>
+		</column>
+		<column name="SrAV_Wspolczynnik" type="DECIMAL(7,4)" definition="NO_SQL">
+			<description>Współczynnik podwyższenia stawki</description>
+		</column>
+		<column name="SrAV_WspolczynnikBil" type="DECIMAL(7,4)" definition="NO_SQL">
+			<description>Współczynnik podwyższenia stawki dla amortyzacji bilansowej</description>
+		</column>
+		<column name="SrAV_Sezonowy" type="TINYINT" definition="NO_SQL">
+			<description>Środek używany sezonowo</description>
+		</column>
+		<column name="SrAV_SezonowyBil" type="TINYINT" definition="NO_SQL">
+			<description>Środek używany sezonowo (umorzenia bilansowe)</description>
+		</column>
+		<column name="SrAV_PrcID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator osoby odpowiedzialnej materialnie</description>
+		</column>
+		<column name="SrAV_PrcNazwisko" type="NVARCHAR(100)" definition="NO_SQL" hash="1">
+			<description>Nazwisko osoby odpowiedzialnej materialnie</description>
+		</column>
+		<column name="SrAV_KontoGl" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Konto główne środka trwałego</description>
+		</column>
+		<column name="SrAV_KontoUm" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Konto umorzenia środka trwałego</description>
+		</column>
+		<column name="SrAV_KontoAmKoszt" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Konto amortyzacji w części stanowiącej koszt</description>
+		</column>
+		<column name="SrAV_KontoAmRozn" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Konto amortyzacji w części nie stanowiącej kosztu</description>
+		</column>
+		<column name="SrAV_DataLikw" type="DATETIME" definition="NO_SQL">
+			<description>Data likwidacji (zbycia) środka trwałego</description>
+		</column>
+		<column name="SrAV_Stan" type="TINYINT" definition="NO_SQL">
+			<description>Stan środka</description>
+		</column>
+		<column name="SrAV_Likwidacja" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Przyczyna likwidacji</description>
+		</column>
+		<column name="SrAV_LikwDokument" type="NVARCHAR(256)" definition="NO_SQL">
+			<description>Numer dokumentu likwidacji</description>
+		</column>
+		<column name="SrAV_LikwDekID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator księgowania likwidacji</description>
+		</column>
+		<column name="SrAV_Opis" type="NVARCHAR(254)" definition="NO_SQL">
+			<description>Informacja dodatkowe</description>
+		</column>
+		<column name="SrAV_ZakID" type="INTEGER" />
+		<column name="SrAV_OpeZalID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="SrAV_StaZalId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrAV_TS_Zal" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp założenia karty</description>
+		</column>
+		<column name="SrAV_OpeModID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora modyfikującego</description>
+		</column>
+		<column name="SrAV_StaModId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrAV_TS_Mod" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp modyfikacji karty</description>
+		</column>
+	</view>
+	

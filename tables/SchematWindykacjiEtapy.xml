@@ -1,0 +1,98 @@
+<table name="SchematWindykacjiEtapy">
+		<description>Etap schematu windykacji</description>
+		<column name="SwE_SwEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SwE_SwNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka</description>
+		</column>
+		<column name="SwE_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ etapu windykacji</description>
+			<details>
+				1 - e-mail
+				2 - zadanie CRM
+				3 - ponaglenie zapłaty
+				4 - blokada sprzedaży
+				5 - SMS
+			</details>
+		</column>
+		<column name="SwE_Kod" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Kod etapu schematu windykacji</description>
+		</column>
+		<column name="SwE_Nazwa" type="NVARCHAR(250)" definition="NOT NULL">
+			<description>Nazwa etapu schematu windykacji</description>
+		</column>
+		<column name="SwE_Termin" type="INTEGER" definition="NOT NULL">
+			<description>Ile dni po terminie realizacji płatności ma być wykonana akcja</description>
+			<details>
+				- jeśli liczba ujemna – wysyła przed upływem terminu realizacji
+				- jeśli 0 – wysyła w dniu terminu realizacji
+				- jeśli liczba dodatnia – wysyła po upływie terminu realizacji
+			</details>
+		</column>
+		<column name="SwE_EmailSzablonId" type="INTEGER">
+			<description>Identyfikator szablonu e-mail</description>
+		</column>
+		<column name="SwE_CrmZadanie" type="TINYINT" definition="NOT NULL">
+			<description>Czy kontakt jest zadaniem</description>
+			<details>
+				0 - kontakt CRM;
+				1 - zadanie CRM
+			</details>
+		</column>
+		<column name="SwE_CrmTemat" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Temat dla zadania lub kontaktu</description>
+		</column>
+		<column name="SwE_PonZapKosztyDod" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty dodatkowe dla ponaglenia zapłaty</description>
+		</column>
+		<column name="SwE_PonZapGenerujPlatnosc" type="TINYINT" definition="NOT NULL">
+			<description>Czy generować płatności dla kosztów dodatkowych ponaglenia zapłaty</description>
+		</column>
+		<column name="SwE_PonZapFormaPlatnosciId" type="INTEGER">
+			<description>Identyfikator formy płatności dla kosztów dodatkowych ponaglenia zapłaty</description>
+		</column>
+		<column name="SwE_PonZapTerminPlatDni" type="INT" definition="NOT NULL">
+			<description>Termin płatności dla kosztów dodatkowych ponaglenia zapłaty</description>
+		</column>
+		<column name="SwE_PonZapEmail" type="INT" definition="NOT NULL">
+			<description>Wyslij e-mail z wydrukiem ponaglenia</description>
+		</column>
+		<column name="SwE_PonZapTytulWydruku" type="INT" definition="NOT NULL">
+			<description>1 - ponaglenie; 2 - wezwanie; 3 - upomnienie</description>
+		</column>
+		<column name="SwE_PonZapWydrukId" type="INT" definition="NOT NULL CONSTRAINT DF_SwE_PonZapWydrukId DEFAULT(1815)">
+			<description>Id wybranego wydruku</description>
+		</column>
+		<column name="SwE_PonZapWydrukStandardowy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SwE_PonZapWydrukStandardowy DEFAULT(1)">
+			<description>Czy wybrany wydruk jest wydrukiem standardowym</description>
+		</column>
+		<column name="SwE_DdfId" type="INTEGER">
+			<description>Domyślna numeracja dokumentów CRM. Identyfikator dokumentu CRM w tabeli
+				DokDefinicje</description>
+		</column>
+		<column name="SwE_DataDok" type="DATETIME">
+			<description>Data dokumentu dla numeratora</description>
+		</column>
+		<column name="SwE_TypDokumentu" type="INTEGER">
+			<description>Typ generowanego dokumentu</description>
+			<details>700 - kontakt CRM</details>
+		</column>
+		<column name="SwE_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="SwE_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="SwE_JedenEmailDlaWszystkichPlatnosci" type="INTEGER" definition="NOT NULL constraint DF_SwE_JedenEmailDlaWszystkichPlatnosci default(0)">
+			<description>Wysyła jedną wiadomość email dla kontrahenta dla wszytkich płatności z tym samym
+				terminem</description>
+		</column>
+		<primaryKey name="SwE_Primary" columns="SwE_SwEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SwE_SwN" localColumns="SwE_SwNId" refTable="SchematyWindykacji" refColumns="SwN_SwNId" deleteOption="CASCADE">
+			<description>Relacja CDN.SchematWindykacjiEtapy:CDN.SchematyWindykacji (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

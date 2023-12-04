@@ -1,0 +1,46 @@
+<table name="TraElemKorZbiorcza" filterVisible="false">
+		<description>Tabela elementów dla korekty zbiorczej</description>
+		<details>Tabela elementów dla korekty zbiorczej</details>
+		<column name="TreZ_TreZID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator zapisu</description>
+		</column>
+		<column name="TreZ_TrNID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Wskaźnik do nagłówka TraNag</details>
+		</column>
+		<column name="TreZ_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="TreZ_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="TreZ_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawi zaniżonej</description>
+		</column>
+		<column name="TreZ_WartoscFaktur" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość zbiorcza faktur</description>
+		</column>
+		<column name="TreZ_Rabat" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość rabatu</description>
+		</column>
+		<column name="TreZ_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta faktur</description>
+		</column>
+		<primaryKey name="TreZ_Primary" columns="TreZ_TreZID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TreZTraNag" localColumns="TreZ_TrNID" refTable="TraNag" refColumns="TrN_TrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraElemKorZbiorcza:CDN.TraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="TreZTraNag" options="NONCLUSTERED" fields="TreZ_TrNID">
+			<description>Wg nagłówka</description>
+		</index>
+	</table>
+	

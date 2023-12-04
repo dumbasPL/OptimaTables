@@ -1,0 +1,100 @@
+<table name="ProdElem">
+		<description>Elementy produkcyjne</description>
+		<details>
+			Elementy produkcyjne odpowiadające uproszczonym elementom transakcji (TraElem).
+			Tabela przechowuje skład produktu przed akceptacją dokumentu PWP i na jej podstawie są
+			generowane subelementy
+			rezerwacyjne lub kosztowe. Wiersze z tej tabeli są podpięte do elementu dokumentu PWP.
+			Na podstawie tej tabeli przypiętej do elementu PWP będą generowane elementy dokumentu RWS.
+		</details>
+		<column name="PdE_PdEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="PdE_TrEId" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do elementu transakcji</description>
+		</column>
+		<column name="PdE_ZwrId" type="INTEGER">
+			<description>Identyfikator zwrotu w przypadku dekompletacji</description>
+			<details>Wskaźnik do pierwotnego ProdElem przy korektach ilościowych PWP</details>
+		</column>
+		<column name="PdE_Lp" type="SMALLINT" definition="NOT NULL">
+			<description>Numer kolejny elementu</description>
+		</column>
+		<column name="PdE_DataWys" type="DATETIME" definition="NOT NULL">
+			<description>Data rozchodu składnika</description>
+		</column>
+		<column name="PdE_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data przyjęcia produktu</description>
+		</column>
+		<column name="PdE_TwrId" type="INTEGER">
+			<description>Identyfikator towaru</description>
+		</column>
+		<column name="PdE_MagId" type="INTEGER">
+			<description>Wskaźnik do magazynu</description>
+		</column>
+		<column name="PdE_TrEIdRWS" type="INTEGER" />
+		<column name="PdE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość składnika potrzebnego do wyprodukowania jednostki produktu</description>
+		</column>
+		<column name="PdE_Jm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary składnika</description>
+			<details>Na podstawie jednostki brany jest pod uwagę przelicznik pobrany z karty magazynowej</details>
+		</column>
+		<column name="PdE_JmCalkowite" type="SMALLINT" definition="NOT NULL">
+			<description>Ilość wyrażana w jednostkach całkowitych</description>
+		</column>
+		<column name="PdE_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Licznik przelicznika jednostek miary</description>
+		</column>
+		<column name="PdE_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL">
+			<description>Mianownik przelicznika jednostek miary</description>
+		</column>
+		<column name="PdE_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość w jednostkach pomocniczych</description>
+		</column>
+		<column name="PdE_WartoscZakupu" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość składników w cenach zakupu</description>
+		</column>
+		<column name="PdE_WyborDostaw" type="TINYINT" definition="CONSTRAINT DF_PdE_WyborDostaw DEFAULT(0)">
+			<description>Czy wybor dostaw reczny</description>
+			<details>
+				0 - Brak dostaw
+				1 - Wybor dostaw
+			</details>
+		</column>
+		<column name="PdE_TwrTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ karty: 0 - usługa, 1 - towar</description>
+		</column>
+		<primaryKey name="PdE_Primary" columns="PdE_PdEId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_PdETowar" localColumns="PdE_TwrId" refTable="Towary" refColumns="Twr_TwrId">
+			<description>Relacja CDN.ProdElem:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PdETraElem" localColumns="PdE_TrEId" refTable="TraElem" refColumns="TrE_TrEID" deleteOption="CASCADE">
+			<description>Relacja CDN.ProdElem:CDN.TraElem (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PdEMagazyn" localColumns="PdE_MagId" refTable="Magazyny" refColumns="Mag_MagId">
+			<description>Relacja CDN.ProdElem:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<index name="PdERWS" options="NONCLUSTERED" fields="PdE_TrEIdRWS" />
+		<index name="PdETowar" options="NONCLUSTERED" fields="PdE_TwrId">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+		<index name="PdETraElem" options="UNIQUE NONCLUSTERED" fields="PdE_TrEId ,PdE_Lp ,PdE_PdEId">
+			<description>Klucz obcy do elementu transakcji</description>
+		</index>
+		<index name="PdEMagazyn" options="NONCLUSTERED" fields="PdE_MagId">
+			<description>Klucz obcy do magazynu</description>
+		</index>
+		<index name="PdEZwrot" options="NONCLUSTERED" fields="PdE_ZwrId">
+			<description>Wskaźnik do pierwotnego ProdElem przy korektach ilościowych PWP</description>
+		</index>
+	</table>
+	

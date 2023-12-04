@@ -1,0 +1,83 @@
+<table name="DefProjekty">
+		<description>Tabela definicji projektów</description>
+		<details>
+			Tabela z definicjami projektów.
+
+			Struktura drzewiasta.
+
+			Pole Wezel zawiera definicję podległości kolejnych wierszy aby template Borwse mógł
+			odpowiednio wyświetlać drzewko.
+
+			Pole ParentId zawiera klucz foreign key do oojca węzła.
+		</details>
+		<column name="PRJ_PrjId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator projektu</description>
+		</column>
+		<column name="PRJ_Kod" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Unikalny kod projektu</description>
+		</column>
+		<column name="PRJ_Nazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa projektu</description>
+		</column>
+		<column name="PRJ_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol projektu</description>
+		</column>
+		<column name="PRJ_Url" type="VARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Adres url projektu</description>
+		</column>
+		<column name="PRJ_ParentId" type="INTEGER">
+			<description>Identyfikator nadrzędnego projektu</description>
+		</column>
+		<column name="PRJ_Poziom" type="SMALLINT" definition="NOT NULL" />
+		<column name="PRJ_Nieaktywny" type="TINYINT" definition="NOT NULL" />
+		<column name="PRJ_Wezel" type="NVARCHAR(255)" definition="NOT NULL" />
+		<column name="PRJ_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa pozycji w danym węźle</description>
+		</column>
+		<column name="PRJ_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRJ_OpeZalId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PRJ_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRJ_Konto" type="NVARCHAR(51)" definition="NOT NULL" />
+		<column name="PRJ_ImportAppId" type="VARCHAR(5)" />
+		<column name="PRJ_ImportRowId" type="VARCHAR(36)" />
+		<column name="PRJ_TS_Export" type="DATETIME">
+			<description>TimeSTamp dokonania exportu</description>
+		</column>
+		<column name="PRJ_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRJ_DataOtw" type="DATETIME" />
+		<column name="PRJ_DataZam" type="DATETIME" />
+		<column name="PRJ_TS_Zal" type="DATETIME">
+			<description>Time stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="PRJ_TS_Mod" type="DATETIME">
+			<description>Time stamp zmodyfikowania zapisu</description>
+		</column>
+		<column name="PRJ_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRJ_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PRJ_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRJ_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PRJ_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRJ_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRJ_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRJ_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PRJ_Primary" columns="PRJ_PrjId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="PrjKod" options="UNIQUE NONCLUSTERED" fields="PRJ_ParentId ,PRJ_Kod" />
+		<index name="PRJGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="PRJ_Kod, PRJ_PrjID" includedColumns="PRJ_Nieaktywny, PRJ_Nazwa, PRJ_Wezel">
+			<description>Gridlookupu projektów wg kodu i id projektu</description>
+		</index>
+	</table>
+	

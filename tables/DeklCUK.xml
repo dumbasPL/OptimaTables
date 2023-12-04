@@ -1,0 +1,33 @@
+<table name="DeklCUK">
+		<column name="CUK_CUKID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="CUK_DkNID" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="CUK_LpFaktury" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="CUK_NrFaktury" type="NVARCHAR(255)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="CUK_DataFaktury" type="Date" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="CUK_NIPDostawcy" type="NVARCHAR(255)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="CUK_NIPNabywcy" type="NVARCHAR(255)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="CUK_NrPartiiTowaru" type="NVARCHAR(256)" definition="NOT NULL">
+			<description />
+		</column>
+		<primaryKey name="CUK_Primary" columns="CUK_CUKID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_CUKDeklNag" localColumns="CUK_DkNID" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DeklCUK:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

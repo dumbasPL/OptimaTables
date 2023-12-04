@@ -1,0 +1,33 @@
+<table name="TraCykliczneGrupy">
+		<column name="TCG_Grupa" type="INTEGER" definition="NOT NULL">
+			<description>Grupa faktur</description>
+		</column>
+		<column name="TCG_JestCykliczna" type="INTEGER" definition="NOT NULL">
+			<description>Grupa jest cykliczna</description>
+		</column>
+		<column name="TCG_TrnId" type="INT" definition="">
+			<description>Najnowszy dokument w grupie</description>
+		</column>
+		<column name="TCG_DataMod" type="DATETIME" definition="">
+			<description>Czas ostatniego sprawdzania</description>
+		</column>
+		<column name="TCG_Kontrahenci" type="NVARCHAR(250)" definition="">
+			<description>Kontrahenci dokumentów w grupie</description>
+		</column>
+		<column name="TCG_Towary" type="NVARCHAR(MAX)" definition="">
+			<description>Towary najnowszego dokumentu w grupie</description>
+		</column>
+		<column name="TCG_Ukryj" type="INTEGER" definition="">
+			<description>Ukrywanie wyświetlania grupy</description>
+		</column>
+		<primaryKey name="TCG_Primary" columns="TCG_Grupa">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="TCGJestCykliczna" options="NONCLUSTERED" fields="TCG_JestCykliczna">
+			<description />
+		</index>
+		<index name="TCGUkryj" options="NONCLUSTERED" fields="TCG_Ukryj">
+			<description />
+		</index>
+	</table>
+	

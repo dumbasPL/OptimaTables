@@ -1,0 +1,16 @@
+<view name="TwrUpusty">
+		<description>Upusty na towary</description>
+		<column name="TwU_TwrTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="TwU_TwrFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="TwU_TwrNumer" type="INTEGER" definition="NO_SQL">
+			<details>Numer elementu z KARTAMAG</details>
+		</column>
+		<column name="TwU_TwrLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="TwU_Prog" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Próg od jakiego należy dać upust</description>
+		</column>
+		<column name="TwU_Upust" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Upust</description>
+		</column>
+	</view>
+	

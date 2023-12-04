@@ -1,0 +1,15 @@
+<table name="PrmHistoria">
+		<column name="PrH_GIDFirma" type="" definition="NO_SQL" />
+		<column name="PrH_GIDLp" type="" definition="NO_SQL" />
+		<column name="PrH_GIDNumer" type="" definition="NO_SQL" />
+		<column name="PrH_GIDTyp" type="" definition="NO_SQL" />
+		<column name="PrH_ID" type="" definition="NO_SQL" />
+		<column name="PrH_IDPrm" type="" definition="NO_SQL" />
+		<column name="PrH_RabatEfektywny" type="" definition="NO_SQL" />
+		<column name="PrH_RabatKwota" type="" definition="NO_SQL" />
+		<column name="PrH_RabatKwotaDokl" type="" definition="NO_SQL" />
+		<column name="PrH_RabatProcent" type="" definition="NO_SQL" />
+		<column name="PrH_RodzajRabatu" type="" definition="NO_SQL" />
+		<column name="PrH_TrEId" type="" definition="NO_SQL" />
+	</table>
+	

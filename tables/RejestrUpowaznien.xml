@@ -1,0 +1,73 @@
+<table name="RejestrUpowaznien">
+		<description>Rejestr upoważnień do przetwarzania danych</description>
+		<column name="RUP_RUPID" type="INTEGER" definition="NOT NULL IDENTITY(1,1)">
+			<description>Id upowaznienia</description>
+		</column>
+		<column name="RUP_Lp" type="COMPUTED|INTEGER" definition="CDN.RejestrUpowaznienLp (RUP_RUPID)">
+			<description>Lp upowaznienia</description>
+		</column>
+		<column name="RUP_PodID" type="INTEGER" definition="NOT NULL">
+			<description>Id podmiotu</description>
+		</column>
+		<column name="RUP_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="RUP_ImieNazwisko" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Imie i nazwisko podmiotu</description>
+		</column>
+		<column name="RUP_OsobaID" type="INTEGER" definition="NULL">
+			<description>Id przedstawiciela</description>
+		</column>
+		<column name="RUP_DataNadania" type="DATETIME" definition="NOT NULL">
+			<description>Data nadania</description>
+		</column>
+		<column name="RUP_DataUstania" type="DATETIME" definition="NULL">
+			<description>Data ustania</description>
+		</column>
+		<column name="RUP_Opis" type="NVARCHAR(MAX)" definition="NOT NULL" hash="1">
+			<description>Opis</description>
+		</column>
+		<column name="RUP_OpeZalID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RUP_OpeModID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUP_StaZalID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RUP_StaModID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RUP_TS_Zal" type="DATETIME" definition=" NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="RUP_TS_Mod" type="DATETIME" definition=" NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+		</column>
+		<column name="RUP_OpeModKod" type="varchar(20)" definition=" NOT NULL">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUP_OpeZalKod" type="varchar(20)" definition=" NOT NULL">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RUP_OpeModNazwisko" type="nvarchar(50)" definition=" NOT NULL">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUP_OpeZalNazwisko" type="nvarchar(50)" definition=" NOT NULL">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<primaryKey name="PK_RUP_RUPID" columns="RUP_RUPID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_RUPPodmiot" localColumns="RUP_PodID,RUP_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.RejestrUpowaznien:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_RUPPrzedstawiciel" localColumns="RUP_OsobaID" refTable="KntOsoby" refColumns="KnO_KnOId">
+			<description>Relacja CDN.RejestrUpowaznien:CDN.KntOsoby (MANY:1)</description>
+		</foreignKey>
+		<index name="RUP_ImieNazwisko" options="NONCLUSTERED" fields="RUP_ImieNazwisko">
+			<description>Klucz po imieniu i nazwisku osoby uprawnionej</description>
+		</index>
+	</table>
+	

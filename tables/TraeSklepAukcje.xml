@@ -1,0 +1,43 @@
+<table name="TraeSklepAukcje">
+		<description>Tabela akcji z e-Sklep</description>
+		<column name="TrEA_TrEAId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="TrEA_TrNId" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu nadrzędnego</description>
+		</column>
+		<column name="TrEA_AukcjaTyp" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Typ aukcji</description>
+		</column>
+		<column name="TrEA_AukcjaTranID" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Id transakcji</description>
+		</column>
+		<column name="TrEA_AukcjaLogin" type="NVARCHAR(200)" definition="NOT NULL">
+			<description>Login</description>
+		</column>
+		<column name="TrEA_Aukcje" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Nr aukcji oddzielane średnikami</description>
+		</column>
+		<column name="TrEA_AukcjaDostawaID" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrEA_AukcjaDostawaID DEFAULT('')">
+			<description>Identyfikator dostawy z API Allegro</description>
+		</column>
+		<column name="TrEA_AukcjaLoginID" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrEA_AukcjaLoginID DEFAULT('')">
+			<description>Identyfikator kupującego</description>
+		</column>
+		<column name="TrEA_AukcjaLoginSell" type="NVARCHAR(200)" definition="NOT NULL CONSTRAINT DF_TrEA_AukcjaLoginSell DEFAULT('')">
+			<description>Login sprzedającego</description>
+		</column>
+		<column name="TrEA_AukcjaLoginSellID" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrEA_AukcjaLoginSellID DEFAULT('')">
+			<description>Identyfikator sprzedającego</description>
+		</column>
+		<column name="TrEA_AukcjaSmart" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrEA_AukcjaSmart DEFAULT(0)">
+			<description>Identyfikator sprzedającego</description>
+		</column>
+		<primaryKey name="TrEA_Primary" columns="TrEA_TrEAId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TrEATraNag" localColumns="TrEA_TrNId" refTable="TraNag" refColumns="TrN_TrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraeSklepAukcje:CDN.TraNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

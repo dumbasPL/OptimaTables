@@ -1,0 +1,332 @@
+<table name="CRMKontakty">
+		<description>Lista kontaktów z Klientami</description>
+		<column name="CRK_CRKId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="CRK_WatekId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wątku</description>
+		</column>
+		<column name="CRK_ParId" type="INTEGER">
+			<description>Identyfikator "ojca" (relacja do innego wiersza w tej tabeli)</description>
+		</column>
+		<column name="CRK_DDfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="CRK_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="CRK_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="CRK_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(CRK_NUMERNR,CRK_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="CRK_Anulowany" type="INTEGER" definition="NOT NULL">
+			<description>Kolejny numer dla dokumentów anulowanych - dla pozostałych 0</description>
+			<details>-2147483647 - dokument anulowany</details>
+		</column>
+		<column name="CRK_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Zadanie zamknięte, w buforze lub anulowane</description>
+			<details>
+				-1 - Anulowane &lt;br&gt;
+				0 - Zamknięte &lt;br&gt;
+				1 - Bufor
+			</details>
+		</column>
+		<column name="CRK_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId: &lt;br&gt;
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="CRK_PodID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="CRK_OsobaId" type="INTEGER">
+			<description>Identyfikator przedstawiciela kontrahenta</description>
+		</column>
+		<column name="CRK_OsobaNazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Imię i nazwisko przedstawiciela kontrahenta</description>
+		</column>
+		<column name="CRK_OpiekunTyp" type="SMALLINT">
+			<description>Typ opiekuna (pracownik, operator)</description>
+			<details>
+				3 - pracownik (CDN.PracIdx) &lt;br&gt;
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej)
+			</details>
+		</column>
+		<column name="CRK_OpiekunId" type="INTEGER">
+			<description>Identyfikator opiekuna</description>
+		</column>
+		<column name="CRK_Obsluga" type="TINYINT" definition="NOT NULL">
+			<description>0 - obsługa przed sprzedażą, 1 - obsługa po sprzedaży</description>
+		</column>
+		<column name="CRK_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+				Data wystawienia dokumentu
+			</details>
+		</column>
+		<column name="CRK_CzasPrzygot" type="DATETIME">
+			<description>Czas przygotowania przed kontaktem</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CRK_CzasKontaktu" type="DATETIME">
+			<description>Czas prowadzenia rozmowy</description>
+		</column>
+		<column name="CRK_CzasOpracow" type="DATETIME">
+			<description>Czas opracowania kontaktu</description>
+		</column>
+		<column name="CRK_Zadanie" type="TINYINT" definition="NOT NULL">
+			<description>Czy kontakt jest zadaniem</description>
+			<details>
+				0 - nie jest &lt;br&gt;
+				1 - jest zadaniem
+			</details>
+		</column>
+		<column name="CRK_TerminOd" type="DATETIME">
+			<description>Termin początkowy zadania</description>
+		</column>
+		<column name="CRK_TerminDo" type="DATETIME">
+			<description>Termin końcowy zadania</description>
+		</column>
+		<column name="CRK_Przypomnienie" type="TINYINT" definition="NOT NULL">
+			<description>Czy przypominać o zadaniu</description>
+		</column>
+		<column name="CRK_CzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia przed terminem zadania</description>
+		</column>
+		<column name="CRK_Priorytet" type="TINYINT" definition="NOT NULL">
+			<description>Priorytet zadania</description>
+			<details>
+				1 - najwyższy &lt;br&gt;
+				2 - wysoki &lt;br&gt;
+				3 - niski &lt;br&gt;
+				4 - najniższy
+			</details>
+		</column>
+		<column name="CRK_Wykonano" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Procentowy stopień wykonania zadania</description>
+		</column>
+		<column name="CRK_EtapRealizacji" type="INTEGER">
+			<description>Etap realizacji zadania</description>
+			<details>Etap realizacji zadania ID z tabeli CDN.DefEtapy</details>
+		</column>
+		<column name="CRK_Temat" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Temat dla zadania lub kontaktu</description>
+		</column>
+		<column name="CRK_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis zadania</description>
+		</column>
+		<column name="CRK_UwagiDoRealizacji" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_CRK_UwagiDoRealizacji DEFAULT('')">
+			<description>Uwagi do realizacji</description>
+		</column>
+		<column name="CRK_Lokalizacja" type="NVARCHAR(255)">
+			<description>Lokalizacja kontaktu</description>
+		</column>
+		<column name="CRK_Windykacja" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CRK_Windykacja DEFAULT(0)">
+			<description>0-zapis powstał przez zatwierdzenie formularza; 1-zapis powstał automatycznie
+				(poza interfejsem graficznym O!)</description>
+		</column>
+		<column name="CRK_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="CRK_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CRK_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CRK_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="CRK_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CRK_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CRK_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CRK_OpeModKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="CRK_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CRK_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="CRK_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CRK_OpeZalKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="CRK_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CRK_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="CRK_StanowiskoID" type="INTEGER" definition="NULL">
+			<description>Identyfikator stanowiska mobile</description>
+		</column>
+		<column name="CRK_DokID" type="INTEGER" definition="NULL">
+			<description>Identyfikator dokumentu w mobile</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnienia" type="TINYINT" definition="NOT NULL CONSTRAINT DF_CrK_AutomatycznePrzypomnienia DEFAULT(0)">
+			<description>Generowanie automatycznych przypomnień do zadania</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaMail" type="TINYINT">
+			<description>Generowanie automatycznych przypomnień e-mail</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaEmailAdres" type="NVARCHAR(127)" hash="1">
+			<description>Adres, na który będzie wysłany email z przypomnieniem</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaMailCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla e-mail</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaMailWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez e-mail</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaMailSzablonId" type="INTEGER">
+			<description>Szablon domyslny dla e-maila</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaSms" type="TINYINT">
+			<description>Generowanie automatycznych przypomnień sms</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaSmsNumerTelefonu" type="NVARCHAR(127)" hash="1">
+			<description>Numer telefonu, na który będzie wysłany SMS z przypomnieniem</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaSmsCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla sms</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaSmsWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez sms</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaSmsSzablonId" type="INTEGER">
+			<description>Szablon domyslny dla sms</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpe" type="TINYINT" definition="NOT NULL CONSTRAINT DF_CrK_AutomatycznePrzypomnieniaOpe DEFAULT(0)">
+			<description>Generowanie automatycznych przypomnień do zadania</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeMail" type="TINYINT">
+			<description>Generowanie automatycznych przypomnień e-mail</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeMailCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla e-mail</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeMailWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez e-mail</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeMailSzablonId" type="INTEGER">
+			<description>Szablon domyslny dla e-maila</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeSms" type="TINYINT">
+			<description>Generowanie automatycznych przypomnień sms</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeSmsCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla sms</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeSmsWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez sms</description>
+		</column>
+		<column name="CrK_AutomatycznePrzypomnieniaOpeSmsSzablonId" type="INTEGER">
+			<description>Szablon domyslny dla sms</description>
+		</column>
+		<column name="CRK_Cykl" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CrK_Cykl DEFAULT(0)">
+			<description>Zadanie cykliczne</description>
+		</column>
+		<column name="CRK_CyklTyp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CrK_CyklTyp DEFAULT(2)">
+			<description>Typ cyklu: 1 - dzienny; 2 - tygodniowy; 3 - miesięczny; 4 - roczny</description>
+		</column>
+		<column name="CRK_CyklPowtarzajCo" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CrK_CyklPowtarzajCo DEFAULT(1)">
+			<description>Powtarzanie co ... dni (tygodni, ...)</description>
+		</column>
+		<column name="CRK_CyklDzienTygodnia" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CrK_CyklDzienTygodnia DEFAULT(1)">
+			<description>Suma bitowa; 1-pon;2-wt;4-śr;8-czw;16-pt;32-sob;64-niedz</description>
+		</column>
+		<column name="CRK_CyklDzienMiesiaca" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CRK_CyklDzienMiesiaca DEFAULT(1)">
+			<description>Dzień miesiąca dla cyklu tygodniowego i rocznego</description>
+		</column>
+		<column name="CRK_CyklMiesiac" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CRK_CyklMiesiac DEFAULT(1)">
+			<description>Miesiąc dla cyklu rocznego</description>
+		</column>
+		<column name="CRK_CyklTydzien" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CRK_CyklTydzien DEFAULT(1)">
+			<description>Tydzien dla cyklu miesiecznego lub rocznego</description>
+		</column>
+		<column name="CRK_CyklDataStart" type="DATETIME">
+			<description>Data początkowa cyklu</description>
+		</column>
+		<column name="CRK_CyklDataEnd" type="DATETIME">
+			<description>Data końcowa cyklu</description>
+		</column>
+		<column name="CRK_CyklLiczbaWystapien" type="INTEGER" definition="NOT NULL CONSTRAINT DF_CRK_CyklLiczbaWystapien DEFAULT(1)">
+			<description>Liczba wystąpień cyklu</description>
+		</column>
+		<column name="CRK_CyklParentId" type="INTEGER">
+			<description>Id cyklu jeżeli kontakt został wyodrębiony z cyklu</description>
+		</column>
+		<primaryKey name="CRK_Primary" columns="CRK_CRKId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_CrkPrzedstawiciel" localColumns="CRK_OsobaId" refTable="KntOsoby" refColumns="KnO_KnOId">
+			<description>Relacja CDN.CRMKontakty:CDN.KntOsoby (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_CRKPodmiot" localColumns="CRK_PodID,CRK_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.CRMKontakty:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_CRKDokDef" localColumns="CRK_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.CRMKontakty:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="CrkWatek" options="UNIQUE NONCLUSTERED" fields="CRK_WatekId ,CRK_CRKId">
+			<description>Wg wątków</description>
+		</index>
+		<index name="CrkOnlyWatek" options="NONCLUSTERED" fields="CRK_WatekId">
+			<description>Tylko wg wątku</description>
+		</index>
+		<index name="CRKEtap" options="NONCLUSTERED" fields="CRK_EtapRealizacji">
+			<description>Wg etapu realizacji</description>
+		</index>
+		<index name="CrkTemat" options="NONCLUSTERED" fields="CRK_Temat">
+			<description>Wg tematu zadania (kontaktu)</description>
+		</index>
+		<index name="CRKPodmiot" options="UNIQUE NONCLUSTERED" fields="CRK_PodID ,CRK_PodmiotTyp ,CRK_DataDok ,CRK_NumerString ,CRK_NumerNr ,CRK_Anulowany ,CRK_CRKId">
+			<description>Wg podmiotu dla którego wystawiono transakcję</description>
+			<details>Indeks dla listy kontaktów w oknie Sprzedaż dedykowana</details>
+		</index>
+		<index name="CRKDokDef" options="NONCLUSTERED" fields="CRK_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="CRKNumer" options="UNIQUE NONCLUSTERED" fields="CRK_NumerString ,CRK_NumerNr ,CRK_Anulowany">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="CRKNumerPelny" options="UNIQUE NONCLUSTERED" fields="CRK_NumerPelny ,CRK_Anulowany">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="CRKOpiekun" options="NONCLUSTERED" fields="CRK_OpiekunId ,CRK_OpiekunTyp">
+			<description>Wg opiekuna zadania</description>
+		</index>
+		<index name="CRKNadrzedne" options="NONCLUSTERED" fields="CRK_ParId">
+			<description>Wskaźnik do "ojca" (self-relation)</description>
+		</index>
+		<index name="CrKDataDok" options="NONCLUSTERED" fields="CRK_DataDok ,CRK_NumerString ,CRK_NumerNr ,CRK_Anulowany ,CRK_CRKId">
+			<description>Wg daty dokumentów</description>
+		</index>
+		<index name="CrkPrzedstawiciel" options="NONCLUSTERED" fields="CRK_OsobaId">
+			<description>Klucz obcy do tabeli KntOsoby</description>
+		</index>
+		<index name="CrkBufor" options="NONCLUSTERED" fields="CRK_Bufor,CRK_Zadanie" includedColumns="CRK_TerminOd,CRK_TerminDo">
+			<description>Dane dla terminarza</description>
+		</index>
+		<index name="CRMKontaktyAutoMail" options="NONCLUSTERED" fields="CRK_Bufor,CrK_AutomatycznePrzypomnienia,CrK_AutomatycznePrzypomnieniaMail,CrK_AutomatycznePrzypomnieniaMailWyslano,CrK_AutomatycznePrzypomnieniaMailCzasPrzypomnienia" includedColumns="CRK_TerminOd,CrK_AutomatycznePrzypomnieniaEmailAdres,CrK_AutomatycznePrzypomnieniaMailSzablonId" />
+		<index name="CRMKontaktyAutoSMS" options="NONCLUSTERED" fields="CRK_Bufor,CrK_AutomatycznePrzypomnienia,CrK_AutomatycznePrzypomnieniaSms" includedColumns="CRK_TerminOd,CrK_AutomatycznePrzypomnieniaSmsNumerTelefonu,CrK_AutomatycznePrzypomnieniaSmsCzasPrzypomnienia,CrK_AutomatycznePrzypomnieniaSmsWyslano,CrK_AutomatycznePrzypomnieniaSmsSzablonId" />
+		<index name="CRMKontaktyAutoOpeMail" options="NONCLUSTERED" fields="CRK_Bufor,CrK_AutomatycznePrzypomnieniaOpe,CrK_AutomatycznePrzypomnieniaOpeMail,CrK_AutomatycznePrzypomnieniaOpeMailWyslano,CrK_AutomatycznePrzypomnieniaOpeMailCzasPrzypomnienia" includedColumns="CRK_TerminOd,CrK_AutomatycznePrzypomnieniaOpeMailSzablonId" />
+		<index name="CRMKontaktyAutoOpeSMS" options="NONCLUSTERED" fields="CRK_Bufor,CrK_AutomatycznePrzypomnieniaOpe,CrK_AutomatycznePrzypomnieniaOpeSms" includedColumns="CRK_TerminOd,CrK_AutomatycznePrzypomnieniaOpeSmsCzasPrzypomnienia,CrK_AutomatycznePrzypomnieniaOpeSmsWyslano,CrK_AutomatycznePrzypomnieniaOpeSmsSzablonId" />
+	</table>
+	

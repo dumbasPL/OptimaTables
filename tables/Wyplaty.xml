@@ -1,0 +1,319 @@
+<table name="Wyplaty">
+		<description>Tabela wypłat pracowników</description>
+		<column name="WPL_WplId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator wypłaty</description>
+		</column>
+		<column name="WPL_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="WPL_LplId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator listy płac</description>
+		</column>
+		<column name="WPL_DzlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wydziału</description>
+		</column>
+		<column name="WPL_DdfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator definicji dokumentu</description>
+		</column>
+		<column name="WPL_Tryb" type="INTEGER" definition="NOT NULL">
+			<description>Tryb wypłaty</description>
+			<details>
+				0 – oznacza wypłatę P – wartość ustawiana przy konwersji do 12.0 dla wszystkich zapisanych
+				wcześniejszymi wersjami wypłat, nadawana przy dodawaniu ‘zwykłej’ wypłaty o statusie
+				P;&lt;BR&gt;
+				1 - oznacza wypłatę A – wartość nadawana przy zmianie statusu wypłaty z P na A (zmiana z 0
+				na 1);&lt;BR&gt;
+				2 - oznacza wypłatę S – wartość nadawana generowanej automatycznie wypłacie o statusie
+				S;&lt;BR&gt;
+				3 – oznacza wypłatę K – wartość nadawana generowanej automatycznie wypłacie o statusie S.
+			</details>
+		</column>
+		<column name="WPL_ParentId" type="INTEGER">
+			<description>Relacja do samej siebie</description>
+			<details>
+				0 - dla wypłat o statusie P i A;
+				Dla wypłat o statusie S i K - wartość zgodna z wartością WPL_WplId z wypłaty ‘rodzica’ o
+				statusie A – wartość kopiowana z wypłaty A do wypłat S i K podczas naliczania korekty;
+			</details>
+		</column>
+		<column name="WPL_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Symbol umowy</description>
+		</column>
+		<column name="WPL_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Numer umowy</description>
+		</column>
+		<column name="WPL_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(WPL_NUMERNR,WPL_NUMERSTRING)">
+			<description>Pełny numer umowy</description>
+		</column>
+		<column name="WPL_DataDok" type="DATETIME" definition="NOT NULL" />
+		<column name="WPL_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto wypłaty</description>
+		</column>
+		<column name="WPL_Miesiac" type="TINYINT" definition="NOT NULL">
+			<description>Miesiąc</description>
+		</column>
+		<column name="WPL_Rok" type="INTEGER" definition="NOT NULL">
+			<description>Rok</description>
+		</column>
+		<column name="WPL_DataOd" type="DATETIME" definition="NOT NULL">
+			<description>Okres za jaki została naliczona wypłata (data początkowa)</description>
+		</column>
+		<column name="WPL_DataDo" type="DATETIME" definition="NOT NULL">
+			<description>Okres za jaki została naliczona wypłata (data końcowa)</description>
+		</column>
+		<column name="WPL_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Opis wypłaty</description>
+		</column>
+		<column name="WPL_Zamknieta" type="TINYINT" definition="NOT NULL" />
+		<column name="WPL_KatId" type="INTEGER">
+			<description>Kategoria</description>
+		</column>
+		<column name="WPL_KategoriaOpis" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis kategorii</description>
+		</column>
+		<column name="WPL_KorektaPlatnosci" type="TINYINT" definition="NOT NULL" />
+		<column name="WPL_KorektaPola" type="INTEGER" definition="NOT NULL" />
+		<column name="WPL_Brutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto wypłaty</description>
+		</column>
+		<column name="WPL_Korekta" type="TINYINT" definition="NOT NULL">
+			<description>Czy wystąpiła korekta jakiegokolwiek elementu wypłaty</description>
+		</column>
+		<column name="WPL_Archiwalna" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPL_Archiwalna Default(0)">
+			<description>Flaga: wypłata archiwalna</description>
+		</column>
+		<column name="WPL_UmowaDodZas" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_WPL_UmowaDodZas Default(0)">
+			<description>Sposób rozliczania dodatków i zasiłków w umowach cywilnoprawnych</description>
+		</column>
+		<column name="WPL_KursLNal" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_WPL_KursLNal DEFAULT(1)">
+			<description>Licznik kursu waluty wg którego naliczono wypłatę</description>
+		</column>
+		<column name="WPL_KursMNal" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_WPL_KursMNal DEFAULT(1)">
+			<description>Mianownik kursu waluty wg którego naliczono wypłatę</description>
+		</column>
+		<column name="WPL_OddelegowanyDieta" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_OddelegowanyDieta DEFAULT(0)">
+			<description>Stawka diety/dzień w walucie zastosowana przy liczeniu wypłaty</description>
+		</column>
+		<column name="WPL_KursLNalDieta" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_WPL_KursLNalDieta DEFAULT(1)">
+			<description>Licznik kursu dla waluty diety wg którego naliczono wypłatę</description>
+		</column>
+		<column name="WPL_KursMNalDieta" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_WPL_KursMNalDieta DEFAULT(1)">
+			<description>Mianownik kursu dla waluty diety wg którego naliczono wypłatę</description>
+		</column>
+		<column name="WPL_ObnizSklPPK" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPL_ObnizSklPPK DEFAULT(0)">
+			<description>Obniżenie składki podstawowej pracownika</description>
+		</column>
+		<column name="WPL_KorektaPola2" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPL_KorektaPola2 DEFAULT(0)">
+			<description>Korekta pola</description>
+		</column>
+		<column name="WPL_PodstawaPodat1" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_PodstawaPodat1 DEFAULT(0)">
+			<description>Sumaryczna podstawa podatku dla pierwszego progu</description>
+		</column>
+		<column name="WPL_PodstawaPodat2" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_PodstawaPodat2 DEFAULT(0)">
+			<description>Sumaryczna podstawa podatku dla drugiego progu</description>
+		</column>
+		<column name="WPL_ProcentPodat1" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_WPL_ProcentPodat1 DEFAULT(0)">
+			<description>Procent podatku dla pierwszego progu</description>
+		</column>
+		<column name="WPL_ProcentPodat2" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_WPL_ProcentPodat2 DEFAULT(0)">
+			<description>Procent podatku dla drugiego progu</description>
+		</column>
+		<column name="WPL_FormaOpodatZdrow" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_WPL_FormaOpodatZdrow DEFAULT(0)">
+			<description>Forma opodatkowania</description>
+		</column>
+		<column name="WPL_DochodUbMiesZdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_DochodUbMiesZdrow DEFAULT(0)">
+			<description>Dochód za poprzedni miesiąc</description>
+		</column>
+		<column name="WPL_PrzychodBiezRokZdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_PrzychodBiezRokZdrow DEFAULT(0)">
+			<description>Przychód</description>
+		</column>
+		<column name="WPL_PrzychodUbRokZdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_PrzychodUbRokZdrow DEFAULT(0)">
+			<description>Przychód</description>
+		</column>
+		<column name="WPL_Kompensata" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_WPL_Kompensata DEFAULT(0)">
+			<description>Wypłata naliczona z kompensatą zaliczki podatku</description>
+		</column>
+		<column name="WPL_WlascDochodSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDochodSkala DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascDochodLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDochodLiniowy DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascPrzychodBiezRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascPrzychodBiezRyczalt DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascPrzychodUbRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascPrzychodUbRyczalt DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascDochodKarta" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDochodKarta DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascDochodBrak" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDochodBrak DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_OddelegowanyKierowca" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPL_OddelegowanyKierowca DEFAULT(0)">
+			<description>Wypłata naliczona z obsługą pakietu mobilności</description>
+		</column>
+		<column name="WPL_WlascKwotaPoprzRokSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascKwotaPoprzRokSkala DEFAULT(0)">
+			<description>Dochód z dział. za poprzedni rok (skala)</description>
+		</column>
+		<column name="WPL_WlascKwotaPoprzRokLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascKwotaPoprzRokLiniowy DEFAULT(0)">
+			<description>Dochód z dział. za poprzedni rok (liniowy)</description>
+		</column>
+		<column name="WPL_WlascKwotaPoprzRokRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascKwotaPoprzRokRyczalt DEFAULT(0)">
+			<description>Dochód z dział. za poprzedni rok (ryczałt)</description>
+		</column>
+		<column name="WPL_WlascPodstZdrowRokSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascPodstZdrowRokSkala DEFAULT(0)">
+			<description>Roczna podstawa składki (skala)</description>
+		</column>
+		<column name="WPL_WlascPodstZdrowRokLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascPodstZdrowRokLiniowy DEFAULT(0)">
+			<description>Roczna podstawa składki (liniowy)</description>
+		</column>
+		<column name="WPL_WlascPodstZdrowRokRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascPodstZdrowRokRyczalt DEFAULT(0)">
+			<description>Roczna podstawa składki (ryczałt)</description>
+		</column>
+		<column name="WPL_WlascSumaSklZdrowSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascSumaSklZdrowSkala DEFAULT(0)">
+			<description>Suma miesięcznych składek (skala)</description>
+		</column>
+		<column name="WPL_WlascSumaSklZdrowLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascSumaSklZdrowLiniowy DEFAULT(0)">
+			<description>Suma miesięcznych składek (liniowy)</description>
+		</column>
+		<column name="WPL_WlascSumaSklZdrowRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascSumaSklZdrowRyczalt DEFAULT(0)">
+			<description>Suma miesięcznych składek (ryczałt)</description>
+		</column>
+		<column name="WPL_WlascSklZdrowRokSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascSklZdrowRokSkala DEFAULT(0)">
+			<description>Roczna składka (skala)</description>
+		</column>
+		<column name="WPL_WlascSklZdrowRokLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascSklZdrowRokLiniowy DEFAULT(0)">
+			<description>Roczna składka (liniowy)</description>
+		</column>
+		<column name="WPL_WlascSklZdrowRokRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascSklZdrowRokRyczalt DEFAULT(0)">
+			<description>Roczna składka (ryczałt)</description>
+		</column>
+		<column name="WPL_WlascDoplataSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDoplataSkala DEFAULT(0)">
+			<description>Kwota do dopłaty (skala)</description>
+		</column>
+		<column name="WPL_WlascDoplataLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDoplataLiniowy DEFAULT(0)">
+			<description>Kwota do dopłaty (liniowy)</description>
+		</column>
+		<column name="WPL_WlascDoplataRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDoplataRyczalt DEFAULT(0)">
+			<description>Kwota do dopłaty (ryczałt)</description>
+		</column>
+		<column name="WPL_WlascZwrotSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascZwrotSkala DEFAULT(0)">
+			<description>Kwota do zwrotu (skala)</description>
+		</column>
+		<column name="WPL_WlascZwrotLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascZwrotLiniowy DEFAULT(0)">
+			<description>Kwota do zwrotu (liniowy)</description>
+		</column>
+		<column name="WPL_WlascZwrotRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascZwrotRyczalt DEFAULT(0)">
+			<description>Kwota do zwrotu (ryczałt)</description>
+		</column>
+		<column name="WPL_WlascZmianaFormyOpodat1" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPL_WlascZmianaFormyOpodat1 DEFAULT(0)">
+			<description>Zmiana formy opodat. (styczeń 2022)</description>
+		</column>
+		<column name="WPL_WlascZmianaFormyOpodat7" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPL_WlascZmianaFormyOpodat7 DEFAULT(0)">
+			<description>Zmiana formy opodat. (lipiec 2022)</description>
+		</column>
+		<column name="WPL_WlascDoplata" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascDoplata DEFAULT(0)">
+			<description>Kwota do dopłaty</description>
+		</column>
+		<column name="WPL_WlascZwrot" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascZwrot DEFAULT(0)">
+			<description>Kwota do zwrotu</description>
+		</column>
+		<column name="WPL_WlascPodlZdrowMiesSkala" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPL_WlascPodlZdrowMiesSkala DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascPodlZdrowMiesLiniowy" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPL_WlascPodlZdrowMiesLiniowy DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascPodlZdrowMiesRyczalt" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPL_WlascPodlZdrowMiesRyczalt DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascMinPodstZdrowSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascMinPodstZdrowSkala DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascMinPodstZdrowLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascMinPodstZdrowLiniowy DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_WlascMinPodstZdrowRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPL_WlascMinPodstZdrowRyczalt DEFAULT(0)">
+			<description />
+		</column>
+		<column name="WPL_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="WPL_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WPL_TS_Zal" type="DATETIME">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WPL_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPL_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WPL_TS_Mod" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WPL_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WPL_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="WPL_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WPL_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="WPL_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WPL_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPL_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WPL_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPL_TS_Import" type="DATETIME">
+			<description>TimeSTamp dokonania importu</description>
+		</column>
+		<column name="WPL_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="WPL_Primary" columns="WPL_WplId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_WPLKategoria" localColumns="WPL_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Wyplaty:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPLDdfLink" localColumns="WPL_DdfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.Wyplaty:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPLLplLink" localColumns="WPL_LplId" refTable="ListyPlac" refColumns="LPL_LplId" deleteOption="CASCADE">
+			<description>Relacja CDN.Wyplaty:CDN.ListyPlac (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPLPraLink" localColumns="WPL_PraId" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.Wyplaty:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPLDzlLink" localColumns="WPL_DzlId" refTable="Dzialy" refColumns="DZL_DzlId">
+			<description>Relacja CDN.Wyplaty:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<index name="WPLPraLink" options="NONCLUSTERED" fields="WPL_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="WPLDzlLink" options="NONCLUSTERED" fields="WPL_DzlId">
+			<description>Klucz obcy działu</description>
+		</index>
+		<index name="WPLLplLink" options="NONCLUSTERED" fields="WPL_LplId">
+			<description>Klucz obcy listy płac</description>
+		</index>
+		<index name="WPLDdfLink" options="NONCLUSTERED" fields="WPL_DdfId">
+			<description>Link do definicji dokumentu</description>
+		</index>
+		<index name="WplNumerPelny" options="UNIQUE NONCLUSTERED" fields="WPL_NumerPelny ,WPL_Tryb">
+			<description>Wg numeru wypłaty</description>
+		</index>
+		<index name="WPLKategoria" options="NONCLUSTERED" fields="WPL_KatId">
+			<description>Link do kategorii</description>
+		</index>
+		<index name="WPLInclude" options="NONCLUSTERED" fields="WPL_ParentId">
+			<description>Self-relacja</description>
+		</index>
+	</table>
+	

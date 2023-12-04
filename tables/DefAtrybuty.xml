@@ -1,0 +1,175 @@
+<table name="DefAtrybuty">
+		<description>Definicje atrybutów towarów</description>
+		<column name="DeA_DeAId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="DeA_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ atrybutu</description>
+			<details>
+				1 - atrybut towaru&lt;br&gt;
+				2 - atrybut kontrahenta&lt;br&gt;
+				3 - środka trwałego &lt;br&gt;
+				4 - dokumentu
+			</details>
+		</column>
+		<column name="DeA_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod definicji atrybutu</description>
+		</column>
+		<column name="DeA_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa definicji atrybutu</description>
+		</column>
+		<column name="DeA_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="DeA_Zalezny" type="TINYINT" definition="NOT NULL">
+			<description>Czy atrybut zalezny od kontrahenta</description>
+			<details>
+				0 - niezależny
+				1 - zależny od kontrahenta
+			</details>
+		</column>
+		<column name="DeA_CzyKopiowacFA" type="TINYINT" definition="NOT NULL">
+			<description>Czy atrybut ma być kopiowany do opisu dokumentu</description>
+			<details>
+				0 - nie kopiować;
+				1 - kopiować na opis dokumentu;
+			</details>
+		</column>
+		<column name="DeA_CzyKopiowacDoVAT" type="TINYINT" definition="NOT NULL">
+			<description>Czy kopiować atrybut do rejestru VAT</description>
+			<details>
+				0 - nie kopiować do rejestru VAT
+				1 - kopiować atrybut do rejestru VAT
+			</details>
+		</column>
+		<column name="DeA_CzyKod" type="TINYINT" definition="NOT NULL">
+			<details>
+				0 - kod atrybutu nie pokaże się przed wartością &lt;br&gt;
+				1 - kod atrybutu pokaże się przed wartością
+			</details>
+		</column>
+		<column name="DeA_CzyPrzenosic" type="TINYINT" definition="NOT NULL">
+			<description>Czy przenosic na transakcje</description>
+			<details>
+				0 - nie przenosić na transakcje;
+				1 - przenosić na transakcje;
+			</details>
+		</column>
+		<column name="DeA_CzyDrukowac" type="TINYINT" definition="NOT NULL">
+			<description>Czy drukowac atrybut na transakcjach</description>
+			<details>
+				0 - nie drukować;
+				1 - drukować;
+			</details>
+		</column>
+		<column name="DeA_CzyPrzenosicNaDostawy" type="TINYINT" definition="NOT NULL">
+			<description>Czy przenosic na dostawy</description>
+			<details>
+				0 - nie przenosić na dostawy &lt;br&gt;
+				1 - przenosić na dostawy
+			</details>
+		</column>
+		<column name="DeA_CzyObowiazkowyDostawy" type="TINYINT" definition="NOT NULL">
+			<description>Czy obowiazkowy na dostawach</description>
+			<details>
+				0 - nie obowiązkowy przy dostawach &lt;br&gt;
+				1 - obowiązkowy przy dostawach
+			</details>
+		</column>
+		<column name="DeA_ESklep" type="TINYINT">
+			<description>Czy udostępniać w e-Sklepie</description>
+			<details>
+				Domyślnie nadawane NULL &lt;br&gt;
+				1- jeżeli check udostępniaj w e-Sklep włączony &lt;br&gt;
+				0 - jeżeli check udostępniaj w e-Sklep wyłączono
+			</details>
+		</column>
+		<column name="DeA_UdostepniajWMobile" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_UdostepniajWMobile DEFAULT(0)" filterVisible="false">
+			<description>Czy udostępniać w Mobile</description>
+		</column>
+		<column name="DeA_PozwalajNaEdycje" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_PozwalajNaEdycje DEFAULT(0)" filterVisible="false">
+			<description>Czy pozwalać na edycję w Mobile</description>
+		</column>
+		<column name="DeA_PozwalajNaEdycjeESklep" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_PozwalajNaEdycjeESklep DEFAULT(0)" filterVisible="false">
+			<description>Czy pozwalać na edycję w ESklep</description>
+		</column>
+		<column name="DeA_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu</description>
+		</column>
+		<column name="DeA_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="DeA_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="DeA_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="DeA_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DeA_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp założenia karty</description>
+		</column>
+		<column name="DeA_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartę</description>
+		</column>
+		<column name="DeA_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DeA_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DeA_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DeA_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DeA_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DeA_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DeA_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DeA_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DeA_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="DeA_JezykId" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_DeA_JezykId DEFAULT(1)">
+			<description>Identyfikator jezyka</description>
+			<details>
+				1 -polski
+				2- angielski
+				3 - niemiecki
+			</details>
+		</column>
+		<column name="DeA_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji karty</description>
+		</column>
+		<column name="DeA_AnalizyBI" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_AnalizyBI DEFAULT(0)">
+			<description>Przenoś do Analiz BI</description>
+		</column>
+		<column name="DeA_JPKDostepnyFA" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_JPKDostepnyFA DEFAULT(0)">
+			<description>atrybut JPK FA</description>
+		</column>
+		<column name="DeA_JPKDostepnyFAVAT" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_JPKDostepnyFAVAT DEFAULT(0)">
+			<description>atrybut JPK FA VAT</description>
+		</column>
+		<column name="DeA_JPKDostepnyVAT" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_JPKDostepnyVAT DEFAULT(0)">
+			<description>atrybut JPK VAT</description>
+		</column>
+		<column name="DeA_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeA_Nieaktywny DEFAULT(0)">
+			<description>Czy atrybut nieaktywny</description>
+		</column>
+		<primaryKey name="DeA_Primary" columns="DeA_DeAId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DeAKod" options="UNIQUE NONCLUSTERED" fields="DeA_Typ ,DeA_Kod">
+			<description>Wg kodu definicji</description>
+		</index>
+		<index name="DeAGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="DeA_Kod, DeA_DeAId" includedColumns="DeA_Typ, DeA_Format, DeA_Nazwa">
+			<description>Gridlookupu atrybutu wg kodu i id atrybutu</description>
+		</index>
+	</table>
+	

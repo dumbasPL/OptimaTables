@@ -1,0 +1,258 @@
+<table name="SrsCzesci">
+		<description>Części dla realizacji zlecenia</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="SrC_SrCId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrC_SrZId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zlecenia</description>
+			<details>Klucz obcy do tabeli SrSZlecenia</details>
+		</column>
+		<column name="SrC_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer pozycji</description>
+		</column>
+		<column name="SrC_TwrId" type="INTEGER">
+			<description>Identyfikator towarów tabeli cdn.Towary</description>
+			<details>Klucz obcy do tabeli Towary.</details>
+		</column>
+		<column name="SrC_KatID" type="INTEGER">
+			<description>Identyfikator kategorii;</description>
+			<details>Klucz obcy do tabeli Kategorie</details>
+		</column>
+		<column name="SrC_MmTreID" type="INTEGER">
+			<description>Identyfikator pozycji na MM</description>
+			<details>Klucz obcy do tabeli TraSElemDost</details>
+		</column>
+		<column name="SrC_MmZwrot" type="INTEGER" definition="NOT NULL">
+			<description>Flaga - czy wykonano MM zwrotny dla tej pozycji;</description>
+			<details>
+				0 - NIE &lt;br&gt;
+				1 - TAK
+			</details>
+		</column>
+		<column name="SrC_TwrKod" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod w cenniku</description>
+		</column>
+		<column name="SrC_TwrNazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa części</description>
+		</column>
+		<column name="SrC_TwrEAN" type="VARCHAR(40)" definition="NOT NULL CONSTRAINT DF_SrC_TwrEan DEFAULT('')">
+			<description>Kod EAN towaru</description>
+		</column>
+		<column name="SrC_Opis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Opis częsci (towaru)</description>
+		</column>
+		<column name="SrC_SerwisantTyp" type="INTEGER" definition="NOT NULL">
+			<description>Serwisant - operator/pracownik</description>
+			<details>
+				3 - pracownik (CDN.PracIdx);
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej);
+			</details>
+		</column>
+		<column name="SrC_SerwisantId" type="INTEGER" definition="NOT NULL">
+			<description>Serwisant</description>
+		</column>
+		<column name="SrC_MagId" type="INTEGER">
+			<description>Magazyn</description>
+		</column>
+		<column name="SrC_Status" type="TINYINT" definition="NOT NULL">
+			<description>Stan pobrania z magazynu: nie pobrano/ pobrano/ zamówiono</description>
+			<details>
+				0 - nie pobrano;
+				1 - pobrano;
+				2 - nie pobrano, zamówiono;
+				3 - pobrano, zamówiono;
+			</details>
+		</column>
+		<column name="SrC_Dokument" type="INTEGER" definition="NOT NULL">
+			<description>Pole niewykorzystywane. Zawsze wartość równa się zero</description>
+		</column>
+		<column name="SrC_Fakturowac" type="TINYINT" definition="NOT NULL">
+			<description>Tak/Nie</description>
+			<details>
+				0 - Nie;
+				1 - Tak;
+			</details>
+		</column>
+		<column name="SrC_TwCNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer ceny początkowej</description>
+		</column>
+		<column name="SrC_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrC_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<column name="SrC_Cena0" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena początkowa</description>
+		</column>
+		<column name="SrC_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat</description>
+		</column>
+		<column name="SrC_CenaNetto" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie zlecenia</description>
+		</column>
+		<column name="SrC_CenaBrutto" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) brutto w walucie zlecenia</description>
+		</column>
+		<column name="SrC_IloscPobierana" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach cennika</description>
+		</column>
+		<column name="SrC_IloscPobieranaJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach pomocniczych</description>
+		</column>
+		<column name="SrC_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach cennika</description>
+		</column>
+		<column name="SrC_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="SrC_IloscPobieranaDisp" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_SrC_IloscPobieranaDisp DEFAULT(0)">
+			<description>Ilość pobierana w zależności od statusu</description>
+		</column>
+		<column name="SrC_IloscDoPobraniaDisp" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_SrC_IloscDoPobraniaDisp DEFAULT(0)">
+			<description>Ilość do pobrania w zależności od statusu</description>
+		</column>
+		<column name="SrC_IloscWydanaDisp" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_SrC_IloscWydanaDisp DEFAULT(0)">
+			<description>Ilość pobierana w zależności od statusu</description>
+		</column>
+		<column name="SrC_IloscDoWydaniaDisp" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_SrC_IloscDoWydaniaDisp DEFAULT(0)">
+			<description>Ilość do pobrania w zależności od statusu</description>
+		</column>
+		<column name="SrC_MmZwrotDisp" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_SrC_MmZwrotDisp DEFAULT(0)">
+			<description>Ilość do zwrotu w zależności od statusu</description>
+		</column>
+		<column name="SrC_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="SrC_JMZ" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="SrC_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Przelicznik jednostki miary - licznik</description>
+		</column>
+		<column name="SrC_JMPrzelicznikM" type="INTEGER" definition="NOT NULL">
+			<description>Przelicznik jednostki miary - mianownik</description>
+		</column>
+		<column name="SrC_WartoscNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji</description>
+		</column>
+		<column name="SrC_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="SrC_WartoscNettoWylicz" type="DECIMAL(19,6)" definition="NOT NULL">
+			<description>Wartość netto pozycji</description>
+		</column>
+		<column name="SrC_WartoscBruttoWylicz" type="DECIMAL(19,6)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="SrC_WartoscZakupu" type="COMPUTED|DECIMAL(15,2)" definition="CDN.FNSRC_WARTOSCZAKUPU(SRC_SRCID)">
+			<description>Koszt rzeczywisty, zapisywany po wystawieniu dokumentów RW/WZ</description>
+		</column>
+		<column name="SrC_WartoscZakupuWylicz" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszt symulowany</description>
+		</column>
+		<column name="SrC_Cena0PLN" type="DECIMAL(19,6)" definition="NOT NULL CONSTRAINT DF_SrC_Cena0PLN DEFAULT(0)">
+			<description>Cena początkowa w walucie systemowej</description>
+		</column>
+		<column name="SrC_CenaNettoPLN" type="DECIMAL(19,6)" definition="NOT NULL CONSTRAINT DF_SrC_CenaNettoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="SrC_CenaBruttoPLN" type="DECIMAL(19,6)" definition="NOT NULL CONSTRAINT DF_SrC_CenaBruttoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej brutto</description>
+		</column>
+		<column name="SrC_WartoscNettoPLN" type="DECIMAL(23,10)" definition="NOT NULL CONSTRAINT DF_SrC_WartoscNettoPLN DEFAULT(0)">
+			<description>Wartość netto pozycji w walucie systemowej</description>
+		</column>
+		<column name="SrC_WartoscBruttoPLN" type="DECIMAL(23,10)" definition="NOT NULL CONSTRAINT DF_SrC_WartoscBruttoPLN DEFAULT(0)">
+			<description>Wartość brutto pozycji w walucie systemowej</description>
+		</column>
+		<column name="SrC_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_SrC_Waluta DEFAULT('')">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="SrC_Stawka" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_SrC_Stawka DEFAULT(0)">
+			<description>Stawka podatku vat</description>
+		</column>
+		<column name="SrC_FlagaVat" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_SrC_FlagaVat DEFAULT(2)">
+			<description>Flaga podatku (zwolniony, opodatkowany, zaniżony, nie podlega)</description>
+		</column>
+		<column name="SrC_Zrodlowa" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_SrC_Zrodlowa DEFAULT(0)">
+			<description>Stawka źródłowa dla podatku zaniżonego</description>
+		</column>
+		<column name="SrC_StawkaOSS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrC_StawkaOSS DEFAULT(0)">
+			<description>Pole techniczne, czy ustawiono stawki OSS</description>
+		</column>
+		<column name="SrC_Atr1_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrC_Atr1_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrC_Atr1_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrC_Atr1_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrC_Atr1_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrC_Atr2_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrC_Atr2_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrC_Atr2_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrC_Atr2_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrC_Atr2_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrC_Atr3_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrC_Atr3_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrC_Atr3_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrC_Atr3_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrC_Atr3_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrC_Atr4_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrC_Atr4_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrC_Atr4_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrC_Atr4_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrC_Atr4_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrC_Atr5_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrC_Atr5_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrC_Atr5_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrC_Atr5_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrC_Atr5_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrC_UstawAtrSQL" type="INT" definition="NOT NULL CONSTRAINT DF_SrC_UstawAtrSQL DEFAULT(-1)">
+			<description>Pole techniczne do ustawiana atrybutów - nie przestawiać ręcznie</description>
+		</column>
+		<column name="SrC_WyborDostaw" type="TINYINT" definition="NULL CONSTRAINT DF_SrC_WyborDostaw DEFAULT(0)">
+			<description>Czy wybrano dostawy</description>
+		</column>
+		<column name="SrC_CzySaCechyWymagane" type="INT" definition="NOT NULL CONSTRAINT DF_SrC_CzySaCechyWymagane DEFAULT(-1)">
+			<description>Towar posiada wymagane cechy</description>
+		</column>
+		<primaryKey name="SrC_Primary" columns="SrC_SrCId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrcKategoria" localColumns="SrC_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.SrsCzesci:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrCZlecenia" localColumns="SrC_SrZId" refTable="SrsZlecenia" refColumns="SrZ_SrZId" deleteOption="CASCADE">
+			<description>Relacja CDN.SrsCzesci:CDN.SrsZlecenia (MANY:1)</description>
+		</foreignKey>
+		<index name="SrCZlecenia" options="UNIQUE NONCLUSTERED" fields="SrC_SrZId ,SrC_Lp ,SrC_SrCId">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="SrCUsluga" options="UNIQUE NONCLUSTERED" fields="SrC_TwrId ,SrC_SrCId">
+			<description>Wg towaru</description>
+		</index>
+		<index name="SrcKategoria" options="UNIQUE NONCLUSTERED" fields="SrC_KatID ,SrC_SrCId" />
+		<index name="SrCTwrKod" options="NONCLUSTERED" fields="SrC_SrZId ,SrC_TwrKod" />
+	</table>
+	

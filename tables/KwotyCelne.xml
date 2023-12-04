@@ -1,0 +1,29 @@
+<table name="KwotyCelne">
+		<description>Tabela z listą kwot celnych</description>
+		<details>Tabela zawiera slownik kwot celnych</details>
+		<column name="KCe_KCeId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KCe_Nazwa" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Nazwa kwoty celnej</description>
+		</column>
+		<column name="KCe_Import" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy import</description>
+		</column>
+		<column name="KCe_WNT" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy wewnątrz wspólnotowe</description>
+		</column>
+		<column name="KCe_WplywNaWartoscVAT" type="SMALLINT" definition="NOT NULL">
+			<description>Czy wpływa na wartośc magazynu</description>
+		</column>
+		<column name="KCe_WplywNaPlatnosc" type="SMALLINT" definition="NOT NULL">
+			<description>Czy wpływa na płatność</description>
+		</column>
+		<primaryKey name="KCe_Primary" columns="KCe_KCeId">
+			<description>Wg numeru rekordu</description>
+		</primaryKey>
+		<index name="KCeNazwa" options="UNIQUE NONCLUSTERED" fields="KCe_Nazwa">
+			<description>Według nazwy w ramach listy</description>
+		</index>
+	</table>
+	

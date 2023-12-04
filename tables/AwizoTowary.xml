@@ -1,0 +1,60 @@
+<table name="AwizoTowary">
+		<description>Awizo towary </description>
+		<details>Towary na awizo</details>
+		<column name="AWT_AWTId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AWT_AWZId" type="int" definition="NOT NULL">
+			<description>ID awizo</description>
+		</column>
+		<column name="AWT_NrZamowienia" type="nvarchar(35)" definition="NOT NULL">
+			<description>Numer zamówienia</description>
+		</column>
+		<column name="AWT_DataZamowienia" type="DATETIME" definition="NOT NULL">
+			<description>Data zamówienia</description>
+		</column>
+		<column name="AWT_NrOdbiorca" type="nvarchar(100)" definition="NOT NULL">
+			<description>Numer odbiorcy ostatecznego</description>
+		</column>
+		<column name="AWT_TrEId" type="int" definition="NOT NULL">
+			<description>id elementu RO</description>
+		</column>
+		<column name="AWT_TwrID" type="int" definition="NOT NULL">
+			<description>Id towaru</description>
+		</column>
+		<column name="AWT_TwrKod" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod towaru</description>
+		</column>
+		<column name="AWT_TwrNazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa towaru</description>
+		</column>
+		<column name="AWT_TwrEAN" type="nvarchar(40)" definition="NOT NULL">
+			<description>EAN towaru</description>
+		</column>
+		<column name="AWT_IloscDoSpakuj" type="decimal(15, 4)" definition="NOT NULL">
+			<description>Ilosc do spakowania</description>
+		</column>
+		<column name="AWT_IloscZapakowana" type="decimal(15, 4)" definition="NOT NULL">
+			<description>Ilość którą jeszcze trzeba spakować</description>
+		</column>
+		<column name="AWT_IloscCalkowita" type="decimal(15, 4)" definition="NOT NULL">
+			<description>Całkowita ilość</description>
+		</column>
+		<column name="AWT_Jm" type="nvarchar(20)" definition="NOT NULL">
+			<description>JM</description>
+		</column>
+		<column name="AWT_NrRO" type="nvarchar(30)" definition="NOT NULL">
+			<description>Nr RO</description>
+		</column>
+		<primaryKey name="AWT_Primary" columns="AWT_AWTId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_AWTAwizo" localColumns="AWT_AWZId" refTable="Awizo" refColumns="AWZ_AWZID" deleteOption="CASCADE">
+			<description>Relacja CDN.AwizoTowary:CDN.Awizo (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

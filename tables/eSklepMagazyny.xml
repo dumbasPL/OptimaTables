@@ -1,0 +1,25 @@
+<table name="eSklepMagazyny">
+		<description>Magazyny wysyłane do esklep</description>
+		<column name="ESM_ESMId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ESM_MagId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="ESM_ESSId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator e-Sklep</description>
+		</column>
+		<column name="ESM_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Domyślny magazyn</description>
+		</column>
+		<primaryKey name="ESM_Primary" columns="ESM_ESMId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_eSklepMagazyny" localColumns="ESM_ESSId" refTable="eSklepStanowiska" refColumns="ESS_ESSId" deleteOption="CASCADE">
+			<description>Relacja CDN.eSklepMagazyny:CDN.eSklepStanowiska (MANY:1)</description>
+		</foreignKey>
+		<index name="ESMMagazyn" options="UNIQUE NONCLUSTERED" fields="ESM_MagId ,ESM_ESSId">
+			<description>Według magazynu</description>
+		</index>
+	</table>
+	

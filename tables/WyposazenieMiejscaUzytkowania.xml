@@ -1,0 +1,30 @@
+<table name="WyposazenieMiejscaUzytkowania">
+		<description>Miejsca użytkowania wyposażenia w ujęciu historycznym</description>
+		<details />
+		<column name="WyMU_WyMUID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>Unikalny identyfikator rekordu.</details>
+		</column>
+		<column name="WyMU_WypID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator wyposażenia</description>
+		</column>
+		<column name="WyMU_DataOd" type="DATETIME">
+			<description>Data początkowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="WyMU_DataDo" type="DATETIME">
+			<description>Data końcowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="WyMU_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa (opis) miejsca użytkowania</description>
+		</column>
+		<primaryKey name="WyMUPrimary" columns="WyMU_WyMUID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="WyMUWyp" options="UNIQUE NONCLUSTERED" fields="WyMU_WypID, WyMU_DataOd">
+			<description>Wg wyposażenia</description>
+		</index>
+		<foreignKey name="FK_WyMUWyp" localColumns="WyMU_WypID" refTable="Wyposazenie" refColumns="Wyp_WypID" deleteOption="CASCADE">
+			<description>Relacja CDN.WyposazenieMiejscaUzytkowania:CDN.Wyposazenie (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

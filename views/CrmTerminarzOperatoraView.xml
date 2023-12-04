@@ -1,0 +1,81 @@
+<view name="CrmTerminarzOperatoraView">
+		<description>Lista zdarzeń dla terminarza CRM</description>
+		<details>Jest to view serwerowe zawierające listę wszystkich wydarzeń dla terminarza</details>
+		<column name="RodzajWydarzenia" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj wydarzenia</description>
+			<details>
+				700 - kontakt CRM;
+				750 - etap obiegu dokumentów;
+				900 - czynności serwisowe;
+			</details>
+		</column>
+		<column name="KodOpiekuna" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Kod opiekuna danego wydarzenia</description>
+		</column>
+		<column name="Realizacja" type="SMALLINT" definition="NOT NULL">
+			<description>Stan realizacji</description>
+			<details>
+				1 - zdarzenie zamknięte (zrealizowane)
+				2 - zdarzenie niezrealizowane
+			</details>
+		</column>
+		<column name="Calodzienne" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Stan realizacji</description>
+			<details>
+				0 - zdarzenie nie obejmuje całego dnia
+				1 - zdarzenie całodzienne
+			</details>
+		</column>
+		<column name="IdZrodla" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>ID dokumentu źródłowego (kontaktu, czynności, etapu</description>
+		</column>
+		<column name="Tytul" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Tytuł dla wydarzenia</description>
+		</column>
+		<column name="Opis" type="NVARCHAR(150)" definition="NOT NULL">
+			<description>Opis dla wydarzenia</description>
+		</column>
+		<column name="TerminOd" type="DATETIME" definition="NOT NULL">
+			<description>Termin rozpoczęcia wydarzenia</description>
+		</column>
+		<column name="TerminDo" type="DATETIME" definition="NOT NULL">
+			<description>Termin rozpoczęcia wydarzenia</description>
+		</column>
+		<column name="Status" type="SMALLINT" definition="NOT NULL">
+			<description>Stan realizacji</description>
+			<details>
+				1 - zamknięty kontakt CRM
+				2 - główny kontakt CRM
+				3 - powiązany kontakt CRM
+				4 - czynność serwisowa niezrealizowana
+				5 - czynność serwisowa zrealizowana
+				6 - niewykonany etap obiegu dokumentów
+				7 - wykonany etap obiegu dokumentów
+			</details>
+		</column>
+		<column name="Reminder" type="NVARCHAR(100)" definition="NOT NULL" filterVisible="false">
+			<description>Przymomnienie (dane w formacie XML)</description>
+		</column>
+		<column name="OpiekunTyp" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Typ opiekuna</description>
+		</column>
+		<column name="OpiekunId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>ID opiekuna</description>
+		</column>
+		<column name="NumerDokumentu" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>Pełny numer dokumentu</description>
+		</column>
+		<column name="Kontrahent" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Akronim kontrahenta</description>
+		</column>
+		<column name="Priorytet" type="SMALLINT" definition="NOT NULL">
+			<description>Priorytet wydarzenia</description>
+			<details>
+				1 - najwyzszy
+				2 - wysoki
+				3 - niski
+				4 - najnizszy
+			</details>
+		</column>
+	</view>
+	

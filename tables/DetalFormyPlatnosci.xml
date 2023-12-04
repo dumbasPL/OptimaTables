@@ -1,0 +1,28 @@
+<table name="DetalFormyPlatnosci">
+		<description>Formy platnosci dla stanowiska detalu</description>
+		<column name="DFPl_DFPlId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DFPl_DStaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DFPl_FPlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator formy platnosci</description>
+		</column>
+		<column name="DFPl_Nazwa" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa formy płatnosci</description>
+		</column>
+		<column name="DFPl_NazwaDetal" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa formy płatnosci w detalu</description>
+		</column>
+		<column name="DFPl_Domyslna" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DFPl_Domyslna DEFAULT(0)">
+			<description>Domyslna forma dla detalu</description>
+		</column>
+		<primaryKey name="DFPl_Primary" columns="DFPl_DFPlId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DFplStanowiskoDetal" options="UNIQUE NONCLUSTERED" fields="DFPl_DStaId ,DFPl_FPlId">
+			<description>Według stanowiska</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,32 @@
+<table name="eSklepWaluty">
+		<description>Formy platnosci dla iMall24/ISklep24</description>
+		<column name="ESW_ESWId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ESW_ESSId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator e-Sklep</description>
+		</column>
+		<column name="ESW_Waluta" type="VARCHAR(3)">
+			<description>Waluta</description>
+		</column>
+		<column name="ESW_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Kurs licznik</description>
+		</column>
+		<column name="ESW_KursM" type="DECIMAL(15,0)" definition="NOT NULL">
+			<description>Kurs mianowkik</description>
+		</column>
+		<column name="ESW_ZKonfig" type="TINYINT" definition="NOT NULL">
+			<description>czy kurs z konfiguracji</description>
+		</column>
+		<column name="ESW_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<primaryKey name="ESW_Primary" columns="ESW_ESWId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ESWESSId" localColumns="ESW_ESSId" refTable="eSklepStanowiska" refColumns="ESS_ESSId" deleteOption="CASCADE">
+			<description>Relacja CDN.eSklepWaluty:CDN.eSklepStanowiska (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

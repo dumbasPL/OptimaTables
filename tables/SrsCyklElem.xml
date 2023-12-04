@@ -1,0 +1,171 @@
+<table name="SrsCyklElem">
+		<description>Pozycje wzorca zlecenia serwisowego</description>
+		<details>Pozycje wzorca zlecenia serwisowego</details>
+		<column name="SrE_SrEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrE_SrWId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wzorca zlecenia</description>
+			<details>Klucz obcy do tabeli SrsCyklNag</details>
+		</column>
+		<column name="SrE_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ elementu</description>
+			<details>
+				901 - część
+				902 - czynność
+			</details>
+		</column>
+		<column name="SrE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer pozycji</description>
+		</column>
+		<column name="SrE_TwrId" type="INTEGER">
+			<description>Identyfikator towarów tabeli cdn.Towary</description>
+			<details>Klucz obcy do tabeli Towary.</details>
+		</column>
+		<column name="SrE_KatID" type="INTEGER">
+			<description>Identyfikator kategorii;</description>
+			<details>Klucz obcy do tabeli Kategorie</details>
+		</column>
+		<column name="SrE_TwrKod" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod w cenniku</description>
+		</column>
+		<column name="SrE_TwrNazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa czynności lub części</description>
+		</column>
+		<column name="SrE_TwrEAN" type="VARCHAR(40)" definition="NOT NULL  CONSTRAINT DF_SrE_TwrEan DEFAULT('')">
+			<description>Kod EAN towaru</description>
+		</column>
+		<column name="SrE_Opis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Opis czynności lub częsci (towaru)</description>
+		</column>
+		<column name="SrE_Fakturowac" type="TINYINT" definition="NOT NULL">
+			<description>Tak/Nie</description>
+			<details>
+				0 - Nie;
+				1 - Tak;
+			</details>
+		</column>
+		<column name="SrE_TypCeny" type="TINYINT" definition="NOT NULL">
+			<description>Stała lub indywidualna dla każdego kontrahenta</description>
+			<details>
+				0 - stała &lt;br&gt;
+				1 - cena kontrahenta (z cennika)
+			</details>
+		</column>
+		<column name="SrE_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrE_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<column name="SrE_CenaNetto" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="SrE_CenaBrutto" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej brutto</description>
+		</column>
+		<column name="SrE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach cennika</description>
+		</column>
+		<column name="SrE_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="SrE_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="SrE_JMZ" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="SrE_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Przelicznik jednostki miary - licznik</description>
+		</column>
+		<column name="SrE_JMPrzelicznikM" type="INTEGER" definition="NOT NULL">
+			<description>Przelicznik jednostki miary - mianownik</description>
+		</column>
+		<column name="SrE_WartoscNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji</description>
+		</column>
+		<column name="SrE_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="SrE_SerwisantTyp" type="INTEGER">
+			<description>Serwisant - operator/pracownik</description>
+			<details>
+				3 - pracownik (CDN.PracIdx);
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej);
+			</details>
+		</column>
+		<column name="SrE_SerwisantId" type="INTEGER">
+			<description>Serwisant</description>
+		</column>
+		<column name="SrE_MagId" type="INTEGER">
+			<description>Magazyn</description>
+		</column>
+		<column name="SrE_Atr1_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrE_Atr1_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrE_Atr1_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrE_Atr1_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrE_Atr1_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrE_Atr2_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrE_Atr2_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrE_Atr2_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrE_Atr2_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrE_Atr2_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrE_Atr3_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrE_Atr3_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrE_Atr3_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrE_Atr3_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrE_Atr3_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrE_Atr4_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrE_Atr4_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrE_Atr4_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrE_Atr4_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrE_Atr4_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrE_Atr5_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrE_Atr5_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrE_Atr5_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrE_Atr5_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrE_Atr5_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrE_UstawAtrSQL" type="INT" definition="NOT NULL CONSTRAINT DF_SrE_UstawAtrSQL DEFAULT(-1)">
+			<description>Pole techniczne do ustawiana atrybutów - nie przestawiać ręcznie</description>
+		</column>
+		<primaryKey name="SrE_Primary" columns="SrE_SrEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrEKategoria" localColumns="SrE_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.SrsCyklElem:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrEZlecenia" localColumns="SrE_SrWId" refTable="SrsCyklNag" refColumns="SrW_SrWId" deleteOption="CASCADE">
+			<description>Relacja CDN.SrsCyklElem:CDN.SrsCyklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="SrEZlecenia" options="UNIQUE NONCLUSTERED" fields="SrE_SrWId, SrE_Typ ,SrE_Lp ,SrE_SrEId">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="SrEUsluga" options="UNIQUE NONCLUSTERED" fields="SrE_TwrId ,SrE_SrEId">
+			<description>Wg towaru</description>
+		</index>
+		<index name="SrEKategoria" options="UNIQUE NONCLUSTERED" fields="SrE_KatID ,SrE_SrEId" />
+		<index name="SrETwrKod" options="NONCLUSTERED" fields="SrE_SrWId ,SrE_TwrKod" />
+	</table>
+	

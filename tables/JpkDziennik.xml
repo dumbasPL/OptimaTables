@@ -1,0 +1,19 @@
+<table name="JpkDziennik">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="Id" type="int" definition="NO_SQL" />
+		<column name="JpNId" type="int" definition="NO_SQL" />
+		<column name="DeNId" type="int" definition="NO_SQL" />
+		<column name="LpZapisuDziennika" type="int" definition="NO_SQL" />
+		<column name="NrZapisuDziennika" type="varchar(50)" definition="NO_SQL" />
+		<column name="OpisDziennika" type="varchar(50)" definition="NO_SQL" />
+		<column name="NrDowoduKsiegowego" type="varchar(256)" definition="NO_SQL" />
+		<column name="RodzajDowodu" type="varchar(30)" definition="NO_SQL" />
+		<column name="DataOperacji" type="date" definition="NO_SQL" />
+		<column name="DataDowodu" type="date" definition="NO_SQL" />
+		<column name="DataKsiegowania" type="date" definition="NO_SQL" />
+		<column name="OperatorId" type="int" definition="NO_SQL" />
+		<column name="KodOperatora" type="varchar(50)" definition="NO_SQL" />
+		<column name="OpisOperacji" type="varchar(256)" definition="NO_SQL" />
+		<column name="DziennikKwotaOperacji" type="decimal(15, 2)" definition="NO_SQL" />
+	</table>
+	

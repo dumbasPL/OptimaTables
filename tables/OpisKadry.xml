@@ -1,0 +1,26 @@
+<table name="OpisKadry">
+		<description>Opis analityczny (kadry)</description>
+		<column name="OPK_OpkId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="OPK_RodzajZrodla" type="INTEGER" definition="NOT NULL" />
+		<column name="OPK_ZrodloId" type="INTEGER" definition="NOT NULL" />
+		<column name="OPK_PraId" type="INTEGER" />
+		<column name="OPK_DzlId" type="INTEGER" definition="NOT NULL" />
+		<column name="OPK_PrjId" type="INTEGER" definition="NOT NULL" />
+		<column name="OPK_Procent" type="DECIMAL(15,4)" definition="NOT NULL" />
+		<primaryKey name="OPK_Primary" columns="OPK_OpkId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_OPKPraLink" localColumns="OPK_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.OpisKadry:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_OPKDzlId" localColumns="OPK_DzlId" refTable="Dzialy" refColumns="DZL_DzlId">
+			<description>Relacja CDN.OpisKadry:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<index name="OPKPraLink" options="NONCLUSTERED" fields="OPK_PraId" />
+		<index name="OPKDzlId" options="NONCLUSTERED" fields="OPK_DzlId" />
+		<index name="OPKPrjLink" options="NONCLUSTERED" fields="OPK_PrjId" />
+		<index name="OPKUnikalny" options="UNIQUE NONCLUSTERED" fields="OPK_RodzajZrodla ,OPK_ZrodloId ,OPK_DzlId ,OPK_PrjId" />
+	</table>
+	

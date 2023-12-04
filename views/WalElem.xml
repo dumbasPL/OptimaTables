@@ -1,0 +1,22 @@
+<view name="WalElem">
+		<description>Historia walut</description>
+		<column name="WaE_Symbol" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Symbol waluty</description>
+			<details>Symbol waluty</details>
+		</column>
+		<column name="WaE_KursTS" type="INTEGER" definition="NO_SQL">
+			<description>Archiwalny kurs (TimeStamp)</description>
+			<details>Liczba dni od 01-01-1996</details>
+		</column>
+		<column name="WaE_Lp" type="SMALLINT" definition="NO_SQL">
+			<description>Kolejny kurs</description>
+			<details>Liczba dni od 01-01-1996</details>
+		</column>
+		<column name="WaE_KursM" type="DECIMAL( 5,0)" definition="NO_SQL">
+			<description>Mianownik kursu</description>
+		</column>
+		<column name="WaE_KursL" type="DECIMAL( 9,4)" definition="NO_SQL">
+			<description>Licznik kursu</description>
+		</column>
+	</view>
+	

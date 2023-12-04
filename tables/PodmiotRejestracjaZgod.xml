@@ -1,0 +1,82 @@
+<table name="PodmiotRejestracjaZgod">
+		<description>Zgody dla podmiotu (kontrahenta, przedstawiciela, pracownika)</description>
+		<column name="PRZ_PRZId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PRZ_PodmiotID" type="INTEGER" definition="NOT NULL">
+			<description>Id podmiotu</description>
+		</column>
+		<column name="PRZ_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="PRZ_PrzedstawicielId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_Przedstawiciel DEFAULT(0)">
+			<description>Id przedstawiciela</description>
+		</column>
+		<column name="PRZ_TrescZgodyId" type="INTEGER" definition="NOT NULL">
+			<description>Id tresci zgody</description>
+		</column>
+		<column name="PRZ_EMAIL" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu email</description>
+		</column>
+		<column name="PRZ_SMS" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu sms</description>
+		</column>
+		<column name="PRZ_Telefon" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu telefon</description>
+		</column>
+		<column name="PRZ_List" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu list</description>
+		</column>
+		<column name="PRZ_DataWyrazenia" type="DATETIME" definition="NOT NULL">
+			<description>Data wyrażenia zgody</description>
+		</column>
+		<column name="PRZ_ZrodloPozyskaniaId" type="INTEGER" definition="NOT NULL">
+			<description>Id zródło pozyskania</description>
+		</column>
+		<column name="PRZ_IPWyrazenia" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>IP wyrażenia</description>
+		</column>
+		<column name="PRZ_DataWycofania" type="DATETIME" definition="">
+			<description>Data wycofania zgody</description>
+		</column>
+		<column name="PRZ_ZrodloWycofaniaId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_ZrodloWycofaniaId DEFAULT(0)">
+			<description>Id zródło wycofania</description>
+		</column>
+		<column name="PRZ_IPWycofania" type="NVARCHAR(254)" definition="NOT NULL CONSTRAINT DF_PRZ_IPWycofania DEFAULT('')" hash="1">
+			<description>IP wycofania</description>
+		</column>
+		<column name="PRZ_PowodWycofania" type="NVARCHAR(1000)" definition="NOT NULL CONSTRAINT DF_PRZ_PowodWycofania DEFAULT('')">
+			<description>Powód wycofania</description>
+		</column>
+		<column name="PRZ_Akronim" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRZ_Akronim DEFAULT('')" hash="1">
+			<description>Akronim podmiotu</description>
+		</column>
+		<column name="PRZ_ImieNazwisko" type="NVARCHAR(150)" definition="NOT NULL CONSTRAINT DF_PRZ_ImieNazwisko DEFAULT('')" hash="1">
+			<description>Imię i nazwisko podmiotu</description>
+		</column>
+		<column name="PRZ_JezykId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_JezykId DEFAULT(1)">
+			<description>Id jezyka zgody</description>
+		</column>
+		<column name="PRZ_WyrazenieESklepId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_WyrazenieESklepId DEFAULT(0)">
+			<description>Id esklep z ktorego przyszła zgoda</description>
+		</column>
+		<column name="PRZ_WycofanieESklepId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_WycofanieESklepId DEFAULT(0)">
+			<description>Id sklepu w ktorym wycofano zg</description>
+		</column>
+		<column name="PRZ_TS_Mod" type="DATETIME" definition="NOT NULL CONSTRAINT DF_PRZ_TS_Mod DEFAULT(GetDate())">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="PRZ_TrNId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_TrNId DEFAULT(0)">
+			<description>Id dokumentu do którego zgoda zesklep</description>
+		</column>
+		<column name="PRZ_WyrazenieMobileId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_WyrazenieMobileId DEFAULT(0)">
+			<description>Id mobile z ktorego przyszła zgoda</description>
+		</column>
+		<column name="PRZ_WycofanieMobileId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRZ_WycofanieMobileId DEFAULT(0)">
+			<description>Id mobile w ktorym wycofano zg</description>
+		</column>
+		<primaryKey name="PRZ_Primary" columns="PRZ_PRZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

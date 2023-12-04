@@ -1,0 +1,99 @@
+<table name="Awizo">
+		<description>Awizo</description>
+		<details>Awizo dla EDI</details>
+		<column name="AWZ_AWZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AWZ_Numer" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Numer awizo</description>
+		</column>
+		<column name="AWZ_Data" type="datetime" definition="NOT NULL">
+			<description>Data awizo</description>
+		</column>
+		<column name="AWZ_DataDostawy" type="datetime" definition="NOT NULL">
+			<description>Data dostawy</description>
+		</column>
+		<column name="AWZ_PodId" type="int" definition="NOT NULL">
+			<description>ID nabywcy</description>
+		</column>
+		<column name="AWZ_OdbId" type="int" definition="NOT NULL">
+			<description>ID odbiorcy</description>
+		</column>
+		<column name="AWZ_TypTransportuID" type="int" definition="NOT NULL">
+			<description>ID typu transportu</description>
+		</column>
+		<column name="AWZ_WarunkiDostawyID" type="int" definition="NOT NULL">
+			<description>ID warunku dostawy</description>
+		</column>
+		<column name="AWZ_TrNID" type="int" definition="NOT NULL">
+			<description>ID RO</description>
+		</column>
+		<column name="AWZ_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="AWZ_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="AWZ_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AWZ_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="AWZ_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="AWZ_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AWZ_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AWZ_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AWZ_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AWZ_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AWZ_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AWZ_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AWZ_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AWZ_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="AWZ_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Stan dokumentu</description>
+			<details>
+				1 - bufor, &lt;br&gt;
+				0 - zatwierdzony, &lt;br&gt;
+				-1 - anulowany
+			</details>
+		</column>
+		<column name="AWZ_PodTyp" type="SMALLINT">
+			<description>Typ podmiotu (płatnika) z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="AWZ_OdbTyp" type="SMALLINT">
+			<description>Typ podmiotu (płatnika) z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<primaryKey name="AWZ_Primary" columns="AWZ_AWZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

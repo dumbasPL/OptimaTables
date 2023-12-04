@@ -1,0 +1,57 @@
+<table name="AwizoOpakowania">
+		<description>Awizo opakowania </description>
+		<details>Opakowania na awizo</details>
+		<column name="AWO_AWOId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AWO_AWZId" type="int" definition="NOT NULL">
+			<description>ID awizo</description>
+		</column>
+		<column name="AWO_OpakowanieID" type="int" definition="NOT NULL">
+			<description>ID w obrębie awizo</description>
+		</column>
+		<column name="AWO_ParentID" type="int" definition="NOT NULL">
+			<description>ID rodzica</description>
+		</column>
+		<column name="AWO_Opis" type="NVARCHAR(70)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="AWO_NrZamowienia" type="NVARCHAR(35)" definition="NOT NULL">
+			<description>Numer zamówienia</description>
+		</column>
+		<column name="AWO_NrOdbiorca" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Numer odbiorcy</description>
+		</column>
+		<column name="AWO_TrEID" type="int" definition="NOT NULL">
+			<description>ID elementu RO</description>
+		</column>
+		<column name="AWO_KodSSCC" type="nvarchar(18)" definition="NOT NULL">
+			<description>Kod SSCC</description>
+		</column>
+		<column name="AWO_TwrID" type="int" definition="NOT NULL">
+			<description>ID towaru</description>
+		</column>
+		<column name="AWO_TwrIlosc" type="decimal(15, 4)" definition="NOT NULL">
+			<description>Ilość towaru</description>
+		</column>
+		<column name="AWO_Objetosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Objętość towaru</description>
+		</column>
+		<column name="AWO_Waga" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Waga towaru</description>
+		</column>
+		<column name="AWO_TypOpakowaniaId" type="int" definition="NOT NULL">
+			<description>ID typu opakowania</description>
+		</column>
+		<primaryKey name="AWO_Primary" columns="AWO_AWOId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_AWOAwizo" localColumns="AWO_AWZId" refTable="Awizo" refColumns="AWZ_AWZID" deleteOption="CASCADE">
+			<description>Relacja CDN.AwizoOpakowania:CDN.Awizo (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

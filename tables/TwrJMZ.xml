@@ -1,0 +1,53 @@
+<table name="TwrJMZ" filterVisible="false">
+		<description>Lista jednostek miary towaru</description>
+		<details>Tabela jednostek miary towarów.</details>
+		<column name="TwJZ_TwJZId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator EAN</description>
+		</column>
+		<column name="TwJZ_TwrID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do karty towaru</description>
+			<details>Wskaźnik do nagłówka Towary: TwC:TwrId = Twr:TwrId</details>
+		</column>
+		<column name="TwJZ_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa jednostki miary</description>
+		</column>
+		<column name="TwJZ_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Licznik przelicznika JM</description>
+			<details>Licznik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="TwJZ_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL">
+			<description>Mianownik przelicznika JM</description>
+			<details>Mianownik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="TwJZ_eSklepID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TwJZ_eSklepID DEFAULT(0)">
+			<description>Identyfikator esklepu</description>
+		</column>
+		<column name="TwJZ_eSklepDomyslna" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TwJZ_eSklepDomyslna DEFAULT(0)">
+			<description>Identyfikator esklepu</description>
+		</column>
+		<column name="TwJZ_CenaJednostkowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TwJZ_CenaJednostkowa DEFAULT(0)">
+			<description>JM dla ceny jednostkowej</description>
+		</column>
+		<column name="TwJZ_Lp" type="INTEGER">
+			<description>Lp jednostki</description>
+		</column>
+		<column name="TwJZ_WysCm" type="SMALLINT">
+			<description>Wysokość towaru w jednostce opakowania (cm)</description>
+		</column>
+		<column name="TwJZ_SzerCm" type="SMALLINT">
+			<description>Szerokość towaru w jednostce opakowania (cm)</description>
+		</column>
+		<column name="TwJZ_DlugCm" type="SMALLINT">
+			<description>Długość towaru w jednostce opakowania (cm)</description>
+		</column>
+		<primaryKey name="TwJZ_Primary" columns="TwJZ_TwJZID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_TwJZTowar" localColumns="TwJZ_TwrID" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrCeny:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="TwJZTowar" options="UNIQUE NONCLUSTERED" fields="TwJZ_TwrID ,TwJZ_JM,TwJZ_eSklepId">
+			<description>Wg JM i karty towaru</description>
+		</index>
+	</table>
+	

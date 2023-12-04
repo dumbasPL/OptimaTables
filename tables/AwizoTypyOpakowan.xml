@@ -1,0 +1,21 @@
+<table name="AwizoTypyOpakowan">
+		<description>Typy opakowań dla Awizo</description>
+		<details>Typy opakowań dla awizo dla EDI</details>
+		<column name="AWTO_AWTOId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AWTO_Kod" type="NVARCHAR(17)" definition="NOT NULL">
+			<description>Kod typu opakowania</description>
+		</column>
+		<column name="AWTO_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa typu opakowania</description>
+		</column>
+		<primaryKey name="AWTO_Primary" columns="AWTO_AWTOId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

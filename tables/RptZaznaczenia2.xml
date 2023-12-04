@@ -1,0 +1,28 @@
+<table name="RptZaznaczenia2" filterVisible="false">
+		<description>Tabela zaznaczeń rekordów do wydruku</description>
+		<column name="RpZ2_GUID" type="VARCHAR(50)">
+			<description>Identyfikator wydruku</description>
+		</column>
+		<column name="RpZ2_RekordLp" type="INTEGER">
+			<description>Numer kolejny zaznaczonego rekordu wg porządku sortowania z aplikacji</description>
+		</column>
+		<column name="RpZ2_GIDTyp" type="SMALLINT">
+			<description>Identyfikator rekordu - Typ</description>
+		</column>
+		<column name="RpZ2_GIDFirma" type="INTEGER">
+			<description>Identyfikator rekordu - Firma</description>
+		</column>
+		<column name="RpZ2_GIDNumer" type="INTEGER">
+			<description>Identyfikator rekordu - Numer lub ID</description>
+		</column>
+		<column name="RpZ2_GIDLp" type="SMALLINT">
+			<description>Identyfikator rekordu - Lp</description>
+		</column>
+		<column name="RpZ2_KopiaLp" type="SMALLINT">
+			<description>Numer kopii</description>
+		</column>
+		<primaryKey name="RpZ2_Primary" columns="RpZ2_GUID,RpZ2_RekordLp,RpZ2_KopiaLp">
+			<description>Podstawowy</description>
+		</primaryKey>
+	</table>
+	

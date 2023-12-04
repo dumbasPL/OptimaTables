@@ -1,0 +1,72 @@
+<table name="CentraKierownicy">
+		<description>Tabela kierowników oraz zastępców centrum podległościowego firmy</description>
+		<column name="CNK_CnkId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator centrum</description>
+		</column>
+		<column name="CNK_CntId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator centrum kierownika/zastępcy</description>
+		</column>
+		<column name="CNK_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika posiadającego dane centrum</description>
+		</column>
+		<column name="CNK_Rodzaj" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj kierownika: 0 - kierownik, 1 - zastępca</description>
+		</column>
+		<column name="CNK_Kod" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Kod centrum</description>
+		</column>
+		<column name="CNK_OkresOd" type="DATETIME" definition="NULL">
+			<details>Okres sprawowania funkcji kierowniczej</details>
+		</column>
+		<column name="CNK_OkresDo" type="DATETIME" definition="NULL">
+			<details>Okres sprawowania funkcji kierowniczej</details>
+		</column>
+		<column name="CNK_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="CNK_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CNK_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CNK_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="CNK_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CNK_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CNK_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CNK_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="CNK_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CNK_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="CNK_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CNK_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="CNK_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CNK_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="CNK_Primary" columns="CNK_CnkId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_CNKPraLink" localColumns="CNK_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.CentraKierownicy:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_CNKCentra" localColumns="CNK_CntId" refTable="Centra" refColumns="CNT_CntId" deleteOption="CASCADE">
+			<description>Relacja CDN.CentraKierownicy:CDN.Centra (MANY:1)</description>
+		</foreignKey>
+		<index name="CNKPraLink" options="NONCLUSTERED" fields="CNK_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="CNKCentra" options="NONCLUSTERED" fields="CNK_CntId">
+			<description>Klucz obcy centrum</description>
+		</index>
+	</table>
+	

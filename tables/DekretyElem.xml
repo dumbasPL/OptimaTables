@@ -1,0 +1,168 @@
+<table name="DekretyElem">
+		<description>Elementy dekretów księgowych</description>
+		<column name="DeE_DeEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DeE_DeNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka zapisu</description>
+		</column>
+		<column name="DeE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp dekretu w księgowaniu zbiorczym</description>
+		</column>
+		<column name="DeE_DataWys" type="DATETIME" definition="NOT NULL">
+			<description>Data wystawienia dokumentu</description>
+		</column>
+		<column name="DeE_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data dokonania operacji gospodarczej</description>
+		</column>
+		<column name="DeE_Dokument" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="DeE_DataKur" type="DATETIME" definition="NOT NULL">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="DeE_SlownikTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				Typ słownika.
+				NULL - brak słownika
+				1 - Kontrahent (tabela: Kontrahenci)
+				2 - Bank (tabela: BnkNazwy)
+				3 - Pracownik/Wspólnik (tabela: PracEtaty)
+				5 - Urząd (tabela: Urzedy)
+				6 - Środek trwały (tabela: Trwale)
+				7 - Towar (tabela: Towary)
+			</details>
+		</column>
+		<column name="DeE_SlownikId" type="INTEGER">
+			<description>Identyfikator pozycji słownika</description>
+		</column>
+		<column name="DeE_KatId" type="INTEGER">
+			<description>Identyfikator kategorii</description>
+		</column>
+		<column name="DeE_Kategoria" type="VARCHAR(256)" definition="NOT NULL" hash="1">
+			<description>Opis dokumentu księgowego</description>
+		</column>
+		<column name="DeE_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota na jaką opiewa księgowanie</description>
+		</column>
+		<column name="DeE_KwotaWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zapisu w walucie</description>
+		</column>
+		<column name="DeE_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta zapisu</description>
+		</column>
+		<column name="DeE_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu</description>
+		</column>
+		<column name="DeE_FPlID" type="INTEGER">
+			<description>Forma płatności</description>
+			<details>
+				Pole przyjmuje wartości:
+				1-gotówka,
+				2-czek,
+				3-przelew,
+				4-kredyt,
+				5-inne
+			</details>
+		</column>
+		<column name="DeE_Platnosci" type="INTEGER" definition="NOT NULL">
+			<description>Czy generuje płatności do Preliminarza</description>
+			<details>0 - nie, 1 - tak</details>
+		</column>
+		<column name="DeE_Termin" type="DATETIME">
+			<description>Termin płatności dla generowanych zdarzeń w preliminarzu</description>
+		</column>
+		<column name="DeE_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik kursu waluty</description>
+		</column>
+		<column name="DeE_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik kursu waluty</description>
+		</column>
+		<column name="DeE_AccWnId" type="INTEGER">
+			<description>Identyfikator konta po stronie Winien</description>
+		</column>
+		<column name="DeE_AccMaId" type="INTEGER">
+			<description>Identyfikator konbta po stronie Ma</description>
+		</column>
+		<column name="DeE_KontoWn" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Symbol konta po stronie Winien</description>
+		</column>
+		<column name="DeE_KontoMa" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Symbol konta po stronie Ma</description>
+		</column>
+		<column name="DeE_DokumentTyp" type="SMALLINT">
+			<description>Typ dokumentu źródłowego</description>
+			<details>
+				Pole przyjmuje wartości:
+				NULL,
+				7 - dokument środka trwałego, tabela CDN.TrwaleHist
+				8 - wypłaty, tabela CDN.Wyplaty
+				14 - zapisy kasowo bankowe, tabela CDN.BnkZapisy
+				44 - rozrachunek różnicy kursowej
+				50 - rozrachunek kompensaty
+			</details>
+		</column>
+		<column name="DeE_DokumentId" type="INTEGER">
+			<description>Identyfikator dokumentu źródłowego</description>
+			<details>Klucz obcy do tabeli dokumentów źródłowych, w zależności od DokumentTyp</details>
+		</column>
+		<column name="DeE_BZdId" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli cdn.BnkZdarzenia w przypadku księgowania wg
+				płatnosci</description>
+		</column>
+		<column name="DeE_Rozrachunki" type="INTEGER">
+			<description>Czy generowany będzie rozrachunek</description>
+		</column>
+		<column name="DeE_BezRozliczenia" type="SMALLINT">
+			<description>Czy wygenerowanie rozrachunku rozliczy dokumenty KB</description>
+		</column>
+		<column name="DeE_TerminRoz" type="DATETIME">
+			<description>Termin płatności rozrachunku</description>
+		</column>
+		<column name="DeE_StatusRozrachunku" type="INTEGER">
+			<description>Status rozrachunku</description>
+			<details>
+				Pole przyjmuje wartości:
+				status_Niepodlega = 0 or NULL,
+				status_Nierozliczony = 1,
+				status_RozliczonyCzesciowo = 2,
+				status_RozliczonyCalkowicie = 3
+			</details>
+		</column>
+		<column name="DeE_Korekta" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeE_Korekta DEFAULT(0)">
+			<description>Element korekta</description>
+			<details>
+				1 - element jest sumą kosztów dokumentów korekcyjnych
+				0 - element nie jest korektą
+			</details>
+		</column>
+		<primaryKey name="DeE_Primary" columns="DeE_DeEId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DeEKategoria" localColumns="DeE_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.DekretyElem:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DeENaglowek" localColumns="DeE_DeNId" refTable="DekretyNag" refColumns="DeN_DeNId" deleteOption="CASCADE">
+			<description>Relacja CDN.DekretyElem:CDN.DekretyNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DeENaglowek" options="NONCLUSTERED" fields="DeE_DeNId ,DeE_Lp">
+			<description>Wg nagłówka dokumentu</description>
+		</index>
+		<index name="DeEPodmiot" options="NONCLUSTERED" fields="DeE_SlownikId ,DeE_SlownikTyp">
+			<description>Wg podmiotu</description>
+		</index>
+		<index name="DeEKategoria" options="NONCLUSTERED" fields="DeE_KatId">
+			<description>Wg kategorii</description>
+		</index>
+		<index name="DeEDokument" options="NONCLUSTERED" fields="DeE_DokumentId ,DeE_DokumentTyp">
+			<description>Klucz obcy do dokumentu źródłowego</description>
+		</index>
+		<index name="DeEBZdId" options="NONCLUSTERED" fields="DeE_BZdId">
+			<description>Klucz obcy do tabeli cdn.BnkZdarzenia</description>
+		</index>
+		<index name="DeE_DETA" options="NONCLUSTERED" fields="DeE_DeEId ,DeE_Rozrachunki, DeE_AccWnId, DeE_AccMaId, DeE_DeNId" includedColumns="DeE_Dokument, DeE_Kategoria, DeE_Waluta, DeE_KontoWn, DeE_KontoMa">
+			<description />
+		</index>
+	</table>
+	

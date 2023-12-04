@@ -1,0 +1,216 @@
+<table name="DeklNag">
+		<description>Nagłówki deklaracji podatkowych</description>
+		<details>
+			Deklaracje podatkowe zapisywane są w trzech tabelach:
+			DeklNag zawiera informacje o rodzaju deklaracji, roku i miesiącu, którego dotyczy deklaracja,
+			wspólniku itp.
+			DeklElem zawiera obliczone pozycje deklaracji
+			DeklWydr zawiera przygotowany zestaw danych do wydrukowania deklaracji
+		</details>
+		<column name="DkN_DkNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DkN_DkkId" type="INTEGER">
+			<details>wskazuje na powiązanie z tabelą CDN.DeklKedu po DKK_DKKId, nulll - brak powiązania</details>
+		</column>
+		<column name="DkN_ParentId" type="INTEGER" />
+		<column name="DkN_Data" type="DATETIME" />
+		<column name="DkN_Numer" type="INTEGER" definition="NOT NULL" />
+		<column name="DkN_PraID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podatnika</description>
+			<details>
+				Identyfikator wspólnika (WspolNag) lub pracownika (Pracowicy), dla którego została obliczona
+				deklaracja, w przypadku deklaracji osobistych, np. PIT-5.
+				Dla deklaracji obliczanych dla firmy (np. VAT-7) pole DkN:WsNId = 0 (NULL)
+			</details>
+		</column>
+		<column name="DkN_Pra2ID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator współwłaściciela</description>
+			<details>
+				Identyfikator wspólnika (WspolNag) lub pracownika (Pracowicy), dla którego została obliczona
+				deklaracja, w przypadku deklaracji osobistych, np. PIT-5.
+				Dla deklaracji obliczanych dla firmy (np. VAT-7) pole DkN:WsNId = 0 (NULL)
+			</details>
+		</column>
+		<column name="DkN_TypDeklar" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Rodzaj deklaracji</description>
+			<details>
+				Oznacza rodzaj deklaracji (VAT-7, PIT-11 itp.)
+				Lista dopuszczalnych wartości jest dostępna w dokumentacji obiektów COM dla biblioteki
+				op_deklaracje, wyliczenie TypDeklarEnum.
+			</details>
+		</column>
+		<column name="DkN_RokMiesiac" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiac deklaracji</description>
+			<details>
+				Rok i miesiąc którego dotyczy deklaracja, obliczany jako:
+				100 * Rok + Miesiąc
+			</details>
+		</column>
+		<column name="DkN_Wersja" type="TINYINT" definition="NOT NULL">
+			<description>Wersja formularza deklaracji</description>
+		</column>
+		<column name="DkN_Kwota" type="COMPUTED|DECIMAL(15,2)" definition="CDN.KWOTADEKLARACJI (DKN_DKNID)">
+			<description>Kwota deklaracji wykazywana na listach</description>
+		</column>
+		<column name="DkN_Zablokowana" type="TINYINT" definition="NOT NULL">
+			<description>Deklaracja zablokowana do ponownego obliczenia</description>
+		</column>
+		<column name="DkN_Finalna" type="COMPUTED|INTEGER" definition="CDN.DEKLFINALNA (DKN_DKNID, DKN_ROKMIESIAC)">
+			<description>Finalna wersja deklaracji</description>
+		</column>
+		<column name="DkN_DekId" type="INTEGER">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada DkN_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada DkN_DekId = NULL;
+			</details>
+		</column>
+		<column name="DkN_PreDekId" type="INTEGER">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis predekretowany posiada DkN_PreDekId = Dek_DekId;&lt;br&gt;
+				Zapis niepredekretowany posiada DkN_PreDekId = NULL;
+			</details>
+		</column>
+		<column name="DkN_DataKur" type="DATETIME" definition="NULL">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="DkN_Waluta" type="VARCHAR(3)" definition="NULL">
+			<description>Waluta zapisu</description>
+		</column>
+		<column name="DkN_KursNumer" type="INTEGER" definition="NULL">
+			<description>Numer kursu</description>
+		</column>
+		<column name="DkN_KursL" type="DECIMAL(15,4)" definition="NULL">
+			<description>Licznik kursu</description>
+		</column>
+		<column name="DkN_KursM" type="DECIMAL( 5,0)" definition="NULL">
+			<description>Mianownik kursu</description>
+		</column>
+		<column name="DkN_ImportRowID" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="DkN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora obliczającego deklaracje</description>
+		</column>
+		<column name="DkN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DkN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp obliczenia deklaracji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DkN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora, który zmodyfikował deklarację</description>
+		</column>
+		<column name="DkN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DkN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji deklaracji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DkN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DkN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DkN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DkN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DkN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DkN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DkN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DkN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="DkN_EDekl_RefID" type="NVARCHAR(240)" hash="1">
+			<description>Identyfikator przetwarzanej wiaadomości</description>
+		</column>
+		<column name="DkN_EDekl_Status" type="INTEGER">
+			<description>Status przetwarzania dokumentu</description>
+		</column>
+		<column name="DkN_EDekl_StatusOpis" type="NVARCHAR(1000)">
+			<description>Opis słowny statusu przetwarzania dokumentu</description>
+		</column>
+		<column name="DkN_EDekl_Podmiot" type="NVARCHAR(1000)">
+			<description>Nazwa podmiotu, który przyjął deklarację</description>
+		</column>
+		<column name="DkN_EDekl_DokumentID" type="VARCHAR(240)">
+			<description>Numer złożonego dokumentu</description>
+		</column>
+		<column name="DkN_EDekl_DataWplyniecia" type="NVARCHAR(50)">
+			<description>Data wpłynięcia dokumentu do ministerstwa</description>
+		</column>
+		<column name="DkN_EDekl_SkrotDokumentu" type="NVARCHAR(240)">
+			<description>Skrót przesłanej deklaracji</description>
+		</column>
+		<column name="DkN_EDekl_SkrotStruktury" type="NVARCHAR(240)">
+			<description>Skrót przesłanej struktury</description>
+		</column>
+		<column name="DkN_EDekl_StrukturaLogiczna" type="NVARCHAR(240)">
+			<description>Nazwa struktury logicznej przesłanej deklaracji</description>
+		</column>
+		<column name="DkN_EDekl_NIP1" type="VARCHAR(50)" hash="1">
+			<description>Nip osoby wpisanej na deklaracji jako pierwszej</description>
+		</column>
+		<column name="DkN_EDekl_NIP2" type="VARCHAR(50)" hash="1">
+			<description>Nip osoby wpisanej na deklaracji jako drugiej</description>
+		</column>
+		<column name="DkN_EDekl_SigningTime" type="NVARCHAR(50)">
+			<description>Czas wykonania podpisu elektronicznego deklaracji</description>
+		</column>
+		<column name="DkN_EDekl_StempelCzasu" type="NVARCHAR(240)">
+			<description>Stempel czasu wpłynięcia dokumentu</description>
+		</column>
+		<column name="DkN_EDekl_OperatorWysylajacy" type="INTEGER">
+			<description>Identyfikator operatora wysyłającego deklarację</description>
+		</column>
+		<column name="DkN_EDekl_OperatorPobierajacyUPO" type="INTEGER">
+			<description>Identyfikator operatora który pobrał UPO</description>
+		</column>
+		<column name="DkN_EDekl_DataWyslania" type="DATETIME">
+			<description>Data wyslania deklaracji do ministerstwa</description>
+		</column>
+		<column name="DkN_EDekl_DataOdebraniaUPO" type="DATETIME" />
+		<column name="DkN_EDekl_KodUrzedu" type="VARCHAR(6)">
+			<description>Kod urzędu, do którego została złożona deklaracja</description>
+		</column>
+		<column name="DkN_ConstNIP" type="NVARCHAR(20)" hash="1">
+			<description>Nip osoby fizycznej wpisanej ręcznie na deklaracji</description>
+		</column>
+		<primaryKey name="DkN_Primary" columns="DkN_DkNID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DKNDeklKedu" localColumns="DkN_DkkId" refTable="DeklKedu" refColumns="DKK_DkkId" deleteOption="CASCADE">
+			<description>Relacja CDN.DeklNag:CDN.DeklKedu (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DkNPodatnik" localColumns="DkN_PraID" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.DeklNag:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DkNWspolwlasciciel" localColumns="DkN_Pra2ID" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.DeklNag:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="DkNDekretyNag" options="NONCLUSTERED" fields="DkN_DekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="DkNPreDekret" options="NONCLUSTERED" fields="DkN_PreDekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="DKNDeklKedu" options="NONCLUSTERED" fields="DkN_DkkId" />
+		<index name="DKNParentId" options="NONCLUSTERED" fields="DkN_ParentId" />
+		<index name="DkNPodatnik" options="UNIQUE NONCLUSTERED" fields="DkN_PraID ,DkN_TypDeklar ,DkN_RokMiesiac ,DkN_Data ,DkN_Numer ,DkN_ParentId ,DkN_ConstNIP">
+			<description>Wg podatnika</description>
+			<details>Zestawienie deklaracji określonego typu dla wybranego wspólnika</details>
+		</index>
+		<index name="DkNRokMies" options="UNIQUE NONCLUSTERED" fields="DkN_TypDeklar ,DkN_RokMiesiac ,DkN_Data ,DkN_Numer ,DkN_PraID ,DkN_ParentId ,DkN_ConstNIP">
+			<description>Wg miesiąca rozliczenia</description>
+			<details>Zestawienie deklaracji obliczonych w danym miesiącu</details>
+		</index>
+	</table>
+	

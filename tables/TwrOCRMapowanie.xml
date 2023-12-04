@@ -1,0 +1,12 @@
+<table name="TwrOCRMapowanie">
+		<column name="TwOM_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Id towaru</description>
+		</column>
+		<column name="TwOM_TwrOCRNazwa" type="nvarchar(256)" definition="NOT NULL">
+			<description>Nazwa z OCR</description>
+		</column>
+		<foreignKey name="FK_TwOMTwrId" localColumns="TwOM_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrOCRMapowanie:CDN.Towary (1:1)</description>
+		</foreignKey>
+	</table>
+	

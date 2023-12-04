@@ -1,0 +1,78 @@
+<table name="TrwaleAIElem">
+		<description>Tabela z elementami arkusza inwentaryzacyjnego środków trwałych</description>
+		<column name="SrTAIE_SrTAIEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrTAIE_SrTAINID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka arkusza</description>
+		</column>
+		<column name="SrTAIE_Lp" type="INT" definition="NOT NULL">
+			<description>Lp</description>
+		</column>
+		<column name="SrTAIE_SrTID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator środka trwałego</description>
+			<details>Wskaźnik do kartoteki środka trwałego, którego dotyczy element</details>
+		</column>
+		<column name="SrTAIE_NrInwent" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Numer inwentarzowy środka trwałego</description>
+		</column>
+		<column name="SrTAIE_UniqueNrInwBuster" type="COMPUTED|INTEGER" definition="CASE WHEN SrTAIE_NrInwent = '' THEN SrTAIE_SrTAIEID ELSE 0 END">
+			<description>Pole techniczne zapewniające warunkową unikalność numeru inwentarzowego</description>
+			<details>Chodzi o to aby dopuścić wiele pozycji (w budowie) o pustym numerze inwentarzowym,
+				ale równocześnie zabronić duplikacji numeru w każdym innym przypadku.</details>
+		</column>
+		<column name="SrTAIE_KodKreskowy" type="VARCHAR(128)" definition="NOT NULL">
+			<description>Kod kreskowy środka trwałego</description>
+		</column>
+		<column name="SrTAIE_UniqueKodKreskowyBuster" type="COMPUTED|INTEGER" definition="CASE WHEN SrTAIE_KodKreskowy = '' THEN SrTAIE_SrTAIEID ELSE 0 END">
+			<description>Pole techniczne zapewniające warunkową unikalność kodu kreskowego</description>
+			<details>Chodzi o to aby dopuścić wiele pozycji o pustym kodzie kreskowym, ale równocześnie
+				zabronić duplikacji kodu kreskowego w każdym innym przypadku.</details>
+		</column>
+		<column name="SrTAIE_Nazwa" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Nazwa środka trwałego</description>
+		</column>
+		<column name="SrTAIE_Grupa" type="VARCHAR(32)" definition="NOT NULL">
+			<description>Grupa środka trwałego</description>
+		</column>
+		<column name="SrTAIE_WartoscPocz" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość początkowa środka trwałego</description>
+		</column>
+		<column name="SrTAIE_Ilosc" type="INT" definition="NOT NULL">
+			<description>Ilość wg spisu</description>
+		</column>
+		<column name="SrTAIE_StanBiez" type="INT" definition="NOT NULL">
+			<description>Stan bieżący</description>
+		</column>
+		<column name="SrTAIE_Roznica" type="COMPUTED|INTEGER" definition="SrTAIE_Ilosc - SrTAIE_StanBiez">
+			<description>Róznica pomiędzy ilością wg spisu a stanem bieżącym</description>
+		</column>
+		<primaryKey name="SrTAIE_Primary" columns="SrTAIE_SrTAIEID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrTAIENaglowek" localColumns="SrTAIE_SrTAINID" refTable="TrwaleAINag" refColumns="SrTAIN_SrTAINID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleAIElem:CDN.TrwaleAINag (MANY:1)</description>
+		</foreignKey>
+		
+		<index name="SrTAIENaglowek" options="UNIQUE NONCLUSTERED" fields="SrTAIE_SrTAINID, SrTAIE_SrTAIEID">
+			<description>Indeks wg nagłówka</description>
+			<details>Indeks do tabeli TrwaleAINag</details>
+		</index>
+		<index name="SrTAIETrwale" options="UNIQUE NONCLUSTERED" fields="SrTAIE_SrTID, SrTAIE_SrTAIEID">
+			Indeks wg środka trwałego
+		</index>
+		<index name="SrTAIENrInwent" options="UNIQUE NONCLUSTERED" fields="SrTAIE_SrTAINID, SrTAIE_NrInwent, SrTAIE_UniqueNrInwBuster">
+			<description>Indeks wg nagłówka nr-u inwentarzowego środka</description>
+		</index>
+		<index name="SrTAIEKodKreskowy" options="UNIQUE NONCLUSTERED" fields="SrTAIE_SrTAINID, SrTAIE_KodKreskowy, SrTAIE_UniqueKodKreskowyBuster">
+			<description>Indeks wg nagłówka i kodu kreskowego środka</description>
+		</index>
+		<index name="SrTAIELp" options="UNIQUE NONCLUSTERED" fields="SrTAIE_SrTAINID, SrTAIE_Lp">
+			<description>Indeks wg nagłówka i Lp</description>
+		</index>
+	</table>
+	

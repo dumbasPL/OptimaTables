@@ -1,0 +1,1051 @@
+<table name="TraNag">
+		<description>Tabela z nagłówkami dokumentów</description>
+		<details>Nagłówki dokumentów (faktur, paragonów itp).</details>
+		<column name="TrN_TrNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="TrN_RelTrNId" type="INTEGER">
+			<description>Pomocnicze pole relacji miedzy dokumentami</description>
+		</column>
+		<column name="TrN_FVMarza" type="TINYINT">
+			<description>Faktura marza</description>
+			<details>1 - Faktura marza</details>
+		</column>
+		<column name="TrN_FVMarzaRodzaj" type="TINYINT">
+			<description>Faktura marza rodzaj</description>
+			<details>
+				1- Procedura marży dla biur podróży
+				2- Procedura marży – towary używane
+				3- Procedura marży – dzieła sztuki
+				4- Procedura marży – przedmioty kolekcjonerskie i antyki
+			</details>
+		</column>
+		<column name="TrN_DDfId" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="TrN_TypDokumentu" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Typ dokumentu (klasa dokumentu z tabeli DokDefinicje)</description>
+			<details>&lt;a href= "TypyRodzajeDoKHAMAG.htm" &gt;Typy i rodzaje dokumentów HAMAG &lt;/a&gt;</details>
+		</column>
+		<column name="TrN_ZwrId" type="INTEGER">
+			<description>Identyfikator dokumentu źrodlowego dla dokumentów korygujących</description>
+		</column>
+		<column name="TrN_ZwrIdWZKK" type="INTEGER">
+			<description>Identyfikator dokumentu źrodlowego dla dokumentów korygujących WZKK</description>
+		</column>
+		<column name="TrN_FaId" type="INTEGER">
+			<description>Wskaźnik do faktury wykorzystywany przy przekształacaniu paragonów i WZ do
+				faktury</description>
+			<details>W paragonie lub WZ jest tu TrNId faktury, do której został przekształcony dokument
+				źródłowy</details>
+		</column>
+		<column name="TrN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="TrN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="TrN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(TRN_NUMERNR,TRN_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="TrN_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Stan dokumentu</description>
+			<details>
+				1 - bufor, &lt;br&gt;
+				0 - zatwierdzony, &lt;br&gt;
+				-1 - anulowany
+			</details>
+		</column>
+		<column name="TrN_Anulowany" type="INTEGER" definition="NOT NULL">
+			<details>-2147483647 - dokument anulowany</details>
+		</column>
+		<column name="TrN_VaNId" type="INTEGER">
+			<description>Wskaźnik do rejestru Vat</description>
+			<details>VaNId dokumentu w rejestrze Vat będącego efektem przeniesienia faktury do rejestru</details>
+		</column>
+		<column name="TrN_RycID" type="INTEGER">
+			<description>Wskaźnik do Ewidencji ryczałtowej</description>
+			<details>RycID dokumentu w ewidencji ryczałtowej będącego efektem zaksięgowania faktury do
+				ryczałtu</details>
+		</column>
+		<column name="TrN_KPRID" type="INTEGER">
+			<description>Wskaźnik do KPiR</description>
+			<details>KPRID dokumentu w zapisach KPR będącego efektem zaksięgowania faktury do KPiR</details>
+		</column>
+		<column name="TrN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="TrN_DataWys" type="DATETIME" definition="NOT NULL">
+			<description>Data wystawienia dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="TrN_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji (zakupu lub sprzedaży)</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="TrN_NumerObcy" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer wlasny dokumentu obcego</description>
+		</column>
+		<column name="TrN_DataKur" type="DATETIME" definition="NOT NULL">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="TrN_NumerPelnyPrw" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Pierwotny numer pełny dokumentu</description>
+		</column>
+		<column name="TrN_TaxFreePotwierdzony" type="TINYINT" definition="NOT NULL">
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TrN_Korekta" type="TINYINT" definition="NOT NULL">
+			<description>Faktura korygująca</description>
+			<details>
+				Określa, czy faktura jest fakturą korygującą, oraz typ korekty: &lt;br&gt;
+				0 - faktura zwykła &lt;br&gt;
+				1 - korekta ilości &lt;br&gt;
+				2 - korekta wartości (ceny) &lt;br&gt;
+				3 - korekta Vat &lt;br&gt;
+				4 - nota korygująca &lt;br&gt;
+				5 - korekta graniczna &lt;br&gt;
+				6 - korekta graniczna UE
+			</details>
+		</column>
+		<column name="TrN_Fiskalna" type="TINYINT" definition="NOT NULL">
+			<description>Czy transakcja z kasy fiskalnej</description>
+			<details>
+				0 - dokument niefiskalny &lt;br&gt;
+				1 - dokument fiskalny
+			</details>
+		</column>
+		<column name="TrN_FiskalnaErr" type="INTEGER">
+			<description>Błąd fiskalizacji</description>
+			<details>W przypadku udanej fiskalizacji NULL, a w momencie wystąpienia błędu &gt; 1</details>
+		</column>
+		<column name="TrN_StatusString" type="COMPUTED|NVARCHAR(10)" definition="CDN.FNTRNSTATUSSTRING(TRN_TYPDOKUMENTU , TRN_STATUSINT)">
+			<description>Status dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="TrN_StatusInt" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrN_StatusInt DEFAULT(0)">
+			<description>Status dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="TrN_RabatPromocyjny" type="DECIMAL(11,4)" />
+		<column name="TrN_RabatKorekta" type="DECIMAL(11,4)" />
+		<column name="TrN_Detal" type="TINYINT" definition="NOT NULL">
+			<description>Transakcja detaliczna</description>
+		</column>
+		<column name="TrN_Rodzaj" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj dokumentu</description>
+			<details>&lt;a href= "TypyRodzajeDoKHAMAG.htm" &gt;Typy i rodzaje dokumentów HAMAG &lt;/a&gt;</details>
+		</column>
+		<column name="TrN_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu (płatnika) z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="TrN_PodID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu (płatnika)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="TrN_PodNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy płatnika</description>
+		</column>
+		<column name="TrN_PodNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy płatnika</description>
+		</column>
+		<column name="TrN_PodNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy płatnika</description>
+			<details>Rozszerzone do współpracy z CDN-XL</details>
+		</column>
+		<column name="TrN_PodKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj zamieszkania (siedziby) płatnika</description>
+		</column>
+		<column name="TrN_PodWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Wojewódzwo płatnika</description>
+		</column>
+		<column name="TrN_PodPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat płatnika</description>
+		</column>
+		<column name="TrN_PodGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina płatnika</description>
+		</column>
+		<column name="TrN_PodUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica płatnika</description>
+		</column>
+		<column name="TrN_PodNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu płatnika</description>
+		</column>
+		<column name="TrN_PodNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu płatnika</description>
+		</column>
+		<column name="TrN_PodMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto płatnika</description>
+		</column>
+		<column name="TrN_PodKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy płatnika</description>
+		</column>
+		<column name="TrN_PodPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta płatnika</description>
+		</column>
+		<column name="TrN_PodAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu płatnika</description>
+		</column>
+		<column name="TrN_PodNipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="TrN_PodNipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP płatnika</description>
+		</column>
+		<column name="TrN_PodmiotGLN" type="VARCHAR(13)" definition="NOT NULL" hash="1">
+			<description>Numer GLN podmiotu</description>
+		</column>
+		<column name="TrN_Finalny" type="TINYINT" definition="NOT NULL">
+			<description>Status kontrahenta</description>
+			<details>
+				Przyjmuje wartości:
+				0 - podmiot gospodarczy
+				1 - odbiorca finalny
+			</details>
+		</column>
+		<column name="TrN_PodatekVat" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_PodatekVat DEFAULT(0)">
+			<description>Czy kontrahent jest płatnikiem podatku VAT</description>
+		</column>
+		<column name="TrN_Pesel" type="NVARCHAR(11)" definition="NOT NULL CONSTRAINT DF_TrN_Pesel DEFAULT('')" hash="1">
+			<description>Numer PESEL</description>
+		</column>
+		<column name="TrN_Export" type="TINYINT" definition="NOT NULL">
+			<description>Transakcja eksportowa</description>
+			<details>
+				0- krajowa &lt;br&gt;
+				1- kontrahnet pozaunijny &lt;br&gt;
+				2 - kontrahent pozaunijny zwrot vat &lt;br&gt;
+				3 - wewnątrzuijny &lt;br&gt;
+				4- wewnątrzuijny trójstronny &lt;br&gt;
+				5 - podatnikiem jest nabywca &lt;br&gt;
+				7 - poza tyretorium kraju (stawka NP)
+			</details>
+		</column>
+		<column name="TrN_ZwolnionyZAkcyzy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_ZwolnionyZAkcyzy DEFAULT(0)">
+			<description>Czy kontrahent jest zwolniony z akcyzy na wyroby węglowe</description>
+		</column>
+		<column name="TrN_OdbiorcaTyp" type="SMALLINT">
+			<description>Typ odbiorcy z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy OdbId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="TrN_OdbID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator odbiorcy</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez OdbiorcaTyp,
+				lub jest równy 0 (NULL) dla odbiorcy wpisanego "z ręki"</details>
+		</column>
+		<column name="TrN_OdbNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy odbiorcy</description>
+		</column>
+		<column name="TrN_OdbNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy odbiorcy</description>
+		</column>
+		<column name="TrN_OdbNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy odbiorcy</description>
+			<details>Rozszerzone do współpracy z CDN-XL</details>
+		</column>
+		<column name="TrN_OdbKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj zamieszkania (siedziby) odbiorcy</description>
+		</column>
+		<column name="TrN_OdbWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Wojewódzwo odbiorcy</description>
+		</column>
+		<column name="TrN_OdbPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat odbiorcy</description>
+		</column>
+		<column name="TrN_OdbGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina odbiorcy</description>
+		</column>
+		<column name="TrN_OdbUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica odbiorcy</description>
+		</column>
+		<column name="TrN_OdbNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu odbiorcy</description>
+		</column>
+		<column name="TrN_OdbNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu odbiorcy</description>
+		</column>
+		<column name="TrN_OdbMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto odbiorcy</description>
+		</column>
+		<column name="TrN_OdbKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy odbiorcy</description>
+		</column>
+		<column name="TrN_OdbPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta odbiorcy</description>
+		</column>
+		<column name="TrN_OdbAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu odbiorcy</description>
+		</column>
+		<column name="TrN_OdbNipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="TrN_OdbNipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP odbiorcy</description>
+		</column>
+		<column name="TrN_OdbiorcaGLN" type="VARCHAR(13)" definition="NOT NULL" hash="1">
+			<description>Numer GLN odbiorcy</description>
+		</column>
+		<column name="TrN_OdbiorcaDocTyp" type="SMALLINT">
+			<description>Typ odbiorcy docelowego (współpraca z CDN XL)</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy OdbDocId:
+				1 - Kontrahenci;
+				2 - BnkNazwy;
+				3 - Pracownicy;
+				4 - WspolNag;
+				5 - Urzedy
+			</details>
+		</column>
+		<column name="TrN_OdbDocID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator odbiorcy docelowego (współpraca z CDN XL)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez
+				OdbiorcaDocTyp, lub jest równy 0 (NULL) dla odbiorcy wpisanego "z ręki"</details>
+		</column>
+		<column name="TrN_OdbTelefon" type="VARCHAR(20)" hash="1">
+			<description>Telefon odbiorcy</description>
+		</column>
+		<column name="TrN_OdbEmail" type="NVARCHAR(127)" hash="1">
+			<description>Adres Email odbiorcy</description>
+		</column>
+		<column name="TrN_PlatnikTyp" type="SMALLINT">
+			<description>Typ płatnika z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="TrN_PlatnikID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator płatnika</description>
+			<details>Wskaźnik do płatnika - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="TrN_FADokumentDostawy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_FADokumentDostawy DEFAULT(0)">
+			<description>Czy FA to dokument dostawy</description>
+		</column>
+		<column name="TrN_FinalnyWegiel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_FinalnyWegiel DEFAULT(0)">
+			<description>Odbiorca finalny węgiel</description>
+		</column>
+		<column name="TrN_NrListuPrzewozowego" type="NVARCHAR(150)" definition="NOT NULL CONSTRAINT DF_TrN_NrListuPrzewozowego DEFAULT('')" hash="1">
+			<description>Nr listu przewozowego</description>
+		</column>
+		<column name="TrN_NrListuPrzewozowegoTypKuriera" type="int" definition="NOT NULL CONSTRAINT DF_TrN_NrListuPrzewozowegoTypKuriera DEFAULT(0)">
+			<description>Nr listu przewozowego typ kuriera</description>
+		</column>
+		<column name="TrN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="TrN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="TrN_FPlId" type="INTEGER">
+			<description>Identyfikator formy płatności</description>
+		</column>
+		<column name="TrN_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="TrN_TerminZwrotuKaucji" type="DATETIME">
+			<description>Termin Zwrotu Kaucji przeniesiony z kontrahenta</description>
+		</column>
+		<column name="TrN_RazemNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna netto</description>
+		</column>
+		<column name="TrN_RazemVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna VAT</description>
+		</column>
+		<column name="TrN_RazemBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna brutto</description>
+		</column>
+		<column name="TrN_WartoscZakupu" type="COMPUTED|DECIMAL(15,2)" definition="CDN.FNTRN_WARTOSCZAKUPU(TRN_TRNID)">
+			<description>Wartość faktury netto w cenach zakupu</description>
+			<details>Wartość zakupu liczona funkcją na podstawie subelementów</details>
+		</column>
+		<column name="TrN_RazemNettoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota netto w walucie</description>
+		</column>
+		<column name="TrN_RazemVATWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość Vat wyrażona w walucie</description>
+		</column>
+		<column name="TrN_RazemBruttoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto dokumentu w walucie</description>
+		</column>
+		<column name="TrN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="TrN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="TrN_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="TrN_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="TrN_PlatElemWalSys" type="TINYINT" definition="NOT NULL">
+			<description>Sposób liczenia płatności na fakturach walutowych</description>
+			<details>Check, czy płatność dokumentu jest liczona jako wartość w walucie systemowej
+				przeliczonej na walutę i kurs dokumentu</details>
+		</column>
+		<column name="TrN_VatDlaDokWal" type="TINYINT" definition="NOT NULL">
+			<description>Vat dla dokumentow walutowych</description>
+		</column>
+		<column name="TrN_PlatKaucje" type="TINYINT" definition="NOT NULL">
+			<description>Czy dokument kaucyjny ma posiadać płatności</description>
+		</column>
+		<column name="TrN_PodmiotZalTyp" type="SMALLINT">
+			<description>Typ podmiotu pobierającego zaliczkę</description>
+		</column>
+		<column name="TrN_PodZalId" type="INTEGER">
+			<description>Identyfikator podmiotu pobierającego zaliczkę</description>
+		</column>
+		<column name="TrN_BlokadaPlatnosci" type="SMALLINT" definition="NOT NULL">
+			<description>Czy na dokumencie zablokowana jest standardowa obsługa płatności</description>
+			<details>
+				1 = dla dokumentów które nie generują płatności &lt;br&gt;
+				HANDLOWE: &lt;br&gt;
+				Faktura sprzedazy pierwotna, Faktura Pro Forma, TaxFree, Rezerwacje Odbiorcy, Faktura zakupu
+				pierwotna, Nota korygująca, Faktura RR, Faktura Wew. sprzedaży oraz zakupu &lt;br&gt;
+				MAGAZYNOWE:&lt;br&gt;
+				WZ, PZ, RW,PW,MM,PWP,RWS, AI,BOM &lt;br&gt;
+				WKA,PKA (kaucje) - jeśli włączona płatność = 0, jeśli wyłączona = 1
+			</details>
+		</column>
+		<column name="TrN_MagZrdId" type="INTEGER">
+			<description>Identyfikator magazynu źródłowego</description>
+		</column>
+		<column name="TrN_MagDocId" type="INTEGER">
+			<description>Identyfikator magazynu docelowego</description>
+		</column>
+		<column name="TrN_TypNB" type="TINYINT" definition="NOT NULL">
+			<description>Typ faktury (od netto lub od brutto)</description>
+			<details>
+				1 - od netto &lt;br&gt;
+				2 - od brutto
+			</details>
+		</column>
+		<column name="TrN_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat na fakturze</description>
+			<details>Domyślny rabat dla elementów</details>
+		</column>
+		<column name="TrN_RabatWartosc" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_TrN_RabatWartosc DEFAULT(0)">
+			<description>Rabat na fakturze</description>
+			<details>Domyślny rabat dla elementów</details>
+		</column>
+		<column name="TrN_Odebral" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko osoby odbierającej fakturę</description>
+		</column>
+		<column name="TrN_Opis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Dodatkowy opis na fakturze</description>
+		</column>
+		<column name="TrN_ZwroconoCalaIlosc" type="TINYINT">
+			<description>Czy zwrócono całą ilość</description>
+			<details>
+				NULL - dokument w buforze
+				1 - pusty status dla RO/ZD &lt;br&gt;
+				2 - w realizacji RO/ZD &lt;br&gt;
+				3 - zrealizowano RO/ZD &lt;br&gt;
+				4- zamknięto RO/ZD
+			</details>
+		</column>
+		<column name="TrN_NotaKorPrzed" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis dla noty korygującej</description>
+		</column>
+		<column name="TrN_NotaKorPo" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis dla noty korygującej</description>
+		</column>
+		<column name="TrN_TrSTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ subelementów podpiętych do transakcji (rezerwacyjne lub wpływające na stany)</description>
+			<details>
+				1 - dostawa &lt;br&gt;
+				2 - rozchód &lt;br&gt;
+				3 - rezerwacja &lt;br&gt;
+				4 - zamówienie
+			</details>
+		</column>
+		<column name="TrN_DekId" type="INTEGER" filterVisible="false">
+			<description>Wskaźnik do dekretu księgowego</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada TrN_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada TrN_DekId = NULL;
+			</details>
+		</column>
+		<column name="TrN_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu danych</description>
+		</column>
+		<column name="TrN_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator bazy źródłowej</description>
+		</column>
+		<column name="TrN_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator zapisu źródłowego</description>
+		</column>
+		<column name="TrN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="TrN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TrN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="TrN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="TrN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TrN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="TrN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TrN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="TrN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="TrN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TrN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="TrN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="TrN_GIDTyp" type="SMALLINT" filterVisible="false" />
+		<column name="TrN_GIDFirma" type="INTEGER" filterVisible="false" />
+		<column name="TrN_GIDNumer" type="INTEGER" filterVisible="false" />
+		<column name="TrN_GIDLp" type="SMALLINT" filterVisible="false" />
+		<column name="TrN_eSklepID" type="INTEGER" filterVisible="false" />
+		<column name="TrN_NieOkreslonaWartoscKor" type="INTEGER" filterVisible="false" />
+		<column name="TrN_OFFPrawoDoFAPA" type="TINYINT">
+			<description>Czy PA może być przekształcany do FA</description>
+		</column>
+		<column name="TrN_OFFPrawoDoAnulowania" type="TINYINT">
+			<description>Anulowanie dokumentow w offline</description>
+		</column>
+		<column name="TrN_OFFExportMag" type="TINYINT">
+			<description>Dokumenty magazynowe do wyeksportowania</description>
+		</column>
+		<column name="TrN_Centrala" type="TINYINT" definition="NOT NULL">
+			<description>Czy dokument ZD i RO dla centrali</description>
+			<details>Pole wykorzystywane do współpracy z CDN-XL</details>
+		</column>
+		<column name="TrN_KodTransakcji" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Kod transakcji dla deklaracji INTRASTAT</description>
+		</column>
+		<column name="TrN_IsNId" type="INTEGER">
+			<description>Klucz obcy do deklaracji INTRASTAT</description>
+		</column>
+		<column name="TrN_DataTransportu" type="DATETIME">
+			<description>Data transportu - do deklaracji INTRASTAT</description>
+		</column>
+		<column name="TrN_KodKraju" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Kod kraju - do deklaracji INTRASTAT</description>
+		</column>
+		<column name="TrN_DabId" type="INTEGER">
+			<description>Wskaźnik do danych binarnych dla e-faktur</description>
+		</column>
+		<column name="TrN_DataEFaktura" type="DATETIME">
+			<description>Time Stamp wprowadzenia zapisu dla E-faktury</description>
+		</column>
+		<column name="TrN_OpeWysylajacy" type="NVARCHAR(60)" hash="1">
+			<description>Operator wysyłający e-fakturę</description>
+		</column>
+		<column name="TrN_EFakturaGUID" type="VARCHAR(36)">
+			<description>Identyfikator e-faktury</description>
+		</column>
+		<column name="TrN_DataPtwTaxFree" type="DATETIME">
+			<description>Data potwierdzenia TaxFree</description>
+		</column>
+		<column name="TrN_PreDekID" type="INTEGER">
+			<description>Klucz obcy do tabeli predekretów</description>
+		</column>
+		<column name="TrN_TrybNettoVAT" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrN_TrybNettoVAT DEFAULT(0)">
+			<description>Płatność VAT w PLN</description>
+		</column>
+		<column name="TrN_AkcyzaMiejsceOdbioru" type="NVARCHAR(200)" hash="1">
+			<description>Adres miejsca odbioru wyrobów węglowych</description>
+		</column>
+		<column name="TrN_AkcyzaMiejsceWydania" type="NVARCHAR(200)" hash="1">
+			<description>Adres miejsca wydania do przemieszczenia wyrobów węglowych</description>
+		</column>
+		<column name="TrN_AkcyzaDataRozpoczeciaPrzem" type="DATETIME">
+			<description>Data rozpoczęcia przemieszczenia wyrobów węglowych</description>
+		</column>
+		<column name="TrN_AkcyzaDataOdbioruOd" type="DATETIME">
+			<description>Data odbioru wyrobów węglowych od</description>
+		</column>
+		<column name="TrN_AkcyzaDataOdbioruDo" type="DATETIME">
+			<description>Data odbioru wyrobów węglowych do</description>
+		</column>
+		<column name="TrN_Srw" type="SMALLINT">
+			<description>Zmiany po cięciu bazy</description>
+		</column>
+		<column name="TrN_PARodzajKor" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrN_PARodzajKor DEFAULT(0)">
+			<description>Typ korekty do Paragonu pomyłka czy zwrot</description>
+		</column>
+		<column name="TrN_MetodaKasowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_MetodaKasowa DEFAULT(0)">
+			<description>Metoda kasowa</description>
+		</column>
+		<column name="TrN_KorektaZTytulu" type="NVARCHAR(1024)" definition="NOT NULL CONSTRAINT DF_TrN_KorektaZTytulu DEFAULT('')">
+			<description>korekta z tytułu</description>
+		</column>
+		<column name="TrN_EdycjaTabelkiVAT" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_EdycjaTabelkiVAT DEFAULT(0)">
+			<description>Edycja tabelki VAT na FZ</description>
+		</column>
+		<column name="TrN_PlatnoscNaWZ" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_PlatnoscNaWZ DEFAULT(0)">
+			<description>Płatność na WZ</description>
+		</column>
+		<column name="TrN_BzpId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrN_BzpId DEFAULT(0)">
+			<description>Wskaźnik do zapisu księgowego dla WZ</description>
+			<details>
+				Referencja do tabeli BnkZapisy;
+			</details>
+		</column>
+		<column name="TrN_RezerwacjaWew" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_RezerwacjaWew DEFAULT(0)">
+			<description>Rezerwacja wewnętrzna</description>
+		</column>
+		<column name="TrN_PAFACzesciowe" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_PAFACzesciowe DEFAULT(0)">
+			<description>Częsciowe fakturowanie paragonu</description>
+		</column>
+		<column name="TrN_AktualizacjaCenyZakKor" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_AktualizacjaCenyZakKor DEFAULT(0)">
+			<description>Aktualizacja ceny po korekcie wartosciowej</description>
+		</column>
+		<column name="TrN_StawkaNPOO" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_StawkaNPOO DEFAULT(0)">
+			<description>Stawka NP dla odwrotnego obciążenia</description>
+		</column>
+		<column name="TrN_WartoscOO" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_TrN_WartoscOO DEFAULT(0)">
+			<description>Stawka NP dla odwrotnego obciążenia</description>
+		</column>
+		<column name="TrN_AwizoId" type="INT" definition="NOT NULL CONSTRAINT DF_TrN_AwizoId DEFAULT(0)">
+			<description>Id awizo dla ECOD</description>
+		</column>
+		<column name="TrN_DokMOSMMId" type="INT" definition="NOT NULL CONSTRAINT DF_TrN_DokMOSMMId DEFAULT(0)">
+			<description>Id korekty dokumentu z MOS do ktorego powstala MM</description>
+		</column>
+		<column name="TrN_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="TrN_PunktyZam" type="INTEGER " definition="NOT NULL CONSTRAINT DF_TrN_PunktyZam DEFAULT(0)">
+			<description>Ilość punktów za zamówienie</description>
+		</column>
+		<column name="TrN_PunktyZap" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrN_PunktyZap DEFAULT(0)">
+			<description>Ilość punktów użytych do zapłaty za zamówienie</description>
+		</column>
+		<column name="TrN_WeryfikacjaVATCzynnyData" type="DATETIME">
+			<description>Data weryfikacji statusu VAT czynny</description>
+		</column>
+		<column name="TrN_WeryfikacjaVATCzynnyWartosc" type="INTEGER">
+			<description>Weryfikacja statusu VAT czynny wartość</description>
+		</column>
+		<column name="Trn_Sent" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Trn_Sent DEFAULT(0)">
+			<description>Wygenerowano dokument SENT na podstawie tego dokumentu</description>
+		</column>
+		<column name="Trn_DokumentDostawy" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Trn_DokumentDostawy DEFAULT(0)">
+			<description>Wygenerowano dokument dostawy na podstawie tego dokumentu</description>
+		</column>
+		<column name="TrN_PCID" type="INTEGER">
+			<description>ID w historii pieczątki</description>
+		</column>
+		<column name="TrN_PCJSID" type="INTEGER">
+			<description>ID w historii pieczątki - jednostka samorządowa</description>
+		</column>
+		<column name="TrN_eSklepZrodlo" type="INT">
+			<description>Zródło zamówienia w e-Sklep</description>
+			<details>
+				0- e-Sklep
+				2- Facebook
+				3- Allegro
+				4- wszytsko.pl
+				5- Comarch e-Sklep RWD
+				6- API
+				7- system ERP
+				8- eBay
+				9- Ceneo
+				10- Comarch e-Sklep wersja mobilna
+				13- Amazon
+				100- wszystko.pl
+			</details>
+		</column>
+		<column name="TrN_eSklepRodzajDokumentu" type="TINYINT">
+			<description>Jaki dokument wystawić do rezerwacji z e-Sklep</description>
+			<details>1- Paragon, 2- Faktura</details>
+		</column>
+		<column name="TrN_eSklepFormaPlatnosci" type="NVARCHAR(50)">
+			<description>Forma płatności zamówienia z e-Sklep</description>
+		</column>
+		<column name="TrN_eSklepStatusPlatnosci" type="TINYINT">
+			<description>Status płatności e-Sklep</description>
+			<details>0-nieopłacona, 1-opłacona, 2-opłacona częściowo, 3-rozpoczęta</details>
+		</column>
+		<column name="TrN_eSklepUwagiKlienta" type="NVARCHAR(2048)">
+			<description>Uwagi klienta z e-Sklep</description>
+		</column>
+		<column name="TrN_eSklepSposobDostawyTyp" type="smallint">
+			<description>Sposób dostawy typ w e-Sklep </description>
+		</column>
+		<column name="TrN_eSklepSposobDostawyNazwa" type="NVARCHAR(100)">
+			<description>Sposób dostawy nazwa w e-Sklep</description>
+		</column>
+		<column name="TrN_eSklepStatusDostawy" type="SMALLINT" definition="CONSTRAINT DF_TrN_eSklepStatusDostawy DEFAULT(-1)">
+			<description>Status dostawy</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoID" type="INT">
+			<description>Id punktu odbioru</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoIDeSklep" type="INT">
+			<description>Id punktu odbioru w e-Sklep</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoNazwa1" type="NVARCHAR(250)">
+			<description>Punkt odbioru osobistego nazwa</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoNazwa2" type="NVARCHAR(250)">
+			<description>Punkt odbioru osobistego nazwa cdn</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoKrajISO" type="NVARCHAR(2)">
+			<description>Punkt odbioru osobistego kraj ISO</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoUlica" type="NVARCHAR(50)">
+			<description>Punkt odbioru osobistego ulica</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoWojewodztwo" type="NVARCHAR(50)">
+			<description>Punkt odbioru osobistego ulica</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoNrBudynku" type="NVARCHAR(10)">
+			<description>Punkt odbioru osobistego Nr budynku </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoNrLokalu" type="NVARCHAR(10)">
+			<description>Punkt odbioru osobistego Nr lokalu </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoMiasto" type="NVARCHAR(50)">
+			<description>Punkt odbioru osobistego miasto </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoKodPocztowy" type="NVARCHAR(10)">
+			<description>Punkt odbioru osobistego kod pocztowy </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoTelefon" type="NVARCHAR(20)">
+			<description>Punkt odbioru osobistego telefon </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoGSM" type="NVARCHAR(20)">
+			<description>Punkt odbioru osobistego telefon GSM </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoEmail" type="NVARCHAR(200)">
+			<description>Punkt odbioru osobistego email </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoAPI" type="NVARCHAR(max)">
+			<description>Dane które przyszły z API systemu dostawcy, są one różne w zależności od tego czy
+				jest to Poczta, DHL czy Inpost </description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoSzerokosc" type="NVARCHAR(12)">
+			<description>Punkt odbioru osobistego Szerokość geograficzna</description>
+		</column>
+		<column name="TrN_eSklepPunktOdbioruOsobistegoDlugosc" type="NVARCHAR(12)">
+			<description>Punkt odbioru osobistego długość geograficzna</description>
+		</column>
+		<column name="TrN_eSklepKodPaczkomatuPodst" type="NVARCHAR(50)">
+			<description>Paczkomat podstawowy kod</description>
+		</column>
+		<column name="TrN_eSklepPaczkomatKodPaczki" type="NVARCHAR(30)">
+			<description>kod paczki w paczkomacie</description>
+		</column>
+		<column name="TrN_eSklepPaczkomatPodstMiasto" type="NVARCHAR(50)">
+			<description>Paczkomat podstawowy miasto</description>
+		</column>
+		<column name="TrN_eSklepPaczkomatPodstKodPocztowy" type="NVARCHAR(10)">
+			<description>Paczkomat podstawowy kod pocztowy</description>
+		</column>
+		<column name="TrN_eSklepPaczkomatPodstUlica" type="NVARCHAR(50)">
+			<description>Paczkomat podstawowy ulica</description>
+		</column>
+		<column name="TrN_eSklepPaczkomatPodstUlicaNR" type="NVARCHAR(50)">
+			<description>Paczkomat podstawowy ulica nr</description>
+		</column>
+		<column name="TrN_eSklepKodPaczkomatuRezerw" type="NVARCHAR(50)">
+			<description>Paczkomat alternatywny kod </description>
+		</column>
+		<column name="TrN_eSklepPaczkomatRezerwMiasto" type="NVARCHAR(50)">
+			<description>Paczkomat alternatywny miasto </description>
+		</column>
+		<column name="TrN_eSklepPaczkomatRezerwKodPocztowy" type="NVARCHAR(10)">
+			<description>Paczkomat alternatywny kod pocztowy </description>
+		</column>
+		<column name="TrN_eSklepPaczkomatRezerwUlica" type="NVARCHAR(50)">
+			<description>Paczkomat alternatywny ulica </description>
+		</column>
+		<column name="TrN_eSklepPaczkomatRezerwUlicaNR" type="NVARCHAR(50)">
+			<description>Paczkomat alternatywny Ulica NR</description>
+		</column>
+		<column name="TrN_OpeZatwID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zatwierdzającego dokument</description>
+		</column>
+		<column name="TrN_TS_Zatw" type="DATETIME">
+			<description>Data zatwierdzenia</description>
+		</column>
+		<column name="TrN_OpeWydrID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora drukującego dokument</description>
+		</column>
+		<column name="TrN_TS_Wydr" type="DATETIME">
+			<description>Data ostatniego wydruku</description>
+		</column>
+		<column name="TrN_OpeZatwKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TrN_OpeZatwKod DEFAULT('')">
+			<description>Kod operatora zatwierdzającego dokument</description>
+		</column>
+		<column name="TrN_OpeZatwNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrN_OpeZatwNazwisko DEFAULT('')">
+			<description>Nazwisko operatora zatwierdzającego dokument</description>
+		</column>
+		<column name="TrN_OpeWydrKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TrN_OpeWydrKod DEFAULT('')">
+			<description>Kod operatora drukującego dokument</description>
+		</column>
+		<column name="TrN_OpeWydrNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrN_OpeWydrNazwisko DEFAULT('')">
+			<description>Nazwisko operatora drukującego dokument</description>
+		</column>
+		<column name="TrN_OpeEMailID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora tworzącego email</description>
+		</column>
+		<column name="TrN_TS_EMail" type="DATETIME">
+			<description>Data utworzenia email</description>
+		</column>
+		<column name="TrN_OpeEMailKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TrN_OpeEMailKod DEFAULT('')">
+			<description>Kod operatora tworzącego email</description>
+		</column>
+		<column name="TrN_OpeEMailNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrN_OpeEMailNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego email</description>
+		</column>
+		<column name="TrN_DokumentTozsamosci" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrN_DokumentTozsamosci DEFAULT('')">
+			<description>Dokument tożsamości</description>
+		</column>
+		<column name="TrN_UmowaWegiel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_UmowaWegiel DEFAULT(0)">
+			<description>Umowa na dostawy węgla</description>
+		</column>
+		<column name="TrN_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_SplitPay DEFAULT(0)">
+			<description>Split Payment - płatność z zastosowaniem mechanizmu podzielonej płatności</description>
+		</column>
+		<column name="TrN_WartoscSP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_TrN_WartoscSP DEFAULT(0)">
+			<description>Wartość towarów z MPP - informacyjnie</description>
+		</column>
+		<column name="TrN_eSklepDataDost" type="DATETIME">
+			<description>Planowana data dostawy</description>
+		</column>
+		<column name="TrN_PlatnikRachunekLp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrN_PlatnikRachunekLp DEFAULT(0)">
+			<description>Numer rachunku płatnika - wskaźnik na CDN.SchematPlatnosci</description>
+		</column>
+		<column name="TrN_PlatnikRachunekNr" type="NVARCHAR(51)" definition="NOT NULL CONSTRAINT DF_TrN_PlatnikRachunekNr DEFAULT('')">
+			<description>Numer rachunku płatnika</description>
+		</column>
+		<column name="TrN_AwfWyslano" type="DATETIME">
+			<description>Data wysłania przez SOA informacji o wystawieniu dokumentu</description>
+		</column>
+		<column name="TrN_NieNaliczajOplataCukrowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_NieNaliczajOplataCukrowa DEFAULT(0)">
+			<description>Czy naliczać opłatę cukrową</description>
+		</column>
+		<column name="TrN_RozliczamPodatekWOSS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_RozliczamPodatekWOSS DEFAULT(0)">
+			<description>Czy rozliczam podatek w OSS</description>
+		</column>
+		<column name="TrN_DnpID" type="INTEGER">
+			<description>Link do skojarzonego pliku OBD</description>
+		</column>
+		<column name="TrN_ApfinoStatFakt" type="TINYINT">
+			<description>Status faktoringu Apfino</description>
+		</column>
+		<column name="TrN_ApfinoStatWind" type="TINYINT">
+			<description>Status windykacji Apfino</description>
+		</column>
+		<column name="TrN_ApfinoStatSync" type="TINYINT">
+			<description>Czy faktura jest zsynchronizowana w Apfino</description>
+		</column>
+		<column name="TrN_NrKSeF" type="NVARCHAR(128)" definition="NOT NULL CONSTRAINT DF_TrN_NrKSeF DEFAULT('')">
+			<description>Numer identyfikujący fakturę w Krajowym Systemie e-Faktur (KSeF)</description>
+		</column>
+		<column name="TrN_NieWysylajDokumentuDoKSeF" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_NieWysylajDokumentuDoKSeF DEFAULT(0)">
+			<description>Czy dokument ma być wysyłany do KSeF</description>
+		</column>
+		<column name="TrN_KSeFStatusId" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_TrN_KSeFStatusId DEFAULT(0)">
+			<description>Id statusu faktury w Optimie</description>
+		</column>
+		<column name="TrN_KSeFStatus" type="NVARCHAR(1000)" definition="NOT NULL CONSTRAINT DF_TrN_KSeFStatus DEFAULT('')">
+			<description>Status zgłoszenia w KSeF</description>
+		</column>
+		<column name="TrN_KSeFReferenceNumber" type="nvarchar(50)">
+			<description>Numer referencyjny</description>
+			<details />
+		</column>
+		<column name="TrN_KSeFOpeID" type="INTEGER" definition="NULL">
+			<details>ID operatora wysyłającego</details>
+		</column>
+		<column name="TrN_KSeFOpeKod" type="varchar(20)" hash="1">
+			<description>Kod operatora wysyłającego</description>
+		</column>
+		<column name="TrN_KSeFOpeNazwisko" type="nvarchar(50)" hash="1">
+			<description>Nazwisko operatora wysyłającego</description>
+		</column>
+		<column name="TrN_KSeFUPOOpeID" type="INTEGER" definition="NULL">
+			<details>ID operatora obierającego</details>
+		</column>
+		<column name="TrN_KSeFUPOOpeKod" type="varchar(20)" hash="1">
+			<description>Kod operatora obierającego</description>
+		</column>
+		<column name="TrN_KSeFUPOOpeNazwisko" type="nvarchar(50)" hash="1">
+			<description>Nazwisko operatora obierającego</description>
+		</column>
+		<column name="TrN_KSeFDataWyslania" type="DateTime">
+			<description>Data wysłania do KSeF</description>
+		</column>
+		<column name="TrN_KSeFDataPrzyjecia" type="DateTime">
+			<description>Data przyjęcia w KSeF</description>
+		</column>
+		<column name="TrN_KSeFDataOdebraniaUpo" type="DateTime">
+			<description>Data odebrania UPO</description>
+		</column>
+		<column name="TrN_KSeFFPLId" type="INTEGER" definition="NULL">
+			<details>ID formy płatności w KSeF</details>
+		</column>
+		<column name="TrN_KSeFTrybAwaryjny" type="TinyInt" definition="NULL">
+			<details>Tryb awaryjny wystawienia dokumentu</details>
+		</column>
+		<column name="TrN_KSeFTypSrodowiska" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_TrN_KSeFTypSrodowiska DEFAULT(-1)">
+			<details>Typ środowiska KSeF do którego wysłano dokument</details>
+		</column>
+		<column name="TrN_NieUwzglwedniajWEwidencjiWegiel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrN_NieUwzglwedniajWEwidencjiWegiel DEFAULT(0)">
+			<description>Nie uwzględniaj kontrahenta w ewidencji wyrobów węglowych.</description>
+		</column>
+		<column name="Trn_WszystkoPlIdZamowienia" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Trn_WszystkoPlIdZamowienia DEFAULT('')">
+			<description>Id zamówienia wszystko.pl</description>
+		</column>
+		<column name="Trn_WszystkoPlSyncho" type="INT" definition="NOT NULL CONSTRAINT DF_Trn_WszystkoPlSyncho DEFAULT(0)">
+			<description>Status sunchronizacji </description>
+		</column>
+		<primaryKey name="TrN_Primary" columns="TrN_TrNID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_TrNPodmiot" localColumns="TrN_PodID,TrN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.TraNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrNPlatnik" localColumns="TrN_PlatnikID,TrN_PlatnikTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.TraNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrNMagazynZrd" localColumns="TrN_MagZrdId" refTable="Magazyny" refColumns="Mag_MagId">
+			<description>Relacja CDN.TraNag:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrNPlatnosc" localColumns="TrN_FPlId" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.TraNag:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrNDokDef" localColumns="TrN_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.TraNag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrNKategoria" localColumns="TrN_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.TraNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrNPieczatka" localColumns="TrN_PCID" refTable="Pieczatki" refColumns="PC_PCID">
+			<description>Relacja CDN.TraNag:CDN.Pieczatki (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrNPieczatkaJS" localColumns="TrN_PCJSID" refTable="PieczatkiJS" refColumns="PCJS_PCJSID">
+			<description>Relacja CDN.TraNag:CDN.PieczatkiJS (MANY:1)</description>
+		</foreignKey>
+		<index name="TrNDataDok" options="UNIQUE NONCLUSTERED" fields="TrN_TypDokumentu ,TrN_DataDok ,TrN_NumerString ,TrN_NumerNr ,TrN_Anulowany, TrN_Bufor ,TrN_TrNID">
+			<description>Wg daty dokumentu</description>
+		</index>
+		<index name="TrNNumer" options="UNIQUE NONCLUSTERED" fields="TrN_NumerString ,TrN_NumerNr ,TrN_Anulowany">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="TrNTypNUmer" options="UNIQUE NONCLUSTERED" fields="TrN_TypDokumentu ,TrN_NumerString ,TrN_NumerNr ,TrN_Anulowany" />
+		<index name="TrNNumerPelny" options="UNIQUE NONCLUSTERED" fields="TrN_NumerPelny ,TrN_Anulowany">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="TrNPodmiot" options="UNIQUE NONCLUSTERED" fields="TrN_PodID ,TrN_PodmiotTyp ,TrN_DataDok ,TrN_NumerString ,TrN_NumerNr ,TrN_TrNID">
+			<description>Wg podmiotu dla którego wystawiono transakcję</description>
+		</index>
+		<index name="TrNKategoria" options="UNIQUE NONCLUSTERED" fields="TrN_KatID ,TrN_DataDok ,TrN_TrNID">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="TrNOdbiorca" options="NONCLUSTERED" fields="TrN_OdbID ,TrN_OdbiorcaTyp">
+			<description>Wg identyfikatora odbiorcy</description>
+		</index>
+		<index name="TrNOdbiorcaDoc" options="NONCLUSTERED" fields="TrN_OdbDocID ,TrN_OdbiorcaDocTyp">
+			<description>Wg odbiorcy docelowego</description>
+		</index>
+		<index name="TrNPodZaliczka" options="NONCLUSTERED" fields="TrN_PodZalId ,TrN_PodmiotZalTyp">
+			<description>Wg podmiotu dla którego rozliczamy zaliczki</description>
+		</index>
+		<index name="TrNPlatnosc" options="NONCLUSTERED" fields="TrN_FPlId">
+			<description>Wg identyfikatora formy płatności</description>
+		</index>
+		<index name="TrNDokDef" options="NONCLUSTERED" fields="TrN_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="TrNVatNag" options="NONCLUSTERED" fields="TrN_VaNId">
+			<description>Wg dokumentu w rejestrze Vat</description>
+		</index>
+		<index name="TrNDekrety" options="NONCLUSTERED" fields="TrN_DekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="TrNPreDekrety" options="NONCLUSTERED" fields="TrN_PreDekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="TrNZwrot" options="UNIQUE NONCLUSTERED" fields="TrN_ZwrId ,TrN_TrNID">
+			<description>Wg identyfikatora dokumetu źródłowego</description>
+		</index>
+		<index name="TrNFaktura" options="NONCLUSTERED" fields="TrN_FaId ,TrN_RelTrNId ,TrN_ZwroconoCalaIlosc">
+			<description>Wg identyfikatora faktury</description>
+		</index>
+		<index name="TrNMagazynZrd" options="NONCLUSTERED" fields="TrN_MagZrdId">
+			<description>Klucz obcy do magazynu źródłowego</description>
+		</index>
+		<index name="TrNMagazynDoc" options="NONCLUSTERED" fields="TrN_MagDocId">
+			<description>Klucz obcy do magazynu docelowego</description>
+		</index>
+		<index name="TrNGUID" options="UNIQUE NONCLUSTERED" fields="TrN_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="TrNGID" options="NONCLUSTERED" fields="TrN_GIDTyp ,TrN_GIDFirma ,TrN_GIDNumer">
+			<description>Wg identyfikatora GOD w CDN-XL</description>
+		</index>
+		<index name="TrNIntrastad" options="NONCLUSTERED" fields="TrN_IsNId" />
+		<index name="TrN_ZwrIdWZKK" options="NONCLUSTERED" fields="TrN_ZwrIdWZKK" />
+		<index name="TrN_Bufor" options="NONCLUSTERED" fields="TrN_Bufor" />
+		<index name="TrN_Rodzaj" options="NONCLUSTERED" fields="TrN_Rodzaj" />
+		<index name="TrN_DataWys" options="NONCLUSTERED" fields="TrN_DataWys" />
+		<index name="TrN_DataOpe" options="NONCLUSTERED" fields="TrN_DataOpe" />
+		<index name="TrN_RazemNetto" options="NONCLUSTERED" fields="TrN_RazemNetto" />
+		<index name="TrN_Korekta" options="NONCLUSTERED" fields="TrN_Korekta" />
+		<index name="TrN_OpeZalPodmiot" options="NONCLUSTERED" fields="TrN_OpeZalID, TrN_PodmiotTyp, TrN_PodID" />
+		<index name="TraNagDokMOSMMId" options="NONCLUSTERED" fields="TrN_DokMOSMMId ,TrN_Bufor" includedColumns="TrN_TypDokumentu, TrN_NumerPelny, TrN_DataWys, TrN_RazemNetto, TrN_RazemNettoWal, TrN_Waluta, TrN_MagZrdId" />
+		<index name="TraNageSklepID" options="NONCLUSTERED" fields="TrN_eSklepID,TrN_TS_Mod, TrN_GIDNumer" includedColumns="TrN_Bufor, TrN_ZwroconoCalaIlosc, TrN_TS_Zal, TrN_NumerPelny, TrN_eSklepStatusPlatnosci, TrN_eSklepStatusDostawy, TrN_eSklepDataDost, TrN_TypDokumentu, TrN_DataWys" />
+		<index name="TraNagTypDokumentuAnulowany" options="NONCLUSTERED" fields="TrN_TypDokumentu,TrN_Anulowany" includedColumns="TrN_NumerPelny,TrN_RazemNetto,TrN_RazemBrutto, TrN_PodNazwa1, TrN_PodNazwa2, TrN_PodNazwa3,TrN_MagZrdId,TrN_Bufor,TrN_DataWys,TrN_DataDok" />
+		<index name="TraNagTypDokumentu" options="NONCLUSTERED" fields="TrN_TypDokumentu" includedColumns="TrN_NumerNr,TrN_NumerString,TrN_Anulowany,TrN_PodNazwa1, TrN_PodNazwa2, TrN_PodNazwa3,TrN_NumerPelny,TrN_MagZrdId,TrN_Bufor,TrN_DataDok,TrN_Fiskalna,TrN_FiskalnaErr" />
+		<index name="TraNagZwrIdBufor" options="NONCLUSTERED" fields="TrN_ZwrId,TrN_Bufor" includedColumns="TrN_TypDokumentu, TrN_NumerPelny, TrN_DataWys, TrN_RazemNetto, TrN_RazemNettoWal, TrN_Waluta, TrN_MagZrdId" />
+		<index name="TraNagTypDokumentuDataWys" options="NONCLUSTERED" fields="TrN_TypDokumentu,TrN_DataWys" includedColumns="TrN_NumerNr,TrN_NumerString,TrN_Anulowany,TrN_PodNazwa1, TrN_PodNazwa2, TrN_PodNazwa3,TrN_PodmiotTyp,TrN_PodID" />
+	</table>
+	

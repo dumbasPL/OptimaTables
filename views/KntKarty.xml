@@ -1,0 +1,328 @@
+<view name="KntKarty">
+		<description>Kontrahenci</description>
+		<column name="Knt1_GIDTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_GIDFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_GIDNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_GIDLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_KnATyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_KnAFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_KnANumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_KnALp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_Typ" type="TINYINT" definition="NO_SQL">
+			<description>dostawca/odbiorca</description>
+			<details>
+				Ustawienia na bitach
+				24 - dostawco-odbiorca
+			</details>
+		</column>
+		<column name="Knt1_Akwizytor" type="SMALLINT" definition="NO_SQL">
+			<description>Czy kontrahent jest akwizytorem?</description>
+		</column>
+		<column name="Knt1_Akronim" type="VARCHAR(20)" definition="NO_SQL">
+			<description>Skrócona nazwa kontrahenta</description>
+		</column>
+		<column name="Knt1_AkronimFormat" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Sposób wyświetlania akronimu kontrahenta</description>
+			<details>
+				Maska wprowadzania akronimu.
+				Zgodnie ze specyfikacją Clariona.
+			</details>
+		</column>
+		<column name="Knt1_FppKod" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Kod kontrahenta z FPP</description>
+		</column>
+		<column name="Knt1_Nazwa1" type="NVARCHAR(50)" definition="NO_SQL" hash="1">
+			<description>Pierwsza część nazwy kontrahenta</description>
+		</column>
+		<column name="Knt1_Nazwa2" type="NVARCHAR(50)" definition="NO_SQL" hash="1">
+			<description>Druga część nazwy kontrahenta</description>
+		</column>
+		<column name="Knt1_Nazwa3" type="NVARCHAR(250)" definition="NO_SQL" hash="1">
+			<description>Trzecia część nazwy kontrahenta</description>
+		</column>
+		<column name="Knt1_KodP" type="NVARCHAR(10)" definition="NO_SQL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="Knt1_Miasto" type="NVARCHAR(30)" definition="NO_SQL" hash="1" />
+		<column name="Knt1_Ulica" type="NVARCHAR(30)" definition="NO_SQL" hash="1" />
+		<column name="Knt1_Adres" type="NVARCHAR(30)" definition="NO_SQL" hash="1">
+			<description>Dodatkowe pole adresu</description>
+		</column>
+		<column name="Knt1_NipE" type="NVARCHAR(20)" definition="NO_SQL" hash="1">
+			<description>Nip prezentowany na ekranie</description>
+		</column>
+		<column name="Knt1_Nip" type="NVARCHAR(20)" definition="NO_SQL" hash="1">
+			<description>Nip bez kresek</description>
+		</column>
+		<column name="Knt1_Regon" type="VARCHAR(20)" definition="NO_SQL" hash="1" />
+		<column name="Knt1_Pesel" type="NVARCHAR(11)" definition="NO_SQL" hash="1" />
+		<column name="Knt1_KontoDostawcy" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Konto księgowe dostawcy</description>
+		</column>
+		<column name="Knt1_KontoOdbiorcy" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Konto księgowe odbiorcy</description>
+		</column>
+		<column name="Knt1_Kraj" type="NVARCHAR(2)" definition="NO_SQL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="Knt1_Telefon1" type="VARCHAR(30)" definition="NO_SQL" hash="1">
+			<description>Telefon do biura</description>
+		</column>
+		<column name="Knt1_Telefon2" type="VARCHAR(30)" definition="NO_SQL" hash="1">
+			<description>Telefon domowy</description>
+		</column>
+		<column name="Knt1_Fax" type="VARCHAR(30)" definition="NO_SQL" hash="1" />
+		<column name="Knt1_Modem" type="NVARCHAR(30)" definition="NO_SQL" hash="1" />
+		<column name="Knt1_Telex" type="NVARCHAR(30)" definition="NO_SQL" hash="1" />
+		<column name="Knt1_EMail" type="NVARCHAR(127)" definition="NO_SQL" hash="1">
+			<description>Adres w internecie</description>
+		</column>
+		<column name="Knt1_URL" type="VARCHAR(255)" definition="NO_SQL" hash="1">
+			<description>Adres strony w internecie</description>
+		</column>
+		<column name="Knt1_BnkTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_BnkFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_BnkNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_BnkLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_NrRachunku" type="NVARCHAR(50)" definition="NO_SQL" hash="1">
+			<description>Numer konta w banku</description>
+		</column>
+		<column name="Knt1_Soundex" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Akronim (fonetycznie)</description>
+			<details>
+				Skrócona nazwa kontrahenta zapisana fonetycznie.
+				Pozwala na szukanie podobnie brzmiących nazw jeśli nie jesteśmy pewni pisowni.
+			</details>
+		</column>
+		<column name="Knt1_Rabat" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Ustalony - proponowany rabat</description>
+		</column>
+		<column name="Knt1_LimitWart" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Nie wykorzystane</description>
+		</column>
+		<column name="Knt1_MaxLimitWart" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Maksymalny limit kredytu kontrolowany przy sprzedaży</description>
+		</column>
+		<column name="Knt1_LimitPoTerminie" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Limit kredytu po terminie</description>
+			<details>Procentowo dopuszczalne przekroczenie wartości kredytu.</details>
+		</column>
+		<column name="Knt1_LimitOkres" type="TINYINT" definition="NO_SQL">
+			<description>Maksymalny okres odroczenia płatności</description>
+		</column>
+		<column name="Knt1_Dewizowe" type="TINYINT" definition="NO_SQL">
+			<description>Czy kontrahent dewizowy?</description>
+		</column>
+		<column name="Knt1_Symbol" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Symbol waluty (Wal_Symbol)</description>
+		</column>
+		<column name="Knt1_NrKursu" type="SMALLINT" definition="NO_SQL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="Knt1_Cena" type="SMALLINT" definition="NO_SQL">
+			<description>Ustalona - podpowiadana cena sprzedaży</description>
+			<details>TwC_GIDLp numer ceny z tabeli TwrCeny Wskazuje jaka cena będzie proponowana przy
+				sprzedaży dla tego kontrahenta.</details>
+		</column>
+		<column name="Knt1_FormaPl" type="TINYINT" definition="NO_SQL">
+			<description>Ustalona - podpowiadana forma płatności</description>
+			<details>Podpowiadana cena z pliku CENYELE łacznie z KARTAMAG. Jeśli takiej ceny nie ma w
+				spisie cen do wybranego numeru karty magazynowej to jako cena jest pobierana wskazana na
+				KARTAMAG</details>
+		</column>
+		<column name="Knt1_Marza" type="DECIMAL( 5,2)" definition="NO_SQL">
+			<description>Ustalona, propopnowana marża</description>
+		</column>
+		<column name="Knt1_TypKarty" type="SMALLINT" definition="NO_SQL">
+			<description>Typ karty kredytowej</description>
+		</column>
+		<column name="Knt1_NumerKarty" type="NVARCHAR(16)" definition="NO_SQL" hash="1">
+			<description>Numer karty kredytowej</description>
+		</column>
+		<column name="Knt1_DataKarty" type="INTEGER" definition="NO_SQL">
+			<description>Data ważności karty kredytowej</description>
+		</column>
+		<column name="Knt1_Ean" type="VARCHAR(16)" definition="NO_SQL">
+			<description>Kod Ean</description>
+			<details>Kod kreskowy karty stałego klienta (Znakowo)</details>
+		</column>
+		<column name="Knt1_ObcaKarta" type="SMALLINT" definition="NO_SQL">
+			<description>Obca karta stałego klienta</description>
+			<details>
+				= 0 - karta własna;
+				&lt;&gt; 0 - numer kolejny zdefiniowanej obcej karty
+			</details>
+		</column>
+		<column name="Knt1_EanTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_EanFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_EanNumer" type="INTEGER" definition="NO_SQL">
+			<details>Jeśli Knt_Ean jest wypełniony, wówczas Knt_EanTyp=0, Knt_EanFirma=0, Knt_EanNumer=0.
+				Jeśli Knt_Ean jest pusty, wówczas w pola te jest podstawiany GID własny kontrahenta
+				(Knt_EanTyp=Knt_GIDTyp, Knt_EanFirma= Knt_GIDFirma, Knt_EanNumer= Knt_GIDNumer)</details>
+		</column>
+		<column name="Knt1_Osoba" type="TINYINT" definition="NO_SQL" hash="1">
+			<description>Ustalona - podpowiadana osoba</description>
+		</column>
+		<column name="Knt1_ExpoKraj" type="TINYINT" definition="NO_SQL">
+			<description>Kontrahent eksportowy lub krajowy</description>
+			<details>Status kontrahenta; 1 - krajowy, 2 - eksportowy, 0 - nieokreślony</details>
+		</column>
+		<column name="Knt1_SeriaFa" type="NVARCHAR(5)" definition="NO_SQL">
+			<description>Ustalona - proponowana seria faktur</description>
+		</column>
+		<column name="Knt1_PlatnikVat" type="TINYINT" definition="NO_SQL">
+			<description>Czy kontrahent jest płatnikiem VAT?</description>
+		</column>
+		<column name="Knt1_TypDok" type="SMALLINT" definition="NO_SQL">
+			<description>Typ rachunku dla kontrahenta</description>
+		</column>
+		<column name="Knt1_Status" type="TINYINT" definition="NO_SQL">
+			<description>Status kontrahenta</description>
+			<details>Status kontrahenta; 1 - podmiot gosp.; 2 - odbiorca finalny</details>
+		</column>
+		<column name="Knt1_Koncesja" type="INTEGER" definition="NO_SQL">
+			<description>Koncesja na handel towarem</description>
+		</column>
+		<column name="Knt1_DataKoncesji" type="INTEGER" definition="NO_SQL">
+			<description>Data ważności koncesji</description>
+		</column>
+		<column name="Knt1_FAVATData" type="INTEGER" definition="NO_SQL">
+			<description>FA VAT bez podpisu odbiorcy</description>
+		</column>
+		<column name="Knt1_SposobDostawy" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Sposób w jaki dostarczany jest towar dla lub od kontrahenta</description>
+		</column>
+		<column name="Knt1_HasloChk" type="NVARCHAR(2)" definition="NO_SQL">
+			<description>Litery kontrolne hasła</description>
+		</column>
+		<column name="Knt1_HasloKontrahent" type="NVARCHAR(11)" definition="NO_SQL">
+			<description>Hasło operatora do bazy</description>
+		</column>
+		<column name="Knt1_Dzialalnosc" type="TINYINT" definition="NO_SQL">
+			<description>Rodzaj działalności gospodarczej</description>
+			<details>
+				Możliwe wartości:
+				9 - Inna działalność
+			</details>
+		</column>
+		<column name="Knt1_ZTrTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_ZTrFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_ZTrNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_ZTrLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_OpeTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_OpeFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_OpeNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_OpeLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_AkwTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_AkwFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_AkwNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_AkwLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_PrcTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_PrcFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_PrcNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_PrcLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_Atrybut1" type="NVARCHAR(15)" definition="NO_SQL">
+			<description>Nazwa atrybutu</description>
+		</column>
+		<column name="Knt1_Format1" type="TINYINT" definition="NO_SQL">
+			<description>Format atrybutu</description>
+			<details>
+				1- tekst
+				+192 - jeżeli lista zamknieta
+			</details>
+		</column>
+		<column name="Knt1_Wartosc1" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="Knt1_Atrybut2" type="NVARCHAR(15)" definition="NO_SQL">
+			<description>Nazwa atrybutu</description>
+		</column>
+		<column name="Knt1_Format2" type="TINYINT" definition="NO_SQL">
+			<description>Format atrybutu</description>
+			<details>patrz: format1</details>
+		</column>
+		<column name="Knt1_Wartosc2" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="Knt1_Atrybut3" type="NVARCHAR(15)" definition="NO_SQL">
+			<description>Nazwa atrybutu</description>
+		</column>
+		<column name="Knt1_Format3" type="TINYINT" definition="NO_SQL">
+			<description>Format atrybutu</description>
+			<details>patrz: format1</details>
+		</column>
+		<column name="Knt1_Wartosc3" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="Knt1_AkwProwizja" type="DECIMAL( 7,4)" definition="NO_SQL">
+			<description>Prowizja akwizytora</description>
+		</column>
+		<column name="Knt1_Umowa" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer umowy upustowej</description>
+		</column>
+		<column name="Knt1_DataW" type="INTEGER" definition="NO_SQL">
+			<description>Data ważności umowy upustowej</description>
+		</column>
+		<column name="Knt1_LastModL" type="INTEGER" definition="NO_SQL">
+			<description>Data ostatniej modyfikacji lokalnej</description>
+		</column>
+		<column name="Knt1_LastModO" type="INTEGER" definition="NO_SQL">
+			<description>Data ostatniej modyfikacji oddziałowej</description>
+		</column>
+		<column name="Knt1_LastModC" type="INTEGER" definition="NO_SQL">
+			<description>Data ostatniej modyfikacji centralnej</description>
+		</column>
+		<column name="Knt1_FaVATOsw" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer oświadczenia do wystawiania faktur VAT bez podpisu</description>
+		</column>
+		<column name="Knt1_CechaOpis" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Opis przepisywany na dokument</description>
+		</column>
+		<column name="Knt1_AutoPotwierdzenie" type="TINYINT" definition="NO_SQL">
+			<description>Autopotwierdzenie zamówienia</description>
+		</column>
+		<column name="Knt1_Aktywna" type="INTEGER" definition="NO_SQL">
+			<description>Nie wykorzystywane</description>
+		</column>
+		<column name="Knt1_Wsk" type="TINYINT" definition="NO_SQL">
+			<description>Używane przez API</description>
+			<details>
+				TrybInterakcyjny - 1
+				Dodatkowo 4 oznacza że dane kontrahenta nie są publikowane na WWW (IZam)
+			</details>
+		</column>
+		<column name="Knt1_MagTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_MagFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_MagNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_MagLp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_OutlookUrl" type="VARCHAR(255)" definition="NO_SQL">
+			<description>Ulr folderu w MS Outlook</description>
+		</column>
+		<column name="Knt1_Nieaktywny" type="TINYINT" definition="NO_SQL">
+			<description>Czy kontrahent jest nieaktywny (do odfiltrowania list)</description>
+			<details>
+				0 - aktywny
+				1 - nieaktywny
+			</details>
+		</column>
+		<column name="Knt1_Zrodlo" type="INTEGER" definition="NO_SQL">
+			<description>Id wartości z kategorii 'źródło pochodzenia'</description>
+		</column>
+		<column name="Knt1_Branza" type="INTEGER" definition="NO_SQL">
+			<description>Id wartości z kategorii 'branża'</description>
+		</column>
+		<column name="Knt1_Rodzaj" type="INTEGER" definition="NO_SQL">
+			<description>Id wartości z kategorii 'rodzaj klienta'</description>
+		</column>
+		<column name="Knt1_RolaPartnera" type="INTEGER" definition="NO_SQL">
+			<description>Id wartości z kategorii 'rola partnera'</description>
+		</column>
+		<column name="Knt1_Odleglosc" type="DECIMAL(10,2)" definition="NO_SQL">
+			<description>Odległość</description>
+		</column>
+		<column name="Knt1_KarTyp" type="SMALLINT" definition="NO_SQL" />
+		<column name="Knt1_KarFirma" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_KarNumer" type="INTEGER" definition="NO_SQL" />
+		<column name="Knt1_KarLp" type="SMALLINT" definition="NO_SQL" />
+	</view>
+	

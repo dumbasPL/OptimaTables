@@ -1,0 +1,16 @@
+<table name="RejestrOperacjiTypyOperacji">
+		<description>Rejestr operacji typy operacji</description>
+		<column name="ROPTOp_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operacji</description>
+		</column>
+		<column name="ROPTOp_Nazwa" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Typ operacji</description>
+		</column>
+		<column name="ROPTOp_Jezyk" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ROPTOp_Jezyk DEFAULT(1045)">
+			<description>Jezyk interfejsu 1-PL; 2-EN</description>
+		</column>
+		<primaryKey name="ROPTOp_Primary" columns="ROPTOp_Typ,ROPTOp_Jezyk">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

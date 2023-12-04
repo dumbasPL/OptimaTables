@@ -1,0 +1,126 @@
+<table name="DokNag">
+		<description>Nagłówki dokumentów z biblioteki</description>
+		<column name="DoN_DoNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DoN_DDfId" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="DoN_SSID" type="INTEGER">
+			<description>Identyfikator schematu obiegu w tabeli SekSchematy w bazie konfiguracyjnej</description>
+		</column>
+		<column name="DoN_ProcesKod" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa procesu obiegu dokumentów</description>
+		</column>
+		<column name="DoN_EtapBiezacyLp" type="INTEGER" definition="NOT NULL">
+			<description>Lp etapu, który jest bieżący dla danego procesu</description>
+		</column>
+		<column name="DoN_NumerObcy" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer obcy dokumentu</description>
+		</column>
+		<column name="DoN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="DoN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(DON_NUMERNR,DON_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DoN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="DoN_Tytul" type="NVARCHAR(50)">
+			<description>Tytuł dokumentu</description>
+		</column>
+		<column name="DoN_Dotyczy" type="NVARCHAR(1024)">
+			<description>Pole opis</description>
+		</column>
+		<column name="DoN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data wprowadzenia dokumentu</description>
+		</column>
+		<column name="DoN_OpiekunID" type="INTEGER">
+			<description>ID opiekuna</description>
+		</column>
+		<column name="DoN_OpiekunTyp" type="INTEGER">
+			<description>Typ opiekuna</description>
+			<details>
+				3 - pracownik &lt;br&gt;
+				8 - operator
+			</details>
+		</column>
+		<column name="DoN_Status" type="INTEGER">
+			<description>Status dokumentu</description>
+			<details>Identyfikator do tabeli CDN.DefEtapy</details>
+		</column>
+		<column name="DoN_Typ" type="INTEGER">
+			<description>Typ dokumentu</description>
+			<details>
+				1 - dokument firmowy w bazie głównej &lt;br&gt;
+				2 - dokument wspólny w bazie konfiguracyjnej
+			</details>
+		</column>
+		<column name="DoN_Katalog" type="INTEGER">
+			<description>Katalog dokumentu</description>
+			<details>Identyfikator to tabeli CDN.Katalogi</details>
+		</column>
+		<column name="DoN_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="DoN_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w tabeli źródłowej</description>
+		</column>
+		<column name="DoN_OriginId" type="INTEGER">
+			<description>Identyfikator pochodzenia dokuemntu</description>
+		</column>
+		<column name="DoN_TS_Export" type="DATETIME">
+			<description>Czas wyeksportowania dokumentu</description>
+		</column>
+		<column name="DoN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładania dokumentu</description>
+		</column>
+		<column name="DoN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DoN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zakładania dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DoN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora, który zmodyfikował dokument</description>
+		</column>
+		<column name="DoN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DoN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DoN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DoN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DoN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DoN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DoN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DoN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DoN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DoN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="DoN_Primary" columns="DoN_DoNID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DokNagKeyNumer" options="UNIQUE NONCLUSTERED" fields="DoN_NumerString ,DoN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="DokNagKeyTytul" options="NONCLUSTERED" fields="DoN_Tytul">
+			<description>Wg tytulu dokumentu</description>
+		</index>
+		<index name="DONDataDok" options="UNIQUE NONCLUSTERED" fields="DoN_DataDok ,DoN_NumerString ,DoN_NumerNr">
+			<description>Wg daty dokumentu</description>
+		</index>
+	</table>
+	

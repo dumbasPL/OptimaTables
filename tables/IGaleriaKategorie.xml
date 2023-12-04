@@ -1,0 +1,22 @@
+<table name="IGaleriaKategorie">
+		<description>Kategorie towaru z iGaleria24</description>
+		<column name="IGK_IGKId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="IGK_ParentId" type="INTEGER" definition="NOT NULL">
+			<description>Id rodzica</description>
+		</column>
+		<column name="IGK_Nazwa" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa kategorii</description>
+		</column>
+		<column name="IGK_Aktywna" type="TINYINT" definition="NOT NULL">
+			<description>czy kategoria jest aktywna</description>
+		</column>
+		<index name="IGKategorieId" options="UNIQUE NONCLUSTERED" fields="IGK_IGKId">
+			<description>Wg id</description>
+		</index>
+		<index name="IGKategorieNazwa" options="UNIQUE NONCLUSTERED" fields="IGK_Nazwa, IGK_IGKId">
+			<description>Wg nazwy i id</description>
+		</index>
+	</table>
+	

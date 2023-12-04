@@ -1,0 +1,108 @@
+<table name="FaCyklElem">
+		<description>Tabela z listą pozycji skojarzonych z fakturą cykliczną</description>
+		<column name="FCE_FcEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="FCE_FcNID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka dokumentu</description>
+		</column>
+		<column name="FCE_TypNB" type="TINYINT">
+			<description>Typ ceny z nagłówka: netto/brutto</description>
+			<details>
+				1 - netto &lt;br&gt;
+				2 - brutto
+			</details>
+		</column>
+		<column name="FCE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa</description>
+		</column>
+		<column name="FCE_TwrID" type="INTEGER">
+			<description>Identyfikator towaru</description>
+			<details>Klucz obcy do tabeli CDN.Towary</details>
+		</column>
+		<column name="FCE_Kod" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Akronim towaru</description>
+		</column>
+		<column name="FCE_Nazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa towaru</description>
+		</column>
+		<column name="FCE_MagId" type="INTEGER">
+			<description>Magazyn</description>
+		</column>
+		<column name="FCE_IloscTyp" type="TINYINT">
+			<description>Ilość: stała dla wszystkich / zależna od kontrahenta</description>
+			<details>
+				0 - stała dla wszystkich &lt;br&gt;
+				1 - zależna od kontrahenta
+			</details>
+		</column>
+		<column name="FCE_Ilosc" type="DECIMAL(15,4)">
+			<description>Ilość stała dla wszystkich kontrahentów w jednostkach podstawowych</description>
+		</column>
+		<column name="FCE_IloscJM" type="DECIMAL(15,4)">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="FCE_JM" type="NVARCHAR(20)">
+			<description>jednostka miary</description>
+		</column>
+		<column name="FCE_JMZ" type="NVARCHAR(20)">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="FCE_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_FCE_JMPrzelicznikL DEFAULT(1)">
+			<description>Przelicznik jednostki miary - licznik</description>
+		</column>
+		<column name="FCE_JMPrzelicznikM" type="INTEGER" definition="NOT NULL CONSTRAINT DF_FCE_JMPrzelicznikM DEFAULT(1)">
+			<description>Przelicznik jednostki miary - mianownik</description>
+		</column>
+		<column name="FCE_CenaTyp" type="TINYINT">
+			<description>Stała lub indywidualna dla każdego kontrahenta</description>
+			<details>
+				0 - stała &lt;br&gt;
+				1 - indywidualna dla kontrahenta
+				2 - cena domyślna dla kontrahenta
+				3 - grupa cenowa
+			</details>
+		</column>
+		<column name="FCE_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_FCE_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<column name="FCE_Cena" type="DECIMAL(17,4)">
+			<description>Cena netto</description>
+		</column>
+		<column name="FCE_CenaBrutto" type="DECIMAL(17,4)">
+			<description>Cena brutto</description>
+		</column>
+		<column name="FCE_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_FCE_Waluta DEFAULT('')">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="FCE_CenaNettoPLN" type="DECIMAL(17,4)" definition="NOT NULL CONSTRAINT DF_FCE_CenaNettoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="FCE_CenaBruttoPLN" type="DECIMAL(17,4)" definition="NOT NULL CONSTRAINT DF_FCE_CenaBruttoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej brutto</description>
+		</column>
+		<column name="FCE_GrupaCenowa" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_FCE_GrupaCenowa DEFAULT(0)">
+			<description>Grupa cenowa</description>
+		</column>
+		<column name="FCE_CloneId" type="INTEGER">
+			<description>Identyfikator klonowania</description>
+		</column>
+		<primaryKey name="FCE_Primary" columns="FCE_FcEID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_FcENaglowek" localColumns="FCE_FcNID" refTable="FaCyklNag" refColumns="FCN_FcNID" deleteOption="CASCADE">
+			<description>Relacja CDN.FaCyklElem:CDN.FaCyklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="FcENaglowek" options="UNIQUE NONCLUSTERED" fields="FCE_FcNID ,FCE_FcEID ,FCE_Lp">
+			<description>Wskaźnik do nagłówka definicji</description>
+			<details>Klucz obcy do tabeli FaCyklNag</details>
+		</index>
+		<index name="FcELp" options="NONCLUSTERED" fields="FCE_FcEID ,FCE_Lp">
+			<description>Wg liczby porządkowej</description>
+		</index>
+	</table>
+	

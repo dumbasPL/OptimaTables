@@ -1,0 +1,99 @@
+<table name="GrupyPotracen">
+		<description>Tabela grup potrącen</description>
+		<column name="GPR_GprId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="GPR_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa typu nieobecności</description>
+		</column>
+		<column name="GPR_Skrot" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Skrót typu nieobecności</description>
+		</column>
+		<column name="GPR_KwotaEgzekucji1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wysokość kwoty podlegającej egzekucji</description>
+		</column>
+		<column name="GPR_KwotaEgzekucji2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wysokość kwoty podlegającej egzekucji</description>
+		</column>
+		<column name="GPR_KwotaEgzekucji3" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wysokość kwoty podlegającej egzekucji</description>
+		</column>
+		<column name="GPR_KwotaWolna" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wolna od potrąceń</description>
+		</column>
+		<column name="GPR_PropWymiarEtatu" type="TINYINT" definition="NOT NULL">
+			<description>Proporcjonalnie do wymiaru etatu</description>
+		</column>
+		<column name="GPR_KwotaEgzekucjiZUS" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wysokość kwoty podlegającej egzekucji</description>
+		</column>
+		<column name="GPR_KwotaWolnaZUS" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wolna od potrąceń</description>
+		</column>
+		<column name="GPR_KwotaWolnaZUS2" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_GPR_KwotaWolnaZUS2 DEFAULT(0)">
+			<description>Kwota wolna od potrąceń</description>
+		</column>
+		<column name="GPR_PropWymiarEtatuZUS" type="TINYINT" definition="NOT NULL">
+			<description>Proporcjonalnie do wymiaru etatu</description>
+		</column>
+		<column name="GPR_Nieaktywna" type="TINYINT" definition="NOT NULL">
+			<description>Pozycja słownika jest nieużywana</description>
+		</column>
+		<column name="GPR_Standardowy" type="SMALLINT" definition="NOT NULL">
+			<description>Unikalny numer standardowych grup ograniczeń</description>
+		</column>
+		<column name="GPR_Priorytet" type="INTEGER" definition="NOT NULL">
+			<description>Priorytet grupy (unikalny)</description>
+		</column>
+		<column name="GPR_PropDniZasilku" type="TINYINT" definition="NOT NULL CONSTRAINT DF_GPR_PropDniZasilku DEFAULT(0)">
+			<description>Proporcjonalnie do ilości dni zasiłku</description>
+		</column>
+		<column name="GPR_RodzajKwotyWolnejZUS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_GPR_RodzajKwotyWolnejZUS DEFAULT(1)">
+			<description>Rodzaj kwoty wolnej od potrąceń</description>
+		</column>
+		<column name="GPR_KwotaPobranaKonf" type="TINYINT" definition="NOT NULL CONSTRAINT DF_GPR_KwotaPobranaKonf DEFAULT(0)">
+			<description>Kwota wolna pobrana z konfiguracji</description>
+		</column>
+		<column name="GPR_KwotaRodzajPotracenia" type="INT" definition="NOT NULL CONSTRAINT DF_GPR_KwotaRodzajPotracenia DEFAULT(0)">
+			<description>Kwota wolna pobrana z konfiguracji (rodzaj)</description>
+		</column>
+		<column name="GPR_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="GPR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="GPR_TS_Zal" type="DATETIME">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="GPR_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="GPR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="GPR_TS_Mod" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="GPR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_GPR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="GPR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_GPR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="GPR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_GPR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="GPR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_GPR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="GPR_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="GPR_Primary" columns="GPR_GprId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="GPRNazwa" options="UNIQUE NONCLUSTERED" fields="GPR_Nazwa" />
+		<index name="GPRPriorytet" options="NONCLUSTERED" fields="GPR_Priorytet" />
+	</table>
+	

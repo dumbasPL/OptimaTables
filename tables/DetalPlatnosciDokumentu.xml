@@ -1,0 +1,59 @@
+<table name="DetalPlatnosciDokumentu">
+		<description>Platnosci dokumentow dodane w detalu tabela tymczasowa</description>
+		<column name="DPlD_DPlDId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DPlD_DSPlDId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator platnosci w detalu</description>
+		</column>
+		<column name="DPlD_DSTrNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu detalu</description>
+		</column>
+		<column name="DPlD_DSZKBID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DPlD_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska</description>
+		</column>
+		<column name="DPlD_DSFPlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator formy platnosci</description>
+		</column>
+		<column name="DPlD_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota</description>
+		</column>
+		<column name="DPlD_KwotaZaplacona" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zaplacona</description>
+		</column>
+		<column name="DPlD_DataPlatnosci" type="DATETIME" definition="NOT NULL">
+			<description>Data platnosci</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DPlD_Gotowka" type="TINYINT">
+			<description>Czy forma platnosci gotowkowa</description>
+		</column>
+		<column name="DPlD_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DPlD_StanSynchronizacji" type="INTEGER">
+			<description>Stan synchronizacji kontrahenta</description>
+		</column>
+		<column name="DPlD_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu danych</description>
+		</column>
+		<primaryKey name="DPlD_Primary" columns="DPlD_DPlDId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DPlDTraNagDS" localColumns="DPlD_DSTrNId,DPlD_StanDetalID" refTable="DetalTraNag" refColumns="DTrN_DSTrNID,DTrN_StanDetalID" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalPlatnosciDokumentu:CDN.DetalTraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DPlDTraNagDS" options="UNIQUE NONCLUSTERED" fields="DPlD_DSTrNId ,DPlD_DSZKBID ,DPlD_StanDetalID ,DPlD_DSPlDId">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="DetalPlatnosciDokumentuDSZKBID" options="NONCLUSTERED" fields="DPlD_DSZKBID, DPlD_StanDetalID" />
+	</table>
+	

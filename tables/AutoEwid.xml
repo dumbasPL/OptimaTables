@@ -1,0 +1,128 @@
+<table name="AutoEwid">
+		<description>Ewidencja samochodów</description>
+		<details>
+			Zawiera ewidencję samochodów użytkowanych w firmie.
+			Można rejestrować zarówno samochody będących własnością podatnika (właściciela firmy lub
+			wspólnika) używane do celów służbowych jak i samochody prywatne pracowników użytkowane do
+			celów służbowych.
+		</details>
+		<column name="AuE_AuEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AuE_Rejestracja" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer rejestracyjny pojazdu</description>
+			<details>Numer rejestracyjny pojazdu. Pole musi mieć unikalną wartość.</details>
+		</column>
+		<column name="AuE_Marka" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Marka samochodu</description>
+		</column>
+		<column name="AuE_KlasaPoj" type="TINYINT" definition="NOT NULL">
+			<description>Grupa pojemności silnika</description>
+			<details>
+				Pole to określa do jakiej grupy (z punktu widzenia podatkowego) zaliczany jest pojazd.
+				Pole przyjmuje następujące wartości:
+				dla samochodów o pojemności powyżej 900ccm - 1 (e_mk_nTypSamochodPow900)
+				dla samochodów o pojemności do 900ccm - 2 (e_mk_nTypSamochodDo900)
+				dla motocykli - 3 (e_mk_nTypSamochodMotocykl)
+				dla motorowerów - 4 (e_mk_nTypSamochodMotorower)
+			</details>
+		</column>
+		<column name="AuE_Pojemnosc" type="SMALLINT" definition="NOT NULL">
+			<description>Pojemność silnika w centymetrach sześciennych</description>
+		</column>
+		<column name="AuE_Pracownik" type="TINYINT" definition="NOT NULL">
+			<description>Czy prywatny samochód pracownika</description>
+			<details>Określa, czy dany pojazd jest samochodem prywatnym pracownika (Pracownik=1), czy
+				właściciela firmy (Pracownik=0)</details>
+		</column>
+		<column name="AuE_Limit" type="SMALLINT" definition="NOT NULL">
+			<description>Limit przejazdów w jazdach miejskich</description>
+			<details>Dla samochodów będących własnością pracownika określa limit przejazdów w jazdach
+				miejskich (w km)</details>
+		</column>
+		<column name="AuE_PrcId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator pracownika</description>
+			<details>
+				Wskaźnik do tabeli Pracownicy (identyfikator pracownika odpowiedzialnego za samochód -
+				dysponenta).
+				Pracownik może być wpisany "z ręki" (Prc:PrcId = 0) lub pobrany z tabeli Pracownicy
+				(Prc:PrcId = AuE:PrcId)
+			</details>
+		</column>
+		<column name="AuE_PrcNazwisko" type="NVARCHAR(100)" definition="NOT NULL" hash="1">
+			<description>Nazwisko dysponenta pojazdu</description>
+		</column>
+		<column name="AuE_PrcAdres" type="NVARCHAR(100)" definition="NOT NULL" hash="1">
+			<description>Adres dysponenta pojazdu</description>
+		</column>
+		<column name="AuE_Opis" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Informacja dodatkowe</description>
+		</column>
+		<column name="AuE_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_AuE_Nieaktywny DEFAULT (0)">
+			<description>Samochód nieaktywny</description>
+		</column>
+		<column name="AuE_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="AuE_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuE_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuE_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="AuE_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuE_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuE_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuE_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AuE_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuE_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AuE_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuE_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuE_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuE_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuE_DataRoz" type="DATETIME">
+			<description>Data rozpoczęcia ewidencji</description>
+		</column>
+		<column name="AuE_DataZak" type="DATETIME">
+			<description>Data zakończenia ewidencji</description>
+		</column>
+		<column name="AuE_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<primaryKey name="AuE_Primary" columns="AuE_AuEID">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_AuEPracownik" localColumns="AuE_PrcId" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.AutoEwid:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="AuERejestracja" options="UNIQUE NONCLUSTERED" fields="AuE_Rejestracja">
+			<description>Wg numeru rejestracyjnego</description>
+			<details>Unikalny indeks wg numeru rejestracyjnego. Wykorzystywany do wyświetlania,
+				przeglądania listy pojazdów</details>
+		</index>
+		<index name="AuEPracownik" options="NONCLUSTERED" fields="AuE_PrcId">
+			<description>Indeks wg dysponenta pojazdu</description>
+			<details>Indeks wiążący samochód z pracownikiem odpowiedzialnym za jego używanie (dysponentem
+				pojazdu)</details>
+		</index>
+	</table>
+	

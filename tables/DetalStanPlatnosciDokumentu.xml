@@ -1,0 +1,36 @@
+<table name="DetalStanPlatnosciDokumentu">
+		<description>Platnosci dokumentow dodane w detalu tabela tymczasowa</description>
+		<column name="DSPlD_DSPlDId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DSPlD_DSTrNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu detalu</description>
+		</column>
+		<column name="DSPlD_DSFPlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator formy platnosci</description>
+		</column>
+		<column name="DSPlD_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota</description>
+		</column>
+		<column name="DSPlD_KwotaZaplacona" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zaplacona</description>
+		</column>
+		<column name="DSPlD_DataPlatnosci" type="DATETIME" definition="NOT NULL">
+			<description>Data platnosci</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSPlD_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<primaryKey name="DSPlD_Primary" columns="DSPlD_DSPlDId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DSTraNag" localColumns="DSPlD_DSTrNId" refTable="DetalStanTraNag" refColumns="DSTrN_DSTrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalStanPlatnosciDokumentu:CDN.DetalStanTraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DSTraNag" options="UNIQUE NONCLUSTERED" fields="DSPlD_DSTrNId ,DSPlD_DSPlDId">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+	</table>
+	

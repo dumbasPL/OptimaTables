@@ -1,0 +1,34 @@
+<table name="BnkCertyfikaty">
+		<description>Lista odcisków certyfikatów operatorów dla poszczególnych banków</description>
+		<column name="BnC_BnCID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="BnC_BNaID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator banku</description>
+		</column>
+		<column name="BnC_OpeID" type="INTEGER" definition="NULL">
+			<description>Identyfikator operatora (NULL jeśli certyfikat dla całej firmy)</description>
+		</column>
+		<column name="BnC_TypOperacji" type="INTEGER" definition="NOT NULL CONSTRAINT DF_BnC_TypOperacji DEFAULT(0)">
+			<description>Typ operacji, do której jest stosowany certyfikat</description>
+		</column>
+		<column name="BnC_Nazwa" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Przyjazna nazwa certyfikatu</description>
+		</column>
+		<column name="BnC_Thumbprint" type="NVARCHAR(256)" definition="NULL">
+			<description>Odcisk palca certyfikatu</description>
+		</column>
+		<column name="BnC_Content" type="NVARCHAR(MAX)" definition="NULL">
+			<description>Zawartość certyfikatu zakodowana w Base64</description>
+		</column>
+		<primaryKey name="BnC_Primary" columns="BnC_BnCID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BnCBank" localColumns="BnC_BNaID" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.BnkCertyfikaty:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<index name="BnCBankOpe" options="UNIQUE NONCLUSTERED" fields="BnC_BNaID, BnC_OpeID, BnC_TypOperacji">
+			<description>Indeks wg banku, operatora i typu operacji</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,54 @@
+<table name="SchKsiElem">
+		<description>Elementy schematów księgowych</description>
+		<column name="SKE_SKEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SKE_SKNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka schematu</description>
+		</column>
+		<column name="SKE_Lp" type="SMALLINT" definition="NOT NULL">
+			<description>Numer pozycji na liście</description>
+		</column>
+		<column name="SKE_DataWys" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis daty wystawienia dokumentu</description>
+		</column>
+		<column name="SKE_DataOpe" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis daty operacji</description>
+		</column>
+		<column name="SKE_Dokument" type="VARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis numeru dokumentu</description>
+		</column>
+		<column name="SKE_SlownikKSI" type="TINYINT" definition="NOT NULL">
+			<description>Czy grupować zapisy wg słownika</description>
+		</column>
+		<column name="SKE_Kategoria" type="TINYINT" definition="NOT NULL">
+			<description>Czy grupować zapisy wg kategorii</description>
+		</column>
+		<column name="SKE_KontoWn" type="NVARCHAR(2000)" definition="NOT NULL">
+			<description>Konto po stronie Winien</description>
+		</column>
+		<column name="SKE_KontoMa" type="NVARCHAR(2000)" definition="NOT NULL">
+			<description>Konto po stronie Ma</description>
+		</column>
+		<column name="SKE_Kwota" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis księgowanej kwoty</description>
+		</column>
+		<column name="SKE_Opis" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis opisu dokumentu</description>
+		</column>
+		<column name="SKE_Warunek" type="NVARCHAR(2000)" definition="NOT NULL">
+			<description>Symboliczny zapis warunku, przy którym generowany jest element</description>
+		</column>
+		<column name="SKE_KsiegowanieWalutowe" type="TINYINT" definition="NOT NULL" />
+		<column name="SKE_Rozrachunki" type="INTEGER" />
+		<primaryKey name="SKE_Primary" columns="SKE_SKEId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_SKESchemat" localColumns="SKE_SKNId" refTable="SchKsiNag" refColumns="SKN_SKNId" deleteOption="CASCADE">
+			<description>Relacja CDN.SchKsiElem:CDN.SchKsiNag (MANY:1)</description>
+		</foreignKey>
+		<index name="SKESchemat" options="NONCLUSTERED" fields="SKE_SKNId ,SKE_Lp">
+			<description>Wg nagłowka schematu</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,76 @@
+<table name="AnkAnkietyPyt">
+		<description>Pytania dla wzorca ankiet</description>
+		<column name="AnkAnP_AnkAnPId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkAnP_AnkAnNId" type="INTEGER" definition="NOT NULL">
+			<description>Id ankiety</description>
+		</column>
+		<column name="AnkAnP_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dla pytania</description>
+		</column>
+		<column name="AnkAnP_Tresc" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Tresc pytania</description>
+		</column>
+		<column name="AnkAnP_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis pytania</description>
+		</column>
+		<column name="AnkAnP_TypPytania" type="TINYINT" definition="NOT NULL">
+			<description>Typ pytania 0 - otwarte; 1 - wybór odpowiedzi z listy</description>
+		</column>
+		<column name="AnkAnP_FormatPytOtwartego" type="TINYINT" definition="NOT NULL">
+			<description>Format pytania otwartego 0 - tekst; 1 - liczba; 2 - data</description>
+		</column>
+		<column name="AnkAnP_WielokrotnyWybor" type="TINYINT" definition="NOT NULL">
+			<description> 0 - jednokrotny wybór; 1 - wielokrotny wybór</description>
+		</column>
+		<column name="AnkAnP_AnkSonId" type="INTEGER" definition="NULL">
+			<description>Szablon odpowiedzi</description>
+		</column>
+		<column name="AnkAnP_Waga" type="INTEGER" definition="NOT NULL">
+			<description>Waga; domyślnie 0 max: 100</description>
+		</column>
+		<column name="AnkAnP_OdpWymagana" type="TINYINT" definition="NOT NULL">
+			<description>Czy odpowiedź na pytanie jest wymagana (1) czy nie (0)</description>
+		</column>
+		<column name="AnkAnP_Nieaktywne" type="TINYINT" definition="NOT NULL">
+			<description>Czy to pytanie jest nieaktywne (1) czy aktywne (0)</description>
+		</column>
+		<column name="AnkAnP_OdpowiedzWyb" type="INT" definition="NULL">
+			<description>Wartość odpowiedzi na pytanie dla pytań z wyborem</description>
+		</column>
+		<column name="AnkAnP_Odpowiedz" type="NVARCHAR(MAX)" definition="NULL">
+			<description>Odpowiedź na pytanie</description>
+		</column>
+		<column name="AnkAnP_WypelniajacyTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Wypełniający - typ podmiotu</description>
+		</column>
+		<column name="AnkAnP_WypelniajacyId" type="INTEGER" definition="NOT NULL">
+			<description>Wypełniający - id podmiotu</description>
+		</column>
+		<column name="AnkAnP_AnkSpId" type="INTEGER" definition="NULL">
+			<description>Identyfikator pytania w słowniku pytań</description>
+		</column>
+		<column name="AnkAnP_AnkGpId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator grupy do której pytanie przydzielono</description>
+		</column>
+		<column name="AnkAnP_GpTreeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator grupowania</description>
+		</column>
+		<column name="AnkAnP_GpParentId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator grupowania</description>
+		</column>
+		<column name="AnkAnP_GpParentLp" type="INTEGER" definition="NOT NULL">
+			<description>Lp grupy</description>
+		</column>
+		<column name="AnkAnP_PunktyZaOdp" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Punkty za odpowiedź</description>
+		</column>
+		<primaryKey name="AnkAnP_Primary" columns="AnkAnP_AnkAnPId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AnkAnP_AnkAnN" localColumns="AnkAnP_AnkAnNId" refTable="AnkAnkietyNag" refColumns="AnkAnN_AnkAnNId" deleteOption="CASCADE">
+			<description>Relacja CDN.AnkAnkietyPyt:CDN.AnkAnkietyNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

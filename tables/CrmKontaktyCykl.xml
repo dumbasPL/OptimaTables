@@ -1,0 +1,70 @@
+<table name="CrmKontaktyCykl">
+		<description>Tabela terminów cyklicznych dla zadania CRM</description>
+		<column name="CRC_CRCId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="CRC_CRKId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do CRMKontakty</description>
+			<details>Wpisywane jest ID z tabeli CRMKontakty z pola CRK_CRKId</details>
+		</column>
+		<column name="CRC_TerminOd" type="DATETIME" definition="NOT NULL">
+			<description>Termin początkowy zadania</description>
+		</column>
+		<column name="CRC_TerminDo" type="DATETIME" definition="NOT NULL">
+			<description>Termin końcowy zadania</description>
+		</column>
+		<column name="CRC_Przypomnienie" type="TINYINT" definition="NOT NULL">
+			<description>Czy przypominać o zadaniu</description>
+		</column>
+		<column name="CRC_CzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia przed terminem zadania</description>
+		</column>
+		<column name="CRC_Aktywny" type="INTEGER" definition="NOT NULL">
+			<description>Flaga aktywności terminu; 1 - aktywny; -1 - usunięty; 0 - wyłączony z cyklu </description>
+		</column>
+		<column name="CRC_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Zadanie zamknięte, w buforze lub anulowane</description>
+			<details>
+				-1 - Anulowane &lt;br&gt;
+				0 - Zamknięte &lt;br&gt;
+				1 - Bufor
+			</details>
+		</column>
+		<column name="CRC_CrKWylaczonyId" type="INTEGER" definition="NULL">
+			<description>Id zapisu w CrmKontakty jeśli został wyodrębiony do osobnego zadania</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaSmsCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla sms</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaSmsWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez sms</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaMailCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla e-mail</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaMailWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez e-mail</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaOpeSmsCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla sms</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaOpeSmsWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez sms</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaOpeMailCzasPrzypomnienia" type="DATETIME">
+			<description>Czas przypomnienia dla e-mail</description>
+		</column>
+		<column name="CrC_AutomatycznePrzypomnieniaOpeMailWyslano" type="DATETIME">
+			<description>Czas wysłania przypomnienia poprzez e-mail</description>
+		</column>
+		<primaryKey name="CRC_Primary" columns="CRC_CRCId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_CRCCRMKontakty" localColumns="CRC_CRKId" refTable="CRMKontakty" refColumns="CRK_CRKId" deleteOption="CASCADE">
+			<description>Relacja CDN.CrmKontaktyCykl:CDN.CRMKontakty (MANY:1)</description>
+		</foreignKey>
+		<index name="CRCCRMKontakty" options="NONCLUSTERED" fields="CRC_CRKId ,CRC_CRCId">
+			<description>Klucz obcy do CRMKontakty</description>
+		</index>
+	</table>
+	

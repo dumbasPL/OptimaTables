@@ -1,0 +1,28 @@
+<table name="AnkAnkietyAnkieterzy">
+		<description>Pytania dla wzorca ankiet</description>
+		<column name="AnkAaA_AnkAaAId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkAaA_AnkAnNId" type="INTEGER" definition="NOT NULL">
+			<description>Id wzorca ankiety</description>
+		</column>
+		<column name="AnkAaA_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dla podmiotu</description>
+		</column>
+		<column name="AnkAaA_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="AnkAaA_PodID" type="INTEGER" definition="NOT NULL">
+			<description>Id podmiotu</description>
+		</column>
+		<primaryKey name="AnkAaA_Primary" columns="AnkAaA_AnkAaAId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="AnkAaA_Lp_UniqueIx" options="UNIQUE NONCLUSTERED" fields="AnkAaA_AnkAnNId, AnkAaA_Lp">
+			<description>Unikalne Lp</description>
+		</index>
+		<foreignKey name="FK_AnkAaA_AnkAnN" localColumns="AnkAaA_AnkAnNId" refTable="AnkAnkietyNag" refColumns="AnkAnN_AnkAnNId" deleteOption="CASCADE">
+			<description>Relacja CDN.AnkAnkietyAnkieterzy:CDN.AnkAnkietyNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

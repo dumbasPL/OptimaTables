@@ -1,0 +1,132 @@
+<table name="ZajeciaWynagr">
+		<description>Tabela zajęć komorniczych wynagrodzenia pracownika</description>
+		<column name="ZAW_ZawId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZAW_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika posiadającego dane zajęcie</description>
+		</column>
+		<column name="ZAW_KntId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator komornika</description>
+		</column>
+		<column name="ZAW_TwpId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator typu wypłaty</description>
+		</column>
+		<column name="ZAW_Sygnatura" type="NVARCHAR(70)">
+			<description>Numer decyzji</description>
+		</column>
+		<column name="ZAW_DataDecyzji" type="DATETIME">
+			<description>Data dostarczenia decyzji</description>
+		</column>
+		<column name="ZAW_Nieaktywne" type="TINYINT" definition="NOT NULL">&gt; <description>Zajęcie
+			wynagrodzenia nieaktywne</description>
+		</column>
+		<column name="ZAW_BnaId" type="INTEGER">
+			<description>Identyfikator banku</description>
+		</column>
+		<column name="ZAW_RachunekNr" type="NVARCHAR(50)" hash="1">
+			<description>Numer rachunku</description>
+		</column>
+		<column name="ZAW_RachunekNr0" type="NVARCHAR(50)" hash="1">
+			<description>Numer rachunku bez separatorów</description>
+		</column>
+		<column name="ZAW_IBAN" type="SMALLINT" definition="NOT NULL">
+			<description>Czy numer rachunku jest w standardzie IBAN</description>
+		</column>
+		<column name="ZAW_Nazwa" type="NVARCHAR(128)">
+			<description>Nazwa</description>
+		</column>
+		<column name="ZAW_Opis" type="NVARCHAR(256)" hash="1">
+			<description>Opis</description>
+		</column>
+		<column name="ZAW_Rodzaj" type="TINYINT">
+			<description>Typ zajęcia wynagrodzenia</description>
+		</column>
+		<column name="ZAW_Wartosc" type="DECIMAL(15,2)">
+			<description>Kwota</description>
+		</column>
+		<column name="ZAW_Splacono" type="DECIMAL(15,2)">
+			<description>Wartość bezwgl. z sumy wartości elementów wypłat powiązanych z zajęciem</description>
+		</column>
+		<column name="ZAW_DataOd" type="DATETIME">
+			<description>Okres od obowiązywania zajęcia</description>
+		</column>
+		<column name="ZAW_DataDo" type="DATETIME">
+			<description>Okres do obowiązywania zajęcia</description>
+		</column>
+		<column name="ZAW_Umowa" type="TINYINT">
+			<description>Flaga: egzekucja również z wypłat umów</description>
+		</column>
+		<column name="ZAW_UmowaOgranicz" type="TINYINT">
+			<description>Flaga: rodzaj ograniczania zajęcia na wypłacie umowy</description>
+		</column>
+		<column name="ZAW_UmowaOgraniczKwota" type="DECIMAL(15,2)">
+			<description>Kwota wolna dla wypłaty umowy</description>
+		</column>
+		<column name="ZAW_UmowaOgraniczProcent" type="DECIMAL(15,2)">
+			<description>Kwota wolna dla wypłaty umowy jako procent</description>
+		</column>
+		<column name="ZAW_Priorytet" type="INTEGER">
+			<description>Priorytet wskazujący kolejność naliczania</description>
+		</column>
+		<column name="ZAW_Splacone" type="TINYINT" definition="NOT NULL">
+			<description>Flaga, czy zajęcie wynar. jest spłacone</description>
+		</column>
+		<column name="ZAW_SplaconeCale" type="COMPUTED|TINYINT" definition="cdn.SplaconeCale(ZAW_Rodzaj,ZAW_Wartosc,ZAW_Splacono,ZAW_Splacone)">
+			<description>Pełna informacja o spłaceniu zajęcia</description>
+		</column>
+		<column name="ZAW_IloscGodzin" type="DATETIME">
+			<details>Ilość godzin</details>
+		</column>
+		<column name="ZAW_RodzajCzasuPracy" type="INT" definition="NOT NULL CONSTRAINT DF_ZAW_RodzajCzasuPracy DEFAULT(0)">
+			<description>Rodzaj czasu pracy</description>
+		</column>
+		<column name="ZAW_ProcWynZgodnyGrupa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ZAW_ProcWynZgodnyGrupa DEFAULT(0)">
+			<description>Proc. wynagr. podleg. egzekucji zgodnie z ustaw. grupy ograniczeń potrąceń</description>
+		</column>
+		<column name="ZAW_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="ZAW_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZAW_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="ZAW_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="ZAW_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ZAW_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="ZAW_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZAW_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ZAW_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZAW_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ZAW_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ZAW_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ZAW_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ZAW_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="ZAW_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="ZAW_Primary" columns="ZAW_ZawId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_ZAWPraLink" localColumns="ZAW_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZajeciaWynagr:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="ZAWPraLink" options="NONCLUSTERED" fields="ZAW_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+	</table>
+	

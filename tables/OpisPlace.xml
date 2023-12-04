@@ -1,0 +1,47 @@
+<table name="OpisPlace">
+		<description>Opis analityczny (płace)</description>
+		<column name="OPP_OppId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="OPP_WpeId" type="INTEGER" definition="NOT NULL" />
+		<column name="OPP_PraId" type="INTEGER" definition="NOT NULL" />
+		<column name="OPP_DzlId" type="INTEGER" definition="NOT NULL" />
+		<column name="OPP_PrjId" type="INTEGER" definition="NOT NULL" />
+		<column name="OPP_Procent" type="DECIMAL(15,4)" definition="NOT NULL" />
+		<column name="OPP_Brutto" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="OPP_ZUSF" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="OPP_ZUSP" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="OPP_Zdrow" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="OPP_ZalFIS" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="OPP_PPKP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_PPKP DEFAULT(0)" />
+		<column name="OPP_PPKF" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_PPKF DEFAULT(0)" />
+		<column name="OPP_SklEmerPrac" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklEmerPrac DEFAULT(0)" />
+		<column name="OPP_SklRentPrac" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklRentPrac DEFAULT(0)" />
+		<column name="OPP_SklChorPrac" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklChorPrac DEFAULT(0)" />
+		<column name="OPP_SklEmerFirma" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklEmerFirma DEFAULT(0)" />
+		<column name="OPP_SklRentFirma" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklRentFirma DEFAULT(0)" />
+		<column name="OPP_SklWypadFirma" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklWypadFirma DEFAULT(0)" />
+		<column name="OPP_SklFGSP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklFGSP DEFAULT(0)" />
+		<column name="OPP_SklFP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklFP DEFAULT(0)" />
+		<column name="OPP_SklFEP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklFEP DEFAULT(0)" />
+		<column name="OPP_SklWypadPrac" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklWypadPrac DEFAULT(0)" />
+		<column name="OPP_SklChorFirma" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_OPP_SklChorFirma DEFAULT(0)" />
+		<primaryKey name="OPP_Primary" columns="OPP_OppId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_OPPWpeId" localColumns="OPP_WpeId" refTable="WypElementy" refColumns="WPE_WpeId" deleteOption="CASCADE">
+			<description>Relacja CDN.OpisPlace:CDN.WypElementy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_OPPPraLink" localColumns="OPP_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.OpisPlace:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_OPPDzlId" localColumns="OPP_DzlId" refTable="Dzialy" refColumns="DZL_DzlId">
+			<description>Relacja CDN.OpisPlace:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<index name="OPPWpeId" options="NONCLUSTERED" fields="OPP_WpeId" />
+		<index name="OPPPraLink" options="NONCLUSTERED" fields="OPP_PraId" />
+		<index name="OPPDzlId" options="NONCLUSTERED" fields="OPP_DzlId" />
+		<index name="OPPPrjLink" options="NONCLUSTERED" fields="OPP_PrjId" />
+		<index name="OPPPozycja" options="UNIQUE NONCLUSTERED" fields="OPP_WpeId ,OPP_DzlId ,OPP_PrjId" />
+	</table>
+	

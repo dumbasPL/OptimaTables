@@ -1,0 +1,41 @@
+<table name="TwrGrupyAtrybuty">
+		<description>Lista atrybutów towarów</description>
+		<column name="TwGA_TwGAId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="TwGA_DeAId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator definicji</description>
+			<details>Klucz obcy do tabeli DefAtrybuty</details>
+		</column>
+		<column name="TwGA_TwGId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator grupy</description>
+			<details>Klucz obcy do tabeli Towary</details>
+		</column>
+		<column name="TwGA_WartoscTxt" type="NVARCHAR(100)" definition="NOT NULL" filterVisible="false">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TwGA_DABID" type="INTEGER">
+			<description>Klucz obcy do CDN.DaneBinarne</description>
+		</column>
+		<column name="TwGA_SourceId" type="INTEGER">
+			<description>Id atrybutu źródłowego</description>
+		</column>
+		<column name="TwGA_JezykId" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_TwGA_JezykId DEFAULT(0)">
+			<description>Identyfikator jezyka</description>
+			<details>
+				1 -polski
+				2- angielski
+				3 - niemiecki
+			</details>
+		</column>
+		<primaryKey name="TwGA_Primary" columns="TwGA_TwGAId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="TwGAGrupa" options="NONCLUSTERED" fields="TwGA_TwGId">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+		<index name="TwGADefAtrybut" options="NONCLUSTERED" fields="TwGA_DeAId">
+			<description>Klucz obcy do definicji atrybutu</description>
+		</index>
+	</table>
+	

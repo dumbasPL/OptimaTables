@@ -1,0 +1,193 @@
+<table name="BnkRachunki">
+		<description>Rachunki bankowe</description>
+		<details>Rachunki bankowe firmy. Rachunki związane z bankiem o BNaId = 0 są traktowane jako kasy
+			firmowe.</details>
+		<column name="BRa_BRaID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BRa_Akronim" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Akronim rachunku</description>
+			<details>Unikalny kod (akronim) banku, do szybkiego (mniemonicznego) wyszukiwania</details>
+		</column>
+		<column name="BRa_Symbol" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Symbol rachunku</description>
+		</column>
+		<column name="BRa_DDfID" type="INTEGER">
+			<description>Klucz obcy do definicji dokumentu</description>
+		</column>
+		<column name="BRa_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa rachunku</description>
+		</column>
+		<column name="BRa_BNaID" type="INTEGER">
+			<description>Klucz obcy do tabeli BnkNazwy</description>
+		</column>
+		<column name="BRa_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL" hash="1">
+			<description>Numer rachunku</description>
+		</column>
+		<column name="BRa_IBAN" type="SMALLINT" definition="NOT NULL">
+			<description>Czy numer rachunku jest w standardzie IBAN</description>
+		</column>
+		<column name="BRa_KKrID" type="INTEGER">
+			<description>Typ karty kredytowej</description>
+		</column>
+		<column name="BRa_KartaDW" type="DATETIME">
+			<description>Data ważności karty kredytowej</description>
+			<details>Reprezentacja pola typu datetime na serwerze MS SQL</details>
+		</column>
+		<column name="BRa_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta rachunku/kasy</description>
+		</column>
+		<column name="BRa_KursSprzedazyNr" type="INTEGER" definition="NOT NULL">
+			<description>Domyślny kurs sprzedaży</description>
+		</column>
+		<column name="BRa_KursZakupuNr" type="INTEGER" definition="NOT NULL">
+			<description>Domyślny kurs zakupu</description>
+		</column>
+		<column name="BRa_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Kurs bilansu otwarcia</description>
+		</column>
+		<column name="BRa_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania bilansu otwarcia</description>
+		</column>
+		<column name="BRa_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania bilansu otwarcia</description>
+		</column>
+		<column name="BRa_SaldoBO" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Saldo otwarcia rachunku w walucie</description>
+		</column>
+		<column name="BRa_SaldoBOSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Saldo otwarcia rachunku w walucie systemowej</description>
+		</column>
+		<column name="BRa_BRpOkres" type="SMALLINT" definition="NOT NULL">
+			<description>Typowy okres raportów w rejestrze</description>
+		</column>
+		<column name="BRa_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ rachunku</description>
+		</column>
+		<column name="BRa_LimitKredytu" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Limit linii kredytowej rachunku</description>
+		</column>
+		<column name="BRa_OprocRachunku" type="DECIMAL( 7,3)" definition="NOT NULL">
+			<description>Stopa oprocentowania rachunku</description>
+		</column>
+		<column name="BRa_OprocKredytu" type="DECIMAL( 7,3)" definition="NOT NULL">
+			<description>Stopa oprocentowania przy saldzie debetowym (&lt;0)</description>
+		</column>
+		<column name="BRa_OprocKarne" type="DECIMAL( 7,3)" definition="NOT NULL">
+			<description>Stopa oprocentowania odsetek karnych przy saldzie&lt;LimitKredytu</description>
+		</column>
+		<column name="BRa_KaraZaPrzekr" type="DECIMAL(15,2)">
+			<description>Kwota karna potrącana przez bank w przypadku przekroczenia limitu kredytowego</description>
+		</column>
+		<column name="BRa_NumeryObce" type="SMALLINT" definition="NOT NULL">
+			<description>Czy raporty rachunku obsługują numery obce</description>
+		</column>
+		<column name="BRa_KontoPrzeciwstawne" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto księgowe dla prostych księgowań</description>
+		</column>
+		<column name="BRa_Nieaktywny" type="SMALLINT" definition="NOT NULL">
+			<description>Czy rachunek jest nieaktywny</description>
+		</column>
+		<column name="BRa_MagazynWalut" type="SMALLINT" definition="NOT NULL">
+			<description>Czy rachunek obsługuje magazyn walut</description>
+		</column>
+		<column name="BRa_KursHistorycznyMW" type="SMALLINT" definition="NOT NULL">
+			<description>Rozliczenie MW według kursu historycznego</description>
+		</column>
+		<column name="BRa_RozKur2SumaMW" type="SMALLINT" definition="NOT NULL">
+			<description>Różnice kursowe MW wliczone w podsumowanie raportu</description>
+		</column>
+		<column name="BRa_PrzelewySEPA" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BRa_PrzelewySEPA DEFAULT(0)">
+			<description>Czy w rejestrze przelewy w walucie EUR są domyślnie eksportowane w standardzie
+				SEPA</description>
+		</column>
+		<column name="BRa_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BRa_SplitPay DEFAULT(0)">
+			<description>Rachunek VAT dla Split Payment</description>
+		</column>
+		<column name="BRa_CDCIdentyfikatorFirmy" type="NVARCHAR(32)">
+			<description>Id firmy/kontekstu w mBanku (DIK)</description>
+		</column>
+		<column name="BRa_TS_Export" type="DATETIME">
+			<description>TimeStamp wykonania eksportu</description>
+		</column>
+		<column name="BRa_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="BRa_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="BRa_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="BRa_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRa_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRa_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="BRa_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRa_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRa_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRa_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BRa_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRa_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BRa_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRa_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRa_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRa_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRa_GIDTyp" type="SMALLINT" />
+		<column name="BRa_GIDFirma" type="INTEGER" />
+		<column name="BRa_GIDNumer" type="INTEGER" />
+		<column name="BRa_GIDLp" type="SMALLINT" />
+		<primaryKey name="BRa_Primary" columns="BRa_BRaID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BRaKartaTyp" localColumns="BRa_KKrID" refTable="KartyKredytowe" refColumns="KKr_KKrId">
+			<description>Relacja CDN.BnkRachunki:CDN.KartyKredytowe (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BRaDokDefinicja" localColumns="BRa_DDfID" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.BnkRachunki:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BRaNumer" localColumns="BRa_BNaID" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.BnkRachunki:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<index name="BRaDokDefinicja" options="NONCLUSTERED" fields="BRa_DDfID">
+			<description>Relacja do definicji dokumentu</description>
+		</index>
+		<index name="BRaAkronim" options="UNIQUE NONCLUSTERED" fields="BRa_Akronim">
+			<description>Indeks wg akronimu rachunku</description>
+		</index>
+		<index name="BRaSymbol" options="UNIQUE NONCLUSTERED" fields="BRa_Symbol">
+			<description>Indeks wg symbolu rachunku</description>
+		</index>
+		<index name="BRaNumer" options="UNIQUE NONCLUSTERED" fields="BRa_BNaID ,BRa_RachunekNr">
+			<description>Wg numeru rachunku</description>
+		</index>
+		<index name="BRaKartaTyp" options="NONCLUSTERED" fields="BRa_KKrID">
+			<description>Klucz obcy do tabeli kart kredytowych</description>
+		</index>
+		<index name="BRaGUID" options="UNIQUE NONCLUSTERED" fields="BRa_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="BRaGID" options="NONCLUSTERED" fields="BRa_GIDTyp ,BRa_GIDFirma ,BRa_GIDNumer">
+			<description>Klucz wg identyfikatora GID w XL-u</description>
+		</index>
+	</table>
+	

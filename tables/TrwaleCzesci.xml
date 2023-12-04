@@ -1,0 +1,23 @@
+<table name="TrwaleCzesci">
+		<description>Tabela części zestawów środków trwałych</description>
+		<details>Tabela części zestawów środków trwałych</details>
+		<column name="SrTC_SrtCID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SrTC_ZestawID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator środka trwałego - zestawu</description>
+		</column>
+		<column name="SrTC_CzescID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator środka trwałego będącego częścią zestawu</description>
+		</column>
+		<primaryKey name="SrTC_Primary" columns="SrTC_SrtCID">
+			<description>Wg ID</description>
+		</primaryKey>
+		<foreignKey name="FK_SrTCZestaw" localColumns="SrTC_ZestawID" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleCzesci:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+		<index name="SrTCZestaw" options="UNIQUE NONCLUSTERED" fields="SrTC_ZestawID ,SrTC_CzescID">
+			<description>Wg zestawu</description>
+		</index>
+	</table>
+	

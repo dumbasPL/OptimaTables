@@ -1,0 +1,47 @@
+<table name="TypWyplataGrupa">
+		<description>Tabela grup typów wypłat</description>
+		<column name="TWY_TwyId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TWY_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Opis grupy</description>
+		</column>
+		<column name="TWY_Nieaktywna" type="TINYINT" definition="NOT NULL">
+			<description>Grupa nieaktywna</description>
+		</column>
+		<column name="TWY_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="TWY_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TWY_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="TWY_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="TWY_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TWY_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="TWY_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TWY_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="TWY_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TWY_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="TWY_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TWY_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="TWY_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TWY_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="TWY_Primary" columns="TWY_TwyId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="TWYNazwa" options="UNIQUE NONCLUSTERED" fields="TWY_Nazwa" />
+	</table>
+	

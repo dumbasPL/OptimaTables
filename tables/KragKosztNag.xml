@@ -1,0 +1,66 @@
+<table name="KragKosztNag">
+		<description>Nagłówki definicji kręgów kosztów</description>
+		<column name="KKN_KKNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KKN_OObId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do okresu obrachunkowego</description>
+		</column>
+		<column name="KKN_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol kręgu kosztów</description>
+		</column>
+		<column name="KKN_AccId" type="INTEGER">
+			<description>Klucz obcy do konta pomocniczego</description>
+		</column>
+		<column name="KKN_NieAktywny" type="SMALLINT" definition="NOT NULL">
+			<description>Czy nie uwzględniać tego kręgu w kontroli</description>
+		</column>
+		<column name="KKN_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="KKN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KKN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="KKN_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="KKN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KKN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="KKN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KKN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="KKN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KKN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="KKN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KKN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="KKN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KKN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="KKN_Primary" columns="KKN_KKNId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KKNSymbol" localColumns="KKN_OObId" refTable="OkresyObrach" refColumns="OOb_OObID" deleteOption="CASCADE">
+			<description>Relacja CDN.KragKosztNag:CDN.OkresyObrach (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KKNKonto" localColumns="KKN_AccId" refTable="Konta" refColumns="Acc_AccId">
+			<description>Relacja CDN.KragKosztNag:CDN.Konta (MANY:1)</description>
+		</foreignKey>
+		<index name="KKNSymbol" options="UNIQUE NONCLUSTERED" fields="KKN_OObId ,KKN_Symbol">
+			<description>Według symbolu kręgu</description>
+		</index>
+		<index name="KKNKonto" options="NONCLUSTERED" fields="KKN_AccId ,KKN_NieAktywny">
+			<description>Wg konta pomocniczego</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,131 @@
+<table name="TypNieobec">
+		<description>Tabela typów nieobecności</description>
+		<column name="TNB_TnbId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TNB_PdzId" type="INTEGER" definition="NOT NULL">
+			<description>Pozycja na deklaracji ZUS</description>
+		</column>
+		<column name="TNB_TwpId" type="INTEGER">
+			<description>Odnośnik do typu wypłaty</description>
+		</column>
+		<column name="TNB_LnbId" type="INTEGER">
+			<description>Odnośnik do limitu nieobecności</description>
+		</column>
+		<column name="TNB_TyuId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do tytułu ubezpieczenia</description>
+		</column>
+		<column name="TNB_TnkId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do typu nieobecności karty pracy</description>
+		</column>
+		<column name="TNB_Nazwa" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa typu nieobecności</description>
+		</column>
+		<column name="TNB_Akronim" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Skrót typu nieobecności</description>
+		</column>
+		<column name="TNB_Typ" type="INTEGER" definition="NOT NULL">
+			<details>
+				1 – usprawiedliwiona
+				2 – nieusprawiedliwiona
+				4 – urlop
+				8 – zwolnienie chorobowe
+			</details>
+		</column>
+		<column name="TNB_RozliczDni" type="TINYINT" definition="NOT NULL">
+			<description>Rozliczać w dniach</description>
+		</column>
+		<column name="TNB_TypRozliczenia" type="INTEGER" definition="NOT NULL" />
+		<column name="TNB_PomnCzasPracy" type="TINYINT" definition="NOT NULL" />
+		<column name="TNB_PomnCzasRNA" type="TINYINT" definition="NOT NULL" />
+		<column name="TNB_PomnStazPracy" type="TINYINT" definition="NOT NULL" />
+		<column name="TNB_PomnLimitUrlopu" type="TINYINT" definition="NOT NULL" />
+		<column name="TNB_PomniejszWynagr" type="TINYINT" definition="NOT NULL">
+			<description>Pomniejszenie wynagrodzenia dla stawki miesięcznej/godzinowej</description>
+		</column>
+		<column name="TNB_Pomniejszenie" type="TINYINT" definition="NOT NULL" />
+		<column name="TNB_Standardowy" type="SMALLINT" definition="NOT NULL" />
+		<column name="TNB_Wycofany" type="TINYINT" definition="NOT NULL" />
+		<column name="TNB_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Pozycja słownika jest nieużywana</description>
+		</column>
+		<column name="TNB_WliczOkresPracyNaucz" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TNB_WliczOkresPracyNaucz DEFAULT(0)">
+			<description>Czy nieobecność jest wliczana do okresu pracy nauczycielskiej</description>
+		</column>
+		<column name="TNB_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="TNB_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="TNB_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TNB_TS_Zal" type="DATETIME">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="TNB_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="TNB_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="TNB_TS_Mod" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="TNB_Planowany" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TNB_Planowany DEFAULT(0)">
+			<description>Pole, wykorzystywane w ePracowniku, oznaczające ze dana nieobecnośc będzie
+				wymagała akceptacji (zatwierdzenia)</description>
+		</column>
+		<column name="TNB_PoZatwierdzeniu" type="INTEGER" definition="NULL">
+			<description>Pole, wykorzystywane w ePracowniku, które będzie wskazywało na jaka nieobecność
+				ma zostac edytowana, zatwierdzana nieobecność</description>
+		</column>
+		<column name="TNB_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TNB_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="TNB_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TNB_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="TNB_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TNB_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="TNB_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TNB_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="TNB_Primary" columns="TNB_TnbId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_TNBTnkLink" localColumns="TNB_TnkId" refTable="TypNieobecKartaPracy" refColumns="TNK_TnkId">
+			<description>Relacja CDN.TypNieobec:CDN.TypNieobecKartaPracy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TNBTyuLink" localColumns="TNB_TyuId" refTable="TytUbezp" refColumns="TYU_TyuId">
+			<description>Relacja CDN.TypNieobec:CDN.TytUbezp (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TNBLnbId" localColumns="TNB_LnbId" refTable="LimitNieobec" refColumns="LNB_LnbId">
+			<description>Relacja CDN.TypNieobec:CDN.LimitNieobec (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TNBPdzLink" localColumns="TNB_PdzId" refTable="PozDeklZUS" refColumns="PDZ_PdzId">
+			<description>Relacja CDN.TypNieobec:CDN.PozDeklZUS (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TNBTwpId" localColumns="TNB_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId">
+			<description>Relacja CDN.TypNieobec:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<index name="TNBNazwa" options="UNIQUE NONCLUSTERED" fields="TNB_Nazwa" />
+		<index name="TNBTwpId" options="NONCLUSTERED" fields="TNB_TwpId">
+			<description>Relacja do typu wypłaty</description>
+		</index>
+		<index name="TNBPdzLink" options="NONCLUSTERED" fields="TNB_PdzId">
+			<description>Link do PozDeklZUS</description>
+		</index>
+		<index name="TNBLnbId" options="NONCLUSTERED" fields="TNB_LnbId">
+			<description>Relacja do limitu nieobecności</description>
+		</index>
+		<index name="TNBTyuLink" options="NONCLUSTERED" fields="TNB_TyuId">
+			<description>Relacja do tytułu ubezpieczenia</description>
+		</index>
+		<index name="TNBTnkLink" options="NONCLUSTERED" fields="TNB_TnkId">
+			<description>Relacja do typu nieobecności karty czasu pracy</description>
+		</index>
+	</table>
+	

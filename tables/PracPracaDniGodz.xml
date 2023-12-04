@@ -1,0 +1,47 @@
+<table name="PracPracaDniGodz">
+		<description>Wejścia/wyjścia planu pracy</description>
+		<column name="PGR_PgrId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PGR_PprId" type="INTEGER" definition="NOT NULL">
+			<description>We/wy w dniu</description>
+		</column>
+		<column name="PGR_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer porządkowy</description>
+		</column>
+		<column name="PGR_OdGodziny" type="DATETIME" definition="NOT NULL">
+			<description>Godzina wejścia</description>
+		</column>
+		<column name="PGR_DoGodziny" type="DATETIME" definition="NOT NULL">
+			<description>Godzina wyjścia</description>
+		</column>
+		<column name="PGR_Strefa" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator strefy</description>
+		</column>
+		<column name="PGR_DzlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wydziału</description>
+		</column>
+		<column name="PGR_PrjId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator projektu</description>
+		</column>
+		<column name="PGR_Uwagi" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Uwagi</description>
+		</column>
+		<column name="PGR_OdbNadg" type="INTEGER" definition="NOT NULL">
+			<description>Odbiór nadgodzin</description>
+		</column>
+		<column name="PGR_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PGR_Primary" columns="PGR_PgrId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="PGRLp" options="NONCLUSTERED" fields="PGR_Lp" />
+		<index name="PGRPprLink" options="NONCLUSTERED" fields="PGR_PprId">
+			<description>Klucz obcy czasu pracy</description>
+		</index>
+		<foreignKey name="FK_PGRPprLink" localColumns="PGR_PprId" refTable="PracPracaDni" refColumns="PPR_PprId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPracaDniGodz:CDN.PracPracaDni (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

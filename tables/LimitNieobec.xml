@@ -1,0 +1,100 @@
+<table name="LimitNieobec">
+		<description>Tabela typów limitów nieobecności</description>
+		<column name="LNB_LnbId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="LNB_Nazwa" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa limitu nieobecności</description>
+		</column>
+		<column name="LNB_Skrot" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Skrót limitu nieobecności</description>
+		</column>
+		<column name="LNB_Podstawa" type="INTEGER" definition="NOT NULL" />
+		<column name="LNB_KumNieWykorz" type="TINYINT" definition="NOT NULL">
+			<description>Czy niewykorzystany limit podlega przenoszeniu na kolejny rok</description>
+			<details>
+				1- podlega przenoszeniu
+				0 - nie podlega przenoszeniu
+			</details>
+		</column>
+		<column name="LNB_ZalezyOdStaz" type="TINYINT" definition="NOT NULL">
+			<description>Czy wysokość limitu zależna od stażu pracy</description>
+			<details>
+				0 - nie zależy od stażu; liczba dni rocznego limitu zawsze zgodna z zapisana w polu
+				LNB.LiczbaDni;
+				1- zależy od stażu; liczba dni limitu wyliczana wg progów urlopowych z konfiguracji;
+			</details>
+		</column>
+		<column name="LNB_LiczPropDoZatr" type="TINYINT" definition="NOT NULL">
+			<description>Czy limit proporcjonalny do okresu zatrudnienia</description>
+			<details>
+				0 - nie proporcjonalny; stała liczba dni limitu na rok, niezależnie od okresu zatrudnienia
+				1 - liczony proporcjonalnie do liczby miesięcy zatrudnienia w roku
+			</details>
+		</column>
+		<column name="LNB_Godzinowy" type="TINYINT" definition="NOT NULL">
+			<description>Czy przeliczany na godziny</description>
+			<details>
+				0 - liczony na dni
+				1 - liczony na godziny
+			</details>
+		</column>
+		<column name="LNB_LiczbaDni" type="INTEGER" definition="NOT NULL">
+			<description>liczba dni limitu należnego na rok</description>
+			<details>(istotna tylko jeśli LNB_ZalezyOdStazu=0)</details>
+		</column>
+		<column name="LNB_LiczbaDniDod" type="INTEGER" definition="NOT NULL" />
+		<column name="LNB_Staz" type="TINYINT" definition="NOT NULL" />
+		<column name="LNB_Standardowy" type="SMALLINT" definition="NOT NULL">
+			<description>Identyfikator standardowego typu limitu</description>
+			<details>dla definiowanych przez Użytkownika zawsze wartość = 0 (zero)</details>
+		</column>
+		<column name="LNB_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_LNB_Nieaktywny DEFAULT(0)">
+			<description>Pozycja słownika jest nieużywana</description>
+		</column>
+		<column name="LNB_PoMiesiacach" type="TINYINT" definition="NOT NULL CONSTRAINT DF_LNB_PoMiesiacach DEFAULT(0)">
+			<description>Oznaczenie, czy należny limit danego typu jest liczony na rok, czy na miesiąc</description>
+		</column>
+		<column name="LNB_LiczPropDoEtatu" type="TINYINT" definition="NOT NULL CONSTRAINT DF_LNB_LiczPropDoEtatu DEFAULT(0)">
+			<description>Należny limit liczony proporcjonalnie do wymiaru etatu</description>
+		</column>
+		<column name="LNB_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="LNB_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="LNB_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="LNB_TS_Zal" type="DATETIME">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="LNB_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="LNB_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="LNB_TS_Mod" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="LNB_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_LNB_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="LNB_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_LNB_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="LNB_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_LNB_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="LNB_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_LNB_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="LNB_Primary" columns="LNB_LnbId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="LNBNazwa" options="UNIQUE NONCLUSTERED" fields="LNB_Nazwa" />
+		<index name="LNBSkrot" options="NONCLUSTERED" fields="LNB_Skrot" />
+	</table>
+	

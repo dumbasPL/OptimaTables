@@ -1,0 +1,76 @@
+<table name="Centra">
+		<description>Tabela centrów podległościowych firmy</description>
+		<column name="CNT_CntId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator centrum</description>
+		</column>
+		<column name="CNT_Kod" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kod centrum</description>
+		</column>
+		<column name="CNT_Nazwa" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Nazwa centrum</description>
+		</column>
+		<column name="CNT_ParentId" type="INTEGER">
+			<description>Identyfikator nadrzędnego węzła</description>
+			<details>NULL dla centrum brak i głównego, pozostałe wskazują na centrum nadrzędne po
+				CNT_CntId</details>
+		</column>
+		<column name="CNT_Nieaktywny" type="SMALLINT" definition="NOT NULL">
+			<description>Znacznik aktywności centrum</description>
+			<details>0- aktywny, 1- nieaktywny</details>
+		</column>
+		<column name="CNT_AdresWezla" type="NVARCHAR(512)" definition="NOT NULL">
+			<details>0-dla brak, 1- główne</details>
+		</column>
+		<column name="CNT_Poziom" type="SMALLINT" definition="NOT NULL">
+			<details>0-dla brak, 1-dla głównego, powyżej 1 – dla podcentrów (wskazuje na zagłębienie)</details>
+		</column>
+		<column name="CNT_Lisc" type="INT" definition="NOT NULL" />
+		<column name="CNT_AddMethod" type="TINYINT" definition="NOT NULL" filterVisible="false" />
+		<column name="CNT_ImpId" type="INTEGER" definition="NOT NULL" filterVisible="false" />
+		<column name="CNT_Last" type="TINYINT" definition="NOT NULL" />
+		<column name="CNT_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="CNT_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CNT_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CNT_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="CNT_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="CNT_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="CNT_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CNT_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="CNT_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CNT_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="CNT_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_CNT_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="CNT_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_CNT_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="CNT_Primary" columns="CNT_CNTId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_CNTParrent" localColumns="CNT_ParentId" refTable="Centra" refColumns="CNT_CntId">
+			<description>Self-Relacja do CDN.Centra</description>
+		</foreignKey>
+		<index name="CNTInclude" options="UNIQUE NONCLUSTERED" fields="CNT_ParentId ,CNT_Kod">
+			<description>Klucz wewnętrzny</description>
+		</index>
+		<index name="CNTGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="CNT_Kod, CNT_CNTId" includedColumns="CNT_Nieaktywny, CNT_Nazwa, CNT_AdresWezla">
+			<description>Gridlookupu centrum wg kodu i id centrum</description>
+		</index>
+	</table>
+	

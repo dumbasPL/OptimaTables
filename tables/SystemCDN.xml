@@ -1,0 +1,15 @@
+<table name="SystemCDN" filterVisible="false">
+		<description>Tabela ustawien systemowych</description>
+		<details>Tabela używana do przechowywania ustawień systemowych oraz do komunikacji z driver'em
+			(dla ODBC) - brak pliku to błąd krytyczny</details>
+		<column name="SYS_ID" type="INTEGER">
+			<description>numer kolejny parametru</description>
+		</column>
+		<column name="SYS_Wartosc" type="VARCHAR(254)" definition="NOT NULL">
+			<description>Wartość parametru</description>
+		</column>
+		<primaryKey name="SYS_Primary" columns="SYS_ID">
+			<description>wg ID</description>
+		</primaryKey>
+	</table>
+	

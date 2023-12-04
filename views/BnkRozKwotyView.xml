@@ -1,0 +1,128 @@
+<view name="BnkRozKwotyView">
+		<description>Lista rozrachunków dokumentów kasowo-bankowych</description>
+		<column name="BRKV_BRKID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BRKV_Waluta" type="VARCHAR(3)" definition="NO_SQL">
+			<description>Waluta rozliczenia</description>
+		</column>
+		<column name="BRKV_DokTyp1" type="SMALLINT" definition="NO_SQL">
+			<description>Typ dokumentu uczestniczącego w rozrachunku po lewej stronie</description>
+			<details>Określa, czy rozrachowywany zapis po lewej stronie znajduje się w tabeli BnkZapisy
+				czy BnkZdarzenia</details>
+		</column>
+		<column name="BRKV_DokID1" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator dokumentu uczestniczącego w rozrachunku po lewej stronie</description>
+			<details>Określa ID rozliczanego zapisu w tabeli BnkZapisy lub BnkZdarzenia</details>
+		</column>
+		<column name="BRKV_Numer1" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer dokumentu po lewej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Data1" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Data dokumentu z lewej strony rozrachunku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRKV_Termin1" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Termin doumentu po lewej stronie rozliczenia</description>
+		</column>
+		<column name="BRKV_BRaId1" type="INTEGER" definition="NO_SQL">
+			<description>Id rachunku dokumentu z lewej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KursNumer1" type="INTEGER" definition="NO_SQL">
+			<description>Kurs waluty dokumentu z lewej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KursL1" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Licznik kursu waluty dokumentu z lewej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KursM1" type="DECIMAL( 7,0)" definition="NO_SQL">
+			<description>Mianownik kursu dokumentu z lewej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_Opis1" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Opis dokumentu z lewej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KontoPrzeciwstawne1" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Konto przeciwstawne dokumentu z lewej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_PodmiotTyp1" type="INTEGER" definition="NO_SQL">
+			<description>Typ podmiotu po lewej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_PodmiotId1" type="INTEGER" definition="NO_SQL">
+			<description>Id podmiotu po lewej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Kwota1" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota w walucie po lewej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_KwotaSys1" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota w PLN po lewej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_KwotaRozSys1" type="DECIMAL(15,2)" definition="NO_SQL" />
+		<column name="BRKV_Typ1" type="NVARCHAR(3)" definition="NO_SQL">
+			<description>Typ (opisowy) dokumentu po lewej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Wynagrodzenie1" type="TINYINT" definition="NO_SQL">
+			<description>Czy lewy dokument jest oznaczony jako wynagrodzenie</description>
+		</column>
+		<column name="BRKV_DokTyp2" type="INTEGER" definition="NO_SQL">
+			<description>Typ dokumentu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_DokId2" type="INTEGER" definition="NO_SQL">
+			<description>Id dokumentu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Numer2" type="NVARCHAR(30)" definition="NO_SQL">
+			<description>Numer dokumentu po lewej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Data2" type="DATETIME" definition="NO_SQL">
+			<description>Data dokumentu z prawej strony rozrachunku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRKV_Termin2" type="NVARCHAR(8)" definition="NO_SQL">
+			<description>Termin dokumentu po prawej stronie rozliczenia</description>
+		</column>
+		<column name="BRKV_BraId2" type="INTEGER" definition="NO_SQL">
+			<description>Id rachunku dokumentu z prawej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KursNumer2" type="INTEGER" definition="NO_SQL">
+			<description>Numer kursu waluty dokumentu z prawej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KursL2" type="DECIMAL(15,4)" definition="NO_SQL">
+			<description>Licznik kursu waluty dokumentu z prawej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KursM2" type="DECIMAL( 7,0)" definition="NO_SQL">
+			<description>Mianownik kursu waluty dokumentu z prawej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_Opis2" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Opis dokumentu z prawej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_KontoPrzeciwstawne2" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Konto przeciwstawne dokumentu z prawej strony rozrachunku</description>
+		</column>
+		<column name="BRKV_PodmiotTyp2" type="INTEGER" definition="NO_SQL">
+			<description>Typ podmiotu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_PodmiotId2" type="INTEGER" definition="NO_SQL">
+			<description>Id podmiotu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Kwota2" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota dokumentu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_KwotaSys2" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota w PLN dokumentu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_KwotaRozSys2" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota rozrachunku w PLN dokumentu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Typ2" type="NVARCHAR(3)" definition="NO_SQL">
+			<description>Typ (opisowy) dokumentu po prawej stronie rozrachunku</description>
+		</column>
+		<column name="BRKV_Wynagrodzenie2" type="TINYINT" definition="NO_SQL">
+			<description>Czy prawy dokument jest oznaczony jako wynagrodzenie</description>
+		</column>
+		<column name="BRKV_Automatyczny" type="INTEGER" definition="NO_SQL">
+			<description>Rozliczenie automtyczne</description>
+		</column>
+	</view>
+	

@@ -1,0 +1,35 @@
+<table name="DetalRoliczeniaZaleglosci">
+		<description>Rozliczenie zaleglosci dodane w mobile tabela tymczasowa</description>
+		<column name="DRZ_DRZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DRZ_DSDRZId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DRZ_DSDRZId DEFAULT(0)">
+			<description>Identyfikator zdarzenia w Mobile</description>
+		</column>
+		<column name="DRZ_BZdId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zdarzenia w KB</description>
+		</column>
+		<column name="DRZ_DSZKBID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DRZ_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska</description>
+		</column>
+		<column name="DRZ_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota</description>
+		</column>
+		<column name="DRZ_StanSynchronizacji" type="INTEGER">
+			<description>Stan synchronizacji kontrahenta</description>
+		</column>
+		<column name="DRZ_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu danych</description>
+		</column>
+		<primaryKey name="DRZ_Primary" columns="DRZ_DRZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

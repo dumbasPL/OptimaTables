@@ -1,0 +1,59 @@
+<table name="SrsRodzajeU">
+		<description>Rodzaje serwisowanych urządzeń</description>
+		<details>Rodzaje serwisowanych urządzeń (Moduł Serwis)</details>
+		<column name="SrR_SrRId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrR_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod rodzaju</description>
+		</column>
+		<column name="SrR_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa rodzaju</description>
+		</column>
+		<column name="SrR_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Dla oznaczenia już nieużywanych</description>
+		</column>
+		<column name="SrR_OpeZalId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego urządzenie</description>
+		</column>
+		<column name="SrR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrR_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrR_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego urządzenie</description>
+		</column>
+		<column name="SrR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrR_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SrR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SrR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SrR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SrR_Primary" columns="SrR_SrRId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="SrUKod" options="UNIQUE NONCLUSTERED" fields="SrR_Kod">
+			<description>Wg kodu</description>
+		</index>
+	</table>
+	

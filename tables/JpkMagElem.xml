@@ -1,0 +1,16 @@
+<table name="JpkMagElem">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="ID" type="int" definition="NO_SQL" />
+		<column name="JpNID" type="int" definition="NO_SQL" />
+		<column name="TrNID" type="int" definition="NO_SQL" />
+		<column name="TrEID" type="int" definition="NO_SQL" />
+		<column name="Typdok" type="int" definition="NO_SQL" />
+		<column name="NumerDok" type="nvarchar(30)" definition="NO_SQL" />
+		<column name="KodTowaru" type="nvarchar(40)" definition="NO_SQL" />
+		<column name="NazwaTowaru" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="Ilosc" type="decimal(15, 4)" definition="NO_SQL" />
+		<column name="Jednostka" type="nvarchar(20)" definition="NO_SQL" />
+		<column name="CenaJedn" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="WartoscPozycji" type="decimal(15, 2)" definition="NO_SQL" />
+	</table>
+	

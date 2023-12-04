@@ -1,0 +1,58 @@
+<table name="JpkVAT">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="Id" type="int" definition="NO_SQL" />
+		<column name="JpNId" type="int" definition="NO_SQL" />
+		<column name="VaNId" type="int" definition="NO_SQL" />
+		<column name="Typ" type="tinyint" definition="NO_SQL" />
+		<column name="VatZd" type="tinyint" definition="NO_SQL" />
+		<column name="RokMiesiac" type="int" definition="NO_SQL" />
+		<column name="Lp" type="int" definition="NO_SQL" />
+		<column name="DataSprzedazy" type="date" definition="NO_SQL" />
+		<column name="DataWystawienia" type="date" definition="NO_SQL" />
+		<column name="DataWplywu" type="date" definition="NO_SQL" />
+		<column name="Dokument" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="NIP" type="nvarchar(50)" definition="NO_SQL" />
+		<column name="Kontrahent" type="nvarchar(350)" definition="NO_SQL" />
+		<column name="Adres" type="nvarchar(350)" definition="NO_SQL" />
+		<column name="K_10" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_11" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_12" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_13" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_14" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_15" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_16" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_17" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_18" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_19" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_20" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_21" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_22" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_23" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_24" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_25" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_26" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_27" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_28" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_29" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_30" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_31" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_32" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_33" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_34" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_35" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_36" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_37" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_38" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_42" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_43" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_44" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_45" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_46" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_47" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_48" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="DataZakupu" type="date" definition="NO_SQL" />
+		<column name="K_39" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_49" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_50" type="decimal(15, 2)" definition="NO_SQL" />
+	</table>
+	

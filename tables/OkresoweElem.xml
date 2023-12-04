@@ -1,0 +1,70 @@
+<table name="OkresoweElem">
+		<description>Elementy definicji księgowań okresowych</description>
+		<column name="OkE_OkEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="OkE_OkNId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka</description>
+		</column>
+		<column name="OkE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa</description>
+		</column>
+		<column name="OkE_KontoWn" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Symbol konta po stronie Winien</description>
+		</column>
+		<column name="OkE_KontoMa" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Symbol konta po stronie Ma</description>
+		</column>
+		<column name="OkE_Dokument" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Numer wygenerowanego księgowania okresowego</description>
+		</column>
+		<column name="OkE_Kwota" type="NVARCHAR(2000)" definition="NOT NULL">
+			<description>Definicja kwoty</description>
+		</column>
+		<column name="OkE_KatId" type="INTEGER">
+			<description>Klucz obcy do kategorii</description>
+		</column>
+		<column name="OkE_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis (kategoria) pozycji</description>
+		</column>
+		<column name="OkE_Warunek" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis warunku wykonywania księgowania</description>
+		</column>
+		<column name="OkE_Rozrachunki" type="INTEGER">
+			<description>Rozrachunki na kontach</description>
+		</column>
+		<column name="OkE_KwotaWartosc" type="DECIMAL(15,2)">
+			<description>Kwota - Wartość liczbowa</description>
+		</column>
+		<column name="OkE_Harmonogram" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OkE_Harmonogram DEFAULT (0)">
+			<description>Księgowanie wg harmonogramu; 0 - aktywne, 1 - nie aktywne</description>
+		</column>
+		<column name="OkE_ZakresDat" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OkE_ZakresDat DEFAULT (0)">
+			<description>Zakres dat DataOd DataDo: 0 - aktywny, 1 - nie aktywny</description>
+		</column>
+		<column name="OkE_DataOd" type="DATETIME">
+			<description>Data od zakresu dat</description>
+		</column>
+		<column name="OkE_DataDo" type="DATETIME">
+			<description>Data do zakresu dat</description>
+		</column>
+		<column name="OkE_Uwagi" type="nvarchar(1024)">
+			<description>Opis - uwagi</description>
+		</column>
+		<primaryKey name="OkE_Primary" columns="OkE_OkEId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_OkENaglowek" localColumns="OkE_OkNId" refTable="OkresoweNag" refColumns="OkN_OkNId" deleteOption="CASCADE">
+			<description>Relacja CDN.OkresoweElem:CDN.OkresoweNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_OkEKategoria" localColumns="OkE_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.OkresoweElem:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="OkEKategoria" options="NONCLUSTERED" fields="OkE_KatId">
+			<description>Klucz obcy do tabeli Kategorie</description>
+		</index>
+		<index name="OkENaglowek" options="UNIQUE NONCLUSTERED" fields="OkE_OkNId ,OkE_Lp ,OkE_OkEId">
+			<description>Klucz obcy do nagłówka</description>
+		</index>
+	</table>
+	

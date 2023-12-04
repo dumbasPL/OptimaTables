@@ -1,0 +1,1129 @@
+<table name="PracEtaty">
+		<description>Dane kadrowe pracowników (szczegółowa ewidencja)</description>
+		<column name="PRE_PreId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PRE_ZrgId" type="INTEGER" />
+		<column name="PRE_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PRE_PodmiotTyp" type="SMALLINT" definition="CONSTRAINT DF_PRE_PodmiotTyp DEFAULT(3)">
+			<description>Typ podmiotu w ramach PodmiotyView</description>
+		</column>
+		<column name="PRE_DzlId" type="INTEGER" definition="CONSTRAINT DF_PRE_DzlId DEFAULT(3)">
+			<description>Odnośnik do działu pracownika</description>
+		</column>
+		<column name="PRE_CntId" type="INTEGER" definition="CONSTRAINT DF_PRE_CntId DEFAULT(3)">
+			<description>Odnośnik do centrum pracownika</description>
+		</column>
+		<column name="PRE_KalId" type="INTEGER">
+			<description>Odnośnik do kalendarza etatu</description>
+		</column>
+		<column name="PRE_ETATwpId" type="INTEGER">
+			<description>Typ wyplaty zasadniczego</description>
+		</column>
+		<column name="PRE_UBZTyuId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do tytułu ubezpieczenia</description>
+		</column>
+		<column name="PRE_TypPracownika" type="TINYINT" definition="NOT NULL">
+			<description>Charakter zatrudnienia pracownika (0 - pracownik, 1 - właściciel lub
+				współpracownik)</description>
+		</column>
+		<column name="PRE_WlascicielId" type="INTEGER">
+			<description>Odnośnik do innego pracownika</description>
+		</column>
+		<column name="PRE_BnaId" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli BnkNazwy</description>
+		</column>
+		<column name="PRE_FplId" type="INTEGER">
+			<description>Formy płatności pracownika</description>
+		</column>
+		<column name="PRE_Kod" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Kod pracownika</description>
+		</column>
+		<column name="PRE_Nazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko pracownika</description>
+		</column>
+		<column name="PRE_Imie1" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Pierwsze imię pracownika</description>
+		</column>
+		<column name="PRE_Pesel" type="NVARCHAR(11)" definition="NOT NULL" hash="1">
+			<description>Pesel pracownika</description>
+		</column>
+		<column name="PRE_ETARodzajZatrudnienia" type="INTEGER" definition="NOT NULL">
+			<details>
+				0 – wartość domyślna (pracownik)
+				1 - właściciel
+				2 - osoba współpracująca
+				4 – uczeń I klasa
+				5 - uczeń II klasa
+				6 - uczeń III klasa
+				7 – młodociany
+			</details>
+		</column>
+		<column name="PRE_DataOd" type="DATETIME" definition="NOT NULL">
+			<description>Początkowa data aktualności (rekordu) pracownika</description>
+		</column>
+		<column name="PRE_DataDo" type="DATETIME" definition="NOT NULL">
+			<description>Końcowa data aktualności (rekordu) pracownika</description>
+		</column>
+		<column name="PRE_ZatrudnionyOd" type="DATETIME">
+			<description>Data zatrudnienia pracownika</description>
+		</column>
+		<column name="PRE_ZatrudnionyDo" type="DATETIME">
+			<description>Data zwolnienia pracownika</description>
+		</column>
+		<column name="PRE_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL" hash="1">
+			<description>Numer konta rachunku bankowego podmiotu</description>
+		</column>
+		<column name="PRE_IBAN" type="SMALLINT" definition="NOT NULL">
+			<description>Czy numer rachunku jest w standardzie IBAN</description>
+		</column>
+		<column name="PRE_ZestCzasuPracy" type="TINYINT" definition="NOT NULL">
+			<description>sposób rozliczania pracownika</description>
+			<details>
+				0 – kalendarz (domyślny)
+				1 – wg obecności
+				2 – wg zestawienia
+			</details>
+		</column>
+		<column name="PRE_WypNaKonto" type="TINYINT" definition="NOT NULL">
+			<description>Czy wypłata ma być przelewana na konto</description>
+		</column>
+		<column name="PRE_NrwAktach" type="NVARCHAR(19)" definition="NOT NULL" hash="1">
+			<description>Numer w aktach</description>
+		</column>
+		<column name="PRE_Filtr" type="TINYINT" definition="NOT NULL">
+			<description>Informacja o naliczaniu FP dla podstawy poniżej minimalnej płacy</description>
+		</column>
+		<column name="PRE_NazwRodowe" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko rodowe pracownika</description>
+		</column>
+		<column name="PRE_Imie2" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Drugie imię pracownika</description>
+		</column>
+		<column name="PRE_ImieOjca" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Imię ojca pracownika</description>
+		</column>
+		<column name="PRE_ImieMatki" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Imię matki pracownika</description>
+		</column>
+		<column name="PRE_NazwRodoweM" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko rodowe matki pracownika</description>
+		</column>
+		<column name="PRE_DataUr" type="DATETIME">
+			<description>Data urodzenia pracownika</description>
+		</column>
+		<column name="PRE_MiejsceUr" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejsce urodzenia pracownika</description>
+		</column>
+		<column name="PRE_Obywatelstwo" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Obywatelstwo pracownika</description>
+		</column>
+		<column name="PRE_Plec" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Płeć pracownika</description>
+		</column>
+		<column name="PRE_StanCywilny" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Stan cywilny pracownika</description>
+		</column>
+		<column name="PRE_MLDKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="PRE_MLDWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="PRE_MLDPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="PRE_MLDGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="PRE_MLDUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="PRE_MLDNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="PRE_MLDNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="PRE_MLDMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość</description>
+		</column>
+		<column name="PRE_MLDKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="PRE_MLDPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="PRE_MLDAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu</description>
+		</column>
+		<column name="PRE_MLDGminaKod" type="INTEGER" definition="NOT NULL">
+			<description>Kod gminy wg GUS</description>
+		</column>
+		<column name="PRE_HDKTelefon1" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Pierwszy telefon pracownika</description>
+		</column>
+		<column name="PRE_HDKTelefon2" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Drugi telefon pracownika</description>
+		</column>
+		<column name="PRE_NipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="PRE_NipE" type="VARCHAR(13)" definition="NOT NULL" hash="1">
+			<description>NIP pracownika</description>
+		</column>
+		<column name="PRE_DowOsobisty" type="NVARCHAR(12)" definition="NOT NULL" hash="1">
+			<description>Seria i numer dowodu osobistego pracownika</description>
+		</column>
+		<column name="PRE_DowGdzie" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Miejsce wydania dowodu osobistego</description>
+		</column>
+		<column name="PRE_DowKiedy" type="DATETIME">
+			<description>Data wydania dowodu osobistego</description>
+		</column>
+		<column name="PRE_DowWaznyDo" type="DATETIME">
+			<description>Data ważności dowodu osobistego</description>
+		</column>
+		<column name="PRE_DowKto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwa urzędu wydającego dowód osobisty</description>
+		</column>
+		<column name="PRE_Paszport" type="NVARCHAR(9)" definition="NOT NULL" hash="1">
+			<description>Numer paszportu pracownika</description>
+		</column>
+		<column name="PRE_KORKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="PRE_KORWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="PRE_KORPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="PRE_KORGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="PRE_KORUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="PRE_KORNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="PRE_KORNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="PRE_KORMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość</description>
+		</column>
+		<column name="PRE_KORKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="PRE_KORPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="PRE_KORAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu</description>
+		</column>
+		<column name="PRE_ZAMKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="PRE_ZAMWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="PRE_ZAMPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="PRE_ZAMGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="PRE_ZAMUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="PRE_ZAMNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="PRE_ZAMNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="PRE_ZAMMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość</description>
+		</column>
+		<column name="PRE_ZAMKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="PRE_ZAMPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="PRE_ZAMAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu</description>
+		</column>
+		<column name="PRE_HDKFax" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Fax pracownika</description>
+		</column>
+		<column name="PRE_HDKTeleks" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Teleks pracownika</description>
+		</column>
+		<column name="PRE_HDKSkrytkaPoczt" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Skrytka pocztowa pracownika</description>
+		</column>
+		<column name="PRE_HDKWypOsoba" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwisko i imię osoby powiadamianej w razie wypadku pracownika</description>
+		</column>
+		<column name="PRE_HDKWypAdres" type="NVARCHAR(60)" definition="NOT NULL" hash="1">
+			<description>Adres osoby powiadamianej w razie wypadku pracownika</description>
+		</column>
+		<column name="PRE_HDKWypTelefon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon osoby powiadamianej w razie wypadku pracownika</description>
+		</column>
+		<column name="PRE_AdresCentrum" type="NVARCHAR(512)" definition="NOT NULL CONSTRAINT DF_PRE_AdresCentrum DEFAULT('')">
+			<description />
+		</column>
+		<column name="PRE_PODMnoznikKoszty" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty uzyskania pracownika (mnożnik)</description>
+		</column>
+		<column name="PRE_PODMnoznikUlga" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Ulga podatkowa pracownika (mnożnik)</description>
+		</column>
+		<column name="PRE_PODKosztyTytul" type="INTEGER" definition="NOT NULL">
+			<description>Koszty uzyskania z tytułu</description>
+			<details>
+				0 - brak
+				1- z jednego stosunku pracy (domyślny)
+				2 – z więcej niż jednego stosunku pracy
+				3 – z jednego stosunku pracy, podwyższone o 25% w związku z zamieszkiwanie poza
+				miejscowością w której znajduje się miejsce pracy
+				4 – z więcej niż jednego stosunku pracy, podwyższone o 25% w związku z zamieszkiwanie poza
+				miejscowością w której znajduje się miejsce pracy
+				5 – na podstawie wydatków faktycznie poniesionych
+			</details>
+		</column>
+		<column name="PRE_PODProcKosztyUzysk" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wysokość 50% kosztów uzyskania</description>
+		</column>
+		<column name="PRE_PODZaniechPodat" type="INTEGER" definition="NOT NULL">
+			<description>Zaniechanie podatkowe</description>
+		</column>
+		<column name="PRE_PODUrzSkarbId" type="INTEGER">
+			<description>Identyfikator urzędu skarbowego właściwego pracownikowi</description>
+		</column>
+		<column name="PRE_RefundacjaKwota" type="DECIMAL(15,2)">
+			<description>Kwota refundacji</description>
+		</column>
+		<column name="PRE_RefundOd" type="DATETIME">
+			<description>Data początkowa okresu refundacji</description>
+		</column>
+		<column name="PRE_RefundDo" type="DATETIME">
+			<description>Data końcowa okresu refundacji</description>
+		</column>
+		<column name="PRE_HDKWojStosunek" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Stosunek do służby wojskowej pracownika</description>
+		</column>
+		<column name="PRE_HDKWojStopien" type="NVARCHAR(60)" definition="NOT NULL" hash="1">
+			<description>Stopień wojskowy pracownika</description>
+		</column>
+		<column name="PRE_HDKWojSpecjal" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Specjalność pracownika podczas służby wojskowej</description>
+		</column>
+		<column name="PRE_HDKWojWKU" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Przynależność pracownika do WKU</description>
+		</column>
+		<column name="PRE_HDKWojNrKsiaz" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer książeczki wojskowej pracownika</description>
+		</column>
+		<column name="PRE_HDKWojPrzydzial" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Przydział do służby wojskowej pracownika</description>
+		</column>
+		<column name="PRE_ETAStosunekPracy" type="INTEGER" definition="NOT NULL">
+			<description>Stosunek pracy</description>
+		</column>
+		<column name="PRE_ETADataZawarcia" type="DATETIME">
+			<description>Data zawarcia umowy o pracę</description>
+		</column>
+		<column name="PRE_ETARodzajUmowy" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Rodzaj umowy o pracę</description>
+		</column>
+		<column name="PRE_ETARozwiazUmowy" type="INTEGER" definition="NOT NULL">
+			<description>Rozwiązanie umowy o pracę</description>
+		</column>
+		<column name="PRE_ETAMiejsce" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>Miejsce pracy pracownika</description>
+		</column>
+		<column name="PRE_ETAEtatL" type="SMALLINT" definition="NOT NULL">
+			<description>Wymiar czasu pracy (licznik)</description>
+		</column>
+		<column name="PRE_ETAEtatM" type="SMALLINT" definition="NOT NULL">
+			<description>Wymiar czasu pracy (mianownik)</description>
+		</column>
+		<column name="PRE_ETAMinimalna" type="TINYINT" definition="NOT NULL">
+			<description>Zaszeregowanie z uwzględnieniem stawki minimalnej</description>
+		</column>
+		<column name="PRE_ETADataRozpocz" type="DATETIME">
+			<description>Data rozpoczęcia pracy przez pracownika</description>
+		</column>
+		<column name="PRE_ETAStawka" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Stawka zaszeregownia pracownika</description>
+		</column>
+		<column name="PRE_ETAStawkaGodz" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie stawki godzinowej</description>
+			<details>nie wykorzystywane</details>
+		</column>
+		<column name="PRE_ETAStawkaL" type="TINYINT" definition="NOT NULL">
+			<description>Mnożnik stawki zaszeregowania (licznik)</description>
+			<details>nie wykorzystywane</details>
+		</column>
+		<column name="PRE_ETAStawkaM" type="TINYINT" definition="NOT NULL">
+			<description>Mnożnik stawki zaszeregowania (mianownik)</description>
+			<details>nie wykorzystywane</details>
+		</column>
+		<column name="PRE_ETAWymiar" type="TINYINT" definition="NOT NULL">
+			<description>Wymiar etatu</description>
+			<details>
+				1- stawka miesięczna&lt;BR&gt;
+				2- stawka godzinowa
+			</details>
+		</column>
+		<column name="PRE_ETAStandard" type="TINYINT" definition="NOT NULL">
+			<description>Standardowe stałe podatkowe</description>
+		</column>
+		<column name="PRE_ETAGwarantProcMin" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Gwarantowany procent płacy minimalnej</description>
+		</column>
+		<column name="PRE_KartaPobytu" type="NVARCHAR(1)" definition="NOT NULL">
+			<description>Rodzaj karty pobytu (stała lub tymczasowa)</description>
+		</column>
+		<column name="PRE_StNiepelnosp" type="INTEGER" definition="NOT NULL">
+			<description>Stopień niepełnosprawności pracowika</description>
+		</column>
+		<column name="PRE_NiepelnospOd" type="DATETIME">
+			<description>Okres niepełnosprawności (data początkowa)</description>
+		</column>
+		<column name="PRE_NiepelnospDo" type="DATETIME">
+			<description>Okres niepełnosprawności (data końcowa)</description>
+		</column>
+		<column name="PRE_KodPokrew" type="INTEGER" definition="NOT NULL">
+			<description>Kod pokrewieństwa z pracodawcą</description>
+		</column>
+		<column name="PRE_WspolGosp" type="TINYINT" definition="NOT NULL">
+			<description>Pracownik pozostaje we współnym gospodarstwie domowym z pracodawcą</description>
+		</column>
+		<column name="PRE_KodNiezdol" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_KodNiezdol DEFAULT(1)">
+			<description>Kod niezdolności pracownika do pracy</description>
+		</column>
+		<column name="PRE_NiezdolOd" type="DATETIME">
+			<description>Okres niezdolności do pracy (data początkowa)</description>
+		</column>
+		<column name="PRE_NiezdolDo" type="DATETIME">
+			<description>Okres niezdolności do pracy (data końcowa)</description>
+		</column>
+		<column name="PRE_KodStGorniczego" type="INTEGER" definition="NOT NULL">
+			<description>Kod stanowiska pracy górniczej</description>
+		</column>
+		<column name="PRE_GorniczeOd" type="DATETIME">
+			<description>Okres pracy górniczej (data początkowa)</description>
+		</column>
+		<column name="PRE_GorniczeDo" type="DATETIME">
+			<description>Okres pracy górniczej (data końcowa)</description>
+		</column>
+		<column name="PRE_KodWyksztal" type="INTEGER" definition="NOT NULL">
+			<description>Kod wykształcenia pracownika</description>
+		</column>
+		<column name="PRE_WarSzczegolne" type="NVARCHAR(9)" definition="NOT NULL">
+			<description>Oznaczenie czy pracownik pracuje w warunkach szczególnych</description>
+		</column>
+		<column name="PRE_WarSzczegolneOd" type="DATETIME">
+			<description>Okres pracy w warunkach szczególnych (data początkowa)</description>
+		</column>
+		<column name="PRE_WarSzczegolneDo" type="DATETIME">
+			<description>Okres pracy w warunkach szczególnych (data końcowa)</description>
+		</column>
+		<column name="PRE_KodKasyChorych" type="NVARCHAR(3)" definition="NOT NULL">
+			<description>Kod Kasy Chorych pracownika</description>
+		</column>
+		<column name="PRE_KasaChData" type="DATETIME">
+			<description>Data przystąpienia do Kasy Chorych</description>
+		</column>
+		<column name="PRE_UBZZusOd" type="DATETIME">
+			<description>Data powstania obowiązkowych ubezpieczeń społecznych</description>
+		</column>
+		<column name="PRE_UBZJestEmerytal" type="TINYINT" definition="NOT NULL">
+			<description>Pracownik podlega ubezpieczeniu emerytalnemu</description>
+		</column>
+		<column name="PRE_UBZJestRentowe" type="TINYINT" definition="NOT NULL">
+			<description>Pracownik podlega ubezpieczeniu rentowemu</description>
+		</column>
+		<column name="PRE_UBZJestChorobowe" type="TINYINT" definition="NOT NULL">
+			<description>Pracownik podlega ubezpieczeniu chorobowemu</description>
+		</column>
+		<column name="PRE_UBZJestWypad" type="TINYINT" definition="NOT NULL">
+			<description>Pracownik podlega ubezpieczeniu wypadkowemu</description>
+		</column>
+		<column name="PRE_UBZZdrowOd" type="DATETIME">
+			<description>Data powstania obowiązkowego ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="PRE_UBZEmerOd" type="DATETIME">
+			<description>Data powstania dobrowolnego ubezpieczenia emerytalnego</description>
+		</column>
+		<column name="PRE_UBZRentOd" type="DATETIME">
+			<description>Data powstania dobrowolnego ubezpieczenia rentowego</description>
+		</column>
+		<column name="PRE_UBZChorOd" type="DATETIME">
+			<description>Data powstania dobrowolnego ubezpieczenia chorobowego</description>
+		</column>
+		<column name="PRE_UBZZdrowDobrOd" type="DATETIME">
+			<description>Data powstania dobrowolnego ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="PRE_UBZZdrowKwotaPierwSkl" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota pierwszej składki zdrowotnej</description>
+		</column>
+		<column name="PRE_UBZEmerDo" type="DATETIME">
+			<description>Data zakończenia ubezpieczenia emerytalnego</description>
+		</column>
+		<column name="PRE_UBZRentDo" type="DATETIME">
+			<description>Data zakończenia ubezpieczenia rentowego</description>
+		</column>
+		<column name="PRE_UBZChorDo" type="DATETIME">
+			<description>Data zakończenia ubezpieczenia chorobowego</description>
+		</column>
+		<column name="PRE_UBZWypadDo" type="DATETIME">
+			<description>Data zakończenia ubezpieczenia wypadkowego</description>
+		</column>
+		<column name="PRE_UBZZdrowDo" type="DATETIME">
+			<description>Data zakończenia ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="PRE_UBZEmerKod" type="INTEGER">
+			<description>Kod przyczyny rozwiązania ubezpieczenia emerytalnego</description>
+		</column>
+		<column name="PRE_UBZRentKod" type="INTEGER">
+			<description>Kod przyczyny rozwiązania ubezpieczenia rentowego</description>
+		</column>
+		<column name="PRE_UBZChorKod" type="INTEGER">
+			<description>Kod przyczyny rozwiązania ubezpieczenia chorobowego</description>
+		</column>
+		<column name="PRE_UBZWypadKod" type="INTEGER">
+			<description>Kod przyczyny rozwiązania ubezpieczenia</description>
+		</column>
+		<column name="PRE_UBZZdrowKod" type="INTEGER">
+			<description>Kod przyczyny rozwiązania ubezpieczenia zdrowotnego</description>
+		</column>
+		<column name="PRE_UBZJestDobrEmerytal" type="TINYINT" definition="NOT NULL">
+			<description>Jest dobrowolne ubezpieczenie emerytalne</description>
+		</column>
+		<column name="PRE_UBZJestDobrRentowe" type="TINYINT" definition="NOT NULL">
+			<description>Jest dobrowolne ubezpieczenie rentowe</description>
+		</column>
+		<column name="PRE_UBZJestDobrChorobowe" type="TINYINT" definition="NOT NULL">
+			<description>Jest dobrowolne ubezpieczenie chorobowe</description>
+		</column>
+		<column name="PRE_UBZJestDobrZdrow" type="TINYINT" definition="NOT NULL">
+			<description>Jest dobrowolne ubezpieczenie zdrowotne</description>
+		</column>
+		<column name="PRE_PrzekroczRok" type="INTEGER">
+			<description>Rok przekroczenia podstawy składek</description>
+		</column>
+		<column name="PRE_PrzekroczMiesiac" type="TINYINT">
+			<description>Miesiąc przekroczenia podstawy składek</description>
+		</column>
+		<column name="PRE_PrzekroczKwota" type="DECIMAL(15,2)">
+			<description>Kwota przekroczenia podstawy składek</description>
+		</column>
+		<column name="PRE_PrzekroczInformacja" type="TINYINT">
+			<description>Informacja o przekroczenu podstawy składek przekazana przez</description>
+		</column>
+		<column name="PRE_Przekroczenie" type="TINYINT">
+			<description>Czy kwota jest przekroczeniem podstawy czy podstawą składki</description>
+		</column>
+		<column name="PRE_PrawoER" type="INTEGER" definition="NOT NULL">
+			<description>Kod ustalonego prawa do emerytury lub renty</description>
+		</column>
+		<column name="PRE_HDKUwagi" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Uwagi dotyczące pracownika</description>
+		</column>
+		<column name="PRE_HDKPrawoJazdy" type="TINYINT" definition="NOT NULL">
+			<description>Czy pracownik posiada prawo jazdy</description>
+		</column>
+		<column name="PRE_HDKPrawoJazdyKat" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>Kategoria prawa jazdy</description>
+		</column>
+		<column name="PRE_HDKEmail" type="NVARCHAR(127)" definition="NOT NULL" hash="1">
+			<description>Adres E-mail pracownika</description>
+		</column>
+		<column name="PRE_HDKURL" type="VARCHAR(255)" definition="NOT NULL" hash="1" />
+		<column name="PRE_MstIdMLD" type="INTEGER" />
+		<column name="PRE_MstIdZAM" type="INTEGER" />
+		<column name="PRE_MstIdKOR" type="INTEGER" />
+		<column name="PRE_MstPocztaMLD" type="INTEGER" />
+		<column name="PRE_MstPocztaZAM" type="INTEGER" />
+		<column name="PRE_MstPocztaKOR" type="INTEGER" />
+		<column name="PRE_MstMiejsceUr" type="INTEGER" />
+		<column name="PRE_ABSData" type="DATETIME" />
+		<column name="PRE_ABSChor35" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_ABSChor90" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_ABSChor6M" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_ABSOP60" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_ABSOP14" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_ABSOP30" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_ABSOP30 DEFAULT(0)" />
+		<column name="PRE_ABSUrlMiesKorekta" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_ABSUrlMies" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_ABSChorMiesKorekta" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_ABSPrawoZasChorOd" type="DATETIME" />
+		<column name="PRE_ABSFinansowanePracodawcaOd" type="DATETIME" />
+		<column name="PRE_IndywDRA" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_KatId" type="INTEGER">
+			<description>Kategoria</description>
+		</column>
+		<column name="PRE_KategoriaOpis" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis kategorii</description>
+		</column>
+		<column name="PRE_KontoKsiegowe" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Domyślne konto księgowe</description>
+		</column>
+		<column name="PRE_WaznoscBadanOkres" type="DATETIME">
+			<description>Data ważności badań okresowych</description>
+		</column>
+		<column name="PRE_LimitNadgodzin" type="DATETIME">
+			<description>Indywidualny limit nadgodzin</description>
+		</column>
+		<column name="PRE_IndywLimitNadgodzin" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_KodWyksztPFRON" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_HDKWiekEmerData" type="DATETIME">
+			<description>Data osiągnięcia wieku emerytalnego</description>
+		</column>
+		<column name="PRE_AdresDzialu" type="NVARCHAR(512)" definition="NOT NULL" />
+		<column name="PRE_Opis" type="NVARCHAR(128)" definition="NOT NULL" hash="1">
+			<description>Opis pracownika (filtrowanie)</description>
+		</column>
+		<column name="PRE_ETANormaDobowa" type="DATETIME" definition="NOT NULL">
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PRE_HDKRodzajMiejsc" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_UBZOgraniczSklZdrow" type="TINYINT" definition="NOT NULL">
+			<description>Składka zdrowotna ograniczona do wys. podatku</description>
+		</column>
+		<column name="PRE_ABSLimitLiczbaDni" type="INTEGER" definition="NOT NULL" />
+		<column name="PRE_ABSProcWynChorFlaga" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_ABSProcWynChor" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="PRE_ETAPodstZdrowMnoznik" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="PRE_ETAIndywProcWypad" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_ETAIndywProcWypadProcent" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="PRE_HDKGUSGlowneMiejscePracy" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_HDKGUSPierwszaPraca" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_HDKGUSPoraNocna" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_HDKGUSPracSezonowy" type="TINYINT" definition="NOT NULL" />
+		<column name="PRE_NieRozliczac" type="TINYINT" definition="NOT NULL">
+			<description>Pracownik standardowo nie podlega rozliczeniu</description>
+		</column>
+		<column name="PRE_DabId" type="INTEGER">
+			<description>Klucz obcy do CDN.DaneBinarne</description>
+			<details>Wskazuje na powiązanie ze zdjęciem pracownika</details>
+		</column>
+		<column name="PRE_NieNaliczacFP" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_NieNaliczacFP DEFAULT(0)">
+			<description>Nie naliczać składek na Fundusz Pracy</description>
+		</column>
+		<column name="PRE_NieNaliczacFGSP" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_NieNaliczacFGSP DEFAULT(0)">
+			<description>Nie naliczać składek na Fundusz Gwarantowanych Świadczeń Pracowniczych</description>
+		</column>
+		<column name="PRE_PelneDaneAdresowePFRON" type="TINYINT" definition="NOT NULL">
+			<description>Wykazywać na deklaracji PFRON pełne dane adresowe</description>
+		</column>
+		<column name="PRE_PomocPublicznaPFRON" type="TINYINT" definition="NOT NULL">
+			<description>Dofinansowanie stanowi pomoc publiczną</description>
+		</column>
+		<column name="PRE_WzrostZatrudnieniaPFRON" type="TINYINT" definition="NOT NULL">
+			<description>Zatrudnienie pracownika związane ze wzrostem netto zatrudnienia</description>
+		</column>
+		<column name="PRE_ZatrudRozwUmowyPFRON" type="TINYINT" definition="NOT NULL">
+			<description>Zatrudnienie w wyniku rozwiązania umowy z przyczyn innych niż art.26b ust.4 lub 5</description>
+		</column>
+		<column name="PRE_ABSFinansowanePracodawca" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_ABSFinansowanePracodawca DEFAULT(0)">
+			<description>Chorobowe finansowane przez pracodawcę</description>
+		</column>
+		<column name="PRE_ABSFinansowanePracodawcaDni" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_ABSFinansowanePracodawcaDni DEFAULT(0)">
+			<description>Ilość dni chorobowego finansowanego przez pracodawcę</description>
+			<details>0 (domyślnie), ilość dni chorobowego finansowana przez pracodawcę</details>
+		</column>
+		<column name="PRE_KodFEP" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_KodFEP DEFAULT(0)">
+			<description>Kod pracy w szczególnych warunkach lub szczególnym charakterze</description>
+		</column>
+		<column name="PRE_FEPOd" type="DATETIME">
+			<description>Okres pracy w szczególnych warunkach lub szczególnym charakterze</description>
+		</column>
+		<column name="PRE_FEPDo" type="DATETIME">
+			<description>Okres pracy w szczególnych warunkach lub szczególnym charakterze</description>
+		</column>
+		<column name="PRE_FPOd" type="DATETIME" />
+		<column name="PRE_FPDo" type="DATETIME" />
+		<column name="PRE_FGSPOd" type="DATETIME" />
+		<column name="PRE_FGSPDo" type="DATETIME" />
+		<column name="PRE_Oddelegowany" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_Oddelegowany DEFAULT(0)">
+			<description>Oznaczenie wskazujące, czy w danym zapisie historycznym pracownik ma zaznaczony
+				check ‘Oddelegowany’</description>
+		</column>
+		<column name="PRE_OddelegowanyDieta" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_OddelegowanyDieta DEFAULT(0)">
+			<description>Stawka diety/dzień dla oddelegowanego dla danego zapisu historycznego - konieczna
+				do obliczania podstawy składek ZUS i podstawy podatku</description>
+		</column>
+		<column name="PRE_OddelegowanyWaluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_PRE_OddelegowanyWaluta DEFAULT('')">
+			<description>Symbol waluty przypisanej do oddelegowanego jako waluta rozliczenia</description>
+		</column>
+		<column name="PRE_OddelegowanyZUS" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie wskazujące, czy w danym zapisie historycznym pracownik ma zaznaczony
+				check „Składki ZUS odprowadzane w Polsce”</description>
+		</column>
+		<column name="PRE_OddelegowanyFIS" type="TINYINT" definition="NOT NULL">
+			<description>Oznaczenie wskazujące, czy w danym zapisie historycznym pracownik ma zaznaczony
+				check „Zaliczka podatku odprowadzana w Polsce”</description>
+		</column>
+		<column name="PRE_WychPodstEmerRentOd" type="DATETIME">
+			<description>Podstawa E/R dla wych. od dnia</description>
+		</column>
+		<column name="PRE_WychPodstEmerRentMax" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Maksymalna podstawa E/R dla wych.</description>
+		</column>
+		<column name="PRE_RodzajDokumentu" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj dokumentu dla deklaracji PIT (NIP lub PESEL)</description>
+		</column>
+		<column name="PRE_PODNieLiczKoszty50" type="TINYINT" definition="NOT NULL">
+			<description>Nie naliczać 50% kosztów uzyskania</description>
+		</column>
+		<column name="PRE_ETADkmIdStanowisko" type="INT" definition="NULL">
+			<description>Stanowisko</description>
+		</column>
+		<column name="PRE_ETADkmIdFunkcja" type="INT" definition="NULL">
+			<description>Funkcja</description>
+		</column>
+		<column name="PRE_DkmIdKodZawodu" type="INT" definition="NULL">
+			<description>Kod zawodu</description>
+		</column>
+		<column name="PRE_KodZawoduSymbol" type="VARCHAR(7)" definition="NULL">
+			<description>Symbol kodu zawodu</description>
+		</column>
+		<column name="PRE_ETADkmIdWypowPowod" type="INT" definition="NULL">
+			<description>Przyczyna zwolnienia</description>
+		</column>
+		<column name="PRE_DkmIdPracodawca" type="INT" definition="NULL">
+			<description>Pracodawca - użytkownik</description>
+		</column>
+		<column name="PRE_Tymczasowy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_Tymczasowy DEFAULT(0)">
+			<description>Pracownik tymczasowy - flaga</description>
+		</column>
+		<column name="PRE_ZastepowanyId" type="INTEGER" definition="NULL">
+			<description>Identyfikator pracownika zastępowanego</description>
+		</column>
+		<column name="PRE_Zastepowany" type="NVARCHAR(128)" definition="NOT NULL CONSTRAINT DF_PRE_Zastepowany DEFAULT('')" hash="1">
+			<description>Nazwisko i imię pracownika zastępowanego</description>
+		</column>
+		<column name="PRE_ZastepowanyLista" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_ZastepowanyLista DEFAULT(0)">
+			<description>Pracownik tymczasowy - z listy pracowników</description>
+		</column>
+		<column name="PRE_ABSPierwszyLimit" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_ABSPierwszyLimit DEFAULT(0)">
+			<description>Pierwsze zatrudnienie - limit, flaga</description>
+		</column>
+		<column name="PRE_Przelozony" type="NVARCHAR(128)" definition="NOT NULL CONSTRAINT DF_PRE_Przelozony DEFAULT('')" hash="1">
+			<description>Nazwisko i imię przełożonego pracownika</description>
+		</column>
+		<column name="PRE_ZamZamiastMld" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_ZamZamiastMld DEFAULT(0)">
+			<description>Adres zamieszkania zamiast zameldowania na deklaracji PIT</description>
+		</column>
+		<column name="PRE_TelefonSms" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRE_TelefonSms DEFAULT('')" hash="1">
+			<description>Telefon SMS pracownika</description>
+		</column>
+		<column name="PRE_FlotaPrawa" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_FlotaPrawa DEFAULT(0)">
+			<description>Wspołpraca z Comarch ERP Mobile Flota (prawa dostępu)</description>
+		</column>
+		<column name="PRE_FlotaOperator" type="INTEGER" definition="NULL">
+			<description>Wspołpraca z Comarch ERP Mobile Flota (operator)</description>
+		</column>
+		<column name="PRE_MLDKodKraju" type="NVARCHAR(2)" definition="NOT NULL CONSTRAINT DF_PRE_MLDKodKraju DEFAULT('')">
+			<description>Kod kraju</description>
+		</column>
+		<column name="PRE_ZAMKodKraju" type="NVARCHAR(2)" definition="NOT NULL CONSTRAINT DF_PRE_ZAMKodKraju DEFAULT('')">
+			<description>Kod kraju</description>
+		</column>
+		<column name="PRE_KORKodKraju" type="NVARCHAR(2)" definition="NOT NULL CONSTRAINT DF_PRE_KORKodKraju DEFAULT('')">
+			<description>Kod kraju</description>
+		</column>
+		<column name="PRE_PODNierezydent" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PODNierezydent DEFAULT(0)">
+			<description>Ograniczony obowiązek podatkowy (nierezydent)</description>
+		</column>
+		<column name="PRE_PODNipZagranicznyRodzaj" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_PODNipZagranicznyRodzaj DEFAULT(0)">
+			<description>Rodzaj numeru identyfikacyjnego</description>
+		</column>
+		<column name="PRE_PODNipZagraniczny" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRE_PODNipZagraniczny DEFAULT('')" hash="1">
+			<description>Zagraniczny numer identyfikacyjny podatnika</description>
+		</column>
+		<column name="PRE_KontoKsiegowe2" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRE_KontoKsiegowe2 DEFAULT('')">
+			<description>Drugie konto księgowe</description>
+		</column>
+		<column name="PRE_PRMPracaRodzic" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PRMPracaRodzic DEFAULT(0)">
+			<description>Praca na część etatu w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_PRMStawka" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PRMStawka DEFAULT(0)">
+			<description>Stawka w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_PRMWymiar" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PRMWymiar DEFAULT(1)">
+			<description>Rodzaj stawki w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_PRMMinimalna" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PRMMinimalna DEFAULT(0)">
+			<description>Stawka najniższ. wynagr. w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_PRMKalId" type="INTEGER">
+			<description>Kalendarz w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_PRMEtatL" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_PRMEtatL DEFAULT(1)">
+			<description>Wymiar etatu (licznik) w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_PRMEtatM" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_PRMEtatM DEFAULT(2)">
+			<description>Wymiar etatu (mianownik) w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_NieGenPodwZasMacierz" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_NieGenPodwZasMacierz DEFAULT(0)">
+			<description>Nie generować w wypłacie podwyższenia zasiłku macierzyńskiego</description>
+		</column>
+		<column name="PRE_OddelegowanyKraj" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT DF_PRE_OddelegowanyKraj DEFAULT('')">
+			<description>Symbol kraju oddelegowania</description>
+		</column>
+		<column name="PRE_OddelegowanyWalutaDieta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_PRE_OddelegowanyWalutaDieta DEFAULT('')">
+			<description>Symbol waluty dla waluty diety</description>
+		</column>
+		<column name="PRE_ZakId" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="PRE_HDKGUSSymbolWykszt" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_HDKGUSSymbolWykszt DEFAULT(0)">
+			<description>Symbol poziomu wykształcenia GUS</description>
+		</column>
+		<column name="PRE_HDKGUSSymbolSystemuCzP" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_HDKGUSSymbolSystemuCzP DEFAULT(10)">
+			<description>Symbol systemu czasu pracy GUS</description>
+		</column>
+		<column name="PRE_PrzychPoprzRok" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PrzychPoprzRok DEFAULT(0)">
+			<description>Stawka w trakcie url. macierz.</description>
+		</column>
+		<column name="PRE_KodWygasniecia" type="NVARCHAR(32)" definition="NOT NULL CONSTRAINT DF_PRE_KodWygasniecia DEFAULT('')">
+			<description>Kod wygaśnięcia/rozwiązania stosunku pracy</description>
+		</column>
+		<column name="PRE_KodPodstPrawRozw" type="NVARCHAR(32)" definition="NOT NULL CONSTRAINT DF_PRE_KodPodstPrawRozw DEFAULT('')">
+			<description>Kod podstawy prawnej rozwiązania lub wygaśnięcia stosunku pracy</description>
+		</column>
+		<column name="PRE_PodstPrawRozw" type="NVARCHAR(72)" definition="NOT NULL CONSTRAINT DF_PRE_PodstPrawRozw DEFAULT('')">
+			<description>Podstawa prawna rozwiązania lub wygaśnięcia stosunku pracy</description>
+		</column>
+		<column name="PRE_StronaInicjujaca" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PRE_StronaInicjujaca DEFAULT(0)">
+			<description>Strona inicjująca</description>
+		</column>
+		<column name="PRE_Nauczyciel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_Nauczyciel DEFAULT(0)">
+			<description>Flaga oznaczajaca, że pracownik jest nauczycielem</description>
+		</column>
+		<column name="PRE_ObowPrzechDokDo" type="DATETIME" definition="NULL">
+			<description>Obowiązek przechowywania dokumentacji do dnia</description>
+		</column>
+		<column name="PRE_ObywatelKodKraju" type="NVARCHAR(2)" definition="NOT NULL CONSTRAINT DF_PRE_ObywatelKodKraju DEFAULT('')">
+			<description>Kod kraju (obywatelstwo)</description>
+		</column>
+		<column name="PRE_PPKOkresOd" type="DATETIME" definition="NULL">
+			<description>Data przystąpienia do PPK</description>
+		</column>
+		<column name="PRE_PPKOkresDo" type="DATETIME" definition="NULL">
+			<description>Data rezygnacji z PPK</description>
+		</column>
+		<column name="PRE_PPKSklPodstPrac" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_PRE_PPKSklPodstPrac DEFAULT(0)">
+			<description>Składka podstawowa PPK</description>
+		</column>
+		<column name="PRE_PPKSklDodatPrac" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_PRE_PPKSklDodatPrac DEFAULT(0)">
+			<description>Składka dodatkowa PPK</description>
+		</column>
+		<column name="PRE_PPKObnizenieSkladki" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PPKObnizenieSkladki DEFAULT(0)">
+			<description>Obniżenie składki podstawowej pracownika od dnia</description>
+		</column>
+		<column name="PRE_PPKDataObnizenia" type="DATETIME" definition="NULL">
+			<description>Data złożenia deklaracji obniżenia składki PPK</description>
+		</column>
+		<column name="PRE_PPKSklDodatFirma" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_PRE_PPKSklDodatFirma DEFAULT(0)">
+			<description>Składka dodatkowa PPK</description>
+		</column>
+		<column name="PRE_PPKDataSkladkiDodatkowej" type="DATETIME" definition="NULL">
+			<description>Data złożenia deklaracji składki dodatkowej pracownika</description>
+		</column>
+		<column name="PRE_PPKIndywSklDodatFirma" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PPKIndywSklDodatFirma DEFAULT(0)">
+			<description>Indywidualny procent składki dodatkowej pracodawcy</description>
+		</column>
+		<column name="PRE_PPKPrzekazDaneKontaktowe" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PPKPrzekazDaneKontaktowe DEFAULT(0)">
+			<description>Przekaż dane kontaktowe pracownika do instytucji finansowej</description>
+		</column>
+		<column name="PRE_PODZwolPIT26" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PODZwolPIT26 DEFAULT(0)">
+			<description>Zwolnienie z PIT dla osób do 26 lat</description>
+		</column>
+		<column name="PRE_BnaIdMikro" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli BnkNazwy</description>
+		</column>
+		<column name="PRE_RachunekNrMikro" type="NVARCHAR(51)" definition="NOT NULL CONSTRAINT DF_PRE_RachunekNrMikro DEFAULT('')" hash="1">
+			<description>Numer konta mikrorachunku US</description>
+		</column>
+		<column name="PRE_IBANMikro" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_IBANMikro DEFAULT(1)">
+			<description>Czy numer mikrorachunku US jest w standardzie IBAN</description>
+		</column>
+		<column name="PRE_PODKartaPodPrzychod" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PODKartaPodPrzychod DEFAULT(0)">
+			<description>Karta podatkowa (przychód)</description>
+		</column>
+		<column name="PRE_PODKartaPodDochod" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PODKartaPodDochod DEFAULT(0)">
+			<description>Karta podatkowa (dochód)</description>
+		</column>
+		<column name="PRE_PODRyczaltPrzychod" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PODRyczaltPrzychod DEFAULT(0)">
+			<description>Ryczałt od przychodów ewidencjonowanych (przychód)</description>
+		</column>
+		<column name="PRE_PODRyczaltDochod" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PODRyczaltDochod DEFAULT(0)">
+			<description>Ryczałt od przychodów ewidencjonowanych (dochód)</description>
+		</column>
+		<column name="PRE_PODZasOgolnePrzychod" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PODZasOgolnePrzychod DEFAULT(0)">
+			<description>Zasady ogólne (przychód)</description>
+		</column>
+		<column name="PRE_PODZasOgolneDochod" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_PODZasOgolneDochod DEFAULT(0)">
+			<description>Zasady ogólne (dochód)</description>
+		</column>
+		<column name="PRE_MalzonekId" type="INTEGER">
+			<description>Odnośnik do innego pracownika</description>
+		</column>
+		<column name="PRE_SynchronizacjaTNA" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_SynchronizacjaTNA DEFAULT(1)">
+			<description>Pozwolenie na synchronizację do Comarch TNA</description>
+		</column>
+		<column name="PRE_LogowanieTNA" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_LogowanieTNA DEFAULT(1)">
+			<description>Pozwolenie na logowanie do Comarch TNA</description>
+		</column>
+		<column name="PRE_OddelegowanyPropOdl" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_OddelegowanyPropOdl DEFAULT(0)">
+			<description>Metoda proporcjonalnego odliczenia</description>
+		</column>
+		<column name="PRE_PODZwolPIT" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_PODZwolPIT DEFAULT(0)">
+			<description>Zwolnienie z PIT</description>
+		</column>
+		<column name="PRE_PODNiePobierZalFIS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PODNiePobierZalFIS DEFAULT(0)">
+			<description>Zwolnienie z pobrania zaliczki podatku</description>
+		</column>
+		<column name="PRE_PODZwolPITRok" type="INT" definition="NOT NULL CONSTRAINT DF_PRE_PODZwolPITRok DEFAULT(0)">
+			<description>Zwolnienie z PIT do danego roku</description>
+		</column>
+		<column name="PRE_PODNiePomnDochUlga" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PODNiePomnDochUlga DEFAULT(0)">
+			<description>Nie pomniejszać dochodu o ulgę dla pracowników</description>
+		</column>
+		<column name="PRE_UBZFormaOpodat" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZFormaOpodat DEFAULT(0)">
+			<description>Forma opodatkowania</description>
+		</column>
+		<column name="PRE_UBZOplacZdrowPrzychUbRok" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZOplacZdrowPrzychUbRok DEFAULT(0)">
+			<description>Opłacenie składki na podstawie przychodu z poprzedniego roku</description>
+		</column>
+		<column name="PRE_UBZPrzychWlascDekl" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZPrzychWlascDekl DEFAULT(1)">
+			<description>Dane o przychodzie/dochodzie z deklaracji podatkowych</description>
+		</column>
+		<column name="PRE_UBZDochodUbMies" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_UBZDochodUbMies DEFAULT(0)">
+			<description>Dochód za poprzedni miesiąc</description>
+		</column>
+		<column name="PRE_UBZPrzychodBiezRok" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_UBZPrzychodBiezRok DEFAULT(0)">
+			<description>Przychod za bieżący rok</description>
+		</column>
+		<column name="PRE_UBZPrzychodUbRok" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_PRE_UBZPrzychodUbRok DEFAULT(0)">
+			<description>Przychód za poprzedni rok</description>
+		</column>
+		<column name="PRE_PODNieStosPrzedlZalFIS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_PODNieStosPrzedlZalFIS DEFAULT(0)">
+			<description>Nie stosować przedłużenia terminu poboru zaliczki podatku</description>
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatSkala" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatSkala DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatSkalaDane" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatSkalaDane DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatSkalaBazId" type="INT" definition="NULL">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatLiniowy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatLiniowy DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatLiniowyDane" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatLiniowyDane DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatLiniowyBazId" type="INT" definition="NULL">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatLiniowySklZdrow" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatLiniowySklZdrow DEFAULT(0)">
+			<description>Nie przenoś składki zdrowotnej na kwoty deklaracji</description>
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatRyczalt" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatRyczalt DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatRyczaltDane" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatRyczaltDane DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatRyczaltBazId" type="INT" definition="NULL">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatRyczaltUbRok" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatRyczaltUbRok DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatKarta" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatKarta DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatKartaIlosc" type="INT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatKartaIlosc DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatBrak" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatBrak DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatBrakIlosc" type="INT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatBrakIlosc DEFAULT(0)">
+			<description />
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatSkalaSklZdrow" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatSkalaSklZdrow DEFAULT(0)">
+			<description>Nie przenoś składki zdrowotnej na kwoty deklaracji</description>
+		</column>
+		<column name="PRE_UBZWlascFormaOpodatRyczaltSklZdrow" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PRE_UBZWlascFormaOpodatRyczaltSklZdrow DEFAULT(0)">
+			<description>Nie przenoś składki zdrowotnej na kwoty deklaracji</description>
+		</column>
+		<column name="PRE_PODUlgaMnoznikL" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_PODUlgaMnoznikL DEFAULT(1)">
+			<description>Mnożnik ulgi podatkowej - licznik</description>
+		</column>
+		<column name="PRE_PODUlgaMnoznikM" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PRE_PODUlgaMnoznikM DEFAULT(1)">
+			<description>Mnożnik ulgi podatkowej - mianownik</description>
+		</column>
+		<column name="PRE_ImportRowId" type="VARCHAR(36)" />
+		<column name="PRE_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PRE_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRE_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PRE_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRE_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PRE_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PRE_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRE_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PRE_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRE_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PRE_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PRE_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PRE_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PRE_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PRE_Primary" columns="PRE_PreId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PREZrgId" localColumns="PRE_ZrgId" refTable="ZestawyRegul" refColumns="ZRG_ZrgId">
+			<description>Relacja CDN.PracEtaty:CDN.ZestawyRegul (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREKategoria" localColumns="PRE_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.PracEtaty:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRETyuLink" localColumns="PRE_UBZTyuId" refTable="TytUbezp" refColumns="TYU_TyuId">
+			<description>Relacja CDN.PracEtaty:CDN.TytUbezp (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREFplLink" localColumns="PRE_FplId" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.PracEtaty:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREBnaLink" localColumns="PRE_BnaId" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.PracEtaty:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREKalLink" localColumns="PRE_KalId" refTable="Kalendarze" refColumns="KAL_KalId">
+			<description>Relacja CDN.PracEtaty:CDN.Kalendarze (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREDzlLink" localColumns="PRE_DzlId" refTable="Dzialy" refColumns="DZL_DzlId">
+			<description>Relacja CDN.PracEtaty:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREPraLink" localColumns="PRE_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracEtaty:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRE_ETADkmIdStanowisko" localColumns="PRE_ETADkmIdStanowisko" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.PracEtaty:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRE_ETADkmIdFunkcja" localColumns="PRE_ETADkmIdFunkcja" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.PracEtaty:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRE_DkmIdKodZawodu" localColumns="PRE_DkmIdKodZawodu" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.PracEtaty:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRE_ETADkmIdWypowPowod" localColumns="PRE_ETADkmIdWypowPowod" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.PracEtaty:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRE_DkmIdPracodawca" localColumns="PRE_DkmIdPracodawca" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.PracEtaty:CDN.DaneKadMod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREZastepowanyLink" localColumns="PRE_ZastepowanyId" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.PracEtaty:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRECntLink" localColumns="PRE_CntId" refTable="Centra" refColumns="CNT_CntId">
+			<description>Relacja CDN.PracEtaty:CDN.Centra (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREPRMKalLink" localColumns="PRE_PRMKalId" refTable="Kalendarze" refColumns="KAL_KalId">
+			<description>Relacja CDN.PracEtaty:CDN.Kalendarze (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREZakLink" localColumns="PRE_ZakId" refTable="Zaklady" refColumns="ZAK_ZakId">
+			<description>Relacja CDN.PracEtaty:CDN.Zaklady (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PREBnaMikroLink" localColumns="PRE_BnaIdMikro" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.PracEtaty:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<index name="PREZrgId" options="NONCLUSTERED" fields="PRE_ZrgId">
+			<description>Link do zestawu reguł wygładzania importu RCP</description>
+		</index>
+		<index name="PREPraLink" options="UNIQUE NONCLUSTERED" fields="PRE_PraId ,PRE_DataOd">
+			<description>Unikalny indeks zapisu historycznego pracownika</description>
+		</index>
+		<index name="PREDzlLink" options="NONCLUSTERED" fields="PRE_DzlId">
+			<description>Klucz obcy działu</description>
+		</index>
+		<index name="PREKalLink" options="NONCLUSTERED" fields="PRE_KalId">
+			<description>Klucz obcy kalendarza</description>
+		</index>
+		<index name="PREBnaLink" options="NONCLUSTERED" fields="PRE_BnaId">
+			<description>Link do tabeli banków</description>
+		</index>
+		<index name="PREFplLink" options="NONCLUSTERED" fields="PRE_FplId">
+			<description>Link do FormyPlatnosci</description>
+		</index>
+		<index name="PREWlascicielLink" options="NONCLUSTERED" fields="PRE_WlascicielId">
+			<description>Odnośnik do pracownika</description>
+		</index>
+		<index name="PRETyuLink" options="NONCLUSTERED" fields="PRE_UBZTyuId">
+			<description>Relacja do tytułu ubezpieczenia</description>
+		</index>
+		<index name="PREKategoria" options="NONCLUSTERED" fields="PRE_KatId">
+			<description>Relacja do kategorii</description>
+		</index>
+		<index name="PRECntLink" options="NONCLUSTERED" fields="PRE_CntId">
+			<description>Klucz obcy centrum</description>
+		</index>
+		<index name="PRE_EP_Idx" options="NONCLUSTERED" fields="PRE_PraId, PRE_DataOd, PRE_Nazwisko, PRE_TypPracownika, PRE_PreId" includedColumns="PRE_Imie1, PRE_DataDo, PRE_ZatrudnionyOd, PRE_ZatrudnionyDo">
+			<description>Indeks e-pracownik</description>
+		</index>
+		<index name="PRE_EP_DataZatrudnienia_Idx" options="NONCLUSTERED" fields="PRE_TypPracownika, PRE_DataOd, PRE_DataDo, PRE_ZatrudnionyOd, PRE_ZatrudnionyDo" includedColumns="PRE_PraId,PRE_Nazwisko,PRE_Imie1,PRE_CntId">
+			<description>Indeks e-pracownik</description>
+		</index>
+		<index name="PRE_EP_Data_Idx" options="NONCLUSTERED" fields="PRE_DataOd, PRE_DataDo" includedColumns="PRE_PraId,PRE_CntId">
+			<description>Indeks e-pracownik</description>
+		</index>
+		<index name="PREPRMKalLink" options="NONCLUSTERED" fields="PRE_PRMKalId">
+			<description>Klucz obcy kalendarza</description>
+		</index>
+		<index name="PREZakLink" options="NONCLUSTERED" fields="PRE_ZakId">
+			<description>Klucz obcy zakładu</description>
+		</index>
+		<index name="PREBnaMikroLink" options="NONCLUSTERED" fields="PRE_BnaIdMikro">
+			<description>Link do tabeli banków</description>
+		</index>
+		<index name="PREMalzonekLink" options="NONCLUSTERED" fields="PRE_MalzonekId">
+			<description>Odnośnik do pracownika</description>
+		</index>
+		<index name="PREGUID" options="UNIQUE NONCLUSTERED" fields="PRE_ImportRowId" />
+		<index name="HRM_PracEtatyKalendarzePodsumowanie" options="NONCLUSTERED" fields="PRE_TypPracownika, PRE_DataOd, PRE_DataDo" includedColumns="PRE_PraId, PRE_DzlId, PRE_CntId, PRE_Nazwisko, PRE_Imie1, PRE_ZatrudnionyOd, PRE_ZatrudnionyDo, PRE_WaznoscBadanOkres">
+			<description>Wg typu pracownik/właściciel i dat zapisu</description>
+		</index>
+	</table>
+	

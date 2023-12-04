@@ -1,0 +1,16 @@
+<table name="AktualizacjeBlokBaza">
+		<description>Aktualizacje bazy - blokada</description>
+		<column name="AktBB_ID" type="int" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AktBB_Uzytkownik" type="varchar(50)" definition="NULL">
+			<description>Użytkownik</description>
+		</column>
+		<column name="AktBB_Czas" type="datetime2(7)" definition="NULL">
+			<description>Czas</description>
+		</column>
+		<primaryKey name="AktBB_Primary" columns="AktBB_ID">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

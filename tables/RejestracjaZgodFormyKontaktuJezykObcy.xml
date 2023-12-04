@@ -1,0 +1,22 @@
+<table name="RejestracjaZgodFormyKontaktuJezykObcy" filterVisible="false">
+		<description>Formy kontaktu dla rejestru zgód języki obce</description>
+		<column name="RZFKJ_RZFKJID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RZFKJ_RZFKId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator formy kontaktu</description>
+		</column>
+		<column name="RZFKJ_JezykID" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_RZFKJ_JezykID DEFAULT(1)">
+			<description>id jezyka obcego</description>
+		</column>
+		<column name="RZFKJ_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa</description>
+		</column>
+		<primaryKey name="RZFKJ_Primary" columns="RZFKJ_RZFKID,RZFKJ_JezykID" />
+		<foreignKey name="FK_RZFKJdoRejestracjaZgodFormyKontaktu" localColumns="RZFKJ_RZFKId" refTable="RejestracjaZgodFormyKontaktu" refColumns="RZFK_RZFKID" deleteOption="CASCADE">
+			<description>Relacja
+				CDN.RejestracjaZgodFormyKontaktuJezykObcy:CDN.RejestracjaZgodFormyKontaktu (MANY:1)</description>
+		</foreignKey>
+		<index name="RZFKJOID" options="UNIQUE NONCLUSTERED" fields="RZFKJ_RZFKJID" />
+	</table>
+	

@@ -1,0 +1,313 @@
+<table name="CfgKurierzy">
+		<description>Konfiguracja kurierzy</description>
+		<column name="CKK_CKKID" type="int" definition="NOT NULL">
+			<description>Identyfikator rekordu 1- sendit, 2- dpd, 3- dhl</description>
+		</column>
+		<column name="CKK_Aktywny" type="tinyint" definition="NOT NULL">
+			<description>Czy aktywny</description>
+		</column>
+		<column name="CKK_Domyslny" type="tinyint" definition="NOT NULL">
+			<description>Czy domyślny</description>
+		</column>
+		<column name="CKK_Login" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Login</description>
+		</column>
+		<column name="CKK_Haslo" type="nvarchar(4000)" definition="NOT NULL" hash="1">
+			<description>Hasło</description>
+		</column>
+		<column name="CKK_NumerKlienta" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Numer klienta</description>
+		</column>
+		<column name="CKK_DomyslnaNumeracjaZleceniaNadaniaPaczek" type="int" definition=" NOT NULL">
+			<description>Domyślna numeracja</description>
+		</column>
+		<column name="CKK_DomyslnaSeriaZleceniaNadaniaPaczek" type="nvarchar(10)" definition="NOT NULL">
+			<description>Nazwa serii</description>
+		</column>
+		<column name="CKK_Platnik" type="tinyint" definition="NOT NULL">
+			<description>Płatnik</description>
+		</column>
+		<column name="CKK_ZlecenieOdbioruWysylki" type="tinyint" definition="NOT NULL">
+			<description>Zlecenie odbioru wysyłki</description>
+		</column>
+		<column name="CKK_DomyslnaPaczka" type="tinyint" definition="NOT NULL">
+			<description>Czy dodać domyślną paczkę</description>
+		</column>
+		<column name="CKK_KategoriaPrzesylki" type="tinyint" definition="NOT NULL">
+			<description>Kategoria przesyłki </description>
+		</column>
+		<column name="CKK_WagaZKarty" type="tinyint" definition="NOT NULL">
+			<description>W pierwszej kolejności pobieraj wagę z kartotek towarowych</description>
+		</column>
+		<column name="CKK_InformacjeOZawartosci" type="tinyint" definition="NOT NULL">
+			<description>informacja o zawartości</description>
+		</column>
+		<column name="CKK_InformacjeOZawartosciTyp" type="tinyint" definition="NOT NULL">
+			<description>informacja o zawartości typ</description>
+		</column>
+		<column name="CKK_InformacjeOZawartosciTekst" type="nvarchar(254)" definition="NOT NULL">
+			<description>informacja o zawartości tekst</description>
+		</column>
+		<column name="CKK_Referencje" type="tinyint" definition="NOT NULL">
+			<description>Referencja do dokumentu</description>
+		</column>
+		<column name="CKK_ReferencjeTyp" type="tinyint" definition="NOT NULL">
+			<description>Referencja do dokumentu typ</description>
+		</column>
+		<column name="CKK_DoreczenieGwarantowane" type="tinyint" definition="NOT NULL">
+			<description>Doreczenie gwarantowane</description>
+		</column>
+		<column name="CKK_DoreczenieGwarantowaneDoGodziny" type="tinyint" definition="NOT NULL">
+			<description>Doreczenie gwarantowane do godziny</description>
+		</column>
+		<column name="CKK_DoreczenieGwarantowaneDoGodzinyWybrana" type="nvarchar(10)" definition="NOT NULL">
+			<description>Doreczenie gwarantowane do wybranej godziny</description>
+		</column>
+		<column name="CKK_DoreczenieGwarantowaneNaGodzine" type="tinyint" definition="NOT NULL">
+			<description>Doreczenie gwarantowane na godzinę</description>
+		</column>
+		<column name="CKK_DoreczenieGwarantowaneNaGodzineWybrana" type="nvarchar(10)" definition="NOT NULL">
+			<description>Doreczenie gwarantowane na wybraną godzinę</description>
+		</column>
+		<column name="CKK_DoreczenieGwarantowaneWieczor" type="tinyint" definition="NOT NULL">
+			<description>Doreczenie gwarantowane wieczór</description>
+		</column>
+		<column name="CKK_DoreczenieGwarantowaneSobota" type="tinyint" definition="NOT NULL">
+			<description>Doreczenie gwarantowane sobota</description>
+		</column>
+		<column name="CKK_DoreczenieInfoPrzedDoreczeniem" type="tinyint" definition="NOT NULL">
+			<description>Doreczenie z informacją przed doręczeniem</description>
+		</column>
+		<column name="CKK_DoreczeniePotwierdzenieDoreczenia" type="tinyint" definition="NOT NULL">
+			<description>Potwierdzenie doręczenia</description>
+		</column>
+		<column name="CKK_DoreczenieDoRakWlasnych" type="tinyint" definition="NOT NULL">
+			<description>Doręczenie do rąk własnych</description>
+		</column>
+		<column name="CKK_DoreczenieOdbiorWlasny" type="tinyint" definition="NOT NULL">
+			<description>Odbiór własny</description>
+		</column>
+		<column name="CKK_DoreczenieOdbiorWlasnyTyp" type="tinyint" definition="NOT NULL">
+			<description>Odbiór własny typ</description>
+		</column>
+		<column name="CKK_DomyslnePobranie" type="tinyint" definition="NOT NULL">
+			<description>czy pobranie</description>
+		</column>
+		<column name="CKK_DomyslnePobranieDlaFormyPlat" type="tinyint" definition="NOT NULL">
+			<description>Czy pobranie zależne od formy płatności</description>
+		</column>
+		<column name="CKK_PobranieDlaFormPlat" type="nvarchar(254)" definition="NOT NULL">
+			<description>pobranie dla form płatności id</description>
+		</column>
+		<column name="CKK_KwotaPobrania" type="tinyint" definition="NOT NULL">
+			<description>Kwota pobrania typ</description>
+		</column>
+		<column name="CKK_KwotaPobraniaWartosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Wartość pobrania</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPrzesylki" type="tinyint" definition="NOT NULL">
+			<description>Czy deklarowana wartość przesyłki</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPrzesylkiTyp" type="tinyint" definition="NOT NULL">
+			<description>Deklarowana wartość przesyłki typ</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPrzesylkiWartosc" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Wartość pobrania</description>
+		</column>
+		<column name="CKK_DokumentyZwrotne" type="tinyint" definition="NOT NULL">
+			<description>Czy dokumenty zwrotne</description>
+		</column>
+		<column name="CKK_DokumentyZwrotneTyp" type="tinyint" definition="NOT NULL">
+			<description>Dokumenty zwrotne typ</description>
+		</column>
+		<column name="CKK_NadanieWSobote" type="tinyint" definition="NOT NULL">
+			<description>czy nadanie w sobotę</description>
+		</column>
+		<column name="CKK_PrzesylkaZwrotna" type="tinyint" definition="NOT NULL">
+			<description>Czy przesyłka zwrotna</description>
+		</column>
+		<column name="CKK_SenditNazwa" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sendit Nazwa</description>
+		</column>
+		<column name="CKK_SenditWycenaPrzedWysylka" type="tinyint" definition="NOT NULL">
+			<description>Sendit Wycena Przed Wysyłką</description>
+		</column>
+		<column name="CKK_SenditNazwisko" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Sendit nazwisko</description>
+		</column>
+		<column name="CKK_SenditImie" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Sendit imię</description>
+		</column>
+		<column name="CKK_SenditKodPocztowy" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Sendit Kod Pocztowy</description>
+		</column>
+		<column name="CKK_SenditTelefon" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Sendit Telefon</description>
+		</column>
+		<column name="CKK_SenditEmail" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Sendit Email</description>
+		</column>
+		<column name="CKK_SenditBraID" type="int" definition=" NOT NULL">
+			<description>Sendit id rejestru</description>
+		</column>
+		<column name="CKK_SenditKey" type="nvarchar(512)" definition="NOT NULL" hash="1">
+			<description>Sendit klucz</description>
+		</column>
+		<column name="CKK_SenditAdresSerwera" type="nvarchar(254)" definition="NOT NULL">
+			<description>Sendit adres serwera</description>
+		</column>
+		<column name="CKK_SenditFirmaKurierska" type="tinyint" definition="NOT NULL">
+			<description>Sendit domyślna firma kurierska</description>
+		</column>
+		<column name="CKK_Prefix" type="nvarchar(14)" definition="NOT NULL CONSTRAINT DF_CKK_Prefix DEFAULT('')">
+			<description>unikalny prefiks spedytora</description>
+		</column>
+		<column name="CKK_FormatWydruku" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_FormatWydruku DEFAULT(0)">
+			<description>Sendit domyślny format wydruku</description>
+		</column>
+		<column name="CKK_FormatPliku" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_FormatPliku DEFAULT(0)">
+			<description>Sendit domyślny format pliku</description>
+		</column>
+		<column name="CKK_DrukarkaDomyslnaListPrzew" type="nvarchar(254)" definition="NOT NULL CONSTRAINT DF_CKK_DrukarkaDomyslnaListPrzew DEFAULT('')">
+			<description>Domyslna drukarka list przewozowy</description>
+		</column>
+		<column name="CKK_DrukarkaDomyslnaProt" type="nvarchar(254)" definition="NOT NULL CONSTRAINT DF_CKK_DrukarkaDomyslnaProt DEFAULT('')">
+			<description>Domyslna drukarka protokół</description>
+		</column>
+		<column name="CKK_Preawizacja" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_Preawizacja DEFAULT(0)">
+			<description>DHL preawizacja</description>
+		</column>
+		<column name="CKK_UmowaEPO" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_UmowaEPO DEFAULT(0)">
+			<description>Umowa EPO</description>
+		</column>
+		<column name="CKK_EPO" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_EPO DEFAULT(0)">
+			<description>EPO</description>
+		</column>
+		<column name="CKK_Serwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_Serwis DEFAULT(0)">
+			<description>Serwis dla usługi pocztowej</description>
+		</column>
+		<column name="CKK_UwagiOdbTyp" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_UwagiOdbTyp DEFAULT(0)">
+			<description>Uwagi dla odbiorcy</description>
+		</column>
+		<column name="CKK_UwagiOdbTekst" type="nvarchar(254)" definition="NOT NULL CONSTRAINT DF_CKK_UwagiOdbTekst DEFAULT('')">
+			<description>Uwagi dla odbiorcy tekst</description>
+		</column>
+		<column name="CKK_SposobPobrania" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_SposobPobrania DEFAULT(0)">
+			<description>Sposób pobrania</description>
+		</column>
+		<column name="CKK_TytulPrzelewu" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_TytulPrzelewu DEFAULT(0)">
+			<description>Tytul przelewu</description>
+		</column>
+		<column name="CKK_PotwierdzenieOdbioru" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieOdbioru DEFAULT(0)">
+			<description>Potwierdzenie odbioru</description>
+		</column>
+		<column name="CKK_PotwierdzenieOdbioruTyp" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieOdbioruTyp DEFAULT(0)">
+			<description>Potwierdzenie odbioru typ</description>
+		</column>
+		<column name="CKK_PotwierdzenieOdbioruIlosc" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieOdbioruIlosc DEFAULT(0)">
+			<description>Potwierdzenie odbioru ilość</description>
+		</column>
+		<column name="CKK_PotwierdzenieDoreczenia" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieDoreczenia DEFAULT(0)">
+			<description>Potwierdzenie doręczenia</description>
+		</column>
+		<column name="CKK_PotwierdzenieDoreczeniaTyp" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieDoreczeniaTyp DEFAULT(0)">
+			<description>Potwierdzenie doręczenia typ</description>
+		</column>
+		<column name="CKK_UrzadNadaniaKod" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_CKK_UrzadNadaniaKod DEFAULT('')">
+			<description>Kod urzędu nadania</description>
+		</column>
+		<column name="CKK_UrzadNadaniaAdres" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_CKK_UrzadNadaniaAdres DEFAULT('')">
+			<description>Adres urzędu nadania</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPP" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_DeklarowanaWartoscPP DEFAULT(0)">
+			<description>Deklarowana Wartosc PP</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPPTyp" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_DeklarowanaWartoscPPTyp DEFAULT(0)">
+			<description>Deklarowana Wartosc PP Typ</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPPWartosc" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_CKK_DeklarowanaWartoscPPWartosc DEFAULT(0)">
+			<description>Deklarowana Wartosc PP Wartosc</description>
+		</column>
+		<column name="CKK_PocztaPoleconaUmowaGabaryt" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PocztaPoleconaUmowaGabaryt DEFAULT(1)">
+			<description>Poczta polska umowa na nadawanie przesyłek poleconych według gabarytów</description>
+		</column>
+		<column name="CKK_NazwiskoOperatora" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_NazwiskoOperatora DEFAULT(1)">
+			<description>Czy drukować nazwisko operatora na liście przewozowym</description>
+		</column>
+		<column name="CKK_PaczkaDomyslnyRozmiar" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PaczkaDomyslnyRozmiar DEFAULT(0)">
+			<description>Domyślny rozmiar paczki</description>
+		</column>
+		<column name="CKK_SeryjneGenerowanieDoJednegoDok" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_SeryjneGenerowanieDoJednegoDok DEFAULT(0)">
+			<description>Seryjne generowanie do jednego dokumentu</description>
+		</column>
+		<column name="CKK_PobranieDlaMM" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PobranieDlaMM DEFAULT(0)">
+			<description>Czy ustawiać pobranie dla dokumentów MM</description>
+		</column>
+		<column name="CKK_WagaZKartySerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_WagaZKartySerwis DEFAULT(0)">
+			<description>W pierwszej kolejności pobieraj wagę z kartotek towarowych</description>
+		</column>
+		<column name="CKK_DomyslnePobranieSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_DomyslnePobranieSerwis DEFAULT(0)">
+			<description>czy pobranie</description>
+		</column>
+		<column name="CKK_KwotaPobraniaSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_KwotaPobraniaSerwis DEFAULT(0)">
+			<description>Kwota pobrania typ</description>
+		</column>
+		<column name="CKK_KwotaPobraniaWartoscSerwis" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_CKK_KwotaPobraniaWartoscSerwis DEFAULT(0)">
+			<description>Wartość pobrania</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPrzesylkiSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_DeklarowanaWartoscPrzesylkiSerwis DEFAULT(0)">
+			<description>Czy deklarowana wartość przesyłki</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPrzesylkiWartoscSerwis" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_CKK_DeklarowanaWartoscPrzesylkiWartoscSerwis DEFAULT(0)">
+			<description>Wartość pobrania</description>
+		</column>
+		<column name="CKK_DokumentyZwrotneSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_DokumentyZwrotneSerwis DEFAULT(0)">
+			<description>Czy dokumenty zwrotne</description>
+		</column>
+		<column name="CKK_DokumentyZwrotneTypSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_DokumentyZwrotneTypSerwis DEFAULT(0)">
+			<description>Czy dokumenty zwrotne typ</description>
+		</column>
+		<column name="CKK_PreawizacjaSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PreawizacjaSerwis DEFAULT(0)">
+			<description>DHL preawizacja</description>
+		</column>
+		<column name="CKK_PrzesylkaZwrotnaSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PrzesylkaZwrotnaSerwis DEFAULT(0)">
+			<description>Czy przesyłka zwrotna</description>
+		</column>
+		<column name="CKK_SposobPobraniaSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_SposobPobraniaSerwis DEFAULT(0)">
+			<description>Sposób pobrania</description>
+		</column>
+		<column name="CKK_TytulPrzelewuSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_TytulPrzelewuSerwis DEFAULT(0)">
+			<description>Tytul przelewu</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPPSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_DeklarowanaWartoscPPSerwis DEFAULT(0)">
+			<description>Deklarowana Wartosc PP</description>
+		</column>
+		<column name="CKK_DeklarowanaWartoscPPWartoscSerwis" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_CKK_DeklarowanaWartoscPPWartoscSerwis DEFAULT(0)">
+			<description>Deklarowana Wartosc PP Wartosc</description>
+		</column>
+		<column name="CKK_PotwierdzenieOdbioruSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieOdbioruSerwis DEFAULT(0)">
+			<description>Potwierdzenie odbioru</description>
+		</column>
+		<column name="CKK_PotwierdzenieOdbioruTypSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieOdbioruTypSerwis DEFAULT(0)">
+			<description>Potwierdzenie odbioru typ</description>
+		</column>
+		<column name="CKK_PotwierdzenieOdbioruIloscSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieOdbioruIloscSerwis DEFAULT(0)">
+			<description>Potwierdzenie odbioru ilość</description>
+		</column>
+		<column name="CKK_PotwierdzenieDoreczeniaSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieDoreczeniaSerwis DEFAULT(0)">
+			<description>Potwierdzenie doręczenia</description>
+		</column>
+		<column name="CKK_PotwierdzenieDoreczeniaTypSerwis" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_PotwierdzenieDoreczeniaTypSerwis DEFAULT(0)">
+			<description>Potwierdzenie doręczenia typ</description>
+		</column>
+		<column name="CKK_OpcjaUwagi" type="tinyint" definition="NOT NULL CONSTRAINT DF_CKK_OpcjaUwagi DEFAULT(0)">
+			<description>Opcja uwagi</description>
+		</column>
+		<primaryKey name="CKK_Primary" columns="CKK_CKKID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="CKKPrefix" options="UNIQUE NONCLUSTERED" fields="CKK_Prefix">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

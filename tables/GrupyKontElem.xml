@@ -1,0 +1,28 @@
+<table name="GrupyKontElem">
+		<description>Grupy kont elementy</description>
+		<column name="GKE_GKEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="GKE_GKNID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka</description>
+		</column>
+		<column name="GKE_AccId" type="INTEGER" definition="NOT NULL">
+			<description>ID konta księgowego</description>
+		</column>
+		<primaryKey name="GKE_Primary" columns="GKE_GKEID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_GKENaglowek" localColumns="GKE_GKNID" refTable="GrupyKontNag" refColumns="GKN_GKNID" deleteOption="CASCADE">
+			<description>Relacja CDN.GrupyKontElem:CDN.GrupyKontNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_GKEKonto" localColumns="GKE_AccId" refTable="Konta" refColumns="Acc_AccId">
+			<description>Relacja CDN.GrupyKontElem:CDN.Konta (MANY:1)</description>
+		</foreignKey>
+		<index name="GKEKonto" options="NONCLUSTERED" fields="GKE_AccId">
+			<description>Wg konta</description>
+		</index>
+		<index name="GKENaglowek" options="UNIQUE NONCLUSTERED" fields="GKE_GKNID ,GKE_GKEID">
+			<description>Wg nagłówka</description>
+		</index>
+	</table>
+	

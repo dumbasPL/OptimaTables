@@ -1,0 +1,77 @@
+<table name="DokRelacje">
+		<description>Tabela wskaźników do skojarzonych dokumentów</description>
+		<column name="DoR_DoRId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="DoR_ParentTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu nadrzędnego</description>
+			<details>750 - dokument obieg dokumentów</details>
+		</column>
+		<column name="DoR_ParentId" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu nadrzędnego</description>
+			<details>ID z CDN.DokNAG z bazy głównej</details>
+		</column>
+		<column name="DoR_ParentGUID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator dokumentu nadrzędnego</description>
+		</column>
+		<column name="DoR_DokumentTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu skojarzonego</description>
+			<details>
+				302 Fak. sprzedaży &lt;br&gt;
+				301 Fak. zakupu &lt;br&gt;
+				305 Paragon &lt;br&gt;
+				320 Faktura pro forma &lt;br&gt;
+				308 Rezerwacja obiorcy &lt;br&gt;
+				309 Zamówienie dostawcy &lt;br&gt;
+				322 Faktura wewnętrzna sprzedaży &lt;br&gt;
+				321 Faktura wewnętrzna zakupu &lt;br&gt;
+				350 Faktura rolnik ryczałtowy &lt;br&gt;
+				345 Tax Free &lt;br&gt;
+				306 Wydanie zewnętrzne &lt;br&gt;
+				307 Przyjęcie zewnętrzne &lt;br&gt;
+				304 Rozchód wewnętrzny &lt;br&gt;
+				303 Przyjęcie wewnętrzne &lt;br&gt;
+				312 Przesunięcie między-magazynowe &lt;br&gt;
+				310 Bilnas otwarcia magazynu &lt;br&gt;
+				311 Arkusz inwentaryzacyjny &lt;br&gt;
+				317 Przyjęcie wewnętrzne produktu &lt;br&gt;
+				318 Rozchód wewnętrzny produktu &lt;br&gt;
+				314 Wydanie kaucji &lt;br&gt;
+				313 Przyjęcie kaucji &lt;br&gt;
+				380 Awizo ECOD &lt;br&gt;
+				700 Kontakt CRM &lt;br&gt;
+				999 Rejestr VAT &lt;br&gt;
+				900 Zlecenie serwisowe &lt;br&gt;
+			</details>
+		</column>
+		<column name="DoR_DokumentId" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu skojarzonego</description>
+			<details>
+				To, do jakiej tabeli odwołuje się ten klucz obcy zależne jest od TypDokumentu &lt;br&gt;
+				Dokumenty magazynowe CDN.Tranag &lt;br&gt;
+				Dokumenty serwisowe CDN.SrsZlecenia &lt;br&gt;
+				Dokumnety Rej VAT CDN.VatNag &lt;br&gt;
+				Dokumenty CRM CDN.CRMKontakty
+			</details>
+		</column>
+		<column name="DoR_DokumentGUID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator dokumentu skojarzonego</description>
+		</column>
+		<column name="DoR_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>0-dodany przez operatora; 1-dodany przez program</description>
+		</column>
+		<column name="DoR_HRM" type="SMALLINT" definition="NULL">
+			<description>0 - Blokuj w Comarch HRM; 1-Udostępnij w Comarch HRM; NULL - nie dotyczy</description>
+		</column>
+		<primaryKey name="DoR_Primary" columns="DoR_DoRId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DoSDokument" options="NONCLUSTERED" fields="DoR_DokumentTyp ,DoR_DokumentId">
+			<description>Klucz obcy do skojarzonego dokumentu</description>
+		</index>
+		<index name="DosParent" options="NONCLUSTERED" fields="DoR_ParentTyp ,DoR_ParentId ,DoR_DoRId">
+			<description>Klucz obcy do dokumentu</description>
+		</index>
+		<index name="DoRUniqueDok" options="UNIQUE NONCLUSTERED" fields="DoR_ParentTyp ,DoR_ParentId ,DoR_DokumentTyp ,DoR_DokumentId, DoR_ParentGUID, DoR_DokumentGUID" />
+	</table>
+	

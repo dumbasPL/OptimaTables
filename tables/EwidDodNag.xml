@@ -1,0 +1,371 @@
+<table name="EwidDodNag">
+		<description>Nagłówki ewidencji dodatkowej</description>
+		<details>Nagłówki dokumentów w ewidencji pomocniczej</details>
+		<column name="EDN_EDNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="EDN_DDfId" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="EDN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="EDN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="EDN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(EDN_NUMERNR,EDN_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="EDN_NumerObcy" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer wlasny dokumentu obcego</description>
+		</column>
+		<column name="EDN_DataWys" type="DATETIME" definition="NOT NULL">
+			<description>Data wystawienia dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+				Data wystawienia dokumentu
+			</details>
+		</column>
+		<column name="EDN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="EDN_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji gospodarczej</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="EDN_DataKur" type="DATETIME" definition="NOT NULL">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="EDN_Typ" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Typ dokumentu (klasa dokumentu z tabeli DokDefinicje)</description>
+			<details>101-ewidencja przychodów; 102-ewidencja kosztów</details>
+		</column>
+		<column name="EDN_Rejestr" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa rejestru pomocniczego</description>
+		</column>
+		<column name="EDN_RokMies" type="COMPUTED|INTEGER" definition="100*YEAR(EDN_DATADOK)+MONTH(EDN_DATADOK)">
+			<description>Rok i miesiąc zapisu</description>
+			<details>Pole wyliczane, do potrzeb numeracji w miesiącu</details>
+		</column>
+		<column name="EDN_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny w ramach miesiąca</description>
+		</column>
+		<column name="EDN_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - Kontrahenci;
+				2 - BnkNazwy;
+				3 - PracKod;
+				5 - Urzedy
+			</details>
+		</column>
+		<column name="EDN_PodID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="EDN_Nazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy podmiotu</description>
+		</column>
+		<column name="EDN_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy podmiotu</description>
+		</column>
+		<column name="EDN_Nazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy podmiotu</description>
+		</column>
+		<column name="EDN_Kraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj zamieszkania (siedziby) podmiotu</description>
+		</column>
+		<column name="EDN_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Wojewódzwo podmiotu</description>
+		</column>
+		<column name="EDN_Powiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat podmiotu</description>
+		</column>
+		<column name="EDN_Gmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina podmiotu</description>
+		</column>
+		<column name="EDN_Ulica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica podmiotu</description>
+		</column>
+		<column name="EDN_NrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu podmiotu</description>
+		</column>
+		<column name="EDN_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu podmiotu</description>
+		</column>
+		<column name="EDN_Miasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto podmiotu</description>
+		</column>
+		<column name="EDN_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy podmiotu</description>
+		</column>
+		<column name="EDN_Poczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta podmiotu</description>
+		</column>
+		<column name="EDN_Adres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu podmiotu</description>
+		</column>
+		<column name="EDN_NipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="EDN_NipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP podmiotu</description>
+		</column>
+		<column name="EDN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="EDN_PodmiotZalTyp" type="SMALLINT">
+			<description>Typ podmiotu rozliczającego zaliczkę</description>
+		</column>
+		<column name="EDN_PodZalId" type="INTEGER">
+			<description>Id podmiotu rozliczającego zaliczkę</description>
+		</column>
+		<column name="EDN_PlatnikTyp" type="SMALLINT">
+			<description>Typ płatnika z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="EDN_PlatnikID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator płatnika</description>
+			<details>Wskaźnik do płatnika - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="EDN_PlatnikRachunekLp" type="INTEGER">
+			<description>Numer rachunku płatnika - wskaźnik na CDN.SchematPlatnosci</description>
+		</column>
+		<column name="EDN_PlatnikKraj" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikKraj DEFAULT('')" hash="1">
+			<description>Kraj zamieszkania (siedziby) płatnika</description>
+		</column>
+		<column name="EDN_PlatnikWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikWojewodztwo DEFAULT('')">
+			<description>Wojewódzwo płatnika</description>
+		</column>
+		<column name="EDN_PlatnikPowiat" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikPowiat DEFAULT('')" hash="1">
+			<description>Powiat płatnika</description>
+		</column>
+		<column name="EDN_PlatnikGmina" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikGmina DEFAULT('')" hash="1">
+			<description>Gmina płatnika</description>
+		</column>
+		<column name="EDN_PlatnikUlica" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikUlica DEFAULT('')" hash="1">
+			<description>Pierwsza linia adresu płatnika</description>
+		</column>
+		<column name="EDN_PlatnikNrDomu" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikNrDomu DEFAULT('')" hash="1">
+			<description>Numer domu płatnika</description>
+		</column>
+		<column name="EDN_PlatnikNrLokalu" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikNrLokalu DEFAULT('')" hash="1">
+			<description>Numer lokalu płatnika</description>
+		</column>
+		<column name="EDN_PlatnikMiasto" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikMiasto DEFAULT('')" hash="1">
+			<description>Miasto płatnika</description>
+		</column>
+		<column name="EDN_PlatnikKodPocztowy" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikKodPocztowy DEFAULT('')" hash="1">
+			<description>Kod pocztowy płatnika</description>
+		</column>
+		<column name="EDN_PlatnikPoczta" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikPoczta DEFAULT('')" hash="1">
+			<description>Poczta płatnika</description>
+		</column>
+		<column name="EDN_PlatnikAdres2" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikAdres2 DEFAULT('')" hash="1">
+			<description>Druga linia adresu płatnika</description>
+		</column>
+		<column name="EDN_PlatnikNazwa1" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikNazwa1 DEFAULT('')" hash="1">
+			<description>Pierwsza linia nazwy płatnika</description>
+		</column>
+		<column name="EDN_PlatnikNazwa2" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikNazwa2 DEFAULT('')" hash="1">
+			<description>Druga linia nazwy płatnika</description>
+		</column>
+		<column name="EDN_PlatnikNazwa3" type="NVARCHAR(250)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikNazwa3 DEFAULT('')" hash="1">
+			<description>Trzecia linia nazwy płatnika</description>
+		</column>
+		<column name="EDN_PlatnikRachunekNr" type="NVARCHAR(51)" definition="NOT NULL CONSTRAINT df_EDN_PlatnikRachunekNr DEFAULT('')" hash="1">
+			<description>Numer rachunku płatnika</description>
+		</column>
+		<column name="EDN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="EDN_KwotaRazemSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna dokumentu w walucie systemowej</description>
+		</column>
+		<column name="EDN_KontrolaSumy" type="TINYINT" definition="NOT NULL">
+			<description>Kontrola, czy suma elementów ma być równa kwocie całkowitej</description>
+		</column>
+		<column name="EDN_KwotaRazem" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota całkowita w walucie</description>
+		</column>
+		<column name="EDN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="EDN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="EDN_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="EDN_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="EDN_Platnosci" type="TINYINT" definition="NOT NULL">
+			<description>Czy generować płatności dla dokumentu</description>
+			<details>Znacznik, czy dokument powoduje powstanie płatności w preliminarzu</details>
+		</column>
+		<column name="EDN_FPlId" type="INTEGER">
+			<description>Identyfikator formy płatności</description>
+		</column>
+		<column name="EDN_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="EDN_MagazynZrodlowy" type="NVARCHAR(20)">
+			<description>Magazyn źródłowy</description>
+		</column>
+		<column name="EDN_MagazynDocelowy" type="NVARCHAR(20)">
+			<description>Magazyn docelowy</description>
+		</column>
+		<column name="EDN_DekId" type="INTEGER" filterVisible="false">
+			<description>Wskaźnik do dekretu księgowego</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada EDN_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada EDN_DekId = NULL;
+			</details>
+		</column>
+		<column name="EDN_PreDekId" type="INTEGER" filterVisible="false">
+			<description>Wskaźnik do predekretu księgowego</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis predekretowany posiada EDN_PreDekId = Dek_DekId;&lt;br&gt;
+				Zapis niepredekretowany posiada EDN_PreDekId = NULL;
+			</details>
+		</column>
+		<column name="EDN_KPRId" type="INTEGER">
+			<description>Wskaźnik do zapisu w KPiR</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada EDN_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada EDN_KPRId = NULL;
+			</details>
+		</column>
+		<column name="EDN_RycId" type="INTEGER">
+			<description>Wskaźnik do zapisu w ewidencji ryczałtowej</description>
+			<details>
+				Referencja do tabeli Ryczalt.&lt;br&gt;
+				Zapis zaksięgowany posiada EDN_RYCId = RYC_RYCId;&lt;br&gt;
+				Zapis niezaksięgowany posiada EDN_RYCId = NULL;
+			</details>
+		</column>
+		<column name="EDN_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji/bazy źródłowej</description>
+		</column>
+		<column name="EDN_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w tabeli źródłowej</description>
+		</column>
+		<column name="EDN_TS_Export" type="DATETIME">
+			<description>Czas wyeksportowania dokumentu</description>
+		</column>
+		<column name="EDN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="EDN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="EDN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="EDN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="EDN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="EDN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="EDN_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="EDN_DnpID" type="INTEGER">
+			<description>Link do skojarzonego pliku OBD</description>
+		</column>
+		<column name="EDN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_EDN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="EDN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_EDN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="EDN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_EDN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="EDN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_EDN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="EDN_Primary" columns="EDN_EDNID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_EDNPodmiot" localColumns="EDN_PodID,EDN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.EwidDodNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_EDNKategoria" localColumns="EDN_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.EwidDodNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_EDNDokDef" localColumns="EDN_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.EwidDodNag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_EDNPlatnosc" localColumns="EDN_FPlId" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.EwidDodNag:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<index name="EDNKategoria" options="UNIQUE NONCLUSTERED" fields="EDN_KatID ,EDN_Typ ,EDN_DataWys ,EDN_EDNID">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="EDNPodmiot" options="UNIQUE NONCLUSTERED" fields="EDN_PodID ,EDN_PodmiotTyp ,EDN_Typ ,EDN_DataWys ,EDN_EDNID">
+			<description>Wg podmiotu dla którego wystawiono transakcję</description>
+		</index>
+		<index name="EDNPodmiotZal" options="NONCLUSTERED" fields="EDN_PodZalId ,EDN_PodmiotZalTyp">
+			<description>Wg podmiotu rozliczającego zaliczkę</description>
+		</index>
+		<index name="EDNChronoRej" options="UNIQUE NONCLUSTERED" fields="EDN_Typ ,EDN_Rejestr ,EDN_DataDok ,EDN_EDNID">
+			<description>Wg daty dokumentu w rejestrze</description>
+		</index>
+		<index name="EDNLp" options="UNIQUE NONCLUSTERED" fields="EDN_Typ ,EDN_Rejestr ,EDN_RokMies ,EDN_Lp ,EDN_EDNID">
+			<description>Wg liczby porządkowej</description>
+		</index>
+		<index name="EDNDokDef" options="NONCLUSTERED" fields="EDN_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="EDNNumer" options="UNIQUE NONCLUSTERED" fields="EDN_NumerString ,EDN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="EDNNumerPelny" options="UNIQUE NONCLUSTERED" fields="EDN_NumerPelny">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="EDNPlatnosc" options="NONCLUSTERED" fields="EDN_FPlId">
+			<description>Wg identyfikatora formy płatności</description>
+		</index>
+		<index name="EDNDekrety" options="NONCLUSTERED" fields="EDN_DekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="EDNPreDekrety" options="NONCLUSTERED" fields="EDN_PreDekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="EDNZapisy" options="NONCLUSTERED" fields="EDN_KPRId" />
+		<index name="EDNRyczalt" options="NONCLUSTERED" fields="EDN_RycId" />
+		<index name="EDNGUID" options="UNIQUE NONCLUSTERED" fields="EDN_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,25 @@
+<table name="Zamienniki">
+		<description>Zamienniki dla towaru</description>
+		<column name="ZAM_ZamId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZAM_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator towaru</description>
+		</column>
+		<column name="ZAM_ZamTwrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zamiennika</description>
+		</column>
+		<column name="ZAM_Lp" type="INTEGER">
+			<description>Lp zamiennika</description>
+		</column>
+		<primaryKey name="ZAM_Primary" columns="ZAM_ZamId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ZamTwrId" localColumns="ZAM_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.Zamienniki:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="ZamTwrId" options="UNIQUE NONCLUSTERED" fields="ZAM_TwrId ,ZAM_ZamTwrId">
+			<description>Według towaru</description>
+		</index>
+	</table>
+	

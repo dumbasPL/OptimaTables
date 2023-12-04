@@ -1,0 +1,116 @@
+<table name="RptKolejka2" filterVisible="false">
+		<description>Tabela dla wydruków z kolejki</description>
+		<column name="RpQ2_GUID" type="VARCHAR(50)">
+			<description>Identyfikator wydruku</description>
+		</column>
+		<column name="RpQ2_RekordLp" type="INTEGER">
+			<description>Numer kolejny rekordu w kolejce wg porządku sortowania z aplikacji</description>
+		</column>
+		<column name="RpQ2_KopiaLp" type="SMALLINT">
+			<description>Numer kopii</description>
+		</column>
+		<column name="RpQ2_Pole1" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole2" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole3" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole4" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole5" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole6" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole7" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole8" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole9" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole10" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole11" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole12" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole13" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole14" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole15" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole16" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole17" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole18" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole19" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole20" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole21" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole22" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole23" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole24" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole25" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole26" type="NVARCHAR(255)" />
+		<column name="RpQ2_Pole27" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole28" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole29" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole30" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole31" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole32" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole33" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole34" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole35" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole36" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole37" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole38" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole39" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole40" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole41" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole42" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole43" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole44" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole45" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole46" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole47" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole48" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole49" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole50" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole51" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole52" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole53" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole54" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole55" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole56" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole57" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole58" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole59" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole60" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole61" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole62" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole63" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole64" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole65" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole66" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole67" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole68" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole69" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole70" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole71" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole72" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole73" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole74" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole75" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole76" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole77" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole78" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole79" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole80" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole81" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole82" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole83" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole84" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole85" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole86" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole87" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole88" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole89" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole90" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole91" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole92" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole93" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole94" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole95" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole96" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole97" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole98" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole99" type="NVARCHAR(MAX)" />
+		<column name="RpQ2_Pole100" type="NVARCHAR(MAX)" />
+		<primaryKey name="RpQ2_Primary" columns="RpQ2_GUID,RpQ2_RekordLp,RpQ2_KopiaLp">
+			<description>Podstawowy</description>
+		</primaryKey>
+	</table>
+	

@@ -1,0 +1,32 @@
+<table name="KartyKredytowe">
+		<description>Tabela z listą kart kredytowych</description>
+		<details>Tabela zawiera slownik kart kredytowych</details>
+		<column name="KKr_KKrId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KKr_Algorytm" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Algorytm walidacji numeru karty</description>
+			<details>
+				Wypełniany podczas kreowania tabeli. Algorytm o numerze zero oznacza „numer karty nie jest
+				weryfikowany”, tzn. sprawdzana jest tylko zgodność numeru z algorytmem Luhn’a.
+				1 - Visa;
+				2 - Master Card;
+				3 - American Express;
+				4 - Dinners Club, Carte Blanche;
+				5 - enRoute;
+				6 - Discover;
+				7 - JCB
+			</details>
+		</column>
+		<column name="KKr_Nazwa" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa karty kredytowej</description>
+			<details>Np. American Express</details>
+		</column>
+		<primaryKey name="KKr_Primary" columns="KKr_KKrId">
+			<description>Wg numeru rekordu</description>
+		</primaryKey>
+		<index name="KKrNazwa" options="UNIQUE NONCLUSTERED" fields="KKr_Nazwa">
+			<description>Według nazwy w ramach listy</description>
+		</index>
+	</table>
+	

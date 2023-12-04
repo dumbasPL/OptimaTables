@@ -1,0 +1,33 @@
+<table name="BnkSposobyLogowania">
+		<description>Tabela ze sposobami logowania operatorów dla danego banku</description>
+		<column name="BSL_BSLID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BSL_BNaID" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do karty banku</description>
+		</column>
+		<column name="BSL_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="BSL_TypLogowania" type="TINYINT" definition="NOT NULL">
+			<description>Typ logowania operatora w banku (0 - certyfikat, 1 - token mobilny)</description>
+		</column>
+		<column name="BSL_Login" type="NVARCHAR(32)" definition="NOT NULL">
+			<description>Login operatora w banku</description>
+		</column>
+		<primaryKey name="BSL_Primary" columns="BSL_BSLID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_BSLBank" localColumns="BSL_BNaID" refTable="BnkNazwy" refColumns="BNa_BNaID" deleteOption="CASCADE">
+			<description>Relacja CDN.BnkSposobyLogowania:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<index name="BSLBank" options="UNIQUE NONCLUSTERED" fields="BSL_BNaID, BSL_BSLID">
+			<description>ID banku</description>
+			<details>Indeks do tabeli BnkNazwy</details>
+		</index>
+	</table>
+	

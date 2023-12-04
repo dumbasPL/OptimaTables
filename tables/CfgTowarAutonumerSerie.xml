@@ -1,0 +1,22 @@
+<table name="CfgTowarAutonumerSerie">
+		<description>Konfiguracja serii autonumeracji kodu towarów</description>
+		<column name="CTAS_CTASId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="CTAS_Nazwa" type="nvarchar(19)" definition="NOT NULL">
+			<description>Nazwa serii</description>
+		</column>
+		<column name="CTAS_Opis" type="nvarchar(40)" definition="NOT NULL">
+			<description>Opis serii</description>
+		</column>
+		<column name="CTAS_Domyslna" type="tinyint" definition="NOT NULL">
+			<description>Seria domyślna</description>
+		</column>
+		<primaryKey name="CTAS_Primary" columns="CTAS_CTASId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="CTAS_Nazwa_UniqueIx" options="UNIQUE NONCLUSTERED" fields="CTAS_Nazwa">
+			<description>Index nazwa serii</description>
+		</index>
+	</table>
+	

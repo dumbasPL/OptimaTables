@@ -1,0 +1,40 @@
+<table name="WszystkoPLParametry">
+		<description>Parametry kategorii z wszystko.pl</description>
+		<column name="WPLP_WPLPId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WPLP_WPLKId" type="INTEGER" definition="NOT NULL">
+			<description>Id kategorii wszystko.pl</description>
+		</column>
+		<column name="WPLP_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ parametru</description>
+		</column>
+		<column name="WPLP_Wymagalny" type="TINYINT" definition="NOT NULL">
+			<description>Czy wymagany</description>
+		</column>
+		<column name="WPLP_Nazwa" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Nazwa parametru</description>
+		</column>
+		<column name="WPLP_Precyzja" type="INT" definition="NOT NULL">
+			<description>Precyzja</description>
+		</column>
+		<column name="WPLP_WieloWyborLista" type="TINYINT" definition="NOT NULL">
+			<description>Czy możliwy wielokrotny wybór</description>
+		</column>
+		<column name="WPLP_IloscWyborKolor" type="INT" definition="NOT NULL">
+			<description>Ile mozna wybrać kolorów</description>
+		</column>
+		<column name="WPLP_Minimum" type="INT" definition="NOT NULL">
+			<description>Minimalna wartość, ilość znaków</description>
+		</column>
+		<column name="WPLP_Maksimum" type="INT" definition="NOT NULL">
+			<description>Maksywalna wartość, ilość znaków</description>
+		</column>
+		<column name="WPLP_Jednostka" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Nazwa Jednostki</description>
+		</column>
+		<column name="WPLP_CzyZakres" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPLP_CzyZakres DEFAULT(0)">
+			<description>Czy zakres</description>
+		</column>
+	</table>
+	

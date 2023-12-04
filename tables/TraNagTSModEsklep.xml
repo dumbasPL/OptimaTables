@@ -1,0 +1,40 @@
+<table name="TraNagTSModEsklep">
+		<description>Tabela z datą modyfikacji dokumentu dla sklepu</description>
+		<column name="TrNTS_TrNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu (numer rekordu)</description>
+		</column>
+		<column name="TrNTS_Status" type="INT" definition="NOT NULL">
+			<description>Status dokumentu wysłany do sklepu</description>
+		</column>
+		<column name="TrNTS_StatusPlat" type="INT" definition="">
+			<description>Status platnosci wysłany do sklepu</description>
+		</column>
+		<column name="TrNTS_StatusDost" type="INT" definition="">
+			<description>Status dostawy wysłany do sklepu</description>
+		</column>
+		<column name="TrNTS_DataPlanowanaDostawy" type="DATETIME" definition="">
+			<description>Data planowanej dostawy wysłana do sklepu</description>
+		</column>
+		<column name="TrNTS_TS_ModESklep" type="DATETIME" definition="NOT NULL">
+			<description>Data ostatniej modyfikacji</description>
+		</column>
+		<column name="TrNTS_DataPrzyjecia" type="DATETIME" definition="">
+			<description>Data przyjecia dokumentu wysłana do sklepu</description>
+		</column>
+		<column name="TrNTS_DataPotwierdzenia" type="DATETIME" definition="">
+			<description>Data potwierdzenia dokumentu wysłana do sklepu</description>
+		</column>
+		<column name="TrNTS_DataRealizacji" type="DATETIME" definition="">
+			<description>Data realizacji dokumentu wysłana do sklepu</description>
+		</column>
+		<column name="TrNTS_TS_ModList" type="DATETIME" definition="">
+			<description>Data modyfikacji listów przewozowych dokumentu wysłana do sklepu</description>
+		</column>
+		<primaryKey name="TrNTS_Primary" columns="TrNTS_TrNId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_TrNTSTrNId" localColumns="TrNTS_TrNId" refTable="TraNag" refColumns="TrN_TrNId" deleteOption="CASCADE">
+			<description>Relacja CDN.TraNagTSModEsklep:CDN.TraNag (1:1)</description>
+		</foreignKey>
+	</table>
+	

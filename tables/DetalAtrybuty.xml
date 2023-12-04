@@ -1,0 +1,40 @@
+<table name="DetalAtrybuty">
+		<description>Atrybuty</description>
+		<column name="DAtr_DAtrId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DAtr_OptimaId" type="INTEGER" definition="NOT NULL">
+			<description>Id atrybutu w optimie</description>
+		</column>
+		<column name="DAtr_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Id stanowiska w optimie</description>
+		</column>
+		<column name="DAtr_DSAtrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu w detalu</description>
+		</column>
+		<column name="DAtr_objectType" type="INTEGER" definition="NOT NULL">
+			<description>typ atrybutu</description>
+		</column>
+		<column name="DAtr_objectId" type="INTEGER" definition="NOT NULL">
+			<description>id np kontrahenta,towaru</description>
+		</column>
+		<column name="DAtr_classId" type="INTEGER" definition="NOT NULL">
+			<description>id definicji</description>
+		</column>
+		<column name="DAtr_valueId" type="INTEGER" definition="NOT NULL">
+			<description>id wartosci dla atrybutu typu lista</description>
+		</column>
+		<column name="DAtr_value" type="NVARCHAR(max)" definition="NOT NULL">
+			<description>wartość atrybutu</description>
+		</column>
+		<column name="DAtr_format" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>format atrybutu</description>
+		</column>
+		<column name="DAtr_valueType" type="INTEGER" definition="NOT NULL">
+			<description>Typ atrybutu</description>
+		</column>
+		<primaryKey name="DAtr_Primary" columns="DAtr_DAtrId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

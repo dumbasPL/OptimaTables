@@ -1,0 +1,22 @@
+<table name="KasaChor">
+		<description>Słownik kas chorych</description>
+		<column name="KCH_KchId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KCH_Kod" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Kod Kasy Chorych</description>
+		</column>
+		<column name="KCH_Poziom" type="INTEGER" definition="NOT NULL" />
+		<column name="KCH_Wybieralny" type="INTEGER" definition="NOT NULL" />
+		<column name="KCH_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Nazwa Kasy Chorych</description>
+		</column>
+		<column name="KCH_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_KCH_ZjeId default('')" />
+		<primaryKey name="KCH_Primary" columns="KCH_KchId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="KCHZjeLink" options="NONCLUSTERED" fields="KCH_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,53 @@
+<table name="SentElement">
+		<description>Tabela elementów dokumentu SENT</description>
+		<column name="SNEL_SNELID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SNEL_SentID" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu SENT</description>
+		</column>
+		<column name="SNEL_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp</description>
+		</column>
+		<column name="SNEL_TwrId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_SNEL_TwrId  DEFAULT(0)">
+			<description>Id towaru</description>
+		</column>
+		<column name="SNEL_KodCN" type="VARCHAR(8)" definition="NOT NULL">
+			<description>Kod CN zgłaszanej grupy towarów</description>
+		</column>
+		<column name="SNEL_Ilosc" type="decimal(15,2)" definition="NOT NULL">
+			<description>Kod CN zgłaszanej grupy towarów</description>
+		</column>
+		<column name="SNEL_JM" type="nvarchar(20)" definition="NOT NULL">
+			<description>Kod CN zgłaszanej grupy towarów</description>
+		</column>
+		<column name="SNEL_Masa" type="decimal(15,2)" definition="NOT NULL">
+			<description>Kod CN zgłaszanej grupy towarów</description>
+		</column>
+		<column name="SNEL_Opis" type="nvarchar(2000)" definition="NULL">
+			<description>Kod CN zgłaszanej grupy towarów</description>
+		</column>
+		<column name="SNEL_Stawka" type="decimal(5,2)" definition="NOT NULL CONSTRAINT DF_SNEL_Stawka DEFAULT(0)">
+			<description>Stawka</description>
+		</column>
+		<column name="SNEL_Flaga" type="smallint" definition="NOT NULL CONSTRAINT DF_SNEL_Flaga DEFAULT(0)">
+			<description>Stawka flaga</description>
+		</column>
+		<column name="SNEL_Zrodlowa" type="decimal(5,2)" definition="NOT NULL CONSTRAINT DF_SNEL_Zrodlowa DEFAULT(0)">
+			<description>Stawka źródłowa</description>
+		</column>
+		<column name="SNEL_KodOdpadu" type="nvarchar(6)" definition="NOT NULL CONSTRAINT DF_SNEL_KodOdpadu DEFAULT('')">
+			<description>Kod odpadu</description>
+		</column>
+		<primaryKey name="SNEL_Primary" columns="SNEL_SNELID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SentElementSent" localColumns="SNEL_SentID" refTable="SentZgloszenia" refColumns="Sent_SentID" deleteOption="CASCADE">
+			<description>Relacja CDN.SentElement:CDN.SentZgloszenia (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

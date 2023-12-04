@@ -1,0 +1,82 @@
+<table name="FaCyklTwrKnt">
+		<description>Tabela z listą cen i ilości dla kontrahentów</description>
+		<column name="FCT_FcTID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="FCT_FcEID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_FCT_FcEId DEFAULT(0)">
+			<description>Id z tabeli FaCyklElem</description>
+		</column>
+		<column name="FCT_FcKID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_FCT_FcKId DEFAULT(0)">
+			<description>Id z tabeli FaCyklKnt</description>
+		</column>
+		<column name="FCT_TypKnt" type="TINYINT" definition="NOT NULL">
+			<description>1 - grupa; 2 - kontrahent</description>
+		</column>
+		<column name="FCT_KntLp" type="INTEGER" definition="NOT NULL">
+			<description>Lpkontrahenta</description>
+		</column>
+		<column name="FCT_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość</description>
+		</column>
+		<column name="FCT_JM" type="NVARCHAR(20)">
+			<description>jednostka miary</description>
+		</column>
+		<column name="FCT_TypNB" type="TINYINT">
+			<description>Rodzaj ceny z nagłówka: brutto/netto</description>
+			<details>
+				1 - netto &lt;br&gt;
+				2 - brutto
+			</details>
+		</column>
+		<column name="FCT_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_FCT_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<column name="FCT_Cena" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena netto</description>
+		</column>
+		<column name="FCT_CenaBrutto" type="DECIMAL(17,4)">
+			<description>Cena brutto</description>
+		</column>
+		<column name="FCT_CenaNettoPLN" type="DECIMAL(17,4)" definition="NOT NULL CONSTRAINT DF_FCT_CenaNettoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="FCT_CenaBruttoPLN" type="DECIMAL(17,4)" definition="NOT NULL CONSTRAINT DF_FCT_CenaBruttoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej brutto</description>
+		</column>
+		<column name="FCT_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_FCT_Waluta DEFAULT('')">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="FCT_NabywcaKod" type="VARCHAR(20)" hash="1">&gt; <description>Akronim podmiotu lub
+			grupy</description>
+		</column>
+		<column name="FCT_NabywcaNazwa" type="NVARCHAR(352)" hash="1">&gt; <description>Nazwa podmiotu lub
+			grupy</description>
+		</column>
+		<column name="FCT_OdbiorcaKod" type="VARCHAR(20)" hash="1">&gt; <description>Akronim podmiotu lub
+			grupy</description>
+		</column>
+		<column name="FCT_OdbiorcaNazwa" type="NVARCHAR(352)" hash="1">&gt; <description>Nazwa podmiotu lub
+			grupy</description>
+		</column>
+		<column name="FCT_ObowiazujeOdTxt" type="VARCHAR(22)">
+			<description>Data początkowa okresu obowiązywania</description>
+		</column>
+		<column name="FCT_ObowiazujeDoTxt" type="VARCHAR(22)">
+			<description>Data końcowa okresu obowiązywania</description>
+		</column>
+		<primaryKey name="FCT_Primary" columns="FCT_FcTID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_FCT_FaCyklElem" localColumns="FCT_FcEID" refTable="FaCyklElem" refColumns="FCE_FCEId" deleteOption="CASCADE">
+			<description>Relacja CDN.FaCyklTwrKnt do CDN.FaCyklElem (MANY:1)</description>
+		</foreignKey>
+		<index name="FcTPozycjaElem" options="NONCLUSTERED" fields="FCT_FcEID,FCT_TypKnt,FCT_KntLp">
+			<description>Wskaźnik do pozycji dokumentu</description>
+			<details>Klucz obcy do tabeli FaCyklElem</details>
+		</index>
+	</table>
+	

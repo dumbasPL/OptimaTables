@@ -1,0 +1,22 @@
+<table name="ZamowienieKuriera">
+		<description>Zamówienie kuriera</description>
+		<column name="ZAMK_ZAMKID" type="int" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZAMK_AdresID" type="int" definition="NOT NULL">
+			<description>Id oddziału</description>
+		</column>
+		<column name="ZAMK_KurierTyp" type="int" definition="NOT NULL">
+			<description>Typ kuriera</description>
+		</column>
+		<column name="ZAMK_DataZamowienia" type="DATETIME" definition="NOT NULL">
+			<description>Data zamówienia kuriera</description>
+		</column>
+		<primaryKey name="ZAMK_Primary" columns="ZAMK_ZAMKID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="ZAMK_AdresID_idx" options="NONCLUSTERED" fields="ZAMK_AdresID">
+			<description>Wg adresu</description>
+		</index>
+	</table>
+	

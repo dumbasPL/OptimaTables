@@ -1,0 +1,113 @@
+<table name="AnkAnkietyNag">
+		<description>Lista kontaktów z Klientami</description>
+		<column name="AnkAnN_AnkAnNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AnkAnN_DDfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="AnkAnN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="AnkAnN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="AnkAnN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(AnkAnN_NumerNr,AnkAnN_NumerString)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="AnkAnN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data utworzenia dokumentu (człon numeru dokumentu)</description>
+		</column>
+		<column name="AnkAnN_Stan" type="INTEGER" definition="NOT NULL">
+			<description>Stan ankiety 0-do wypełnienia 1-wypełniona 2-zatwierdzona 3-odrzucona</description>
+		</column>
+		<column name="AnkAnN_PrzyczynaOdrzucenia" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Przyczyna odrzucenia ankiety</description>
+		</column>
+		<column name="AnkAnN_AnkWaNId" type="INTEGER">
+			<description>Wzorzec ankiety</description>
+		</column>
+		<column name="AnkAnN_Nazwa" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Nazwa ankiety</description>
+		</column>
+		<column name="AnkAnN_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis ankiety</description>
+		</column>
+		<column name="AnkAnN_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="AnkAnN_PodID" type="INTEGER" definition="NOT NULL">
+			<description>Id podmiotu</description>
+		</column>
+		<column name="AnkAnN_OsobaId" type="INTEGER" definition="NULL">
+			<description>Id przedstawiciela</description>
+		</column>
+		<column name="AnkAnN_OsobaTelefon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon do osoby ankietowanej</description>
+		</column>
+		<column name="AnkAnN_OsobaNazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Imię i nazwisko osoby ankietowanej</description>
+		</column>
+		<column name="AnkAnN_TerminOd" type="DATETIME" definition="NOT NULL">
+			<description>Termin ankiety - od</description>
+		</column>
+		<column name="AnkAnN_TerminDo" type="DATETIME" definition="NOT NULL">
+			<description>Termin ankiety - do</description>
+		</column>
+		<column name="AnkAnN_Ocena" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna ocena ankiety</description>
+		</column>
+		<column name="AnkAnN_DataWypelnienia" type="DATETIME" definition="NULL">
+			<description>Data wypelnienia</description>
+		</column>
+		<column name="AnkAnN_DataZatwierdzenia" type="DATETIME" definition="NULL">
+			<description>Data zatwierdzenia ankiety</description>
+		</column>
+		<column name="AnkAnN_Eksport" type="INTEGER" definition="NULL">
+			<description>1 - dokument wyeksportowano do Mobile</description>
+		</column>
+		<column name="AnkAnN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="AnkAnN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AnkAnN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AnkAnN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="AnkAnN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AnkAnN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AnkAnN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AnkAnN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AnkAnN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AnkAnN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AnkAnN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AnkAnN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AnkAnN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AnkAnN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="AnkAnN_Primary" columns="AnkAnN_AnkAnNId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="AnkAnNNumer" options="UNIQUE NONCLUSTERED" fields="AnkAnN_NumerString, AnkAnN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+	</table>
+	

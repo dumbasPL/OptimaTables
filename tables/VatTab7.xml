@@ -1,0 +1,56 @@
+<table name="VatTab7" filterVisible="false">
+		<description>Kwoty VAT do rozlicznenia metodą "kasową"</description>
+		<details>Pomocnicza tabela elementów (pozycji) dokumentu w rejestrze Vat służąca do rozliczenia
+			deklaracji Vat-7 metodą kasową.</details>
+		<column name="Va7_Va7ID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator zapisu</description>
+		</column>
+		<column name="Va7_VaNID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Wskaźnik do nagłówka VatNag: VaT:VaNId = VaN:VaNId</details>
+		</column>
+		<column name="Va7_RokMiesiac" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc (lub kwartał) w którym będzie rozliczany zapis</description>
+		</column>
+		<column name="Va7_RodzajZakupu" type="SMALLINT" definition="NOT NULL">
+			<description>Rodzaj zakupu</description>
+		</column>
+		<column name="Va7_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="Va7_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="Va7_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawki zaniżonej</description>
+		</column>
+		<column name="Va7_Netto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota netto</description>
+		</column>
+		<column name="Va7_VAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota VAT</description>
+		</column>
+		<column name="Va7_Odliczenia" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Va7_Odliczenia DEFAULT(0)">
+			<description>Odliczenia VAT</description>
+		</column>
+		<primaryKey name="Va7_Primary" columns="Va7_Va7ID" type="NONCLUSTERED">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_Va7Naglowek" localColumns="Va7_VaNID" refTable="VatNag" refColumns="VaN_VaNID" deleteOption="CASCADE">
+			<description>Relacja CDN.VatTab7:CDN.VatNag (MANY:1)</description>
+		</foreignKey>
+		<index name="Va7Naglowek" options="CLUSTERED" fields="Va7_VaNID">
+			<description>Wg identyfikatora nagłówka VAT</description>
+		</index>
+		<index name="Va7RokMiesiac" options="NONCLUSTERED" fields="Va7_RokMiesiac">
+			<description>Wg roku i miesiąca rozliczenia</description>
+		</index>
+	</table>
+	

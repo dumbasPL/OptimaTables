@@ -1,0 +1,36 @@
+<table name="ZestawieniaKonta">
+		<description>Powiazanie kont księgowych z definicjami zestawień księgowych</description>
+		<column name="ZKa_ZKaId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZKa_OObId" type="INTEGER" definition="NOT NULL">
+			<description>Okres obrachunkowy Id, powiązanie z tabelą CDN.OkresyObrach</description>
+		</column>
+		<column name="ZKa_ZKNId" type="INTEGER" definition="NOT NULL">
+			<description>Zestawienie Księgowe Id, powiązanie z tabelą CDN.ZestKsiNag</description>
+		</column>
+		<column name="ZKa_ZKPId" type="INTEGER" definition="NOT NULL">
+			<description>Pozycja Zestawienienia Księgowego Id, powiązanie z tabelą CDN.ZestKsiPoz</description>
+		</column>
+		<column name="ZKa_AccId" type="INTEGER" definition="NOT NULL">
+			<description>Konto księgowe Id, powiązanie z tabelą CDN.Konta</description>
+		</column>
+		<column name="ZKa_Funkcja" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Funkcja użyta w zestawieniu dla danego konta</description>
+		</column>
+		<column name="ZKa_FunkcjaNorma" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Funkcja użyta w zestawieniu dla danego konta, postać znormalizowana dla
+				wyszukiwania</description>
+		</column>
+		<primaryKey name="ZKa_Primary" columns="ZKa_ZKaId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ZKaZestawienie" localColumns="ZKa_ZKPId" refTable="ZestKsiPoz" refColumns="ZKP_ZKPId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZestawieniaKonta:CDN.ZestKsiPoz (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_AccZestawienie" localColumns="ZKa_AccId" refTable="Konta" refColumns="Acc_AccId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZestawieniaKonta:CDN.Konta (MANY:1)</description>
+		</foreignKey>
+		<index name="ZKaZestawienie" options="NONCLUSTERED" fields="ZKa_OObId, ZKa_ZKNId, ZKa_ZKPId, ZKa_AccId, ZKa_FunkcjaNorma" />
+	</table>
+	

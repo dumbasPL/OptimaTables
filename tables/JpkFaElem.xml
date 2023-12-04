@@ -1,0 +1,18 @@
+<table name="JpkFaElem">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="ID" type="int" definition="NO_SQL" />
+		<column name="JpNID" type="int" definition="NO_SQL" />
+		<column name="TrNID" type="int" definition="NO_SQL" />
+		<column name="TrEID" type="int" definition="NO_SQL" />
+		<column name="P_2B" type="nvarchar(30)" definition="NO_SQL" />
+		<column name="P_7" type="nvarchar(256)" definition="NO_SQL" />
+		<column name="P_8A" type="nvarchar(20)" definition="NO_SQL" />
+		<column name="P_8B" type="decimal(15, 4)" definition="NO_SQL" />
+		<column name="P_9A" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_9B" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_10" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_11" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_11A" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_12" type="nvarchar(30)" definition="NO_SQL" />
+	</table>
+	

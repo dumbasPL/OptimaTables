@@ -1,0 +1,653 @@
+<table name="Kontrahenci">
+		<description>Tabela z danymi kontrahenta</description>
+		<column name="Knt_KntId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator kontrahenta (numer rekordu)</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Knt_PodmiotTyp" type="SMALLINT" definition="CONSTRAINT DF_Knt_PodmiotTyp DEFAULT(1)">
+			<description>Identyfikator podmiotu w ramach PodmiotyView</description>
+		</column>
+		<column name="Knt_Kod" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Unikalny kod kontrahenta</description>
+		</column>
+		<column name="Knt_GLN" type="VARCHAR(13)" definition="NOT NULL" hash="1">
+			<description>Identyfikator Global Localization Number</description>
+		</column>
+		<column name="Knt_IdSisc" type="VARCHAR(17)" definition="NOT NULL CONSTRAINT DF_Knt_IdSisc DEFAULT('')" hash="1">
+			<description>Id Sisc</description>
+		</column>
+		<column name="Knt_EAN" type="VARCHAR(16)" definition="NOT NULL" hash="1">
+			<description>Kod EAN kontrahenta</description>
+		</column>
+		<column name="Knt_Grupa" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Grupa do której należy kontrahent</description>
+		</column>
+		<column name="Knt_Nazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy kontrahenta</description>
+		</column>
+		<column name="Knt_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy kontrahenta</description>
+		</column>
+		<column name="Knt_Nazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy kontrahenta</description>
+			<details>Wprowadzone dla zgodności współpracy z CDN-XL</details>
+		</column>
+		<column name="Knt_Kraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="Knt_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="Knt_Powiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="Knt_Gmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="Knt_Ulica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia adresu kontrahenta (ulica)</description>
+		</column>
+		<column name="Knt_NrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="Knt_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="Knt_Miasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość</description>
+		</column>
+		<column name="Knt_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="Knt_Poczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="Knt_Adres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu kontrahenta</description>
+		</column>
+		<column name="Knt_NipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="Knt_NipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP (forma edycyjna)</description>
+		</column>
+		<column name="Knt_Nip" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP do indeksu</description>
+			<details>Numer NIP kontrahenta po usunięciu separatorów (kresek) wykorzystywany w indeksie</details>
+		</column>
+		<column name="Knt_NipPelny" type="COMPUTED|NVARCHAR(22)" definition="Knt_NipKraj + Knt_Nip PERSISTED">
+			<description>Numer NIP wraz z prefiksem w postaci kodu kraju</description>
+		</column>
+		<column name="Knt_Regon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer Regon</description>
+		</column>
+		<column name="Knt_Pesel" type="NVARCHAR(11)" definition="NOT NULL" hash="1">
+			<description>Numer PESEL</description>
+		</column>
+		<column name="Knt_Telefon1" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon</description>
+		</column>
+		<column name="Knt_Telefon2" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon (drugi numer)</description>
+		</column>
+		<column name="Knt_TelefonSms" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Knt_TelefonSms DEFAULT('')" hash="1">
+			<description>Telefon dla SMS</description>
+		</column>
+		<column name="Knt_Fax" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer faksu</description>
+		</column>
+		<column name="Knt_Email" type="NVARCHAR(127)" definition="NOT NULL" hash="1">
+			<description>Adres elektroniczny e-mail</description>
+		</column>
+		<column name="Knt_URL" type="VARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Adres strony w Internecie</description>
+		</column>
+		<column name="Knt_KrajISO" type="NVARCHAR(9)" definition="NOT NULL">
+			<description>Kod ISO kraju kontrahenta</description>
+		</column>
+		<column name="Knt_Zezwolenie" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Numer zezwolenia na prowadzenie działalności</description>
+		</column>
+		<column name="Knt_KodTransakcji" type="NVARCHAR(2)" definition="NOT NULL">
+			<description>Domyślny kod transakcji (dla deklaracji INTRASTAT)</description>
+		</column>
+		<column name="Knt_BazaBR_GUID" type="UNIQUEIDENTIFIER">
+			<description>GUID bazy danych dla Biura rachunkowego</description>
+		</column>
+		<column name="Knt_BNaID" type="INTEGER">
+			<description>Klucz obcy do tabeli BnkNazwy</description>
+		</column>
+		<column name="Knt_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL" hash="1">
+			<description>Numer rachunku bankowego</description>
+		</column>
+		<column name="Knt_IBAN" type="SMALLINT" definition="NOT NULL">
+			<description>Czy numer rachunku jest w standardzie IBAN</description>
+		</column>
+		<column name="Knt_RachunekNr0" type="COMPUTED|NVARCHAR(51)" definition="CONVERT(NVARCHAR(51), REPLACE(REPLACE(KNT_RACHUNEKNR, '-', ''), ' ', ''), 0)">
+			<description>Numer rachunku bankowego bez separatorów</description>
+		</column>
+		<column name="Knt_OsTytul" type="NVARCHAR(20)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Tytuł przedstawiciela firmy</description>
+		</column>
+		<column name="Knt_OsPlec" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Płeć przedstawiciela</description>
+			<details>
+				Pole przyjmuje wartości:
+				1- mężczyzna
+				2 - kobieta
+			</details>
+		</column>
+		<column name="Knt_OsNazwisko" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Imię i nazwisko przedstawiciela</description>
+		</column>
+		<column name="Knt_OsKraj" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false">
+			<description>Kraj przedstawiciela</description>
+		</column>
+		<column name="Knt_OsWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false">
+			<description>Województwo przedstawiciela</description>
+		</column>
+		<column name="Knt_OsPowiat" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Powiat przedstawiciele</description>
+		</column>
+		<column name="Knt_OsGmina" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Gmina przedstawiciela</description>
+		</column>
+		<column name="Knt_OsUlica" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Pierwsza linia adresu przedstawiciela (ulica)</description>
+		</column>
+		<column name="Knt_OsNrDomu" type="NVARCHAR(10)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Numer domu przedstawiciela</description>
+		</column>
+		<column name="Knt_OsNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Numer lokalu przedstawiciela</description>
+		</column>
+		<column name="Knt_OsMiasto" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Miejscowość przedstawiciela</description>
+		</column>
+		<column name="Knt_OsKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Kod pocztowy przedstawiciela</description>
+		</column>
+		<column name="Knt_OsPoczta" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Poczta przedstawiciela</description>
+		</column>
+		<column name="Knt_OsAdres2" type="NVARCHAR(256)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Dodatkowa linia adresu przedstawiciela</description>
+		</column>
+		<column name="Knt_OsTelefon" type="VARCHAR(20)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Telefon przedstawiciela</description>
+		</column>
+		<column name="Knt_OsGSM" type="VARCHAR(20)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Telefon GSM przedstawiciela</description>
+		</column>
+		<column name="Knt_OsEmail" type="NVARCHAR(40)" definition="NOT NULL" filterVisible="false" hash="1">
+			<description>Adres elektroniczny e-mail przedstawiciela</description>
+		</column>
+		<column name="Knt_Informacje" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy wysyłać informacje (uwzględniać w korespondencji seryjnej, itp)</description>
+		</column>
+		<column name="Knt_Upust" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Standardowy upust procentowy</description>
+		</column>
+		<column name="Knt_LimitFlag" type="TINYINT" definition="NOT NULL">
+			<description>Czy limitować kredyt</description>
+		</column>
+		<column name="Knt_LimitKredytu" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wielkość limitu kredytowego</description>
+		</column>
+		<column name="Knt_LimitPrzeterKredytFlag" type="TINYINT" definition="NOT NULL" />
+		<column name="Knt_LimitPrzeterKredytWartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wielkość limitu przeterminowanego kredytowego</description>
+		</column>
+		<column name="Knt_Ceny" type="SMALLINT" definition="NOT NULL">
+			<description>Grupa cenowa dla kontrahenta</description>
+		</column>
+		<column name="Knt_FplID" type="INTEGER">
+			<description>Id domyślnej formy płatności dla kontrahenta</description>
+			<details>
+				Pole przyjmuje wartości:
+				1-gotówka,
+				2-czek,
+				3-przelew,
+				4-kredyt,
+				5-inne
+			</details>
+		</column>
+		<column name="Knt_MaxZwloka" type="SMALLINT" definition="NOT NULL">
+			<description>Maksymalna zwłoka płatności w dniach</description>
+		</column>
+		<column name="Knt_TerminPlat" type="TINYINT" definition="NOT NULL">
+			<description>Niestandardowy termin płatności dla kontrahenta</description>
+		</column>
+		<column name="Knt_Termin" type="SMALLINT" definition="NOT NULL">
+			<description>Termin dla kontrahenta - Ilość dni</description>
+		</column>
+		<column name="Knt_KontoOdb" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto wskazane jako domyślne konto rozchodu na karcie kontrahenta</description>
+		</column>
+		<column name="Knt_KontoDost" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto wskazane jako domyślne konto przychodu na karcie kontrahenta</description>
+		</column>
+		<column name="Knt_KatID" type="INTEGER">
+			<description>Identyfikator kategorii sprzedaży dokumentu</description>
+			<details>Identyfikator domyślnej kategorii sprzedaży dla dokumentów od/dla kontrahenta.</details>
+		</column>
+		<column name="Knt_KatZakID" type="INTEGER">
+			<description>Identyfikator kategorii zakupu dokumentu</description>
+			<details>Identyfikator kategorii zakupu dla dokumentów od/dla kontrahenta.</details>
+		</column>
+		<column name="Knt_BlokadaDok" type="TINYINT" definition="NOT NULL">
+			<description>Blokada na wystawienie transakcji z kontrahentem</description>
+		</column>
+		<column name="Knt_LimitKredytuWal" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty kredytu</description>
+		</column>
+		<column name="Knt_LimitKredytuWykorzystany" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wykorzystany limit kredytowy</description>
+		</column>
+		<column name="Knt_NieRozliczac" type="TINYINT" definition="NOT NULL">
+			<description>Kontrahent standardowo nie podlega rozliczeniu</description>
+		</column>
+		<column name="Knt_PodatekVat" type="TINYINT" definition="NOT NULL">
+			<description>Czy kontrahent jest płatnikiem podatku VAT</description>
+		</column>
+		<column name="Knt_Finalny" type="TINYINT" definition="NOT NULL">
+			<description>Status odbiorcy: firma / odbiorca finalny</description>
+			<details>
+				Przyjmuje wartości:
+				0 - firma
+				1- odbiorca finalny
+			</details>
+		</column>
+		<column name="Knt_FinalnyWegiel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_FinalnyWegiel DEFAULT(0)">
+			<description>odbiorca finalny węgiel</description>
+		</column>
+		<column name="Knt_Export" type="TINYINT" definition="NOT NULL">
+			<description>Status odbiorcy: krajowy / eksportowy</description>
+			<details>
+				Pole przyjmuje wartości:
+				0 – krajowy
+				1 – pozaunijny
+				2 – pozaunijny (zwrot VAT)
+				3 – wewnątrzunijny
+				4 – wewnątrzunijny trójstronny
+				5 – podatnikiem jest nabywca
+				6 – poza terytorium kraju
+				7 – poza terytorium kraju (stawka np)
+				8 - wewnątrzunijny - podatnikiem jest nabywca
+				9 - pozaunijny - podatnikiem jest nabywca
+			</details>
+		</column>
+		<column name="Knt_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj kontrahenta</description>
+			<details>
+				Pole przyjmuje wartości:
+				1 - odbiorca,
+				2 - dostawca,
+				3 - konkurencja,
+				4 - partner
+			</details>
+		</column>
+		<column name="Knt_Rodzaj_Dostawca" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj podmiotu - Dostawca</description>
+		</column>
+		<column name="Knt_Rodzaj_Odbiorca" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj podmiotu - Odbiorca</description>
+		</column>
+		<column name="Knt_Rodzaj_Konkurencja" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj podmiotu - Konkurecja</description>
+		</column>
+		<column name="Knt_Rodzaj_Partner" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj podmiotu - Partner</description>
+		</column>
+		<column name="Knt_Rodzaj_Potencjalny" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj podmiotu - klient potencjalny</description>
+		</column>
+		<column name="Knt_Medialny" type="TINYINT" definition="NOT NULL">
+			<description>Status odbiorcy: medialny</description>
+			<details>
+				Przyjmuje wartości:
+				0 - nie medialny
+				1- medialny
+			</details>
+		</column>
+		<column name="Knt_MalyPod" type="TINYINT" definition="NOT NULL">
+			<description>Kontrahent ma status małego podatnika</description>
+		</column>
+		<column name="Knt_Rolnik" type="TINYINT" definition="NOT NULL">
+			<description>Czy podatnik jest rolnikiem ryczałtowym</description>
+		</column>
+		<column name="Knt_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Czy kontrahent jest nieaktywny</description>
+			<details>Pole może być wykorzystywane do zaznaczania czy kontrahent jest kontrahentem
+				"aktywnym" (tzn. czy były z nim w ostatnim czasie transakcje) i używane w filtrowaniu (np.
+				do korespondencji seryjnej)</details>
+		</column>
+		<column name="Knt_Chroniony" type="TINYINT" definition="NOT NULL">
+			<description>Nie publikuj danych kontrahenta</description>
+		</column>
+		<column name="Knt_NieUwzglVATZD" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_NieUwzglVATZD DEFAULT(0)">
+			<description>Nie uwzględniać na VAT-ZD</description>
+		</column>
+		<column name="Knt_Opis" type="NVARCHAR(MAX)" definition="NOT NULL" hash="1">
+			<description>Pole na uwagi</description>
+		</column>
+		<column name="Knt_OdbiorcaId" type="INTEGER">
+			<description>Wskaźnik do odbiorcy skojarzonego z płatnikiem</description>
+			<details>Wskaźnik do tabeli kontrahenci - wiąże odbiorcę z płatnikiem</details>
+		</column>
+		<column name="Knt_OpiekunTyp" type="SMALLINT">
+			<description>Typ opiekuna dla CRM</description>
+		</column>
+		<column name="Knt_OpiekunId" type="INTEGER">
+			<description>Id opiekuna dla CRM</description>
+		</column>
+		<column name="Knt_OpiekunKsiegTyp" type="SMALLINT">
+			<description>Typ opiekuna dla CRM / Księgowość</description>
+		</column>
+		<column name="Knt_OpiekunKsiegID" type="INTEGER">
+			<details>Wskaźnik do tabeli kontrahenci - wiąże odbiorcę z płatnikiem</details>
+		</column>
+		<column name="Knt_OpiekunKsiegDomyslny" type="TINYINT" />
+		<column name="Knt_OpiekunPiKTyp" type="SMALLINT">
+			<description>Typ opiekuna dla CRM / PiK</description>
+		</column>
+		<column name="Knt_OpiekunPiKID" type="INTEGER">
+			<details>Wskaźnik do tabeli kontrahenci - wiąże odbiorcę z płatnikiem</details>
+		</column>
+		<column name="Knt_OpiekunPiKDomyslny" type="TINYINT" />
+		<column name="Knt_OpiekunDomyslny" type="TINYINT" />
+		<column name="Knt_TerminZwrotuKaucji" type="SMALLINT" definition="NOT NULL">
+			<description>Termin zwrotu kaucji</description>
+		</column>
+		<column name="Knt_NaliczajPlatnosc" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy naliczać płatność na dokumentach WKA/PKA</description>
+		</column>
+		<column name="Knt_ZakazDokumentowHaMag" type="TINYINT" definition="NOT NULL">
+			<description>Czy można dodać kontrahenta na dokument HaMag</description>
+		</column>
+		<column name="Knt_ZgodaNaEFaktury" type="TINYINT" definition="NOT NULL">
+			<description>Zgoda na wysyłanie e-faktur</description>
+			<details>
+				0 - NIE &lt;br&gt;
+				1- TAK
+			</details>
+		</column>
+		<column name="Knt_TypWymiany" type="TINYINT">
+			<description>Typ wymiany</description>
+			<details>0 - XML</details>
+		</column>
+		<column name="Knt_PowiazanyUoV" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_PowiazanyUoV DEFAULT(0)">
+			<description>Kontrahent powiązany art. 32 ust.2-4 UoV</description>
+		</column>
+		<column name="Knt_MetodaKasowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_MetodaKasowa DEFAULT(0)">
+			<description>Metoda kasowa</description>
+		</column>
+		<column name="Knt_UWDId" type="INTEGER">
+			<description>ID Partnera</description>
+		</column>
+		<column name="Knt_UWDOddzial" type="NVARCHAR(10)">
+			<description>Oddział partnera</description>
+		</column>
+		<column name="Knt_UWDEmail" type="NVARCHAR(30)" hash="1">
+			<description>Email partnera</description>
+		</column>
+		<column name="Knt_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu</description>
+		</column>
+		<column name="Knt_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="Knt_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="Knt_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="Knt_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Knt_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp założenia karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Knt_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartę</description>
+		</column>
+		<column name="Knt_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Knt_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Knt_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Knt_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Knt_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Knt_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Knt_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Knt_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Knt_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Knt_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="Knt_GIDTyp" type="SMALLINT" filterVisible="false" />
+		<column name="Knt_GIDFirma" type="INTEGER" filterVisible="false" />
+		<column name="Knt_GIDNumer" type="INTEGER" filterVisible="false" />
+		<column name="Knt_GIDLp" type="SMALLINT" filterVisible="false" />
+		<column name="Knt_eSklepID" type="INTEGER" filterVisible="false">
+			<description>Pole techniczne używane podczas synchronizacji z e-commerce</description>
+		</column>
+		<column name="Knt_eSklepZrodlo" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_Knt_eSklepZrodlo DEFAULT(7)">
+			<description>Fakturowanie czynności</description>
+		</column>
+		<column name="Knt_FCzynnosci" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_FCzynnosci DEFAULT(1)">
+			<description>Fakturowanie czynności</description>
+		</column>
+		<column name="Knt_FCzesci" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_FCzesci DEFAULT(0)">
+			<description>Fakturowanie części</description>
+		</column>
+		<column name="Knt_KorKraj" type="NVARCHAR(40)" filterVisible="false" hash="1">
+			<description>Adres korespondencyjny kontrahenta - Kraj</description>
+		</column>
+		<column name="Knt_KorMiasto" type="NVARCHAR(40)" filterVisible="false" hash="1">
+			<description>Adres korespondencyjny kontrahenta - Miejscowość</description>
+		</column>
+		<column name="Knt_KorKodPocztowy" type="VARCHAR(10)" filterVisible="false" hash="1">
+			<description>Adres korespondencyjny kontrahenta - Kod pocztowy</description>
+		</column>
+		<column name="Knt_KorPoczta" type="NVARCHAR(40)" filterVisible="false" hash="1">
+			<description>Adres korespondencyjny kontrahenta - Poczta</description>
+		</column>
+		<column name="Knt_KorUlica" type="NVARCHAR(40)" filterVisible="false" hash="1">
+			<description>Adres korespondencyjny kontrahenta - Ulica </description>
+		</column>
+		<column name="Knt_KorNrDomu" type="NVARCHAR(10)" filterVisible="false" hash="1">
+			<description>Adres korespondencyjny kontrahenta - Numer domu</description>
+		</column>
+		<column name="Knt_KorNrLokalu" type="NVARCHAR(10)" filterVisible="false" hash="1">
+			<description>Adres korespondencyjny kontrahenta - Numer lokalu</description>
+		</column>
+		<column name="Knt_NieNaliczajOdsetek" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_NieNaliczajOdsetek DEFAULT(0)">
+			<description>Czy nie naliczać odsetek dla płatności kontrahenta</description>
+		</column>
+		<column name="Knt_ESklep" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_ESklep DEFAULT(0)">
+			<description>Czy kontrahent ma być dostępny w e-Sklepie</description>
+		</column>
+		<column name="Knt_ZwolnionyZAkcyzy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_ZwolnionyZAkcyzy DEFAULT(0)">
+			<description>Czy kontrahent jest zwolniony z akcyzy na wyroby węglowe</description>
+		</column>
+		<column name="Knt_WindykacjaSchematId" type="INTEGER">
+			<description>Schemat windykacji dla automatu windykacji</description>
+		</column>
+		<column name="Knt_WindykacjaOsobaId" type="INTEGER">
+			<description>Id przedstawiciela wybranego jako osoba kontaktowa w sprawach windykacji
+				należności</description>
+		</column>
+		<column name="Knt_WindykacjaEMail" type="NVARCHAR(127)" definition="NOT NULL CONSTRAINT DF_Knt_WindykacjaEMail DEFAULT('')" hash="1">
+			<description>Adres poczty e-mail osoby reprezentującej firmę w sprawach windykacji należności</description>
+		</column>
+		<column name="Knt_WindykacjaTelefonSms" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Knt_WindykacjaTelefonSms DEFAULT('')" hash="1">
+			<description>Telefon dla SMS</description>
+		</column>
+		<column name="Knt_Komornik" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_Komornik DEFAULT(0)">
+			<description>Czy kontrahent jest komornikiem</description>
+		</column>
+		<column name="Knt_KomornikOkreg" type="NVARCHAR(256)">
+			<description>Komornik - okręg sądowy</description>
+		</column>
+		<column name="Knt_KomornikMiasto" type="NVARCHAR(40)">
+			<description>Komornik - siedziba sądu</description>
+		</column>
+		<column name="Knt_KomornikRewir" type="NVARCHAR(256)">
+			<description>Komornik - rewir</description>
+		</column>
+		<column name="Knt_NadID" type="INT">
+			<description>Identyfikator kontrahenta nadrzędnego</description>
+			<details>NULL jeśli dany kontrahent nie jest kontrahentem podrzędnym żadnego innego
+				kontrahenta</details>
+		</column>
+		<column name="Knt_GlID" type="INT">
+			<description>Identyfikator kontrahenta głównego dla danego kontrahenta</description>
+		</column>
+		<column name="Knt_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_Knt_Waluta DEFAULT('')">
+			<description>Domyślna waluta kontrahenta</description>
+		</column>
+		<column name="Knt_Algorytm" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_Algorytm DEFAULT(0)">
+			<description>Domyślny algorytm kontrahenta</description>
+		</column>
+		<column name="Knt_LoginComarchCloud" type="NVARCHAR(256)">
+			<description>Login Comarch Cloud</description>
+		</column>
+		<column name="Knt_CJBTyp" type="SMALLINT">
+			<description>Typ Centralizacja jednostek budżetowych</description>
+		</column>
+		<column name="Knt_CJBId" type="INTEGER">
+			<description>Id Centralizacja jednostek budżetowych</description>
+		</column>
+		<column name="Knt_LpAnonimizacji" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Knt_LpAnonimizacji DEFAULT(0)">
+			<description>Lp anonimizacji</description>
+		</column>
+		<column name="Knt_DataAnonimizacji" type="DATETIME">
+			<description>Data anonimizacji</description>
+		</column>
+		<column name="Knt_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_SplitPay DEFAULT(0)">
+			<description>Split Payment - płatność z zastosowaniem mechanizmu podzielonej płatności</description>
+		</column>
+		<column name="Knt_Domena" type="NVARCHAR(127)" definition="NOT NULL CONSTRAINT DF_Knt_Domena DEFAULT('')" hash="1">
+			<description>Domena adresu e-mail</description>
+		</column>
+		<column name="Knt_DokumentTozsamosci" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Knt_DokumentTozsamosci DEFAULT('')">
+			<description>Dokument tożsamości</description>
+		</column>
+		<column name="Knt_UmowaWegiel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_UmowaWegiel DEFAULT(0)">
+			<description>Umowa na dostawy węgla</description>
+		</column>
+		<column name="Knt_AwfZgoda" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_AwfZgoda DEFAULT(0)">
+			<description>Zgoda na automatyczne wysyłanie faktur drogą elektroniczną</description>
+		</column>
+		<column name="Knt_AwfMonit" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Knt_AwfMonit DEFAULT(0)">
+			<description>Przypomnienie o funkcji zgoda na automatyczne wysyłanie faktur drogą
+				elektroniczną</description>
+		</column>
+		<column name="Knt_NieNaliczajOplataCukrowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_NieNaliczajOplataCukrowa DEFAULT(0)">
+			<description>Czy naliczać opłatę cukrową</description>
+		</column>
+		<column name="Knt_NieUwzglwedniajWEwidencjiWegiel" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_NieUwzglwedniajWEwidencjiWegiel DEFAULT(0)">
+			<description>Nie uwzględniaj kontrahenta w ewidencji wyrobów węglowych.</description>
+		</column>
+		<column name="Knt_NieWysylajDokumentuDoKSeF" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Knt_NieWysylajDokumentuDoKSeF DEFAULT(0)">
+			<description>Czy dokument ma być wysyłany do KSeF</description>
+		</column>
+		<column name="Knt_ApfinoStatSync" type="TINYINT">
+			<description>Czy kontrahent jest zsynchronizowany w Apfino</description>
+		</column>
+		<primaryKey name="Knt_Primary" columns="Knt_KntId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KntFormaPlatnosci" localColumns="Knt_FplID" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.Kontrahenci:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KntBnkNazwy" localColumns="Knt_BNaID" refTable="BnkNazwy" refColumns="BNa_BNaId">
+			<description>Relacja CDN.Kontrahenci:CDN.BnkNazwy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KntKategoria" localColumns="Knt_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Kontrahenci:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KntKategoriaZak" localColumns="Knt_KatZakID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Kontrahenci:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KntParent" localColumns="Knt_NadID" refTable="Kontrahenci" refColumns="Knt_KntID">
+			<description>Self-Relacja do CDN.Kontrahenci</description>
+		</foreignKey>
+		<foreignKey name="FK_KntCJB" localColumns="Knt_CJBId" refTable="Kontrahenci" refColumns="Knt_KntID">
+			<description>Self-Relacja do CDN.Kontrahenci</description>
+		</foreignKey>
+		<index name="KntOdbiorca" options="NONCLUSTERED" fields="Knt_OdbiorcaId">
+			<description>Klucz obcy do tabeli Kontrahenci (odbiorca)</description>
+		</index>
+		<index name="KntKod" options="UNIQUE NONCLUSTERED" fields="Knt_Kod">
+			<description>Wg kodu kontrahenta</description>
+		</index>
+		<index name="KntGrupKod" options="UNIQUE NONCLUSTERED" fields="Knt_Grupa, Knt_Kod">
+			<description>Wg kodu kontrahenta w ramach grupy</description>
+		</index>
+		<index name="KntNazwa" options="UNIQUE NONCLUSTERED" fields="Knt_Nazwa1 ,Knt_KntId">
+			<description>Wg nazwy kontrahenta</description>
+		</index>
+		<index name="KntGrupNazwa" options="UNIQUE NONCLUSTERED" fields="Knt_Grupa ,Knt_Nazwa1 ,Knt_KntId">
+			<description>Wg nazwy kontrahenta w ramach grupy</description>
+		</index>
+		<index name="KntNIP" options="UNIQUE NONCLUSTERED" fields="Knt_Nip ,Knt_KntId">
+			<description>Wg numeru NIP</description>
+			<details>Indeks wg numeru NIP po usunieciu separatorów (kresek) - jest więc niewrażliwy na
+				sposób sformatowania NIP</details>
+		</index>
+		<index name="KntBnkNazwy" options="NONCLUSTERED" fields="Knt_BNaID">
+			<description>Relacja do banków</description>
+		</index>
+		<index name="KntFormaPlatnosci" options="NONCLUSTERED" fields="Knt_FplID">
+			<description>Wg identyfikatora płatności</description>
+		</index>
+		<index name="KntKategoria" options="NONCLUSTERED" fields="Knt_KatID">
+			<description>Wg identyfikatora kategorii sprzedaży</description>
+		</index>
+		<index name="KntKategoriaZak" options="NONCLUSTERED" fields="Knt_KatZakID">
+			<description>Wg identyfikatora kategorii zakupu</description>
+		</index>
+		<index name="KntOpiekun" options="NONCLUSTERED" fields="Knt_OpiekunId ,Knt_OpiekunTyp">
+			<description>Wg id opiekuna</description>
+		</index>
+		<index name="KntGUID" options="UNIQUE NONCLUSTERED" fields="Knt_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="KntEAN" options="NONCLUSTERED" fields="Knt_EAN">
+			<description>Wg kodu EAN</description>
+		</index>
+		<index name="KntGID" options="NONCLUSTERED" fields="Knt_GIDTyp ,Knt_GIDFirma ,Knt_GIDNumer">
+			<description>Wg identyfikatora GID w CDN XL</description>
+		</index>
+		<index name="KntRachunekNr0" options="NONCLUSTERED" fields="Knt_RachunekNr0">
+			<description>Wg numeru rachunku</description>
+		</index>
+		<index name="KntGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="Knt_Kod, Knt_KntId" includedColumns="Knt_Nieaktywny, Knt_Nazwa1, Knt_Nip">
+			<description>Gridlookupu kontrahenta wg kodu i id kontrahenta</description>
+		</index>
+		<index name="KntNieaktywny" options="NONCLUSTERED" fields="Knt_Nieaktywny" includedColumns="Knt_KntId, Knt_Kod, Knt_Nip, Knt_Nazwa1">
+			<description>Wg aktywności</description>
+		</index>
+		<index name="KntBRGUID" options="NONCLUSTERED" fields="Knt_BazaBR_GUID" includedColumns="Knt_Kod, Knt_Telefon1, Knt_Telefon2, Knt_Email, Knt_URL">
+			<description>Wg aktywności</description>
+		</index>
+		<index name="KntGlID" fields="Knt_GlID" includedColumns="Knt_KntId">
+			<description>Wg ID kontrahenta głównego</description>
+		</index>
+		<index name="KntNadID" fields="Knt_NadID" includedColumns="Knt_KntId">
+			<description>Wg ID kontrahenta nadrzędnego</description>
+		</index>
+	</table>
+	

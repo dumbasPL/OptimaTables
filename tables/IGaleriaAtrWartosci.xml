@@ -1,0 +1,28 @@
+<table name="IGaleriaAtrWartosci">
+		<description>Wartości atrybutów dla towaru z iGaleria24</description>
+		<column name="IGAW_IGAWId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="IGAW_IGAId" type="INTEGER" definition="NOT NULL">
+			<description>Id atrybutu</description>
+		</column>
+		<column name="IGAW_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Id towaru</description>
+		</column>
+		<column name="IGAW_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>wartość</description>
+		</column>
+		<column name="IGAW_IGDWID" type="INT" definition="NOT NULL CONSTRAINT DF_IGAW_IGDWID DEFAULT(0)">
+			<description>id wartosci atrybutu</description>
+		</column>
+		<primaryKey name="IGAW_Primary" columns="IGAW_IGAWId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_IGAWTowar" localColumns="IGAW_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.IGaleriaAtrWartosci:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="IGAWTowar" options="NONCLUSTERED" fields="IGAW_TwrId">
+			<description>Klucz obcy do tabeli Towary</description>
+		</index>
+	</table>
+	

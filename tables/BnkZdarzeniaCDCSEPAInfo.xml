@@ -1,0 +1,54 @@
+<table name="BnkZdarzeniaCDCSEPAInfo">
+		<description>Tabela informacji CDC-SEPA związanych ze zdarzeniem KB</description>
+		<column name="BZdCSI_BZdCSIID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="BZdCSI_BZdID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zdarzenia</description>
+			<details>Klucz obcy do tabeli cdn.BnkZdarzenia</details>
+		</column>
+		<column name="BZdCSI_Sekcja" type="TINYINT" definition="NOT NULL">
+			<description>Numer sekcji: 1 - Zleceniodawca, 2 - Pierwotny zleceniodawca, 3 - Kontrahent, 4 -
+				Finalny odbiorca</description>
+		</column>
+		<column name="BZdCSI_OsobaTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ osoby: 1 - Prawna, 2 - Fizyczna</description>
+		</column>
+		<column name="BZdCSI_Nazwa" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Nazwa </description>
+		</column>
+		<column name="BZdCSI_BICBEI" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>BIC/BEI</description>
+		</column>
+		<column name="BZdCSI_Ident" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Identyfikator</description>
+		</column>
+		<column name="BZdCSI_IdentTyp" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Typ identyfikatora</description>
+		</column>
+		<column name="BZdCSI_IdentWyst" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Wystawca identyfikatora</description>
+		</column>
+		<column name="BZdCSI_DataUr" type="DATETIME">
+			<description>Data urodzenia (osoba fizyczna)</description>
+		</column>
+		<column name="BZdCSI_Kraj" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Kraj (osoba fizyczna)</description>
+		</column>
+		<column name="BZdCSI_Wojew" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo (osoba fizyczna)</description>
+		</column>
+		<column name="BZdCSI_Miasto" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Miejscowość (osoba fizyczna)</description>
+		</column>
+		<primaryKey name="BZdCSI_Primary" columns="BZdCSI_BZdCSIID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BZdCSIBZd" localColumns="BZdCSI_BZdID" refTable="BnkZdarzenia" refColumns="BZd_BZdID" deleteOption="CASCADE">
+			<description>Relacja CDN.BnkZdarzeniaCDCSEPAInfo:CDN.BnkZdarzenia (MANY:1)</description>
+		</foreignKey>
+		<index name="BZdCSISekcja" options="UNIQUE NONCLUSTERED" fields="BZdCSI_BZdID ,BZdCSI_Sekcja">
+			<description>Wg zdarzenia i sekcji</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,206 @@
+<table name="ListyPlac">
+		<description>Tabela elementów wypłat pracowników</description>
+		<column name="LPL_LplId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator listy płac</description>
+		</column>
+		<column name="LPL_DzlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wydziału</description>
+		</column>
+		<column name="LPL_DdfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator definicji dokumentu</description>
+		</column>
+		<column name="LPL_Tryb" type="INTEGER" definition="NOT NULL">
+			<description>Tryb listy płac</description>
+			<details>
+				0 – oznacza listę płac Podstawową – wartość ustawiana przy konwersji do 12.0 dla wszystkich
+				zapisanych wcześniejszymi wersjami wypłat, nadawana przy dodawaniu ‘zwykłej’ listy płac o
+				statusie P;
+				1 - oznacza listę płac typu Korygująca – ustawiana dla listy płac definiowanej przez
+				użytkownika jako Korygująca.
+			</details>
+		</column>
+		<column name="LPL_ParentId" type="INTEGER">
+			<description>Relacja do samej siebie</description>
+			<details>
+				0 - dla list płac o statusie P (mających LPL_Tryb=0)
+				Dla list płac Korygujących - wartość zgodna z wartością LPL_LplId z listy płac ‘rodzica’ o
+				statusie P – wartość kopiowana z listy płac o statusie P podczas definiowania listy
+				Korygującej, po wybraniu na formularzu powiązanej listy Podstawowej z lookupa.
+			</details>
+		</column>
+		<column name="LPL_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Symbol listy płac</description>
+		</column>
+		<column name="LPL_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Numer listy płac</description>
+		</column>
+		<column name="LPL_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(LPL_NUMERNR,LPL_NUMERSTRING)">
+			<description>Pełny numer listy płac</description>
+		</column>
+		<column name="LPL_DataOd" type="DATETIME" definition="NOT NULL" />
+		<column name="LPL_DataDo" type="DATETIME" definition="NOT NULL" />
+		<column name="LPL_Miesiac" type="SMALLINT" definition="NOT NULL" />
+		<column name="LPL_Rok" type="INTEGER" definition="NOT NULL" />
+		<column name="LPL_DataDok" type="DATETIME" definition="NOT NULL" />
+		<column name="LPL_Nazwa" type="NVARCHAR(128)" definition="NOT NULL" hash="1">
+			<description>Opis listy płac</description>
+		</column>
+		<column name="LPL_DataDanych" type="DATETIME" />
+		<column name="LPL_Zamknieta" type="DATETIME">
+			<description>Oznaczenie czy lista płac jest zamknięta</description>
+		</column>
+		<column name="LPL_Kategoria" type="INTEGER" definition="NOT NULL">
+			<description>Kategoria listy płac</description>
+		</column>
+		<column name="LPL_MiesiecyWstecz" type="INTEGER" definition="NOT NULL" />
+		<column name="LPL_Zaksiegowana" type="TINYINT" definition="NOT NULL" />
+		<column name="LPL_DekId" type="INTEGER">
+			<description>Klucz obcy do zapisu księgowego (Dekrety)</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada LPL_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada LPL_DekId = NULL;
+			</details>
+		</column>
+		<column name="LPL_KPRId" type="INTEGER">
+			<description>Klucz obcy do zapisu księgowego (ZapisyKPR)</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada LPL_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada LPL_KPRId = NULL;
+			</details>
+		</column>
+		<column name="LPL_PreDekId" type="INTEGER">
+			<description>Klucz obcy do zapisu księgowego (Dekrety)</description>
+			<details>
+				Referencja do tabeli DekretyNag. Dotyczy predekretacji.&lt;br&gt;
+				Zapis zaksięgowany posiada LPL_PreDekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada LPL_PreDekId = NULL;
+			</details>
+		</column>
+		<column name="LPL_Symbol" type="VARCHAR(5)" definition="NOT NULL" />
+		<column name="LPL_Oddelegowani" type="TINYINT" definition="NOT NULL CONSTRAINT DF_LPL_Oddelegowani DEFAULT(0)">
+			<description>Ustawienie parametru „Lista tylko dla pracowników oddelegowanych za granicę” na
+				liście płac</description>
+		</column>
+		<column name="LPL_DataKur" type="DATETIME" definition="NULL">
+			<description>Data kursu ustawiona na liście płac</description>
+		</column>
+		<column name="LPL_KursNumer" type="INT" definition="NOT NULL CONSTRAINT DF_LPL_KursNumer DEFAULT(3)">
+			<description>Typ kursu, jeśli LPL_Waluta jest niepusta (czyli dla pracownika wybrano walutę
+				inną niż PLN</description>
+		</column>
+		<column name="LPL_KursL" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_LPL_KursL DEFAULT(1)">
+			<description>Licznik kursu waluty</description>
+		</column>
+		<column name="LPL_KursM" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_LPL_KursM DEFAULT(1)">
+			<description>Mianownik kursu waluty</description>
+		</column>
+		<column name="LPL_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_LPL_Waluta DEFAULT('')">
+			<description>Symbol waluty zastosowanej dla rozliczeń walutowych w wypłatach</description>
+		</column>
+		<column name="LPL_Tymczasowi" type="TINYINT" definition="NOT NULL CONSTRAINT DF_LPL_Tymczasowi DEFAULT(0)">
+			<description>Lista płac dla pracowników tymczasowych - flaga</description>
+		</column>
+		<column name="LPL_OddelegowaniKraj" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT DF_LPL_OddelegowaniKraj DEFAULT('')">
+			<description>Symbol kraju oddelegowania</description>
+		</column>
+		<column name="LPL_WalutaDieta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_LPL_WalutaDieta DEFAULT('')">
+			<description>Symbol waluty dla waluty diety</description>
+		</column>
+		<column name="LPL_DataKurDieta" type="DATETIME" definition="NULL">
+			<description>Data kursu dla waluty diety</description>
+		</column>
+		<column name="LPL_KursNumerDieta" type="INT" definition="NOT NULL CONSTRAINT DF_LPL_KursNumerDieta DEFAULT(3)">
+			<description>Typ kursu dla waluty diety</description>
+		</column>
+		<column name="LPL_KursLDieta" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_LPL_KursLDieta DEFAULT(1)">
+			<description>Licznik kursu waluty dla diety</description>
+		</column>
+		<column name="LPL_KursMDieta" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_LPL_KursMDieta DEFAULT(1)">
+			<description>Mianownik kursu waluty dla diety</description>
+		</column>
+		<column name="LPL_ZakId" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="LPL_ImportAppId" type="VARCHAR(5)" />
+		<column name="LPL_ImportRowId" type="VARCHAR(36)" />
+		<column name="LPL_TS_Export" type="DATETIME">
+			<description>TimeSTamp dokonania exportu</description>
+		</column>
+		<column name="LPL_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="LPL_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="LPL_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="LPL_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="LPL_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="LPL_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="LPL_TS_Import" type="DATETIME">
+			<description>TimeSTamp dokonania importu</description>
+		</column>
+		<column name="LPL_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_LPL_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="LPL_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_LPL_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="LPL_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_LPL_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="LPL_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_LPL_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="LPL_Primary" columns="LPL_LplId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_LPLDdfLink" localColumns="LPL_DdfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.ListyPlac:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_LPLDzlLink" localColumns="LPL_DzlId" refTable="Dzialy" refColumns="DZL_DzlId">
+			<description>Relacja CDN.ListyPlac:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_LPLZakLink" localColumns="LPL_ZakId" refTable="Zaklady" refColumns="ZAK_ZakId">
+			<description>Relacja CDN.PracEtaty:CDN.Zaklady (MANY:1)</description>
+		</foreignKey>
+		<index name="LPLNumerPelny" options="UNIQUE NONCLUSTERED" fields="LPL_NumerPelny">
+			<description>Indeks po numerze listy</description>
+		</index>
+		<index name="LplRokMiesiac" options="NONCLUSTERED" fields="LPL_Rok ,LPL_Miesiac">
+			<description>Klucz wg roku i miesiąca wyplaty</description>
+		</index>
+		<index name="LPLDdfLink" options="NONCLUSTERED" fields="LPL_DdfId">
+			<description>Link do definicji dokumentów</description>
+		</index>
+		<index name="LPLDzlLink" options="NONCLUSTERED" fields="LPL_DzlId">
+			<description>Link do wydziału</description>
+		</index>
+		<index name="LPlDekrety" options="NONCLUSTERED" fields="LPL_DekId">
+			<description>Klucz obcy do DekretyNag</description>
+		</index>
+		<index name="LPlPreDekrety" options="NONCLUSTERED" fields="LPL_PreDekId">
+			<description>Klucz obcy do DekretyNag</description>
+		</index>
+		<index name="LPlZapisyKPR" options="NONCLUSTERED" fields="LPL_KPRId">
+			<description>Klucz obcy do tabeli ZapisyKPR</description>
+		</index>
+		<index name="LPLInclude" options="NONCLUSTERED" fields="LPL_ParentId">
+			<description>Self-relacja</description>
+		</index>
+		<index name="LPLZakLink" options="NONCLUSTERED" fields="LPL_ZakId">
+			<description>Klucz obcy zakładu</description>
+		</index>
+	</table>
+	

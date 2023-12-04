@@ -1,0 +1,15 @@
+<table name="KntPromocje" visibleForPrefixSearch="false">
+		<column name="KPR_Id" type="" definition="NO_SQL" />
+		<column name="KPR_KngFirma" type="" definition="NO_SQL" />
+		<column name="KPR_KngLp" type="" definition="NO_SQL" />
+		<column name="KPR_KngNumer" type="" definition="NO_SQL" />
+		<column name="KPR_KngTyp" type="" definition="NO_SQL" />
+		<column name="KPR_KntFirma" type="" definition="NO_SQL" />
+		<column name="KPR_KntLp" type="" definition="NO_SQL" />
+		<column name="KPR_KntNumer" type="" definition="NO_SQL" />
+		<column name="KPR_KntTyp" type="" definition="NO_SQL" />
+		<column name="KPR_PrmId" type="" definition="NO_SQL" />
+		<column name="KPR_Typ" type="" definition="NO_SQL" />
+		<column name="KPR_Wartosc" type="" definition="NO_SQL" />
+	</table>
+	

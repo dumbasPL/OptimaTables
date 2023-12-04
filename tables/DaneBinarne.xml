@@ -1,0 +1,143 @@
+<table name="DaneBinarne">
+		<description>Dane binarne</description>
+		<column name="DAB_DABID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DAB_MagazynDanych" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DAB_MagazynDanych DEFAULT(1)">
+			<description>MagazynDanych</description>
+			<details>
+				0 - SQL
+				1 - iBard24
+			</details>
+		</column>
+		<column name="DAB_MagazynDanychId" type="VARCHAR(20)">
+			<description>Dodatkowe Id związane z przechowywaniem danych</description>
+		</column>
+		<column name="DAB_Typ" type="INTEGER">
+			<description>Typ</description>
+			<details>
+				NULL - jeżeli dana binarna dodana z poziomu atrybutu &lt;br&gt;
+				1 - jeżeli dodano na dokumencie w module serwis &lt;br&gt;
+				2 - jeżeli dodano na dokumencie w module obieg dokumentów (dok.firmowy)
+				8 - jeżeli dodano na dokumencie w module kadry
+				9 - załącznik maila
+				10 - załączik maila
+				11 - raporty weryfikacji statusu kontrahenta
+				12 - pliki z webserwisów
+				13 - logo pieczątki dla wydruków
+				20 - dokument e-teczki
+				21 - sprawozdania finansowe
+				22 - sprawozdania finansowe - załącznik
+				23 - sprawozdania finansowe - konfiguracja
+				31 - Apfino - pieczęć prewencyjna
+			</details>
+		</column>
+		<column name="DAB_Flaga" type="INTEGER">
+			<description>Flaga</description>
+			<details>
+				NULL - brak dodatkowych informacji (domyślne) &lt;br&gt;
+				1 - plik podpisany cyfrowo &lt;br&gt;
+			</details>
+		</column>
+		<column name="DAB_TwAID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Klucz obcy do TwrAtrybuty</description>
+			<details>
+				0 = jezeli w polu Typ = NULL &lt;br&gt;
+				ID kolejne, dla binariów kojarzonych z dokukmentem np w OBD
+			</details>
+		</column>
+		<column name="DAB_Wartosc" type="IMAGE">
+			<description>Dane binarne, w zależności od rozmiaru pliku dane mogą być skompresowane w
+				formacie ZIP</description>
+		</column>
+		<column name="DAB_Rozmiar" type="INTEGER">
+			<description>Rozmiar pliku</description>
+		</column>
+		<column name="DAB_RozmiarWartosci" type="COMPUTED|INTEGER" definition="DATALENGTH(DAB_WARTOSC)">
+			<description>Rozmiar pola DAB_Wartosc w bajtach</description>
+		</column>
+		<column name="DAB_NazwaPliku" type="NVARCHAR(254)" definition="NOT NULL" filterVisible="false">
+			<description>Nazwa pliku</description>
+		</column>
+		<column name="DAB_Nazwa" type="NVARCHAR(128)">
+			<description>Nazwa danej binarnej</description>
+			<details>
+				0 = jeżeli w polu Typ = NULL &lt;br&gt;
+				ID kolejne, dla binariów kojarzonych z dokumentem np w OBD.
+			</details>
+		</column>
+		<column name="DAB_Rozszerzenie" type="NVARCHAR(4)">
+			<description>Rozszerzenie pliku</description>
+			<details>Aktualnie &lt;NULL&gt;</details>
+		</column>
+		<column name="DAB_Sciezka" type="NVARCHAR(255)" definition="NOT NULL CONSTRAINT DF_DAB_Sciezka DEFAULT('')">
+			<description>Pełna ścieżka do pliku</description>
+		</column>
+		<column name="DAB_Wersja" type="NVARCHAR(20)">
+			<description>Wersja pliku</description>
+		</column>
+		<column name="DAB_IBard24Id" type="BIGINT">
+			<description>Id pliku w IBard24</description>
+		</column>
+		<column name="DAB_IBard24LinkPrywatny" type="NVARCHAR(512)">
+			<description>Link prywatny do pliku na ibard24</description>
+		</column>
+		<column name="DAB_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego daną binarną</description>
+		</column>
+		<column name="DAB_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DAB_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="DAB_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego daną binarną</description>
+		</column>
+		<column name="DAB_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DAB_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+		</column>
+		<column name="DAB_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DAB_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DAB_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DAB_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DAB_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DAB_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DAB_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DAB_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="DAB_GUID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator</description>
+		</column>
+		<column name="DAB_eSklepZalVerID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator z esklep</description>
+		</column>
+		<column name="DAB_eSklepZalID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator z esklep</description>
+		</column>
+		<column name="DAB_eSklepJezykID" type="INT">
+			<description>Unikalny identyfikator jezyka</description>
+		</column>
+		<column name="DAB_eSklepID" type="INT">
+			<description>Unikalny identyfikator sklepu</description>
+		</column>
+		<column name="DAB_WszystkoPLLink" type="nvarchar(2048)">
+			<description>Unikalny identyfikator wszystko.pl</description>
+		</column>
+		<primaryKey name="DAB_Primary" columns="DAB_DABID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DABKeyNazwa" options="NONCLUSTERED" fields="DAB_Nazwa ,DAB_DABID">
+			<description>Wg nazwy</description>
+		</index>
+		<index name="AtBTwrAtrybut" options="NONCLUSTERED" fields="DAB_TwAID">
+			<description>Klucz obcy do TwrAtrybuty</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,71 @@
+<table name="SprawozdaniaFinansoweZalaczniki">
+		<description>Sprawozdania finansowe - podpisy</description>
+		<column name="SFZ_SFZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SFZ_SFNId" type="INT">
+			<description>Klucz obcy do tabeli CDN.SprawozdaniaFinansowe</description>
+			<details />
+		</column>
+		<column name="SFZ_DABId" type="INT">
+			<description>Klucz obcy do tabeli CDN.DaneBinarne</description>
+			<details />
+		</column>
+		<column name="SFZ_Nazwa" type="nvarchar(260)">
+			<description>Nazwa pliku</description>
+			<details />
+		</column>
+		<column name="SFZ_Typ" type="INT">
+			<description>Typ załącznika</description>
+			<details />
+		</column>
+		<column name="SFZ_Wlasny" type="INT">
+			<description>Typ załącznika własny</description>
+			<details />
+		</column>
+		<column name="SFZ_TS_Oblicz" type="DATETIME">
+			<description>Data i godzina obliczenia zestawienia</description>
+		</column>
+		<column name="SFZ_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="SFZ_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SFZ_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SFZ_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="SFZ_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SFZ_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SFZ_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SFZ_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SFZ_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SFZ_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SFZ_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SFZ_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SFZ_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SFZ_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SFZ_Primary" columns="SFZ_SFZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="SFZSFNId" options="NONCLUSTERED" fields="SFZ_SFNId">
+			<description>Według SFZ_SFNId</description>
+		</index>
+		<index name="SFZDABId" options="UNIQUE NONCLUSTERED" fields="SFZ_DABId">
+			<description>Według SFZ_SFNId</description>
+		</index>
+	</table>
+	

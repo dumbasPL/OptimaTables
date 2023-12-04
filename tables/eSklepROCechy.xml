@@ -1,0 +1,22 @@
+<table name="eSklepROCechy">
+		<description>Cechy RO dla ISklep24</description>
+		<column name="ESC_ESCID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ESC_TrEID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator elementu</description>
+		</column>
+		<column name="ESC_TwRID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator towaru</description>
+		</column>
+		<column name="ESC_Cecha_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator cechy</description>
+		</column>
+		<column name="ESC_Cecha_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc cechy</description>
+		</column>
+		<primaryKey name="ESC_Primary" columns="ESC_ESCID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

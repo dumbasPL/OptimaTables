@@ -1,0 +1,22 @@
+<table name="OAtrybutyKlasyElem">
+		<description>Pozycje listy klasy atrybutów typu lista</description>
+		<column name="AKE_AkeId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator</description>
+		</column>
+		<column name="AKE_AtkId" type="INTEGER" definition="NOT NULL">
+			<description>KLucz obcy do klasy atrybutów</description>
+		</column>
+		<column name="AKE_Wartosc" type="NVARCHAR(101)" definition="NOT NULL" />
+		<column name="AKE_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="AKE_Primary" columns="AKE_AkeId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AKEAtkId" localColumns="AKE_AtkId" refTable="OAtrybutyKlasy" refColumns="ATK_AtkId" deleteOption="CASCADE">
+			<description>Relacja CDN.OAtrybutyKlasyElem:CDN.OAtrybutyKlasy (MANY:1)</description>
+		</foreignKey>
+		<index name="AKEAtkId" options="NONCLUSTERED" fields="AKE_AtkId" />
+		<index name="AKEWartosc" options="UNIQUE NONCLUSTERED" fields="AKE_AtkId ,AKE_Wartosc" />
+	</table>
+	

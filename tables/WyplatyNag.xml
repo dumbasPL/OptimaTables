@@ -1,0 +1,206 @@
+<table name="WyplatyNag">
+		<description>Uproszczona ewidencja wypłat dla pracowników</description>
+		<details>
+			Nagłówek wypłaty.
+			Informacje o wypłacie zapisywane są w tabelach:
+			WyplatyNag - sumaryczne kwoty wypłaty
+			WyplatyElem - kwoty składników wypłaty
+		</details>
+		<column name="WyN_WyNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WyN_PrcID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator rekordu pracownika</description>
+			<details>Wskaźnik do kartoteki pracownika (relacja do tabeli Pracownicy: WyN:PrcId =
+				Prc:PrcId)</details>
+		</column>
+		<column name="WyN_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc wypłaty</description>
+			<details>
+				Rok i miesiąc wypłaty, obliczany jako:
+				100 * Rok + Miesiąc
+			</details>
+		</column>
+		<column name="WyN_DataWyp" type="DATETIME" definition="NOT NULL">
+			<description>Data dokonania wypłaty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WyN_DataZap" type="DATETIME">
+			<description>Data wpłaty zaliczki do US</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WyN_Etat" type="TINYINT" definition="NOT NULL">
+			<description>Wypłata z tytułu umowy o pracę</description>
+		</column>
+		<column name="WyN_Zwolnienie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WyN_Zwolnienie DEFAULT(0)">
+			<description>Wypłata podlega zwolnieniu dla młodych</description>
+		</column>
+		<column name="WyN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) wypłaty może zostac wpisany "z ręki" (WyN:KatId = 0) lub zostac pobrany z
+				listy kategorii (WyN:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="WyN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Kategoria (opis)</description>
+		</column>
+		<column name="WyN_BruttoRazem" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wynagrodzenie razem brutto</description>
+		</column>
+		<column name="WyN_BruttoOpodat" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wynagrodzenie brutto podlegające opodatkowaniu</description>
+		</column>
+		<column name="WyN_BruttoKoszt" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wynagrodzenie brutto stanowiące koszt uzyskania pracodawcy</description>
+		</column>
+		<column name="WyN_BruttoGotowka" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Część wynagrodzenia w gotówce (wpływa na kwotę do wypłaty)</description>
+		</column>
+		<column name="WyN_UbEmerytPrac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie emerytalne płacona przez pracownika</description>
+		</column>
+		<column name="WyN_UbEmerytFir" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie emerytalne płacona przez firmę</description>
+		</column>
+		<column name="WyN_UbRentowPrac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie rentowe płacona przez pracownika</description>
+		</column>
+		<column name="WyN_UbRentowFir" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie rentowe płacona przez firmę</description>
+		</column>
+		<column name="WyN_UbChorobPrac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie chorobowe płacona przez pracownika</description>
+		</column>
+		<column name="WyN_UbWypadkFir" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie wypadkowe płacona przez firmę</description>
+		</column>
+		<column name="WyN_PodstawaFGSP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek na FGŚP</description>
+		</column>
+		<column name="WyN_PodstawaFP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek na FP</description>
+		</column>
+		<column name="WyN_KosztyUzyskania" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty uzyskania przychodu</description>
+		</column>
+		<column name="WyN_UlgaDlaPrac" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WyN_UlgaDlaPrac DEFAULT(0)">
+			<description>Ulga dla pracowników</description>
+		</column>
+		<column name="WyN_Podatek" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wielkość podatku dochodowego</description>
+		</column>
+		<column name="WyN_UbZdrowotne" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie zdrowotne odliczona od podatku</description>
+		</column>
+		<column name="WyN_UbZdrowNOdl" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na ubezpieczenie zdrowotne nie odliczona od podatku</description>
+		</column>
+		<column name="WyN_ZaliczkaUS" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Zaliczka przekazana do US</description>
+		</column>
+		<column name="WyN_Gotowka" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wynagrodzenia wypłacana w gotówce</description>
+		</column>
+		<column name="WyN_PodstawaFEP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa na fundusz emerytur pomostowychdd</description>
+		</column>
+		<column name="WyN_SkladkaFEP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Składka na fundusz emerytur pomostowych</description>
+		</column>
+		<column name="WyN_UlgaOdliczona" type="DECIMAL(15,2)">
+			<description>Kwota ulgi, która została odliczona w danej wypłacie</description>
+		</column>
+		<column name="WyN_KprID" type="INTEGER">
+			<description>Wskaźnik zaksięgowania do KpiR</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada WyN_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada WyN_KPRId = NULL;
+			</details>
+		</column>
+		<column name="WyN_DekID" type="INTEGER">
+			<description>Wskaźnik zaksięgowania do dekretów</description>
+			<details>
+				Relacja do dokumentu księgowego (Dekrety).
+				Zapis zaksięgowany posiada VaN:DekId = Dek:DekId.
+				Zapis niezaksięgowany posiada VaN:DekId = 0.
+			</details>
+		</column>
+		<column name="WyN_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="WyN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="WyN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WyN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WyN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="WyN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WyN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time stamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WyN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WyN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="WyN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WyN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="WyN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WyN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="WyN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WyN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="WyN_ZakID" type="INT">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="WyN_DoRozliczWKolMies" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WyN_DoRozliczWKolMies DEFAULT(0)">
+			<description>Kwota zaliczki podatku do US do rozliczenia w kolejnym miesiacu</description>
+		</column>
+		<column name="WyN_RozliczZPoprzedMies" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WyN_RozliczZPoprzedMies DEFAULT(0)">
+			<description>Kwota zaliczki podatku do US z poprzednich miesiacy rozliczona w aktualnej
+				zaliczce</description>
+		</column>
+		<primaryKey name="WyN_Primary" columns="WyN_WyNId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_WyNPracownik" localColumns="WyN_PrcID" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.WyplatyNag:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WyNKategoria" localColumns="WyN_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.WyplatyNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="WyNKategoria" options="UNIQUE NONCLUSTERED" fields="WyN_KatID ,WyN_RokMies ,WyN_DataWyp ,WyN_WyNId">
+			<description>Wg kategorii</description>
+			<details>Wypłaty wg identyfikatora kategorii (indeks wiżący tabelę WyplatyNag z Kategorie)</details>
+		</index>
+		<index name="WyNPracownik" options="UNIQUE NONCLUSTERED" fields="WyN_PrcID ,WyN_RokMies ,WyN_DataWyp ,WyN_WyNId">
+			<description>Wg pracownika</description>
+		</index>
+		<index name="WyNMiesiac" options="NONCLUSTERED" fields="WyN_RokMies">
+			<description>Wg miesiąca</description>
+		</index>
+		<index name="WyNZapisyKPR" options="UNIQUE NONCLUSTERED" fields="WyN_KprID ,WyN_WyNId">
+			<description>Wg zapisu księgowego do ZapisyKPR</description>
+		</index>
+		<index name="WyNDekrety" options="UNIQUE NONCLUSTERED" fields="WyN_DekID ,WyN_WyNId">
+			<description>Wg zapisu księgowego do Dekrety</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,37 @@
+<table name="ZestKsiWyniki">
+		<description>Pozycje definicji zestawień księgowych</description>
+		<column name="ZKW_ZKWId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZKW_OObId" type="INTEGER" definition="NULL">
+			<description>Identyfikator okresu obrachunkowego</description>
+		</column>
+		<column name="ZKW_ZKNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka zestawienia</description>
+		</column>
+		<column name="ZKW_ZKPId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pozycji zestawienia</description>
+		</column>
+		<column name="ZKW_ZKKId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator kolumny zestawienia</description>
+		</column>
+		<column name="ZKW_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość pozycji zestawienia</description>
+		</column>
+		<primaryKey name="ZKW_Primary" columns="ZKW_ZKWId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ZKWZestawienie" localColumns="ZKW_ZKNId" refTable="ZestKsiNag" refColumns="ZKN_ZKNId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZestKsiWyniki:CDN.ZestKsiNag (MANY:1)</description>
+		</foreignKey>
+		<index name="ZKWZestawienie" options="NONCLUSTERED" fields="ZKW_ZKNId">
+			<description>Wg nagłówka zestawienia</description>
+		</index>
+		<index name="ZKWPozycja" options="UNIQUE NONCLUSTERED" fields="ZKW_ZKPId ,ZKW_ZKKId, ZKW_OObId">
+			<description>Wg pozycji zestawienia</description>
+		</index>
+		<index name="ZKWKolumna" options="NONCLUSTERED" fields="ZKW_ZKKId">
+			<description>Wg kolumny zestawienia</description>
+		</index>
+	</table>
+	

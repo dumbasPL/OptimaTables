@@ -1,0 +1,98 @@
+<table name="DetalStanZapisyKB">
+		<description>Tabela dokumentów KP/KW detal</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="DSZKB_DSZKBID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSZKB_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="DSZKB_DSFPlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator formy płatności</description>
+			<details>W paragonie lub WZ jest tu TrNId faktury, do której został przekształcony dokument
+				źródłowy</details>
+		</column>
+		<column name="DSZKB_TypDokumentu" type="INTEGER" definition="NOT NULL">
+			<description>Typ dokumentu (klasa dokumentu)</description>
+			<details>
+				301 - Faktura Zakupu &lt;br&gt;
+				302 - Faktura sprzedaży &lt;br&gt;
+				303 - Przyjęcie Wewnętrzne &lt;br&gt;
+				304 - Rozchód Wewnętrzny &lt;br&gt;
+				305 - Paragon &lt;br&gt;
+				306 - Wydanie Zewnętrzne &lt;br&gt;
+				307 - Przyjęcie Zewnętrzne &lt;br&gt;
+				308 - Rezerwacja Odbiorcy &lt;br&gt;
+				309 - Zamówienie u Dostawcy &lt;br&gt;
+				310 - Bilans Otwarcia Magazynu &lt;br&gt;
+				311 - Arkusz Inwentaryzacyjny &lt;br&gt;
+				312 - Przesunięcie Międzymagazynowe &lt;br&gt;
+				313 - Przyjęcie kaucji &lt;br&gt;
+				314 - Wydanie kaucji &lt;br&gt;
+				317 - Przyjęcie Wewnętrzne Produktów &lt;br&gt;
+				318 - Rozchód Wewnętrzny Składników &lt;br&gt;
+				320 - Faktura Pro Forma &lt;br&gt;
+				321 - FWS &lt;br&gt;
+				322 - FWZ &lt;br&gt;
+				345 - TaxFree &lt;br&gt;
+				350 - FRR
+			</details>
+		</column>
+		<column name="DSZKB_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="DSZKB_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="DSZKB_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.DETALNUMERPELNY(DSZKB_NUMERNR,DSZKB_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DSZKB_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Stan dokumentu</description>
+			<details>
+				1 - bufor, &lt;br&gt;
+				0 - zatwierdzony, &lt;br&gt;
+				-1 - anulowany
+			</details>
+		</column>
+		<column name="DSZKB_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="DSZKB_PodID" type="INTEGER">
+			<description>Identyfikator podmiotu (płatnika)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="DSZKB_RazemBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna brutto</description>
+		</column>
+		<column name="DSZKB_StanSynchronizacji" type="INTEGER">
+			<description>Stan synchronizacji kontrahenta</description>
+		</column>
+		<column name="DSZKB_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="DSZKB_Opis" type="NVARCHAR(254)">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="DSZKB_ZmianaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zmiany</description>
+		</column>
+		<primaryKey name="DSZKB_Primary" columns="DSZKB_DSZKBID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="DSZKBIDPodmiot" options="UNIQUE NONCLUSTERED" fields="DSZKB_PodID ,DSZKB_DSZKBID" />
+		<index name="DSZKBIDOperator" options="UNIQUE NONCLUSTERED" fields="DSZKB_DSZKBID ,DSZKB_OpeID" />
+	</table>
+	

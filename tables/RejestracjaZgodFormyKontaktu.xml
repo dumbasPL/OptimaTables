@@ -1,0 +1,48 @@
+<table name="RejestracjaZgodFormyKontaktu">
+		<description>Formy kontaktu dla rejestru zgód</description>
+		<column name="RZFK_RZFKId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RZFK_Nazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa formy zgody</description>
+		</column>
+		<column name="RZFK_GUID" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator</description>
+		</column>
+		<column name="RZFK_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RZFK_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RZFK_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RZFK_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RZFK_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RZFK_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RZFK_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RZFK_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RZFK_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RZFK_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="RZFK_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RZFK_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RZFK_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RZFK_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="RZFK_Primary" columns="RZFK_RZFKId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

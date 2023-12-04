@@ -1,0 +1,337 @@
+<table name="SenditZleceniePrzesylki">
+		<description>Sendit Zlecenie Przesylki</description>
+		<column name="SZL_SZLID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SZL_DDfId" type="int" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="SZL_FaId" type="int" definition="NOT NULL">
+			<description>ID dokumentu do którego powstało zlecenie </description>
+		</column>
+		<column name="SZL_NumerNr" type="int" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="SZL_NumerString" type="varchar(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="SZL_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(SZL_NUMERNR,SZL_NUMERSTRING)">
+			<description>Numer pełny</description>
+		</column>
+		<column name="SZL_Bufor" type="smallint" definition="NOT NULL">
+			<description>Zapis w buforze</description>
+		</column>
+		<column name="SZL_DataDok" type="datetime" definition="NOT NULL">
+			<description>Data wystawienia</description>
+		</column>
+		<column name="SZL_OpiekunTyp" type="SMALLINT">
+			<description>Typ opiekuna (pracownik, operator)</description>
+			<details>
+				3 - pracownik (CDN.PracIdx) &lt;br&gt;
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej)
+			</details>
+		</column>
+		<column name="SZL_OpiekunId" type="INTEGER">
+			<description>Identyfikator opiekuna</description>
+		</column>
+		<column name="SZL_OpiekunNazwa" type="nvarchar(100)" definition="NOT NULL  CONSTRAINT DF_SZL_OpiekunNazwa DEFAULT('')" hash="1">
+			<description>Imię i nazwisko opiekuna</description>
+		</column>
+		<column name="SZL_SANID" type="int" definition="NULL">
+			<description>Id adresu nadawczego</description>
+		</column>
+		<column name="SZL_SANNazwa" type="nvarchar(250)" definition="NOT NULL  CONSTRAINT DF_SZL_SANNazwa DEFAULT('')" hash="1">
+			<description>nazwy nadawcy</description>
+		</column>
+		<column name="SZL_SANUlica" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>ulica z adresu nadawczego</description>
+		</column>
+		<column name="SZL_SANNrDomu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu z adresu nadawczego</description>
+		</column>
+		<column name="SZL_SANNrLokalu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu z adresu nadawczego</description>
+		</column>
+		<column name="SZL_SANMiasto" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Miasto z adresu nadawczego</description>
+		</column>
+		<column name="SZL_SANKodPocztowy" type="varchar(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy z adresu nadawczego</description>
+		</column>
+		<column name="SZL_SANTelefon" type="varchar(20)" definition="NULL" hash="1">
+			<description>Telefon odbiorcy</description>
+		</column>
+		<column name="SZL_SANEmail" type="nvarchar(127)" definition="NULL" hash="1">
+			<description>Email odbiorcy</description>
+		</column>
+		<column name="SZL_OdbiorcaTyp" type="smallint" definition="NULL">
+			<description>Typ odbiorcy z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy OdbId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="SZL_OdbID" type="int" definition="NULL">
+			<description>Identyfikator odbiorcy</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez OdbiorcaTyp,
+				lub jest równy 0 (NULL) dla odbiorcy wpisanego "z ręki"</details>
+		</column>
+		<column name="SZL_OdbNazwa" type="nvarchar(250)" definition="NOT NULL" hash="1">
+			<description>nazwy odbiorcy</description>
+		</column>
+		<column name="SZL_OdbUlica" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Ulica odbiorcy</description>
+		</column>
+		<column name="SZL_OdbNrDomu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu odbiorcy</description>
+		</column>
+		<column name="SZL_OdbNrLokalu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu odbiorcy</description>
+		</column>
+		<column name="SZL_OdbMiasto" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Miasto odbiorcy</description>
+		</column>
+		<column name="SZL_OdbKodPocztowy" type="varchar(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy odbiorcy</description>
+		</column>
+		<column name="SZL_OdbTelefon" type="varchar(20)" definition="NULL" hash="1">
+			<description>Telefon odbiorcy</description>
+		</column>
+		<column name="SZL_OdbEmail" type="nvarchar(127)" definition="NULL" hash="1">
+			<description>Email odbiorcy</description>
+		</column>
+		<column name="SZL_Odebral" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko osoby odbierającej fakturę</description>
+		</column>
+		<column name="SZL_FirmaKurierskaID" type="INT" definition="NOT NULL">
+			<description>Id firmy kurierskiej</description>
+		</column>
+		<column name="SZL_OpcjePobranie" type="TINYINT" definition="NOT NULL">
+			<description>Czy pobranie</description>
+		</column>
+		<column name="SZL_OpcjeKwotaPobrania" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Kwota ubezpieczenia</description>
+		</column>
+		<column name="SZL_OpcjeZwrotPotwierdzenia" type="TINYINT" definition="NOT NULL">
+			<description>Czy zwrot potwierdzenia</description>
+		</column>
+		<column name="SZL_OpcjeUbezpieczenie" type="TINYINT" definition="NOT NULL">
+			<description>Czy ubezpieczenie</description>
+		</column>
+		<column name="SZL_OpcjeKwotaUbezpieczenia" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Kwota ubezpieczenia</description>
+		</column>
+		<column name="SZL_DataWyslania" type="datetime" definition="NOT NULL">
+			<description>Data wysłania</description>
+		</column>
+		<column name="SZL_DataKurierOD" type="datetime" definition="NOT NULL">
+			<description>Przyjazd kuriera od</description>
+		</column>
+		<column name="SZL_DataKurierDo" type="datetime" definition="NOT NULL">
+			<description>Przyjazd kuriera do</description>
+		</column>
+		<column name="SZL_NumerZleceniaSendit" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Numer zlecenia sendit</description>
+		</column>
+		<column name="SZL_NumerProtokoluOdbioru" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Numer protokołu odbioru</description>
+		</column>
+		<column name="SZL_NumerZleceniaOdbioru" type="nvarchar(254)" definition="NOT NULL" hash="1">
+			<description>Numer protokołu odbioru</description>
+		</column>
+		<column name="SZL_StatusKey" type="nvarchar(254)" definition="NOT NULL">
+			<description>Status zlecenia Key</description>
+		</column>
+		<column name="SZL_Status" type="nvarchar(254)" definition="NOT NULL">
+			<description>Status zlecenia</description>
+		</column>
+		<column name="SZL_DataStatusu" type="datetime" definition="NOT NULL">
+			<description>Data zmiany statusu</description>
+		</column>
+		<column name="SZL_Uwagi" type="nvarchar(1024)" definition="NOT NULL">
+			<description>Uwagi</description>
+		</column>
+		<column name="SZL_Koszt" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Koszt zlecenia</description>
+		</column>
+		<column name="SZL_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="SZL_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SZL_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SZL_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="SZL_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SZL_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SZL_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SZL_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SZL_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SZL_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SZL_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SZL_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SZL_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SZL_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="SZL_TypKuriera" type="int" definition="NOT NULL CONSTRAINT DF_SZL_TypKuriera DEFAULT(1)">
+			<description>Typ kuriera</description>
+		</column>
+		<column name="SZL_BladWalidacji" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_SZL_BladWalidacji DEFAULT('')">
+			<description>błąd walidacji</description>
+		</column>
+		<column name="SZL_NrListuPrzewozowego" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_SZL_NrListuPrzewozowego DEFAULT('')">
+			<description>Numer listów przewozowych</description>
+		</column>
+		<column name="SZL_Platnik" type="int" definition="NOT NULL CONSTRAINT DF_SZL_Platnik DEFAULT(0)">
+			<description>Platnik</description>
+		</column>
+		<column name="SZL_NumerPlatnika" type="NVARCHAR(254)" definition="NOT NULL CONSTRAINT DF_SZL_NumerPlatnika DEFAULT('')">
+			<description>Numer płatnika FID</description>
+		</column>
+		<column name="SZL_PrzesylkaDoOddzialu" type="int" definition="NOT NULL CONSTRAINT DF_SZL_PrzesylkaDoOddzialu DEFAULT(0)">
+			<description>Przesyłka do oddziału</description>
+		</column>
+		<column name="SZL_OdbAdresKorespondencyjny" type="int" definition="NOT NULL CONSTRAINT DF_SZL_OdbAdresKorespondencyjny DEFAULT(0)">
+			<description>Użyj adresu korespondencyjnego</description>
+		</column>
+		<column name="SZL_Zawartosc" type="int" definition="NOT NULL CONSTRAINT DF_SZL_Zawartosc DEFAULT(0)">
+			<description>Czy zawartość</description>
+		</column>
+		<column name="SZL_ZawartoscTekst" type="NVARCHAR(254)" definition="NOT NULL CONSTRAINT DF_SZL_ZawartoscTekst DEFAULT('')">
+			<description>Opis zawartości</description>
+		</column>
+		<column name="SZL_Referencje" type="int" definition="NOT NULL CONSTRAINT DF_SZL_Referencje DEFAULT(0)">
+			<description>Czy referencje</description>
+		</column>
+		<column name="SZL_ReferencjeTekst" type="NVARCHAR(254)" definition="NOT NULL CONSTRAINT DF_SZL_ReferencjeTekst DEFAULT('')">
+			<description>Referencje</description>
+		</column>
+		<column name="SZL_DokumentyZwrotne" type="int" definition="NOT NULL CONSTRAINT DF_SZL_DokumentyZwrotne DEFAULT(0)">
+			<description>Dokumenty zwrotne</description>
+		</column>
+		<column name="SZL_DokumentyZwrotneTekst" type="NVARCHAR(254)" definition="NOT NULL CONSTRAINT DF_SZL_DokumentyZwrotneTekst DEFAULT('')">
+			<description>Dokumenty zwrotne numery</description>
+		</column>
+		<column name="SZL_PrzesylkaZwrotna" type="int" definition="NOT NULL CONSTRAINT DF_SZL_PrzesylkaZwrotna DEFAULT(0)">
+			<description>Przesyłka zwrotna</description>
+		</column>
+		<column name="SZL_OdbSANID" type="int" definition="NULL">
+			<description>Id adresu odbiorczego</description>
+		</column>
+		<column name="SZL_TypPaczkiDPD" type="int" definition="NOT NULL CONSTRAINT DF_SZL_TypPaczkiDPD DEFAULT(0)">
+			<description>Typ paczki</description>
+		</column>
+		<column name="SZL_Serwis" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SZL_Serwis DEFAULT(0)">
+			<description>Serwis</description>
+		</column>
+		<column name="SZL_Preawizacja" type="tinyint" definition=" NOT NULL CONSTRAINT DF_SZL_Preawizacja DEFAULT(0)">
+			<description>DHL preawizacja</description>
+		</column>
+		<column name="SZL_OdbiorWPunkcie" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_OdbiorWPunkcie DEFAULT(0)">
+			<description>Odbiór w punkcie</description>
+		</column>
+		<column name="SZL_OdbiorWPunkcieId" type="nvarchar(50)" definition="NOT NULL CONSTRAINT DF_SZL_OdbiorWPunkcieId DEFAULT('')">
+			<description>Identyfikator punktu odbioru</description>
+		</column>
+		<column name="SZL_OdbiorWPunkcieNazwa" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_OdbiorWPunkcieNazwa DEFAULT('')">
+			<description>Nazwa punktu odbioru</description>
+		</column>
+		<column name="SZL_OdbiorWPunkcieAdres" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_OdbiorWPunkcieAdres DEFAULT('')">
+			<description>Adres punktu odbioru</description>
+		</column>
+		<column name="SZL_SposobPobrania" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_SposobPobrania DEFAULT(0)">
+			<description>Sposób pobrania</description>
+		</column>
+		<column name="SZL_TytulPrzelewu" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_TytulPrzelewu DEFAULT('')">
+			<description>Tytuł przelewu</description>
+		</column>
+		<column name="SZL_DokumentyZwrotneTyp" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_DokumentyZwrotneTyp DEFAULT(0)">
+			<description>Typ dokumentu zwrotnego</description>
+		</column>
+		<column name="SZL_PotwierdzenieOdbioru" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_PotwierdzenieOdbioru DEFAULT(0)">
+			<description>Potwierdzenie odbioru</description>
+		</column>
+		<column name="SZL_PotwierdzenieOdbioruTyp" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_PotwierdzenieOdbioruTyp DEFAULT(0)">
+			<description>Typ potwierdzenia odbioru</description>
+		</column>
+		<column name="SZL_PotwierdzenieOdbioruIlosc" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_PotwierdzenieOdbioruIlosc DEFAULT(0)">
+			<description>Ilość potwierdzeń odbioru</description>
+		</column>
+		<column name="SZL_EPO" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_EPO DEFAULT(0)">
+			<description>Elektroniczne potwierdzenie odbioru</description>
+		</column>
+		<column name="SZL_PotwierdzenieDoreczenia" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_PotwierdzenieDoreczenia DEFAULT(0)">
+			<description>Potwierdzenie doreczenia</description>
+		</column>
+		<column name="SZL_PotwierdzenieDoreczeniaTyp" type="tinyint" definition="NOT NULL CONSTRAINT DF_SZL_PotwierdzenieDoreczeniaTyp DEFAULT(0)">
+			<description>Typ potwierdzenia doręczenia</description>
+		</column>
+		<column name="SZL_UrzadNadaniaKod" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_UrzadNadaniaKod DEFAULT('')">
+			<description>Kod urzędu nadania</description>
+		</column>
+		<column name="SZL_UrzadNadaniaAdres" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_UrzadNadaniaAdres DEFAULT('')">
+			<description>Adres urzędu nadania</description>
+		</column>
+		<column name="SZL_PlikZlecenia" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_PlikZlecenia DEFAULT('')">
+			<description>Plik zlecenia</description>
+		</column>
+		<column name="SZL_NrTransakcjiOdbioru" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_NrTransakcjiOdbioru DEFAULT('')">
+			<description>Numer transakcji odbioru</description>
+		</column>
+		<column name="SZL_OpcjeDeklarowanaWartosc" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SZL_OpcjeDeklarowanaWartosc DEFAULT(0)">
+			<description>Opcja deklarowana Wartosc</description>
+		</column>
+		<column name="SZL_OpcjeDeklarowanaWartoscKwota" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_SZL_OpcjeDeklarowanaWartoscKwota DEFAULT(0)">
+			<description>Deklarowana wartosc kwota</description>
+		</column>
+		<column name="SZL_AllegroTransactionId" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_AllegroTransactionId DEFAULT('')">
+			<description>AllegroTransactionId</description>
+		</column>
+		<column name="SZL_AllegroUserId" type="nvarchar(255)" definition="NOT NULL CONSTRAINT DF_SZL_AllegroUserId DEFAULT('')">
+			<description>AllegroUserId</description>
+		</column>
+		<column name="SZL_DostawaWWeekend" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SZL_DostawaWWeekend DEFAULT(0)">
+			<description>Dostawa w weekend</description>
+		</column>
+		<column name="SZL_DokZrodlowe" type="nvarchar(MAX)" definition="NOT NULL CONSTRAINT DF_SZL_DokZrodlowe DEFAULT('')">
+			<description>Dokumenty źródłowe</description>
+		</column>
+		<column name="SZL_DokZrodloweTyp" type="INT" definition="NOT NULL CONSTRAINT DF_SZL_DokZrodloweTyp DEFAULT(0)">
+			<description>Dokumenty źródłowe</description>
+		</column>
+		<column name="SZL_SposobNadania" type="INT" definition="NOT NULL CONSTRAINT DF_SZL_SposobNadania DEFAULT(0)">
+			<description>Sposób nadania</description>
+		</column>
+		<primaryKey name="SZL_Primary" columns="SZL_SZLId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_SZLDokDef" localColumns="SZL_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.SenditZleceniePrzesylki:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="SZLNumer" options="UNIQUE NONCLUSTERED" fields="SZL_NumerString ,SZL_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+	</table>
+	

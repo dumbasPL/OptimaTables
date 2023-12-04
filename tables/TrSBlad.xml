@@ -1,0 +1,13 @@
+<table name="TrSBlad">
+		<description>Błąd w TrasElem</description>
+		<column name="TrSBlad_TwrID" type="int" definition="NOT NULL">
+			<description>Id Towaru</description>
+		</column>
+		<column name="TrSBlad_Kod" type="nvarchar(40)" definition="NOT NULL">
+			<description>kod towaru</description>
+		</column>
+		<column name="TrSBlad_Ilosc" type="decimal(15, 4)" definition="NOT NULL">
+			<description>Poprawione ilości</description>
+		</column>
+	</table>
+	

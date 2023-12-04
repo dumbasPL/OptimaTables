@@ -1,0 +1,108 @@
+<table name="BONag">
+		<description>Nagłówki dokumentów BO</description>
+		<column name="BON_BONId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="BON_OObId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator okresu obrachunkowego</description>
+		</column>
+		<column name="BON_OObPrevId" type="INTEGER">
+			<description>Identyfikator poprzedniego okresu obrachunkowego</description>
+		</column>
+		<column name="BON_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Zapis w buforze</description>
+		</column>
+		<column name="BON_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="BON_DDfId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do DokDefinicje</description>
+		</column>
+		<column name="BON_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Część stała numeru</description>
+		</column>
+		<column name="BON_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Część numeryczna numeru dokumentu</description>
+		</column>
+		<column name="BON_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(BON_NUMERNR,BON_NUMERSTRING)">
+			<description>Numer pełny dokumentu</description>
+		</column>
+		<column name="BON_KatId" type="INTEGER">
+			<description>Identyfikator kategorii</description>
+		</column>
+		<column name="BON_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis dokumentu księgowego</description>
+		</column>
+		<column name="BON_Korekta" type="TINYINT" definition="NOT NULL">
+			<description>Korekta bilansu otwarcia</description>
+		</column>
+		<column name="BON_BilansZamkniecia" type="TINYINT" definition="NOT NULL">
+			<description>Wpływa na bilans zamknięcia okresu poprzedniego</description>
+		</column>
+		<column name="BON_KwotaWN" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota po stronie WN</description>
+		</column>
+		<column name="BON_KwotaMA" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota po stronie MA</description>
+		</column>
+		<column name="BON_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="BON_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BON_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="BON_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="BON_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BON_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="BON_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BON_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BON_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BON_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BON_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BON_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BON_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BON_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="BON_Primary" columns="BON_BONId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BONKategorie" localColumns="BON_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.BONag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BONDokDef" localColumns="BON_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.BONag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BONOkres" localColumns="BON_OObId" refTable="OkresyObrach" refColumns="OOb_OObID">
+			<description>Relacja CDN.BONag:CDN.OkresyObrach (MANY:1)</description>
+		</foreignKey>
+		<index name="BONOkres" options="UNIQUE NONCLUSTERED" fields="BON_OObId ,BON_NumerPelny">
+			<description>Dokumenty wg okresu obrachunkowego</description>
+		</index>
+		<index name="BONDokDef" options="NONCLUSTERED" fields="BON_DDfId">
+			<description>Klucz obcy do DokDefinicje</description>
+		</index>
+		<index name="BONKategorie" options="NONCLUSTERED" fields="BON_KatId">
+			<description>Klucz obcy do Kategorie</description>
+		</index>
+		<index name="BONOkresPrev" options="NONCLUSTERED" fields="BON_OObPrevId">
+			<description>Wskaźnik do okresu poprzedniego</description>
+		</index>
+		<index name="BONNumer" options="UNIQUE NONCLUSTERED" fields="BON_NumerString ,BON_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+	</table>
+	

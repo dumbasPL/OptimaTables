@@ -1,0 +1,27 @@
+<table name="RptTemp2" filterVisible="false">
+		<description>Tabela pomocnicza dla wydruków</description>
+		<details>
+			Tabela wykorzystywana jest przez view CDN.ZasobyView do określania na jaki dzień i na jakim
+			magazynie mają być wyświetlane zasoby przez to view.
+			Dodanie jednego wiersza do tabeli z ID magazynu oraz datą powoduje wyświetlenie przez to view
+			zasobów dla tych danych.
+			W przypadku wydruków z listy zasobów program samodzielnie wprowadza i usuwa dane do tej
+			tabeli.
+		</details>
+		<column name="RpT2_RpT2Id" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator wydruku</description>
+		</column>
+		<column name="RpT2_TmpId" type="INTEGER">
+			<description>Id wiersza powiązanego relacyjnie</description>
+			<details>W przypadku użycia tabeli z view CDN.ZasobyView w kolumnie podaje się ID magazynu.</details>
+		</column>
+		<column name="RpT2_Data" type="DATETIME">
+			<description>Data pomocnicza dla wydruku</description>
+			<details>W przypadku użycia tabeli z view CDN.ZasobyView w kolumnie podaje datę na którą
+				wartości zasobów są wyświetlane.</details>
+		</column>
+		<primaryKey name="RpT2_Primary" columns="RpT2_RpT2Id">
+			<description>Wg id wydruku</description>
+		</primaryKey>
+	</table>
+	

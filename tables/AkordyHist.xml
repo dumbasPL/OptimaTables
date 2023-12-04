@@ -1,0 +1,89 @@
+<table name="AkordyHist">
+		<description>Tabela akordów pracownika (zapisy historyczne)</description>
+		<column name="AKH_AkhId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AKH_AkrId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do dodatku</description>
+		</column>
+		<column name="AKH_AdfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator typu akordu</description>
+		</column>
+		<column name="AKH_Nazwa" type="NVARCHAR(40)">
+			<description>Nazwa akordu</description>
+		</column>
+		<column name="AKH_OkresOd" type="DATETIME" definition="NOT NULL">
+			<description>Data początkowa obowiązywania akordu</description>
+		</column>
+		<column name="AKH_OkresDo" type="DATETIME" definition="NOT NULL">
+			<description>Data końcowa obowiązywania akordu</description>
+		</column>
+		<column name="AKH_Ilosc" type="DECIMAL(15,2)">
+			<description>Ilość jednostek</description>
+		</column>
+		<column name="AKH_Czas" type="DATETIME">
+			<description>Czas</description>
+		</column>
+		<column name="AKH_Miesiac" type="SMALLINT" definition="NOT NULL">
+			<description>Miesiąc</description>
+		</column>
+		<column name="AKH_Rok" type="INTEGER" definition="NOT NULL">
+			<description>Rok</description>
+		</column>
+		<column name="AKH_Stawka" type="DECIMAL(15,4)" definition="NOT NULL" />
+		<column name="AKH_Proporcjonalnie" type="TINYINT" definition="NOT NULL">
+			<description>Podział proporcjonalny</description>
+		</column>
+		<column name="AKH_Wspolczynnik" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Współczynnik podziału</description>
+		</column>
+		<column name="AKH_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="AKH_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="AKH_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AKH_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="AKH_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfkującego zapis</description>
+		</column>
+		<column name="AKH_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AKH_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji</description>
+		</column>
+		<column name="AKH_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AKH_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AKH_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AKH_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AKH_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AKH_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AKH_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AKH_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="AKH_Primary" columns="AKH_AkhId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AKHAkrLink" localColumns="AKH_AkrId" refTable="Akordy" refColumns="AKR_AkrId" deleteOption="CASCADE">
+			<description>Relacja CDN.AkordyHist:CDN.Akordy (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_AKHAdfLink" localColumns="AKH_AdfId" refTable="AkordDefinicja" refColumns="ADF_AdfId">
+			<description>Relacja CDN.AkordyHist:CDN.AkordDefinicja (MANY:1)</description>
+		</foreignKey>
+		<index name="AKHAkrLink" options="NONCLUSTERED" fields="AKH_AkrId">
+			<description>Link do akordu</description>
+		</index>
+		<index name="AKHAdfLink" options="NONCLUSTERED" fields="AKH_AdfId">
+			<description>Link do AkordDefinicja</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,22 @@
+<view name="AtrybutyView">
+		<description>Lista wszystkich atrybutów</description>
+		<column name="ATR_AtrID" type="INTEGER" definition="NO_SQL" />
+		<column name="ATR_Kod" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="ATR_WartoscTXT" type="NVARCHAR(1024)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="ATR_CzyKod" type="INTEGER" definition="NO_SQL">
+			<description>Czy kod ma być kopiowany przed wartościa atrybutu</description>
+		</column>
+		<column name="ATR_PodmiotTyp" type="INTEGER" definition="NO_SQL">
+			<description>Typ podmiotu</description>
+			<details>Zeo jeśli atrybut towaru</details>
+		</column>
+		<column name="ATR_PodmiotID" type="INTEGER" definition="NO_SQL">
+			<description>ID podmiotu</description>
+			<details>Zero jeśli jest to atrybut towaru</details>
+		</column>
+	</view>
+	

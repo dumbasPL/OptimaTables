@@ -1,0 +1,27 @@
+<table name="TraCyklPropKntWzorce">
+		<column name="TrC_Grupa" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="TrC_WzrId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="TrC_PodId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="TrC_PropStatus" type="INTEGER" definition="NOT NULL CONSTRAINT TrC_PropStatus DEFAULT(1)">
+			<description />
+		</column>
+		<column name="TrC_Aktywna" type="INTEGER" definition="CONSTRAINT TrC_Aktywna DEFAULT(1)">
+			<description />
+		</column>
+		<column name="TrC_DataUtw" type="DATETIME" definition="CONSTRAINT DF_TrCProp_DataUtw DEFAULT(GetDate())">
+			<description />
+		</column>
+		<column name="TrC_DataMod" type="DATETIME" definition="CONSTRAINT DF_TrCProp_DataMod DEFAULT(GetDate())">
+			<description />
+		</column>
+		<primaryKey name="TrCProp_Primary" columns="TrC_Grupa, TrC_WzrId, TrC_PodId">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

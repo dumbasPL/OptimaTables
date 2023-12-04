@@ -1,0 +1,61 @@
+<table name="RejestrCzynnosci">
+		<description>Rejestr czynności</description>
+		<column name="RUC_RUCID" type="INTEGER" definition="NOT NULL IDENTITY(1,1)">
+			<description>Id czynności</description>
+		</column>
+		<column name="RUC_Nazwa" type="NVARCHAR(500)" definition="NOT NULL CONSTRAINT DF_RUC_Nazwa DEFAULT('')">
+			<description>Nazwa</description>
+		</column>
+		<column name="RUC_CelPrzetwarzania" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_RUC_CelPrzetwarzania DEFAULT('')">
+			<description>Cel przetwarzania</description>
+		</column>
+		<column name="RUC_KategorieOsob" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Kategorie osób</description>
+		</column>
+		<column name="RUC_KategorieDanychOs" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Kategorie danych osobowych</description>
+		</column>
+		<column name="RUC_KategorieOdbiorcow" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Kategorie odbiorców</description>
+		</column>
+		<column name="RUC_PlanowanyTermin" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Planowany termin</description>
+		</column>
+		<column name="RUC_InformacjeDodatkowe" type="NVARCHAR(MAX)" definition="NOT NULL CONSTRAINT DF_RUC_InformacjeDodatkowea DEFAULT('')">
+			<description>Informacje dodatkowe</description>
+		</column>
+		<column name="RUC_OpeZalID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RUC_OpeModID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUC_StaZalID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RUC_StaModID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RUC_TS_Zal" type="DATETIME" definition=" NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="RUC_TS_Mod" type="DATETIME" definition=" NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+		</column>
+		<column name="RUC_OpeModKod" type="varchar(20)" definition=" NOT NULL">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUC_OpeZalKod" type="varchar(20)" definition=" NOT NULL">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RUC_OpeModNazwisko" type="nvarchar(50)" definition=" NOT NULL">
+			<description>Nazwisko operatora modyfikującego zapi</description>
+		</column>
+		<column name="RUC_OpeZalNazwisko" type="nvarchar(50)" definition=" NOT NULL">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<primaryKey name="PK_RUC_RUCID" columns="RUC_RUCID">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

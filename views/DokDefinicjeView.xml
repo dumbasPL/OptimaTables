@@ -1,0 +1,78 @@
+<view name="DokDefinicjeView">
+		<description>Definicje schematow numeracji dokumentów - view</description>
+		<column name="DDfV_DDfID" type="INTEGER" definition="NO_SQL" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DDfV_Klasa" type="INTEGER" definition="NO_SQL">
+			<description>Predefiniowana klasa dokumentu</description>
+			<details>
+				101 - Ewid.dod. przych. &lt;br&gt; 102 - Ewid.dod. kosztów &lt;br&gt; 201 - Deklaracje,
+				RejestrVAT Zakupu, Wypłata &lt;br&gt; 202 - RejestrVAT sprz., Wpłata &lt;br&gt; 211 - RKB
+				&lt;br&gt; 221- Nota odsetkowa &lt;br&gt; 222 - Ponaglenie zapłaty &lt;br&gt; 223 -
+				Potwierdzenie salda &lt;br&gt; 224 - RKUR &lt;br&gt; 301 - FZ , FZKOR, FZKG, FZ NotaKor
+				&lt;br&gt; 302 - FA, FAKOR &lt;br&gt; 303 - PW, PWKOR, PWAI &lt;br&gt;
+				304 - RW, RWKOR, RW z AI &lt;br&gt; 305 - PA, PAKOR &lt;br&gt; 306 - WZ, WZKOR, WZKK
+				&lt;br&gt; 307 - PZ, PZKOR &lt;br&gt; 308 - RO &lt;br&gt; 309 - ZD &lt;br&gt; 310 - BOM,
+				BOMKOR, BZM &lt;br&gt; 311 - AI &lt;br&gt; 312 - MM &lt;br&gt; 313 - PKA, PKAKOR &lt;br&gt;
+				314 - WKA, WKAKOR &lt;br&gt; 317 - PWP, PWPKOR &lt;br&gt; 318 - RWS, RWSKOR &lt;br&gt; 320 -
+				FPF &lt;br&gt; 321 - FWS &lt;br&gt; 322 - FWS &lt;br&gt; 345 - Tax Free &lt;br&gt; 350 - FRR
+				&lt;br&gt; 400 - Umowa &lt;br&gt; 500 - Bilans otwarcia &lt;br&gt; 600 - Bilans otwarcia,
+				Etat, Inna wypłata, Pożyczka, Umowa zlecenie, Właściciel,Zaliczki &lt;br&gt;650 - Etat
+				korygująca, 700 - Kontakt &lt;br&gt; 800 - Oferta MS Word &lt;br&gt; 900 - Zlecenie
+				serwisowe
+			</details>
+		</column>
+		<column name="DDfV_Symbol" type="VARCHAR(5)" definition="NO_SQL">
+			<description>Symbol definicji dokumentu</description>
+			<details>Symbol uzywany jest w schematach numeracji dokumentów</details>
+		</column>
+		<column name="DDfV_Nazwa" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Nazwa definicji dokumentu</description>
+		</column>
+		<column name="DDfV_Nieaktywna" type="TINYINT" definition="NO_SQL">
+			<description>Czy definicja jest nieaktywna</description>
+		</column>
+		<column name="DDfV_Numeracja" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Schemat numeracji dokumentu</description>
+		</column>
+		<column name="DDfV_SeriaOperatora" type="TINYINT" definition="NO_SQL">
+			<description>Pobierać serię domyślną z operatora</description>
+		</column>
+		<column name="DDfV_KierunekOrg" type="INTEGER" definition="NO_SQL">
+			<description>Funkcja pokazująca kierunek dla defincji dokumentu</description>
+			<details>
+				-1 - rozchód &lt;br&gt;
+				1 - przychód
+			</details>
+		</column>
+		<column name="DDfV_TS_Export" type="DATETIME" definition="NO_SQL">
+			<description>Czas wykonania eksportu</description>
+		</column>
+		<column name="DDfV_ImportAppId" type="VARCHAR(5)" definition="NO_SQL">
+			<description>Identyfikator aplikacji / bazy z której dokonano importu</description>
+		</column>
+		<column name="DDfV_ImportRowId" type="VARCHAR(36)" definition="NO_SQL">
+			<description>Identyfikator wiersza oryginalnego</description>
+		</column>
+		<column name="DDfV_OpeZalID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="DDfV_StaZalId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DDfV_TS_Zal" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="DDfV_OpeModID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="DDfV_StaModId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DDfV_TS_Mod" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+	</view>
+	

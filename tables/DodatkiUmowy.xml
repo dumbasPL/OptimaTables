@@ -1,0 +1,31 @@
+<table name="DodatkiUmowy">
+		<description>Tabela umów wypłacanych z dodatkiem pracownika</description>
+		<column name="DOU_DouId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DOU_DodId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dodatku</description>
+		</column>
+		<column name="DOU_UmwId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator umowy</description>
+		</column>
+		<column name="DOU_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="DOU_Primary" columns="DOU_DouId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DOUDodLink" localColumns="DOU_DodId" refTable="Dodatki" refColumns="DOD_DodId" deleteOption="CASCADE">
+			<description>Relacja CDN.Dodatki:CDN.DodatkiUmowy (1:MANY)</description>
+		</foreignKey>
+		<index name="DOUDodLink" options="NONCLUSTERED" fields="DOU_DodId">
+			<description>Klucz obcy dodatku</description>
+		</index>
+		<foreignKey name="FK_DOUUmwLink" localColumns="DOU_UmwId" refTable="Umowy" refColumns="UMW_UmwId">
+			<description>Relacja CDN.Umowy:CDN.DodatkiUmowy (MANY:MANY)</description>
+		</foreignKey>
+		<index name="DOUUmwLink" options="NONCLUSTERED" fields="DOU_UmwId">
+			<description>Klucz obcy umowy</description>
+		</index>
+	</table>
+	

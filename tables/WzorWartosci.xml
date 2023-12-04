@@ -1,0 +1,23 @@
+<table name="WzorWartosci">
+		<description>Tabela parametrów dla algorytmu 12</description>
+		<column name="WZW_WzwId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WZW_TwpId" type="INTEGER" />
+		<column name="WZW_Symbol" type="VARCHAR(128)" definition="NOT NULL">
+			<description>Symbol</description>
+		</column>
+		<column name="WZW_Wzor" type="NVARCHAR(256)" definition="NOT NULL" />
+		<column name="WZW_Nieaktywny" type="SMALLINT" definition="NOT NULL" />
+		<column name="WZW_Dodatkowe" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="WZW_WzrId" type="INTEGER" />
+		<primaryKey name="WZW_Primary" columns="WZW_WzwId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_WZWTypWyplata" localColumns="WZW_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId" deleteOption="CASCADE">
+			<description>Relacja CDN.WzorWartosci:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<index name="WZWWzrId" options="NONCLUSTERED" fields="WZW_WzrId" />
+		<index name="WZWTypWyplata" options="NONCLUSTERED" fields="WZW_TwpId" />
+	</table>
+	

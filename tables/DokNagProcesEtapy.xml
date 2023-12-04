@@ -1,0 +1,42 @@
+<table name="DokNagProcesEtapy">
+		<description>Tabela drzewiastej struktury etapów obiegu dla dokumentu</description>
+		<column name="DnPr_DnPrID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DnPr_DoNID" type="INTEGER">
+			<description>Identyfikator dokumentu</description>
+		</column>
+		<column name="DnPr_Typ" type="INTEGER">
+			<description>Typ dokumentu</description>
+			<details>
+				1 - w bazie głównej &lt;br&gt;
+				2 - w bazie konfiguracyjnej
+			</details>
+		</column>
+		<column name="DnPr_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa</description>
+		</column>
+		<column name="DnPr_PoprzedniLp" type="INTEGER" definition="NOT NULL">
+			<description>Lp etapu poprzedniego</description>
+		</column>
+		<column name="DnPr_Poziom" type="SMALLINT" definition="NOT NULL">
+			<description>Poziom etapu</description>
+			<details>
+				1- etap główny &lt;br&gt;
+				2- etap powiązany
+			</details>
+		</column>
+		<primaryKey name="DnPr_Primary" columns="DnPr_DnPrID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DnPrDokNag" localColumns="DnPr_DoNID" refTable="DokNag" refColumns="DoN_DoNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DokNagProcesEtapy:CDN.DokNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DnPrLp" options="UNIQUE NONCLUSTERED" fields="DnPr_DoNID ,DnPr_Lp ,DnPr_Poziom ,DnPr_DnPrID">
+			<description>Wg Lp</description>
+		</index>
+		<index name="DnPrDokNag" options="UNIQUE NONCLUSTERED" fields="DnPr_DoNID ,DnPr_DnPrID">
+			<description>Klucz obcy do nagłówka</description>
+		</index>
+	</table>
+	

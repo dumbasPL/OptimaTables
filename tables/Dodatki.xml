@@ -1,0 +1,43 @@
+<table name="Dodatki">
+		<description>Tabela dodatków płacowych pracownika</description>
+		<column name="DOD_DodId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DOD_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika posiadającego dany dodatek</description>
+		</column>
+		<column name="DOD_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Opis dodatku</description>
+		</column>
+		<column name="DOD_RdzId" type="INTEGER">
+			<description>Identyfikator członka rodziny</description>
+		</column>
+		<column name="DOD_Rodzaj" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj dodatku</description>
+		</column>
+		<column name="DOD_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DOD_Nieaktywny DEFAULT(0)">
+			<description>Dodatek nieaktywny</description>
+		</column>
+		<column name="DOD_Umowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DOD_Umowa DEFAULT(0)">
+			<description>Dodatek wypłacany z konkretną umową (powiązany)</description>
+		</column>
+		<column name="DOD_WliczChorWOkresie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DOD_WliczChorWOkresie DEFAULT(0)">
+			<description>Dodatek wliczany do podst. chor. tylko w okresie wypłacania</description>
+		</column>
+		<column name="DOD_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="DOD_Primary" columns="DOD_DodId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DODPraLink" localColumns="DOD_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.Dodatki:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="DODPraLink" options="NONCLUSTERED" fields="DOD_PraId">
+			<description>Klucz obcy pracownika</description>
+		</index>
+		<index name="DODRdzLink" options="NONCLUSTERED" fields="DOD_RdzId">
+			<description>Link do członka rodziny</description>
+		</index>
+	</table>
+	

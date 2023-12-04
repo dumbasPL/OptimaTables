@@ -1,0 +1,49 @@
+<table name="DeklKedu">
+		<description>Tabela deklaracji</description>
+		<column name="DKK_DkkId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DKK_Data" type="DATETIME" definition="NOT NULL" />
+		<column name="DKK_Nazwa" type="VARCHAR(72)" definition="NOT NULL" hash="1" />
+		<column name="DKK_Opis" type="NVARCHAR(254)" definition="NOT NULL" />
+		<column name="DKK_Zablokowana" type="TINYINT" definition="NOT NULL" />
+		<column name="DKK_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="DKK_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DKK_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DKK_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="DKK_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DKK_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DKK_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DKK_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DKK_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DKK_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DKK_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DKK_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DKK_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DKK_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="DKK_Primary" columns="DKK_DkkId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DkkNazwa" options="UNIQUE NONCLUSTERED" fields="DKK_Nazwa">
+			<description>Klucz wg nazwy</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,54 @@
+<table name="BnkZapisyCDCSEPAInfo">
+		<description>Tabela informacji CDC-SEPA związanych z zapisem KB</description>
+		<column name="BZpCSI_BZpCSIID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="BZpCSI_BZpID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator Zapisy</description>
+			<details>Klucz obcy do tabeli cdn.BnkZapisy</details>
+		</column>
+		<column name="BZpCSI_Sekcja" type="TINYINT" definition="NOT NULL">
+			<description>Numer sekcji: 1 - Zleceniodawca, 2 - Pierwotny zleceniodawca, 3 - Finalny
+				odbiorca</description>
+		</column>
+		<column name="BZpCSI_OsobaTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ osoby: 1 - Prawna, 2 - Fizyczna</description>
+		</column>
+		<column name="BZpCSI_Nazwa" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Nazwa</description>
+		</column>
+		<column name="BZpCSI_BICBEI" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>BIC/BEI</description>
+		</column>
+		<column name="BZpCSI_Ident" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Identyfikator</description>
+		</column>
+		<column name="BZpCSI_IdentTyp" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Typ identyfikatora</description>
+		</column>
+		<column name="BZpCSI_IdentWyst" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Wystawca identyfikatora</description>
+		</column>
+		<column name="BZpCSI_DataUr" type="DATETIME">
+			<description>Data urodzenia (osoba fizyczna)</description>
+		</column>
+		<column name="BZpCSI_Kraj" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Kraj (osoba fizyczna)</description>
+		</column>
+		<column name="BZpCSI_Wojew" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo (osoba fizyczna)</description>
+		</column>
+		<column name="BZpCSI_Miasto" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Miejscowość (osoba fizyczna)</description>
+		</column>
+		<primaryKey name="BZpCSI_Primary" columns="BZpCSI_BZpCSIID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BZpCSIBZp" localColumns="BZpCSI_BZpID" refTable="BnkZapisy" refColumns="BZp_BZpID" deleteOption="CASCADE">
+			<description>Relacja CDN.BnkZapisyCDCSEPAInfo:CDN.BnkZapisy (MANY:1)</description>
+		</foreignKey>
+		<index name="BZpCSISekcja" options="UNIQUE NONCLUSTERED" fields="BZpCSI_BZpID, BZpCSI_Sekcja">
+			<description>Wg zapisu i sekcji</description>
+		</index>
+	</table>
+	

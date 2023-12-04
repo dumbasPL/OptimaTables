@@ -1,0 +1,26 @@
+<table name="KragKosztElem">
+		<description>Eleemnty definicji kręgów kosztów</description>
+		<column name="KKE_KKEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="KKE_KKNId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka</description>
+		</column>
+		<column name="KKE_Konto" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Symbol konta księgowego</description>
+		</column>
+		<column name="KKE_Strona" type="SMALLINT" definition="NOT NULL">
+			<description>Konto źródłowe lub docelowe</description>
+			<details>1 oznacza konto źródłowe, 2 konto docelowe</details>
+		</column>
+		<primaryKey name="KKE_Primary" columns="KKE_KKEId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KKENaglowek" localColumns="KKE_KKNId" refTable="KragKosztNag" refColumns="KKN_KKNId" deleteOption="CASCADE">
+			<description>Relacja CDN.KragKosztElem:CDN.KragKosztNag (MANY:1)</description>
+		</foreignKey>
+		<index name="KKENaglowek" options="UNIQUE NONCLUSTERED" fields="KKE_KKNId ,KKE_Strona ,KKE_Konto">
+			<description>Klucz obcy do nagłówka</description>
+		</index>
+	</table>
+	

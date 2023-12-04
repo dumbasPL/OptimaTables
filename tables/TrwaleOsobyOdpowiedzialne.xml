@@ -1,0 +1,36 @@
+<table name="TrwaleOsobyOdpowiedzialne">
+		<description>Osoby odpowiedzialne za środek w ujęciu historycznym</description>
+		<details />
+		<column name="SrOO_SrOOID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrOO_SrTID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator środka trwałego</description>
+		</column>
+		<column name="SrOO_DataOd" type="DATETIME">
+			<description>Data początkowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="SrOO_DataDo" type="DATETIME">
+			<description>Data końcowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="SrOO_PrcID" type="INTEGER">
+			<description>ID pracownika odpowiedzialnego</description>
+		</column>
+		<column name="SrOO_PrcImieNazwisko" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Imię i nazwisko osoby odpowiedzialnej</description>
+		</column>
+		<primaryKey name="SrOOPrimary" columns="SrOO_SrOOID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="SrOOSrT" options="UNIQUE NONCLUSTERED" fields="SrOO_SrTID, SrOO_DataOd">
+			<description>Wg środka trwałego</description>
+		</index>
+		<foreignKey name="FK_SrOOSrT" localColumns="SrOO_SrTID" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleOsobyOdpowiedzialne:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

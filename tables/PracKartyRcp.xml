@@ -1,0 +1,21 @@
+<table name="PracKartyRcp">
+		<description>Lista kart RCP pracownika</description>
+		<column name="PKR_PkrId" type="INTEGER" definition="IDENTITY(1,1)" />
+		<column name="PKR_PrcId" type="INTEGER" definition="NOT NULL" />
+		<column name="PKR_Numer" type="NVARCHAR(20)" definition="NOT NULL" />
+		<column name="PKR_OkresOd" type="DATETIME" definition="NOT NULL" />
+		<column name="PKR_OkresDo" type="DATETIME" definition="NOT NULL" />
+		<primaryKey name="PKR_Primary" columns="PKR_PkrId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PKRPrcId" localColumns="PKR_PrcId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracKartyRcp:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="PKRNazwa" options="UNIQUE NONCLUSTERED" fields="PKR_PrcId ,PKR_Numer ,PKR_OkresOd">
+			<description>Indeks po numerze</description>
+		</index>
+		<index name="PKRPrcId" options="NONCLUSTERED" fields="PKR_PrcId">
+			<description>Klucz obcy do pracownika</description>
+		</index>
+	</table>
+	

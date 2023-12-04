@@ -1,0 +1,19 @@
+<table name="RegulyRcp">
+		<description>Lista reguł dotycząca importów danych z czytników RCP</description>
+		<column name="RRG_RrgId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Klucz główny</description>
+		</column>
+		<column name="RRG_Opis" type="NVARCHAR(200)" definition="NOT NULL" />
+		<column name="RRG_IloscMinZrodlo" type="INTEGER" definition="NOT NULL" />
+		<column name="RRG_Akcja" type="TINYINT" definition="NOT NULL" />
+		<column name="RRG_MetodaModyf" type="INTEGER" definition="NOT NULL" />
+		<column name="RRG_IloscMinCel" type="INTEGER" definition="NOT NULL" />
+		<column name="RRG_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_RRG_ZjeId default('')" />
+		<index name="RRGZjeLink" options="NONCLUSTERED" fields="RRG_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+		<primaryKey name="RRG_Primary" columns="RRG_RrgId">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

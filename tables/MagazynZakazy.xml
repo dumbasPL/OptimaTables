@@ -1,0 +1,22 @@
+<table name="MagazynZakazy">
+		<description>Zakazy dostępu do magazynu</description>
+		<column name="MaZ_MaZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="MaZ_MagId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="MaZ_OpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<primaryKey name="MaZ_Primary" columns="MaZ_MaZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_MaZMagazyn" localColumns="MaZ_MagId" refTable="Magazyny" refColumns="Mag_MagId" deleteOption="CASCADE">
+			<description>Relacja CDN.MagazynZakazy:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<index name="MaZMagazyn" options="UNIQUE NONCLUSTERED" fields="MaZ_MagId ,MaZ_OpeId">
+			<description>Według magazynu</description>
+		</index>
+	</table>
+	

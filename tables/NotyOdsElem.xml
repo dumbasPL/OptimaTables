@@ -1,0 +1,73 @@
+<table name="NotyOdsElem">
+		<description>Tabela z elementami not odsetkowych</description>
+		<column name="NOE_NOEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="NOE_NONId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka dokumentu</description>
+		</column>
+		<column name="NOE_BZdId" type="INTEGER">
+			<description>Klucz obcy do tabeli BnkZdarzenia</description>
+		</column>
+		<column name="NOE_BRKId" type="INTEGER">
+			<description>Klucz obcy do tabeli BnkRozKwoty</description>
+		</column>
+		<column name="NOE_Numer" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>Numer dokumentu źródłowego</description>
+		</column>
+		<column name="NOE_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="NOE_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="NOE_DataOd" type="DATETIME" definition="NOT NULL">
+			<description>Data od której są naliczane odsetki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="NOE_DataDo" type="DATETIME" definition="NOT NULL">
+			<description>Data do której są naliczane odsetki</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="NOE_Podstawa" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa do naliczania odsetek (w walucie)</description>
+		</column>
+		<column name="NOE_OdsetkiStopa" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Stopa procentowa odsetek</description>
+		</column>
+		<column name="NOE_OdsetkiKwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość naliczonych odsetek (w walucie)</description>
+		</column>
+		<primaryKey name="NOE_Primary" columns="NOE_NOEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_NOENaglowek" localColumns="NOE_NONId" refTable="NotyOdsNag" refColumns="NON_NONId" deleteOption="CASCADE">
+			<description>Relacja CDN.NotyOdsElem:CDN.NotyOdsNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_NOEZdarzenie" localColumns="NOE_BZdId" refTable="BnkZdarzenia" refColumns="BZd_BZdId">
+			<description>Relacja CDN.NotyOdsElem:CDN.BnkZdarzenia (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_NOERozliczenie" localColumns="NOE_BRKId" refTable="BnkRozKwoty" refColumns="BRK_BRKID">
+			<description>Relacja CDN.NotyOdsElem:CDN.BnkRozKwoty (MANY:1)</description>
+		</foreignKey>
+		<index name="NOENaglowek" options="UNIQUE NONCLUSTERED" fields="NOE_NONId ,NOE_NOEId">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Klucz obcy do tabeli NotyOdsNag</details>
+		</index>
+		<index name="NOEZdarzenie" options="NONCLUSTERED" fields="NOE_BZdId">
+			<description>Klucz obcy do tabeli BnkZdarzenia</description>
+		</index>
+		<index name="NOERozliczenie" options="NONCLUSTERED" fields="NOE_BRKId">
+			<description>Klucz obcy do tabeli BnkRozKwoty</description>
+		</index>
+	</table>
+	

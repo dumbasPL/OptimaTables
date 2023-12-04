@@ -1,0 +1,250 @@
+<table name="ZapisyKPR">
+		<description>Zapisy księgi przychodów i rozchodów</description>
+		<column name="KPR_KPRID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="KPR_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Zapis w buforze</description>
+		</column>
+		<column name="KPR_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc zapisu</description>
+			<details>
+				Rok i miesiąc wpisu dokumentu, obliczany jako:
+				100 * YEAR(DataOpeData) + MONTH(DataOpeData)
+			</details>
+		</column>
+		<column name="KPR_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa zapisu</description>
+		</column>
+		<column name="KPR_OrgId" type="INTEGER">
+			<description>Identyfikator zapisu oryginalnego (dla zapisów związanych)</description>
+		</column>
+		<column name="KPR_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data zdarzenia gospodarczego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KPR_Dokument" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu księgowego</description>
+		</column>
+		<column name="KPR_Korekta" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KPR_Korekta default(0)">
+			<description>Wskazuje, czy dokument jest korektą</description>
+			<details>
+				0 - dokument nie jest korektą
+				1 - korekta miesięczna
+				2 - korekta kwartalna
+			</details>
+		</column>
+		<column name="KPR_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - Kontrahenci;
+				2 - BnkNazwy;
+				3 - Pracownicy;
+				4 - WspolNag;
+				5 - Urzedy
+			</details>
+		</column>
+		<column name="KPR_PodID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kontrahenta</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="KPR_KntNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy kontrahenta</description>
+		</column>
+		<column name="KPR_KntNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy kontrahenta</description>
+		</column>
+		<column name="KPR_KntNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy kontrahenta</description>
+		</column>
+		<column name="KPR_KntKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj zamieszkania (siedziby) kontrahenta</description>
+		</column>
+		<column name="KPR_KntWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="KPR_KntPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="KPR_KntGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="KPR_KntUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="KPR_KntNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="KPR_KntNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="KPR_KntMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość kontrahenta</description>
+		</column>
+		<column name="KPR_KntKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy kontrahenta</description>
+		</column>
+		<column name="KPR_KntPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="KPR_KntAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Druga linia adresu kontrahenta (państwo)</description>
+		</column>
+		<column name="KPR_KntNipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="KPR_KntNipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP kontrahenta</description>
+		</column>
+		<column name="KPR_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) dokumentu może zostać wpisany "z ręki" (KPR:KatId = 0) lub zostać pobrany z
+				listy kategorii (KPR:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="KPR_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="KPR_Sprzedaz" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość sprzedanych towarów i usług</description>
+		</column>
+		<column name="KPR_Pozostale" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Pozostałe przychody</description>
+		</column>
+		<column name="KPR_Towary" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Zakup towarów handlowych</description>
+		</column>
+		<column name="KPR_Uboczne" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty uboczne zakupu</description>
+		</column>
+		<column name="KPR_Reklama" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty reprezentacji i reklamy</description>
+		</column>
+		<column name="KPR_Wynagrodz" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wynagrodzenia w gotówce i w naturze</description>
+		</column>
+		<column name="KPR_Inne" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Pozostałe wydatki</description>
+		</column>
+		<column name="KPR_Zaszlosci" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kolumna 16 księgi</description>
+		</column>
+		<column name="KPR_Koszty_BiR" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_KPR_Koszty_BiR DEFAULT(0)">
+			<description>Kolumna Kosztow B+R</description>
+		</column>
+		<column name="KPR_OpisKosztow" type="NVARCHAR(254)" definition="NOT NULL CONSTRAINT DF_KPR_OpisKosztow DEFAULT('')">
+			<description>Opis kosztów</description>
+		</column>
+		<column name="KPR_Uwagi" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Uwagi</description>
+		</column>
+		<column name="KPR_Skreslony" type="TINYINT" definition="NOT NULL">
+			<description>Znacznik skreślenia zapisu</description>
+		</column>
+		<column name="KPR_Zrodlo" type="TINYINT" definition="NOT NULL">
+			<description>Znacznik pochodzenia zapisu</description>
+			<details>
+				Wskazuje na źródło pochodzenia zapisu. Jeśli KPR_Zrodlo&lt;&gt;0, to zapis został
+				zaksięgowany z ewidencji źródłowej, wg powiązania:&lt;br&gt;
+				2 - VatNag (VaN_KPRId=KPR_KPRId);&lt;br&gt;
+				3 - AutoRozlicz (AuR_KPRId=KPR_KPRId);&lt;br&gt;
+				4 - RemanentNag (ReN_KPRId=KPR_KPRId);&lt;br&gt;
+				5 - WyplatyNag (WyN_KPRId=KPR_KPRId);&lt;br&gt;
+				7 - TrwaleHist (SrH_KPRId=KPR_KPRId);&lt;br&gt;
+				10 - ListyPlac (LPL_KPRId=KPR_KPRId);&lt;br&gt;
+				12 - EwidDodNag (EDN_KPRId=KPR_KPRId);&lt;br&gt;
+				13 - BnkRozKwoty - księgowanie różnic kursowych (BRK_KPRId=KPR_KPRId);&lt;br&gt;
+
+				Uwaga: dla Zrodla = 3, automatycznie ustawiane jest VaN_KPRId dla zapisu korekcyjnego VAT
+			</details>
+		</column>
+		<column name="KPR_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="KPR_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="KPR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KPR_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KPR_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="KPR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KPR_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KPR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KPR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="KPR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KPR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="KPR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KPR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="KPR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KPR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="KPR_OpisKorekta" type="NVARCHAR(254)">
+			<description>Opis dokumentów korekcyjnych</description>
+		</column>
+		<column name="KPR_KorektaZaplaconych" type="TINYINT" definition="NOT NULL constraint DF_KPR_KorektaZaplaconych default(0)">
+			<description>Opis dokumentów korekcyjnych</description>
+		</column>
+		<column name="KPR_SpisZNatury" type="INTEGER" definition="NOT NULL constraint DF_KPR_SpisZNatury default(0)">
+			<description>Liczba uwzględnień w spisie z natury</description>
+		</column>
+		<column name="KPR_DataGosp" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KPR_DataGosp default(-2)">
+			<description>Data operacji gospodarczej</description>
+		</column>
+		<column name="KPR_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="KPR_ZakLp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_KPR_ZakLP default(0)">
+			<description>Liczba porządkowa zapisu dla zakładu</description>
+		</column>
+		<primaryKey name="KPR_Primary" columns="KPR_KPRID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KPRKontrah" localColumns="KPR_PodID,KPR_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.ZapisyKPR:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KPRKategoria" localColumns="KPR_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.ZapisyKPR:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="KPROryginal" options="NONCLUSTERED" fields="KPR_OrgId">
+			<description>Klucz obcy do zapisu oryginalnego</description>
+		</index>
+		<index name="KPRLp" options="UNIQUE NONCLUSTERED" fields="KPR_Bufor ,KPR_RokMies ,KPR_Lp ,KPR_KPRID">
+			<description>Wg liczby porządkowej w księdze</description>
+		</index>
+		<index name="KPRChronoBuf" options="UNIQUE NONCLUSTERED" fields="KPR_Bufor ,KPR_DataOpe ,KPR_KPRID">
+			<description>Chronologiczny, w ramach księgi / bufora</description>
+		</index>
+		<index name="KPRChrono" options="UNIQUE NONCLUSTERED" fields="KPR_DataOpe ,KPR_KPRID">
+			<description>Chronologiczny dla wszystkich zapisów</description>
+		</index>
+		<index name="KPRKontrah" options="UNIQUE NONCLUSTERED" fields="KPR_PodID ,KPR_PodmiotTyp ,KPR_DataOpe ,KPR_KPRID">
+			<description>Wg kontrahenta</description>
+		</index>
+		<index name="KPRKategoria" options="UNIQUE NONCLUSTERED" fields="KPR_KatID ,KPR_DataOpe ,KPR_KPRID">
+			<description>Wg kategorii</description>
+		</index>
+	</table>
+	

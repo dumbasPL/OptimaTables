@@ -1,0 +1,133 @@
+<table name="PieczatkiJS">
+		<description>Historia pieczątki jednostki samorządowej</description>
+		<column name="PCJS_PCJSID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PCJS_Aktualna" type="COMPUTED|TINYINT" definition="CASE WHEN PCJS_DataDo = CONVERT(DATETIME, '2999-12-31', 120) THEN 1 ELSE 0 END">
+			<description>Identyfikator podmiotu PUESC</description>
+		</column>
+		<column name="PCJS_DataOd" type="DATETIME" definition="NOT NULL">
+			<description>Początek okresu obowiązywania</description>
+		</column>
+		<column name="PCJS_DataDo" type="DATETIME" definition="NOT NULL">
+			<description>Koniec okresu obowiązywania</description>
+		</column>
+		<column name="PCJS_Nazwa1" type="NVARCHAR(50)" hash="1">
+			<description>Nazwa firmy - pierwsza linia</description>
+		</column>
+		<column name="PCJS_Nazwa2" type="NVARCHAR(50)" hash="1">
+			<description>Nazwa firmy - druga linia</description>
+		</column>
+		<column name="PCJS_Nazwa3" type="NVARCHAR(512)" hash="1">
+			<description>Nazwa firmy - trzecia linia</description>
+		</column>
+		<column name="PCJS_NipKraj" type="VARCHAR(2)">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="PCJS_NipE" type="NVARCHAR(20)" hash="1">
+			<description>NIP firmy</description>
+		</column>
+		<column name="PCJS_Regon" type="NVARCHAR(20)" hash="1">
+			<description>Regon firmy</description>
+		</column>
+		<column name="PCJS_Kraj" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Kraj</description>
+		</column>
+		<column name="PCJS_KrajISO" type="NVARCHAR(2)">
+			<description>Adres firmy - Kod ISO kraju</description>
+		</column>
+		<column name="PCJS_Wojewodztwo" type="NVARCHAR(40)">
+			<description>Adres firmy - Województwo</description>
+		</column>
+		<column name="PCJS_Powiat" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Powiat</description>
+		</column>
+		<column name="PCJS_Gmina" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Gmina</description>
+		</column>
+		<column name="PCJS_KodGminy" type="VARCHAR(7)" hash="1">
+			<description>Adres firmy - Kod gminy</description>
+		</column>
+		<column name="PCJS_Miasto" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Miasto</description>
+		</column>
+		<column name="PCJS_Ulica" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Ulica</description>
+		</column>
+		<column name="PCJS_NrDomu" type="NVARCHAR(10)">
+			<description>Adres firmy - Numer domu</description>
+		</column>
+		<column name="PCJS_NrLokalu" type="NVARCHAR(10)">
+			<description>Adres firmy - Numer lokalu</description>
+		</column>
+		<column name="PCJS_KodP" type="VARCHAR(10)" hash="1">
+			<description>Adres firmy - Kod pocztowy</description>
+		</column>
+		<column name="PCJS_Poczta" type="NVARCHAR(40)" hash="1">
+			<description>Adres firmy - Poczta</description>
+		</column>
+		<column name="PCJS_UlicaNrDomLok" type="COMPUTED|NVARCHAR(64)" definition="CASE WHEN IsNull(PCJS_Ulica, '')&lt;&gt;'' THEN (CASE WHEN IsNull(PCJS_NrLokalu, '')&lt;&gt;'' THEN PCJS_Ulica + ' ' + IsNull(PCJS_NrDomu, '') + '/' + PCJS_NrLokalu ELSE PCJS_Ulica + ' ' + IsNull(PCJS_NrDomu, '') END) ELSE (CASE WHEN IsNull(PCJS_NrLokalu, '')&lt;&gt;'' THEN IsNull(PCJS_NrDomu, '') + '/' + PCJS_NrLokalu ELSE IsNull(PCJS_NrDomu, '') END) END">
+			<description>Ulica + numer domu + numer lokalu</description>
+		</column>
+		<column name="PCJS_Telefon" type="VARCHAR(20)" hash="1">
+			<description>Numer telefonu</description>
+		</column>
+		<column name="PCJS_Email" type="VARCHAR(127)" hash="1">
+			<description>Adres email poczty elektronicznej</description>
+		</column>
+		<column name="PCJS_URL" type="VARCHAR(254)" hash="1">
+			<description>Adres URL strony internetowej</description>
+		</column>
+		<column name="PCJS_AktDok" type="TINYINT">
+			<description>Czy aktualizować dokumenty (pole techniczne)</description>
+		</column>
+		<column name="PCJS_TS_Export" type="DATETIME">
+			<description>TimeStamp wykonania eksportu</description>
+		</column>
+		<column name="PCJS_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="PCJS_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="PCJS_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora dodającego zapis</description>
+		</column>
+		<column name="PCJS_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PCJS_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp dodania zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PCJS_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PCJS_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PCJS_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PCJS_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PCJS_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PCJS_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PCJS_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PCJS_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PCJS_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PCJS_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PCJS_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="PCJS_Primary" columns="PCJS_PCJSID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="PCJSChron" options="NONCLUSTERED" fields="PCJS_DataOd" />
+		<index name="PCJSGUID" options="UNIQUE NONCLUSTERED" fields="PCJS_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

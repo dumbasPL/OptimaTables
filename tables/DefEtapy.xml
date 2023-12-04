@@ -1,0 +1,36 @@
+<table name="DefEtapy">
+		<description>Definicje etapów realizacji zlecenia</description>
+		<column name="DEt_DEtId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="DEt_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ etapu</description>
+			<details>
+				1 - status &lt;br&gt;
+				2 - etap dla zadania/kontaktu w CRM
+			</details>
+		</column>
+		<column name="DEt_Lp" type="INTEGER">
+			<description>Pozycja etapu</description>
+		</column>
+		<column name="DEt_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod etapu</description>
+		</column>
+		<column name="DEt_Opis" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="DEt_CzyData" type="TINYINT" definition="NOT NULL">
+			<description>Czy do tego etapu jest przypisana data</description>
+			<details>
+				0 - data nie jest przypisana
+				1 - data jest przypisana
+			</details>
+		</column>
+		<primaryKey name="DEt_Primary" columns="DEt_DEtId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DEtKod" options="UNIQUE NONCLUSTERED" fields="DEt_Typ ,DEt_Kod">
+			<description>Wg kodu definicji</description>
+		</index>
+	</table>
+	

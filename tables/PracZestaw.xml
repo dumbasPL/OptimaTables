@@ -1,0 +1,85 @@
+<table name="PracZestaw">
+		<description>Zestawienia czasu pracy</description>
+		<column name="PZE_PzeId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PZE_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PZE_Tryb" type="TINYINT">
+			<details>
+				0 – zestawienie podstawowe (standard)
+				1 - anulowane
+				2 – korygujące
+			</details>
+		</column>
+		<column name="PZE_ParentId" type="INTEGER">
+			<details>&lt;&gt; 0 - pojawia się w zestawieniu korygującym (PZE_Tryb=2) i wskazuje na
+				anulowane zestawienie (PZE_PzeId)</details>
+		</column>
+		<column name="PZE_OkresOd" type="DATETIME" definition="NOT NULL">
+			<description>Początkowa data aktualności (rekordu) pracownika</description>
+		</column>
+		<column name="PZE_OkresDo" type="DATETIME" definition="NOT NULL">
+			<description>Końcowa data aktualności (rekordu) pracownika</description>
+		</column>
+		<column name="PZE_Ilosc" type="INTEGER" definition="NOT NULL">
+			<description>Ilość przepracowanych dni</description>
+		</column>
+		<column name="PZE_Czas" type="DATETIME" definition="NOT NULL" />
+		<column name="PZE_CzasNoc" type="DATETIME" definition="NOT NULL" />
+		<column name="PZE_CzasWolne" type="DATETIME" definition="NOT NULL" />
+		<column name="PZE_CzasSW" type="DATETIME" definition="NOT NULL" />
+		<column name="PZE_Nadgodziny50" type="DATETIME" definition="NOT NULL" />
+		<column name="PZE_Nadgodziny100" type="DATETIME" definition="NOT NULL" />
+		<column name="PZE_NadgodzinySW" type="DATETIME" definition="NOT NULL" />
+		<column name="PZE_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PZE_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PZE_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PZE_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PZE_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PZE_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PZE_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PZE_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PZE_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PZE_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PZE_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PZE_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PZE_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PZE_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="PZE_Zrodlo" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PZE_Zrodlo DEFAULT(0)" />
+		<column name="PZE_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PZE_Primary" columns="PZE_PzeId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PZEPraLink" localColumns="PZE_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracZestaw:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="PZEPraLink" options="NONCLUSTERED" fields="PZE_PraId ,PZE_OkresOd">
+			<description>Iindeks po id pracownika</description>
+		</index>
+		<index name="KeyParentId" options="NONCLUSTERED" fields="PZE_ParentId">
+			<description>Relacja do zestawienia anulowanego</description>
+		</index>
+	</table>
+	

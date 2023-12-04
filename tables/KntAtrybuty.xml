@@ -1,0 +1,61 @@
+<table name="KntAtrybuty">
+		<description>Lista atrybutów kontrahentów</description>
+		<column name="KnA_KnAId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="KnA_DeAId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator definicji</description>
+			<details>Klucz obcy do tabeli DefAtrybuty</details>
+		</column>
+		<column name="KnA_PodmiotTyp" type="SMALLINT" filterVisible="false">
+			<description>Typ podmiotu (dla atrybutów kontrtahentów)</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId: &lt;br&gt;
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="KnA_PodmiotId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>Klucz obcy do tabel Kontrahenci, BnkNazwy, PracKod, Urzedy (zaleznie od PodmiotTyp)</details>
+		</column>
+		<column name="KnA_WartoscTxt" type="NVARCHAR(1024)" definition="NOT NULL" filterVisible="false">
+			<description>Wartosc atrybutu</description>
+		</column>
+		<column name="KnA_CzyKopiowac" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy atrybut ma być kopiowany do opisu na dokumentach</description>
+		</column>
+		<column name="KnA_CzyKod" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy doklejać kod atrybutu do opisu</description>
+		</column>
+		<column name="KnA_CzyPrzenosic" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy przenosić kod na transakcje</description>
+		</column>
+		<column name="KnA_CzyDrukowac" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy drukować kod na transakcjach</description>
+		</column>
+		<column name="KnA_CzyKopiowacDoVAT" type="TINYINT" definition="NOT NULL" filterVisible="false">
+			<description>Czy kopiowac do rejestru VAT</description>
+		</column>
+		<primaryKey name="KnA_Primary" columns="KnA_KnAId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KnAPodmiot" localColumns="KnA_PodmiotId,KnA_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp" deleteOption="CASCADE">
+			<description>Relacja CDN.KntAtrybuty:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KnADefAtrybut" localColumns="KnA_DeAId" refTable="DefAtrybuty" refColumns="DeA_DeAId" deleteOption="CASCADE">
+			<description>Relacja CDN.KntAtrybuty:CDN.DefAtrybuty (MANY:1)</description>
+		</foreignKey>
+		<index name="KnAPodmiot" options="NONCLUSTERED" fields="KnA_PodmiotId ,KnA_PodmiotTyp">
+			<description>Klucz obcy do podmiotów</description>
+		</index>
+		<index name="KnADefAtrybut" options="NONCLUSTERED" fields="KnA_DeAId">
+			<description>Klucz obcy do definicji atrybutu</description>
+		</index>
+		<index name="KnADefAtrybutPodmiot" options="NONCLUSTERED" fields="KnA_DeAId, KnA_PodmiotId, KnA_PodmiotTyp">
+			<description>Indeks dla listy kontrahentów - na potrzeby kolumn z wartościami atrybutów</description>
+		</index>
+	</table>
+	

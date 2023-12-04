@@ -1,0 +1,84 @@
+<table name="RejestracjaZgodTresc">
+		<description>Treści zgód</description>
+		<column name="RZT_RZTId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RZT_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Nieaktywna</description>
+		</column>
+		<column name="RZT_ParentId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_RZT_ParentId DEFAULT(0)">
+			<description>Id aktualizowanej zgody</description>
+		</column>
+		<column name="RZT_Tytul" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Tytuł</description>
+		</column>
+		<column name="RZT_Tresc" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Treść</description>
+		</column>
+		<column name="RZT_ObowiazujeOd" type="DATETIME" definition="NOT NULL">
+			<description>Data od której obowiązuje</description>
+		</column>
+		<column name="RZT_RZKID" type="INTEGER" definition="NOT NULL">
+			<description>Kategoria zgody</description>
+		</column>
+		<column name="RZT_EMAIL" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu email</description>
+		</column>
+		<column name="RZT_SMS" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu sms</description>
+		</column>
+		<column name="RZT_Telefon" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu telefon</description>
+		</column>
+		<column name="RZT_List" type="TINYINT" definition="NOT NULL">
+			<description>Forma kontaktu list</description>
+		</column>
+		<column name="RZT_GuidGlowny" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator</description>
+		</column>
+		<column name="RZT_GuidVer" type="UNIQUEIDENTIFIER">
+			<description>Unikalny identyfikator versji</description>
+		</column>
+		<column name="RZT_Wersja" type="INTEGER" definition="NOT NULL">
+			<description>Wersja</description>
+		</column>
+		<column name="RZT_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RZT_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RZT_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RZT_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RZT_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RZT_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RZT_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RZT_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RZT_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RZT_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="RZT_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RZT_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RZT_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RZT_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="RZT_Primary" columns="RZT_RZTId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_RZTRZKID" localColumns="RZT_RZKID" refTable="RejestracjaZgodKategorie" refColumns="RZK_RZKID">
+			<description>Relacja CDN.RejestracjaZgodKategorie:CDN.RejestracjaZgodTresc (1:MANY)</description>
+		</foreignKey>
+	</table>
+	

@@ -1,0 +1,40 @@
+<table name="DziennikZakazy">
+		<description>Zakazy dostępu do dzienników cząstkowych</description>
+		<column name="DzZ_DzZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DzZ_DziId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dziennika</description>
+		</column>
+		<column name="DzZ_OpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<column name="DzZ_Dodawanie" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz dodawania zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="DzZ_Podglad" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz podglądu zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="DzZ_ZmianaWlas" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz zmiany własnych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="DzZ_ZmianaInne" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz zmiany cudzych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="DzZ_KasowanieWlas" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz kasowania własnych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<column name="DzZ_KasowanieInne" type="TINYINT" definition="NOT NULL">
+			<description>Zakaz kasowania cudzych zapisów w dzienniku cząstkowym</description>
+		</column>
+		<primaryKey name="DzZ_Primary" columns="DzZ_DzZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DzZDziennik" localColumns="DzZ_DziId" refTable="Dzienniki" refColumns="Dzi_DziId" deleteOption="CASCADE">
+			<description>Relacja CDN.DziennikZakazy:CDN.Dzienniki (MANY:1)</description>
+		</foreignKey>
+		<index name="DzZDziennik" options="UNIQUE NONCLUSTERED" fields="DzZ_DziId ,DzZ_OpeId">
+			<description>Według dziennika</description>
+		</index>
+	</table>
+	

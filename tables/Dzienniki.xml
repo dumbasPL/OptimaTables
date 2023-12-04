@@ -1,0 +1,58 @@
+<table name="Dzienniki">
+		<description>Definicje dzienników cząstkowych</description>
+		<column name="Dzi_DziId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Dzi_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol dziennika</description>
+			<details>Symbol dziennika księgowego</details>
+		</column>
+		<column name="Dzi_Nazwa" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa cząstkowego dziennika księgowego</description>
+		</column>
+		<column name="Dzi_OObId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator okresu obrachunkowego</description>
+		</column>
+		<column name="Dzi_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="Dzi_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Dzi_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="Dzi_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="Dzi_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Dzi_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="Dzi_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Dzi_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Dzi_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Dzi_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Dzi_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Dzi_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Dzi_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Dzi_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Dzi_Primary" columns="Dzi_DziId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DziSymbol" localColumns="Dzi_OObId" refTable="OkresyObrach" refColumns="OOb_OObID" deleteOption="CASCADE">
+			<description>Relacja CDN.Dzienniki:CDN.OkresyObrach (MANY:1)</description>
+		</foreignKey>
+		<index name="DziSymbol" options="UNIQUE NONCLUSTERED" fields="Dzi_OObId ,Dzi_Symbol">
+			<description>Według symbolu dziennika</description>
+		</index>
+	</table>
+	

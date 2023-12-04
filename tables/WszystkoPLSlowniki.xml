@@ -1,0 +1,29 @@
+<table name="WszystkoPLSlowniki">
+		<description>Słowniki przesłane z wszystko.pl</description>
+		<column name="WPLSL_WPLSLId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WPLSL_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ słownika</description>
+			<details>
+				1 - Cenniki dostaw;
+				2 - Warunki gwarancji;
+				3 - Warunki zwrotów;
+				4 - Warunki reklamacji;
+				5 - Czas realizacji;
+			</details>
+		</column>
+		<column name="WPLSL_GUID" type="VARCHAR(64)" definition="NOT NULL">
+			<description>GUID z wszystko.pl</description>
+		</column>
+		<column name="WPLSL_Wartosc" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Wartość w słowniku</description>
+		</column>
+		<column name="WPLSL_Nieaktywna" type="TINYINT" definition="NOT NULL">
+			<description>Nieaktywność wartości</description>
+		</column>
+		<primaryKey name="WPLSL_Primary" columns="WPLSL_WPLSLId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

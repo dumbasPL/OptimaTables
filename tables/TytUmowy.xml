@@ -1,0 +1,16 @@
+<table name="TytUmowy">
+		<description>Słownik tytułów umów</description>
+		<column name="TUM_TumId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TUM_Nazwa" type="VARCHAR(254)" definition="NOT NULL">
+			<description>Tytuł umowy</description>
+		</column>
+		<column name="TUM_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="TUM_Primary" columns="TUM_TumId">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

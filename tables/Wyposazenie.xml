@@ -1,0 +1,170 @@
+<table name="Wyposazenie">
+		<description>Ewidencja wyposażenia</description>
+		<column name="Wyp_WypID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>Unikalny identyfikator rekordu. Poprzez to pole realizowane są wszystkie relacje typu
+				1:MANY do innych tabel.</details>
+		</column>
+		<column name="Wyp_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny w ewidencji</description>
+		</column>
+		<column name="Wyp_DokumentID" type="INTEGER">
+			<description>Identyfikator dokumentu zakupu</description>
+		</column>
+		<column name="Wyp_DokumentTyp" type="INTEGER">
+			<description>Typ dokumentu zakupu</description>
+		</column>
+		<column name="Wyp_DokumentNr" type="VARCHAR(30)" filterVisible="false">
+			<description>Numer dokumentu nabycia</description>
+		</column>
+		<column name="Wyp_DataZak" type="DATETIME" definition="NOT NULL">
+			<description>Data zakupu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Wyp_NumerKPR" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Numer pozycji w księdze</description>
+		</column>
+		<column name="Wyp_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa wyposażenia</description>
+		</column>
+		<column name="Wyp_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) wyposażenia może zostać wpisany "z ręki" (Wyp:KatId = 0) lub zostać pobrany
+				z listy kategorii (Wyp:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="Wyp_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis wyposażenia</description>
+		</column>
+		<column name="Wyp_NrInwent" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Numer inwentarzowy</description>
+		</column>
+		<column name="Wyp_KodKreskowy" type="VARCHAR(128)" definition="NOT NULL CONSTRAINT DF_Wyp_KodKreskowy DEFAULT('')">
+			<description>Kod kreskowy</description>
+		</column>
+		<column name="Wyp_UniqueKodKreskowyBuster" type="COMPUTED|INTEGER" definition="CASE WHEN Wyp_KodKreskowy = '' THEN Wyp_WypID ELSE 0 END">
+			<description>Pole techniczne zapewniające warunkową unikalność kodu kreskowego</description>
+			<details>Chodzi o to aby dopuścić wiele wyposażeń o pustym kodzie kreskowym, ale równocześnie
+				zabronić duplikacji kodu kreskowego w każdym innym przypadku.</details>
+		</column>
+		<column name="Wyp_WartoscZakup" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość nabycia</description>
+		</column>
+		<column name="Wyp_Ilosc" type="DECIMAL(15,4)">
+			<description>Ilość sztuk/jednostek</description>
+		</column>
+		<column name="Wyp_JednostkaMiary" type="NVARCHAR(20)">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="Wyp_PrcID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator osoby odpowiedzialnej materialnie</description>
+			<details>
+				Wskaźnik do tabeli Pracownicy.
+				Osoba odpowiedzialna materialnie może zostać wpisana "z ręki" (Wyp:PrcId = 0) lub pobrana z
+				listy pracowników (Wyp:PrcId = Prc:PrcId)
+			</details>
+		</column>
+		<column name="Wyp_PrcNazwisko" type="NVARCHAR(100)" definition="NOT NULL" hash="1">
+			<description>Nazwisko osoby odpowiedzialnej materialnie</description>
+		</column>
+		<column name="Wyp_DataLikw" type="DATETIME">
+			<description>Data likwidacji (zbycia)</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Wyp_Stan" type="TINYINT" definition="NOT NULL">
+			<description>Stan elementu wyposażenia</description>
+			<details>
+				Przyjmuje wartości:
+				0 (e_mk_SrT_Stan_W_Uzyciu) - wyposażenie w użyciu
+				1 (e_mk_SrT_Stan_Zlikwidowany) - wyposażenie zlikwidowane
+				2 (e_mk_SrT_Stan_Zbyty) - wyposażenie zbyte
+			</details>
+		</column>
+		<column name="Wyp_Likwidacja" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Przyczyna likwidacji</description>
+		</column>
+		<column name="Wyp_LikwDokument" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu likwidacji</description>
+		</column>
+		<column name="Wyp_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Informacja dodatkowe</description>
+		</column>
+		<column name="Wyp_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="Wyp_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="Wyp_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="Wyp_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Wyp_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Wyp_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartę</description>
+		</column>
+		<column name="Wyp_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Wyp_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Wyp_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Wyp_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Wyp_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Wyp_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Wyp_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Wyp_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Wyp_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Wyp_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Wyp_Primary" columns="Wyp_WypID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_WypPracownik" localColumns="Wyp_PrcID" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.Wyposazenie:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WypKategoria" localColumns="Wyp_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Wyposazenie:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="WypPracownik" options="NONCLUSTERED" fields="Wyp_PrcID">
+			<description>Wg pracownika odpowiedzialnego</description>
+			<details>Wg identyfikatora pracownika odpowiedzilnego materialnie za wyposażenie (indeks
+				wiążący tabelę Wyposażenie z tabelą Pracownicy)</details>
+		</index>
+		<index name="WypKategoria" options="NONCLUSTERED" fields="Wyp_KatID">
+			<description>Wg kategorii</description>
+			<details>Wg identyfikatora kategorii (indeks wiążący tabelę Wyposażenie z tabelą Kategorie)</details>
+		</index>
+		<index name="WypLp" options="UNIQUE NONCLUSTERED" fields="Wyp_Lp">
+			<description>Wg liczby porządkowej</description>
+		</index>
+		<index name="WypNazwa" options="UNIQUE NONCLUSTERED" fields="Wyp_Nazwa ,Wyp_Lp">
+			<description>Wg nazwy</description>
+		</index>
+		<index name="WypDokument" options="NONCLUSTERED" fields="Wyp_DokumentTyp ,Wyp_DokumentID">
+			<description>Wg dokumentu zakupu</description>
+			<details>Indeks do relacji z fakturą zakupu (VatNag)</details>
+		</index>
+		<index name="WypNrInwent" options="UNIQUE NONCLUSTERED" fields="Wyp_NrInwent">
+			<description>Wg numeru inwentarzowego</description>
+		</index>
+		<index name="WypKodKreskowy" options="UNIQUE NONCLUSTERED" fields="Wyp_KodKreskowy, Wyp_UniqueKodKreskowyBuster">
+			<description>Wg kodu kodu kreskowego</description>
+		</index>
+		<index name="WypGUID" options="UNIQUE NONCLUSTERED" fields="Wyp_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,106 @@
+<table name="KwotyDodatkowe">
+		<description>Kwoty dodatkowe</description>
+		<column name="Kdd_KddID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Kdd_PrzekrojTyp" type="INTEGER" definition="NOT NULL">
+			<description>Przekrój</description>
+			<details>Jakiego przekroju dotyczy kwota dod.</details>
+		</column>
+		<column name="Kdd_DokumentTyp" type="INTEGER" definition="NOT NULL">
+			<description>Typ dokumentu</description>
+			<details>
+				Określa tabelę, do której odnosi się relacja:
+				1-TraNag;
+				2-VatNag;
+				3-AutoRozlicz;
+				4-RemanentNag;
+				5-WyplatyNag;
+				6-DeklNag;
+				7-TrwaleHist;
+				8-Wyplaty;
+				9-BnkRaporty;
+				10-ListyPlac;
+				11-NotaOdsetkowa;
+				12-EwidDodatkowa;
+				13-BnkRozKwoty;
+				14-BnkZapisy;
+			</details>
+		</column>
+		<column name="Kdd_DokumentID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu</description>
+		</column>
+		<column name="Kdd_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+		</column>
+		<column name="Kdd_Opis" type="NVARCHAR(50)">
+			<description>Opis pozycji</description>
+		</column>
+		<column name="Kdd_Kat2ID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator drugiej kategorii</description>
+		</column>
+		<column name="Kdd_Opis2" type="NVARCHAR(50)">
+			<description>Drugi opis pozycji</description>
+		</column>
+		<column name="Kdd_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość kwoty do rozksięgowania</description>
+		</column>
+		<column name="Kdd_KwotaWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość kwoty do rozksięgowania w Walucie</description>
+		</column>
+		<column name="Kdd_Segment1" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto WN (dla wersji tylko powiązanej z KH)</description>
+			<details>Konto WN (dla wersji tylko powiązanej z KH)</details>
+		</column>
+		<column name="Kdd_Segment2" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Konto MA (dla wersji tylko powiązanej z KH)</description>
+			<details>Konto MA (dla wersji tylko powiązanej z KH)</details>
+		</column>
+		<column name="Kdd_Wartosc1" type="TINYINT" definition="NOT NULL">
+			<description>Wartość pomocnicza - dla ewidencji dodatkowej Kolumna KPR</description>
+		</column>
+		<column name="Kdd_Wartosc2" type="TINYINT" definition="NOT NULL">
+			<description>Wartość pomocnicza - dla ewidencji dodatkowej Kolumna RYC</description>
+		</column>
+		<column name="Kdd_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta zapisu</description>
+		</column>
+		<column name="Kdd_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu</description>
+		</column>
+		<column name="Kdd_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik kursu waluty</description>
+		</column>
+		<column name="Kdd_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik kursu waluty</description>
+		</column>
+		<column name="Kdd_DataKur" type="DATETIME" definition="NOT NULL">
+			<description>Data notowania kursu waluty</description>
+		</column>
+		<column name="Kdd_Rozrachunki" type="INTEGER">
+			<description>Identyfikator rozrachunku</description>
+		</column>
+		<column name="Kdd_Lp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Kdd_Lp DEFAULT(0)">
+			<desctiption>Lp kwoty dodatkowej</desctiption>
+		</column>
+		<primaryKey name="Kdd_Primary" columns="Kdd_KddID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_KddKategoria" localColumns="Kdd_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.KwotyDodatkowe:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_KddKategoria2" localColumns="Kdd_Kat2ID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.KwotyDodatkowe:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="KddDokument" options="NONCLUSTERED" fields="Kdd_DokumentID ,Kdd_DokumentTyp">
+			<description>Do relacji z dokumentem źrodłowym</description>
+		</index>
+		<index name="KddKategoria" options="NONCLUSTERED" fields="Kdd_KatID ,Kdd_DokumentTyp ,Kdd_DokumentID">
+			<description>Wg kategorii na dokumentach źródłowych</description>
+		</index>
+	</table>
+	

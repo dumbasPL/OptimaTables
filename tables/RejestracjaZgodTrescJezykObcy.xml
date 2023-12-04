@@ -1,0 +1,21 @@
+<table name="RejestracjaZgodTrescJezykObcy" filterVisible="false">
+		<description>Treści zgód jezyki obce</description>
+		<column name="RZTJ_RZTJID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RZTJ_RZTID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator treści zgody</description>
+		</column>
+		<column name="RZTJ_JezykID" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_RZTJ_JezykID DEFAULT(1)">
+			<description>id jezyka obcego</description>
+		</column>
+		<column name="RZTJ_Tresc" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Treść</description>
+		</column>
+		<primaryKey name="RZTJ_Primary" columns="RZTJ_RZTID,RZTJ_JezykID" />
+		<foreignKey name="FK_RZTJdoRejestracjaZgodTresc" localColumns="RZTJ_RZTID" refTable="RejestracjaZgodTresc" refColumns="RZT_RZTId" deleteOption="CASCADE">
+			<description>Relacja CDN.RejestracjaZgodTrescJezykObcy:CDN.RejestracjaZgodTresc (MANY:1)</description>
+		</foreignKey>
+		<index name="RZTJOID" options="UNIQUE NONCLUSTERED" fields="RZTJ_RZTJID" />
+	</table>
+	

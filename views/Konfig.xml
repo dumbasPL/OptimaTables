@@ -1,0 +1,22 @@
+<view name="Konfig">
+		<description>Tabela z danymi konfiguracyjnymi programu</description>
+		<column name="Kon_KonId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Kon_Numer" type="INTEGER" definition="NO_SQL">
+			<description>Numer parametru</description>
+			<details>Wartość tego pola określa znaczenie rekordu, tzn. każdemu parametrowi w konfiguracji
+				programu odpowiada jeden rekord w tabeli Konfig.</details>
+		</column>
+		<column name="Kon_Lp" type="SMALLINT" definition="NO_SQL">
+			<description>Liczba porządkowa dla zmiennych grupowych</description>
+			<details>Wykorzystywane dla zapamiętania listy stawek Vat</details>
+		</column>
+		<column name="Kon_Wartosc" type="NVARCHAR(254)" definition="NO_SQL">
+			<description>Wartosc parametru</description>
+		</column>
+		<column name="Kon_Opis" type="NVARCHAR(254)" definition="NO_SQL">
+			<description>Opis rekordu</description>
+		</column>
+	</view>
+	

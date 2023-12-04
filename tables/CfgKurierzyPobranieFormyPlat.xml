@@ -1,0 +1,22 @@
+<table name="CfgKurierzyPobranieFormyPlat">
+		<description>Konfiguracja kurierzy, formy płatności pobranie</description>
+		<column name="CKF_CKFID" type="int" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="CKF_CKKID" type="int" definition="NOT NULL">
+			<description>Id firmy kurierskiej</description>
+		</column>
+		<column name="CKF_FplId" type="int" definition="NOT NULL">
+			<description>Id formy płatności</description>
+		</column>
+		<foreignKey name="FK_CKFPlatnosc" localColumns="CKF_FplId" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.CfgKurierzyPobranieFormyPlat:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<primaryKey name="CKF_Primary" columns="CKF_CKFID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_CKFCKKID" localColumns="CKF_CKKID" refTable="CfgKurierzy" refColumns="CKK_CKKID" deleteOption="CASCADE">
+			<description>Relacja CDN.CfgKurierzyPobranieFormyPlat:CDN.CfgKurierzy (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

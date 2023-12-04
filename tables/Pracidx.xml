@@ -1,0 +1,92 @@
+<table name="Pracidx">
+		<description>Plik pomocniczy do ewidencji pracowników</description>
+		<column name="PRI_PriId" type="INTEGER">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PRI_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Typ pracownika (1 - pracownik, 2 - właściciel, współpracownik; 10 - zatrudnienie
+				na etat; 20 - zleceniobiorca)</description>
+			<details>
+				Pracownik tylko dodany do bazy bez etatu, bez umowy - 1 rekord:
+				PRI_Typ=1 pracownik, PRI_Typ=2 właściciel&lt;BR&gt;
+				Zatrudniany na etat ma dopisywany jeden dodatkowy rekord: PRI_Typ=10 &lt;BR&gt;
+				Zatrudniany na umowę zlecenie ma dopisywany jeden dodatkowy rekord: PRI_Typ=20&lt;BR&gt;
+				Pracownik może mieć max 3 rekordy w cdn.pracidx&lt;BR&gt;
+				Filtrowanie na liście pracowników oparte jest o tabele Pracidx kolumna PRI_Typ.
+				pracownik (bez etatu i umowy) wpisany do bazy w kolumnie przyjmuje wartość 1
+				właściciel (bez etatu) wpisany do bazy w kolumnie przyjmuje wartość 2
+			</details>
+		</column>
+		<column name="PRI_DzlId" type="INTEGER" definition="CONSTRAINT DF_PRI_DzlId DEFAULT(3)" filterVisible="false">
+			<description>Identyfikator firmy</description>
+		</column>
+		<column name="PRI_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PRI_Kod" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Kod pracownika</description>
+		</column>
+		<column name="PRI_Nazwisko" type="NVARCHAR(40)" hash="1">
+			<description>Nazwisko pracownika</description>
+		</column>
+		<column name="PRI_Imie1" type="NVARCHAR(30)" hash="1">
+			<description>Imię pracownika</description>
+		</column>
+		<column name="PRI_Pesel" type="NVARCHAR(11)" hash="1">
+			<description>Pesel pracownika</description>
+		</column>
+		<column name="PRI_DataOd" type="DATETIME">
+			<description>Początkowa data aktualności pracownika</description>
+		</column>
+		<column name="PRI_DataDo" type="DATETIME">
+			<description>Końcowa data aktualności pracownika</description>
+		</column>
+		<column name="PRI_AdresDzialu" type="NVARCHAR(512)" definition="NOT NULL">
+			<description>Adres dostępu wydziału pracownika</description>
+		</column>
+		<column name="PRI_AdresCentrum" type="NVARCHAR(512)" definition="NOT NULL CONSTRAINT DF_PRI_AdresCentrum DEFAULT('')">
+			<description>Adres dostępu wydziału pracownika</description>
+		</column>
+		<column name="PRI_CntId" type="INTEGER" definition="CONSTRAINT DF_PRI_CntId DEFAULT(3)">
+			<description />
+		</column>
+		<column name="PRI_Opis" type="NVARCHAR(128)" definition="NOT NULL" hash="1">
+			<description>Opis pracownika (filtrowanie)</description>
+		</column>
+		<column name="PRI_Archiwalny" type="TINYINT" definition="NOT NULL">
+			<description>Flaga oznaczająca pracownika archiwalnego</description>
+		</column>
+		<column name="PRI_ParentId" type="INTEGER">
+			<description>Identyfikator pracownika podstawowego (wieloetatowość)</description>
+			<details>
+				Null - dla etatu głównego i pracownika zwykłego &lt;BR&gt;
+				PraId etatu podstawowego - dla etatów dodatkowych
+			</details>
+		</column>
+		<column name="PRI_Nadrzedny" type="TINYINT" definition="NOT NULL">
+			<description>Pracownik posiadający etat podstawowy (wieloetatowość)</description>
+		</column>
+		<column name="PRI_ImportRowId" type="VARCHAR(36)" />
+		<primaryKey name="PRI_Primary" columns="PRI_PriId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PriPraId" localColumns="PRI_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.Pracidx:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PRIDzlLink" localColumns="PRI_DzlId" refTable="Dzialy" refColumns="DZL_DzlId">
+			<description>Relacja CDN.Pracidx:CDN.Dzialy (MANY:1)</description>
+		</foreignKey>
+		<index name="PriPraId" options="NONCLUSTERED" fields="PRI_PraId">
+			<description>Klucz obcy do PracKod</description>
+		</index>
+		<index name="PRIKod" options="UNIQUE NONCLUSTERED" fields="PRI_Kod ,PRI_PriId" />
+		<index name="PRINazwisko" options="UNIQUE NONCLUSTERED" fields="PRI_Nazwisko ,PRI_Imie1 ,PRI_PriId" />
+		<index name="PRIDzlLink" options="NONCLUSTERED" fields="PRI_DzlId">
+			<description>Klucz obcy działu</description>
+		</index>
+		<index name="PRI_EP_Idx" options="NONCLUSTERED" fields="PRI_Archiwalny, PRI_Typ, PRI_PraId, PRI_PriId">
+			<description>Indeks e-pracownik</description>
+		</index>
+		<index name="PRIGUID" options="UNIQUE NONCLUSTERED" fields="PRI_ImportRowId" />
+	</table>
+	

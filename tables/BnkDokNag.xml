@@ -1,0 +1,226 @@
+<table name="BnkDokNag">
+		<description>Tabela z nagłówkami dokumentów kasowych</description>
+		<column name="BDN_BDNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BDN_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu</description>
+			<details>222-ponaglenie zapłaty; 223-potwierdzenie salda</details>
+		</column>
+		<column name="BDN_DDfId" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="BDN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="BDN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="BDN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(BDN_NUMERNR,BDN_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="BDN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="BDN_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu (płatnika) z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - Kontrahenci;
+				2 - BnkNazwy;
+				3 - Pracownicy;
+				4 - WspolNag;
+				5 - Urzedy
+			</details>
+		</column>
+		<column name="BDN_PodmiotID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu (płatnika)</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="BDN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="BDN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="BDN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="BDN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="BDN_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="BDN_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="BDN_RazemKwota1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Dt; Dla ponaglenia zapłaty: łączna kwota
+				zaległości</details>
+		</column>
+		<column name="BDN_RazemKwotaSys1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie systemowej)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Dt; Dla ponaglenia zapłaty: łączna kwota
+				zaległości</details>
+		</column>
+		<column name="BDN_RazemKwota2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Ct; dla ponaglenia zapłaty: łączna kwota
+				odsetek</details>
+		</column>
+		<column name="BDN_RazemKwotaSys2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Łączna kwota (w walucie systemowej)</description>
+			<details>Dla potwierdzenia salda: łączna kwota Ct; dla ponaglenia zapłaty: łączna kwota
+				odsetek</details>
+		</column>
+		<column name="BDN_OdsetkiTyp" type="TINYINT" definition="NOT NULL">
+			<description>Sposób naliczania odsetek</description>
+			<details>1-odsetki ustawowe; 2-odsetki indywidualne</details>
+		</column>
+		<column name="BDN_OdsetkiStopa" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Wielkość odsetek indywidualnych</description>
+		</column>
+		<column name="BDN_OdsetkiPodatkoweProg" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_BDN_OdsetkiPodatkoweProg DEFAULT(0)">
+			<description>Próg odsetek podatkowych dla ponaglenia zapłaty</description>
+		</column>
+		<column name="BDN_KosztyDodatkowe" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_BDN_KosztyDodatkowe DEFAULT(0)">
+			<description>Koszty dodatkowe dla ponaglenia zapłaty (w walucie)</description>
+		</column>
+		<column name="BDN_KosztyDodatkoweSys" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_BDN_KosztyDodatkoweSys DEFAULT(0)">
+			<description>Koszty dodatkowe dla ponaglenia zapłaty (w walucie systemowej)</description>
+		</column>
+		<column name="BDN_GenerujPlatnosciKst" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BDN_GenerujPlatnosciKst DEFAULT(0)">
+			<description>Czy generować płatności dla kosztów ponaglenia zapłaty</description>
+		</column>
+		<column name="BDN_FPlIDKst" type="INTEGER">
+			<description>Identyfikator formy płatności dla kosztów ponaglenia zapłaty</description>
+		</column>
+		<column name="BDN_TerminKst" type="DATETIME">
+			<description>Termin płatności dla kosztów ponaglenia zapłaty</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BDN_GenerujPlatnosciOds" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BDN_GenerujPlatnosciOds DEFAULT(0)">
+			<description>Czy generować płatności dla odsetek ponaglenia zapłaty</description>
+		</column>
+		<column name="BDN_FPlIDOds" type="INTEGER">
+			<description>Identyfikator formy płatności dla odsetek ponaglenia zapłaty</description>
+		</column>
+		<column name="BDN_TerminOds" type="DATETIME">
+			<description>Termin płatności dla odsetek ponaglenia zapłaty</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BDN_Uwagi" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="BDN_DekID" type="INTEGER">
+			<description>Klucz obcy do tabeli dekretów</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada BDN_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BDN_DekId = NULL;
+			</details>
+		</column>
+		<column name="BDN_PreDekID" type="INTEGER">
+			<description>Klucz obcy do tabeli predekretów</description>
+		</column>
+		<column name="BDN_Windykacja" type="INTEGER" definition="NOT NULL CONSTRAINT DF_BDN_Windykacja DEFAULT(0)">
+			<description>0-zapis powstał przez zatwierdzenie formularza; 1-zapis został wygenerowany przez
+				automat windykacji)</description>
+		</column>
+		<column name="BDN_UwzglNalez" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BDN_UwzglNalez DEFAULT(0)">
+			<description>Czy podczas generowania elementów dokumentu są brane pod uwagę należności
+				(dotyczy potwierdzenia salda)</description>
+		</column>
+		<column name="BDN_UwzglZobow" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BDN_UwzglZobow DEFAULT(0)">
+			<description>Czy podczas generowania elementów dokumentu są brane pod uwagę zobowiązania
+				(dotyczy potwierdzenia salda)</description>
+		</column>
+		<column name="BDN_UwzglPrzych" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BDN_UwzglPrzych DEFAULT(0)">
+			<description>Czy podczas generowania elementów dokumentu są brane pod uwagę dokumenty
+				przychodowe (dotyczy potwierdzenia salda)</description>
+		</column>
+		<column name="BDN_UwzglRozch" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BDN_UwzglRozch DEFAULT(0)">
+			<description>Czy podczas generowania elementów dokumentu są brane pod uwagę dokumenty
+				rozchodowe (dotyczy potwierdzenia salda)</description>
+		</column>
+		<column name="BDN_UwzglBufor" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BDN_UwzglBufor DEFAULT(0)">
+			<description>Czy podczas generowania elementów dokumentu są brane pod uwagę zdarzenia w
+				buforze (dotyczy potwierdzenia salda)</description>
+		</column>
+		<column name="BDN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="BDN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BDN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="BDN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="BDN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BDN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="BDN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BDN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BDN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BDN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BDN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BDN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BDN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BDN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="BDN_Primary" columns="BDN_BDNId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_BDNPodmiot" localColumns="BDN_PodmiotID,BDN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.BnkDokNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BDNKategoria" localColumns="BDN_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.BnkDokNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_BDNDokDefinicja" localColumns="BDN_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.BnkDokNag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="BDNPodmiot" options="UNIQUE NONCLUSTERED" fields="BDN_PodmiotID ,BDN_PodmiotTyp ,BDN_Typ ,BDN_DataDok ,BDN_BDNId">
+			<description>Wg podmiotu dla którego wystawiono notę</description>
+		</index>
+		<index name="BDNKategoria" options="UNIQUE NONCLUSTERED" fields="BDN_KatID ,BDN_Typ ,BDN_DataDok ,BDN_BDNId">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="BDNDokDefinicja" options="NONCLUSTERED" fields="BDN_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="BDNNumer" options="UNIQUE NONCLUSTERED" fields="BDN_NumerString ,BDN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="BDNNumerPelny" options="UNIQUE NONCLUSTERED" fields="BDN_Typ ,BDN_NumerPelny">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+	</table>
+	

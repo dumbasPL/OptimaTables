@@ -1,0 +1,38 @@
+<table name="BnkRozRelacje">
+		<description>Tabela pomocnicza dla BnkRozKwoty</description>
+		<details>
+			Tabela zawiera redundantne dane w stosunku do BnkRozKwoty i służy do zbudowania indeksu, który
+			umożliwia zobaczenie rozrachunku zarówno z lewej jak i prawej strony.
+			Dla każdego wiersza w BnkRozKwoty trigger generuje dwa "lustrzane" wiersze w tabeli
+			BnkRozRelacje.
+			Tabela jest w pełni odbudowywalna na podstawie BnkRozKwoty
+		</details>
+		<column name="BRR_BRKID" type="INTEGER">
+			<description>Identyfikator rekordu w tabeli BnkRozKwoty</description>
+		</column>
+		<column name="BRR_ZDokTyp" type="SMALLINT">
+			<description>Typ dokumentu uczestniczącego w rozrachunku (dokument rozliczający)</description>
+			<details>Określa, czy rozrachowywany zapis (rozliczający) znajduje się w tabeli BnkZapisy czy
+				BnkZdarzenia. Typ: 1 - zdarzenie,2 - zapis K/B</details>
+		</column>
+		<column name="BRR_ZDokID" type="INTEGER">
+			<description>Identyfikator dokumentu uczestniczącego w rozrachunku (dokument rozliczjący)</description>
+			<details>Określa ID rozliczającego zapisu w tabeli BnkZapisy lub BnkZdarzenia</details>
+		</column>
+		<column name="BRR_DDokTyp" type="SMALLINT">
+			<description>Typ dokumentu uczestniczącego w rozrachunku (dokument rozliczany)</description>
+			<details>Określa, czy rozrachowywany zapis (rozliczany) znajduje się w tabeli BnkZapisy czy
+				BnkZdarzenia. Typ: 1 - zdarzenie,2 - zapis K/B</details>
+		</column>
+		<column name="BRR_DDokID" type="INTEGER">
+			<description>Identyfikator dokumentu uczestniczącego w rozrachunku (dokument rozliczany)</description>
+			<details>Określa ID rozliczanego zapisu w tabeli BnkZapisy lub BnkZdarzenia</details>
+		</column>
+		<index name="BRRRozKwoty" options="NONCLUSTERED" fields="BRR_BRKID">
+			<description>do relacji z rozrachunkiem</description>
+		</index>
+		<index name="BRRLZrodlo" options="NONCLUSTERED" fields="BRR_ZDokID ,BRR_ZDokTyp">
+			<description>Do relacji z dokumentem po lewej stronie</description>
+		</index>
+	</table>
+	

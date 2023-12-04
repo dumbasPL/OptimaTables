@@ -1,0 +1,51 @@
+<table name="AnkSzablonOdpNag">
+		<description>szablony odpowiedzi</description>
+		<column name="AnkSoN_AnkSonId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkSoN_Nazwa" type="NVARCHAR(250)" definition="NOT NULL">
+			<description>Nazwa szablonu odpowiedzi</description>
+		</column>
+		<column name="AnkSoN_Auto" type="INTEGER" definition="NOT NULL CONSTRAINT DF_AnkSoN_Auto DEFAULT(0)">
+			<description>Czy szablon utworzony automatycznie</description>
+		</column>
+		<column name="AnkSoN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="AnkSoN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AnkSoN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AnkSoN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="AnkSoN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AnkSoN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AnkSoN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AnkSoN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AnkSoN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AnkSoN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AnkSoN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AnkSoN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AnkSoN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AnkSoN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="AnkSoN_Primary" columns="AnkSoN_AnkSonId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="AnkSoN_Nazwa_UniqueIx" options="UNIQUE NONCLUSTERED" fields="AnkSoN_Nazwa">
+			<description>Unikalny indeks dla nazwy szablonu</description>
+		</index>
+	</table>
+	

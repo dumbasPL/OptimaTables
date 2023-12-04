@@ -1,0 +1,30 @@
+<table name="PozDeklPIT">
+		<description>Słownik pozycji na deklaracjach PIT</description>
+		<column name="PDP_PdpId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PDP_Kod" type="VARCHAR(254)" definition="NOT NULL" />
+		<column name="PDP_Rodzaj" type="TINYINT" definition="NOT NULL" />
+		<column name="PDP_Poziom" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_Wybieralny" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="PDP_PIT4" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_PIT11" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_PIT8A" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_PIT8B" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_PIT40" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_IFT1" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_PIT8C" type="INTEGER" definition="NOT NULL" />
+		<column name="PDP_Filtr" type="TINYINT" definition="NOT NULL" />
+		<column name="PDP_PITR" type="INTEGER" definition="NOT NULL CONSTRAINT DF_PDP_PITR DEFAULT(0)" />
+		<column name="PDP_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_PDP_ZjeId default('')" />
+		<primaryKey name="PDP_Primary" columns="PDP_PdpId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="PDPZjeLink" options="NONCLUSTERED" fields="PDP_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,19 @@
+<table name="OAtrybutyHist">
+		<description>Zapisy historyczne atrybutów</description>
+		<column name="ATH_AthId" type="INTEGER" definition="IDENTITY(1,1)" />
+		<column name="ATH_PrcId" type="INTEGER" definition="NOT NULL" />
+		<column name="ATH_AtkId" type="INTEGER" />
+		<column name="ATH_OatId" type="INTEGER" definition="NOT NULL" />
+		<column name="ATH_Wartosc" type="NVARCHAR(101)" definition="NOT NULL" />
+		<column name="ATH_DataOd" type="DATETIME" definition="NOT NULL" />
+		<column name="ATH_DataDo" type="DATETIME" definition="NOT NULL" />
+		<column name="ATH_ImportRowId" type="nvarchar(36)" definition="NULL CONSTRAINT DF_ATH_ImportRowId DEFAULT(newid())" />
+		<primaryKey name="ATH_Primary" columns="ATH_AthId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_ATHOatId" localColumns="ATH_OatId" refTable="OAtrybuty" refColumns="OAT_OatId" deleteOption="CASCADE">
+			<description>Relacja CDN.OAtrybutyHist:CDN.OAtrybuty (MANY:1)</description>
+		</foreignKey>
+		<index name="ATHOatId" options="NONCLUSTERED" fields="ATH_OatId" />
+	</table>
+	

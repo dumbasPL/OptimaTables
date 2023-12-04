@@ -1,0 +1,155 @@
+<table name="DetalStanOperatorzy">
+		<description>Tabela z funkcjami pracownikow detalu</description>
+		<details>Tabela znajduje się w bazie konfiguracyjnej, jest wspólna dla wszystkich firm
+			obsługiwanych w programie</details>
+		<column name="DSOpe_DSOpeID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator operatora</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSOpe_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detal</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSOpe_OptimaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora w optimie</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSOpe_Kod" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Kod operatora</description>
+		</column>
+		<column name="DSOpe_Nazwisko" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwisko operatora</description>
+		</column>
+		<column name="DSOpe_KodDlaDF" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Kod dla drukarki fisk</description>
+		</column>
+		<column name="DSOpe_Haslo" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Haslo</description>
+		</column>
+		<column name="DSOpe_KontoDomenowe" type="VARCHAR(100)" hash="1">
+			<description>Nazwa konta domenowego Windows przypisanego do operatora</description>
+		</column>
+		<column name="DSOpe_KontoDomenoweSID" type="VARCHAR(200)" hash="1">
+			<description>SID konta domenowego Windows przypisanego do operatora</description>
+		</column>
+		<column name="DSOpe_NTSid" type="VARCHAR(100)" definition="NOT NULL" hash="1">
+			<description>NTSid</description>
+		</column>
+		<column name="DSOpe_NTKonto" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>NTKonto</description>
+		</column>
+		<column name="DSOpe_NTLogin" type="TINYINT" definition="NOT NULL">
+			<description>NTLogin</description>
+		</column>
+		<column name="DSOpe_OpeNieAktywny" type="TINYINT" definition="NOT NULL">
+			<description>OpeNieAktywny</description>
+		</column>
+		<column name="DSOpe_KodFunkcji" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>KodFunkcji</description>
+		</column>
+		<column name="DSOpe_ZmianaCenySprzedazy" type="TINYINT" definition="NOT NULL">
+			<description>Zmiana ceny sprzedaży</description>
+		</column>
+		<column name="DSOpe_PrawoDoRabatowPozycja" type="TINYINT" definition="NOT NULL">
+			<description>Prawo do rabatów pozycja</description>
+		</column>
+		<column name="DSOpe_PrawoDoRabatowDokument" type="TINYINT" definition="NOT NULL">
+			<description>Prawo do rabatów dokument</description>
+		</column>
+		<column name="DSOpe_StornoOstatniejPozycji" type="TINYINT" definition="NOT NULL">
+			<description>Storno ostatniej pozycji</description>
+		</column>
+		<column name="DSOpe_StornoCalegoParagonu" type="TINYINT" definition="NOT NULL">
+			<description>Storno całego paragonu</description>
+		</column>
+		<column name="DSOpe_WplataDoKasy" type="TINYINT" definition="NOT NULL">
+			<description>Wpłata do kasy</description>
+		</column>
+		<column name="DSOpe_WyplataZKasy" type="TINYINT" definition="NOT NULL">
+			<description>Wypłata z kasy</description>
+		</column>
+		<column name="DSOpe_ReczneOtwarcieSzuflady" type="TINYINT" definition="NOT NULL">
+			<description>Ręczne otwarcie szuflady</description>
+		</column>
+		<column name="DSOpe_RaportFiskalny" type="TINYINT" definition="NOT NULL">
+			<description>Raport fiskalny</description>
+		</column>
+		<column name="DSOpe_RaportOkresowy" type="TINYINT" definition="NOT NULL">
+			<description>Raport okresowy</description>
+		</column>
+		<column name="DSOpe_PodgladStanuKasy" type="TINYINT" definition="NOT NULL">
+			<description>Podgląd stanu kasy</description>
+		</column>
+		<column name="DSOpe_PlatnoscInnymiFormami" type="TINYINT" definition="NOT NULL">
+			<description>Płatność innymi formami</description>
+		</column>
+		<column name="DSOpe_ZwrotTowaru" type="TINYINT" definition="NOT NULL">
+			<description>Zwrot towaru</description>
+		</column>
+		<column name="DSOpe_FakturaDoParagonu" type="TINYINT" definition="NOT NULL">
+			<description>Faktura do paragonu</description>
+		</column>
+		<column name="DSOpe_PodgladDokWlasnych" type="TINYINT" definition="NOT NULL">
+			<description>Podgląd wystawionych dokumentów własnych</description>
+		</column>
+		<column name="DSOpe_PodgladDokWszystkich" type="TINYINT" definition="NOT NULL">
+			<description>Podgląd wystawionych dokumentów wszystkich</description>
+		</column>
+		<column name="DSOpe_KonfiguracjaProgramu" type="TINYINT" definition="NOT NULL">
+			<description>Konfiguracja programu</description>
+		</column>
+		<column name="DSOpe_KonfiguracjaInterfejsu" type="TINYINT" definition="NOT NULL">
+			<description>Konfiguracja interface</description>
+		</column>
+		<column name="DSOpe_OtwarcieZmiany" type="TINYINT" definition="NOT NULL">
+			<description>Otwarcie Zmiany</description>
+		</column>
+		<column name="DSOpe_ZamkniecieZmiany" type="TINYINT" definition="NOT NULL">
+			<description>Zamknięcie zmiany</description>
+		</column>
+		<column name="DSOpe_PrzekazanieParagonow" type="TINYINT" definition="NOT NULL">
+			<description>Przekazanie Paragonow</description>
+		</column>
+		<column name="DSOpe_EdycjaParagonow" type="TINYINT" definition="NOT NULL">
+			<description>Edycja Paragonow</description>
+		</column>
+		<column name="DSOpe_StanWszystkieMagazyny" type="TINYINT" definition="NOT NULL">
+			<description>Podgląd stanu na wszystkich magazynach</description>
+		</column>
+		<column name="DSOpe_NieokreslonyPlatOdroczona" type="TINYINT" definition="NOT NULL">
+			<description>Płatność odroczona dla !Nieokreślonego</description>
+		</column>
+		<column name="DSOpe_ZmianaJM" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DSOpe_ZmianaJM DEFAULT(0)">
+			<description>Zmiana jednostki miary</description>
+		</column>
+		<column name="DSOpe_Karta" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Karta</description>
+		</column>
+		<column name="DSOpe_MaxRabat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_DSOpe_MaxRabat DEFAULT(99.99)">
+			<description>Maksymalny rabat</description>
+		</column>
+		<column name="DSOpe_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DSOpe_DataLogowania" type="DATETIME" definition="NOT NULL">
+			<description>ostatnie logowanie</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<primaryKey name="DSOpe_Primary" columns="DSOpe_DSOpeID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="DelalStanDSOpe_OptimaID" options="NONCLUSTERED" fields="DSOpe_OptimaId">
+			<description>Wg kodu funkcji</description>
+		</index>
+	</table>
+	

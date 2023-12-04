@@ -1,0 +1,13 @@
+<table name="Aktualizacje">
+		<description>Aktualizacje bazy</description>
+		<column name="Akt_Hash" type="char(64)" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Akt_Wersja" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Akt_Wersja DEFAULT('')">
+			<description>wersja programu</description>
+		</column>
+		<primaryKey name="Akt_Primary" columns="Akt_Hash,Akt_Wersja">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

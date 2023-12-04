@@ -1,0 +1,108 @@
+<table name="RemanentElem">
+		<description>Elementy spisu z natury</description>
+		<details>Remanent jest zapisywany w strukturze dwupoziomowej: W RemanentNag zapisywane są
+			informacje dotyczące daty sporządzenia spisu, numeru spisu itp, natomiast w RemanentElem
+			znajdują się pozycje spisu z natury</details>
+		<column name="ReE_ReEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ReE_ReNID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator nagłówka spisu z natury</description>
+			<details>Pole wiążące nagłówek spisu z natury z elementami spisu (ReN:ReNId = ReE:ReNId)</details>
+		</column>
+		<column name="ReE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa pozycji spisu</description>
+		</column>
+		<column name="ReE_TwrId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator towaru</description>
+			<details>
+				Relacja do tabeli Towary.
+				Jeżeli towar został wpisany "z ręki", wówczas ReE:TwrId = 0.
+				Jeżeli towar został pobrany z listy towarów, wówczas ReE:TwrId = Twr:TwrId
+			</details>
+		</column>
+		<column name="ReE_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa towaru</description>
+		</column>
+		<column name="ReE_Jm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="ReE_MetodaOblicz" type="TINYINT" definition="NOT NULL">
+			<description>Sposób obliczania równania Wartość = Cena * Ilość</description>
+			<details>
+				Wskazuje, które z pól: Cena, Ilość i Wartość jest obliczane.
+				Jeżeli MetodaOblicz = 1 : Ilosc = Wartosc / Cena
+				Jeżeli MetodaOblicz = 2 : Cena = Wartosc / Ilosc
+				Jeżeli MetodaOblicz = 3 : Wartosc = Cena * Ilosc
+			</details>
+		</column>
+		<column name="ReE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru stwierdzona w czasie spisu</description>
+		</column>
+		<column name="ReE_Cena" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena jednostkowa towaru stwierdzona w czasie spisu</description>
+		</column>
+		<column name="ReE_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość towaru stwierdzona w czasie spisu</description>
+		</column>
+		<column name="ReE_CenaNabycia" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena nabycia towaru</description>
+		</column>
+		<column name="ReE_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Uwagi dodatkowe</description>
+		</column>
+		<column name="ReE_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego pozycję spisu</description>
+		</column>
+		<column name="ReE_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ReE_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia pozycji spisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ReE_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego pozycję spisu</description>
+		</column>
+		<column name="ReE_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="ReE_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji pozycji spisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ReE_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ReE_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="ReE_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ReE_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="ReE_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_ReE_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="ReE_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_ReE_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="ReE_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ReE_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<primaryKey name="ReE_Primary" columns="ReE_ReEID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ReETowar" localColumns="ReE_TwrId" refTable="Towary" refColumns="Twr_TwrId">
+			<description>Relacja CDN.RemanentElem:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_ReELp" localColumns="ReE_ReNID" refTable="RemanentNag" refColumns="ReN_ReNID" deleteOption="CASCADE">
+			<description>Relacja CDN.RemanentElem:CDN.RemanentNag (MANY:1)</description>
+		</foreignKey>
+		<index name="ReELp" options="UNIQUE NONCLUSTERED" fields="ReE_ReNID ,ReE_Lp ,ReE_ReEID">
+			<description>Wg liczby porządkowej pozycji w spisie</description>
+		</index>
+		<index name="ReNNazwa" options="UNIQUE NONCLUSTERED" fields="ReE_ReNID ,ReE_Nazwa ,ReE_ReEID">
+			<description>Pozycje spisu wg nazwy towaru</description>
+		</index>
+		<index name="ReETowar" options="NONCLUSTERED" fields="ReE_TwrId">
+			<description>Wg identyfikatora towaru</description>
+		</index>
+	</table>
+	

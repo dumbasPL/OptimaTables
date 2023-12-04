@@ -1,0 +1,86 @@
+<table name="OfertyKnt">
+		<description>Ofertowanie - kontrahenci Oferta</description>
+		<column name="OfK_OfKId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator tabeli</description>
+		</column>
+		<column name="OfK_OfDId" type="INTEGER">
+			<description>Identyfikator dokumentu oferty</description>
+		</column>
+		<column name="OfK_Kod" type="NVARCHAR(20)" definition="NULL" hash="1">
+			<description>Kod podmiotu</description>
+		</column>
+		<column name="OfK_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp podmiotu na dokumencie</description>
+		</column>
+		<column name="OfK_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="OfK_PodID" type="INTEGER">
+			<description>Id podmiotu</description>
+		</column>
+		<column name="OfK_PodNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Podmiot Nazwa1</description>
+		</column>
+		<column name="OfK_PodNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Podmiot Nazwa2</description>
+		</column>
+		<column name="OfK_PodNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Podmiot Nazwa3</description>
+		</column>
+		<column name="OfK_PodKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="OfK_PodWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="OfK_PodPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="OfK_PodGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="OfK_PodUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="OfK_PodNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="OfK_PodNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="OfK_PodMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto</description>
+		</column>
+		<column name="OfK_PodKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="OfK_PodPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="OfK_PodAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Adres2</description>
+		</column>
+		<column name="OfK_PodNipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju NIP</description>
+		</column>
+		<column name="OfK_PodNipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer Nip</description>
+		</column>
+		<column name="OfK_PodmiotGLN" type="VARCHAR(13)" definition="NOT NULL" hash="1">
+			<description>GLN</description>
+		</column>
+		<column name="OfK_PodEmail" type="NVARCHAR(127)" definition="NOT NULL" hash="1">
+			<description>Adres e-mail</description>
+		</column>
+		<column name="OfK_KnO_KnOId" type="INT" definition="NULL">
+			<description>Id przedstawiciela</description>
+		</column>
+		<primaryKey name="OfK_Primary" columns="OfK_OfKID" />
+		<foreignKey name="FK_OfKOfertyDok" localColumns="OfK_OfDId" refTable="OfertyDok" refColumns="OfD_OfDId" deleteOption="CASCADE">
+			<description>Relacja CDN.OfertyKnt:CDN.OfertyDok (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_OfKPodmiot" localColumns="OfK_PodID,OfK_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.OfertyKnt:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

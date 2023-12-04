@@ -1,0 +1,269 @@
+<table name="TraSElemDost">
+		<description>Tabela z dostawami</description>
+		<details>Subelementy dokumentów (faktur, paragonów itp) wiążą element transakcji z zasobem
+			magazynowym</details>
+		<column name="TsD_TsDID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="TsD_TrSID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator subelementu transakcji</description>
+			<details>Klucz obcy do tabeli TraSElem</details>
+		</column>
+		<column name="TsD_TrEId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator elementu transakcji</description>
+			<details>Klucz obcy do tabeli TraElem</details>
+		</column>
+		<column name="TsD_PdEId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TsD_PdEId DEFAULT(0)">
+			<description>Identyfikator prodelementu transakcji</description>
+			<details>Klucz obcy do tabeli ProdElem</details>
+		</column>
+		<column name="TsD_TrSIdDost" type="INTEGER">
+			<description>Wskaźnik do TraSElem zakładającego dostawę</description>
+		</column>
+		<column name="TsD_ZwrId" type="INTEGER">
+			<description>Identyfikator elementu oryginalnego (dla zwrotów)</description>
+		</column>
+		<column name="TsD_NumerPelny" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Pełny numer dokumentu</description>
+		</column>
+		<column name="TsD_NumerObcy" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer wlasny dokumentu obcego</description>
+		</column>
+		<column name="TsD_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji (zakupu lub sprzedaży)</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="TsD_Dostawca" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Unikalny kod dostawcy</description>
+		</column>
+		<column name="TsD_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych</description>
+		</column>
+		<column name="TsD_IloscDostepna" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Dostepna ilość towaru</description>
+		</column>
+		<column name="TsD_Wartosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Wartość towaru</description>
+		</column>
+		<column name="TsD_SrCDId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TsD_SrCDId DEFAULT(0)">
+			<description>Id cześci ze zlecenia serwisowego dla którego pobrano zasób</description>
+		</column>
+		<column name="TsD_Cecha1_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha1_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha1_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha1_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha2_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha2_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha2_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha2_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha3_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha3_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha3_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha3_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha4_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha4_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha4_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha4_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha5_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha5_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha5_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha5_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha6_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha6_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha6_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha6_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha7_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha7_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha7_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha7_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha8_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha8_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha8_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha8_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha9_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha9_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha9_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha9_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsD_Cecha10_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsD_Cecha10_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsD_Cecha10_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsD_Cecha10_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<primaryKey name="TsD_Primary" columns="TsD_TsDID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_TrSTraElemD" localColumns="TsD_TrEId" refTable="TraElem" refColumns="TrE_TrEID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraSElemDost:CDN.TraElem (MANY:1)</description>
+		</foreignKey>
+		<index name="TrSTraElemD" options="UNIQUE NONCLUSTERED" fields="TsD_TrEId ,TsD_TrSID ,TsD_TsDID">
+			<description>Wg elementu faktury</description>
+		</index>
+		<index name="TrSDostawa" options="NONCLUSTERED" fields="TsD_TrSIdDost">
+			<description>Wskaźnik do TraSElem zakładającego dostawę</description>
+		</index>
+		<index name="TrSDostawaProdElem" options="NONCLUSTERED" fields="TsD_PdEId" includedColumns="TsD_Ilosc" />
+	</table>
+	

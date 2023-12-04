@@ -1,0 +1,31 @@
+<table name="eSklepFormyPlatnosci">
+		<description>Formy platnosci dla iMall24/ISklep24</description>
+		<column name="ESF_ESFId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ESF_ESSId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator e-Sklep</description>
+		</column>
+		<column name="ESF_IGFPlId" type="INTEGER">
+			<description>Identyfikator rekordu z iMall</description>
+		</column>
+		<column name="ESF_FPlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator formy platnosci z O!</description>
+		</column>
+		<column name="ESF_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa formy płatnosci</description>
+		</column>
+		<column name="ESF_Aktywna" type="TINYINT" definition="NOT NULL">
+			<description>czy forma płatności jest aktywna</description>
+		</column>
+		<column name="ESF_PlatOnline" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESF_PlatOnline DEFAULT(0)">
+			<description>czy forma płatności jest online</description>
+		</column>
+		<primaryKey name="ESF_Primary" columns="ESF_ESFId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ESFESSId" localColumns="ESF_ESSId" refTable="eSklepStanowiska" refColumns="ESS_ESSId" deleteOption="CASCADE">
+			<description>Relacja CDN.eSklepFormyPlatnosci:CDN.eSklepStanowiska (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

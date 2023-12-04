@@ -1,0 +1,55 @@
+<table name="DaneKadMod">
+		<description>Słownik modyfikalnych danych kadrowych</description>
+		<column name="DKM_DkmId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DKM_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj danych w słowniku</description>
+			<details>
+				1 - Stanowisko &lt;BR&gt;
+				2 - Funkcja &lt;BR&gt;
+				3 - Przyczyna zwolnienia &lt;BR&gt;
+				4 - Kod zawodu &lt;BR&gt;
+				5 - Schorzenie &lt;BR&gt;
+				6 - Uprawnienie (kwalifikacja) &lt;BR&gt;
+				7 - Rodzaj stażu pracy &lt;BR&gt;
+				8 - Wzór spłaty pożyczki
+				13 - Czynnik niebezpieczny, szkodliwy, uciążliwy
+			</details>
+		</column>
+		<column name="DKM_Nazwa" type="VARCHAR(280)" definition="NOT NULL" hash="1">
+			<description>Wartość rekordu</description>
+		</column>
+		<column name="DKM_Opis" type="NVARCHAR(60)" definition="NOT NULL" hash="1" />
+		<column name="DKM_Robotnicze" type="TINYINT" definition="NOT NULL">
+			<description>Stanowisko robotnicze</description>
+			<details>
+				1 - (dla DKM_Rodzaj = 1) stanowisko robotnicze
+				0 - (dla DKM_Rodzaj = 1) stanowisko nierobotnicze
+				1 - (dla DKM_Rodzaj = 5) schorzenie o szczególnym charakterze
+				0 - (dla DKM_Rodzaj = 5) schorzenie zwykłe
+				1 - (dla DKM_Rodzaj = 6) uprawnienie (kwalifikacja), w której jest zaznaczone pole
+				"Przypomnienie o terminie wartości"
+				0 - (dla DKM_Rodzaj = 6) uprawnienie (kwalifikacja), w której nie jest zaznaczone pole
+				"Przypomnienie o terminie wartości"
+				1 - (dla DKM_Rodzaj = 8) wzór spłaty pożyczki standardowy (nie da sie go usnąć)
+				0 - (dla DKM_Rodzaj = 8) wzór spłaty pożyczki zdef. przez użytkowniaka
+				1 - (dla DKM_Rodzaj = 13) typ czynnika: fizyczny
+				2 - (dla DKM_Rodzaj = 13) typ czynnika: pył
+				3 - (dla DKM_Rodzaj = 13) typ czynnika: chemiczny
+				4 - (dla DKM_Rodzaj = 13) typ czynnika: biologiczny
+				5 - (dla DKM_Rodzaj = 13) typ czynnika: inny (w tym niebezpieczny)
+			</details>
+		</column>
+		<column name="DKM_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_DKM_ZjeId default('')" />
+		<column name="DKM_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="DKM_Primary" columns="DKM_DkmId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DKMZjeLink" options="NONCLUSTERED" fields="DKM_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

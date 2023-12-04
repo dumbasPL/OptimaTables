@@ -1,0 +1,28 @@
+<table name="TypWyplataGrupaSkladniki">
+		<description>Tabela składników grupy typów wypłat</description>
+		<column name="TWK_TwkId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TWK_TwyId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do grupy</description>
+		</column>
+		<column name="TWK_TwpId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator typu wypłaty</description>
+		</column>
+		<primaryKey name="TWK_Primary" columns="TWK_TwkId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_TWKTwyLink" localColumns="TWK_TwyId" refTable="TypWyplataGrupa" refColumns="TWY_TwyId" deleteOption="CASCADE">
+			<description>Relacja CDN.TypWyplataGrupaSkladniki:CDN.TypWyplataGrupa (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TWKTwpLink" localColumns="TWK_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId">
+			<description>Relacja CDN.TypWyplataGrupaSkladniki:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<index name="TWKTwyLink" options="NONCLUSTERED" fields="TWK_TwyId">
+			<description>Link do grupy</description>
+		</index>
+		<index name="TWKTwpLink" options="NONCLUSTERED" fields="TWK_TwpId">
+			<description>Link do typu składnika</description>
+		</index>
+	</table>
+	

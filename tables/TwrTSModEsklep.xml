@@ -1,0 +1,16 @@
+<table name="TwrTSModEsklep">
+		<description>Tabela z datą modyfikacja dla sklepu</description>
+		<column name="TwTS_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator towaru (numer rekordu)</description>
+		</column>
+		<column name="TwTS_TS_ModESklep" type="DATETIME" definition="NOT NULL CONSTRAINT DF_TwTS_TS_ModESklep DEFAULT(0)">
+			<description>Time Stamp ostatniej modyfikacji karty dla esklep</description>
+		</column>
+		<primaryKey name="TwTS_Primary" columns="TwTS_TwrId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_TwTSTwrId" localColumns="TwTS_TwrId" refTable="Towary" refColumns="Twr_TwrId" deleteOption="CASCADE">
+			<description>Relacja CDN.TwrTSModEsklep:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

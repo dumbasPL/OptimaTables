@@ -1,0 +1,28 @@
+<table name="DetalStanTwrJMZ">
+		<description>Kody Ean towarów w detalu</description>
+		<column name="DSTJZ_DSTJZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DSTJZ_DSTwrId" type="INTEGER" definition="NOT NULL">
+			<description>Id towaru w detalu</description>
+		</column>
+		<column name="DSTJZ_JM" type="nvarchar(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="DSTJZ_JMPrzelicznikL" type="decimal(15, 2)" definition="NOT NULL">
+			<description>Jednostka miary licznik</description>
+		</column>
+		<column name="DSTJZ_JMPrzelicznikM" type="decimal(7, 0)" definition="NOT NULL">
+			<description>Jednostka miary mianownik</description>
+		</column>
+		<primaryKey name="DSTJZ_Primary" columns="DSTJZ_DSTJZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="IDX_DSTJZ_DSTwrId" options="NONCLUSTERED" fields="DSTJZ_DSTwrId">
+			<description>Index kolumny DSTJZ_DSTwrId</description>
+		</index>
+		<foreignKey name="FK_DSTJZ_DSTwrId" localColumns="DSTJZ_DSTwrId" refTable="DetalStanTowary" refColumns="DSTwr_DSTwrId">
+			<description>Relacja CDN.DetalStanTwrJMZ:CDN.DetalStanTowary (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

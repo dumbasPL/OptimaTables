@@ -1,0 +1,22 @@
+<table name="DetalCeny">
+		<description>Ceny dla stanowiska mobile/detalu</description>
+		<column name="DDfC_DDfCId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DDfC_DStaId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DDfC_DfCId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator ceny</description>
+		</column>
+		<primaryKey name="DDfC_Primary" columns="DDfC_DDfCId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DDfCStanowiskoDetal" localColumns="DDfC_DStaId" refTable="DetalStanowiska" refColumns="DSta_DStaId" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalCeny:CDN.DetalStanowiska (MANY:1)</description>
+		</foreignKey>
+		<index name="DDfCStanowiskoDetal" options="UNIQUE NONCLUSTERED" fields="DDfC_DStaId ,DDfC_DfCId">
+			<description>Według stanowiska</description>
+		</index>
+	</table>
+	

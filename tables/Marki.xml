@@ -1,0 +1,57 @@
+<table name="Marki">
+		<description>Producenci marek</description>
+		<column name="Mrk_MrkId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Mrk_PrdId" type="INTEGER">
+			<description>Id producenta</description>
+		</column>
+		<column name="Mrk_Nazwa" type="VARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Nazwa marki</description>
+		</column>
+		<column name="Mrk_Logo" type="INTEGER">
+			<description>Powiązanie z id danej binarnej</description>
+		</column>
+		<column name="Mrk_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="Mrk_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Mrk_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Mrk_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="Mrk_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Mrk_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Mrk_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Mrk_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Mrk_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Mrk_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Mrk_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Mrk_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Mrk_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Mrk_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Mrk_Primary" columns="Mrk_MrkId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_MrkProducenci" localColumns="Mrk_PrdId" refTable="Producenci" refColumns="Prd_PrdId">
+			<description>Relacja CDN.Marki:CDN.Producenci (MANY:1)</description>
+		</foreignKey>
+		<index name="MrkNazwa" options="UNIQUE NONCLUSTERED" fields="Mrk_Nazwa, Mrk_MrkId">
+			<description>Wg nazwy i id</description>
+		</index>
+	</table>
+	

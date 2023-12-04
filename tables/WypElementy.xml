@@ -1,0 +1,387 @@
+<table name="WypElementy">
+		<description>Tabela elementów wypłat pracowników</description>
+		<column name="WPE_WpeId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator elementu wypłaty</description>
+		</column>
+		<column name="WPE_WplId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wypłaty</description>
+		</column>
+		<column name="WPE_PraId" type="INTEGER">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="WPE_TwpId" type="INTEGER">
+			<description>Identyfikator typu składnika</description>
+		</column>
+		<column name="WPE_Nazwa" type="NVARCHAR(128)" definition="NOT NULL">
+			<description>Opis wypłaty</description>
+		</column>
+		<column name="WPE_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="WPE_Ulga" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota ulgi podatkowej dla wypłaty</description>
+		</column>
+		<column name="WPE_Koszty" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota naliczonych kosztów uzyskania</description>
+		</column>
+		<column name="WPE_ZalFis" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość zaliczki podatku</description>
+		</column>
+		<column name="WPE_NalFis" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Naliczona zaliczka podatku</description>
+		</column>
+		<column name="WPE_PodstEmer" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek emerytalnych</description>
+		</column>
+		<column name="WPE_PodstRent" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek rentowych</description>
+		</column>
+		<column name="WPE_PodstChor" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek chorobowych</description>
+		</column>
+		<column name="WPE_PodstWypad" type="DECIMAL(15,2)">
+			<description>Podstawa składek wypadkowych</description>
+		</column>
+		<column name="WPE_PodstFP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek na FP</description>
+		</column>
+		<column name="WPE_PodstFGSP" type="DECIMAL(15,2)">
+			<description>Podstawa składek na FGŚP</description>
+		</column>
+		<column name="WPE_PodstZdrow" type="DECIMAL(15,2)">
+			<description>Podstawa składek zdrowotnych</description>
+		</column>
+		<column name="WPE_SklEmerPrac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki emerytalnej płaconej przez pracownika</description>
+		</column>
+		<column name="WPE_SklEmerFirma" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki emerytalnej płaconej przez pracodawcę</description>
+		</column>
+		<column name="WPE_SklRentPrac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki rentowej płaconej przez pracownika</description>
+		</column>
+		<column name="WPE_SklRentFirma" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki rentowej płaconej przez pracodawcę</description>
+		</column>
+		<column name="WPE_SklChorPrac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki chorobowej płaconej przez pracownika</description>
+		</column>
+		<column name="WPE_SklChorFirma" type="DECIMAL(15,2)">
+			<description>Kwota składki chorobowej płaconej przez pracodawcę</description>
+		</column>
+		<column name="WPE_SklWypadPrac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki wypadkowej płaconej przez pracownika</description>
+		</column>
+		<column name="WPE_SklWypadFirma" type="DECIMAL(15,2)">
+			<description>Kwota składki wypadkowej płaconej przez pracodawcę</description>
+		</column>
+		<column name="WPE_SklFP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki na Fundusz Pracy</description>
+		</column>
+		<column name="WPE_SklFGSP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki na FGŚP</description>
+		</column>
+		<column name="WPE_Korekta" type="TINYINT" />
+		<column name="WPE_Brutto50" type="DECIMAL(15,2)" />
+		<column name="WPE_Koszty50" type="DECIMAL(15,2)" />
+		<column name="WPE_NrZUS" type="INTEGER" />
+		<column name="WPE_TyUb" type="INTEGER" definition="NOT NULL" />
+		<column name="WPE_SklZdrowPrac" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="WPE_SklZdrowFirma" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="WPE_SklZdrowSuma" type="DECIMAL(15,2)" definition="NOT NULL" />
+		<column name="WPE_KatId" type="INTEGER">
+			<description>Kategoria</description>
+		</column>
+		<column name="WPE_KategoriaOpis" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis kategorii</description>
+		</column>
+		<column name="WPE_Temp" type="INTEGER" definition="NOT NULL" />
+		<column name="WPE_PodstFEP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Podstawa składek na FEP</description>
+		</column>
+		<column name="WPE_SklFEP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota składki na FEP</description>
+		</column>
+		<column name="WPE_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty zastosowanej dla rozliczeń walutowych w wypłatach</description>
+		</column>
+		<column name="WPE_WartoscWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto elementu wypłaty w przeliczeniu na walutę obcą zastosowaną w
+				wypłacie</description>
+		</column>
+		<column name="WPE_Netto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto elementu wypłaty w przeliczeniu na PLN</description>
+		</column>
+		<column name="WPE_NettoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto elementu wypłaty w przeliczeniu na walutę obcą</description>
+		</column>
+		<column name="WPE_Przychod50" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota przychodu na PIT z 50% kosztami uzyskania przed odliczeniem ZUS</description>
+		</column>
+		<column name="WPE_Archiwalny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPE_Archiwalny Default(0)">
+			<description>Flaga: element archiwalny</description>
+		</column>
+		<column name="WPE_KosztyBezFIS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_KosztyBezFIS Default(0)">
+			<description>Koszty uzyskania odliczone w wypłacie dla pracownika oddelegowanego nie płacącego
+				podatku w Polsce</description>
+		</column>
+		<column name="WPE_PodstPPK" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstPPK Default(0)">
+			<description>Podstawa składek na PPK</description>
+		</column>
+		<column name="WPE_SklPPKPrac1" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklPPKPrac1 Default(0)">
+			<description>Kwota składki podstawowej na PPK (pracownik)</description>
+		</column>
+		<column name="WPE_SklPPKPrac2" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklPPKPrac2 Default(0)">
+			<description>Kwota składki dodatkowej na PPK (pracownik)</description>
+		</column>
+		<column name="WPE_SklPPKFirma1" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklPPKFirma1 Default(0)">
+			<description>Kwota składki podstawowej na PPK (firma)</description>
+		</column>
+		<column name="WPE_SklPPKFirma2" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklPPKFirma2 Default(0)">
+			<description>Kwota składki dodatkowej na PPK (firma)</description>
+		</column>
+		<column name="WPE_ZalFisZwol" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPE_ZalFisZwol Default(0)">
+			<description>Element zwolniony z zaliczki podatku</description>
+		</column>
+		<column name="WPE_PodstPITZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstPITZwol Default(0)">
+			<description>Kwota składki podatku dla oddeleg.</description>
+		</column>
+		<column name="WPE_MetodaProp" type="TINYINT" definition="NOT NULL CONSTRAINT DF_WPE_MetodaProp Default(0)">
+			<description>Element naliczany metodą proporcjonalną</description>
+		</column>
+		<column name="WPE_PodstEmerZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstEmerZwol Default(0)">
+			<description>Kwota podstawy emer. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_PodstRentZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstRentZwol Default(0)">
+			<description>Kwota podstawy rent. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_PodstChorZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstChorZwol Default(0)">
+			<description>Kwota podstawy chor. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_PodstZdrowZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowZwol Default(0)">
+			<description>Kwota podstawy zdrow. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_SklEmerPracZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklEmerPracZwol Default(0)">
+			<description>Kwota składki emer. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_SklRentPracZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklRentPracZwol Default(0)">
+			<description>Kwota składki rent. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_SklChorPracZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklChorPracZwol Default(0)">
+			<description>Kwota składki chor. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_SklZdrowPracZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowPracZwol Default(0)">
+			<description>Kwota składki zdrow. dla przekrocz. limitu zwol.</description>
+		</column>
+		<column name="WPE_NalFISZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_NalFISZwol Default(0)">
+			<description>Kwota teoretycznej podstawy zaliczki podatku (zwolnienie z podatku)</description>
+		</column>
+		<column name="WPE_UlgaZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_UlgaZwol Default(0)">
+			<description>Kwota teoretycznej ulgi podatkowej (zwolnienie z podatku)</description>
+		</column>
+		<column name="WPE_KosztyZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_KosztyZwol Default(0)">
+			<description>Kwota teoretycznych kosztów uzyskania (zwolnienie z podatku)</description>
+		</column>
+		<column name="WPE_WartoscPodst" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_WartoscPodst Default(0)">
+			<description>Kwota pierwotna podstawy oddel.</description>
+		</column>
+		<column name="WPE_Podmiana" type="tinyint" definition="NOT NULL CONSTRAINT DF_WPE_Podmiana Default(0)">
+			<description>Zmiana podstaw oddel.</description>
+		</column>
+		<column name="WPE_WartoscOddelegWskaznik" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_WPE_WartoscOddelegWskaznik Default(0)">
+			<description>Wskaźnik przekroczenia oddel.</description>
+		</column>
+		<column name="WPE_SumaOpodatOddeleg" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SumaOpodatOddeleg Default(0)">
+			<description>Suma opodat. elem. oddel.</description>
+		</column>
+		<column name="WPE_SwiadZwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SwiadZwol Default(0)">
+			<description>Kwota składników ZFŚS do limitu</description>
+		</column>
+		<column name="WPE_SwiadZwolWal" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SwiadZwolWal Default(0)">
+			<description>Kwota składników ZFŚS do limitu (waluta)</description>
+		</column>
+		<column name="WPE_WartoscOddelegWskaznikDieta" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_WartoscOddelegWskaznikDieta Default(0)">
+			<description>Wskaźnik przekroczenia oddel. przemnoż. przez dietę</description>
+		</column>
+		<column name="WPE_PrzekroczLimituOddeleg" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PrzekroczLimituOddeleg Default(0)">
+			<description>Przekroczenie limitu</description>
+		</column>
+		<column name="WPE_ZalFISZwolPowod" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_WPE_ZalFISZwolPowod DEFAULT(0)">
+			<description>Element zwolniony z pobrania zaliczki podatku</description>
+		</column>
+		<column name="WPE_UlgaKlasaSrednia" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_UlgaKlasaSrednia DEFAULT(0)">
+			<description>Kwota dodatkowej ulgi podatkowej</description>
+		</column>
+		<column name="WPE_NalFISZdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_NalFISZdrow Default(0)">
+			<description>Kwota podstawy zaliczki podatku dla składki zdrowotnej</description>
+		</column>
+		<column name="WPE_UlgaZdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_UlgaZdrow Default(0)">
+			<description>Kwota ulgi podatkowej dla składki zdrowotnej</description>
+		</column>
+		<column name="WPE_KosztyZdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_KosztyZdrow Default(0)">
+			<description>Kwota kosztów uzyskania dla składki zdrowotnej</description>
+		</column>
+		<column name="WPE_Koszty50Zdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_Koszty50Zdrow Default(0)">
+			<description>Kwota 50% kosztów uzyskania dla składki zdrowotnej</description>
+		</column>
+		<column name="WPE_Brutto50Zdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_Brutto50Zdrow Default(0)">
+			<description>Kwota 50% brutto KUP dla składki zdrowotnej</description>
+		</column>
+		<column name="WPE_Przychod50Zdrow" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_Przychod50Zdrow Default(0)">
+			<description>Kwota 50% przychodu KUP dla składki zdrowotnej</description>
+		</column>
+		<column name="WPE_Koszty50Zwol" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_Koszty50Zwol Default(0)">
+			<description>Kwota 50% kosztów uzyskania dla składki zdrowotnej</description>
+		</column>
+		<column name="WPE_ZalFISWstecz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_ZalFISWstecz Default(0)">
+			<description>Zaliczka podatku wg starych zasad</description>
+		</column>
+		<column name="WPE_ZalFISNadwyzka" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_ZalFISNadwyzka Default(0)">
+			<description>Nadwyżka zaliczki podatku</description>
+		</column>
+		<column name="WPE_ZalFISDoplata" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_ZalFISDoplata Default(0)">
+			<description>Dopłata zaliczki podatku</description>
+		</column>
+		<column name="WPE_ZalFISBiez" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_ZalFISBiez Default(0)">
+			<description>Zaliczka podatku wg nowych zasad</description>
+		</column>
+		<column name="WPE_SklZdrowPracWstecz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowPracWstecz Default(0)">
+			<description>Składka zdrowotna wg starych zasad</description>
+		</column>
+		<column name="WPE_SklZdrowSumaWstecz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowSumaWstecz Default(0)">
+			<description>Składka zdrowotna wg starych zasad</description>
+		</column>
+		<column name="WPE_PodstZdrowWlascSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowWlascSkala Default(0)">
+			<description />
+		</column>
+		<column name="WPE_PodstZdrowWlascLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowWlascLiniowy Default(0)">
+			<description />
+		</column>
+		<column name="WPE_PodstZdrowWlascRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowWlascRyczalt Default(0)">
+			<description />
+		</column>
+		<column name="WPE_PodstZdrowWlascKarta" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowWlascKarta Default(0)">
+			<description />
+		</column>
+		<column name="WPE_PodstZdrowWlascBrak" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowWlascBrak Default(0)">
+			<description />
+		</column>
+		<column name="WPE_SklZdrowWlascSkala" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowWlascSkala Default(0)">
+			<description />
+		</column>
+		<column name="WPE_SklZdrowWlascLiniowy" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowWlascLiniowy Default(0)">
+			<description />
+		</column>
+		<column name="WPE_SklZdrowWlascRyczalt" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowWlascRyczalt Default(0)">
+			<description />
+		</column>
+		<column name="WPE_SklZdrowWlascKarta" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowWlascKarta Default(0)">
+			<description />
+		</column>
+		<column name="WPE_SklZdrowWlascBrak" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowWlascBrak Default(0)">
+			<description />
+		</column>
+		<column name="WPE_DietaKierowcyFIS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_DietaKierowcyFIS Default(0)">
+			<description>Dieta pomniejszająca podstawę opodatkowania</description>
+		</column>
+		<column name="WPE_DietaKierowcyZUS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_DietaKierowcyZUS Default(0)">
+			<description>Dieta pomniejszająca podstawę ZUS</description>
+		</column>
+		<column name="WPE_PodstEmerOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstEmerOpodat Default(0)">
+			<description>Podstawa składek emerytalnych</description>
+		</column>
+		<column name="WPE_PodstRentOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstRentOpodat Default(0)">
+			<description>Podstawa składek rentowych</description>
+		</column>
+		<column name="WPE_PodstChorOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstChorOpodat Default(0)">
+			<description>Podstawa składek chorobowych</description>
+		</column>
+		<column name="WPE_SklEmerPracOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklEmerPracOpodat Default(0)">
+			<description>Kwota składki emerytalnej płaconej przez pracownika</description>
+		</column>
+		<column name="WPE_SklRentPracOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklRentPracOpodat Default(0)">
+			<description>Kwota składki rentowej płaconej przez pracownika</description>
+		</column>
+		<column name="WPE_SklChorPracOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklChorPracOpodat Default(0)">
+			<description>Kwota składki chorobowej płaconej przez pracownika</description>
+		</column>
+		<column name="WPE_PodstZdrowOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowOpodat Default(0)">
+			<description>Kwota podstawy zdrowotnej elementów opodatkowanych</description>
+		</column>
+		<column name="WPE_SklZdrowPracOpodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowPracOpodat Default(0)">
+			<description>Kwota składki zdrowotnej elementów opodatkowanych</description>
+		</column>
+		<column name="WPE_PodstZdrowNieopodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_PodstZdrowNieopodat Default(0)">
+			<description>Kwota podstawy zdrowotnej elementów nieopodatkowanych</description>
+		</column>
+		<column name="WPE_SklZdrowPracNieopodat" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowPracNieopodat Default(0)">
+			<description>Kwota składki zdrowotnej elementów nieopodatkowanych</description>
+		</column>
+		<column name="WPE_SklZdrowPracOpodatWstecz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowPracOpodatWstecz Default(0)">
+			<description>Kwota składki zdrowotnej elementów opodatkowanych</description>
+		</column>
+		<column name="WPE_SklZdrowPracNieopodatWstecz" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_WPE_SklZdrowPracNieopodatWstecz Default(0)">
+			<description>Kwota składki zdrowotnej elementów nieopodatkowanych</description>
+		</column>
+		<column name="WPE_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="WPE_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WPE_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WPE_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPE_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="WPE_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="WPE_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WPE_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="WPE_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WPE_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="WPE_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_WPE_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPE_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_WPE_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="WPE_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="WPE_Primary" columns="WPE_WpeId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_WPEKategoria" localColumns="WPE_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.WypElementy:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPETwpLink" localColumns="WPE_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId">
+			<description>Relacja CDN.WypElementy:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPEPraLInk" localColumns="WPE_PraId" refTable="PracKod" refColumns="PRA_PraId">
+			<description>Relacja CDN.WypElementy:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_WPEWplLink" localColumns="WPE_WplId" refTable="Wyplaty" refColumns="WPL_WplId" deleteOption="CASCADE">
+			<description>Relacja CDN.WypElementy:CDN.Wyplaty (MANY:1)</description>
+		</foreignKey>
+		<index name="WPEWplLink" options="NONCLUSTERED" fields="WPE_WplId">
+			<description>Odnośnik do wypłaty</description>
+		</index>
+		<index name="WPEPraLInk" options="NONCLUSTERED" fields="WPE_PraId">
+			<description>Link do pracownika</description>
+		</index>
+		<index name="WPETwpLink" options="NONCLUSTERED" fields="WPE_TwpId">
+			<description>Link do typu składnika</description>
+		</index>
+		<index name="WPEKategoria" options="NONCLUSTERED" fields="WPE_KatId">
+			<description>Link do kategorii</description>
+		</index>
+	</table>
+	

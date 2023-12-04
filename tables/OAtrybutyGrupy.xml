@@ -1,0 +1,10 @@
+<table name="OAtrybutyGrupy">
+		<description>Lista grup atrybutów</description>
+		<column name="ATG_AtgId" type="INTEGER" definition="IDENTITY(1,1)" />
+		<column name="ATG_Nazwa" type="NVARCHAR(41)" definition="NOT NULL" />
+		<primaryKey name="ATG_Primary" columns="ATG_AtgId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="AtgNazwa" options="UNIQUE NONCLUSTERED" fields="ATG_Nazwa" />
+	</table>
+	

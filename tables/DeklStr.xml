@@ -1,0 +1,19 @@
+<table name="DeklStr">
+		<description>Tabela deklaracji</description>
+		<column name="DKS_DksId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DKS_DknId" type="INTEGER" />
+		<column name="DKS_LP" type="INTEGER" definition="NOT NULL" />
+		<column name="DKS_Tekst" type="NVARCHAR(MAX)" />
+		<primaryKey name="DKS_Primary" columns="DKS_DksId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DKSDknLink" localColumns="DKS_DknId" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DeklStr:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DKSDknLink" options="NONCLUSTERED" fields="DKS_DknId">
+			<description>Link do DeklNag</description>
+		</index>
+	</table>
+	

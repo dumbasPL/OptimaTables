@@ -1,0 +1,274 @@
+<table name="eSklepStanowiska">
+		<description>Tabela z e-Sklep</description>
+		<column name="ESS_ESSId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="ESS_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa</description>
+		</column>
+		<column name="ESS_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ 1- iSklep, 2 - iMall</description>
+		</column>
+		<column name="ESS_ASSerwer" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Nazwa serwera</description>
+		</column>
+		<column name="ESS_Hash" type="NVARCHAR(54)" definition="NOT NULL">
+			<description>Hash</description>
+		</column>
+		<column name="ESS_IdKlienta" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>IdKlienta</description>
+		</column>
+		<column name="ESS_IdISklep" type="INTEGER" definition="NOT NULL">
+			<description>Id sklepu</description>
+		</column>
+		<column name="ESS_DomyslnaWaluta" type="VARCHAR(5)" definition="NOT NULL">
+			<description>Domyslna waluta</description>
+		</column>
+		<column name="ESS_DomyslnyMagazyn" type="INTEGER" definition="NOT NULL">
+			<description>Domyslna magazyn</description>
+		</column>
+		<column name="ESS_ExpZasoby" type="TINYINT" definition="NOT NULL">
+			<description>Eksport zasobow </description>
+		</column>
+		<column name="ESS_WyslijStanWszystkieMag" type="TINYINT" definition="NOT NULL">
+			<description>Eksport zasobow z wszystkich magazynow </description>
+		</column>
+		<column name="ESS_StanyNaDzien" type="TINYINT" definition="NOT NULL">
+			<description>Eksport zasobow stany na dzien </description>
+		</column>
+		<column name="ESS_WyslijCechyPartii" type="TINYINT" definition="NOT NULL">
+			<description>Eksport cech partii </description>
+		</column>
+		<column name="ESS_TwGNumer" type="INTEGER" definition="NOT NULL">
+			<description>Id grupy towarow dla stanowiska</description>
+			<details>pole jest not null - wartość 0 oznacza przynależność do roota (grupy głównej)</details>
+		</column>
+		<column name="ESS_SchematNumeracjiRO" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="ESS_SchematNumeracjiROSeria" type="NVARCHAR(5)" definition="NOT NULL">
+			<description>Seria dla definicji</description>
+		</column>
+		<column name="ESS_ExpGrup" type="TINYINT" definition="NOT NULL">
+			<description>Eksport grup</description>
+		</column>
+		<column name="ESS_ExpGrupTyp" type="TINYINT" definition="NOT NULL">
+			<description>Eksport grup typ</description>
+		</column>
+		<column name="ESS_NrCeny" type="INTEGER" definition="NOT NULL">
+			<description>Numer Ceny</description>
+		</column>
+		<column name="ESS_NrCenyDomyslnej" type="INTEGER" definition="NOT NULL">
+			<description>Numer Ceny poprzedniej</description>
+		</column>
+		<column name="ESS_EsklepCena0" type="TINYINT" definition="NOT NULL">
+			<description>Wysyłać ceny 0</description>
+		</column>
+		<column name="ESS_ExpCennik" type="TINYINT" definition="NOT NULL">
+			<description>Eksport cennika</description>
+		</column>
+		<column name="ESS_ExpCennikTyp" type="TINYINT" definition="NOT NULL">
+			<description>Eksport cennika typ</description>
+		</column>
+		<column name="ESS_KosztPrzesylki" type="INTEGER" definition="NOT NULL">
+			<description>Koszt przesyłki</description>
+		</column>
+		<column name="ESS_FormaPlatnosciESPOS1" type="INTEGER" definition="NOT NULL">
+			<description>FormaPlatnosciESPOS1</description>
+		</column>
+		<column name="ESS_FormaPlatnosciESPOS2" type="INTEGER" definition="NOT NULL">
+			<description>FormaPlatnosciESPOS2</description>
+		</column>
+		<column name="ESS_FormaPlatnosciESPOS3" type="INTEGER" definition="NOT NULL">
+			<description>FormaPlatnosciESPOS3</description>
+		</column>
+		<column name="ESS_FormaPlatnosciESPOS4" type="INTEGER" definition="NOT NULL">
+			<description>FormaPlatnosciESPOS4</description>
+		</column>
+		<column name="ESS_FormaPlatnosciESPOS5" type="INTEGER" definition="NOT NULL">
+			<description>FormaPlatnosciESPOS5</description>
+		</column>
+		<column name="ESS_KntSprawdzNIP" type="TINYINT" definition="NOT NULL">
+			<description>Kontrola kontrahenta po NIP</description>
+		</column>
+		<column name="ESS_KntSprawdzEMail" type="TINYINT" definition="NOT NULL">
+			<description>Kontrola kontrahenta po eMail</description>
+		</column>
+		<column name="ESS_KntGrupa" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Grupa kontrahenta</description>
+		</column>
+		<column name="ESS_DaneFirmyNazwa" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Nazwa</description>
+		</column>
+		<column name="ESS_DaneFirmyOpis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dane Firmy Opis</description>
+		</column>
+		<column name="ESS_DaneFirmyUlica" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Ulica</description>
+		</column>
+		<column name="ESS_DaneFirmyNrDomu" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Nr Domu</description>
+		</column>
+		<column name="ESS_DaneFirmyNrMieszkania" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Nr Mieszkania</description>
+		</column>
+		<column name="ESS_DaneFirmyMiasto" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Miasto</description>
+		</column>
+		<column name="ESS_DaneFirmyKodPocztowy" type="VARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Kod Pocztowy</description>
+		</column>
+		<column name="ESS_DaneFirmyWojewodztwo" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dane Firmy Wojewodztwo</description>
+		</column>
+		<column name="ESS_DaneFirmyTelefon" type="VARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Telefon</description>
+		</column>
+		<column name="ESS_DaneFirmyEmail" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Email</description>
+		</column>
+		<column name="ESS_DaneFirmyURL" type="VARCHAR(254)" definition="NOT NULL">
+			<description>Dane Firmy URL</description>
+		</column>
+		<column name="ESS_DaneFirmyGG" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy GG</description>
+		</column>
+		<column name="ESS_DaneFirmySkype" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Skype</description>
+		</column>
+		<column name="ESS_DaneFirmyLogo" type="INTEGER" definition="NOT NULL">
+			<description>Dane Firmy Logo</description>
+		</column>
+		<column name="ESS_DaneFirmyRok" type="NVARCHAR(4)" definition="NOT NULL">
+			<description>Dane Firmy Rok założenia</description>
+		</column>
+		<column name="ESS_DaneFirmyGSM" type="VARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy GSM</description>
+		</column>
+		<column name="ESS_DaneFirmyFacebook" type="NVARCHAR(254)" definition="NOT NULL" hash="1">
+			<description>Dane Firmy Facebook</description>
+		</column>
+		<column name="ESS_FakturaPDF" type="TINYINT" definition="NOT NULL">
+			<description>Faktura w PDF</description>
+		</column>
+		<column name="ESS_TS_Synchro" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroPotw" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroTwr" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroTwrPotw" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroKnt" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroKntPotw" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroGrup" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroGrupPotw" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroSlowniki" type="INTEGER" definition="NOT NULL">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroZestawyTwr" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_TS_SynchroZestawyTwr DEFAULT(0)">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroZestawyTwrPotw" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_TS_SynchroZestawyTwrPotw DEFAULT(0)">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroKntOptima" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_TS_SynchroKntOptima DEFAULT(0)">
+			<description>Time Stamp ostatniej synchronizacji kontrahentów z optimy</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroKntOptimaPotw" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_TS_SynchroKntOptimaPotw DEFAULT(0)">
+			<description>Time Stamp ostatniej synchronizacji kontrahentów z optimy</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroBin" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_TS_SynchroBin DEFAULT(0)">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_TS_SynchroBinPotw" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_TS_SynchroBinPotw DEFAULT(0)">
+			<description>Time Stamp ostatniej synchronizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="ESS_StanSynchronizacji" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_StanSynchronizacji DEFAULT(0)">
+			<description>Czy trwa synchronizacja</description>
+		</column>
+		<column name="ESS_TypSklepu" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_TypSklepu DEFAULT(0)">
+			<description>Jaka wersja sklepu</description>
+		</column>
+		<column name="ESS_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_Nieaktywny DEFAULT(0)">
+			<description>Sklep nieaktywny</description>
+		</column>
+		<column name="ESS_OstatnieDabId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_OstatnieDabId DEFAULT(0)">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="ESS_KontrolaLimituPlat" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_KontrolaLimituPlat DEFAULT(0)">
+			<description>Kontrola limitu płatności (Comarch e-Sklep B2B)</description>
+		</column>
+		<column name="ESS_PierwszaSynchroLoginy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_PierwszaSynchroLoginy DEFAULT(0)">
+			<description>Czy zsynchronizowano loginy w wersji 2018.6</description>
+		</column>
+		<column name="ESS_PierwszaSynchroZgody" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_PierwszaSynchroZgody DEFAULT(0)">
+			<description>Czy zsynchronizowano zgody w wersji 2018.7</description>
+		</column>
+		<column name="ESS_PierwszaSynchroDefAtr" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_PierwszaSynchroDefAtr DEFAULT(0)">
+			<description>Czy zsynchronizowano definicje atrybutów w wersji 2019</description>
+		</column>
+		<column name="ESS_PomijajKosztyDostawyZeroweParagon" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_PomijajKosztyDostawyZeroweParagon DEFAULT(1)">
+			<description>Czy zsynchronizowano definicje atrybutów w wersji 2019</description>
+		</column>
+		<column name="ESS_PomijajKosztyDostawyZeroweFaktura" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_PomijajKosztyDostawyZeroweFaktura DEFAULT(0)">
+			<description>Czy zsynchronizowano definicje atrybutów w wersji 2019</description>
+		</column>
+		<column name="ESS_OstatnieTwrId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_OstatnieTwrId DEFAULT(0)">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="ESS_WersjaProt" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_ESS_WersjaProt DEFAULT(15)">
+			<description>Wersja protokołu</description>
+		</column>
+		<column name="ESS_OstatnieRabatyPusto" type="INTEGER" definition="NOT NULL CONSTRAINT DF_ESS_OstatnieRabatyPusto DEFAULT(0)">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="ESS_GuidZamowienia" type="NVARCHAR(36)">
+			<description>GUID zamówienia sklepu demo</description>
+		</column>
+		<column name="ESS_StatusZamowienia" type="TINYINT" definition="NOT NULL CONSTRAINT DF_ESS_StatusZamowienia DEFAULT(0)">
+			<description>Status zamówienia sklepu demo</description>
+			<details>
+				0 - brak zamówienia (nie dotyczy)
+				1 - złożono zamówienie, ale nie pozyskano hasha
+				2 - złożono zamówienie, uzyskano hash
+				3 - złożono zamówienie, ale jego realizacja nie powiodła się
+			</details>
+		</column>
+		<primaryKey name="ESS_Primary" columns="ESS_ESSId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

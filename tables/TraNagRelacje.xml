@@ -1,0 +1,57 @@
+<table name="TraNagRelacje">
+		<description>Tabela wskaźników do skojarzonych dokumentów</description>
+		<column name="TrR_TrRId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="TrR_TrNTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu nadrzędnego</description>
+		</column>
+		<column name="TrR_TrNId" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu nadrzędnego</description>
+		</column>
+		<column name="TrR_FaTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu skojarzonego</description>
+		</column>
+		<column name="TrR_FaId" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu skojarzonego</description>
+		</column>
+		<column name="TrR_Flaga" type="SMALLINT">
+			<description>pole techniczne</description>
+			<details>
+				Symbolika: &lt;br&gt;
+				FA/FZ faktura sprzedaży/zakupu &lt;br&gt;
+				WZ/PZ - Wydanie/Przyjęcie zewnętrzne &lt;br&gt;
+				WKA/PKA - Wydanie/Przyjęcie kaucji &lt;br&gt;
+
+				0 gdy &lt;br&gt;
+				FA do WZ&lt;br&gt;
+				FZ do PZ&lt;br&gt;
+				PA do FA do WZ &lt;br&gt;
+				1 gdy &lt;br&gt;
+				FA/FZ do WKA/PKA &lt;br&gt;
+				WZ/PZ do WKA/PKA &lt;br&gt;
+				2 gdy &lt;br&gt;
+				WKA/PKA do FA/FZ
+			</details>
+		</column>
+		<primaryKey name="TrR_Primary" columns="TrR_TrRId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="KeyTraNagRelId" options="NONCLUSTERED" fields="TrR_TrNId ,TrR_FaTyp ,TrR_Flaga" includedColumns="TrR_TrRId" />
+		<index name="TraNagRelTrNId" options="NONCLUSTERED" fields="TrR_TrNId ,TrR_TrNTyp">
+			<description>Klucz obcy do skojarzonego dokumentu</description>
+		</index>
+		<index name="TraNagRelFaId" options="NONCLUSTERED" fields="TrR_FaId ,TrR_FaTyp">
+			<description>Klucz obcy do skojarzonego dokumentu</description>
+		</index>
+		<index name="TraNagRelFlaga" options="NONCLUSTERED" fields="TrR_Flaga">
+			<description>Wg flaga</description>
+		</index>
+		<index name="TraNagRelFaTyp" options="NONCLUSTERED" fields="TrR_FaTyp" includedColumns="TrR_TrNId">
+			<description>Wg typu dokumentu skojarzonego</description>
+		</index>
+		<index name="TraNagRelTrNTypFaTyp" options="NONCLUSTERED" fields="TrR_TrNTyp,TrR_FaTyp" includedColumns="TrR_TrNId,TrR_FaId">
+			<description>Wg typów dokumentu i dokumentu skojarzonego</description>
+		</index>
+	</table>
+	

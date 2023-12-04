@@ -1,0 +1,676 @@
+<table name="VatNag">
+		<description>Tabela z nagłówkami rejestrów VAT</description>
+		<details>
+			Nagłówki dokumentów w rejestrze Vat.
+			Tabela VatNag zawiera informacje o dacie dokumentu, kontrahencie itp, tabela VatTab zawiera
+			informacje o pozycjach dokumentu, zagregowanych do poszczególnych stawek Vat
+		</details>
+		<column name="VaN_VaNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="VaN_Typ" type="SMALLINT" definition="NOT NULL" filterVisible="false">
+			<description>Typ zapisu</description>
+			<details>
+				Przyjmuje wartości:
+				1 - rejestr zakupów Vat
+				2 - rejestr sprzedaży Vat
+			</details>
+		</column>
+		<column name="VaN_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj zapisu</description>
+			<details>
+				Rodzaj zapisu
+				Dodatkowy status określający rodzaj zapisu np.
+				0 - faktura nieprzekształcona
+				1 - faktura, do której wygenerowano fakturę wewnętrzną
+				2 - faktura sprzedaży, do której wygenerowano rozliczenie marży
+				3 - faktura wewnętrzna sprzedaży, która powstała z przekształcenia faktury zakupu
+				4 - faktura wewnętrzna zakupu, która powstała z przekształcenia faktury wewnętrznej
+				sprzedaży
+				5 - faktura wewnętrzna z rozliczeniem marży wygenerowana automatycznie z faktury sprzedaży
+				6 - zbiorcza faktura wewnętrzna sprzedaży
+				7 - zbiorcza faktura wewnętrzna zakupu
+				8 - faktura powstała z korekty paragonu do faktury
+				9 - faktura powstała z korekty faktury do paragonu
+				10 - faktura techniczna
+				11 - faktura przeniesiona do bazy danych klienta (BR)
+				12 - faktura będąca marżą ujemną
+			</details>
+		</column>
+		<column name="VaN_Rejestr" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa rejestru</description>
+		</column>
+		<column name="VaN_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc zapisu</description>
+			<details>
+				Rok i miesiąc wpisu dokumentu, obliczany jako:
+				100 * YEAR(DataZapData) + MONTH(DataZapData)
+			</details>
+		</column>
+		<column name="VaN_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa zapisu w rejestrze</description>
+		</column>
+		<column name="VaN_DataObowiazkuPodatkowego" type="DATETIME" definition="NOT NULL CONSTRAINT DF_VaN_DataObowiazkuPodatkowego DEFAULT(GetDate())">
+			<description>Data powstania obowiazku podatkowego</description>
+		</column>
+		<column name="VaN_DataPrawaOdliczenia" type="DATETIME" definition="NOT NULL CONSTRAINT DF_VaN_DataPrawaOdliczenia DEFAULT(GetDate())">
+			<description>Data prawa do odliczenia</description>
+		</column>
+		<column name="VaN_DataZap" type="DATETIME" definition="NOT NULL">
+			<description>Data zapisu w rejestrze</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+				Data wystawienia faktury w rejestrze sprzedaży lub data wpływu w rejestrze zakupów
+			</details>
+		</column>
+		<column name="VaN_DataWys" type="DATETIME" definition="NOT NULL">
+			<description>Data wystawienia dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="VaN_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji (zakupu lub sprzedaży)</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="VaN_DataKur" type="DATETIME" definition="NOT NULL">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="VaN_KursDoKsiegowania" type="TINYINT" definition="NOT NULL">
+			<description>Osobny kurs do księgowania</description>
+		</column>
+		<column name="VaN_DataKurDoVAT" type="DATETIME" definition="NOT NULL">
+			<description>Data kursu waluty (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_DeklRokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc rozliczenia w deklaracji VAT7</description>
+		</column>
+		<column name="VaN_DeklRokMiesKasa" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc rozliczenia w deklaracji wg metody kasowej</description>
+		</column>
+		<column name="VaN_RozliczacVat7" type="TINYINT" definition="NOT NULL">
+			<description>Czy rozliczać w deklaracji Vat-7</description>
+		</column>
+		<column name="VaN_RozliczacVatUE" type="TINYINT" definition="NOT NULL">
+			<description>Czy dokument rozliczać w deklaracji VAT-UE</description>
+		</column>
+		<column name="VaN_RozliczacVat27" type="TINYINT" definition="NOT NULL">
+			<description>Czy dokument rozliczać w deklaracji VAT-27</description>
+		</column>
+		<column name="VaN_AutoVat7Kasa" type="TINYINT" definition="NOT NULL">
+			<description>Automatyczne określanie miesiąca rozliczenia dla metody kasowej</description>
+		</column>
+		<column name="VaN_MetodaKasowa" type="TINYINT" definition="NOT NULL CONSTRAINT DF_VaN_MetodaKasowa DEFAULT(0)">
+			<description>Metoda kasowa</description>
+		</column>
+		<column name="VaN_JPK_FA" type="TINYINT" definition="NOT NULL CONSTRAINT DF_VaN_JPK_FA DEFAULT(0)">
+			<description>JPK_FA</description>
+		</column>
+		<column name="VaN_IdentKsieg" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Identyfikator księgowy</description>
+		</column>
+		<column name="VaN_IdentKsiegNumeracja" type="VARCHAR(50)">
+			<description>Schemat numeracji identyfikatora księgowego</description>
+		</column>
+		<column name="VaN_IdentKsiegDDfID" type="INT">
+			<description>ID schematu numeracji Identyfikatora księgowego</description>
+		</column>
+		<column name="VaN_Dokument" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="VaN_DokumentyNadrzedne" type="VARCHAR(256)" definition="NULL">
+			<description>Numery dokumentów nadrzędnych</description>
+		</column>
+		<column name="VaN_KorektaDo" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer transakcji korygowanej</description>
+		</column>
+		<column name="VaN_Korekta" type="TINYINT" definition="NOT NULL">
+			<description>Czy transakcja korygująca</description>
+			<details>0 - nie, 1 - tak</details>
+		</column>
+		<column name="VaN_Fiskalna" type="TINYINT" definition="NOT NULL">
+			<description>Czy transakcja z kasy fiskalnej</description>
+			<details>0 - nie, 1 - tak</details>
+		</column>
+		<column name="VaN_KorektaVAT" type="TINYINT" definition="NOT NULL">
+			<description>Zapis korekcyjny VAT struktury zakupów</description>
+			<details>0 - nie, 1 - tak</details>
+		</column>
+		<column name="VaN_Detal" type="TINYINT" definition="NOT NULL">
+			<description>Transakcja detaliczna</description>
+			<details>0 - nie, 1 - tak</details>
+		</column>
+		<column name="VaN_Wewnetrzna" type="TINYINT" definition="NOT NULL">
+			<description>Faktura wewnętrzna (nie generuje płatności)</description>
+		</column>
+		<column name="VaN_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				Typ związanego podmiotu. Pole techniczne, wskazujące do jakiego rodzaju podmiotu odwołuje
+				się relacja:
+				1 - Kontrahent (tabela: Kontrahenci)
+				2 - Bank (tabela: BnkNazwy)
+				3 - Pracownik/Wspólnik (tabela: PracEtaty)
+				5 - Urząd (tabela: Urzedy)
+			</details>
+		</column>
+		<column name="VaN_PodID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kontrahenta</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="VaN_KntNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy kontrahenta</description>
+		</column>
+		<column name="VaN_KntNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy kontrahenta</description>
+		</column>
+		<column name="VaN_KntNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy kontrahenta</description>
+		</column>
+		<column name="VaN_KntKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj zamieszkania (siedziby) kontrahenta</description>
+		</column>
+		<column name="VaN_KntWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Wojewódzwo kontrahenta</description>
+		</column>
+		<column name="VaN_KntPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="VaN_KntGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="VaN_KntUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia adresu kontrahenta</description>
+		</column>
+		<column name="VaN_KntNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="VaN_KntNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="VaN_KntMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto kontrahenta</description>
+		</column>
+		<column name="VaN_KntKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="VaN_KntPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="VaN_KntAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Druga linia adresu kontrahenta</description>
+		</column>
+		<column name="VaN_KntNipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Symbol kraju dla numeru NIP</description>
+		</column>
+		<column name="VaN_KntNipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Numer NIP kontrahenta</description>
+		</column>
+		<column name="VaN_Pesel" type="NVARCHAR(11)" definition="NOT NULL CONSTRAINT DF_VaN_Pesel DEFAULT('')" hash="1">
+			<description>Numer PESEL</description>
+		</column>
+		<column name="VaN_KntKonto" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Konto księgowe kontrahenta</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_Finalny" type="TINYINT" definition="NOT NULL">
+			<description>Status kontrahenta</description>
+			<details>
+				Przyjmuje wartości:
+				0 - podmiot gospodarczy
+				1 - odbiorca finalny
+			</details>
+		</column>
+		<column name="VaN_Export" type="TINYINT" definition="NOT NULL">
+			<description>Transakcja eksportowa</description>
+			<details>
+				Rodzaj transakcji:
+				0 - krajowa
+				1 - eksport/import
+				2 - eksport - zwrot VAT
+				3 - dostawa/nabycie wewnątrzwspólnotowa
+				4 - dostawa/nabycie wewnątrzunijna trójstrona
+				5 - krajowa - podatnikiem jest nabywca
+				6 - dostawa poza terytorium kraju
+				7 - poza terytorium kraju (stawka NP)
+			</details>
+		</column>
+		<column name="VaN_PodatekVat" type="TINYINT" definition="NOT NULL CONSTRAINT DF_VaN_PodatekVat DEFAULT(0)">
+			<description>Czy kontrahent jest płatnikiem podatku VAT</description>
+		</column>
+		<column name="VaN_MalyPod" type="TINYINT" definition="NOT NULL">
+			<description>Kontrahent jest małym podatnikiem</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_Rolnik" type="TINYINT" definition="NOT NULL">
+			<description>Czy podatnik jest rolnikiem ryczałtowym</description>
+			<details>0 - nie, 1 - tak</details>
+		</column>
+		<column name="VaN_PlatnikTyp" type="SMALLINT">
+			<description>Typ płatnika z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="VaN_PlatnikID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator płatnika</description>
+			<details>Wskaźnik do płatnika - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="VaN_PlatnikRachunekLp" type="INTEGER">
+			<description>Numer rachunku płatnika - wskaźnik na CDN.SchematPlatnosci</description>
+		</column>
+		<column name="VaN_PlatnikKraj" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikKraj DEFAULT('')" hash="1">
+			<description>Kraj zamieszkania (siedziby) płatnika</description>
+		</column>
+		<column name="VaN_PlatnikWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikWojewodztwo DEFAULT('')">
+			<description>Wojewódzwo płatnika</description>
+		</column>
+		<column name="VaN_PlatnikPowiat" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikPowiat DEFAULT('')" hash="1">
+			<description>Powiat płatnika</description>
+		</column>
+		<column name="VaN_PlatnikGmina" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikGmina DEFAULT('')" hash="1">
+			<description>Gmina płatnika</description>
+		</column>
+		<column name="VaN_PlatnikUlica" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikUlica DEFAULT('')" hash="1">
+			<description>Pierwsza linia adresu płatnika</description>
+		</column>
+		<column name="VaN_PlatnikNrDomu" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikNrDomu DEFAULT('')" hash="1">
+			<description>Numer domu płatnika</description>
+		</column>
+		<column name="VaN_PlatnikNrLokalu" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikNrLokalu DEFAULT('')" hash="1">
+			<description>Numer lokalu płatnika</description>
+		</column>
+		<column name="VaN_PlatnikMiasto" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikMiasto DEFAULT('')" hash="1">
+			<description>Miasto płatnika</description>
+		</column>
+		<column name="VaN_PlatnikKodPocztowy" type="NVARCHAR(10)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikKodPocztowy DEFAULT('')" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="VaN_PlatnikPoczta" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikPoczta DEFAULT('')" hash="1">
+			<description>Poczta płatnika</description>
+		</column>
+		<column name="VaN_PlatnikAdres2" type="NVARCHAR(40)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikAdres2 DEFAULT('')" hash="1">
+			<description>Druga linia adresu płatnika</description>
+		</column>
+		<column name="VaN_PlatnikNazwa1" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikNazwa1 DEFAULT('')" hash="1">
+			<description>Pierwsza linia nazwy płatnika</description>
+		</column>
+		<column name="VaN_PlatnikNazwa2" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikNazwa2 DEFAULT('')" hash="1">
+			<description>Druga linia nazwy płatnika</description>
+		</column>
+		<column name="VaN_PlatnikNazwa3" type="NVARCHAR(250)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikNazwa3 DEFAULT('')" hash="1">
+			<description>Trzecia linia nazwy płatnika</description>
+		</column>
+		<column name="Van_PlatnikRachunekNr" type="NVARCHAR(51)" definition="NOT NULL CONSTRAINT df_VaN_PlatnikRachunekNr DEFAULT('')" hash="1">
+			<description>Numer rachunku płatnika</description>
+		</column>
+		<column name="VaN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="VaN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis kategorii transakcji</description>
+		</column>
+		<column name="VaN_WzID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator wzorca księgowania</description>
+		</column>
+		<column name="VaN_Rozliczono" type="TINYINT" definition="NOT NULL">
+			<description>Status rozliczenia</description>
+			<details>Pole nadmiarowe</details>
+		</column>
+		<column name="VaN_Zaplacono" type="TINYINT" definition="NOT NULL CONSTRAINT DF_VaN_Zaplacono DEFAULT(0)">
+			<description>Flaga zapłacono {0, 1}</description>
+		</column>
+		<column name="VaN_FplID" type="INTEGER">
+			<description>Forma płatności</description>
+			<details>
+				Pole przyjmuje wartości:
+				1-gotówka,
+				2-czek,
+				3-przelew,
+				4-kredyt,
+				5-inne
+			</details>
+		</column>
+		<column name="VaN_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="VaN_RazemNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna netto</description>
+		</column>
+		<column name="VaN_RazemNettoDoVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna netto (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_RazemVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna VAT</description>
+		</column>
+		<column name="VaN_RazemVATDoVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna VAT (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_RazemBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna brutto</description>
+		</column>
+		<column name="VaN_RazemBruttoDoVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość łączna brutto (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_RazemBruttoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota brutto w walucie</description>
+		</column>
+		<column name="VaN_KwotaNKUP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaN_KwotaNKUP DEFAULT(0)">
+			<description>KwotaNKUP</description>
+		</column>
+		<column name="VaN_VATNKUP" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaN_VATNKUP DEFAULT(0)">
+			<description>VATNKUP</description>
+		</column>
+		<column name="VaN_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="VaN_WalutaDoVAT" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="VaN_KursNumerDoVAT" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="VaN_KursLDoVAT" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Licznik notowania waluty (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="VaN_KursMDoVAT" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Mianownik notowania waluty (dla kursu do VAT)</description>
+		</column>
+		<column name="VaN_Zaplata" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zapłacona</description>
+		</column>
+		<column name="VaN_WartoscZak" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość w cenach zakupu</description>
+		</column>
+		<column name="VaN_AkcyzaWegiel" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaN_AkcyzaWegiel DEFAULT(0)">
+			<description>Wartość akcyzy węgla z powiązanego dokumentu handlowego</description>
+		</column>
+		<column name="VaN_AkcyzaWegiel_KolumnaKPR" type="INT" definition="NOT NULL CONSTRAINT DF_VaN_AkcyzaWegiel_KolumnaKPR DEFAULT(0)">
+			<description>Kolumna KPiR do której akcyza ma być księgowana</description>
+			<details>Domyślna wartość "13. Inne"</details>
+		</column>
+		<column name="VaN_TrybNettoVAT" type="TINYINT" definition="NOT NULL CONSTRAINT DF_VaN_TrybNettoVAT DEFAULT(0)">
+			<description>Tryb wyliczania płatności</description>
+		</column>
+		<column name="VaN_PodmiotZalTyp" type="SMALLINT" filterVisible="false">
+			<description>Typ podmiotu pobierającego zaliczkę</description>
+			<details>
+				Typ podmiotu pobierającego zaliczkę . Pole techniczne, wskazujące do jakiego rodzaju
+				podmiotu odwołuje się relacja:
+				1 - Kontrahent (tabela: Kontrahenci)
+				2 - Bank (tabela: BnkNazwy)
+				3 - Pracownik/Wspólnik (tabela: PracEtaty)
+				5 - Urząd (tabela: Urzedy)
+			</details>
+		</column>
+		<column name="VaN_PodZalId" type="INTEGER" filterVisible="false">
+			<description>Id podmiotu pobierającego zaliczkę</description>
+		</column>
+		<column name="VaN_AppRowID" type="VARCHAR(20)">
+			<description>Identyfikator transakcji w aplikcaji źródłowej</description>
+			<details>
+				Identyfikator transakcji w aplikacji źródłowej .
+				NULL - dokument wprowadzony ręcznie lub zaimportowany z Pracy rozproszonej.
+				0 - dokument przesłany z modułu Handel lub zaimportowany przez plik .DAT lub COMMA.
+			</details>
+		</column>
+		<column name="VaN_AppID" type="INTEGER">
+			<description>Numer unikalny aplikacji źródłowej</description>
+			<details>Identyfikator bazy żródłowej dla dokumentów pochodzących z pracy rozproszonej.</details>
+		</column>
+		<column name="VaN_TrnID" type="INTEGER" filterVisible="false">
+			<description>Numer rekordu w tabeli transakcji</description>
+		</column>
+		<column name="VaN_VanOrgId" type="INTEGER">
+			<description>Wskaźnik do zapisu oryginalnego</description>
+		</column>
+		<column name="VaN_CloProc" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wielkość cła w procentach</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_CloWart" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość cła</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_AkcyzaProc" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wielkość akcyzy w procentach</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_AkcyzaWart" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość akcyzy</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_PodImpProc" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Podatek importowy w procentach</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_PodImpWart" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość podatku importowego</description>
+			<details>Pole nadmiarowe.</details>
+		</column>
+		<column name="VaN_KpRID" type="INTEGER">
+			<description>Wskaźnik do zapisów KPiR</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada VaN_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada VaN_KPRId = NULL;
+			</details>
+		</column>
+		<column name="VaN_RycID" type="INTEGER">
+			<description>Wskaźnik do ewidencji ryczałtowej</description>
+			<details>
+				Referencja do tabeli Ryczalt.&lt;br&gt;
+				Zapis zaksięgowany posiada VaN_RYCId = RYC_RYCId;&lt;br&gt;
+				Zapis niezaksięgowany posiada VaN_RYCId = NULL;
+			</details>
+		</column>
+		<column name="VaN_DekID" type="INTEGER">
+			<description>Wskaźnik do dekretu</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis zaksięgowany posiada VaN_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada VaN_DekId = NULL;
+			</details>
+		</column>
+		<column name="VaN_PreDekID" type="INTEGER">
+			<description>Wskaźnik do predekretu</description>
+			<details>
+				Referencja do tabeli DekretyNag.&lt;br&gt;
+				Zapis predekretowany posiada VaN_PreDekId = Dek_DekId;&lt;br&gt;
+				Zapis niepredekretowany posiada VaN_PreDekId = NULL;
+			</details>
+		</column>
+		<column name="VaN_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="VaN_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w tabeli źródłowej</description>
+		</column>
+		<column name="VaN_TS_Export" type="DATETIME">
+			<description>Czas wyeksportowania zapisu</description>
+		</column>
+		<column name="VaN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="VaN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="VaN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="VaN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="VaN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="VaN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="VaN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_VaN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="VaN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_VaN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="VaN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_VaN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="VaN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_VaN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="VaN_IdentKsiegNr" type="INTEGER" />
+		<column name="VaN_IdentKsiegStr" type="VARCHAR(30)" />
+		<column name="VaN_NettoWal" type="DECIMAL(15,2)" />
+		<column name="VaN_VatWal" type="DECIMAL(15,2)" />
+		<column name="VaN_Srw" type="SMALLINT">
+			<description>Zmiany po cięciu bazy</description>
+		</column>
+		<column name="VaN_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<column name="VaN_ZbVaNID" type="INTEGER" />
+		<column name="VaN_DnpID" type="INTEGER">
+			<description>Link do skojarzonego pliku OBD</description>
+		</column>
+		<column name="VaN_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_VaN_SplitPay DEFAULT(0)">
+			<description>Split Payment - płatność z zastosowaniem mechanizmu podzielonej płatności</description>
+		</column>
+		<column name="VaN_OCR" type="TINYINT" definition="NOT NULL CONSTRAINT DF_VaN_OCR DEFAULT(0)">
+			<description>Czy dokument pochodzi z OCR</description>
+		</column>
+		<column name="VaN_Zbiorcza" type="TINYINT" definition="NULL">
+			<description>Faktura wewnętrzna zbiorcza</description>
+		</column>
+		<column name="VaN_RozliczacOSS" type="INTEGER" definition="NOT NULL CONSTRAINT DF_VaN_RozliczacOSS DEFAULT(0)">
+			<description>Czy rozliczać OSS</description>
+		</column>
+		<column name="VaN_RokOSS" type="INTEGER" definition="NOT NULL CONSTRAINT DF_VaN_RokOSS DEFAULT(0)">
+			<description>Rok OSS</description>
+		</column>
+		<column name="VaN_KwartalOSS" type="INTEGER" definition="NOT NULL CONSTRAINT DF_VaN_KwartalOSS DEFAULT(0)">
+			<description>Kwartał OSS</description>
+		</column>
+		<column name="VaN_DataKurOSS" type="DATETIME" definition="NOT NULL CONSTRAINT DF_VaN_DataKurOSS DEFAULT(0)">
+			<description>Data kursu waluty (dla OSS)</description>
+		</column>
+		<column name="VaN_WalutaOSS" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_VaN_WalutaOSS DEFAULT('EUR')">
+			<description>Waluta (dla OSS)</description>
+		</column>
+		<column name="VaN_RazemBruttoOSS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaN_RazemBruttoOSS DEFAULT(0)">
+			<description>Wartość łączna brutto (dla OSS)</description>
+		</column>
+		<column name="VaN_RazemNettoOSS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaN_RazemNettoOSS DEFAULT(0)">
+			<description>Wartość łączna netto (dla OSS)</description>
+		</column>
+		<column name="VaN_RazemVATOSS" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_VaN_RazemVATOSS DEFAULT(0)">
+			<description>Wartość łączna VAT (dla OSS)</description>
+		</column>
+		<column name="VaN_KursMOSS" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_VaN_KursMOSS DEFAULT(1)">
+			<description>Mianownik notowania waluty (dla OSS)</description>
+		</column>
+		<column name="VaN_KursLOSS" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_VaN_KursLOSS DEFAULT(1)">
+			<description>Licznik notowania waluty (dla OSS)</description>
+		</column>
+		<column name="VaN_KursNumerOSS" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_VaN_KursNumerOSS DEFAULT(1)">
+			<description>Numer kursu waluty (dla OSS)</description>
+		</column>
+		<column name="VaN_KodKrajuOSS" type="VARCHAR(2)" definition="NOT NULL CONSTRAINT DF_VaN_KodKrajuOSS DEFAULT('')">
+			<description>Kod kraju (dla OSS)</description>
+		</column>
+		<primaryKey name="VaN_Primary" columns="VaN_VaNID" type="CLUSTERED">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_VaNKontrah" localColumns="VaN_PodID,VaN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.VatNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_VanFormaPlatnosci" localColumns="VaN_FplID" refTable="FormyPlatnosci" refColumns="FPl_FPlId">
+			<description>Relacja CDN.VatNag:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_VaNKategorie" localColumns="VaN_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.VatNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="VaNDeklarac" options="NONCLUSTERED" fields="VaN_Typ, VaN_RozliczacVat7" includedColumns="VaN_DeklRokMies, VaN_Wewnetrzna, VaN_VaNID, VaN_Rodzaj, VaN_RokMies, VaN_Lp, VaN_DataZap, VaN_DataOpe, VaN_DeklRokMiesKasa, VaN_RozliczacVatUE, VaN_Dokument, VaN_Fiskalna, VaN_Detal, VaN_KntNipKraj, VaN_KntNipE, VaN_Finalny, VaN_Export, VaN_Rolnik, VaN_KatID, VaN_Kategoria, VaN_RazemNetto, VaN_RazemVAT, VaN_KpRID, VaN_RycID, VaN_DekID, VaN_IdentKsieg, VaN_KntNazwa1, VaN_Rejestr, VaN_PodatekVat, VaN_Pesel, VaN_MetodaKasowa, VaN_ZakID">
+			<description>Do deklaracji VAT7</description>
+		</index>
+		<index name="VaNDeklarUE" options="NONCLUSTERED" fields="VaN_Typ, VaN_DeklRokMies, VaN_RozliczacVatUE, VaN_Export" includedColumns="VaN_VaNID, VaN_Rejestr, VaN_Wewnetrzna">
+			<description>Do deklaracji VATUE</description>
+		</index>
+		<index name="VaNRejestrChrono" options="NONCLUSTERED" fields="VaN_Typ, VaN_Rejestr, VaN_DataZap">
+			<description>Chronologiczny w ramach jednego typu zapisów i rejestru</description>
+		</index>
+		<index name="VaNChrono" options="NONCLUSTERED" fields="VaN_Typ, VaN_DataZap" includedColumns="VaN_VaNID">
+			
+			<description>Chronologiczny w ramach jednego typu zapisów</description>
+		</index>
+		<index name="VanKPR" options="NONCLUSTERED" fields="VaN_KpRID">
+			<description>Wg wskaźnika zapisów KPiR</description>
+			<details>Relacja do zapisów księgowych w ZapisyKPR</details>
+		</index>
+		<index name="VaNRyczalt" options="NONCLUSTERED" fields="VaN_RycID">
+			<description>Wg zapisów ewidencji ryczałtowej</description>
+			<details>Relacja do zapisów księgowych w Ryczalt</details>
+		</index>
+		<index name="VaNDekrety" options="NONCLUSTERED" fields="VaN_DekID">
+			<description>Wg zapisów w dekretach</description>
+			<details>Relacja do zapisów księgowych w Dekrety</details>
+		</index>
+		<index name="VaNPreDekrety" options="NONCLUSTERED" fields="VaN_PreDekID">
+			<description>Wg zapisów w dekretach</description>
+			<details>Relacja do zapisów księgowych w Dekrety</details>
+		</index>
+		<index name="VaNKontrah" options="NONCLUSTERED" fields="VaN_PodID ,VaN_PodmiotTyp ,VaN_Typ ,VaN_DataZap">
+			<description>Wg wybranego kontrahenta</description>
+		</index>
+		<index name="VanTrnZrd" options="NONCLUSTERED" fields="VaN_TrnID">
+			<description>Wg dokumentu źródłowego</description>
+		</index>
+		<index name="VaNPodmiotZal" options="NONCLUSTERED" fields="VaN_PodZalId ,VaN_PodmiotZalTyp">
+			<description>Wg podmiotu pobierającego zaliczkę</description>
+		</index>
+		<index name="VaNKategorie" options="NONCLUSTERED" fields="VaN_KatID ,VaN_Typ ,VaN_DataZap">
+			<description>Wg kategorii</description>
+		</index>
+		<index name="VanFormaPlatnosci" options="NONCLUSTERED" fields="VaN_FplID">
+			<description>Wg identyfikatora formy płatności</description>
+		</index>
+		<index name="VaNGUID" options="UNIQUE NONCLUSTERED" fields="VaN_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="VaNOrgId" options="NONCLUSTERED" fields="VaN_VanOrgId" />
+		<index name="VaNIdentKsieg" options="NONCLUSTERED" fields="VaN_IdentKsiegStr, VaN_IdentKsiegNr">
+			<description>Indeks wg składników identyfikatora księgowego</description>
+		</index>
+		<index name="VaNIdentKsieg2" options="NONCLUSTERED" fields="VaN_IdentKsieg, VaN_VaNID">
+			<description>Indeks według identyfikatora księgowego</description>
+		</index>
+		<index name="VanDataWys" options="NONCLUSTERED" fields="VaN_DataWys">
+			<description>Indeks wg day wystawienia dokumentu</description>
+		</index>
+		<index name="VanDokNagPliki" options="NONCLUSTERED" fields="VaN_DnPId">
+			<description>Indeks wg id pliku OBD</description>
+		</index>
+	</table>
+	

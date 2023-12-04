@@ -1,0 +1,84 @@
+<table name="DokAtrybuty">
+		<description>Atrybuty transakcji</description>
+		<column name="DAt_DAtId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DAt_Kod" type="VARCHAR(20)">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="DAt_DeAId" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Klucz obcy do DefAtrybuty</description>
+			<details>Klucz obcy do tabeli DefAtrybuty</details>
+		</column>
+		<column name="DAt_WartoscTxt" type="NVARCHAR(1024)" definition="NOT NULL" filterVisible="false">
+			<description>Wartość atrybutu</description>
+			<details>
+				Kolumna zawiera wartość dla wszystkich formatów dostępnych przy definicji atrybutu.
+				Wartość jest przechowywana po przekonwertowaniu do wartości tekstowej.
+				W przypadku atrybuty o formacie typu data do pola wprowadzana jest data w postaci
+		"Clarionowej" to znaczy jest to ilość dni jako liczba całkowita od daty 1800-12-28.
+			</details>
+		</column>
+		<column name="DAt_TrNId" type="INTEGER" filterVisible="false">
+			<description>Klucz obcy do tabeli TraNag</description>
+		</column>
+		<column name="DAt_CRKId" type="INTEGER" filterVisible="false">
+			<description>Klucz obcy do tabeli CRMKontakty</description>
+		</column>
+		<column name="DAt_SrZId" type="INTEGER" filterVisible="false">
+			<description>Klucz obcy do tabeli SrSZlecenia</description>
+		</column>
+		<column name="DAt_VaNID" type="INTEGER">
+			<description>Klucz obcy do tabeli VatNag</description>
+		</column>
+		<column name="DAt_DoNID" type="INTEGER">
+			<description>Klucz obcy do tabeli DokNag</description>
+		</column>
+		<column name="DAt_OfdID" type="INTEGER">
+			<description>Klucz obcy do tabeli OfertyDok</description>
+		</column>
+		<column name="DAt_DokumentTyp" type="INTEGER">
+			<description>Typ linkowanego dokumentu</description>
+		</column>
+		<column name="DAt_DokumentId" type="INTEGER">
+			<description>Id linkowanego dokumentu</description>
+		</column>
+		<column name="DAt_TypJPK" type="TINYINT">
+			<description>Typ atrybutu JPK</description>
+		</column>
+		<column name="DAt_WartoscDecimal" type="COMPUTED|DECIMAL(18,4)" definition="CASE WHEN LEN(DAT_WARTOSCTXT) &lt; 15 AND ISNUMERIC(REPLACE(DAT_WARTOSCTXT, ',','.' )+ 'E0')=1 AND NOT LTRIM(RTRIM(DAT_WARTOSCTXT)) LIKE '[-.,+]' AND NOT [DAT_WARTOSCTXT] LIKE '%'+CHAR(13)+'%' THEN CONVERT([decimal](18,4),LTRIM(RTRIM(replace(replace([DAT_WARTOSCTXT],char(9),''),',','.'))),(0)) ELSE -99999999 END">
+			<description>pole wyliczane wykorzystywane do filtrowania</description>
+		</column>
+		<primaryKey name="DAt_Primary" columns="DAt_DAtId" />
+		<foreignKey name="FK_DTaTraNag" localColumns="DAt_TrNId" refTable="TraNag" refColumns="TrN_TrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DokAtrybuty:CDN.TraNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DAtCRMKey" localColumns="DAt_CRKId" refTable="CRMKontakty" refColumns="CRK_CRKId" deleteOption="CASCADE">
+			<description>Relacja CDN.DokAtrybuty:CDN.CRMKontakty (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DAtDefAtrybut" localColumns="DAt_DeAId" refTable="DefAtrybuty" refColumns="DeA_DeAId" deleteOption="CASCADE">
+			<description>Relacja CDN.DokAtrybuty:CDN.DefAtrybuty (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DAtSrSZlecenia" localColumns="DAt_SrZId" refTable="SrsZlecenia" refColumns="SrZ_SrZId" deleteOption="CASCADE">
+			<description>Relacja CDN.DokAtrybuty:CDN.SrsZlecenia (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DAtVatNag" localColumns="DAt_VaNID" refTable="VatNag" refColumns="VaN_VaNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DokAtrybuty:CDN.VatNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DAtOfertyDok" localColumns="DAt_OfdID" refTable="OfertyDok" refColumns="Ofd_OfdID" deleteOption="CASCADE">
+			<description>Relacja CDN.DokAtrybuty:CDN.OfertyDok (MANY:1)</description>
+		</foreignKey>
+		<index name="DAtCRMKey" options="NONCLUSTERED" fields="DAt_CRKId" />
+		<index name="DAtDefAtrybut" options="NONCLUSTERED" fields="DAt_DeAId" includedColumns="DAt_WartoscTxt,DAt_TrNId,DAt_VaNID" />
+		<index name="DTaTraNag" options="NONCLUSTERED" fields="DAt_TrNId" />
+		<index name="DAtVatNag" options="NONCLUSTERED" fields="DAt_VaNID" includedColumns="DAt_DAtId, DAt_DeAId, DAt_WartoscTxt" />
+		<index name="DAtSrSZlecenia" options="NONCLUSTERED" fields="DAt_SrZId" />
+		<index name="DAtDokNag" options="NONCLUSTERED" fields="DAt_DoNID" />
+		<index name="DAtOfertyDok" options="NONCLUSTERED" fields="DAt_OfdID" />
+		<index name="DAtAtrybutyTraNag" options="NONCLUSTERED" fields="DAt_DeAId, DAt_TrNId">
+			<description>Indeks dla dokumentów handlowych - na potrzeby kolumn z wartościami atrybutów</description>
+		</index>
+		/&gt;
+		<index name="DAtDokument" options="NONCLUSTERED" fields="DAt_DokumentTyp, DAt_DokumentId" />
+	</table>
+	

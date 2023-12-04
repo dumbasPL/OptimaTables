@@ -1,0 +1,18 @@
+<table name="DokKodyJPKV7">
+		<description>Kody JPK V7 na dokumencie, kontrahencie</description>
+		<column name="DKV7_DKV7ID" type="INTEGER" definition="IDENTITY(1,1) NOT NULL" />
+		<column name="DKV7_ParentTyp" type="INTEGER" definition="NOT NULL" />
+		<column name="DKV7_ParentID" type="INTEGER" definition="NOT NULL" />
+		<column name="DKV7_KV7ID" type="INTEGER" definition="NOT NULL" />
+		<column name="DKV7_Status" type="TinyInt" definition="NOT NULL CONSTRAINT DF_DKV7_Status DEFAULT(0)">
+			<description>Sposób dodania parametru, kodu - reczny, automatyczny</description>
+		</column>
+		<primaryKey name="DKV7_Primary" columns="DKV7_DKV7ID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DKV7KodyJPKV7" options="NONCLUSTERED" fields="DKV7_KV7ID,DKV7_ParentTyp,DKV7_ParentID">
+			<description>Klucz obcy słownika</description>
+		</index>
+		<index name="DokKodyJPKV7Parent" options="NONCLUSTERED" fields="DKV7_ParentTyp ,DKV7_ParentID" />
+	</table>
+	

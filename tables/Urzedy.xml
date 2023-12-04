@@ -1,0 +1,152 @@
+<table name="Urzedy">
+		<description>Lista urzędów</description>
+		<column name="Urz_UrzId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Urz_PodmiotTyp" type="SMALLINT" definition="CONSTRAINT DF_Urz_PodmiotTyp DEFAULT(5)">
+			<description>Typ podmiotu w ramach PodmiotyView</description>
+		</column>
+		<column name="Urz_Akronim" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Akronim (kod) urzędu</description>
+			<details>Unikalny kod (akronim) urzędu, do szybkiego wyszukiwania</details>
+		</column>
+		<column name="Urz_Kod" type="VARCHAR(6)">
+			<description>Kod urzędu</description>
+			<details>Kod urzędu</details>
+		</column>
+		<column name="Urz_TypUrzedu" type="SMALLINT" definition="NOT NULL">
+			<description>Typ urzędu</description>
+			<details>1- Urząd skarbowy; 2- ZUS</details>
+		</column>
+		<column name="Urz_Standardowy" type="SMALLINT" definition="NOT NULL">
+			<description>Oznacza urzędy standardowe (np. ZUS)</description>
+		</column>
+		<column name="Urz_Nazwa1" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Pierwsza część nazwy urzędu</description>
+		</column>
+		<column name="Urz_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Druga część nazwy urzędu</description>
+		</column>
+		<column name="Urz_Kraj" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Kraj (adres urzędu)</description>
+		</column>
+		<column name="Urz_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo (adres urzędu)</description>
+		</column>
+		<column name="Urz_Powiat" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Powiat (adres urzędu)</description>
+		</column>
+		<column name="Urz_Gmina" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Gmina (adres urzędu)</description>
+		</column>
+		<column name="Urz_Ulica" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Ulica (adres urzędu)</description>
+		</column>
+		<column name="Urz_NrDomu" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Numer domu (adres urzedu)</description>
+		</column>
+		<column name="Urz_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Numer lokalu (adres urzędu)</description>
+		</column>
+		<column name="Urz_Miasto" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Miasto (adres urzędu)</description>
+		</column>
+		<column name="Urz_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL">
+			<description>Kod pocztowy (adres urzędu)</description>
+		</column>
+		<column name="Urz_Poczta" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Poczta (adres urzędu)</description>
+		</column>
+		<column name="Urz_Adres2" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Dodatkowa część adresu urzędu</description>
+		</column>
+		<column name="Urz_Telefon" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Numer telefonu do urzędu</description>
+		</column>
+		<column name="Urz_TelefonSms" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Urz_TelefonSms DEFAULT('')">
+			<description>Numer telefonu dla SMS</description>
+		</column>
+		<column name="Urz_Fax" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Numer faxu do urzędu</description>
+		</column>
+		<column name="Urz_Email" type="NVARCHAR(127)" definition="NOT NULL">
+			<description>Adres elektroniczny e-mail</description>
+		</column>
+		<column name="Urz_URL" type="VARCHAR(254)" definition="NOT NULL">
+			<description>Adres URL urzędu</description>
+		</column>
+		<column name="Urz_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>Identyfikator domyślnej kategorii dla dokumentów od/dla urzędu.</details>
+		</column>
+		<column name="Urz_NieRozliczac" type="TINYINT" definition="NOT NULL">
+			<description>Urząd standardowo nie podlega rozliczeniu</description>
+		</column>
+		<column name="Urz_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Urz_Nieaktywny DEFAULT(0)">
+			<description>Czy urząd jest nieaktywny</description>
+		</column>
+		<column name="Urz_TS_Export" type="DATETIME">
+			<description>TimeStamp dokonania eksportu</description>
+		</column>
+		<column name="Urz_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="Urz_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źrodłowej</description>
+		</column>
+		<column name="Urz_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="Urz_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Urz_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="Urz_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="Urz_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Urz_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="Urz_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Urz_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Urz_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Urz_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Urz_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Urz_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Urz_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Urz_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Urz_Primary" columns="Urz_UrzId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_UrzKategoria" localColumns="Urz_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Urzedy:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="UrzAkronim" options="UNIQUE NONCLUSTERED" fields="Urz_TypUrzedu ,Urz_Akronim">
+			<description>Indeks wg akronimu urzędu</description>
+		</index>
+		<index name="KeyNazwa" options="UNIQUE NONCLUSTERED" fields="Urz_TypUrzedu ,Urz_Nazwa1 ,Urz_UrzId">
+			<description>Wg nazwy w ramach typu</description>
+		</index>
+		<index name="UrzGUID" options="UNIQUE NONCLUSTERED" fields="Urz_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="UrzKategoria" options="NONCLUSTERED" fields="Urz_KatID">
+			<description>Wg kategorii</description>
+		</index>
+	</table>
+	

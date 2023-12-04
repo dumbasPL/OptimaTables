@@ -1,0 +1,67 @@
+<table name="PracPitUdzialy">
+		<description>Tabela udziałów kwot do deklaracji</description>
+		<column name="PPU_PPUID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator udziału</description>
+		</column>
+		<column name="PPU_PPDID" type="INTEGER" definition="NOT NULL">
+			<description>ID dzialalności kwoty do deklaracji</description>
+		</column>
+		<column name="PPU_UdzialL" type="DECIMAL(15,3)" definition=" NOT NULL">
+			<description>Udział w działalności </description>
+		</column>
+		<column name="PPU_UdzialM" type="DECIMAL(15,2)" definition=" NOT NULL">
+			<description>Udział w działalności </description>
+		</column>
+		<column name="PPU_DataOd" type="DATETIME" definition=" NOT NULL">
+			<description>Data rozpoczęcia obowiązywania udziału</description>
+		</column>
+		<column name="PPU_DataDo" type="DATETIME" definition="NOT NULL">
+			<description>Data zakończenia obowiązywania udziału</description>
+		</column>
+		<column name="PPU_Przychody" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Przychody DEFAULT(0)">
+			<description>Przychody działalności w danym okresie</description>
+		</column>
+		<column name="PPU_Koszty" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Koszty DEFAULT(0)">
+			<description>Koszty działalności w danym okresie </description>
+		</column>
+		<column name="PPU_Stawka1Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka1Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 1</description>
+		</column>
+		<column name="PPU_Stawka2Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka2Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 2</description>
+		</column>
+		<column name="PPU_Stawka3Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka3Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 3</description>
+		</column>
+		<column name="PPU_Stawka4Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka4Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 4</description>
+		</column>
+		<column name="PPU_Stawka5Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka5Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 5</description>
+		</column>
+		<column name="PPU_Stawka6Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka6Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 6</description>
+		</column>
+		<column name="PPU_Stawka7Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka7Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 7</description>
+		</column>
+		<column name="PPU_Stawka8Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka8Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 8</description>
+		</column>
+		<column name="PPU_Stawka9Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka9Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 9</description>
+		</column>
+		<column name="PPU_Stawka10Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka10Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 10</description>
+		</column>
+		<column name="PPU_Stawka11Przychod" type="DECIMAL(15,2)" definition=" NOT NULL CONSTRAINT DF_PPU_Stawka11Przychod DEFAULT(0)">
+			<description>Przychody dla stawki 11</description>
+		</column>
+		<primaryKey name="PPU_Primary" columns="PPU_PPUID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PPUPPDID" localColumns="PPU_PPDID" refTable="PracPitDzialalnosci" refColumns="PPD_PPDID" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPitUdzialy:CDN.PracPitDzialalnosci (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

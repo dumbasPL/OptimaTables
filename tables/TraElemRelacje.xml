@@ -1,0 +1,44 @@
+<table name="TraElemRelacje">
+		<description>Tabela wskaźników do skojarzonych elementow</description>
+		<column name="TeR_TeRId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="TeR_ParentTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu nadrzędnego</description>
+			<details>
+				&lt;br&gt;
+				&lt;a href= "TypyRodzajeDoKHAMAG.htm" &gt;Typy i rodzaje dokumentów HAMAG &lt;/a&gt;
+			</details>
+		</column>
+		<column name="TeR_ParentId" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu nadrzędnego</description>
+			<details>Z tabeli CDN.Traelem</details>
+		</column>
+		<column name="TeR_ChildTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu skojarzonego</description>
+			<details>
+				&lt;br&gt;
+				&lt;a href= "TypyRodzajeDoKHAMAG.htm" &gt;Typy i rodzaje dokumentów HAMAG &lt;/a&gt;
+			</details>
+		</column>
+		<column name="TeR_ChildId" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu skojarzonego</description>
+			<details>Z tabeli CDN.Traelem</details>
+		</column>
+		<column name="TeR_Flaga" type="SMALLINT">
+			<description>pole techniczne</description>
+		</column>
+		<column name="TeR_Info" type="DECIMAL(15,4)">
+			<description>Dodatkowe informacje przy przekształceniach</description>
+		</column>
+		<column name="TeR_Info2" type="DECIMAL(15,4)">
+			<description>Dodatkowe informacje przy przekształceniach</description>
+		</column>
+		<primaryKey name="TeR_Primary" columns="TeR_TeRId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="TeR_Parent" options="NONCLUSTERED" fields="TeR_ParentTyp ,TeR_ParentId" />
+		<index name="TeR_Child" options="NONCLUSTERED" fields="TeR_ChildTyp ,TeR_ChildId" />
+		<index name="TeR_ParentIdChildId" options="NONCLUSTERED" fields="TeR_ChildId,TeR_ParentId" />
+	</table>
+	

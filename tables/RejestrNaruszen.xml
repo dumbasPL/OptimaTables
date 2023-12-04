@@ -1,0 +1,100 @@
+<table name="RejestrNaruszen">
+		<description>Rejestr naruszeń</description>
+		<column name="RUN_RUNID" type="INTEGER" definition="NOT NULL IDENTITY(1,1)">
+			<description>Id naruszenia</description>
+		</column>
+		<column name="RUN_Lp" type="COMPUTED|INTEGER" definition="CDN.RejestrNaruszenLp (RUN_RUNID)">
+			<description>Lp naruszenia</description>
+		</column>
+		<column name="RUN_PodID" type="INTEGER" definition="NOT NULL">
+			<description>Id podmiotu</description>
+		</column>
+		<column name="RUN_PodmiotTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ podmiotu</description>
+		</column>
+		<column name="RUN_Akronim" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Akronim podmiotu</description>
+		</column>
+		<column name="RUN_ImieNazwisko" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Imie i nazwisko podmiotu</description>
+		</column>
+		<column name="RUN_OsobaID" type="INTEGER" definition="NULL">
+			<description>Id przedstawiciela</description>
+		</column>
+		<column name="RUN_DataNaruszenia" type="DATETIME" definition="NOT NULL">
+			<description>Data naruszenia</description>
+		</column>
+		<column name="RUN_MiejsceNaruszenia" type="NVARCHAR(200)" definition="NOT NULL">
+			<description>Miejsce naruszenia</description>
+		</column>
+		<column name="RUN_Zgloszone" type="INTEGER" definition="NOT NULL">
+			<description>Czy naruszenie zostało zgłoszone</description>
+		</column>
+		<column name="RUN_DataZgloszenia" type="DATETIME" definition="NULL">
+			<description>Data zgłoszenia</description>
+		</column>
+		<column name="RUN_MiejsceZgloszenia" type="NVARCHAR(200)" definition="NOT NULL">
+			<description>Miejsce zgłoszenia</description>
+		</column>
+		<column name="RUN_LiczbaRekordow" type="INTEGER" definition="NOT NULL">
+			<description>Liczba rekordów</description>
+		</column>
+		<column name="RUN_PrzyczynaOpoznienia" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Przyczyna opóźnienia zgłoszenia lub uzasadnienie braku zgłoszenia</description>
+		</column>
+		<column name="RUN_CharakterNaruszenia" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Charakter naruszenia</description>
+		</column>
+		<column name="RUN_KategoriaDanych" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Kategoria danych</description>
+		</column>
+		<column name="RUN_Konsekwencje" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Konsekwencje</description>
+		</column>
+		<column name="RUN_PodjeteSrodki" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Podjęte środki</description>
+		</column>
+		<column name="RUN_OpeZalID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RUN_OpeModID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUN_StaZalID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RUN_StaModID" type="INTEGER" definition=" NULL">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RUN_TS_Zal" type="DATETIME" definition=" NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+		</column>
+		<column name="RUN_TS_Mod" type="DATETIME" definition=" NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+		</column>
+		<column name="RUN_OpeModKod" type="varchar(20)" definition=" NOT NULL">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUN_OpeZalKod" type="varchar(20)" definition=" NOT NULL">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RUN_OpeModNazwisko" type="nvarchar(50)" definition=" NOT NULL">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="RUN_OpeZalNazwisko" type="nvarchar(50)" definition=" NOT NULL">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<primaryKey name="PK_RUN_RUNID" columns="RUN_RUNID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_RUNPodmiot" localColumns="RUN_PodID,RUN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.RejestrNaruszen:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_RUNPrzedstawiciel" localColumns="RUN_OsobaID" refTable="KntOsoby" refColumns="KnO_KnOId">
+			<description>Relacja CDN.RejestrNaruszen:CDN.KntOsoby (MANY:1)</description>
+		</foreignKey>
+		<index name="RUN_ImieNazwisko" options="NONCLUSTERED" fields="RUN_ImieNazwisko">
+			<description>Klucz po imieniu i nazwisku osoby naruszającej</description>
+		</index>
+	</table>
+	

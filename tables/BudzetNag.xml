@@ -1,0 +1,54 @@
+<table name="BudzetNag">
+		<description>Tabela dokumenty księgowości budżetowej</description>
+		<column name="BuN_BuNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false" />
+		<column name="BuN_AccId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli Konta</description>
+		</column>
+		<column name="BuN_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu</description>
+		</column>
+		<column name="BuN_KwotaPoprzednia" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>W przypadku korekty kwota poprzednia</description>
+		</column>
+		<column name="BuN_DataDok" type="DATETIME" definition="NOT NULL" />
+		<column name="BuN_Opis" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="BuN_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Bufor</description>
+		</column>
+		<column name="BuN_Korekta" type="INTEGER" definition="NOT NULL">
+			<description>Dokument korekcyjny</description>
+		</column>
+		<column name="BuN_Finalny" type="TINYINT" definition="NOT NULL">
+			<description>Określa czy dokument jest dokumentem finalnym</description>
+		</column>
+		<column name="BuN_OpeZalID" type="INTEGER" />
+		<column name="BuN_StaZalId" type="INTEGER" />
+		<column name="BuN_TS_Zal" type="DATETIME" definition="NOT NULL" />
+		<column name="BuN_OpeModID" type="INTEGER" />
+		<column name="BuN_StaModId" type="INTEGER" />
+		<column name="BuN_TS_Mod" type="DATETIME" definition="NOT NULL" />
+		<column name="BuN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BuN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BuN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BuN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BuN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BuN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BuN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BuN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="BuN_Primary" columns="BuN_BuNId">
+			<description>Unikalny identyfikator rekordu</description>
+		</primaryKey>
+		<index name="BuNDokument" options="NONCLUSTERED" fields="BuN_DataDok ,BuN_Bufor ,BuN_Korekta ,BuN_Finalny">
+			<description>Klucz z data, buforem</description>
+		</index>
+		<index name="BuNKonto" options="NONCLUSTERED" fields="BuN_AccId">
+			<description>Klucz obcy do tabeli konta</description>
+		</index>
+	</table>
+	

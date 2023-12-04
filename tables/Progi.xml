@@ -1,0 +1,28 @@
+<table name="Progi">
+		<description>Tabela progów podatkowych pracownika</description>
+		<column name="PRG_PrgId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator zapisu</description>
+		</column>
+		<column name="PRG_PreId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zapisu historycznego pracownika</description>
+		</column>
+		<column name="PRG_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota</description>
+		</column>
+		<column name="PRG_Procent" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Procent podatku</description>
+		</column>
+		<column name="PRG_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PRG_Primary" columns="PRG_PrgId,PRG_Kwota">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PRGPreLink" localColumns="PRG_PreId" refTable="PracEtaty" refColumns="PRE_PreId" deleteOption="CASCADE">
+			<description>Relacja CDN.Progi:CDN.PracEtaty (MANY:1)</description>
+		</foreignKey>
+		<index name="PRGPreLink" options="NONCLUSTERED" fields="PRG_PreId">
+			<description>Link do zapisu historycznego pracownika</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,29 @@
+<table name="ZaniechaniaRoz">
+		<description>Tabela rozliczeń zaniechań podatkowych pracownika</description>
+		<column name="ZAR_ZarId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZAR_ZanId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zaniechania</description>
+		</column>
+		<column name="ZAR_WplId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wypłaty</description>
+		</column>
+		<column name="ZAR_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Rozliczona kwota</description>
+		</column>
+		<column name="ZAR_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data zaniechania</description>
+		</column>
+		<primaryKey name="ZAR_Primary" columns="ZAR_ZarId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_ZARZanId" localColumns="ZAR_ZanId" refTable="Zaniechania" refColumns="ZAN_ZanId">
+			<description>Relacja CDN.ZaniechaniaRoz:CDN.Zaniechania (MANY:1)</description>
+		</foreignKey>
+		<index name="ZARZanId" options="NONCLUSTERED" fields="ZAR_ZanId">
+			<description>Releacja do Zaniechań</description>
+		</index>
+		<index name="ZARWplId" options="NONCLUSTERED" fields="ZAR_WplId" />
+	</table>
+	

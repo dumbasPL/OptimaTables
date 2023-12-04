@@ -1,0 +1,83 @@
+<table name="DPD">
+		<column name="DPD_DPDID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DPD_DokumentTyp" type="INTEGER" definition="NOT NULL">
+			<description>Typ dokumentu</description>
+			<details>
+				1-TraNag;
+				2-VatNag;
+				12-EwidDodatkowa;
+			</details>
+		</column>
+		<column name="DPD_DokumentID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu</description>
+		</column>
+		<column name="DPD_SumaKwotZdarzen" type="DECIMAL(15,2)">
+			<description>Suma kwot do rozliczenia</description>
+		</column>
+		<column name="DPD_SumaKwotRozliczen" type="DECIMAL(15,2)">
+			<description>Suma kwot rozliczonych</description>
+		</column>
+		<column name="DPD_Numer" type="VARCHAR(30)">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="DPD_Data" type="DATETIME">
+			<description>Data</description>
+		</column>
+		<column name="DPD_Kwota" type="DECIMAL(15,2)">
+			<description>Kwota korekty</description>
+		</column>
+		<column name="DPD_Opis" type="VARCHAR(50)">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="DPD_KPRId" type="INTEGER">
+			<description>Referencja do tabeli ZapisyKPR</description>
+		</column>
+		<column name="DPD_DekId" type="INTEGER">
+			<description>Referencja do tabeli DekretyNag</description>
+		</column>
+		<column name="DPD_Rozliczono" type="INTEGER" definition="NOT NULL">
+			<description>Czy dokument został rozliczony</description>
+			<details>
+				1 - Dokument rozliczony
+				0 - Dokument nierozliczony
+			</details>
+		</column>
+		<column name="DPD_DataKur" type="DATETIME">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="DPD_Waluta" type="VARCHAR(3)">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="DPD_KursL" type="DECIMAL(15,4)">
+			<description>Licznik notowania waluty</description>
+		</column>
+		<column name="DPD_KursM" type="DECIMAL(5,0)">
+			<description>Mianownik notowania waluty</description>
+		</column>
+		<column name="DPD_KursNumer" type="INTEGER">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="DPD_DataWys" type="DATETIME">
+			<description>Data wystawienia dokumentu</description>
+		</column>
+		<column name="DPD_Termin" type="DATETIME">
+			<description>Termin płatności</description>
+		</column>
+		<column name="DPD_Skreslony" type="INTEGER" definition="NOT NULL">
+			<description>Znacznik skreślenia zapisu</description>
+			<details>
+				Przyjmuje wartości:
+				0 - zapis "aktywny"
+				1- zapis skreślony
+			</details>
+		</column>
+		<column name="DPD_DataKorekty" type="DATETIME">
+			<description>Data Korekty</description>
+		</column>
+		<primaryKey name="DPD_Primary" columns="DPD_DPDID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

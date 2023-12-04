@@ -1,0 +1,82 @@
+<table name="Grupy" filterVisible="false">
+		<description>Tabela z listami pomocniczymi</description>
+		<details>
+			Tabela zawiera listy pomocnicze:
+			- grupy kontrahentów
+			- grupy środków trwałych
+			- nazwy rejestrów Vat
+			- jednostki miary
+		</details>
+		<column name="Gru_GruID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Gru_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ listy pomocniczej</description>
+			<details>
+				1 - Rejestry zakupów
+				2 - Rejestry sprzedaży
+				11- Grupy środów trwałych
+				12 - Grupy wartości niematerialnych
+				21- Bufory księgowań
+				31 - Grupy kontrahentów
+				32 - Jednostki miar
+			</details>
+		</column>
+		<column name="Gru_Nazwa" type="VARCHAR(32)" definition="NOT NULL">
+			<description>Nazwa rejestru, grupy</description>
+		</column>
+		<column name="Gru_Opis" type="NVARCHAR(128)" definition="NOT NULL">
+			<description>Opis rejestru, grupy</description>
+		</column>
+		<column name="Gru_Flaga" type="SMALLINT">
+			<description>flaga</description>
+		</column>
+		<column name="Gru_NazwaPEF" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Gru_NazwaPEF DEFAULT('')">
+			<description>Nazwa w PEF</description>
+		</column>
+		<column name="Gru_KontoWn" type="NVARCHAR(50)" definition="NULL">
+			<description>Konto księgowe Wn</description>
+		</column>
+		<column name="Gru_KontoMa" type="NVARCHAR(50)" definition="NULL">
+			<description>Konto księgowe Ma</description>
+		</column>
+		<column name="Gru_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora dodającego grupę</description>
+		</column>
+		<column name="Gru_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Gru_TS_Zal" type="DATETIME">
+			<description>Time Stamp utworzenia grupy</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Gru_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Gru_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego grupę</description>
+		</column>
+		<column name="Gru_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Gru_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego grupę</description>
+		</column>
+		<column name="Gru_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego grupę</description>
+		</column>
+		<column name="Gru_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Gru_TS_Mod" type="DATETIME">
+			<description>Time Stamp ostatniej modyfikacji grupy</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Gru_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Gru_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego grupę</description>
+		</column>
+		<column name="Gru_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Gru_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego grupę</description>
+		</column>
+		<primaryKey name="Gru_Primary" columns="Gru_GruID">
+			<description>Wg numeru rekordu</description>
+		</primaryKey>
+		<index name="GruNazwa" options="UNIQUE NONCLUSTERED" fields="Gru_Typ ,Gru_Nazwa">
+			<description>Według nazwy w ramach listy</description>
+		</index>
+	</table>
+	

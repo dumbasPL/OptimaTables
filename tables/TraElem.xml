@@ -1,0 +1,502 @@
+<table name="TraElem">
+		<description>Tabela z elementami dokumentów</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="TrE_TrEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="TrE_TrNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka transakcji</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="TrE_ZwrId" type="INTEGER">
+			<description>Identyfikator elementu oryginalnego (dla zwrotów)</description>
+		</column>
+		<column name="TrE_TrEIdProd" type="INTEGER">
+			<description>Wskaźnik do rzeczywistej receptury produktu</description>
+		</column>
+		<column name="TrE_PdRId" type="INTEGER">
+			<description>Identyfikator domyślnej rceptury na elemencie PWP</description>
+		</column>
+		<column name="TrE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer pozycji na fakturze</description>
+		</column>
+		<column name="TrE_LpPow" type="INTEGER" definition="NOT NULL">
+			<description>Numer pozycji na dokumencie powiązanym</description>
+		</column>
+		<column name="TrE_LpPowRel" type="INTEGER">
+			<description>Numer pozycji na dokumencie powiązanym</description>
+		</column>
+		<column name="TrE_TypDokumentu" type="INTEGER" definition="NOT NULL">
+			<description>Typ dokumentu (klasa dokumentu)</description>
+			<details>&lt;a href= "TypyRodzajeDoKHAMAG.htm" &gt;Typy i rodzaje dokumentów HAMAG &lt;/a&gt;</details>
+		</column>
+		<column name="TrE_Aktywny" type="TINYINT" definition="NOT NULL">
+			<description>Czy element bierze udział w operacjach handlowych</description>
+			<details>Dla paragonów i WZ przekonwertowanych do faktury oraz anulowanych ustawiane na 0</details>
+		</column>
+		<column name="TrE_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="TrE_RabatPromocyjny" type="DECIMAL(15,4)" />
+		<column name="TrE_RabatKorekta" type="DECIMAL(15,4)" />
+		<column name="TrE_Promocje" type="INTEGER" />
+		<column name="TrE_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji (zakupu lub sprzedaży)</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="TrE_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>Pole to wskazuje na relację do odpowiedniej tabeli zawierającej podmioty
+				(Kontrahenci, BnkNazwy, Pracownicy, WspolNag, Urzedy)</details>
+		</column>
+		<column name="TrE_PodID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>
+				Wskaźnik do kontrahenta (Kontrahenci).
+				Kontrahent może zostać wpisany "z ręki" (VaN:KntId = 0) lub pobrany z listy kontrahentów
+				(VaN:KntId = Knt:KntId)
+			</details>
+		</column>
+		<column name="TrE_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="TrE_Kategoria" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_TrE_Kategoria DEFAULT('')">
+			<description>Opis transakcji</description>
+		</column>
+		<column name="TrE_TwrId" type="INTEGER">
+			<description>Identyfikator towaru</description>
+			<details>Klucz obcy do tabeli Towary</details>
+		</column>
+		<column name="TrE_MagId" type="INTEGER">
+			<description>Identyfikator magazynu</description>
+			<details>Klucz obcy do tabeli Magazyny</details>
+		</column>
+		<column name="TrE_TwrNazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa towaru</description>
+		</column>
+		<column name="TrE_TwrEAN" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Kod EAN towaru</description>
+		</column>
+		<column name="TrE_TwrNumerKat" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Numer katalogowy towaru</description>
+		</column>
+		<column name="TrE_TwrKod" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod towaru</description>
+		</column>
+		<column name="TrE_TwrOpis" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Opis towaru (pozycji dokumentu)</description>
+		</column>
+		<column name="TrE_TwrSWW" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Numer PKWiU towaru</description>
+		</column>
+		<column name="TrE_TwrTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ karty: 0 - usługa, 1 - towar</description>
+		</column>
+		<column name="TrE_TwrKodDostawcy" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod towaru u dostawcy</description>
+		</column>
+		<column name="TrE_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka podatku vat</description>
+		</column>
+		<column name="TrE_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Flaga podatku (zwolniony, opodatkowany, zaniżony, nie podlega)</description>
+		</column>
+		<column name="TrE_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla podatku zaniżonego</description>
+		</column>
+		<column name="TrE_TwCNumer" type="INTEGER" definition="NOT NULL">
+			<description>Domyślna cena dla towaru</description>
+			<details>Numer domyślnej ceny, związany z tabelą TwrCeny</details>
+		</column>
+		<column name="TrE_TypNB" type="TINYINT" definition="NOT NULL">
+			<description>Typ faktury (od netto lub od brutto)</description>
+			<details>
+				1 - od netto &lt;br&gt;
+				2 - od brutto
+			</details>
+		</column>
+		<column name="TrE_Cena0" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena początkowa w walucie</description>
+		</column>
+		<column name="TrE_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat na elemencie faktury</description>
+			<details>Rabat dla pozycji</details>
+		</column>
+		<column name="TrE_CenaW" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie</description>
+		</column>
+		<column name="TrE_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="TrE_Kaucja" type="TINYINT" definition="NOT NULL">
+			<description>Czy element jest kaucja</description>
+			<details>
+				0 - towar zwykły &lt;br&gt;
+				1 - towar kaucyjny
+			</details>
+		</column>
+		<column name="TrE_WyborDostaw" type="TINYINT" definition="CONSTRAINT DF_TrE_WyborDostaw DEFAULT(0)">
+			<description>Czy wybor dostaw reczny</description>
+			<details>
+				0 - Brak dostaw
+				1 - Wybor dostaw
+			</details>
+		</column>
+		<column name="TrE_KursNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="TrE_KursL" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Kurs waluty - licznik</description>
+		</column>
+		<column name="TrE_KursM" type="DECIMAL( 5,0)" definition="NOT NULL">
+			<description>Kurs waluty - mianownik</description>
+		</column>
+		<column name="TrE_CenaT" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="TrE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych</description>
+		</column>
+		<column name="TrE_IloscKW" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych dla Korekty Wartosciowej</description>
+		</column>
+		<column name="TrE_Jm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="TrE_JmZ" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary zastepcza</description>
+		</column>
+		<column name="TrE_JmCalkowite" type="TINYINT" definition="NOT NULL">
+			<description>Ilość towaru wyrażana w wielkościach całkowitych</description>
+		</column>
+		<column name="TrE_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Licznik przelicznika JM</description>
+			<details>Licznik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="TrE_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL">
+			<description>Mianownik przelicznika JM</description>
+			<details>Mianownik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="TrE_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="TrE_IloscJMKW" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze dla Korekty Wartosciowej</description>
+		</column>
+		<column name="TrE_WartoscNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji</description>
+		</column>
+		<column name="TrE_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="TrE_WartoscZakupu" type="COMPUTED|DECIMAL(15,2)" definition="[CDN].[FNTRE_WARTOSCZAKUPU]([TRE_TREID], [TRE_TRNID], [TRE_LPPOW], [TRE_TWRID]) + [TRE_KOSZTUSLUGI]">
+			<description>Wartość netto pozycji w cenach zakupu</description>
+			<details>Wartość zakupu liczona funkcją serwerową na podstawie subelementów</details>
+		</column>
+		<column name="TrE_KosztUslugi" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość kosztu własnego usługi</description>
+		</column>
+		<column name="TrE_KosztKGO" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_TrE_KosztKGO DEFAULT(0)">
+			<description>Koszt KGO</description>
+		</column>
+		<column name="Tre_AkcyzaJMPomPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Tre_AkcyzaJMPomPrzelicznikL DEFAULT(1)">
+			<description>Akcyza Przelicznik dla jednostki pomocniczej</description>
+		</column>
+		<column name="Tre_AkcyzaJMPomPrzelicznikM" type="INTEGER" definition="NOT NULL CONSTRAINT DF_Tre_AkcyzaJMPomPrzelicznikM DEFAULT(1)">
+			<description>Akcyza Przelicznik dla jednostki pomocniczej</description>
+		</column>
+		<column name="TrE_AkcyzaOpal" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_TrE_AkcyzaOpal DEFAULT(0)">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="TrE_AkcyzaStawka" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_TrE_AkcyzaStawka DEFAULT(0)">
+			<description>Ilość towaru w jednostkach drukowanych na fakturze</description>
+		</column>
+		<column name="TrE_Akcyza_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TrE_Akcyza_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TrE_Akcyza_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="TrE_Akcyza_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_TrE_Akcyza_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TrE_SJRodzajPaliwa" type="NVARCHAR(500)" definition="NOT NULL CONSTRAINT DF_TrE_SJRodzajPaliwa DEFAULT('')">
+			<description>Rodzaj paliwa stałego</description>
+		</column>
+		<column name="TrE_SJSystemCertyfikacji" type="NVARCHAR(500)" definition="NOT NULL CONSTRAINT DF_TrE_SJSystemCertyfikacji DEFAULT('')">
+			<description>Systme certyfikacji</description>
+		</column>
+		<column name="TrE_SJPopiol" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJPopiol DEFAULT('')">
+			<description>Zawartość popiołu</description>
+		</column>
+		<column name="TrE_SJSiarka" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJSiarka DEFAULT('')">
+			<description>Zawartość siarki</description>
+		</column>
+		<column name="TrE_SJCzesciLotne" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJCzesciLotne DEFAULT('')">
+			<description>Zawartość części lotnych</description>
+		</column>
+		<column name="TrE_SJWartoscOpalowa" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJWartoscOpalowa DEFAULT('')">
+			<description>Wartość opałowa</description>
+		</column>
+		<column name="TrE_SJZdolnoscSpiekania" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJZdolnoscSpiekania DEFAULT('')">
+			<description>Zdolność spiekania</description>
+		</column>
+		<column name="TrE_SJWymiarZiarna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJWymiarZiarna DEFAULT('')">
+			<description>Wymiar ziarna</description>
+		</column>
+		<column name="TrE_SJZawartoscPodziarna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJZawartoscPodziarna DEFAULT('')">
+			<description>Zawartość podziarna</description>
+		</column>
+		<column name="TrE_SJZawartoscNadziarna" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJZawartoscNadziarna DEFAULT('')">
+			<description>Zawartość nadziarna</description>
+		</column>
+		<column name="TrE_SJZawartoscWilgoci" type="NVARCHAR(15)" definition="NOT NULL CONSTRAINT DF_TrE_SJZawartoscWilgoci DEFAULT('')">
+			<description>Zawartość wilgoci całkowitej</description>
+		</column>
+		<column name="Tre_OdwrotneObciazenie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Tre_OdwrotneObciazenie DEFAULT(0)">
+			<description>odwrotne obciążenie</description>
+		</column>
+		<column name="TrE_KodCN" type="VARCHAR(8)" definition="NOT NULL CONSTRAINT DF_TrE_KodCN DEFAULT('')">
+			<description>KodCN</description>
+		</column>
+		<column name="TrE_WartoscZakupuWylicz" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji w cenach zakupu wyliczona</description>
+		</column>
+		<column name="TrE_Cena0WD" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena0 wyrażona w walucie dokumentu</description>
+		</column>
+		<column name="TrE_CenaWWD" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>CenaW wyrażona w walucie dokumentu po rabacie</description>
+		</column>
+		<column name="TrE_WartoscNettoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto dokumentu w walucie</description>
+		</column>
+		<column name="TrE_WartoscBruttoWal" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto dokumentu w walucie</description>
+		</column>
+		<column name="TrE_WartoscTymczasowa" type="INTEGER">
+			<description>Pole techniczne</description>
+		</column>
+		<column name="TrE_Atr1_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TrE_Atr1_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="TrE_Atr1_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TrE_Atr2_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TrE_Atr2_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="TrE_Atr2_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TrE_Atr3_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TrE_Atr3_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="TrE_Atr3_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TrE_Atr4_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TrE_Atr4_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="TrE_Atr4_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TrE_Atr5_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TrE_Atr5_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="TrE_Atr5_Wartosc" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="TrE_Prog" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość progowa</description>
+		</column>
+		<column name="TrE_UpustTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ upustu progowego (kwotowy/procentowy)</description>
+		</column>
+		<column name="TrE_Upust" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość upustu progowego</description>
+		</column>
+		<column name="TrE_UpustKnt" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Upust dla kontrahenta na konkretny towar</description>
+		</column>
+		<column name="TrE_UpustKntTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ upustu dla kontrahenta na konkretny towar</description>
+			<details>
+				0 - brak &lt;br&gt;
+				1 - stała cena &lt;br&gt;
+				2 - procent
+			</details>
+		</column>
+		<column name="TrE_IFA24Mag" type="tinyint" definition="NOT NULL CONSTRAINT DF_TrE_IFA24Mag DEFAULT(0)">
+			<description>Towar nie ściaga zasobów w IFakturach24</description>
+		</column>
+		<column name="TrE_IFA24" type="tinyint" definition="NOT NULL CONSTRAINT DF_TrE_IFA24 DEFAULT(0)">
+			<description>Pozycja z IFakturach24</description>
+		</column>
+		<column name="TrE_ZTwID" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrE_ZTwID DEFAULT(0)">
+			<description>Identyfikator zestawu</description>
+		</column>
+		<column name="TrE_ZestawWiazanie" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrE_ZestawWiazanie DEFAULT(0)">
+			<description>Powiazanie zestawu</description>
+		</column>
+		<column name="TrE_ZTwGlowny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrE_ZTwGlowny DEFAULT(0)">
+			<description>Towar głowny zestawu</description>
+		</column>
+		<column name="TrE_ZTwKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_TrE_ZTwKod DEFAULT('')">
+			<description>Kod zestawu</description>
+		</column>
+		<column name="TrE_ZTwIlosc" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_TrE_ZTwIlosc DEFAULT(0)">
+			<description>Ilosc na zestawie</description>
+		</column>
+		<column name="TrE_DoZwrotu" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_TrE_DoZwrotu DEFAULT(0)">
+			<description>Pole techniczne dla korekt ilości</description>
+		</column>
+		<column name="TrE_UslugaZlozonaId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrE_UslugaZlozonaId DEFAULT(0)">
+			<description>Identyfikator elementu usługi złozonej do której należą składniki</description>
+		</column>
+		<column name="TrE_UslugaZlozona" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrE_UslugaZlozona DEFAULT(0)">
+			<description>Koszt usługi z RW na FA dla usług złozonej</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="TrE_PATrEId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_TrE_PATrEId DEFAULT(0)">
+			<description>Identyfikator elementu oryginalnego PA(dla FA)</description>
+		</column>
+		<column name="TrE_KWRoznicaKursowa" type="decimal(15,2)" definition="not null constraint DF_TrE_KWRoznicaKursowa default(0)">
+			<description>Wartosc roznicy wynikajacej ze zmiany kursu na korekcie wartosci</description>
+		</column>
+		<column name="Tre_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_Tre_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<column name="TrE_FakZalKwotaMax" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_Tre_FakZalKwotaMax DEFAULT(0)">
+			<description>Wartość maksymalna zaliczki, pole techniczne</description>
+		</column>
+		<column name="Tre_UstawAtrSQL" type="INT" definition="NOT NULL CONSTRAINT DF_Tre_UstawAtrSQL DEFAULT(-1)">
+			<description>Pole techniczne do ustawiana atrybutów - nie przestawiać ręcznie</description>
+		</column>
+		<column name="Tre_UstawAtrSQLDokTyp" type="INT" definition="NOT NULL CONSTRAINT DF_Tre_UstawAtrSQLDokTyp DEFAULT(1)">
+			<description>Pole techniczne do ustawiana atrybutów - nie przestawiać ręcznie</description>
+		</column>
+		<column name="TrE_SplitPay" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrE_SplitPay DEFAULT(0)">
+			<description>Split Payment - płatność z zastosowaniem mechanizmu podzielonej płatności</description>
+		</column>
+		<column name="TrE_KV7ID" type="INT" definition="NOT NULL CONSTRAINT DF_TrE_KV7ID DEFAULT(0)">
+			<description>Kod towaru JPK_V7 przeniesiony z karty towarowej</description>
+		</column>
+		<column name="TrE_CzySaCechyWymagane" type="INT" definition="NOT NULL CONSTRAINT DF_TrE_CzySaCechyWymagane DEFAULT(-1)">
+			<description>Towar posiada wymagane cechy</description>
+		</column>
+		<column name="TrE_OplataCukrowaPrzelicznikML" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaPrzelicznikML DEFAULT(0)">
+			<description>Opłata cukrowa przelicznik</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdCukrowStala" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdCukrowStala DEFAULT(0)">
+			<description>Opłata cukrowa od cukrów stała</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdCukrowZmienna" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdCukrowZmienna DEFAULT(0)">
+			<description>Opłata cukrowa od cukrów zmienna</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdKofeinyTaurynyStala" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdKofeinyTaurynyStala DEFAULT(0)">
+			<description>Opłata cukrowa od kofeiny, tauryny</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdCukrowZawartoscGram" type="decimal(15, 3)" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdCukrowZawartoscGram DEFAULT(0)">
+			<description>Zawartość cukru w gramach</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdCukrowZawartoscSokow20" type="tinyint" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdCukrowZawartoscSokow20 DEFAULT(0)">
+			<description>Czy opłata cukrowa</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdCukrowZawartoscRoztwor" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdCukrowZawartoscRoztwor DEFAULT(0)">
+			<description>Opłata cukrowa od cukrów</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdSubstancjiSlodzacych" type="tinyint" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdSubstancjiSlodzacych DEFAULT(0)">
+			<description>Czy opłata cukrowa</description>
+		</column>
+		<column name="TrE_OplataCukrowaOdKofeinyTauryny" type="tinyint" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaOdKofeinyTauryny DEFAULT(0)">
+			<description>Czy opłata cukrowa</description>
+		</column>
+		<column name="TrE_OplataCukrowaNumerPartiiTowaru" type="nvarchar(512)" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaNumerPartiiTowaru  DEFAULT('')">
+			<description>Oplata Cukrowa numer partii towaru</description>
+		</column>
+		<column name="TrE_OplataCukrowaDoliczDoCeny" type="decimal(15, 2)" definition="NOT NULL CONSTRAINT DF_TrE_OplataCukrowaDoliczDoCeny DEFAULT(0)">
+			<description>Opłata cukrowa od cukrów stała</description>
+		</column>
+		<column name="TrE_StawkaOSS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_TrE_StawkaOSS DEFAULT(0)">
+			<description>Pole techniczne, czy ustawiono stawki OSS</description>
+		</column>
+		<column name="TrE_KrajPochodzenia" type="nvarchar(2)" definition="NOT NULL CONSTRAINT DF_TrE_KrajPochodzenia DEFAULT('')">
+			<description>Kraj pochodzenia dla deklaracji intrastat</description>
+		</column>
+		<primaryKey name="TrE_Primary" columns="TrE_TrEID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_TrEPodmiot" localColumns="TrE_PodID,TrE_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.TraElem:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrETraNag" localColumns="TrE_TrNId" refTable="TraNag" refColumns="TrN_TrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraElem:CDN.TraNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrETowar" localColumns="TrE_TwrId" refTable="Towary" refColumns="Twr_TwrId">
+			<description>Relacja CDN.TraElem:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_TrEKategoria" localColumns="TrE_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.TraElem:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="TrEMagazyn" options="NONCLUSTERED" fields="TrE_MagId">
+			<description>Klucz obcy do magazynu</description>
+		</index>
+		<index name="TrETraNag" options="UNIQUE NONCLUSTERED" fields="TrE_TrNId ,TrE_Lp ,TrE_TrEID" includedColumns="TrE_LpPow,TrE_TypDokumentu,TrE_TwrId,TrE_KosztUslugi">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="TrEPodmiot" options="UNIQUE NONCLUSTERED" fields="TrE_PodID ,TrE_PodmiotTyp ,TrE_DataOpe ,TrE_TrEID">
+			<description>Wg podmiotu dla którego wystawiono transakcję</description>
+		</index>
+		<index name="TrETowar" options="UNIQUE NONCLUSTERED" fields="TrE_TwrId ,TrE_DataOpe ,TrE_TrEID">
+			<description>Wg towaru</description>
+		</index>
+		<index name="TrEKategoria" options="UNIQUE NONCLUSTERED" fields="TrE_KatID ,TrE_DataOpe ,TrE_TrEID">
+			<description>Wg identyfikatora kategorii</description>
+		</index>
+		<index name="TrEZwrot" options="UNIQUE NONCLUSTERED" fields="TrE_ZwrId ,TrE_TrEID">
+			<description>Wg identyfikatora elementu źródłowego</description>
+		</index>
+		<index name="TrEUslugaZlozona" options="NONCLUSTERED" fields="TrE_UslugaZlozonaId">
+			<description>Wskaźnik do elementu do którego należą składniku usługi złozonej</description>
+		</index>
+		<index name="TrEProdukt" options="NONCLUSTERED" fields="TrE_TrEIdProd">
+			<description>Wskaźnik do rzeczywistej receptury produktu</description>
+		</index>
+		<index name="TrETwrKod" options="NONCLUSTERED" fields="TrE_TrNId ,TrE_TwrKod" />
+		<index name="TraElemAktywny" options="NONCLUSTERED" fields="TrE_Aktywny" includedColumns="TrE_TrNId,TrE_TwrId" />
+		<index name="TraElemTrNId" options="NONCLUSTERED" fields="TrE_TrEID, TrE_TrNId" includedColumns="TrE_KosztUslugi" />
+		<index name="TraElemKaucja" options="NONCLUSTERED" fields="TrE_TrNId, TrE_Kaucja" />
+		<index name="TraElemZwrId" options="NONCLUSTERED" fields="TrE_ZwrId, TrE_Aktywny" includedColumns="TrE_TrNId" />
+		<index name="TraElemUslugaZlozonaId" options="NONCLUSTERED" fields="TrE_UslugaZlozonaId ,TrE_Aktywny" includedColumns="TrE_TrNId" />
+	</table>
+	

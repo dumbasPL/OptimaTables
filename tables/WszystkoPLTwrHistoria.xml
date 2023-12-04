@@ -1,0 +1,43 @@
+<table name="WszystkoPLTwrHistoria">
+		<description>Tabela historii oferty dla wszystko.pl</description>
+		<column name="WPLTH_WPLTHID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WPLTH_TwrID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator towaru w tabeli Towary</description>
+		</column>
+		<column name="WPLTH_Data" type="datetime" definition="NOT NULL">
+			<description>Data wysłania oferty</description>
+		</column>
+		<column name="WPLTH_Status" type="INTEGER" definition="NOT NULL">
+			<details>Rodzaj operacji wysłano/zamknięto/skasowano</details>
+		</column>
+		<column name="WPLTH_Opis" type="nvarchar(max)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="WPLTH_WszystkoPLId" type="INTEGER" definition="NULL">
+			<details>Id oferty we wszystko.pl</details>
+		</column>
+		<column name="WPLTH_OpeID" type="INTEGER" definition="NULL">
+			<details>ID operatora</details>
+		</column>
+		<column name="WPLTH_OpeKod" type="varchar(20)" definition="NOT NULL" hash="1">
+			<description>Kod operatora</description>
+		</column>
+		<column name="WPLTH_OpeNazwisko" type="nvarchar(50)" definition="NOT NULL" hash="1">
+			<description>Nazwisko operatora</description>
+		</column>
+		<primaryKey name="WPLTH_Primary" columns="WPLTH_WPLTHID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_WszystkoPLTwrHistoriaTowary" localColumns="WPLTH_TwrID" refTable="Towary" refColumns="Twr_TwrID">
+			<description>Relacja CDN.WszystkoPLTwrHistoria:CDN.Towary (MANY:1)</description>
+		</foreignKey>
+		<index name="WPLTHData" options="NONCLUSTERED" fields="WPLTH_Data">
+			<description>Wg daty operacji</description>
+		</index>
+	</table>

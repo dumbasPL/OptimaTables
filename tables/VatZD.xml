@@ -1,0 +1,118 @@
+<table name="VatZD">
+		<column name="VaZ_VaZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description />
+		</column>
+		<column name="VaZ_Bufor" type="INTEGER" definition="NOT NULL constraint DF_VaZ_Bufor default(0)">
+			<description />
+		</column>
+		<column name="VaZ_BZdId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_VaNId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_VaNId_ZK" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_TrNId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_Typ" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_DkNId" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_SumaKwotZdarzen" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_SumaKwotRozliczen" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_KntNazwa1" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description />
+		</column>
+		<column name="VaZ_KntNazwa2" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description />
+		</column>
+		<column name="VaZ_KntNazwa3" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description />
+		</column>
+		<column name="VaZ_KntNipE" type="NVARCHAR(20)" definition="NULL" hash="1">
+			<description />
+		</column>
+		<column name="VaZ_Dokument" type="NVARCHAR(256)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_DataWys" type="DateTime" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_Termin" type="DateTime" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_TerminPlatnosci" type="DateTime" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_RazemNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_RazemVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_RazemBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_RodzajZakupu" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_Odliczenia" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_Flaga" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_Stawka" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_Netto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_VAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_Brutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_KorektaNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_KorektaVat" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="VaZ_PoprzednioDoRoliczenia" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_PoprzednioRozliczono" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_DoRoliczeniaNaDzienObliczenia" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<column name="VaZ_RoliczonoNaDzienObliczenia" type="DECIMAL(15,2)" definition="NULL">
+			<description />
+		</column>
+		<primaryKey name="VaZ_Primary" columns="VaZ_VaZId">
+			<description />
+		</primaryKey>
+		<foreignKey name="FK_VaZDeklNag" localColumns="VaZ_DkNId" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.VatZD:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="VaZDokuments" options="NONCLUSTERED" fields="VaZ_BZdId, VaZ_Typ, VaZ_VaNId">
+			<description>Relacje do dokumentow</description>
+		</index>
+		<index name="VaZ_BZdId_Index" options="NONCLUSTERED" fields="VaZ_BZdId" includedColumns="VaZ_VaNId, VaZ_DkNId, VaZ_Termin" />
+		<index name="VaZ_VaNId_Index" options="NONCLUSTERED" fields="VaZ_VaNId" includedColumns="VaZ_BZdId, VaZ_DkNId, VaZ_Termin" />
+		<index name="VaZ_DkNId_Index" options="NONCLUSTERED" fields="VaZ_DkNId" includedColumns="VaZ_VaNId, VaZ_BZdId, VaZ_Termin" />
+		<index name="VaZ_Termin_Index" options="NONCLUSTERED" fields="VaZ_Termin" includedColumns="VaZ_VaNId, VaZ_BZdId, VaZ_DkNId" />
+	</table>
+	

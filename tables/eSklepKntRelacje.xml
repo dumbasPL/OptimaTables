@@ -1,0 +1,19 @@
+<table name="eSklepKntRelacje">
+		<description>Tabela powiązań kontrahentow isklep i optima</description>
+		<column name="ESK_ESKId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="ESK_KntOptimaID" type="INTEGER" definition="NOT NULL">
+			<description>id knt optima</description>
+		</column>
+		<column name="ESK_KnteSklepID" type="INTEGER" definition="NOT NULL">
+			<description>Id knt e-Sklepu</description>
+		</column>
+		<column name="ESK_eSklepID" type="INTEGER" definition="NOT NULL">
+			<description>Id e-Sklepu</description>
+		</column>
+		<primaryKey name="ESK_Primary" columns="ESK_ESKId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

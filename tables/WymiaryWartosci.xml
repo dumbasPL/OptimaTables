@@ -1,0 +1,47 @@
+<table name="WymiaryWartosci">
+		<description>Tabela z wartosciami Wymiarów Analitycznych</description>
+		<column name="WyW_WyWID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WyW_WyyId" type="INT" filterVisible="false">
+			<description />
+		</column>
+		<column name="WyW_SourceType" type="INT" filterVisible="false">
+			<description>Typ dokumentu</description>
+		</column>
+		<column name="WyW_SRCGUID" type="NVARCHAR(255)" filterVisible="false">
+			<description>Identyfikator pozycji opisu</description>
+		</column>
+		<column name="WyW_GUID" type="NVARCHAR(255)" filterVisible="false">
+			<description>Identyfikator pozycji opisu</description>
+		</column>
+		<column name="WyW_Wartosc" type="NVARCHAR(255)" filterVisible="false" hash="1">
+			<description>Wartosc opisu</description>
+		</column>
+		<column name="WyW_DokumentTyp" type="INT" filterVisible="false">
+			<description>Typ dokumentu</description>
+		</column>
+		<column name="WyW_DokumentId" type="INT" filterVisible="false">
+			<description>ID dokumentu</description>
+		</column>
+		<column name="WyW_SlownikId" type="INT" filterVisible="false">
+			<description>ID Słownika w kolumnie WyW_Wartosc</description>
+		</column>
+		<column name="WyW_LpPozycji" type="INT" filterVisible="false">
+			<description>Numer LP pozycji</description>
+		</column>
+		<column name="WyW_KwotaPozycji" type="DECIMAL(15,4)" filterVisible="false" />
+		<column name="WyW_Procent" type="DECIMAL(15,4)" filterVisible="false" />
+		<column name="WyW_Kwota" type="DECIMAL(15,4)" filterVisible="false" />
+		<primaryKey name="WyW_Primary" columns="WyW_WyWID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="WyWWyyId" options="NONCLUSTERED" fields="WyW_WyyId" includedColumns="WyW_GUID,WyW_Wartosc,WyW_DokumentTyp,WyW_DokumentId,WyW_SlownikId" />
+		<index name="WyWGUID" options="NONCLUSTERED" fields="WyW_GUID" includedColumns="WyW_Wartosc,WyW_DokumentTyp,WyW_DokumentId,WyW_SlownikId" />
+		<index name="WyWDokument" options="NONCLUSTERED" fields="WyW_DokumentTyp, WyW_DokumentId" includedColumns="WyW_GUID,WyW_Wartosc,WyW_SlownikId" />
+	</table>
+	

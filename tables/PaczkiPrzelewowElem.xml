@@ -1,0 +1,63 @@
+<table name="PaczkiPrzelewowElem">
+		<description>Tabela z elementami paczek zdarzeń K/B</description>
+		<column name="PcPE_PcPEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PcPE_PcPNID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka paczki zdarzeń</description>
+			<details>Klucz obcy do tabeli cdn.PaczkiPrzelewowNag</details>
+		</column>
+		<column name="PcPE_BZdID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zdarzenia</description>
+			<details>Klucz obcy do tabeli cdn.BnkZdarzenia</details>
+		</column>
+		<column name="PcPE_NumerOpis" type="NVARCHAR(256)">
+			<description>Pełny numer dokumentu płatności (wartość aktualna ze zdarzenia kb dla
+				niewysłanych paczek lub historyczna z chwili wysyłki przelewu do webserwisu bankowego dla
+				paczek wysłanych)</description>
+		</column>
+		<column name="PcPE_DataDok" type="DATETIME">
+			<description>Data dokumentu płatności (wartość aktualna ze zdarzenia kb dla niewysłanych
+				paczek lub historyczna z chwili wysyłki przelewu do webserwisu bankowego dla paczek
+				wysłanych)</description>
+		</column>
+		<column name="PcPE_Termin" type="DATETIME">
+			<description>Termin płatności płatności (wartość aktualna ze zdarzenia kb dla niewysłanych
+				paczek lub historyczna z chwili wysyłki przelewu do webserwisu bankowego dla paczek
+				wysłanych)</description>
+		</column>
+		<column name="PcPE_DataReal" type="DATETIME">
+			<description>Planowana data realizacji płatności (wartość aktualna ze zdarzenia kb dla
+				niewysłanych paczek lub historyczna z chwili wysyłki przelewu do webserwisu bankowego dla
+				paczek wysłanych)</description>
+		</column>
+		<column name="PcPE_Kwota" type="DECIMAL(15,2)">
+			<description>Pozostała do rozliczenia kwota płatności w walucie (wartość aktualna ze zdarzenia
+				kb dla niewysłanych paczek lub historyczna z chwili wysyłki przelewu do webserwisu bankowego
+				dla paczek wysłanych)</description>
+		</column>
+		<column name="PcPE_SymbolWaluty" type="VARCHAR(3)">
+			<description>Symbol waluty rozliczenia płatności (wartość aktualna ze zdarzenia kb dla
+				niewysłanych paczek lub historyczna z chwili wysyłki przelewu do webserwisu bankowego dla
+				paczek wysłanych)</description>
+		</column>
+		<column name="PcPE_PodmiotKod" type="VARCHAR(20)">
+			<description>Akronim podmiotu płatności (wartość aktualna ze zdarzenia kb)</description>
+		</column>
+		<column name="PcPE_CDCKomunikat" type="NVARCHAR(256)">
+			<description>Komunikat na płatności z webserwisu bankowego (wartość aktualna ze zdarzenia kb)</description>
+		</column>
+		<primaryKey name="PcPE_Primary" columns="PcPE_PcPEID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_PcPENaglowek" localColumns="PcPE_PcPNID" refTable="PaczkiPrzelewowNag" refColumns="PcPN_PcPNID" deleteOption="CASCADE">
+			<description>Relacja CDN.PaczkiPrzelewowElem:CDN.PaczkiPrzelewowNag (MANY:1)</description>
+		</foreignKey>
+		<index name="PcPEWgNaglowka" options="UNIQUE NONCLUSTERED" fields="PcPE_PcPNID, PcPE_PcPEID">
+			<description>Wg nagłówka</description>
+		</index>
+		<index name="PcPEWgZdarzeniaKB" options="UNIQUE NONCLUSTERED" fields="PcPE_BZdID">
+			<description>Indeks do tabeli BnkZdarzenia</description>
+		</index>
+	</table>
+	

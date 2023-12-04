@@ -1,0 +1,28 @@
+<table name="IGaleriaAtrybuty">
+		<description>Kategorie towaru z iGaleria24</description>
+		<column name="IGA_IGAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="IGA_IGKId" type="INTEGER" definition="NOT NULL">
+			<description>id kategorii</description>
+		</column>
+		<column name="IGA_Nazwa" type="NVARCHAR(100)" definition="NOT NULL">
+			<description>id kategorii</description>
+		</column>
+		<column name="IGA_Typ" type="INTEGER" definition="NOT NULL">
+			<description>id kategorii</description>
+		</column>
+		<column name="IGA_Jednostka" type="NVARCHAR(30)" definition="NOT NULL">
+			<description>id kategorii</description>
+		</column>
+		<column name="IGA_Aktywny" type="TINYINT" definition="NOT NULL">
+			<description>czy atrybut jest aktywny</description>
+		</column>
+		<column name="IGA_DowolnaWartosc" type="TINYINT" definition="NOT NULL">
+			<description>czy atrybutowi można przypisać dowolną wartość</description>
+		</column>
+		<index name="IGAtrybutyId" options="UNIQUE NONCLUSTERED" fields="IGA_IGAId, IGA_IGKId">
+			<description>Wg id</description>
+		</index>
+	</table>
+	

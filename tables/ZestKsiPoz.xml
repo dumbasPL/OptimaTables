@@ -1,0 +1,52 @@
+<table name="ZestKsiPoz">
+		<description>Pozycje definicji zestawień księgowych</description>
+		<column name="ZKP_ZKPId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ZKP_SFId" type="INTEGER" definition="NULL">
+			<description>Identyfikator słownika sprawozdania finansowego</description>
+		</column>
+		<column name="ZKP_ZKNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka zestawienia</description>
+		</column>
+		<column name="ZKP_ParId" type="INTEGER">
+			<description>Identyfikator nadrzędnego węzła zestawienia</description>
+		</column>
+		<column name="ZKP_Numeracja" type="NVARCHAR(4)" definition="NOT NULL CONSTRAINT DF_ZKP_NUMERACJA DEFAULT('AUTO')">
+			<description>Nazwa pozycji zestawienia</description>
+		</column>
+		<column name="ZKP_Lp" type="INT" definition="NOT NULL">
+			<description>Numer pozycji w ramach węzła</description>
+		</column>
+		<column name="ZKP_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa pozycji zestawienia</description>
+		</column>
+		<column name="ZKP_Znak" type="SMALLINT" definition="NOT NULL">
+			<description>Znak, z jakim sumuje się pozycja zestawienia</description>
+		</column>
+		<column name="ZKP_Definicja" type="NVARCHAR(2000)" definition="NOT NULL">
+			<description>Definicja pozycji zestawienia</description>
+		</column>
+		<column name="ZKP_BrakKontroli" type="TINYINT" definition="NOT NULL">
+			<description>Brak kontroli istnienia kont użytych w zestawieniu</description>
+		</column>
+		<column name="ZKP_Poziom" type="SMALLINT" definition="NOT NULL">
+			<description>Poziom zagłębienia pozycji</description>
+		</column>
+		<column name="ZKP_Lisc" type="TINYINT" definition="NOT NULL">
+			<description>Czy pozycja jest na najniższym poziomie (nie jest węzlem)</description>
+		</column>
+		<column name="ZKP_Numer" type="" definition="NO_SQL" />
+		<column name="ZKP_Segment" type="" definition="NO_SQL" />
+		<primaryKey name="ZKP_Primary" columns="ZKP_ZKPId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_ZKPZestawienie" localColumns="ZKP_ZKNId" refTable="ZestKsiNag" refColumns="ZKN_ZKNId" deleteOption="CASCADE">
+			<description>Relacja CDN.ZestKsiPoz:CDN.ZestKsiNag (MANY:1)</description>
+		</foreignKey>
+		<index name="ZKPZestawienie" options="NONCLUSTERED" fields="ZKP_ZKNId" />
+		<index name="ZKPParrent" options="UNIQUE NONCLUSTERED" fields="ZKP_ParId ,ZKP_Lp ,ZKP_ZKPId">
+			<description>Wg węzła do którego należy pozycja</description>
+		</index>
+	</table>
+	

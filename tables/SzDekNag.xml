@@ -1,0 +1,61 @@
+<table name="SzDekNag">
+		<description>Nagłówki szablonów dekretacji</description>
+		<column name="SzD_SzDId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SzD_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ szablonu</description>
+			<details>Określa, czy jest to schemat księgowania rejestru Vat, listy płac itp.</details>
+		</column>
+		<column name="SzD_PodTyp" type="INTEGER" definition="NOT NULL">
+			<description>Typ podmiotu ( zgodny z tabelą Podmioty )</description>
+		</column>
+		<column name="SzD_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol szablonu</description>
+		</column>
+		<column name="SzD_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa szablonu dekretacji</description>
+		</column>
+		<column name="SzD_NieAktywny" type="TINYINT" definition="NOT NULL">
+			<description>Szablon dekretacji nie jest używany i nie powinien pojawiać się na listach</description>
+		</column>
+		<column name="SzD_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="SzD_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SzD_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SzD_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="SzD_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SzD_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SzD_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SzD_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SzD_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SzD_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SzD_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SzD_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SzD_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SzD_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SzD_Primary" columns="SzD_SzDId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="SzDSymbol" options="UNIQUE NONCLUSTERED" fields="SzD_Typ ,SzD_Symbol">
+			<description>Według symbolu zestawienia</description>
+		</index>
+	</table>
+	

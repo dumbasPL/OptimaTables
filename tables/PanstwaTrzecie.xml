@@ -1,0 +1,25 @@
+<table name="PanstwaTrzecie">
+		<description>Panstwa trzecie</description>
+		<column name="PaT_PaTID" type="INTEGER" definition="NOT NULL IDENTITY(1,1)">
+			<description>Id prawa trzeciego</description>
+		</column>
+		<column name="PaT_RUCID" type="INTEGER" definition="NOT NULL">
+			<description>Id rejestru czynnosci</description>
+		</column>
+		<column name="PaT_Kraj" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Kraj</description>
+		</column>
+		<column name="PaT_Uzasadnienie" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Uzasadnienie</description>
+		</column>
+		<column name="PaT_Szczegoly" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Szczegóły uzasadnienia</description>
+		</column>
+		<primaryKey name="PK_PaT_PaTID" columns="PaT_PaTID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PaTRUC" localColumns="PaT_RUCID" refTable="RejestrCzynnosci" refColumns="RUC_RUCID" deleteOption="CASCADE">
+			<description>Relacja CDN.PanstwaTrzecie:CDN.RejestrCzynnosci (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

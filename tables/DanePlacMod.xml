@@ -1,0 +1,36 @@
+<table name="DanePlacMod">
+		<description>Słownik modyfikalnych danych płacowych</description>
+		<column name="DPM_DpmId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DPM_Kod" type="INTEGER" definition="NOT NULL">
+			<description>Kod</description>
+		</column>
+		<column name="DPM_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj danych w słowniku</description>
+		</column>
+		<column name="DPM_Wartosc" type="DECIMAL(15,2)">
+			<description>Wartość rekordu</description>
+		</column>
+		<column name="DPM_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Nazwa rekordu</description>
+		</column>
+		<column name="DPM_Nazwa" type="VARCHAR(60)" definition="NOT NULL" />
+		<column name="DPM_Nieaktywny" type="TINYINT" definition="NOT NULL" />
+		<column name="DPM_Format" type="NVARCHAR(20)" definition="NOT NULL" />
+		<column name="DPM_Dodatkowe" type="NVARCHAR(254)" definition="NOT NULL" />
+		<column name="DPM_Kolekcja" type="NVARCHAR(128)" definition="NOT NULL" />
+		<column name="DPM_Inne" type="NVARCHAR(128)" definition="NOT NULL" />
+		<column name="DPM_KolejkaWartosc" type="NVARCHAR(254)" definition="NOT NULL" />
+		<column name="DPM_KolejkaOpis" type="NVARCHAR(254)" definition="NOT NULL" />
+		<column name="DPM_Tag" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DPM_Tag DEFAULT(0)" />
+		<column name="DPM_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_DPM_ZjeId default('')" />
+		<primaryKey name="DPM_Primary" columns="DPM_DpmId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="DPMNazwa" options="NONCLUSTERED" fields="DPM_Nazwa" />
+		<index name="DPMZjeLink" options="NONCLUSTERED" fields="DPM_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

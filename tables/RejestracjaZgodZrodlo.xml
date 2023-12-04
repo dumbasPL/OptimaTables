@@ -1,0 +1,48 @@
+<table name="RejestracjaZgodZrodlo">
+		<description>Źródła pozyskania / wycofania zgody</description>
+		<column name="RZZ_RZZId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RZZ_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa źródła</description>
+		</column>
+		<column name="RZZ_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Nieaktywne</description>
+		</column>
+		<column name="RZZ_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RZZ_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RZZ_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RZZ_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RZZ_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RZZ_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RZZ_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RZZ_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RZZ_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RZZ_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="RZZ_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RZZ_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RZZ_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RZZ_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="RZZ_Primary" columns="RZZ_RZZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

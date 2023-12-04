@@ -1,0 +1,99 @@
+<table name="OkresoweNag">
+		<description>Nagłówki definicji księgowań okresowych</description>
+		<column name="OkN_OkNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="OkN_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol księgowania okresowego</description>
+		</column>
+		<column name="OkN_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa księgowania okresowego</description>
+		</column>
+		<column name="OkN_Uwagi" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Dodatkowe uwagi dotyczące księgowania okresowego</description>
+		</column>
+		<column name="OkN_Dziennik" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa dziennika, do którego będzie wykonywane księgowanie</description>
+		</column>
+		<column name="OkN_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Czy księgować do bufora</description>
+		</column>
+		<column name="OkN_Dokument" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer wygenerowanego księgowania okresowego</description>
+		</column>
+		<column name="OkN_KatId" type="INTEGER">
+			<description>Klucz obcy do kategorii</description>
+		</column>
+		<column name="OkN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis (kategoria) dekretu</description>
+		</column>
+		<column name="OkN_Warunek" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis warunku wykonywania księgowania</description>
+		</column>
+		<column name="OkN_NieAktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OkN_NieAktywny DEFAULT (0)">
+			<description>Pozycja: 0 - aktywna, 1 - nie aktywna</description>
+		</column>
+		<column name="OkN_Harmonogram" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OkN_Harmonogram DEFAULT (0)">
+			<description>Księgowanie wg harmonogramu; 0 - aktywne, 1 - nie aktywne</description>
+		</column>
+		<column name="OkN_ZakresDat" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OkN_ZakresDat DEFAULT (0)">
+			<description>Zakres dat DataOd DataDo: 0 - aktywny, 1 - nie aktywny</description>
+		</column>
+		<column name="OkN_DataOd" type="DATETIME">
+			<description>Data od zakresu dat</description>
+		</column>
+		<column name="OkN_DataDo" type="DATETIME">
+			<description>Data do zakresu dat</description>
+		</column>
+		<column name="OkN_TS_Ksi" type="DATETIME">
+			<description>TimeStamp wykonania księgowania</description>
+		</column>
+		<column name="OkN_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="OkN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="OkN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="OkN_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="OkN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="OkN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="OkN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OkN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="OkN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_OkN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="OkN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OkN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="OkN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_OkN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="OkN_Primary" columns="OkN_OkNId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_OkNKategoria" localColumns="OkN_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.OkresoweNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="OkNSymbol" options="UNIQUE NONCLUSTERED" fields="OkN_Symbol">
+			<description>Według symbolu księgowania okresowego</description>
+		</index>
+		<index name="OkNKategoria" options="NONCLUSTERED" fields="OkN_KatId">
+			<description>Klucz obcy do tabeli Kategorie</description>
+		</index>
+		<index name="OkNNieAktywany" options="NONCLUSTERED" fields="OkN_NieAktywny">
+			<description>Według aktywności/nieaktywności pozycji</description>
+		</index>
+	</table>
+	

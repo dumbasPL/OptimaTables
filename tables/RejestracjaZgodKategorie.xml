@@ -1,0 +1,13 @@
+<table name="RejestracjaZgodKategorie">
+		<description>Kategorie zgód</description>
+		<column name=" RZK_RZKID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="RZK_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa kategorii</description>
+		</column>
+		<primaryKey name="RZK_Primary" columns="RZK_RZKID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

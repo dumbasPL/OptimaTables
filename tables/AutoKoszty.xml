@@ -1,0 +1,124 @@
+<table name="AutoKoszty">
+		<description>Ewidencja kosztów związanych z używaniem samochodu</description>
+		<details>Tabela zawierająca zestawienie kosztów poniesionych w związku z użytkowaniem pojazdu.</details>
+		<column name="AuK_AuKID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AuK_AuEID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator samochodu</description>
+			<details>
+				Identyfikator pojazdu.
+				Relacja do tabeli AutoEwid (AuK:AuE:Id = AuE:AuEId)
+			</details>
+		</column>
+		<column name="AuK_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc dokumentu</description>
+			<details>
+				Rok i miesiąc wpisu dokumentu, obliczany jako:
+				100 * YEAR(DataZapData) + MONTH(DataZapData)
+			</details>
+		</column>
+		<column name="AuK_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dokumentu w miesiącu</description>
+		</column>
+		<column name="AuK_VaNId" type="INTEGER">
+			<description>Wskaźnik do dokumentu źródłowego</description>
+			<details>
+				Wskaźnik do dokumentu źródłowego faktury zakupu (VatNag).
+				Dokument zakupu może być wpisany "z ręki" (VaN:VaNId = 0) lub pobrany z listy rejestrów Vat
+				(VaN:VaNId = AuK:VaNId)
+			</details>
+		</column>
+		<column name="AuK_DataZap" type="DATETIME" definition="NOT NULL">
+			<description>Data zapisu</description>
+			<details>
+				Data z jaką wprowadzono dokument do ewidencji kosztów.
+				Pole to występuje na serwerze MS SQL
+			</details>
+		</column>
+		<column name="AuK_Dokument" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu zakupu</description>
+		</column>
+		<column name="AuK_KatId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) dokumentu może zostac wpisany "z ręki" (AuK:KatId = 0) lub zostac pobrany z
+				listy kategorii (AuK:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="AuK_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Kategoria (opis) dokumentu</description>
+		</column>
+		<column name="AuK_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość dokumentu</description>
+		</column>
+		<column name="AuK_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="AuK_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuK_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuK_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuK_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuK_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+		</column>
+		<column name="AuK_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuK_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AuK_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuK_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AuK_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuK_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuK_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuK_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="AuK_Primary" columns="AuK_AuKID">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_AuKLp" localColumns="AuK_AuEID" refTable="AutoEwid" refColumns="AuE_AuEID">
+			<description>Relacja CDN.AutoKoszty:CDN.AutoEwid (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_AuKKategoria" localColumns="AuK_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.AutoKoszty:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="AuKLp" options="UNIQUE NONCLUSTERED" fields="AuK_AuEID ,AuK_RokMies ,AuK_Lp ,AuK_AuKID">
+			<description>Wg liczby porządkowej</description>
+			<details>Indeks według liczby porządkowej zapisu w danym miesiącu w ramach dokumentów
+				dotyczących jednego samochodu</details>
+		</index>
+		<index name="AuKChrono" options="UNIQUE NONCLUSTERED" fields="AuK_AuEID ,AuK_RokMies ,AuK_DataZap ,AuK_AuKID">
+			<description>Chronologicznie dla samochodu</description>
+			<details>Indeks chronologiczny w ramach dokumentów dotyczących jednego samochodu. Służy do
+				renumeracji listy.</details>
+		</index>
+		<index name="AuKVatNag" options="NONCLUSTERED" fields="AuK_VaNId">
+			<details>
+				Indeks unikalny wg wskaźnika do dokumentu źródłowego.
+				Dokument w rejestrze Vat może być źródłem tylko dla jednego dokumentu w AutoKoszty
+			</details>
+		</index>
+		<index name="AuKKategoria" options="UNIQUE NONCLUSTERED" fields="AuK_KatId ,AuK_DataZap ,AuK_AuKID">
+			<description>Koszty używania samochodu wg kategorii</description>
+			<details>Powiązanie kategorii z zapisem w ewidencji kosztów</details>
+		</index>
+	</table>
+	

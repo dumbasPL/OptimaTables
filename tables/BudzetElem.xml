@@ -1,0 +1,47 @@
+<table name="BudzetElem">
+		<description>Tabela elementy dokuemntów księgowości budżetowej</description>
+		<column name="BuE_BuEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Primary Key</description>
+		</column>
+		<column name="BuE_BuNId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli BudzetNag</description>
+		</column>
+		<column name="BuE_Miesiac" type="INTEGER" definition="NOT NULL">
+			<description>Rok miesiąc pozycji dokumentu</description>
+		</column>
+		<column name="BuE_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota pozycji</description>
+		</column>
+		<column name="BuE_KwotaPoprzednia" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>W przypadku korekty kwota poprzednia</description>
+		</column>
+		<column name="BuE_OpeZalID" type="INTEGER" />
+		<column name="BuE_StaZalId" type="INTEGER" />
+		<column name="BuE_TS_Zal" type="DATETIME" definition="NOT NULL" />
+		<column name="BuE_OpeModID" type="INTEGER" />
+		<column name="BuE_StaModId" type="INTEGER" />
+		<column name="BuE_TS_Mod" type="DATETIME" definition="NOT NULL" />
+		<column name="BuE_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BuE_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BuE_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BuE_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BuE_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BuE_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BuE_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BuE_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="BuE_Primary" columns="BuE_BuEId">
+			<description>Klucz głuwny unikalny</description>
+		</primaryKey>
+		<foreignKey name="FK_BuEBuNID" localColumns="BuE_BuNId" refTable="BudzetNag" refColumns="BuN_BuNId" deleteOption="CASCADE">
+			<description>Relacja CDN.BudzetElem:CDN.BudzetNag (MANY:1)</description>
+		</foreignKey>
+		<index name="BuEBuNID" options="NONCLUSTERED" fields="BuE_BuNId" />
+		<index name="BuERokMiesiac" options="NONCLUSTERED" fields="BuE_Miesiac">
+			<description>Klucz rok miesiąc</description>
+		</index>
+	</table>
+	

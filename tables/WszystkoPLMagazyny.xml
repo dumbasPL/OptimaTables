@@ -1,0 +1,25 @@
+<table name="WszystkoPLMagazyny">
+		<description>Magazyny wysyłane do wszystko.pl</description>
+		<column name="WPLM_WPLMId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WPLM_MagId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="WPLM_WPLSId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator e-Sklep</description>
+		</column>
+		<column name="WPLM_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Domyślny magazyn</description>
+		</column>
+		<primaryKey name="WPLM_Primary" columns="WPLM_WPLMId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_WszystkoPLMagazyny" localColumns="WPLM_WPLSId" refTable="WszystkoPLStanowiska" refColumns="WPLS_WPLSId" deleteOption="CASCADE">
+			<description>Relacja CDN.eSklepMagazyny:CDN.eSklepStanowiska (MANY:1)</description>
+		</foreignKey>
+		<index name="WPLMMagazyn" options="UNIQUE NONCLUSTERED" fields="WPLM_MagId ,WPLM_WPLSId">
+			<description>Według magazynu</description>
+		</index>
+	</table>
+	

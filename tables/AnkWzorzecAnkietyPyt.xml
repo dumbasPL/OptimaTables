@@ -1,0 +1,61 @@
+<table name="AnkWzorzecAnkietyPyt">
+		<description>Pytania dla wzorca ankiet</description>
+		<column name="AnkWaP_AnkWaPId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkWaP_AnkWaNId" type="INTEGER" definition="NOT NULL">
+			<description>Id wzorca ankiety</description>
+		</column>
+		<column name="AnkWaP_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dla pytania</description>
+		</column>
+		<column name="AnkWaP_Tresc" type="NVARCHAR(1024)" definition="NOT NULL">
+			<description>Tresc pytania</description>
+		</column>
+		<column name="AnkWaP_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis pytania</description>
+		</column>
+		<column name="AnkWaP_TypPytania" type="TINYINT" definition="NOT NULL">
+			<description>Typ pytania 0 - otwarte; 1 - wybór odpowiedzi z listy</description>
+		</column>
+		<column name="AnkWaP_FormatPytOtwartego" type="TINYINT" definition="NOT NULL">
+			<description>Format pytania otwartego 0 - tekst; 1 - liczba; 2 - data</description>
+		</column>
+		<column name="AnkWaP_WielokrotnyWybor" type="TINYINT" definition="NOT NULL">
+			<description> 0 - jednokrotny wybór; 1 - wielokrotny wybór</description>
+		</column>
+		<column name="AnkWaP_AnkSonId" type="INTEGER" definition="NULL">
+			<description>Szablon odpowiedzi</description>
+		</column>
+		<column name="AnkWaP_Waga" type="INTEGER" definition="NOT NULL">
+			<description>Waga; domyślnie 0 max: 100</description>
+		</column>
+		<column name="AnkWaP_OdpWymagana" type="TINYINT" definition="NOT NULL">
+			<description>Czy odpowiedź na pytanie jest wymagana (1) czy nie (0)</description>
+		</column>
+		<column name="AnkWaP_Nieaktywne" type="TINYINT" definition="NOT NULL">
+			<description>Czy to pytanie jest nieaktywne (1) czy aktywne (0)</description>
+		</column>
+		<column name="AnkWaP_AnkSpId" type="INTEGER" definition="NULL">
+			<description>Identyfikator pytania w słowniku pytań</description>
+		</column>
+		<column name="AnkWaP_AnkGpId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator grupy do której pytanie przydzielono</description>
+		</column>
+		<column name="AnkWaP_GpTreeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator grupowania</description>
+		</column>
+		<column name="AnkWaP_GpParentId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator grupowania</description>
+		</column>
+		<column name="AnkWaP_GpParentLp" type="INTEGER" definition="NOT NULL">
+			<description>Lp grupy</description>
+		</column>
+		<primaryKey name="AnkWaP_Primary" columns="AnkWaP_AnkWaPId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AnkWaP_AnkWaN" localColumns="AnkWaP_AnkWaNId" refTable="AnkWzorzecAnkietyNag" refColumns="AnkWaN_AnkWaNId" deleteOption="CASCADE">
+			<description>Relacja CDN.AnkWzorzecAnkietyPyt:CDN.AnkWzorzecAnkietyNag (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

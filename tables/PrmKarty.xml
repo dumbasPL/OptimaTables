@@ -1,0 +1,18 @@
+<table name="PrmKarty" visibleForPrefixSearch="false">
+		<column name="PRM_Akronim" type="" definition="NO_SQL" />
+		<column name="PRM_Aktywna" type="" definition="NO_SQL" />
+		<column name="PRM_Cykliczna" type="" definition="NO_SQL" />
+		<column name="PRM_DataDo" type="" definition="NO_SQL" />
+		<column name="PRM_DataOd" type="" definition="NO_SQL" />
+		<column name="PRM_Dokument" type="" definition="NO_SQL" />
+		<column name="PRM_Id" type="" definition="NO_SQL" />
+		<column name="PRM_LastMod" type="" definition="NO_SQL" />
+		<column name="PRM_PominPozostale" type="" definition="NO_SQL" />
+		<column name="PRM_Priorytet" type="" definition="NO_SQL" />
+		<column name="PRM_PriorytetLp" type="" definition="NO_SQL" />
+		<column name="PRM_SposobStosowania" type="" definition="NO_SQL" />
+		<column name="PRM_Stan" type="" definition="NO_SQL" />
+		<column name="PRM_Typ" type="" definition="NO_SQL" />
+		<column name="PRM_Uwagi" type="" definition="NO_SQL" />
+	</table>
+	

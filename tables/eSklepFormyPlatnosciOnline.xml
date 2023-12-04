@@ -1,0 +1,10 @@
+<table name="eSklepFormyPlatnosciOnline">
+		<description>Formy platnosci online dla eSklep</description>
+		<column name="ESFO_ESFOId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="ESFO_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa formy płatnosci online</description>
+		</column>
+	</table>
+	

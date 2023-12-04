@@ -1,0 +1,226 @@
+<table name="TraSElemCechy">
+		<description>Tabela z dostawami</description>
+		<details>Subelementy dokumentów (faktur, paragonów itp) wiążą element transakcji z zasobem
+			magazynowym</details>
+		<column name="TsC_TsCID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="TsC_TrSID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator subelementu transakcji</description>
+			<details>Klucz obcy do tabeli TraSElem</details>
+		</column>
+		<column name="TsC_Cecha1_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha1_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha1_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha1_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha2_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha2_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha2_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha2_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha3_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha3_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha3_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha3_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha4_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha4_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha4_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha4_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha5_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha5_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha5_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha5_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha6_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha6_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha6_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha6_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha7_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha7_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha7_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha7_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha8_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha8_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha8_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha8_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha9_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha9_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha9_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha9_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="TsC_Cecha10_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="TsC_Cecha10_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="TsC_Cecha10_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="TsC_Cecha10_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<primaryKey name="TsC_Primary" columns="TsC_TsCID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_TrSTraElemC" localColumns="TsC_TrSID" refTable="TraSElem" refColumns="TrS_TrSID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraSElemCechy:CDN.TraSElem (MANY:1)</description>
+		</foreignKey>
+		<index name="TrSTraElemC" options="UNIQUE NONCLUSTERED" fields="TsC_TrSID ,TsC_TsCID">
+			<description>Wg elementu faktury</description>
+		</index>
+	</table>
+	

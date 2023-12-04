@@ -1,0 +1,153 @@
+<table name="JpkV7">
+		<description>Tabela tymczasowa dla Plików JPK</description>
+		<column name="Id" type="int" definition="NO_SQL" />
+		<column name="JpNId" type="int" definition="NO_SQL" />
+		<column name="VaNId" type="int" definition="NO_SQL" />
+		<column name="DkNId" type="int" definition="NO_SQL" />
+		<column name="Typ" type="tinyint" definition="NO_SQL" />
+		<column name="VatZd" type="tinyint" definition="NO_SQL" />
+		<column name="RokMiesiac" type="int" definition="NO_SQL" />
+		<column name="Lp" type="int" definition="NO_SQL" />
+		<column name="DataSprzedazy" type="date" definition="NO_SQL" />
+		<column name="DataWystawienia" type="date" definition="NO_SQL" />
+		<column name="DataWplywu" type="date" definition="NO_SQL" />
+		<column name="DataZakupu" type="date" definition="NO_SQL" />
+		<column name="Dokument" type="nvarchar(max)" definition="NO_SQL" />
+		<column name="KodKrajuNadaniaTIN" type="nvarchar(2)" definition="NO_SQL" />
+		<column name="NIP" type="nvarchar(50)" definition="NO_SQL" />
+		<column name="Kontrahent" type="nvarchar(350)" definition="NO_SQL" />
+		<column name="Adres" type="nvarchar(350)" definition="NO_SQL" />
+		<column name="TypDokumentu" type="nvarchar(32)" definition="NO_SQL" />
+		<column name="DokumentZakupu" type="nvarchar(32)" definition="NO_SQL" />
+		<column name="GTU_01" type="int" definition="NO_SQL" />
+		<column name="GTU_02" type="int" definition="NO_SQL" />
+		<column name="GTU_03" type="int" definition="NO_SQL" />
+		<column name="GTU_04" type="int" definition="NO_SQL" />
+		<column name="GTU_05" type="int" definition="NO_SQL" />
+		<column name="GTU_06" type="int" definition="NO_SQL" />
+		<column name="GTU_07" type="int" definition="NO_SQL" />
+		<column name="GTU_08" type="int" definition="NO_SQL" />
+		<column name="GTU_09" type="int" definition="NO_SQL" />
+		<column name="GTU_10" type="int" definition="NO_SQL" />
+		<column name="GTU_11" type="int" definition="NO_SQL" />
+		<column name="GTU_12" type="int" definition="NO_SQL" />
+		<column name="GTU_13" type="int" definition="NO_SQL" />
+		<column name="SW" type="int" definition="NO_SQL" />
+		<column name="EE" type="int" definition="NO_SQL" />
+		<column name="TP" type="int" definition="NO_SQL" />
+		<column name="TT_WNT" type="int" definition="NO_SQL" />
+		<column name="TT_D" type="int" definition="NO_SQL" />
+		<column name="MR_T" type="int" definition="NO_SQL" />
+		<column name="MR_UZ" type="int" definition="NO_SQL" />
+		<column name="I_42" type="int" definition="NO_SQL" />
+		<column name="I_63" type="int" definition="NO_SQL" />
+		<column name="B_SPV" type="int" definition="NO_SQL" />
+		<column name="B_SPV_DOSTAWA" type="int" definition="NO_SQL" />
+		<column name="B_MPV_PROWIZJA" type="int" definition="NO_SQL" />
+		<column name="MPP" type="int" definition="NO_SQL" />
+		<column name="KorektaPodstawyOpodt" type="int" definition="NO_SQL" />
+		<column name="K_10" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_11" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_12" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_13" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_14" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_15" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_16" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_17" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_18" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_19" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_20" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_21" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_22" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_23" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_24" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_25" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_26" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_27" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_28" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_29" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_30" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_31" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_32" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_33" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_34" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_35" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_36" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="SprzedazVAT_Marza" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="LiczbaWierszySprzedazy" type="int" definition="NO_SQL" />
+		<column name="PodatekNalezny" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="IMP" type="int" definition="NO_SQL" />
+		<column name="K_40" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_41" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_42" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_43" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_44" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_45" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_46" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="K_47" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="ZakupVAT_Marza" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="LiczbaWierszyZakupow" type="int" definition="NO_SQL" />
+		<column name="PodatekNaliczony" type="decimal(15, 2)" definition="NO_SQL" />
+		<column name="P_10" type="int" definition="NO_SQL" />
+		<column name="P_11" type="int" definition="NO_SQL" />
+		<column name="P_12" type="int" definition="NO_SQL" />
+		<column name="P_13" type="int" definition="NO_SQL" />
+		<column name="P_14" type="int" definition="NO_SQL" />
+		<column name="P_15" type="int" definition="NO_SQL" />
+		<column name="P_16" type="int" definition="NO_SQL" />
+		<column name="P_17" type="int" definition="NO_SQL" />
+		<column name="P_18" type="int" definition="NO_SQL" />
+		<column name="P_19" type="int" definition="NO_SQL" />
+		<column name="P_20" type="int" definition="NO_SQL" />
+		<column name="P_21" type="int" definition="NO_SQL" />
+		<column name="P_22" type="int" definition="NO_SQL" />
+		<column name="P_23" type="int" definition="NO_SQL" />
+		<column name="P_24" type="int" definition="NO_SQL" />
+		<column name="P_25" type="int" definition="NO_SQL" />
+		<column name="P_26" type="int" definition="NO_SQL" />
+		<column name="P_27" type="int" definition="NO_SQL" />
+		<column name="P_28" type="int" definition="NO_SQL" />
+		<column name="P_29" type="int" definition="NO_SQL" />
+		<column name="P_30" type="int" definition="NO_SQL" />
+		<column name="P_31" type="int" definition="NO_SQL" />
+		<column name="P_32" type="int" definition="NO_SQL" />
+		<column name="P_33" type="int" definition="NO_SQL" />
+		<column name="P_34" type="int" definition="NO_SQL" />
+		<column name="P_35" type="int" definition="NO_SQL" />
+		<column name="P_36" type="int" definition="NO_SQL" />
+		<column name="P_37" type="int" definition="NO_SQL" />
+		<column name="P_38" type="int" definition="NO_SQL" />
+		<column name="P_39" type="int" definition="NO_SQL" />
+		<column name="P_40" type="int" definition="NO_SQL" />
+		<column name="P_41" type="int" definition="NO_SQL" />
+		<column name="P_42" type="int" definition="NO_SQL" />
+		<column name="P_43" type="int" definition="NO_SQL" />
+		<column name="P_44" type="int" definition="NO_SQL" />
+		<column name="P_45" type="int" definition="NO_SQL" />
+		<column name="P_46" type="int" definition="NO_SQL" />
+		<column name="P_47" type="int" definition="NO_SQL" />
+		<column name="P_48" type="int" definition="NO_SQL" />
+		<column name="P_49" type="int" definition="NO_SQL" />
+		<column name="P_50" type="int" definition="NO_SQL" />
+		<column name="P_51" type="int" definition="NO_SQL" />
+		<column name="P_52" type="int" definition="NO_SQL" />
+		<column name="P_53" type="int" definition="NO_SQL" />
+		<column name="P_54" type="int" definition="NO_SQL" />
+		<column name="P_55" type="int" definition="NO_SQL" />
+		<column name="P_56" type="int" definition="NO_SQL" />
+		<column name="P_57" type="int" definition="NO_SQL" />
+		<column name="P_58" type="int" definition="NO_SQL" />
+		<column name="P_59" type="int" definition="NO_SQL" />
+		<column name="P_60" type="int" definition="NO_SQL" />
+		<column name="P_61" type="nvarchar(max)" definition="NO_SQL" />
+		<column name="P_62" type="int" definition="NO_SQL" />
+		<column name="P_63" type="int" definition="NO_SQL" />
+		<column name="P_64" type="int" definition="NO_SQL" />
+		<column name="P_65" type="int" definition="NO_SQL" />
+		<column name="P_66" type="int" definition="NO_SQL" />
+		<column name="P_67" type="int" definition="NO_SQL" />
+		<column name="P_68" type="int" definition="NO_SQL" />
+		<column name="P_69" type="int" definition="NO_SQL" />
+		<column name="P_ORDZU" type="nvarchar(max)" definition="NO_SQL" />
+	</table>
+	

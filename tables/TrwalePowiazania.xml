@@ -1,0 +1,39 @@
+<table name="TrwalePowiazania">
+		<description>Tabela powiązań środków trwałych z dokumentami</description>
+		<details>Tabela powiązań środków trwałych z dokumentami (rejestru VAT i ewidencji dodatkowej)</details>
+		<column name="SrTP_SrtPID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SrTP_SrTID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator środka trwałego</description>
+		</column>
+		<column name="SrTP_DokumentTyp" type="INTEGER" filterVisible="false">
+			<description>Typ dokumentu związanego ze środkiem trwałym</description>
+		</column>
+		<column name="SrTP_DokumentID" type="INTEGER" filterVisible="false">
+			<description>ID dokumentu związanego ze środkiem trwałym</description>
+		</column>
+		<column name="SrTP_DataDok" type="DATETIME">
+			<description>Data dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrTP_Numer" type="NVARCHAR(256)">
+			<description>Numer dokumentu związanego ze środkiem trwałym</description>
+		</column>
+		<column name="SrTP_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu przypadająca na dany środek trwały</description>
+		</column>
+		<column name="SrTP_Opis" type="NVARCHAR(255)">
+			<description>Opis</description>
+		</column>
+		<primaryKey name="SrTP_Primary" columns="SrTP_SrtPID">
+			<description>Wg ID</description>
+		</primaryKey>
+		<foreignKey name="FK_SrTPDok" localColumns="SrTP_SrTID" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwalePowiazania:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+		<index name="SrTPDok" options="UNIQUE NONCLUSTERED" fields="SrTP_SrTID ,SrTP_DokumentID ,SrTP_DokumentTyp ,SrTP_Numer">
+			<description>Wg zestawu</description>
+		</index>
+	</table>
+	

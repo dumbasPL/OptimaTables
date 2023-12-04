@@ -1,0 +1,145 @@
+<table name="DetalKontrahenci">
+		<description>Kontrahenci detalu</description>
+		<column name="DKnt_DKntId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DKnt_OptimaId" type="INTEGER" definition="NOT NULL">
+			<description>Id kontrahenta w optimie</description>
+		</column>
+		<column name="DKnt_DSKntId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator kontrahenta w detalu</description>
+		</column>
+		<column name="DKnt_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DKnt_Kod" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Kod kontrahenta</description>
+		</column>
+		<column name="DKnt_EAN" type="VARCHAR(16)" definition="NOT NULL" hash="1">
+			<description>EAN</description>
+		</column>
+		<column name="DKnt_Nazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwa kontahenta</description>
+		</column>
+		<column name="DKnt_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Nazwa kontahenta</description>
+		</column>
+		<column name="DKnt_Nazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Nazwa kontahenta</description>
+		</column>
+		<column name="DKnt_Kraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj kontahenta</description>
+		</column>
+		<column name="DKnt_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Wojewodztwo kontahenta</description>
+		</column>
+		<column name="DKnt_Powiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat kontahenta</description>
+		</column>
+		<column name="DKnt_Gmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina kontahenta</description>
+		</column>
+		<column name="DKnt_Ulica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica kontahenta</description>
+		</column>
+		<column name="DKnt_NrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Nr Domu kontahenta</description>
+		</column>
+		<column name="DKnt_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Nr Lokalu kontahenta</description>
+		</column>
+		<column name="DKnt_Miasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto kontahenta</description>
+		</column>
+		<column name="DKnt_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod Pocztowy kontahenta</description>
+		</column>
+		<column name="DKnt_Poczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta kontahenta</description>
+		</column>
+		<column name="DKnt_Adres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Adres2 kontahenta</description>
+		</column>
+		<column name="DKnt_NipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>NipKraj kontahenta</description>
+		</column>
+		<column name="DKnt_NipE" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>NipE kontahenta</description>
+		</column>
+		<column name="DKnt_Nip" type="NVARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Nip kontahenta</description>
+		</column>
+		<column name="DKnt_Regon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Regon kontahenta</description>
+		</column>
+		<column name="DKnt_Pesel" type="NVARCHAR(11)" definition="NOT NULL" hash="1">
+			<description>Pesel kontahenta</description>
+		</column>
+		<column name="DKnt_Telefon" type="VARCHAR(20)" definition="NOT NULL" hash="1">
+			<description>Telefon</description>
+		</column>
+		<column name="DKnt_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Pole na uwagi</description>
+		</column>
+		<column name="DKnt_OsobaOdbierajaca" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Osoba odbierajaca</description>
+		</column>
+		<column name="DKnt_StanSynchronizacji" type="INTEGER" definition="NOT NULL">
+			<description>Stan synchronizacji kontrahenta</description>
+		</column>
+		<column name="DKnt_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DKnt_OpeID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="DKnt_AdresId" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DKnt_AdresId DEFAULT(0)">
+			<description>Identyfikator adresu</description>
+		</column>
+		<column name="DKnt_AdresId2" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DKnt_AdresId2 DEFAULT(0)">
+			<description>Identyfikator adresu 2</description>
+		</column>
+		<column name="DKnt_Telefon1" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DKnt_Telefon1 DEFAULT('')" hash="1">
+			<description>Telefon</description>
+		</column>
+		<column name="DKnt_eMail" type="VARCHAR(60)" definition="NOT NULL CONSTRAINT DF_DKnt_eMail DEFAULT('')" hash="1">
+			<description>eMail</description>
+		</column>
+		<column name="DKnt_URL" type="VARCHAR(254)" definition="NOT NULL CONSTRAINT DF_DKnt_URL DEFAULT('')" hash="1">
+			<description>URL</description>
+		</column>
+		<column name="DKnt_Fax" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DKnt_Fax DEFAULT('')" hash="1">
+			<description>Fax</description>
+		</column>
+		<column name="DKnt_Finalny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DKnt_Finalny DEFAULT(0)">
+			<description>Status odbiorcy: firma / odbiorca finalny</description>
+			<details>
+				Przyjmuje wartości:
+				0 - firma
+				1- odbiorca finalny
+			</details>
+		</column>
+		<column name="DKnt_Rodzaj_Dostawca" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DKnt_Rodzaj_Dostawca DEFAULT(0)">
+			<description>Rodzaj podmiotu - Dostawca</description>
+		</column>
+		<column name="DKnt_Rodzaj_Odbiorca" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DKnt_Rodzaj_Odbiorca DEFAULT(1)">
+			<description>Rodzaj podmiotu - Odbiorca</description>
+		</column>
+		<column name="DKnt_Rodzaj_Konkurencja" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DKnt_Rodzaj_Konkurencja DEFAULT(0)">
+			<description>Rodzaj podmiotu - Konkurecja</description>
+		</column>
+		<column name="DKnt_Rodzaj_Partner" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DKnt_Rodzaj_Partner DEFAULT(0)">
+			<description>Rodzaj podmiotu - Partner</description>
+		</column>
+		<column name="DKnt_Rodzaj_Potencjalny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DKnt_Rodzaj_Potencjalny DEFAULT(0)">
+			<description>Rodzaj podmiotu - klient potencjalny</description>
+		</column>
+		<primaryKey name="DKnt_Primary" columns="DKnt_DKntId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DKntDetal" options="UNIQUE NONCLUSTERED" fields="DKnt_OptimaId ,DKnt_DSKntId, DKnt_StanDetalID">
+			<description>Według stanowiska</description>
+		</index>
+	</table>
+	

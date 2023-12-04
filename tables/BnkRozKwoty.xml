@@ -1,0 +1,286 @@
+<table name="BnkRozKwoty">
+		<description>Lista rozrachunków dokumentów kasowo-bankowych</description>
+		<details>Tabela zawiera listę dokonanych rozrachunków pomiędzy dokumetami, zapisanymi w
+			BnkZapisy i/lub BnkZdarzenia</details>
+		<column name="BRK_BRKID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="BRK_Kwota" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT CK_BRK_Kwota CHECK(BRK_KWOTA&gt;0)">
+			<description>Kwota rozrachunku w walucie</description>
+			<details>W przypadku rozrachunków walutowych - kwota rozrachunku wyrażona w walucie</details>
+		</column>
+		<column name="BRK_KwotaSysL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota rozrachunku lewego dokumentu w walucie systemowej</description>
+			<details>Dla rozrachunków walutowych kwota rozrachunku wyrażona w walucie systemowej,
+				przeliczona wg kursu z "lewego" dokumentu</details>
+		</column>
+		<column name="BRK_KwotaSysP" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota rozrachunku prawego dokumentu w walucie systemowej</description>
+			<details>Dla rozrachunków walutowych kwota rozrachunku wyrażona w walucie systemowej,
+				przeliczona wg kursu z "prawego" dokumentu</details>
+		</column>
+		<column name="BRK_RoznicaKursowaSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Różnica kursowa</description>
+			<details>Różnica kursowa z uwzględnieniem znaku wynikającego z różnicy kursów na lewym i
+				prawym dokumencie oraz z kierunku tych dokumentów</details>
+		</column>
+		<column name="BRK_DDfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator definicji dokumentu</description>
+		</column>
+		<column name="BRK_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Schemat numeracji dla dokumentu</description>
+		</column>
+		<column name="BRK_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny w ramach schematu numeracji</description>
+		</column>
+		<column name="BRK_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(BRK_NUMERNR,BRK_NUMERSTRING)">
+			<description>Numer pełny dokumentu</description>
+		</column>
+		<column name="BRK_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data rozrachunku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRK_Zwloka" type="INTEGER" definition="NOT NULL">
+			<description>Rzeczywista zwłoka płatności</description>
+		</column>
+		<column name="BRK_LDokTyp" type="SMALLINT">
+			<description>Typ dokumentu uczestniczącego w rozrachunku po lewej stronie</description>
+			<details>Określa, czy rozrachowywany zapis po lewej stronie znajduje się w tabeli BnkZapisy
+				czy BnkZdarzenia. Typ: 1 - zdarzenie,2 - zapis K/B</details>
+		</column>
+		<column name="BRK_LDokID" type="INTEGER">
+			<description>Identyfikator dokumentu uczestniczącego w rozrachunku po lewej stronie</description>
+			<details>Określa ID rozliczanego zapisu w tabeli BnkZapisy lub BnkZdarzenia</details>
+		</column>
+		<column name="BRK_PDokTyp" type="SMALLINT">
+			<description>Typ dokumentu uczestniczącego w rozrachunku po prawej stronie</description>
+			<details>Określa, czy rozrachowywany zapis po prawej stronie znajduje się w tabeli BnkZapisy
+				czy BnkZdarzenia. Typ: 1 - zdarzenie,2 - zapis K/B</details>
+		</column>
+		<column name="BRK_PDokID" type="INTEGER">
+			<description>Identyfikator dokumentu uczestniczącego w rozrachunku po prawej stronie</description>
+			<details>Określa ID rozliczanego zapisu w tabeli BnkZapisy lub BnkZdarzenia</details>
+		</column>
+		<column name="BRK_LPodTyp" type="INTEGER">
+			<description>Typ podmiotu lewego dokumentu</description>
+		</column>
+		<column name="BRK_LPodID" type="INTEGER">
+			<description>ID podmiotu lewego dokumentu</description>
+		</column>
+		<column name="BRK_PPodTyp" type="INTEGER">
+			<description>Typ podmiotu prawego dokumentu</description>
+		</column>
+		<column name="BRK_PPodID" type="INTEGER">
+			<description>ID podmiotu prawego dokumentu</description>
+		</column>
+		<column name="BRK_LBRaID" type="INTEGER">
+			<description>Identyfikator rachunku, do którego należy dokument uczestniczący w rozliczeniu po
+				lewej stronie</description>
+		</column>
+		<column name="BRK_PBRaID" type="INTEGER">
+			<description>Identyfikator rachunku, do którego należy dokument uczestniczący w rozliczeniu po
+				prawej stronie</description>
+		</column>
+		<column name="BRK_RozliczenieAutomatyczne" type="TINYINT">
+			<description>Czy rozliczenie zostało wygenerowane automatycznie (przez managera płatności)</description>
+		</column>
+		<column name="BRK_ZapisAutomatyczny" type="SMALLINT">
+			<description>Czy co najmniej jeden z rozliczanych dokumentów jest automatycznie wygenerowanym
+				zapisem kasowym/bankowym</description>
+		</column>
+		<column name="BRK_Waluta" type="VARCHAR(3)">
+			<description>Symbol waluty rozliczenia</description>
+		</column>
+		<column name="BRK_LNumer" type="NVARCHAR(256)">
+			<description>Numer lewego dokumentu wyświetlany na liście</description>
+		</column>
+		<column name="BRK_PNumer" type="NVARCHAR(256)">
+			<description>Numer prawego dokumentu wyświetlany na liście</description>
+		</column>
+		<column name="BRK_LKwota" type="DECIMAL(15,2)">
+			<description>Kwota lewego dokumentu w walucie</description>
+			<details>Pole redundantne, dodane ze względu na optymalizację listy rozliczeń.</details>
+		</column>
+		<column name="BRK_PKwota" type="DECIMAL(15,2)">
+			<description>Kwota prawego dokumentu w walucie</description>
+			<details>Pole redundantne, dodane ze względu na optymalizację listy rozliczeń.</details>
+		</column>
+		<column name="BRK_DekId" type="INTEGER">
+			<description>Identyfikator zapisu księgowego</description>
+			<details>
+				Referencja do tabeli DekretyNag dla księgowania różnic kursowych.&lt;br&gt;
+				Zapis zaksięgowany posiada BRK_DekId = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRK_DekId = NULL;
+			</details>
+		</column>
+		<column name="BRK_Dek2Id" type="INTEGER">
+			<description>Identyfikator zapisu księgowego II</description>
+			<details>
+				Referencja do tabeli DekretyNag dla księgowania rozliczeń (kompensat).&lt;br&gt;
+				Zapis zaksięgowany posiada BRK_Dek2Id = Dek_DekId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRK_Dek2Id = NULL;
+			</details>
+		</column>
+		<column name="BRK_PreDekID" type="INTEGER">
+			<description>Klucz obcy do tabeli predekretów</description>
+		</column>
+		<column name="BRK_PreDek2ID" type="INTEGER">
+			<description>Klucz obcy do tabeli predekretów</description>
+		</column>
+		<column name="BRK_KPRId" type="INTEGER">
+			<description>Identyfikator zapisu księgowego w KPiR</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada BRK_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRK_KPRId = NULL;
+			</details>
+		</column>
+		<column name="BRK_KolumnaKPR" type="TINYINT" definition="NOT NULL">
+			<description>Numer kolumny w KPiR, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="BRK_RycID" type="INTEGER">
+			<description>Identyfikator zapisu księgowego w ewidencji ryczałtowej</description>
+			<details>
+				Referencja do tabeli Ryczalt.&lt;br&gt;
+				Zapis zaksięgowany posiada BRK_RycID = RYC_RycId;&lt;br&gt;
+				Zapis niezaksięgowany posiada BRK_RycID = NULL;
+			</details>
+		</column>
+		<column name="BRK_KolumnaRyc" type="TINYINT" definition="NOT NULL">
+			<description>Numer kolumny w ewidencji ryczałtowej, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="BRK_KontoWn1" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Wn dla księgowania różnicy kursowej</description>
+		</column>
+		<column name="BRK_KontoMa1" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Ma dla księgowania różnicy kursowej</description>
+		</column>
+		<column name="BRK_KontoWn2" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Wn dla księgowania rozliczenia</description>
+		</column>
+		<column name="BRK_KontoMa2" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Konto Ma dla księgowania rozliczenia</description>
+		</column>
+		<column name="BRK_AutoOffLine" type="SMALLINT" definition="NOT NULL">
+			<description>Czy rozliczenie zostało wygenerowane przez mechanizm Off-Line</description>
+		</column>
+		<column name="BRK_TS_Export" type="DATETIME">
+			<description>TimeStamp eksportu</description>
+		</column>
+		<column name="BRK_ImportAppId" type="VARCHAR(5)" />
+		<column name="BRK_ImportRowId" type="VARCHAR(36)" definition="NOT NULL">
+			<description>Unikalny identyfikator</description>
+		</column>
+		<column name="BRK_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="BRK_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRK_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRK_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="BRK_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BRK_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BRK_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRK_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BRK_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRK_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BRK_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BRK_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRK_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BRK_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="BRK_DokumentLP" type="" definition="NO_SQL" />
+		<column name="BRK_LWynagrodzenie" type="" definition="NO_SQL" />
+		<column name="BRK_PWynagrodzenie" type="" definition="NO_SQL" />
+		<column name="BRK_KRoID" type="INTEGER" filterVisible="false">
+			<description>Wskaźnik do tabeli KsiRozrachunki</description>
+		</column>
+		<column name="BRK_DleID" type="INTEGER" filterVisible="false">
+			<description>Wskaźnik do tabeli CDN.DlgElem</description>
+		</column>
+		<column name="BRK_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<primaryKey name="BRK_Primary" columns="BRK_BRKID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BRKDokDef" localColumns="BRK_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.BnkRozKwoty:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<index name="BRKPodmiotL" options="NONCLUSTERED" fields="BRK_LPodID ,BRK_LPodTyp">
+			<description>Wg podmiotu lewego dokumentu</description>
+		</index>
+		<index name="BRKPodmiotP" options="NONCLUSTERED" fields="BRK_PPodID ,BRK_PPodTyp">
+			<description>Wg podmiotu prawego dokumentu</description>
+		</index>
+		<index name="BRKDokDef" options="NONCLUSTERED" fields="BRK_DDfId">
+			<description>Klucz obcy do definicji dokumentu</description>
+		</index>
+		<index name="BRKNumer" options="NONCLUSTERED" fields="BRK_NumerString ,BRK_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="BRKNumerPelny" options="UNIQUE NONCLUSTERED" fields="BRK_NumerPelny ,BRK_BRKID">
+			<description>Wg numeru pełnego dokumentu</description>
+		</index>
+		<index name="BRKDekrety" options="NONCLUSTERED" fields="BRK_DekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="BRKDekrety2" options="NONCLUSTERED" fields="BRK_Dek2Id">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="BRKPreDekrety" options="NONCLUSTERED" fields="BRK_PreDekId">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="BRKPreDekrety2" options="NONCLUSTERED" fields="BRK_PreDek2Id">
+			<description>Klucz obcy do tabeli DekretyNag</description>
+		</index>
+		<index name="BRKKPR" options="NONCLUSTERED" fields="BRK_KPRId">
+			<description>Klucz obcy do tabeli ZapisyKPR</description>
+		</index>
+		<index name="BRKRyc" options="NONCLUSTERED" fields="BRK_RycID">
+			<description>Klucz obcy do tabeli Ryczalt</description>
+		</index>
+		<index name="BRKKRoID" options="NONCLUSTERED" fields="BRK_KRoID">
+			<description>Wg ID rozrachunku (relacja 1:1 CDN.BnkRozKwoty:CDN.KsiRozrachunki)</description>
+		</index>
+		<index name="BRKDleID" options="NONCLUSTERED" fields="BRK_DleID">
+			<description>Wg ID delegacji (relacja 1:1 CDN.BnkRozKwoty:CDN.DlgElem)</description>
+		</index>
+		<index name="BRKGUID" options="UNIQUE NONCLUSTERED" fields="BRK_ImportRowId" />
+		<index name="BRKChrono" options="UNIQUE NONCLUSTERED" fields="BRK_DataDok, BRK_BRKID" includedColumns="BRK_Kwota, BRK_KwotaSysL, BRK_KwotaSysP, BRK_LDokTyp, BRK_LDokID, BRK_PDokTyp, BRK_PDokID, BRK_Waluta" />
+		<index name="BRKDokL" options="NONCLUSTERED" fields="BRK_LDokTyp, BRK_LDokID">
+			<description>Wg lewego dokumentu</description>
+		</index>
+		<index name="BRKDokP" options="NONCLUSTERED" fields="BRK_PDokTyp, BRK_PPodID">
+			<description>Wg prawego dokumentu</description>
+		</index>
+		<index name="BRKDokDataL" options="NONCLUSTERED" fields="BRK_LDokTyp, BRK_LDokID, BRK_DataDok">
+			<description>Wg lewego dokumentu i daty</description>
+		</index>
+		<index name="BRKDokDataP" options="NONCLUSTERED" fields="BRK_PDokTyp, BRK_PDokID, BRK_DataDok">
+			<description>Wg prawego dokumentu i daty</description>
+		</index>
+		<index name="BRKRozKur" options="UNIQUE NONCLUSTERED" fields="BRK_RoznicaKursowaSys, BRK_NumerPelny, BRK_BRKID">
+			<description>Wg różnicy kursowej</description>
+		</index>
+		<index name="BRKAuto" options="NONCLUSTERED" fields="BRK_ZapisAutomatyczny" includedColumns="BRK_BRKID, BRK_DataDok" />
+	</table>
+	

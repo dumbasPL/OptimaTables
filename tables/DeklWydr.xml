@@ -1,0 +1,52 @@
+<table name="DeklWydr">
+		<description>Dane deklaracji do wydruku</description>
+		<details>
+			Deklaracje podatkowe zapisywane są w trzech tabelach:
+			DeklNag zawiera informacje o rodzaju deklaracji, roku i miesiącu, którego dotyczy deklaracja,
+			wspólniku itp.
+			DeklElem zawiera obliczone pozycje deklaracji
+			DeklWydr zawiera przygotowany zestaw danych do wydrukowania deklaracji
+
+			Tabela DeklWydr zawiera w układzie "pionowym" elementy obliczonej deklaracji przygotowane do
+			wydrukowania - tzn. każdej wartości drukowanej na deklaracji odpowiada jeden rekord w tabeli
+			DeklWydr.
+			Znaczenie rekordu określa wartość pola DkW:Numer. Dodatkowo na polu DkW:Opis znajduje się opis
+			znaczenia rekordu
+		</details>
+		<column name="DkW_DkWID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>Unikalny identyfikator rekordu.</details>
+		</column>
+		<column name="DkW_DkNID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Wskaźnik do nagłówka deklaracji</description>
+			<details>Relacja do nagłówka deklaracji DeklNag (DkE:DkNId = DkN:DkNId)</details>
+		</column>
+		<column name="DkW_Rubryka" type="INTEGER" definition="NOT NULL">
+			<description>Numer rubryki na deklaracji</description>
+			<details>Określa numer rubryki na formularzu deklaracji</details>
+		</column>
+		<column name="DkW_SubRubryka" type="SMALLINT" definition="NOT NULL">
+			<description>Numer podrubryki na deklaracji</description>
+			<details>Pole SubRubryka wykorzystywane jest w przypadku występowania na formularzu deklaracji
+				podrubryk (np. 44a, 44b)</details>
+		</column>
+		<column name="DkW_Wartosc" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Wartość rubryki</description>
+			<details>Na polu typu STRING zapisywane są zarówno wartości liczbowe (np. kwota dochodu) jak i
+				tekstowe (np. nazwa firmy) występujące na formularzu deklaracji</details>
+		</column>
+		<column name="DkW_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Opis rubryki</description>
+		</column>
+		<primaryKey name="DkW_Primary" columns="DkW_DkWID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DkWDeklNag" localColumns="DkW_DkNID" refTable="DeklNag" refColumns="DkN_DkNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DeklWydr:CDN.DeklNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DkWDeklNag" options="UNIQUE NONCLUSTERED" fields="DkW_DkNID ,DkW_Rubryka ,DkW_SubRubryka">
+			<description>Wg nagłówka deklaracji</description>
+			<details>Indeks określający zestaw pozycji wydruku dla jednej deklaracji (jednego nagłówka)</details>
+		</index>
+	</table>
+	

@@ -1,0 +1,93 @@
+<table name="TraFakZaliczkowe" filterVisible="false">
+		<description>Tabelka faktur zaliczkowych dla dokumentów Fa finalnych</description>
+		<details>Tabela Vat dla dokumentów handlowych.</details>
+		<column name="TrZ_TrZID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator zapisu</description>
+		</column>
+		<column name="TrZ_TrNID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Wskaźnik do nagłówka TraNag</details>
+		</column>
+		<column name="TrZ_FZID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do faktury zaliczkowej</description>
+			<details>Wskaźnik do nagłówka TraNag</details>
+		</column>
+		<column name="TrZ_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="TrZ_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="TrZ_Zrodlowa" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka źródłowa dla stawi zaniżonej</description>
+		</column>
+		<column name="TrZ_KwotaBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Brutto</description>
+		</column>
+		<column name="TrZ_KwotaBruttoSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Brutto Sys</description>
+		</column>
+		<column name="TrZ_KwotaBruttoMax" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Brutto maksymalna</description>
+		</column>
+		<column name="TrZ_KwotaBruttoSysMax" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Brutto Sys maksymalna</description>
+		</column>
+		<column name="TrZ_KwotaNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Netto</description>
+		</column>
+		<column name="TrZ_KwotaNettoSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Netto Sys</description>
+		</column>
+		<column name="TrZ_KwotaNettoMax" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Netto Max</description>
+		</column>
+		<column name="TrZ_KwotaNettoSysMax" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota Netto Sys Max</description>
+		</column>
+		<column name="TrZ_KwotaVAT" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota vat</description>
+		</column>
+		<column name="TrZ_KwotaVATSys" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota vat sys</description>
+		</column>
+		<column name="TrZ_KwotaVATMax" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota vat maksymalna</description>
+		</column>
+		<column name="TrZ_KwotaVATSysMax" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota vat sys maksymalna</description>
+		</column>
+		<column name="TrZ_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Flaga techniczna</description>
+			<details>
+				0 - zapis standartowy
+				1 - rozliczenie fa zaliczkowej.
+			</details>
+		</column>
+		<column name="TrZ_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="TrZ_NumerPelny" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Pełny numer dokumentu zaliczkowego</description>
+		</column>
+		<column name="TrZ_Uwzgledniac" type="TINYINT" definition="NOT NULL">
+			<description>Flaga zaznaczenia</description>
+		</column>
+		<primaryKey name="TrZ_Primary" columns="TrZ_TrZID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_FakZalTraNag" localColumns="TrZ_TrNID" refTable="TraNag" refColumns="TrN_TrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.TraFakZaliczkowe:CDN.TraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="FakZalTraNag" options="NONCLUSTERED" fields="TrZ_TrNID">
+			<description>Wg identyfikatora i stawki VAT</description>
+		</index>
+	</table>
+	

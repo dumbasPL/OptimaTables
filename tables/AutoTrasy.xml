@@ -1,0 +1,67 @@
+<table name="AutoTrasy">
+		<description>Słownik tras pomocniczych</description>
+		<details>Tabela zawiera pomocniczą listę tras oraz celów przejazdów dla potrzeb "samochodówki"</details>
+		<column name="AuT_AuTID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="AuT_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod trasy przejazdu</description>
+		</column>
+		<column name="AuT_Trasa" type="NVARCHAR(1000)">
+			<description>Opis trasy przejazdu</description>
+		</column>
+		<column name="AuT_Cel" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Opis celu wyjazdu</description>
+		</column>
+		<column name="AuT_Dlugosc" type="DECIMAL( 7,2)" definition="NOT NULL">
+			<description>Długość trasy w km</description>
+		</column>
+		<column name="AuT_Miasto" type="TINYINT" definition="NOT NULL">
+			<description>Przejazd objęty limitem jazd miejskich</description>
+		</column>
+		<column name="AuT_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="AuT_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuT_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuT_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuT_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuT_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuT_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuT_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AuT_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuT_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AuT_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuT_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuT_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuT_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="AuT_Primary" columns="AuT_AuTID">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<index name="AuTKod" options="UNIQUE NONCLUSTERED" fields="AuT_Kod">
+			<description>Wg kodu trasy</description>
+		</index>
+	</table>
+	

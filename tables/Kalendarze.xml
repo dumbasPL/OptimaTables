@@ -1,0 +1,90 @@
+<table name="Kalendarze">
+		<description>Tabela kalendarzy</description>
+		<column name="KAL_KalId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator kalendarza</description>
+		</column>
+		<column name="KAL_Akronim" type="VARCHAR(12)" definition="NOT NULL">
+			<description>Akronim kalendarza</description>
+		</column>
+		<column name="KAL_Nazwa" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa kalendarza</description>
+		</column>
+		<column name="KAL_Opis" type="NVARCHAR(64)" definition="NOT NULL">
+			<description>Opis</description>
+		</column>
+		<column name="KAL_UwzglWymiarEtatu" type="TINYINT" definition="NOT NULL" />
+		<column name="KAL_NadgodzRozlicz" type="TINYINT" definition="NOT NULL" />
+		<column name="KAL_LiczOdchylkiOdZasad" type="TINYINT" definition="NOT NULL" />
+		<column name="KAL_LiczStdDopNadg" type="TINYINT" definition="NOT NULL" />
+		<column name="KAL_LiczStdDopNadgNoc" type="TINYINT" definition="NOT NULL" />
+		<column name="KAL_UwzglDobowWymPlan" type="TINYINT" definition="NOT NULL" />
+		<column name="KAL_ModPlanNB" type="TINYINT" />
+		<column name="KAL_NormaKalendarz" type="TINYINT" definition="NOT NULL" />
+		<column name="KAL_NormaDobowa" type="DATETIME" definition="NOT NULL" />
+		<column name="KAL_NormaTygodniowa" type="DATETIME" definition="NOT NULL" />
+		<column name="KAL_NadgodzOkres" type="INTEGER" definition="NOT NULL" />
+		<column name="KAL_NadgodzPrzesuniecie" type="INTEGER" definition="NOT NULL" />
+		<column name="KAL_NadgodzOpoznienie" type="INTEGER" definition="NOT NULL" />
+		<column name="KAL_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_Nieaktywny DEFAULT(0)">
+			<description>Pozycja słownika jest nieużywana</description>
+		</column>
+		<column name="KAL_EdycjaNocne" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_EdycjaNocne DEFAULT(0)" />
+		<column name="KAL_NocOd" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KAL_NocOd DEFAULT(-2)" />
+		<column name="KAL_NocDo" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KAL_NocDo DEFAULT(-2)" />
+		<column name="KAL_NocLimit" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KAL_NocLimit DEFAULT(-2)" />
+		<column name="KAL_NocProcent" type="DECIMAL(15,2)" definition="NOT NULL  CONSTRAINT DF_KAL_NocProcent DEFAULT(0)" />
+		<column name="KAL_DoplataZaPraceWNocy " type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_DoplataZaPraceWNocy DEFAULT(0)" />
+		<column name="KAL_NocKP130 " type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_NocKP130 DEFAULT(0)" />
+		<column name="KAL_EdycjaNadgodz" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_EdycjaNadgodz DEFAULT(0)" />
+		<column name="KAL_Procent50" type="DECIMAL(15,2)" definition="NOT NULL  CONSTRAINT DF_KAL_Procent50 DEFAULT(0)" />
+		<column name="KAL_Procent100" type="DECIMAL(15,2)" definition="NOT NULL  CONSTRAINT DF_KAL_Procent100 DEFAULT(0)" />
+		<column name="KAL_NadgodzKP130 " type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_NadgodzKP130 DEFAULT(0)" />
+		<column name="KAL_UwzglStandSwieta " type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_UwzglStandSwieta DEFAULT(0)" />
+		<column name="KAL_PodzialNadgDobTyg " type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_PodzialNadgDobTyg DEFAULT(0)" />
+		<column name="KAL_Bilansowanie " type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_Bilansowanie DEFAULT(2)" />
+		<column name="KAL_PowyzejPonizejKP130" type="TINYINT" definition="NOT NULL CONSTRAINT DF_KAL_PowyzejPonizejKP130 DEFAULT(0)">
+			<description>Liczenie powyżej normy wg normy art. 130</description>
+		</column>
+		<column name="KAL_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="KAL_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KAL_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KAL_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="KAL_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="KAL_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KAL_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KAL_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="KAL_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KAL_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="KAL_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_KAL_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="KAL_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_KAL_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="KAL_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="KAL_Primary" columns="KAL_KalId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="KALAkronim" options="UNIQUE NONCLUSTERED" fields="KAL_Akronim">
+			<description>Unikalny indeks po akronimie</description>
+		</index>
+	</table>
+	

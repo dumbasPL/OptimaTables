@@ -1,0 +1,58 @@
+<table name="GrupyKontNag">
+		<description>Grupy kont nagłówek</description>
+		<column name="GKN_GKNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="GKN_OObId" type="INTEGER">
+			<description>Klucz obcy do okresu obrachunkowego</description>
+		</column>
+		<column name="GKN_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol grupy kont</description>
+		</column>
+		<column name="GKN_NieAktywny" type="TINYINT" definition="CONSTRAINT DF_GKN_NieAktywny DEFAULT(0)">
+			<description>Czy grupa kont jest nieaktywna</description>
+		</column>
+		<column name="GKN_OpeZalId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="GKN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputer)</description>
+		</column>
+		<column name="GKN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzania zapisu</description>
+			<details>TimeStamp wprowadzania - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="GKN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="GKN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="GKN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="GKN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_GKN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="GKN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_GKN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="GKN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_GKN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="GKN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_GKN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="GKN_Primary" columns="GKN_GKNID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_GKNOkrObr" localColumns="GKN_OObId" refTable="OkresyObrach" refColumns="OOb_OObID" deleteOption="CASCADE">
+			<description>Relacja CDN.GrupyKontNag:CDN.OkresyObrach (MANY:1)</description>
+		</foreignKey>
+		<index name="GKNSymbol" options="UNIQUE NONCLUSTERED" fields="GKN_Symbol ,GKN_OObId" />
+		<index name="GKNOkrObr" options="NONCLUSTERED" fields="GKN_OObId">
+			<description>Wg okresu obrachunkowego</description>
+		</index>
+	</table>
+	

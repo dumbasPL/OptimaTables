@@ -1,0 +1,90 @@
+<table name="DetalStanTowary">
+		<description>Towary w detalu</description>
+		<column name="DSTwr_DSTwrId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DSTwr_StanDetalID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator stanowiska detalu</description>
+		</column>
+		<column name="DSTwr_OptimaId" type="INTEGER" definition="NOT NULL">
+			<description>Id towaru w optimie</description>
+		</column>
+		<column name="DSTwr_Kod" type="VARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod towaru</description>
+		</column>
+		<column name="DSTwr_NumerKat" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Numer kategorii</description>
+		</column>
+		<column name="DSTwr_SWW" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol SWW</description>
+		</column>
+		<column name="DSTwr_EAN" type="VARCHAR(40)" definition="NOT NULL">
+			<description>EAN</description>
+		</column>
+		<column name="DSTwr_Nazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa</description>
+		</column>
+		<column name="DSTwr_Opis" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Nazwa kontahenta</description>
+		</column>
+		<column name="DSTwr_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa podstawowej jednostki miary</description>
+		</column>
+		<column name="DSTwr_JMCalkowite" type="TINYINT" definition="NOT NULL">
+			<description>Format jednostki miary</description>
+			<details>Format przeliczania jednostek miar. 1 oznacza, że przelicznik będzie całkowity</details>
+		</column>
+		<column name="DSTwr_Kaucja" type="TINYINT" definition="NOT NULL">
+			<description>Czy towar jest opakowaniem/kaucją</description>
+			<details>
+				0 - towar zwykły &lt;br&gt;
+				1 - opakowanie
+			</details>
+		</column>
+		<column name="DSTwr_Cena" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Cena</description>
+		</column>
+		<column name="DSTwr_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Waluta</description>
+		</column>
+		<column name="DSTwr_SONId" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do słownika schematów opakowań</description>
+		</column>
+		<column name="DSTwr_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Wartość procentowa stawki VAT</description>
+		</column>
+		<column name="DSTwr_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Typ stawki</description>
+			<details>
+				Przyjmuje wartości:
+				- Zwolniona - 1 (e_mk_StawkaVAT_Zwolniona)
+				- Opodatkowana - 2 (e_mk_StawkaVAT_Opodatkowana)
+				- Zaniżona - 3 (e_mk_StawkaVAT_Zanizona)
+				- Nie podlega - 4 (e_mk_StawkaVAT_NiePodlega)
+			</details>
+		</column>
+		<column name="DSTwr_NieAktywny" type="TINYINT" definition="NOT NULL">
+			<description>NieAktywny</description>
+		</column>
+		<column name="DSTwr_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ karty: 0 - usługa, 1 - towar</description>
+		</column>
+		<column name="DSTwr_KntId" type="INTEGER">
+			<description>Identyfikator dostawcy towaru</description>
+			<details>Wskaźnik do tabeli Kontrahenci</details>
+		</column>
+		<column name="DSTwr_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji karty</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<primaryKey name="DSTwr_Primary" columns="DSTwr_DSTwrId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DelalStanDSTwr_OptimaID" options="UNIQUE NONCLUSTERED" fields="DSTwr_OptimaId ,DSTwr_StanDetalID">
+			<description>Według stanowiska</description>
+		</index>
+		<index name="TwrDSON" options="NONCLUSTERED" fields="DSTwr_SONId">
+			<description>Klucz do schematów opakowań</description>
+		</index>
+	</table>
+	

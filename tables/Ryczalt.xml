@@ -1,0 +1,166 @@
+<table name="Ryczalt">
+		<description>Ewidencja ryczałtowa</description>
+		<details>Zapisy w ewidencji przychodów objętych zryczałtowanym podatkiem dochodowym</details>
+		<column name="RYC_RycID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="RYC_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Zapis w buforze</description>
+			<details>
+				Przyjmuje wartości:
+				0-w ewidencji przychodów,
+				1-w buforze
+			</details>
+		</column>
+		<column name="RYC_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc zapisu</description>
+			<details>
+				Rok i miesiąc uzyskania przychodu, obliczany jako:
+				100 * YEAR(DataPrzData) + MONTH(DataPrzData)
+			</details>
+		</column>
+		<column name="RYC_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa zapisu (w miesiącu lub w roku)</description>
+		</column>
+		<column name="RYC_DataPrz" type="DATETIME" definition="NOT NULL">
+			<description>Data uzyskania przychodu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RYC_DataWpi" type="DATETIME" definition="NOT NULL">
+			<description>Data wpisu do ewidencji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RYC_Dokument" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu lub dziennego zestawienia sprzedaży</description>
+		</column>
+		<column name="RYC_Przychod1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Sprzedaż wg stawki 3</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Sprzedaż wg stawki 4</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod3" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Sprzedaż wg stawki 5</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod4" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Sprzedaż wg stawki 1</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod5" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Sprzedaż wg stawki 2</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod6" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Sprzedaż wg stawki 6 (sprzedaż praw majątkowych)</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod7" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_RYC_Przychod7 DEFAULT(0)">
+			<description>Sprzedaż wg stawki 7</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod8" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_RYC_Przychod8 DEFAULT(0)">
+			<description>Sprzedaż wg stawki 8</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod9" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_RYC_Przychod9 DEFAULT(0)">
+			<description>Sprzedaż wg stawki 9</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod10" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_RYC_Przychod10 DEFAULT(0)">
+			<description>Sprzedaż wg stawki 10</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_Przychod11" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_RYC_Przychod11 DEFAULT(0)">
+			<description>Sprzedaż wg stawki 11</description>
+			<details>Wartość stawki określana jest w konfiguracji programu</details>
+		</column>
+		<column name="RYC_DokTyp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_RYC_DokTyp DEFAULT(0)">
+			<description>Typ ewidencji ryczałtowej</description>
+		</column>
+		<column name="RYC_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) dokumentu może zostac wpisany "z ręki" (Ryc:KatId = 0) lub zostac pobrany z
+				listy kategorii (Ryc:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="RYC_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Uwagi</description>
+		</column>
+		<column name="RYC_Skreslony" type="TINYINT" definition="NOT NULL">
+			<description>Znacznik skreślenia zapisu</description>
+			<details>
+				Przyjmuje wartości:
+				0 - zapis "aktywny"
+				1- zapis skreślony
+			</details>
+		</column>
+		<column name="RYC_Zrodlo" type="TINYINT" definition="NOT NULL">
+			<description>Znacznik typu zapisu</description>
+			<details>
+				Wskazuje na źródło pochodzenia zapisu. Jeśli RYC_Zrodlo&lt;&gt;0, to zapis został
+				zaksięgowany z ewidencji źródłowej, wg powiązania:&lt;br&gt;
+				2 - VatNag (VaN_RYCId=RYC_RYCId);&lt;br&gt;
+				12 - EwidDodNag (EDN_RYCId=RYC_RYCId);&lt;br&gt;
+			</details>
+		</column>
+		<column name="RYC_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RYC_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RYC_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RYC_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RYC_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RYC_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RYC_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RYC_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RYC_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RYC_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="RYC_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RYC_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RYC_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RYC_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="RYC_Primary" columns="RYC_RycID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_KeyKategoria" localColumns="RYC_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.Ryczalt:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="KeyKategoria" options="UNIQUE NONCLUSTERED" fields="RYC_KatID ,RYC_DataPrz ,RYC_RycID">
+			<details>Zapisy wg kodu kategorii</details>
+		</index>
+		<index name="RycLP" options="UNIQUE NONCLUSTERED" fields="RYC_Bufor ,RYC_RokMies ,RYC_Lp ,RYC_RycID">
+			<description>Wg liczby porządkowej</description>
+		</index>
+		<index name="RycChronoBuf" options="UNIQUE NONCLUSTERED" fields="RYC_Bufor ,RYC_DataPrz ,RYC_RycID">
+			<description>Chronologicznie w ewidencji</description>
+		</index>
+		<index name="RycChrono" options="UNIQUE NONCLUSTERED" fields="RYC_DataPrz ,RYC_RycID">
+			<description>Chronologicznie dla wszystkich zapisów</description>
+		</index>
+	</table>
+	

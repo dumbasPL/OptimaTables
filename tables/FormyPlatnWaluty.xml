@@ -1,0 +1,28 @@
+<table name="FormyPlatnWaluty">
+		<description>Rejestry dla płatności walutowych</description>
+		<column name="FPW_FPWId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="FPW_FPlId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli FormyPlatnosci</description>
+		</column>
+		<column name="FPW_BRaId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do tabeli BnkRachunki</description>
+		</column>
+		<primaryKey name="FPW_Primary" columns="FPW_FPWId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_FPWFormyPlatnosci" localColumns="FPW_FPlId" refTable="FormyPlatnosci" refColumns="FPl_FPlId" deleteOption="CASCADE">
+			<description>Relacja CDN.FormyPlatnWaluty:CDN.FormyPlatnosci (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_FPWBnkrachunki" localColumns="FPW_BRaId" refTable="BnkRachunki" refColumns="BRa_BRaID">
+			<description>Relacja CDN.FormyPlatnWaluty:CDN.BnkRachunki (MANY:1)</description>
+		</foreignKey>
+		<index name="FPWFormyPlatnosci" options="UNIQUE NONCLUSTERED" fields="FPW_FPlId ,FPW_BRaId">
+			<description>Klucz obcy do tabeli FormyPlatnosci</description>
+		</index>
+		<index name="FPWBnkrachunki" options="NONCLUSTERED" fields="FPW_BRaId">
+			<description>Klucz obcy do BnkRachunki</description>
+		</index>
+	</table>
+	

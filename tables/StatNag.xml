@@ -1,0 +1,16 @@
+<table name="StatNag">
+		<description>Statystyki pracy rozproszonej</description>
+		<details>Tabela wprowadzona dla wersji rozwojowych, nieużywana w v 13.0.1.</details>
+		<column name="StN_StNID" type="INTEGER" definition="IDENTITY(1,1)" />
+		<column name="StN_Zrodlo" type="NVARCHAR(100)" definition="NOT NULL" />
+		<column name="StN_DataEksport" type="DATETIME" />
+		<column name="StN_DataImport" type="DATETIME" />
+		<column name="StN_LiczbaSlowEksp" type="INTEGER" definition="NOT NULL" />
+		<column name="StN_LiczbaSlowImp" type="INTEGER" definition="NOT NULL" />
+		<column name="StN_LiczbaDokEksp" type="INTEGER" definition="NOT NULL" />
+		<column name="StN_LiczbaDokImp" type="INTEGER" definition="NOT NULL" />
+		<column name="StN_Operator" type="INTEGER" />
+		<column name="StN_Log" type="NVARCHAR(100)" />
+		<primaryKey name="StN_Primary" columns="StN_StNID" />
+	</table>
+	

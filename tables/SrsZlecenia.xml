@@ -1,0 +1,397 @@
+<table name="SrsZlecenia">
+		<description>Lista zleceń serwisowych</description>
+		<details>Lista zleceń serwisowych (Moduł Serwis)</details>
+		<column name="SrZ_SrZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrZ_DDfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="SrZ_KatID" type="INTEGER">
+			<description>Identyfikator kategorii w tabelii Kategorie</description>
+		</column>
+		<column name="SrZ_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="SrZ_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="SrZ_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(SRZ_NUMERNR,SRZ_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="SrZ_Bufor" type="SMALLINT" definition="NOT NULL">
+			<description>Zadanie zamknięte, w buforze lub anulowane</description>
+			<details>
+				-1 - dokument anulowany;
+				0 - dokument zamknięty;
+				1 - dokument w buforze
+			</details>
+		</column>
+		<column name="SrZ_Stan" type="SMALLINT" definition="NOT NULL">
+			<description>Stan fakturowania:</description>
+			<details>
+				0 - do realizacji &lt;br&gt;
+				1 - w realizacji &lt;br&gt;
+				2- zrealizowane
+			</details>
+		</column>
+		<column name="SrZ_DokStatus" type="NVARCHAR(32)" definition="NOT NULL">
+			<description>Lista typów skojarzonych dokumentów</description>
+			<details>
+				FA - Faktura sprz. &lt;br&gt;
+				PA - Paragon &lt;br&gt;
+				WZ - Wydanie zewnętrzne &lt;br&gt;
+				RW - Rozchód wewnętrzny
+			</details>
+		</column>
+		<column name="SrZ_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId: &lt;br&gt;
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="SrZ_PodmiotId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="SrZ_PodNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy kontrahenta</description>
+		</column>
+		<column name="SrZ_PodNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy</description>
+		</column>
+		<column name="SrZ_PodNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy</description>
+		</column>
+		<column name="SrZ_PodKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description> Kraj zamieszkania (siedziby) płatnika</description>
+		</column>
+		<column name="SrZ_PodWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Wojewódzwo kontrahenta</description>
+		</column>
+		<column name="SrZ_PodPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat kontrahenta</description>
+		</column>
+		<column name="SrZ_PodGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina kontrahenta</description>
+		</column>
+		<column name="SrZ_PodUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica kontrahenta</description>
+		</column>
+		<column name="SrZ_PodNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="SrZ_PodNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="SrZ_PodMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość kontrahenta</description>
+		</column>
+		<column name="SrZ_PodKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="SrZ_PodPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Siedziba poczty</description>
+		</column>
+		<column name="SrZ_PodAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Uzupełnienie adresu</description>
+		</column>
+		<column name="SrZ_Telefon" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Numer telefonu kontrahenta</description>
+		</column>
+		<column name="SrZ_Email" type="NVARCHAR(127)" definition="NOT NULL" hash="1">
+			<description>Email kontrahenta</description>
+		</column>
+		<column name="SrZ_OdbiorcaTyp" type="SMALLINT">
+			<description>Typ odbiorcy z którym dokonano transakcji</description>
+			<details>
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="SrZ_OdbID" type="INTEGER">
+			<description>Identyfikator użytkownika</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="SrZ_OdbNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy użytkownika</description>
+		</column>
+		<column name="SrZ_OdbNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy użytkownika</description>
+		</column>
+		<column name="SrZ_OdbNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy użytkownika</description>
+		</column>
+		<column name="SrZ_OdbKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj zamieszkania (siedziby) użytkownika</description>
+		</column>
+		<column name="SrZ_OdbWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo użytkownika</description>
+		</column>
+		<column name="SrZ_OdbPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat użytkownika</description>
+		</column>
+		<column name="SrZ_OdbGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina użytkownika</description>
+		</column>
+		<column name="SrZ_OdbUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica użytkownika</description>
+		</column>
+		<column name="SrZ_OdbNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu użytkownika</description>
+		</column>
+		<column name="SrZ_OdbNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu użytkownika</description>
+		</column>
+		<column name="SrZ_OdbMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto użytkownika</description>
+		</column>
+		<column name="SrZ_OdbKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy użytkownika</description>
+		</column>
+		<column name="SrZ_OdbPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta użytkownika</description>
+		</column>
+		<column name="SrZ_OdbAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia nazwy użytkownika</description>
+		</column>
+		<column name="SrZ_OdbTelefon" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Telefon do użytkownika</description>
+		</column>
+		<column name="SrZ_OdbEmail" type="NVARCHAR(127)" definition="NOT NULL" hash="1">
+			<description>Email do użytkownika</description>
+		</column>
+		<column name="SrZ_ZlecajacyId" type="INTEGER">
+			<description>Identyfikator osoby - przedstawiciela w tabeli KntOsoby</description>
+		</column>
+		<column name="SrZ_ZlecajacyNazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko osoby zlecającej</description>
+		</column>
+		<column name="SrZ_ZlecajacyTelefon" type="NVARCHAR(40)" hash="1">
+			<description>Telefon przedstawiciela kontrahenta</description>
+		</column>
+		<column name="SrZ_PrzedstawicielId" type="INTEGER">
+			<description>Identyfikator osoby - przedstawiciela w tabeli KntOsoby</description>
+		</column>
+		<column name="SrZ_PrzedstawicielNazwisko" type="NVARCHAR(40)" hash="1">
+			<description>Nazwisko osoby przedstawiciela kontrahenta</description>
+		</column>
+		<column name="SrZ_PrzedstawicielTelefon" type="NVARCHAR(40)" hash="1">
+			<description>Telefon przedstawiciela kontrahenta</description>
+		</column>
+		<column name="SrZ_ProwadzacyTyp" type="SMALLINT">
+			<description>Typ prowadzącego zlecenie (pracownik, operator)</description>
+			<details>
+				3 - pracownik (CDN.PracIdx);
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej);
+			</details>
+		</column>
+		<column name="SrZ_ProwadzacyId" type="INTEGER">
+			<description>Id prowadzącego zlecenie (pracownik, operator)</description>
+		</column>
+		<column name="SrZ_Priorytet" type="TINYINT" definition="NOT NULL">
+			<description>Priorytet zlecenia</description>
+			<details>
+				1 - najwyższy;
+				2 - wysoki;
+				3 - niski;
+				4 - najniższy;
+			</details>
+		</column>
+		<column name="SrZ_SrUId" type="INTEGER">
+			<description>Id urządzenia</description>
+		</column>
+		<column name="SrZ_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+				Data wystawienia dokumentu
+			</details>
+		</column>
+		<column name="SrZ_DataPrzyjecia" type="DATETIME">
+			<description>Data przyjęcia zlecenia do realizacji</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrZ_DataRealizacji" type="DATETIME">
+			<description>Planowana data realizacji</description>
+		</column>
+		<column name="SrZ_CzasRealizacji" type="DATETIME">
+			<description>Planowany czas realizacji</description>
+			<details>Liczony od daty "1899-12-30 00:00.000"</details>
+		</column>
+		<column name="SrZ_DataZamkniecia" type="DATETIME">
+			<description>Czas opracowania kontaktu</description>
+		</column>
+		<column name="SrZ_MagId" type="INTEGER">
+			<description>Magazyn, dla tworzonego dokumentu</description>
+		</column>
+		<column name="SrZ_EtapId" type="INTEGER">
+			<description>Etap realizacji zlecenia</description>
+		</column>
+		<column name="SrZ_EtapOpis" type="NVARCHAR(255)">
+			<description>Opis statusu</description>
+		</column>
+		<column name="SrZ_EtapData" type="DATETIME">
+			<description>Data dla etapu</description>
+		</column>
+		<column name="SrZ_Wykonano" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Procentowy stopień wykonania zlecenia</description>
+		</column>
+		<column name="SrZ_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis dla zlecenia</description>
+		</column>
+		<column name="SrZ_TypNB" type="TINYINT" definition="NOT NULL">
+			<description>Algorytm liczenia cen: od netto; od brutto</description>
+			<details>e_op_TypNB_Brutto</details>
+		</column>
+		<column name="SrZ_WartoscNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto zlecenia</description>
+		</column>
+		<column name="SrZ_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto zlecenia</description>
+		</column>
+		<column name="SrZ_WartoscNettoDoFA" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji do zafakturowania</description>
+		</column>
+		<column name="SrZ_WartoscBruttoDoFA" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji do zafakturowania</description>
+		</column>
+		<column name="SrZ_CzasRealizacjiCzynnosci" type="INTEGER" definition="NOT NULL">
+			<description>Rzeczywisty czas realizacji zlecenia</description>
+		</column>
+		<column name="SrZ_ZbiorczeFaCzesci" type="TINYINT" definition="NOT NULL">
+			<description>Fakturowanie zbiorcze części</description>
+		</column>
+		<column name="SrZ_ZbiorczeTwrIdCzesci" type="INTEGER">
+			<description>Usługa do zbiorczego fakturowania cześci</description>
+		</column>
+		<column name="SrZ_ZbiorczeFaCzynnosci" type="TINYINT" definition="NOT NULL">
+			<description>Fakturowanie zbiorcze czynności</description>
+		</column>
+		<column name="SrZ_ZbiorczeTwrIdCzynnosci" type="INTEGER">
+			<description>Usługa do zbiorczego fakturowania czynnosci</description>
+		</column>
+		<column name="SrZ_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_SrZ_Waluta DEFAULT('')" />
+		<column name="SrZ_KursNumer" type="INTEGER" definition="NOT NULL CONSTRAINT DF_SrZ_KursNumer DEFAULT(-1)" />
+		<column name="SrZ_KursL" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_SrZ_KursL DEFAULT(1)" />
+		<column name="SrZ_KursM" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_SrZ_KursM DEFAULT(1)" />
+		<column name="SrZ_DataKur" type="DATETIME" definition="NOT NULL CONSTRAINT DF_SrZ_DataKur DEFAULT(0)" />
+		<column name="SrZ_WartoscNettoDoFAPLN" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_SrZ_WartoscNettoDoFAPLN DEFAULT(0)">
+			<description>Wartość netto pozycji do zafakturowaniaw walucie systemowej</description>
+		</column>
+		<column name="SrZ_WartoscBruttoDoFAPLN" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_SrZ_WartoscBruttoDoFAPLN DEFAULT(0)">
+			<description>Wartość brutto pozycji do zafakturowania w walucie systemowej</description>
+		</column>
+		<column name="SrZ_WartoscNettoPLN" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_SrZ_WartoscNettoPLN DEFAULT(0)">
+			<description>Wartość netto zlecenia w walucie systemowej</description>
+		</column>
+		<column name="SrZ_WartoscBruttoPLN" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_SrZ_WartoscBruttoPLN DEFAULT(0)">
+			<description>Wartość brutto zlecenia w walucie systemowej</description>
+		</column>
+		<column name="SrZ_FplTyp" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrZ_FplTyp DEFAULT(0)">
+			<description>Typ formy płatności: kontrahenta/ustalona</description>
+			<details>
+				0 - kontrahenta &lt;br&gt;
+				1 - wskazana
+			</details>
+		</column>
+		<column name="SrZ_FplId" type="INTEGER">
+			<description>Ustalona forma płatności</description>
+			<details>ID z CDN.FormyPlatnosci</details>
+		</column>
+		<column name="SrZ_TerminPlatTyp" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrZ_TerminPlatTyp DEFAULT(0)">
+			<description>Termin płatności: z definicji formy płatności / ustalony dzień</description>
+		</column>
+		<column name="SrZ_TerminPlatData" type="DATETIME">
+			<description>Termin płatności ustalony na dzień: ...</description>
+		</column>
+		<column name="SrZ_OpeZalId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="SrZ_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrZ_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrZ_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="SrZ_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrZ_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrZ_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrZ_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SrZ_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrZ_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SrZ_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrZ_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SrZ_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrZ_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SrZ_Primary" columns="SrZ_SrZId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrZKategoria" localColumns="SrZ_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.SrsZlecenia:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrZZlecajacy" localColumns="SrZ_ZlecajacyId" refTable="KntOsoby" refColumns="KnO_KnOId">
+			<description>Relacja CDN.SrsZlecenia:CDN.KntOsoby (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrZMagId" localColumns="SrZ_MagId" refTable="Magazyny" refColumns="Mag_MagId">
+			<description>Relacja CDN.SrsZlecenia:CDN.Magazyny (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrZPodmiot" localColumns="SrZ_PodmiotId,SrZ_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.SrsZlecenia:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrZOdbiorca" localColumns="SrZ_OdbID,SrZ_OdbiorcaTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.SrsZlecenia:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<index name="SrZKategoria" options="UNIQUE NONCLUSTERED" fields="SrZ_KatID ,SrZ_SrZId" />
+		<index name="SrZUrzadzenia" options="NONCLUSTERED" fields="SrZ_SrUId ,SrZ_SrZId" />
+		<index name="SrZMagId" options="NONCLUSTERED" fields="SrZ_MagId">
+			<description>Relacja do tabeli Magazyny</description>
+		</index>
+		<index name="SrZPodmiot" options="NONCLUSTERED" fields="SrZ_PodmiotId ,SrZ_PodmiotTyp">
+			<description>Wg podmiotu dla którego wystawiono transakcję</description>
+		</index>
+		<index name="SrZDokDef" options="NONCLUSTERED" fields="SrZ_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="SrZNumer" options="UNIQUE NONCLUSTERED" fields="SrZ_NumerString ,SrZ_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+		<index name="SsZDataDok" options="NONCLUSTERED" fields="SrZ_DataDok ,SrZ_NumerString ,SrZ_NumerNr ,SrZ_SrZId" />
+		<index name="SrZNumerPelny" options="UNIQUE NONCLUSTERED" fields="SrZ_NumerPelny">
+			<description>Wg pelnego numeru dokumentu</description>
+			<details>Indeks na kolumnie wyliczanej</details>
+		</index>
+		<index name="SrZProwadzacy" options="NONCLUSTERED" fields="SrZ_ProwadzacyId ,SrZ_ProwadzacyTyp">
+			<description>Wg opiekuna zadania</description>
+		</index>
+		<index name="SrZEtap" options="NONCLUSTERED" fields="SrZ_EtapId" />
+		<index name="SrZZlecajacy" options="NONCLUSTERED" fields="SrZ_ZlecajacyId" />
+		<index name="SrZOdbiorca" options="NONCLUSTERED" fields="SrZ_OdbID, SrZ_OdbiorcaTyp" />
+	</table>
+	

@@ -1,0 +1,141 @@
+<table name="OfertyDok">
+		<description>Ofertowanie - dokumenty</description>
+		<column name="OfD_OfDId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator tabeli</description>
+		</column>
+		<column name="OfD_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa oferty</description>
+		</column>
+		<column name="OfD_Opis" type="NVARCHAR(1024)">
+			<description>Opis oferty</description>
+		</column>
+		<column name="OfD_StatusId" type="INTEGER">
+			<description>Identyfikator statusu oferty</description>
+		</column>
+		<column name="OfD_StatusOpis" type="NVARCHAR(254)">
+			<description>Opis statusu oferty</description>
+		</column>
+		<column name="OfD_Body" type="NVARCHAR(MAX)" hash="1">
+			<description>Treść szablonu oferty</description>
+		</column>
+		<column name="OfD_NazwaSzablonu" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_OfD_NazwaSzablonu Default('')">
+			<description>Nazwa szablonu oferty</description>
+		</column>
+		<column name="OfD_KntId" type="INTEGER">
+			<description>Id kontrahenta oferty</description>
+		</column>
+		<column name="OfD_TrNId" type="INTEGER">
+			<description>Id powiązanego dokumentu HaMag</description>
+		</column>
+		<column name="OfD_DDfId" type="INTEGER">
+			<description>Id definicji dokumentu</description>
+		</column>
+		<column name="OfD_TypDokumentu" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu</description>
+		</column>
+		<column name="OfD_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="OfD_NumerString" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Schemat numeracji</description>
+		</column>
+		<column name="OfD_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(OFD_NUMERNR,OFD_NUMERSTRING)">
+			<description>Numer pełny dokumentu</description>
+		</column>
+		<column name="OfD_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="OfD_DataOd" type="DATETIME" definition="NOT NULL CONSTRAINT DF_OfD_DataOd DEFAULT(0)">
+			<description>Data początku obowiązywania oferty</description>
+		</column>
+		<column name="OfD_DataDo" type="DATETIME" definition="NOT NULL CONSTRAINT DF_OfD_DataDo DEFAULT(0)">
+			<description>Data końca obowiązywania oferty</description>
+		</column>
+		<column name="OfD_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_OfD_Waluta Default('')">
+			<description>Symbol waluty dokumentu</description>
+		</column>
+		<column name="OfD_KursNumer" type="INTEGER" definition="NOT NULL CONSTRAINT DF_OfD_KursNumer Default(0)">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="OfD_KursL" type="decimal(15,4)" definition="NOT NULL CONSTRAINT DF_OfD_KursL Default(1)">
+			<description>Licznik kursu waluty</description>
+		</column>
+		<column name="OfD_KursM" type="decimal(5,0)" definition="NOT NULL CONSTRAINT DF_OfD_KursM Default(1)">
+			<description>Mianownik kursu waluty</description>
+		</column>
+		<column name="OfD_DataKur" type="DATETIME" definition="NOT NULL CONSTRAINT DF_OfD_DataKur Default(0)">
+			<description>Data kursu waluty</description>
+		</column>
+		<column name="OfD_Bufor" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_OfD_Bufor Default(0)">
+			<description>Czy dokument w buforze</description>
+		</column>
+		<column name="OfD_Anulowany" type="INT" definition="NOT NULL CONSTRAINT DF_OfD_Anulowany Default(0)">
+			<description>Czy dokument anulowany</description>
+		</column>
+		<column name="OfD_KopiaEl" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OfD_KopiaEl Default(0)">
+			<description>Czy tworzyć kopie elektroniczne wydruku oferty</description>
+		</column>
+		<column name="OfD_PodpisCyfrowy" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OfD_PodpisCyfrowy Default(0)">
+			<description>Czy podpisywać cyfrowo PDF z wydrukiem oferty</description>
+		</column>
+		<column name="OfD_TypNB" type="TINYINT" definition="NOT NULL CONSTRAINT DF_OfD_TypNB Default(0)">
+			<description>Algorytm liczenia VAT na ofercie (od netto lub od brutto)</description>
+			<details>
+				1 - od netto &lt;br&gt;
+				2 - od brutto
+			</details>
+		</column>
+		<column name="OfD_RodzajCeny" type="INTEGER">
+			<description>Rodzaj ceny</description>
+		</column>
+		<column name="OfD_GrupaCenowa" type="INTEGER">
+			<description>Grupa cenowa</description>
+		</column>
+		<column name="OfD_Rabat" type="decimal(11,4)">
+			<description>Rabat oferty</description>
+		</column>
+		<column name="OfD_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="OfD_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="OfD_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="OfD_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="OfD_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="OfD_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="OfD_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OfD_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="OfD_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_OfD_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="OfD_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_OfD_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="OfD_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_OfD_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="OfD_Primary" columns="OfD_OfDID" />
+		<foreignKey name="FK_OfDDokDefinicje" localColumns="OfD_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.OfertyDok:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_OfDKontrahent" localColumns="OfD_KntID" refTable="Kontrahenci" refColumns="Knt_KntId">
+			<description>Relacja CDN.OfertyDok:CDN.Kontrahenci (MANY:1)</description>
+		</foreignKey>
+		<index name="OfDData" options="UNIQUE NONCLUSTERED" fields="OfD_DataDok ,OfD_NumerPelny, OfD_Anulowany" />
+		<index name="OfDKontrahent" options="UNIQUE NONCLUSTERED" fields="OfD_KntID ,OfD_DataDok ,OfD_OfDID" />
+		<index name="OfDDokDefinicje" options="NONCLUSTERED" fields="OfD_DDfId" />
+		<index name="OfDNumer" options="UNIQUE NONCLUSTERED" fields="OfD_NumerString ,OfD_NumerNr, OfD_Anulowany" />
+	</table>
+	

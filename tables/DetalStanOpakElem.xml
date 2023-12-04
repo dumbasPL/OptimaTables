@@ -1,0 +1,31 @@
+<table name="DetalStanOpakElem">
+		<description>Tabela elementów schematów opakowań</description>
+		<column name="DSOE_DSOEId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DSOE_DSONId" type="INTEGER">
+			<description>FK do nagłówka</description>
+		</column>
+		<column name="DSOE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Lp elementu schematu</description>
+		</column>
+		<column name="DSOE_DSTwrId" type="INTEGER" definition="NOT NULL">
+			<description>FK do towaru</description>
+		</column>
+		<column name="DSOE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość opakowania dla jednostki podst.</description>
+		</column>
+		<primaryKey name="DSOE_Primary" columns="DSOE_DSOEId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DSOENaglowek" localColumns="DSOE_DSONId" refTable="DetalStanOpakNag" refColumns="DSON_DSONId" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalStanOpakElem:CDN.DetalStanOpakNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DSOENaglowek" options="UNIQUE NONCLUSTERED" fields="DSOE_DSONId ,DSOE_DSOEId">
+			<description>Klucz do nagłówka</description>
+		</index>
+		<index name="DSOETowar" options="UNIQUE NONCLUSTERED" fields="DSOE_DSTwrId ,DSOE_DSOEId">
+			<description>Klucz do towaru</description>
+		</index>
+	</table>
+	

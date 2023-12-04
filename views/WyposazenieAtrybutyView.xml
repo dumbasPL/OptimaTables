@@ -1,0 +1,103 @@
+<view name="WyposazenieAtrybutyView">
+		<description>View Atrybyty wyposażenia</description>
+		<column name="WyAV_WyAVID" type="NVARCHAR(255)" definition="NO_SQL">
+			<description>Identyfikator rekordu w widoku</description>
+		</column>
+		<column name="WyAV_SrAId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu atrybutu</description>
+		</column>
+		<column name="WyAV_DeAId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu definicji atrybutu</description>
+		</column>
+		<column name="WyAV_WypID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu wyposażenia</description>
+		</column>
+		<column name="WyAV_AtrybutFormat" type="TINYINT" definition="NO_SQL">
+			<description>Format definicji atrybutu</description>
+		</column>
+		<column name="WyAV_AtrybutKod" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Kod definicji atrybutu</description>
+		</column>
+		<column name="WyAV_AtrybutNazwa" type="NVARCHAR(40)" definition="NO_SQL">
+			<description>Nazwa definicji atrybutu</description>
+		</column>
+		<column name="WyAV_AtrybutWartosc" type="NVARCHAR(255)" definition="NO_SQL">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="WyAV_Lp" type="INTEGER" definition="NO_SQL">
+			<description>Numer kolejny w ewidencji</description>
+		</column>
+		<column name="WyAV_VaNID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu dokumentu rejestru VAT</description>
+		</column>
+		<column name="WyAV_Dokument" type="VARCHAR(30)" definition="NO_SQL" filterVisible="false">
+			<description>Numer dokumentu zakupu</description>
+		</column>
+		<column name="WyAV_DataZak" type="DATETIME" definition="NO_SQL">
+			<description>Data zakupu wyposażenia</description>
+		</column>
+		<column name="WyAV_NumerKPR" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Numer pozycji w księdze</description>
+		</column>
+		<column name="WyAV_Nazwa" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Nazwa wyposażenia</description>
+		</column>
+		<column name="WyAV_KatID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu kategorii</description>
+		</column>
+		<column name="WyAV_Kategoria" type="VARCHAR(50)" definition="NO_SQL">
+			<description>Opis kategorii</description>
+		</column>
+		<column name="WyAV_NrInwent" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Numer inwentarzowy</description>
+		</column>
+		<column name="WyAV_JednostkaMiary" type="NVARCHAR(20)" definition="NO_SQL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="WyAV_Ilosc" type="INTEGER" definition="NO_SQL">
+			<description>Ilość sztuk/jednostek</description>
+		</column>
+		<column name="WyAV_WartoscZakup" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Wartość nabycia</description>
+		</column>
+		<column name="WyAV_PrcID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator rekordu pracownika odpowiedzialnego</description>
+		</column>
+		<column name="WyAV_PrcNazwisko" type="NVARCHAR(100)" definition="NO_SQL" hash="1">
+			<description>Nazwisko osoby odpowiedzialnej materialnie</description>
+		</column>
+		<column name="WyAV_DataLikw" type="DATETIME" definition="NO_SQL">
+			<description>Data likwidacji (zbycia)</description>
+		</column>
+		<column name="WyAV_Stan" type="INTEGER" definition="NO_SQL">
+			<description>Stan elementu wyposażenia</description>
+		</column>
+		<column name="WyAV_Likwidacja" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Przyczyna likwidacji</description>
+		</column>
+		<column name="WyAV_LikwDokument" type="NVARCHAR(256)" definition="NO_SQL">
+			<description>Numer dokumentu likwidacji</description>
+		</column>
+		<column name="WyAV_Opis" type="NVARCHAR(254)" definition="NO_SQL">
+			<description>Informacje dodatkowe</description>
+		</column>
+		<column name="WyAV_OpeZalID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora założyciela karty</description>
+		</column>
+		<column name="WyAV_StaZalId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera) założyciela karty</description>
+		</column>
+		<column name="WyAV_TS_Zal" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp założenia karty</description>
+		</column>
+		<column name="WyAV_OpeModID" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator operatora modyfikującego ostatnio kartę</description>
+		</column>
+		<column name="WyAV_StaModId" type="INTEGER" definition="NO_SQL">
+			<description>Identyfikator stanowiska (komputera) ostatnio modyfikującego kartę</description>
+		</column>
+		<column name="WyAV_TS_Mod" type="DATETIME" definition="NO_SQL">
+			<description>TimeStamp modyfikacji karty</description>
+		</column>
+	</view>
+	

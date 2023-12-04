@@ -1,0 +1,22 @@
+<table name="TwrPromocje">
+		<column name="TPR_FlagaNB" type="" definition="NO_SQL" />
+		<column name="TPR_Id" type="" definition="NO_SQL" />
+		<column name="TPR_LP" type="" definition="NO_SQL" />
+		<column name="TPR_Notatki" type="" definition="NO_SQL" />
+		<column name="TPR_PrmId" type="" definition="NO_SQL" />
+		<column name="TPR_Prog" type="" definition="NO_SQL" />
+		<column name="TPR_RodzajCeny" type="" definition="NO_SQL" />
+		<column name="TPR_TwgFirma" type="" definition="NO_SQL" />
+		<column name="TPR_TwgLp" type="" definition="NO_SQL" />
+		<column name="TPR_TwgNumer" type="" definition="NO_SQL" />
+		<column name="TPR_TwgTyp" type="" definition="NO_SQL" />
+		<column name="TPR_TwrFirma" type="" definition="NO_SQL" />
+		<column name="TPR_TwrLp" type="" definition="NO_SQL" />
+		<column name="TPR_TwrNumer" type="" definition="NO_SQL" />
+		<column name="TPR_TwrTyp" type="" definition="NO_SQL" />
+		<column name="TPR_Typ" type="" definition="NO_SQL" />
+		<column name="TPR_Waluta" type="" definition="NO_SQL" />
+		<column name="TPR_Wartosc" type="" definition="NO_SQL" />
+		<column name="TPR_ZstID" type="" definition="NO_SQL" />
+	</table>
+	

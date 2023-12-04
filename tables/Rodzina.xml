@@ -1,0 +1,131 @@
+<table name="Rodzina">
+		<description>Tabela członków rodziny pracownika</description>
+		<column name="RDZ_RdzId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="RDZ_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do pracownika</description>
+		</column>
+		<column name="RDZ_Nazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko</description>
+		</column>
+		<column name="RDZ_Imie" type="NVARCHAR(30)" definition="NOT NULL" hash="1">
+			<description>Imię</description>
+		</column>
+		<column name="RDZ_DataUr" type="DATETIME" hash="1">
+			<description>Data urodzenia</description>
+		</column>
+		<column name="RDZ_Pesel" type="NVARCHAR(11)" definition="NOT NULL" hash="1">
+			<description>Numer Pesel</description>
+		</column>
+		<column name="RDZ_NipE" type="VARCHAR(13)" definition="NOT NULL" hash="1">
+			<description>Numer NIP</description>
+		</column>
+		<column name="RDZ_NipKraj" type="VARCHAR(2)" definition="NOT NULL">
+			<description>Prefiks kraju</description>
+		</column>
+		<column name="RDZ_DowodOsob" type="NVARCHAR(9)" definition="NOT NULL" hash="1">
+			<description>Seria i numer dowodu osobistego</description>
+		</column>
+		<column name="RDZ_Paszport" type="NVARCHAR(9)" definition="NOT NULL" hash="1">
+			<description>Seria i numer paszportu</description>
+		</column>
+		<column name="RDZ_KodPokrew" type="INTEGER">
+			<description>Kod stopnia pokrewieństwa</description>
+		</column>
+		<column name="RDZ_DataUpraw" type="DATETIME">
+			<description>Data uzyskania uprawnień do ubezpieczenia</description>
+		</column>
+		<column name="RDZ_DataUprawDo" type="DATETIME">
+			<description>Data wyrejstrowania ubezpieczenia</description>
+		</column>
+		<column name="RDZ_PozostajeUtrz" type="TINYINT" definition="NOT NULL">
+			<description>Pozostaje na wyłącznym utrzymaniu osoby ubezpieczonej</description>
+		</column>
+		<column name="RDZ_PozostajeGosp" type="TINYINT" definition="NOT NULL">
+			<description>Pozostaje z osobą ubezpieczoną we wspólnym gospodarstwie domowym</description>
+		</column>
+		<column name="RDZ_KodNiepelnosp" type="INTEGER" definition="NOT NULL">
+			<description>Kod stopnia niepełnosprawności</description>
+		</column>
+		<column name="RDZ_ADRKraj" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Kraj</description>
+		</column>
+		<column name="RDZ_ADRWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo</description>
+		</column>
+		<column name="RDZ_ADRPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat</description>
+		</column>
+		<column name="RDZ_ADRGmina" type="NVARCHAR(41)" definition="NOT NULL" hash="1">
+			<description>Gmina</description>
+		</column>
+		<column name="RDZ_ADRUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica</description>
+		</column>
+		<column name="RDZ_ADRNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="RDZ_ADRNrLokalu" type="NVARCHAR(11)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="RDZ_ADRMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość</description>
+		</column>
+		<column name="RDZ_ADRKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="RDZ_ADRPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta</description>
+		</column>
+		<column name="RDZ_ADRAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia adresu</description>
+		</column>
+		<column name="RDZ_MstIdADR" type="INTEGER" />
+		<column name="RDZ_MstPocztaADR" type="INTEGER" />
+		<column name="RDZ_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="RDZ_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RDZ_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RDZ_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="RDZ_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="RDZ_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="RDZ_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RDZ_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="RDZ_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RDZ_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="RDZ_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_RDZ_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="RDZ_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_RDZ_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="RDZ_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="RDZ_Primary" columns="RDZ_RdzId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_RDZPraLink" localColumns="RDZ_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.Rodzina:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="RDZPraLink" options="NONCLUSTERED" fields="RDZ_PraId ,RDZ_Nazwisko">
+			<description>Klucz obcy pracownika</description>
+		</index>
+	</table>
+	

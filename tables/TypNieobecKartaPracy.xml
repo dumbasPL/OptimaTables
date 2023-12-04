@@ -1,0 +1,13 @@
+<table name="TypNieobecKartaPracy">
+		<description>Tabela typów nieobecności dla wydruku karty pracy</description>
+		<column name="TNK_TnkId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TNK_Akronim" type="VARCHAR(20)" definition="NOT NULL" />
+		<column name="TNK_Nazwa" type="NVARCHAR(40)" definition="NOT NULL" />
+		<column name="TNK_SortOrder" type="TINYINT" />
+		<primaryKey name="TNK_Primary" columns="TNK_TnkId">
+			<description>Klucz główny</description>
+		</primaryKey>
+	</table>
+	

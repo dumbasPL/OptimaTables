@@ -1,0 +1,76 @@
+<table name="KsiDokElem">
+		<description>Tabela z elementami dokumentów księgowych</description>
+		<column name="KDE_KDEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="KDE_KDNId" type="INTEGER" definition="NOT NULL">
+			<description>Klucz obcy do nagłówka dokumentu</description>
+		</column>
+		<column name="KDE_LP" type="INTEGER">
+			<description>liczba porządkowa pozycji na dokumencie</description>
+		</column>
+		<column name="KDE_Numer" type="NVARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu źródłowego</description>
+		</column>
+		<column name="KDE_Opis" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="KDE_DataWys" type="DATETIME" definition="NOT NULL">
+			<description>Data wystawienia dokumentu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="KDE_Termin" type="DATETIME" definition="NOT NULL">
+			<description>Termin płatności dokumentu źródłowego</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="KDE_Kwota1" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota pozostała do rozliczenia</description>
+			<details>Dla potwierdzenia salda: Kwota Dt; Dla ponaglenia zapłaty: kwota zaległości</details>
+		</column>
+		<column name="KDE_Kwota2" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota wygenerowanych odsetek</description>
+			<details>Dla potwierdzenia salda: Kwota Ct; Dla ponaglenia zapłaty: kwota odsetek</details>
+		</column>
+		<column name="KDE_Kwota3" type="DECIMAL(15,2)">
+			<description>Stopa generowanych odsetek</description>
+		</column>
+		<column name="KDE_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota dokumentu</description>
+			<details>Dla potwierdzenia salda: Kwota Ct; Dla ponaglenia zapłaty: kwota odsetek</details>
+		</column>
+		<column name="KDE_DataOd" type="DATETIME">
+			<description>Data od której są naliczane odsetki</description>
+		</column>
+		<column name="KDE_DataDo" type="DATETIME">
+			<description>Data do której są naliczane odsetki</description>
+		</column>
+		<column name="KDE_BOEID" type="INTEGER">
+			<description>Klucz obcy do tabeli BOElem</description>
+		</column>
+		<column name="KDE_DeEID" type="INTEGER">
+			<description>Klucz obcy do tabeli DekretyElem</description>
+		</column>
+		<column name="KDE_KRoID" type="INTEGER">
+			<description>klucz obcy do tabeli KsiRozrachunki</description>
+		</column>
+		<primaryKey name="KDE_Primary" columns="KDE_KDEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_KDENaglowek" localColumns="KDE_KDNId" refTable="KsiDokNag" refColumns="KDN_KDNId" deleteOption="CASCADE">
+			<description>Relacja CDN.KsiDokElem:CDN.KsiDokNag (MANY:1)</description>
+		</foreignKey>
+		<index name="KDENaglowek" options="NONCLUSTERED" fields="KDE_KDNId">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+			<details>Klucz obcy do tabeli NotyOdsNag</details>
+		</index>
+		<index name="KDERozrachunek" options="NONCLUSTERED" fields="KDE_KRoID" />
+		<index name="KDEDekret" options="NONCLUSTERED" fields="KDE_DeEID ,KDE_BOEID" />
+	</table>
+	

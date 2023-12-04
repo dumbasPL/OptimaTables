@@ -1,0 +1,35 @@
+<table name="FormatyRcp">
+		<description>Lista formatów importów rcp</description>
+		<column name="FOR_ForId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Row Id</description>
+		</column>
+		<column name="FOR_Katalog" type="NVARCHAR(200)" definition="NOT NULL" />
+		<column name="FOR_Nieaktywny" type="TINYINT" definition="NOT NULL" />
+		<column name="FOR_RodzajImportu" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj importu ( z bazy czy z pliku )</description>
+		</column>
+		<column name="FOR_WgObecnosci" type="TINYINT" definition="NOT NULL" />
+		<column name="FOR_Nazwa" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa formatu</description>
+		</column>
+		<column name="FOR_Format" type="NVARCHAR(50)" definition="NOT NULL" />
+		<column name="FOR_Wejscie" type="NVARCHAR(8)" definition="NOT NULL" />
+		<column name="FOR_WejscieDstId" type="INTEGER" />
+		<column name="FOR_WeWyStrefaPlan" type="TINYINT" definition="NOT NULL">
+			<description>Strefa wejścia zwykłęgo zgodna z pierwszą strefą z planu pracy</description>
+		</column>
+		<column name="FOR_Wyjscie" type="NVARCHAR(8)" definition="NOT NULL" />
+		<column name="FOR_WejscieSluzb" type="NVARCHAR(8)" definition="NOT NULL" />
+		<column name="FOR_WejscieSluzbDstId" type="INTEGER" />
+		<column name="FOR_WyjscieSluzb" type="NVARCHAR(8)" definition="NOT NULL" />
+		<column name="FOR_WeWySStrefaPlan" type="TINYINT" definition="NOT NULL">
+			<description>Strefa wejścia służbowego zgodna z pierwszą strefą z planu pracy</description>
+		</column>
+		<primaryKey name="FOR_Primary" columns="FOR_ForId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="FORNazwa" options="UNIQUE NONCLUSTERED" fields="FOR_Nazwa">
+			<details>SQL_NOTNULL</details>
+		</index>
+	</table>
+	

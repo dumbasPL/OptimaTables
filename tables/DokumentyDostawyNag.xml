@@ -1,0 +1,221 @@
+<table name="DokumentyDostawyNag">
+		<description>Tabela dokumentów dostawy</description>
+		<column name="DDN_DDNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DDN_DDfId" type="INTEGER">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+		</column>
+		<column name="DDN_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="DDN_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="DDN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(DDN_NUMERNR,DDN_NUMERSTRING)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DDN_Status" type="INTEGER" definition="NOT NULL">
+			<description>Status dokumentu</description>
+		</column>
+		<column name="DDN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="DDN_DataFaktury" type="DATETIME" definition="NOT NULL">
+			<description>Data faktury do której powstał DD</description>
+		</column>
+		<column name="DDN_NrFaktury" type="nvarchar(40)" definition="NOT NULL">
+			<description>Data faktury do której powstał DD</description>
+		</column>
+		<column name="DDN_SANID" type="int" definition="NULL">
+			<description>Id adresu nadawczego</description>
+		</column>
+		<column name="DDN_SANUlica" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>ulica z adresu nadawczego</description>
+		</column>
+		<column name="DDN_SANNrDomu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu z adresu nadawczego</description>
+		</column>
+		<column name="DDN_SANNrLokalu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu z adresu nadawczego</description>
+		</column>
+		<column name="DDN_SANMiasto" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Miasto z adresu nadawczego</description>
+		</column>
+		<column name="DDN_SANKodPocztowy" type="varchar(10)" definition="NOT NULL">
+			<description>Kod pocztowy z adresu nadawczego</description>
+		</column>
+		<column name="DDN_SANTelefon" type="varchar(20)" definition="NULL" hash="1">
+			<description>Telefon odbiorcy</description>
+		</column>
+		<column name="DDN_SANEmail" type="nvarchar(40)" definition="NULL" hash="1">
+			<description>Email odbiorcy</description>
+		</column>
+		<column name="DDN_SANWojewodztwo" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DDN_SANWojewodztwo DEFAULT('')">
+			<description>Województwo</description>
+		</column>
+		<column name="DDN_PodmiotTyp" type="smallint" definition="NULL">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy OdbId:
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="DDN_PodID" type="int" definition="NULL">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="DDN_PodNazwa" type="nvarchar(250)" definition="NOT NULL" hash="1">
+			<description>nazwy podmiotu</description>
+		</column>
+		<column name="DDN_PodUlica" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Ulica podmiotu</description>
+		</column>
+		<column name="DDN_PodNrDomu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu podmiotu</description>
+		</column>
+		<column name="DDN_PodNrLokalu" type="nvarchar(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu podmiotu</description>
+		</column>
+		<column name="DDN_PodMiasto" type="nvarchar(40)" definition="NOT NULL" hash="1">
+			<description>Miasto podmiotu</description>
+		</column>
+		<column name="DDN_PodKodPocztowy" type="varchar(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy podmiotu</description>
+		</column>
+		<column name="DDN_PodNipKraj" type="varchar(2)" definition="NOT NULL CONSTRAINT DF_DDN_PodNipKraj DEFAULT('')">
+			<description>Nip kraj</description>
+		</column>
+		<column name="DDN_PodNipE" type="nvarchar(20)" definition="NOT NULL CONSTRAINT DF_DDN_PodNipE DEFAULT('')" hash="1">
+			<description>Nip</description>
+		</column>
+		<column name="DDN_PodKraj" type="nvarchar(40)" definition="NOT NULL CONSTRAINT DF_DDN_PodKraj DEFAULT('')" hash="1">
+			<description>Kraj</description>
+		</column>
+		<column name="DDN_IdSisc" type="VARCHAR(17)" definition="NOT NULL CONSTRAINT DF_DDN_IdSisc DEFAULT('')" hash="1">
+			<description>Id Sisc</description>
+		</column>
+		<column name="DDN_DataWywozu" type="DATETIME" definition="NOT NULL">
+			<description>Data wywozu towaru</description>
+		</column>
+		<column name="DDN_DokumentZrodlowyTyp" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DDN_DokumentZrodlowyTyp  DEFAULT(0)">
+			<description>Typ dokumentu źródłowego</description>
+		</column>
+		<column name="DDN_NumerPuesc" type="VARCHAR(200)" definition="NOT NULL" hash="1">
+			<description>Numer zgłoszenia nadany przez PUESC po złożeniu dokumentu</description>
+		</column>
+		<column name="DDN_StatusPuesc" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Kod statusu zgłoszenia eDD</description>
+		</column>
+		<column name="DDN_DokumentPuescChecksum" type="VARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DDN_DokumentPuescChecksum DEFAULT('')">
+			<description>Suma kontrolna ostatniego dokumetnu na PUESC</description>
+		</column>
+		<column name="DDN_DokumentPuescTyp" type="nvarchar(10)" definition="NOT NULL CONSTRAINT DF_DDN_DokumentPuescTyp DEFAULT('')">
+			<description>Typ ostatniego dokumetnu na PUESC</description>
+		</column>
+		<column name="DDN_DokumentPuescModificationDate" type="DATETIME" definition="NULL">
+			<description>Ostatnia data modyfikacji dokumentu na PUESC</description>
+		</column>
+		<column name="DDN_DataWyslaniaPuesc" type="DATETIME" definition="NULL">
+			<description>Data wysłania zgłoszenia do Puesc</description>
+		</column>
+		<column name="DDN_SenderKey" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DDN_SenderKey DEFAULT('')" hash="1">
+			<description>SenderKey otrzymany z PUESC</description>
+		</column>
+		<column name="DDN_RecipientKey" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DDN_RecipientKey DEFAULT('')" hash="1">
+			<description>RecipientKey otrzymany z PUESC</description>
+		</column>
+		<column name="DDN_CarrierKey" type="NVARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DDN_CarrierKey DEFAULT('')" hash="1">
+			<description>CarrierKey otrzymany z PUESC</description>
+		</column>
+		<column name="DDN_ImiePuesc" type="nvarchar(50)" definition="NULL" hash="1">
+			<description>Imię osoby wysyłającej zgłoszenie eDD w systemie Puesc</description>
+		</column>
+		<column name="DDN_NazwiskoPuesc" type="nvarchar(50)" definition="NULL" hash="1">
+			<description>Nazwisko osoby wysyłającej zgłoszenie eDD w systemie Puesc</description>
+		</column>
+		<column name="DDN_TypeOfTransport" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DDN_TypeOfTransport DEFAULT(2)">
+			<description>Typ transportu</description>
+		</column>
+		<column name="DDN_TransportInneOpis" type="nvarchar(350)" definition="NOT NULL CONSTRAINT DF_DDN_TransportInneOpis DEFAULT('')">
+			<description>Typ transportu</description>
+		</column>
+		<column name="DDN_TypZgloszenia" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DDN_TypZgloszenia DEFAULT(0)">
+			<description>Typ zgloszenia</description>
+		</column>
+		<column name="DDN_RodzajIdentyfikatoraPodatkowego" type="INTEGER" definition="NOT NULL CONSTRAINT DF_DDN_RodzajIdentyfikatoraPodatkowego DEFAULT(0)">
+			<description>Rodzaj identyfikatora podatkowego</description>
+		</column>
+		<column name="DDN_PodKodUrzedu" type="NVARCHAR(8)" definition="NOT NULL">
+			<description>Urząd podatkowy miejsca odbioru</description>
+		</column>
+		<column name="DDN_SANKodUrzedu" type="NVARCHAR(8)" definition="NOT NULL">
+			<description>Urząd podatkowy miejsca wysyłki</description>
+		</column>
+		<column name="DDN_CzasPrzewozuTyp" type="smallint" definition="NOT NULL">
+			<description>Typ czasu wysyłki</description>
+		</column>
+		<column name="DDN_CzasPrzewozu" type="int" definition="NOT NULL">
+			<description>Czas wysyłki</description>
+		</column>
+		<column name="DDN_TrybOdroczony" type="smallint" definition="NOT NULL">
+			<description>Tryb odroczony zgłoszenia</description>
+		</column>
+		<column name="DDN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="DDN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DDN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DDN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DDN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="DDN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DDN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DDN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="DDN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DDN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DDN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DDN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DDN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DDN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<primaryKey name="DDN_Primary" columns="DDN_DDNID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_DDNDokDef" localColumns="DDN_DDfId" refTable="DokDefinicje" refColumns="DDf_DDfID">
+			<description>Relacja CDN.DokumentyDostawyNag:CDN.DokDefinicje (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DDNPodmiot" localColumns="DDN_PodID,DDN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.DokumentyDostawyNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<index name="DDNDokDef" options="NONCLUSTERED" fields="DDN_DDfId">
+			<description>Wg definicji dokumentu</description>
+		</index>
+		<index name="DDNNumer" options="UNIQUE NONCLUSTERED" fields="DDN_NumerString ,DDN_NumerNr">
+			<description>Wg numeru dokumentu</description>
+		</index>
+	</table>
+	

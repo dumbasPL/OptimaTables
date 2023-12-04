@@ -1,0 +1,268 @@
+<table name="SrsCzynnosci">
+		<description>Czynności przypisane do zlecenia</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="SrY_SrYId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrY_SrZId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator zlecenia</description>
+			<details>Klucz obcy do tabeli SrSZlecenia</details>
+		</column>
+		<column name="SrY_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer pozycji</description>
+		</column>
+		<column name="SrY_TwrId" type="INTEGER">
+			<description>Identyfikator usługi w tabeli cdn.Towary</description>
+			<details>Klucz obcy do tabeli Towary. Jeśli jest NULL (0) oznacza, że czynność jest dodana "z
+				ręki".</details>
+		</column>
+		<column name="SrY_KatID" type="INTEGER">
+			<description>Identyfikator kategorii</description>
+			<details>Klucz obcy do tabeli Kategorie</details>
+		</column>
+		<column name="SrY_TwrKod" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod usługi w cenniku</description>
+		</column>
+		<column name="SrY_TwrNazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa czynności</description>
+		</column>
+		<column name="SrY_TwrEAN" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Kod EAN towaru</description>
+		</column>
+		<column name="SrY_Opis" type="NVARCHAR(1024)" definition="NOT NULL CONSTRAINT DF_SrY_TwrEan DEFAULT('')">
+			<description>Opis</description>
+		</column>
+		<column name="SrY_SerwisantTyp" type="INTEGER" definition="NOT NULL">
+			<description>Serwisant - operator/pracownik</description>
+			<details>
+				3 - pracownik (CDN.PracIdx);
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej);
+			</details>
+		</column>
+		<column name="SrY_SerwisantId" type="INTEGER" definition="NOT NULL">
+			<description>Serwisant</description>
+		</column>
+		<column name="SrY_Zakonczona" type="TINYINT" definition="NOT NULL">
+			<description>zakończona Tak/Nie</description>
+			<details>
+				0 - niezakończona;
+				1- zakończona;
+			</details>
+		</column>
+		<column name="SrY_Fakturowac" type="TINYINT" definition="NOT NULL">
+			<description>przenoś na fakturę Tak/Nie</description>
+			<details>
+				0 - nie przenoś
+				1- przenoś
+			</details>
+		</column>
+		<column name="SrY_Dokument" type="INTEGER" definition="NOT NULL">
+			<description>Pole niewykorzystywane. Zawsze wartość równa się zero</description>
+		</column>
+		<column name="SrY_Realizacja" type="TINYINT" definition="NOT NULL">
+			<description>Niezależna / Po wykonaniu poprzedniej /Wg terminu</description>
+			<details>
+				0 - niezależna;
+				1 - po wykonaniu poprzedniej;
+				2 - wg terminu;
+			</details>
+		</column>
+		<column name="SrY_PoprzedniaOk" type="TINYINT" definition="NOT NULL">
+			<description>Poprzednia czynność została zamknięta</description>
+			<details>
+				0 - jeśli poprzednia czynność nie została zamknięta a wybrano realizację "po wykonaniu
+				poprzedniej";
+				1 - jeśli poprzednia czynność została zamknięta a wybrano realizację "po wykonaniu
+				poprzedniej"
+			</details>
+		</column>
+		<column name="SrY_DataWykonania" type="DATETIME">
+			<description>Data wykonania czynności</description>
+			<details>Pole to występuje na serwerze MS SQL.</details>
+		</column>
+		<column name="SrY_TerminOd" type="DATETIME" definition="NOT NULL">
+			<description>Data rozpoczęcia czynności</description>
+			<details>Pole to występuje na serwerze MS SQL.</details>
+		</column>
+		<column name="SrY_TerminDo" type="DATETIME" definition="NOT NULL">
+			<description>Data zakończenia czynności</description>
+			<details>Pole to występuje na serwerze MS SQL.</details>
+		</column>
+		<column name="SrY_RezerwujCzas" type="TINYINT" definition="NOT NULL">
+			<description>Czy rezerwować czas w terminarzu</description>
+			<details>
+				0 - nie rezerwuj czasu w terminarzu;
+				1 - rezerwuj czas w terminarzu;
+			</details>
+		</column>
+		<column name="SrY_Przypomnienie" type="TINYINT" definition="NOT NULL">
+			<description>Czy generować przypomnienie</description>
+			<details>
+				0 - nie przypominaj
+				1 - przypominaj
+			</details>
+		</column>
+		<column name="SrY_CzasPrzypomnienia" type="DATETIME" definition="NOT NULL">
+			<description>Czas przypomnienia przed terminem czynności</description>
+		</column>
+		<column name="SrY_CzasTrwania" type="DATETIME" definition="NOT NULL">
+			<description>czas trwania czynności</description>
+		</column>
+		<column name="SrY_CzasTrwaniaInt" type="INT">
+			<description>czas trwania czynności w minutach</description>
+		</column>
+		<column name="SrY_TwCNumer" type="INTEGER" definition="NOT NULL">
+			<description>Numer ceny początkowej</description>
+		</column>
+		<column name="SrY_CenaZCzteremaMiejscami" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrY_CenaZCzteremaMiejscami DEFAULT(0)">
+			<description>Cena z dokładnością do groszy</description>
+		</column>
+		<column name="SrY_Cena0" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena początkowa w walucie systemowej</description>
+		</column>
+		<column name="SrY_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat</description>
+		</column>
+		<column name="SrY_CenaNetto" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="SrY_CenaBrutto" type="DECIMAL(17,4)" definition="NOT NULL">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej brutto</description>
+		</column>
+		<column name="SrY_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru</description>
+		</column>
+		<column name="SrY_IloscDisp" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_SrY_IloscDisp DEFAULT(0)">
+			<description>Ilość towaru</description>
+		</column>
+		<column name="SrY_IloscJM" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach wybranych na pozycji</description>
+		</column>
+		<column name="SrY_JM" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="SrY_JMZ" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="SrY_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Przelicznik jednostki miary</description>
+		</column>
+		<column name="SrY_JMPrzelicznikM" type="INTEGER" definition="NOT NULL">
+			<description>Przelicznik jednostki miary</description>
+		</column>
+		<column name="SrY_WartoscNetto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość netto pozycji</description>
+		</column>
+		<column name="SrY_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="SrY_WartoscNettoWylicz" type="DECIMAL(19,6)" definition="NOT NULL">
+			<description>Wartość netto pozycji</description>
+		</column>
+		<column name="SrY_WartoscBruttoWylicz" type="DECIMAL(19,6)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<column name="SrY_KosztUslugi" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość kosztu własnego usługi</description>
+		</column>
+		<column name="SrY_Cena0PLN" type="DECIMAL(19,6)" definition="NOT NULL CONSTRAINT DF_SrY_Cena0PLN DEFAULT(0)">
+			<description>Cena początkowa w walucie systemowej</description>
+		</column>
+		<column name="SrY_CenaNettoPLN" type="DECIMAL(19,6)" definition="NOT NULL CONSTRAINT DF_SrY_CenaNettoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej</description>
+		</column>
+		<column name="SrY_CenaBruttoPLN" type="DECIMAL(19,6)" definition="NOT NULL CONSTRAINT DF_SrY_CenaBruttoPLN DEFAULT(0)">
+			<description>Cena transakcyjna (po rabacie) w walucie systemowej brutto</description>
+		</column>
+		<column name="SrY_WartoscNettoPLN" type="DECIMAL(23,10)" definition="NOT NULL CONSTRAINT DF_SrY_WartoscNettoPLN DEFAULT(0)">
+			<description>Wartość netto pozycji w walucie systemowej</description>
+		</column>
+		<column name="SrY_WartoscBruttoPLN" type="DECIMAL(23,10)" definition="NOT NULL CONSTRAINT DF_SrY_WartoscBruttoPLN DEFAULT(0)">
+			<description>Wartość brutto pozycji w walucie systemowej</description>
+		</column>
+		<column name="SrY_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_SrY_Waluta DEFAULT('')">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="SrY_Stawka" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_SrY_Stawka DEFAULT(0)">
+			<description>Stawka podatku vat</description>
+		</column>
+		<column name="SrY_FlagaVat" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_SrY_FlagaVat DEFAULT(2)">
+			<description>Flaga podatku (zwolniony, opodatkowany, zaniżony, nie podlega)</description>
+		</column>
+		<column name="SrY_Zrodlowa" type="DECIMAL(5,2)" definition="NOT NULL CONSTRAINT DF_SrY_Zrodlowa DEFAULT(0)">
+			<description>Stawka źródłowa dla podatku zaniżonego</description>
+		</column>
+		<column name="SrY_StawkaOSS" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrY_StawkaOSS DEFAULT(0)">
+			<description>Pole techniczne, czy ustawiono stawki OSS</description>
+		</column>
+		<column name="SrY_Atr1_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrY_Atr1_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrY_Atr1_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrY_Atr1_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrY_Atr1_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrY_Atr2_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrY_Atr2_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrY_Atr2_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrY_Atr2_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrY_Atr2_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrY_Atr3_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrY_Atr3_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrY_Atr3_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrY_Atr3_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrY_Atr3_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrY_Atr4_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrY_Atr4_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrY_Atr4_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrY_Atr4_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrY_Atr4_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrY_Atr5_DeAId" type="INTEGER">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrY_Atr5_Kod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrY_Atr5_Kod DEFAULT('')">
+			<description>Kod atrybutu</description>
+		</column>
+		<column name="SrY_Atr5_Wartosc" type="NVARCHAR(100)" definition="NOT NULL CONSTRAINT DF_SrY_Atr5_Wartosc DEFAULT('')">
+			<description>Wartość atrybutu</description>
+		</column>
+		<column name="SrY_UstawAtrSQL" type="INT" definition="NOT NULL CONSTRAINT DF_SrY_UstawAtrSQL DEFAULT(-1)">
+			<description>Pole techniczne do ustawiana atrybutów - nie przestawiać ręcznie</description>
+		</column>
+		<primaryKey name="SrY_Primary" columns="SrY_SrYId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrYKategoria" localColumns="SrY_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.SrsCzynnosci:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrYZlecenia" localColumns="SrY_SrZId" refTable="SrsZlecenia" refColumns="SrZ_SrZId" deleteOption="CASCADE">
+			<description>Relacja CDN.SrsCzynnosci:CDN.SrsZlecenia (MANY:1)</description>
+		</foreignKey>
+		<index name="SrYKategoria" options="UNIQUE NONCLUSTERED" fields="SrY_KatID ,SrY_SrYId" />
+		<index name="SrYZlecenia" options="UNIQUE NONCLUSTERED" fields="SrY_SrZId ,SrY_Lp ,SrY_SrYId">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="SrYUsluga" options="UNIQUE NONCLUSTERED" fields="SrY_TwrId ,SrY_SrYId">
+			<description>Wg towaru</description>
+		</index>
+		<index name="SrYTwrKod" options="NONCLUSTERED" fields="SrY_SrZId ,SrY_TwrKod" />
+	</table>
+	

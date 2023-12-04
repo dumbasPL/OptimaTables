@@ -1,0 +1,29 @@
+<table name="TrwaleMiejscaUzytkowania">
+		<description>Miejsca użytkowania środka trwałego w ujęciu historycznym</description>
+		<column name="SrMU_SrMUID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>Unikalny identyfikator rekordu.</details>
+		</column>
+		<column name="SrMU_SrTID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator środka trwałego</description>
+		</column>
+		<column name="SrMU_DataOd" type="DATETIME">
+			<description>Data początkowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="SrMU_DataDo" type="DATETIME">
+			<description>Data końcowa obowiązywania zapisu historycznego</description>
+		</column>
+		<column name="SrMU_Nazwa" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Nazwa (opis) miejsca użytkowania</description>
+		</column>
+		<primaryKey name="SrMUPrimary" columns="SrMU_SrMUID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="SrMUSrT" options="UNIQUE NONCLUSTERED" fields="SrMU_SrTID, SrMU_DataOd">
+			<description>Wg środka trwałego</description>
+		</index>
+		<foreignKey name="FK_SrMUSrT" localColumns="SrMU_SrTID" refTable="Trwale" refColumns="SrT_SrTID" deleteOption="CASCADE">
+			<description>Relacja CDN.TrwaleMiejscaUzytkowania:CDN.Trwale (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

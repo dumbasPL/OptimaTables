@@ -1,0 +1,22 @@
+<table name="KontaZakazy">
+		<description>Zakazy dostępu do kont księgowych</description>
+		<column name="AcZ_AcZId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AcZ_AccId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator konta księgowego</description>
+		</column>
+		<column name="AcZ_OpeId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator operatora</description>
+		</column>
+		<primaryKey name="AcZ_Primary" columns="AcZ_AcZId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_AcZKonto" localColumns="AcZ_AccId" refTable="Konta" refColumns="Acc_AccId" deleteOption="CASCADE">
+			<description>Relacja CDN.KontaZakazy:CDN.Konta (MANY:1)</description>
+		</foreignKey>
+		<index name="AcZKonto" options="UNIQUE NONCLUSTERED" fields="AcZ_AccId ,AcZ_OpeId">
+			<description>Według konta</description>
+		</index>
+	</table>
+	

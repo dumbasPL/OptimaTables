@@ -1,0 +1,103 @@
+<table name="DetalStanTraElem">
+		<description>Tabela z elementami dokumentów detal</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="DSTrE_DSTrEID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DSTrE_DSTrNId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator nagłówka transakcji</description>
+			<details>Klucz obcy do tabeli TraNag</details>
+		</column>
+		<column name="DSTrE_StornoId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator elementu oryginalnego (dla storno)</description>
+		</column>
+		<column name="DSTrE_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer pozycji na fakturze</description>
+		</column>
+		<column name="DSTrE_ZwrId" type="INTEGER">
+			<description>Identyfikator elementu oryginalnego (dla zwrotów)</description>
+		</column>
+		<column name="DSTrE_TwrId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator towaru</description>
+			<details>Klucz obcy do tabeli Towary</details>
+		</column>
+		<column name="DSTrE_TwrNazwa" type="NVARCHAR(255)" definition="NOT NULL" hash="1">
+			<description>Nazwa towaru</description>
+		</column>
+		<column name="DSTrE_TwrEAN" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Kod EAN towaru</description>
+		</column>
+		<column name="DSTrE_TwrKod" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Kod towaru</description>
+		</column>
+		<column name="DSTrE_Stawka" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Stawka podatku vat</description>
+		</column>
+		<column name="DSTrE_Flaga" type="SMALLINT" definition="NOT NULL">
+			<description>Flaga podatku (zwolniony, opodatkowany, zaniżony, nie podlega)</description>
+		</column>
+		<column name="DSTrE_Cena" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Cena</description>
+		</column>
+		<column name="DSTrE_Rabat" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Rabat na elemencie faktury</description>
+			<details>Rabat dla pozycji</details>
+		</column>
+		<column name="DSTrE_CenaPoRabacie" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Cena po rabacie</description>
+		</column>
+		<column name="DSTrE_Kaucja" type="TINYINT" definition="NOT NULL">
+			<description>Czy element jest kaucja</description>
+			<details>
+				0 - towar zwykły &lt;br&gt;
+				1 - towar kaucyjny
+			</details>
+		</column>
+		<column name="DSTrE_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych</description>
+		</column>
+		<column name="DSTrE_Jm" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Jednostka miary</description>
+		</column>
+		<column name="DSTrE_JmCalkowite" type="TINYINT" definition="NOT NULL">
+			<description>Ilość towaru wyrażana w wielkościach całkowitych</description>
+		</column>
+		<column name="DSTrE_JMPrzelicznikL" type="DECIMAL(15,2)" definition="NOT NULL CONSTRAINT DF_DSTrE_JMPrzelicznikL DEFAULT(1)">
+			<description>Licznik przelicznika JM</description>
+			<details>Licznik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="DSTrE_JMPrzelicznikM" type="DECIMAL( 7,0)" definition="NOT NULL CONSTRAINT DF_DSTrE_JMPrzelicznikM DEFAULT(1)">
+			<description>Mianownik przelicznika JM</description>
+			<details>Mianownik przelicznika między podstawową a zbiorczą jednostką miary</details>
+		</column>
+		<column name="DSTrE_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Symbol waluty</description>
+		</column>
+		<column name="DSTrE_WartoscBrutto" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Wartość brutto pozycji</description>
+		</column>
+		<primaryKey name="DSTrE_Primary" columns="DSTrE_DSTrEID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_DSTrETowar" localColumns="DSTrE_TwrId" refTable="DetalStanTowary" refColumns="DSTwr_DSTwrId">
+			<description>Relacja CDN.DetalStanTraElem:CDN.DetalStanTowary (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DSTrETraNag" localColumns="DSTrE_DSTrNId" refTable="DetalStanTraNag" refColumns="DSTrN_DSTrNID" deleteOption="CASCADE">
+			<description>Relacja CDN.DetalStanTraElem:CDN.DetalStanTraNag (MANY:1)</description>
+		</foreignKey>
+		<index name="DSTrETraNag" options="UNIQUE NONCLUSTERED" fields="DSTrE_DSTrNId ,DSTrE_Lp ,DSTrE_DSTrEID">
+			<description>Wg pozycji na dokumencie</description>
+		</index>
+		<index name="DSTrETowar" options="UNIQUE NONCLUSTERED" fields="DSTrE_TwrId ,DSTrE_DSTrEID">
+			<description>Wg towaru</description>
+		</index>
+		<index name="DSTrEZwrot" options="UNIQUE NONCLUSTERED" fields="DSTrE_StornoId ,DSTrE_DSTrEID">
+			<description>Wg identyfikatora elementu źródłowego</description>
+		</index>
+		<index name="DSTrETwrKod" options="NONCLUSTERED" fields="DSTrE_DSTrNId ,DSTrE_TwrKod" />
+	</table>
+	

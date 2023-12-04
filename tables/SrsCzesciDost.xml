@@ -1,0 +1,262 @@
+<table name="SrsCzesciDost">
+		<description>Tabela z dostawami dla częsci</description>
+		<column name="SrCD_SrCDID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrCD_TrSID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator subelementu transakcji</description>
+			<details>Klucz obcy do tabeli TraSElem</details>
+		</column>
+		<column name="SrCD_SrCId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator elementu transakcji</description>
+			<details>Klucz obcy do tabeli częsci</details>
+		</column>
+		<column name="SrCD_TrSIdDost" type="INTEGER">
+			<description>Wskaźnik do TraSElem zakładającego dostawę</description>
+		</column>
+		<column name="SrCD_ZwrId" type="INTEGER">
+			<description>Identyfikator elementu oryginalnego (dla zwrotów)</description>
+		</column>
+		<column name="SrCD_NumerPelny" type="VARCHAR(30)" definition="NOT NULL">
+			<description>Pełny numer dokumentu</description>
+		</column>
+		<column name="SrCD_NumerObcy" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer wlasny dokumentu obcego</description>
+		</column>
+		<column name="SrCD_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data operacji (zakupu lub sprzedaży)</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrCD_Dostawca" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Unikalny kod dostawcy</description>
+		</column>
+		<column name="SrCD_Ilosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość towaru w jednostkach podstawowych</description>
+		</column>
+		<column name="SrCD_IloscDostepna" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Dostepna ilość towaru</description>
+		</column>
+		<column name="SrCD_IloscWykorzystana" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Ilość częsci wykorzystana</description>
+		</column>
+		<column name="SrCD_Wartosc" type="DECIMAL(15,4)" definition="NOT NULL">
+			<description>Wartość towaru</description>
+		</column>
+		<column name="SrCD_Cecha1_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha1_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha1_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha1_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha2_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha2_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha2_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha2_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha3_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha3_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha3_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha3_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha4_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha4_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha4_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha4_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha5_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha5_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha5_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha5_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha6_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha6_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha6_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha6_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha7_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha7_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha7_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha7_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha8_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha8_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha8_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha8_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha9_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha9_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha9_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha9_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<column name="SrCD_Cecha10_DeAId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha10_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format pola</description>
+			<details>
+				1 - tekstowe &lt;br&gt;
+				2 - liczbowe &lt;br&gt;
+				3 - lista &lt;br&gt;
+				4 - data &lt;br&gt;
+				5 - binaria
+			</details>
+		</column>
+		<column name="SrCD_Cecha10_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod Atrybutu</description>
+		</column>
+		<column name="SrCD_Cecha10_Wartosc" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Wartosc atrybutu</description>
+			<details>Wartosc atrybutu</details>
+		</column>
+		<primaryKey name="SrCD_Primary" columns="SrCD_SrCDID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrsCzesciDost" localColumns="SrCD_SrCId" refTable="SrsCzesci" refColumns="SrC_SrCID" deleteOption="CASCADE">
+			<description>Relacja CDN.SrsCzesciDost:CDN.SrsCzesci (MANY:1)</description>
+		</foreignKey>
+		<index name="TrSCzescDost" options="UNIQUE NONCLUSTERED" fields="SrCD_SrCId ,SrCD_TrSID ,SrCD_SrCDID">
+			<description>Wg cześci</description>
+		</index>
+		<index name="SrCDTrSDostawa" options="NONCLUSTERED" fields="SrCD_TrSIdDost">
+			<description>Wskaźnik do TraSElem zakładającego dostawę</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,70 @@
+<table name="PlikiJPK">
+		<description>Tabela plików JPK</description>
+		<column name="JPK_JPKID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Jpk_ProcessState" type="INTEGER" definition="NOT NULL CONSTRAINT DF_JPK_ProcessState DEFAULT(0)">
+			<description>0 - proces tworzenia pliku zakończony; 1 - obliczono część deklaracyjną</description>
+		</column>
+		<column name="JPK_Mode" type="INTEGER" definition="NULL">
+			<description>1 - obowiązkowy, 2 - na żądanie US</description>
+		</column>
+		<column name="JPK_SourceJpkId" type="INTEGER" definition="NULL">
+			<description>Dla korekt id recordu z którego powstała korekta</description>
+		</column>
+		<column name="JPK_KodOsoby" type="NVARCHAR(254)" hash="1" />
+		<column name="JPK_Typ" type="NVARCHAR(254)" definition="NOT NULL" />
+		<column name="JPK_Nazwa" type="NVARCHAR(254)" definition="NOT NULL" />
+		<column name="JPK_DataUtworzenia" type="DATETIME" definition="NOT NULL" />
+		<column name="JPK_CelZlozenia" type="INT" definition="NOT NULL CONSTRAINT DF_JPK_CelZlozenia DEFAULT(0)" />
+		<column name="JPK_WariantFormularza" type="INT" definition="NOT NULL CONSTRAINT DF_JPK_WariantFormularza DEFAULT(1)" />
+		<column name="JPK_XML" type="VARBINARY(MAX)">
+			<description>Plik XML</description>
+		</column>
+		<column name="JPK_RefNr" type="NVARCHAR(254)" hash="1" />
+		<column name="JPK_Path" type="NVARCHAR(254)" definition="NOT NULL" hash="1" />
+		<column name="JPK_Status" type="INT" />
+		<column name="JPK_StatusCode" type="INT" />
+		<column name="JPK_StatusOpis" type="NVARCHAR(1000)" />
+		<column name="JPK_KodUrzedu" type="NVARCHAR(254)" />
+		<column name="JPK_DataWyslania" type="NVARCHAR(254)" />
+		<column name="JPK_DataWplyniecia" type="NVARCHAR(254)" />
+		<column name="JPK_KodOsobyOdbierajacej" type="NVARCHAR(254)" hash="1" />
+		<column name="JPK_DataOdebrania" type="NVARCHAR(254)" />
+		<column name="JPK_SkrotDokumentu" type="NVARCHAR(240)" />
+		<column name="JPK_SkrotStruktury" type="NVARCHAR(240)" />
+		<column name="JPK_StrukturaLogiczna" type="NVARCHAR(240)" />
+		<column name="JPK_StempelCzasu" type="NVARCHAR(240)" />
+		<column name="JPK_SigningTime" type="NVARCHAR(50)" />
+		<column name="JPK_NazwaPodmiotu" type="NVARCHAR(254)" hash="1" />
+		<column name="JPK_NIP1" type="NVARCHAR(20)" hash="1" />
+		<column name="JPK_OkresOd" type="DATETIME" />
+		<column name="JPK_OkresDo" type="DATETIME" />
+		<column name="JPK_JPKScaID" type="INTEGER" />
+		<column name="JPK_RodzajWysylki" type="INTEGER" definition="NOT NULL CONSTRAINT DF_JPK_RodzajWysylki DEFAULT(2)" />
+		<column name="JPK_PodpisanyXML" type="VARBINARY(MAX)" />
+		<column name="JPK_SciezkaPodpisanegoPliku" type="NVARCHAR(254)" hash="1" />
+		<column name="JPK_TypWysylki" type="INTEGER" definition="NOT NULL CONSTRAINT DF_JPK_TypWysylki DEFAULT(-1)" />
+		<column name="JPK_DkNID" type="INT" />
+		<column name="JPK_JpkNagId" type="INT" />
+		<column name="Jpk_Rok" type="int" />
+		<column name="Jpk_Miesiac" type="int" />
+		<column name="Jpk_Kwartalna" type="int" />
+		<column name="Jpk_kodSystemowy" type="nvarchar(50)" />
+		<column name="Jpk_KodFormularza" type="nvarchar(50)" />
+		<column name="Jpk_wersjaSchemy" type="nvarchar(50)" />
+		<column name="Jpk_Sprzedaz" type="int" />
+		<column name="Jpk_Zakup" type="int" />
+		<column name="Jpk_Deklaracja" type="int" />
+		<column name="Jpk_Ewidencja" type="int" />
+		<column name="Jpk_KodFormularzaDekl" type="nvarchar(50)" />
+		<column name="Jpk_wersjaSchemyDekl" type="nvarchar(50)" />
+		<column name="Jpk_kodSystemowyDekl" type="nvarchar(50)" />
+		<primaryKey name="JPK_Primary" columns="JPK_JPKID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="JPKPath" options="UNIQUE NONCLUSTERED" fields="JPK_Path">
+			<description>Klucz wg sciezki</description>
+		</index>
+	</table>
+	

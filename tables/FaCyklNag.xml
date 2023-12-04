@@ -1,0 +1,215 @@
+<table name="FaCyklNag">
+		<description>Tabela z nagłówkami definicji faktur cyklicznych</description>
+		<column name="FCN_FcNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="FCN_Kod" type="VARCHAR(40)" definition="NOT NULL">
+			<description>Kod wzorca faktury cyklicznej</description>
+		</column>
+		<column name="FCN_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa wzorca faktury cyklicznej</description>
+		</column>
+		<column name="FCN_DataOstatniej" type="DATETIME">
+			<description>Data ostatniej (poprzedniej) generacji faktur</description>
+			<details>Pole występuje na serwerze SQL</details>
+		</column>
+		<column name="FCN_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Do zaznaczania wzorców nie wykorzystywanych</description>
+		</column>
+		<column name="FCN_OkresCyklu" type="TINYINT" definition="NOT NULL">
+			<description>Okres cyklu: tygodniowy/miesięczny</description>
+		</column>
+		<column name="FCN_DzienTygodnia" type="TINYINT" definition="NOT NULL">
+			<description>Dzień tygodnia, w którym powinny być utworzone faktury cykliczne</description>
+		</column>
+		<column name="FCN_DzienMiesiaca" type="TINYINT">
+			<description>Dzień miesiąca, w któym powinny być generowane faktury</description>
+		</column>
+		<column name="FCN_PowtarzajCo" type="TINYINT">
+			<description>Dookreślenie, powtarzalności cyklu (co 1,2 ,3 .. tygodnie)</description>
+		</column>
+		<column name="FCN_PowtarzajCoData" type="DATETIME">
+			<description>Data początkowa dla okresów niestandardowych</description>
+			<details>Pole występuje na serwerze SQL</details>
+		</column>
+		<column name="FCN_TypDokumentu" type="INTEGER">
+			<description>Typ generowanego dokumentu</description>
+			<details>302 - faktura sprzedaży</details>
+			<details>320 - faktura pro-forma</details>
+		</column>
+		<column name="FCN_DdfID" type="INTEGER">
+			<description>Schemat numeracji (Identyfikator dokumentu w tabeli DokDefinicje)</description>
+		</column>
+		<column name="FCN_NumerNr" type="INTEGER">
+			<description>Zaślepka dla numeratora</description>
+		</column>
+		<column name="FCN_NumerString" type="VARCHAR(31)">
+			<description>Zaślepka dla numeratora</description>
+		</column>
+		<column name="FCN_DoBufora" type="TINYINT" definition="NOT NULL">
+			<description>Zapisuj dokument do bufora</description>
+			<details>
+				0 - na stałe &lt;br&gt;
+				1 - do bufora
+			</details>
+		</column>
+		<column name="FCN_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_FCN_Waluta DEFAULT('')" />
+		<column name="FCN_KursNumer" type="INTEGER" definition="NOT NULL CONSTRAINT DF_FCN_KursNumer DEFAULT(-1)" />
+		<column name="FCN_KursL" type="DECIMAL(15,4)" definition="NOT NULL CONSTRAINT DF_FCN_KursL DEFAULT(1)" />
+		<column name="FCN_KursM" type="DECIMAL(5,0)" definition="NOT NULL CONSTRAINT DF_FCN_KursM DEFAULT(1)" />
+		<column name="FCN_DataKur" type="DATETIME" definition="NOT NULL CONSTRAINT DF_FCN_DataKur DEFAULT(0)" />
+		<column name="FCN_MagID" type="INTEGER">
+			<description>Magazyn, dla tworzonego dokumentu</description>
+		</column>
+		<column name="FCN_TypNB" type="TINYINT" definition="NOT NULL">
+			<description>Algorytm liczenia VAT (od netto, czy od brutto)</description>
+			<details>
+				1 - netto &lt;br&gt;
+				2 - brutto
+			</details>
+		</column>
+		<column name="FCN_DataDokTyp" type="TINYINT" definition="NOT NULL">
+			<description>Data dokumentu: bieżąca/definiowalna</description>
+			<details>
+				0 - bieżąca &lt;br&gt;
+				1 - wskazana
+				2 - wskazany dzień miesiąca
+			</details>
+		</column>
+		<column name="FCN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+			<details>Pole to występuje na serwerze MS SQL.</details>
+		</column>
+		<column name="FCN_DataDokDzienMiesiaca" type="TINYINT">
+			<description>Data wystawienia w ustalonym dniu miesiąca</description>
+		</column>
+		<column name="FCN_DataSprzedazyTyp" type="TINYINT" definition="NOT NULL">
+			<description>Data sprzedaży: bieżąca/definiowalna</description>
+			<details>
+				0 - bieżąca &lt;br&gt;
+				1 - wskazana
+				2 - wskazany dzień miesiąca
+				3 - ostatni dzień poprzedniego miesiąca
+			</details>
+		</column>
+		<column name="FCN_DataSprzedazy" type="DATETIME" definition="NOT NULL">
+			<description>Data sprzedaży</description>
+		</column>
+		<column name="FCN_DataSprzedazyDzienMiesiaca" type="TINYINT">
+			<description>Data sprzedaży w ustalonym dniu miesiąca</description>
+		</column>
+		<column name="FCN_FPlTyp" type="TINYINT" definition="NOT NULL">
+			<description>Typ formy płatności: kontrahenta/ustalona</description>
+			<details>
+				0 - kontrahenta &lt;br&gt;
+				1 - wskazana
+			</details>
+		</column>
+		<column name="FCN_FplID" type="INTEGER">
+			<description>Ustalona forma płatności</description>
+			<details>ID z CDN.FormyPlatnosci</details>
+		</column>
+		<column name="FCN_TerminPlatTyp" type="TINYINT" definition="NOT NULL">
+			<description>Termin płatności: z definicji formy płatności / ustalony dzień</description>
+		</column>
+		<column name="FCN_TerminPlatDzien" type="SMALLINT">
+			<description>Termin płatności ustalony na dzień: ...</description>
+		</column>
+		<column name="FCN_KategoriaTyp" type="TINYINT" definition="NOT NULL">
+			<description>Kategoria: kontrahenta / stała</description>
+		</column>
+		<column name="FCN_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii dokumentu (jeśli jest stała)</description>
+			<details>Opis (kategoria) na dokumencie może być wpisana "z ręki" (VaN:KatId = 0) lub byc
+				pobrana z listy kategorii (VaN:KatId = Kat:KatId)</details>
+		</column>
+		<column name="FCN_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Opis kategorii (jeśli jest stała)</description>
+		</column>
+		<column name="FCN_Uwagi" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Dodatkowy opis na dokumencie</description>
+		</column>
+		<column name="FCN_DataKolejnegoGen" type="DATETIME">
+			<description>Data i godzina kolejnego generowania faktur cyklicznych</description>
+		</column>
+		<column name="FCN_Przypomnienie" type="TINYINT" definition="NOT NULL">
+			<description>Czy dla wzorca ustawić przypomnienie o terminie kolejnej generacji faktur</description>
+		</column>
+		<column name="FCN_CzasPrzypomnienia" type="DATETIME">
+			<description>Data i godzina wyświetlenia przypomnienia</description>
+		</column>
+		<column name="FCN_OpisNaFakturze" type="NVARCHAR(1024)" definition="NULL">
+			<description>Dodatkowy opis na fakturze</description>
+		</column>
+		<column name="FCN_GenerujAutomatycznie" type="TINYINT" definition="NOT NULL CONSTRAINT DF_FCN_GenerujAutomatycznie DEFAULT(0)">
+			<description>Czy wzorzec ma być uwzględniany podczas automatycznego generowania faktur
+				cyklicznych</description>
+		</column>
+		<column name="FCN_AutomatWyslijEmailDoKnt" type="TINYINT" definition="NOT NULL CONSTRAINT DF_FCN_AutomatWyslijEmailDoKnt DEFAULT(0)">
+			<description>Czy wysyłać e-mail z wydrukiem podczas automatycznego generowania faktur
+				cyklicznych</description>
+		</column>
+		<column name="FCN_AutomatEmailSzablonId" type="INT">
+			<description>Id szablonu e-mail używanego podczas automatycznego generowania faktur
+				cyklicznych</description>
+		</column>
+		<column name="FCN_AutomatWydrukStandardowy" type="TINYINT">
+			<description>1-standardowy; 0-użytkownika</description>
+		</column>
+		<column name="FCN_AutomatWydrukId" type="INT">
+			<description>Id wydruku używanego podczas automatycznego generowania faktur cyklicznych</description>
+		</column>
+		<column name="FCN_BlokujDuplikatyKnt" type="TINYINT" definition="NOT NULL CONSTRAINT DF_FCN_BlokujDuplikatyKnt DEFAULT(1)">
+			<description>Czy dopuszczalne są duplikaty na liście podmiotów (domyślnie nie są dopuszczalne)</description>
+		</column>
+		<column name="FCN_PrzenosNaFaAtrybutyKartyKnt" type="TINYINT" definition="NOT NULL CONSTRAINT DF_FCN_PrzenosNaFaAtrybutyKartyKnt DEFAULT(1)">
+			<description>Czy przenosić na generowaną fakturę atrybuty z karty kontrahenta</description>
+		</column>
+		<column name="FCN_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="FCN_StaZalID" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="FCN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="FCN_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="FCN_StaModID" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="FCN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="FCN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_FCN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="FCN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_FCN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="FCN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_FCN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="FCN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_FCN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="FCN_Primary" columns="FCN_FcNID">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="FCNKod" options="UNIQUE NONCLUSTERED" fields="FCN_Kod">
+			<description>Wg kodu wzorca</description>
+		</index>
+		<index name="FCNNazwa" options="NONCLUSTERED" fields="FCN_Nazwa">
+			<description>Wg nazwy wzorca</description>
+			<details>Indeks wg nazwy</details>
+		</index>
+	</table>
+	

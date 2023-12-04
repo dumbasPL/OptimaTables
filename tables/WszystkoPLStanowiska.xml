@@ -1,0 +1,75 @@
+<table name="WszystkoPLStanowiska">
+		<description>Tabela ze stanowiskiem wszystko.pl</description>
+		<column name="WPLS_WPLSId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="WPLS_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa</description>
+		</column>
+		<column name="WPLS_DDfIDRO" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dokumentu w tabeli DokDefinicje</description>
+			<details>Relacja do tabeli DokDefinicje.</details>
+		</column>
+		<column name="WPLS_DDfROSeria" type="NVARCHAR(5)" definition="NOT NULL">
+			<description>Seria dla definicji</description>
+		</column>
+		<column name="WPLS_KosztPrzesylki" type="INTEGER" definition="NOT NULL">
+			<description>Koszt przesyłki</description>
+		</column>
+		<column name="WPLS_NrCenyDomyslnej" type="INT" definition="NOT NULL">
+			<description>Domyślny cennik</description>
+		</column>
+		<column name="WPLS_TS_Synchro" type="datetime" definition="NOT NULL">
+			<description>Data ostatniej synchronizacji</description>
+		</column>
+		<column name="WPLS_TS_SynchroSlowniki" type="datetime" definition="NOT NULL">
+			<description>Data ostatniej synchronizacji słowników</description>
+		</column>
+		<column name="WPLS_DeviceCode" type="nvarchar(256)" definition="NOT NULL">
+			<description>DeviceCode</description>
+		</column>
+		<column name="WPLS_AccessToken" type="NVARCHAR(4000)" definition="NOT NULL" hash="1">
+			<description>AccessToken</description>
+		</column>
+		<column name="WPLS_AccessTokenExpires" type="datetime" definition="NOT NULL">
+			<description>AccessTokenExpires</description>
+		</column>
+		<column name="WPLS_RefreshToken" type="NVARCHAR(4000)" definition="NOT NULL" hash="1">
+			<description>RefreshToken</description>
+		</column>
+		<column name="WPLS_RefreshTokenExpires" type="datetime" definition="NOT NULL">
+			<description>RefreshTokenExpires</description>
+		</column>
+		<column name="WPLS_Nieaktywny" type="tinyint" definition="NOT NULL">
+			<description>Aktywność stanowiska</description>
+		</column>
+		<column name="WPLS_DodajKontrahenta" type="tinyint" definition="NOT NULL CONSTRAINT DF_WPLS_DodajKontrahenta DEFAULT(0)">
+			<description>Czy dodawać kontrahenta przy imporcie zamówień</description>
+		</column>
+		<column name="WPLS_MapujKontrahentow" type="tinyint" definition="NOT NULL CONSTRAINT DF_WPLS_MapujKontrahentow DEFAULT(0)">
+			<description>Czy mapować kontrahentów przy imporcie zamówień</description>
+		</column>
+		<column name="WPLS_CzasRealizacji" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPLS_CzasRealizacji DEFAULT(0)">
+			<description>Czas realizacji</description>
+		</column>
+		<column name="WPLS_CennikDostaw" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPLS_CennikDostaw DEFAULT(0)">
+			<description>Rodzaj cennika dostaw</description>
+		</column>
+		<column name="WPLS_Zwrot" type="INTEGER" definition="NOT NULL  CONSTRAINT DF_WPLS_Zwrot DEFAULT(0)">
+			<description>Rodzaj zwrotu</description>
+		</column>
+		<column name="WPLS_Reklamacja" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPLS_Reklamacja DEFAULT(0)">
+			<description>Rodzaj reklamacji</description>
+		</column>
+		<column name="WPLS_Gwarancja" type="INTEGER" definition="NOT NULL CONSTRAINT DF_WPLS_Gwarancja DEFAULT(0)">
+			<description>Rodzaj gwarancji</description>
+		</column>
+		<primaryKey name="WPLS_Primary" columns="WPLS_WPLSId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+	</table>
+	

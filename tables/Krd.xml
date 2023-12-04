@@ -1,0 +1,44 @@
+<table name="Krd">
+		<description>Raporty KRD</description>
+		<column name="KRD_KrdId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="KRD_KntId" type="INTEGER">
+			<description>Identyfikator kontrahenta</description>
+			<details>Wskaźnik do tabeli Kontrahenci</details>
+		</column>
+		<column name="KRD_DataOdczytuStatusu" type="DATETIME" definition="NULL">
+			<description>Data ostatniego odpytania</description>
+		</column>
+		<column name="KRD_Status" type="INT" definition="NULL">
+			<description>Wynik ostatniego odpytania</description>
+		</column>
+		<column name="KRD_Monitoring" type="INT" definition="NULL">
+			<description>Ustalono monitoring dla kontrahenta</description>
+		</column>
+		<column name="KRD_MonitoringConditionId" type="BIGINT" definition="NULL">
+			<description>Ustalono monitoring dla kontrahenta</description>
+		</column>
+		<column name="KRD_RaportId" type="VARCHAR(256)" definition="NULL">
+			<description>ID ostatniego raportu w KRD</description>
+		</column>
+		<column name="KRD_Regulamin" type="VARCHAR(256)" definition="NULL">
+			<description>Wersja regulaminu ostatnio zaakceptowanego przez klienta</description>
+		</column>
+		<primaryKey name="KRD_Primary" columns="KRD_KrdId">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu. Wykorzystywany we wszelkich relacjach typu
+				1:MANY</details>
+		</primaryKey>
+		<foreignKey name="FK_Krd2Knt" localColumns="KRD_KntId" refTable="Kontrahenci" refColumns="Knt_KntId" deleteOption="CASCADE">
+			<description>Relacja CDN.KRD:CDN.Kontrahenci (MANY:1)</description>
+		</foreignKey>
+		<index name="KrdKntId" options="UNIQUE NONCLUSTERED" fields="KRD_KntId">
+			<description>Klucz obcy do tabeli Kontrahenci</description>
+		</index>
+	</table>
+	

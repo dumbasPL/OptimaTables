@@ -1,0 +1,209 @@
+<table name="PracNieobec">
+		<description>Tabela nieobecności pracownika</description>
+		<column name="PNB_PnbId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PNB_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PNB_TnbId" type="INTEGER">
+			<description>Odnośnik do typu nieobecności</description>
+		</column>
+		<column name="PNB_TyuId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do tytułu ubezpieczenia</description>
+		</column>
+		<column name="PNB_ParentId" type="INTEGER">
+			<details>
+				0 - dla nieobecności o statusie P i A;
+				Dla nieobecności Korygujących - wartość zgodna z wartością PNB_PnbId z nieobecności
+		‘rodzica’ o statusie A – wartość kopiowana z nieobecności o statusie A podczas dodawania
+		nieobecności K
+			</details>
+		</column>
+		<column name="PNB_Tryb" type="TINYINT">
+			<description>Tryb nieobecności</description>
+			<details>
+				0 – oznacza nieobecność ‘zwykłą’; wartość ustawiana przy konwersji do 12.0 wszystkich
+		zapisanych wcześniejszymi wersjami nieobecności, nadawana przy dodawaniu ‘zwykłej’ nieobecności;
+		1 - oznacza nieobecność anulowaną – wartość nadawana przy zmianie statusu nieobecności ze
+		‘zwykłej’ na anulowaną (zmiana z 0 na 1)
+				2 – oznacza nieobecność Korygującą – wartość nadawana przy dodawaniu nieobecności
+		korygującej – nadpisującej nieobecność anulowaną
+			</details>
+		</column>
+		<column name="PNB_NaPodstPoprzNB" type="TINYINT" definition="NOT NULL">
+			<description>parametr "Na podstawie tego samego dokumentu, co poprzednia nieobecność"</description>
+			<details>
+				0 - oznacza, że do dokumentu jest tylko jedna, aktualna nieobecność lub nieobecność
+		występuje jako pierwsza z tą samą serią i numerem, co nieobecność następująca bezpośrednio po
+		niej,
+				1 - oznacza, że aktualna nieobecność jest kontynuacją do poprzedniej nieobecności
+		występującej w ciągłości - ta sama seria i numer dokumentu
+			</details>
+		</column>
+		<column name="PNB_OkresOd" type="DATETIME" definition="NOT NULL">
+			<description>Data</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PNB_Seria" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Seria zwolnienia lekarskiego</description>
+		</column>
+		<column name="PNB_Numer" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Numer zwolnienia lekarskiego</description>
+		</column>
+		<column name="PNB_OkresDo" type="DATETIME" definition="NOT NULL">
+			<description>DoDnia</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PNB_Opis" type="NVARCHAR(253)" definition="NOT NULL" hash="1">
+			<description>Uwagi</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PNB_Rozliczona" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PNB_Rozliczona DEFAULT(0)">
+			<description>Nieobecność rozliczona w wypłacie</description>
+		</column>
+		<column name="PNB_RozliczWDniu" type="TINYINT" />
+		<column name="PNB_RozliczData" type="DATETIME" />
+		<column name="PNB_KodNieobecnosci" type="NVARCHAR(4)" />
+		<column name="PNB_ZwolnWystawione" type="DATETIME" />
+		<column name="PNB_ZwolnDostarczone" type="DATETIME" />
+		<column name="PNB_PomnZasilek" type="TINYINT" />
+		<column name="PNB_PrzedluzenieOZ" type="TINYINT" />
+		<column name="PNB_KontynuacjaOZ" type="TINYINT" />
+		<column name="PNB_ZwolFPFGSP" type="TINYINT" definition="NOT NULL CONSTRAINT PNB_ZwolFPFGSP DEFAULT(0)">
+			<description>Zwolnienie z FP/FGŚP</description>
+		</column>
+		<column name="PNB_PierwszyDzienChor" type="TINYINT" />
+		<column name="PNB_UrlopNaZadanie" type="TINYINT" definition="NOT NULL" />
+		<column name="PNB_Przyczyna" type="INTEGER" definition="NOT NULL">
+			<details>
+				1 – Nie dotyczy&lt;BR&gt;
+				2 – Zwolnienie lekarskie&lt;BR&gt;
+				3 – Wypadek w pracy/choroba zawodowa&lt;BR&gt;
+				4 – Wypadek w drodze do/z pracy&lt;BR&gt;
+				5 – Zwolnienie w okresie ciąży&lt;BR&gt;
+				6 – Zwolnienie spowodowane gruźlicą&lt;BR&gt;
+				7 – Nadużycie alkoholu&lt;BR&gt;
+				8 – Przestępstwa/wykroczenie&lt;BR&gt;
+				9 – Opieka nad dzieckiem do lat 14&lt;BR&gt;
+				10 – Opieka nad inną osobą&lt;BR&gt;
+				11 – Leczenie szpitalne&lt;BR&gt;
+				12 - Badanie dawcy/pobranie organów
+			</details>
+		</column>
+		<column name="PNB_DniPracy" type="INTEGER" definition="NOT NULL" />
+		<column name="PNB_DniKalend" type="INTEGER" definition="NOT NULL" />
+		<column name="PNB_Calodzienna" type="INTEGER" definition="NOT NULL">
+			<details>
+				PNB_Calodzienna=1 - nieobecność całodzienna&lt;br&gt;
+				PNB_Calodzienna=0 - nieobecność na część dnia
+			</details>
+		</column>
+		<column name="PNB_Godz" type="DATETIME">
+			<details>
+				PNB_Godz w formacie 1899-12-30 00:00:00:000 – ilość godzin nieobecności&lt;br&gt;
+				PNB_ Godz = NULL dla nieobecności całodziennych (PNB_Calodzienna=1) i dla nieobecności „na
+		część etatu” (PNB_WymiarL = NULL, PNB_WymiarM = NULL)
+			</details>
+		</column>
+		<column name="PNB_WymiarL" type="INTEGER">
+			<details>
+				Licznik z wymiaru etatu na jaki zapisano nieobecność na część dnia zapisywany jako liczba
+		całkowita z pola z nieobecności w którym wpisano licznik z części etatu
+				PNB_WymiarL = NULL dla nieobecności całodziennych (PNB_Calodzienna=1) i dla nieobecności „na
+		godziny” (PNB_Godz w formacie 1899-12-30 00:00:00:000)
+			</details>
+		</column>
+		<column name="PNB_WymiarM" type="INTEGER">
+			<details>
+				Mianownik z wymiaru etatu na jaki zapisano nieobecność na część dnia zapisywany jako liczba
+		całkowita z pola z nieobecności w którym wpisano mianownik z części etatu
+				PNB_WymiarM = NULL dla nieobecności całodziennych (PNB_Calodzienna=1”) i dla nieobecności
+		„na godziny” (PNB_Godz w formacie 1899-12-30 00:00:00:000)
+			</details>
+		</column>
+		<column name="PNB_ZlecZasilekPIT" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PNB_ZlecZasilekPIT DEFAULT(0)">
+			<details>
+				Zasiłek ZUS dla zleceniobiorcy nie będącego pracownikiem etatowym.
+				0 - PIT-11 - podatek z przychodami ze stosunku pracy (domyślna)
+				1 - PIT-11 - podatek z przychodami z "Innych źródeł"
+				2 - PIT-8C - bez podatku
+			</details>
+		</column>
+		<column name="PNB_PracaRodzic" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PNB_PracaRodzic DEFAULT(0)">
+			<description>Dodatkowa nieobec. podczas pracy na część etatu w trakcie url. macierz.</description>
+		</column>
+		<column name="PNB_RdzId" type="INTEGER">
+			<description>Identyfikator dziecka, na które udzieloneo urlopu ojcowskiego / rodzicielskiego /
+		wychowawczego</description>
+		</column>
+		<column name="PNB_Dziecko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PNB_Dziecko DEFAULT('')" hash="1">
+			<details>Imię i nazwisko dziecka, na które udzieloneo urlopu ojcowskiego / rodzicielskiego /
+		wychowawczego</details>
+		</column>
+		<column name="PNB_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PNB_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PNB_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PNB_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PNB_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PNB_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PNB_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PNB_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PNB_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PNB_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PNB_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PNB_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PNB_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PNB_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="PNB_Zrodlo" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PNB_Zrodlo DEFAULT(0)">
+			<description>Zrodlo</description>
+		</column>/&gt; <column name="PNB_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PNB_Primary" columns="PNB_PnbId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PNBTyuLink" localColumns="PNB_TyuId" refTable="TytUbezp" refColumns="TYU_TyuId">
+			<description>Relacja CDN.PracNieobec:CDN.TytUbezp (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PNBTnbLink" localColumns="PNB_TnbId" refTable="TypNieobec" refColumns="TNB_TnbId">
+			<description>Relacja CDN.PracNieobec:CDN.TypNieobec (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PNBPraLink" localColumns="PNB_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracNieobec:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_PNBRdzLink" localColumns="PNB_RdzId" refTable="Rodzina" refColumns="RDZ_RdzId">
+			<description>Relacja CDN.PracNieobec:CDN.Rodzina (MANY:1)</description>
+		</foreignKey>
+		<index name="PNBPraLink" options="NONCLUSTERED" fields="PNB_PraId">
+			<description>Indeks po id pracownika</description>
+		</index>
+		<index name="PNBTnbLink" options="NONCLUSTERED" fields="PNB_TnbId">
+			<description>Link do typu nieobecności</description>
+		</index>
+		<index name="PNBTyuLink" options="NONCLUSTERED" fields="PNB_TyuId">
+			<description>Relacja do tytułu ubezpieczenia</description>
+		</index>
+		<index name="PNBParentId" options="NONCLUSTERED" fields="PNB_ParentId">
+			<description>Relacja do nieobecności anulowanej</description>
+		</index>
+	</table>
+	

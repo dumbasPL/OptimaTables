@@ -1,0 +1,55 @@
+<table name="DefCeny" filterVisible="false">
+		<description>Definicje cen towarów</description>
+		<column name="DfC_DfCId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Numer kolejny rekordu</description>
+		</column>
+		<column name="DfC_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer kolejny ceny</description>
+			<details>1 - oznacza cenę zakupu; ceny id Lp&gt;1 są cenami sprzedaży</details>
+		</column>
+		<column name="DfC_Nazwa" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa ceny</description>
+		</column>
+		<column name="DfC_Aktualizacja" type="TINYINT" definition="NOT NULL">
+			<description>Czy cena ma być automatycznie aktualizowana</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1 - tak
+			</details>
+		</column>
+		<column name="DfC_Marza" type="DECIMAL( 5,2)" definition="NOT NULL">
+			<description>Domyślna marża dla ceny</description>
+		</column>
+		<column name="DfC_Zaokraglenie" type="DECIMAL( 7,4)" definition="NOT NULL">
+			<description>Zaokrąglenie ceny</description>
+		</column>
+		<column name="DfC_Offset" type="DECIMAL( 7,4)" definition="NOT NULL">
+			<description>Wartość do dodania do ceny po zaokrągleniu</description>
+		</column>
+		<column name="DfC_Waluta" type="VARCHAR(3)" definition="NOT NULL">
+			<description>Domyślna waluta dla ceny</description>
+		</column>
+		<column name="DfC_Typ" type="TINYINT" definition="NOT NULL">
+			<description>Typ ceny</description>
+			<details>1-netto, 2-brutto</details>
+		</column>
+		<column name="DfC_Nieaktywna" type="SMALLINT">
+			<description>Czy cena jest nieaktywna</description>
+			<details>
+				NULL - domyślnie &lt;br&gt;
+				1 - jeżeli włączono check Nieaktywna &lt;br&gt;
+				0 - jeżeli wyłączono check Nieaktywna
+			</details>
+		</column>
+		<column name="DfC_XL_Lp" type="INTEGER">
+			<description>Lp ceny w systemie XL</description>
+			<details>Do potrzeb współpracy XL-OPT!MA</details>
+		</column>
+		<primaryKey name="DfC_Primary" columns="DfC_DfCId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="DfCLp" options="UNIQUE NONCLUSTERED" fields="DfC_Lp">
+			<description>Wg numeru ceny</description>
+		</index>
+	</table>
+	

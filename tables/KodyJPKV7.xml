@@ -1,0 +1,21 @@
+<table name="KodyJPKV7">
+		<description>Kody JPK V7</description>
+		<column name="KV7_KV7ID" type="INTEGER" definition="IDENTITY(1,1) NOT NULL" />
+		<column name="KV7_Kod" type="NVARCHAR(15)" definition="NOT NULL" />
+		<column name="KV7_Opis" type="NVARCHAR(MAX)" definition="NOT NULL" />
+		<column name="KV7_Rodzaj" type="INTEGER" definition="NOT NULL" />
+		<column name="KV7_Typ" type="INTEGER" definition="NOT NULL" />
+		<column name="KV7_ZjeID" type="NVARCHAR(128)" definition="NOT NULL CONSTRAINT DF_KV7_ZjeID DEFAULT('')" />
+		<column name="KV7_OkresOd" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KV7_OkresOd DEFAULT(CONVERT(DATETIME,'1899-12-31',120))" />
+		<column name="KV7_OkresDo" type="DATETIME" definition="NOT NULL CONSTRAINT DF_KV7_OkresDo DEFAULT(CONVERT(DATETIME,'2999-12-31',120))" />
+		<primaryKey name="KV7_Primary" columns="KV7_KV7ID">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="KV7ZjeLink" options="NONCLUSTERED" fields="KV7_ZjeID">
+			<description>Klucz obcy słownika</description>
+		</index>
+		<index name="KV7KodRodzajTyp" options="NONCLUSTERED" fields="KV7_KV7ID,KV7_Rodzaj, KV7_Typ, KV7_Kod">
+			<description />
+		</index>
+	</table>
+	

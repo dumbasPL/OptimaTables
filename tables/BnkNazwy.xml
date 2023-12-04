@@ -1,0 +1,216 @@
+<table name="BnkNazwy">
+		<description>Lista banków</description>
+		<details>Podstawowy słownik banków. Rekord o BNaID = 0 interpretowany jest jako zaosby pieniężne
+			firmy, a wszystkie rachunki powiązane z tym rekordem rozumiane są jako kasy firmowe.</details>
+		<column name="BNa_BNaId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+				0 oznacza kasę firmy.
+			</details>
+		</column>
+		<column name="BNa_PodmiotTyp" type="SMALLINT" definition="CONSTRAINT DF_BNa_PodmiotTyp DEFAULT(2)">
+			<description>Identyfikator typu podmiotu w ramach PodmiotyView</description>
+		</column>
+		<column name="BNa_Akronim" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Akronim (kod) banku</description>
+			<details>Unikalny kod (akronim) banku, do szybkiego (mniemonicznego) wyszukiwania</details>
+		</column>
+		<column name="BNa_Numer" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Numer kierunkowy banku</description>
+		</column>
+		<column name="BNa_Centrala" type="NVARCHAR(3)" definition="NOT NULL">
+			<description>Numer kierunkowy centrali</description>
+		</column>
+		<column name="BNa_Swift" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Kod SWIFT banku</description>
+		</column>
+		<column name="BNa_Nazwa1" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Pierwsza część nazwy banku</description>
+		</column>
+		<column name="BNa_Nazwa2" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Druga część nazwy banku</description>
+		</column>
+		<column name="BNa_Kraj" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Kraj (adres banku)</description>
+		</column>
+		<column name="BNa_Wojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo (adres banku)</description>
+		</column>
+		<column name="BNa_Powiat" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Powiat (adres banku)</description>
+		</column>
+		<column name="BNa_Gmina" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Gmina (adres banku)</description>
+		</column>
+		<column name="BNa_Ulica" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Ulica (adres banku)</description>
+		</column>
+		<column name="BNa_NrDomu" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Numer domu (adres banku)</description>
+		</column>
+		<column name="BNa_NrLokalu" type="NVARCHAR(10)" definition="NOT NULL">
+			<description>Numer lokalu (adres banku)</description>
+		</column>
+		<column name="BNa_Miasto" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Miasto (adres banku)</description>
+		</column>
+		<column name="BNa_KodPocztowy" type="VARCHAR(10)" definition="NOT NULL">
+			<description>Kod pocztowy (adres banku)</description>
+		</column>
+		<column name="BNa_Poczta" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Poczta (adres banku)</description>
+		</column>
+		<column name="BNa_Adres2" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Dodatkowa część adresu banku</description>
+		</column>
+		<column name="BNa_Modem" type="NVARCHAR(20)">
+			<description>Numer modemu do potrzeb komunikacji elektronicznej</description>
+			<details>Numer, na który "wdzwaniamy się" do banku dla potrzeb elektronicznej wymiany danych
+				(HomeBanking)</details>
+		</column>
+		<column name="BNa_Telefon" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Numer telefonu do banku</description>
+		</column>
+		<column name="BNa_TelefonSms" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BNa_TelefonSms DEFAULT('')">
+			<description>Numer telefonu dla SMS</description>
+		</column>
+		<column name="BNa_Fax" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Numer faxu do banku</description>
+		</column>
+		<column name="BNa_Email" type="NVARCHAR(127)" definition="NOT NULL">
+			<description>Adres elektroniczny e-mail</description>
+		</column>
+		<column name="BNa_URL" type="VARCHAR(254)">
+			<description>Adres URL do usług bankowych</description>
+		</column>
+		<column name="BNa_UID" type="NVARCHAR(30)">
+			<description>Identyfikator do zalogowania się na stronie banku</description>
+		</column>
+		<column name="BNa_PWD" type="NVARCHAR(30)">
+			<description>Hasło do zalogowania się na stronie banku</description>
+		</column>
+		<column name="BNa_Format" type="SMALLINT" definition="NOT NULL">
+			<description>Format wymiany danych elektronicznych z bankiem</description>
+		</column>
+		<column name="BNa_FormatUS" type="SMALLINT">
+			<description>Format eksportu poleceń przelewu do US</description>
+		</column>
+		<column name="BNa_FormatZUS" type="SMALLINT">
+			<description>Format eksportu poleceń przelewu do ZUS</description>
+		</column>
+		<column name="BNa_FormatSplitPay" type="SMALLINT">
+			<description>Format eksportu poleceń przelewu dla Split Payment</description>
+		</column>
+		<column name="BNa_FormatImp" type="SMALLINT">
+			<description>Format importu wyciągów bankowych</description>
+		</column>
+		<column name="BNa_CzasRealizacji" type="SMALLINT" definition="NOT NULL">
+			<description>Typowy czas realizacji zlecenia przelewu przez bank</description>
+		</column>
+		<column name="BNa_IBAN" type="SMALLINT" definition="NOT NULL">
+			<description>Czy bank prowadzi rachunki w standardzie IBAN</description>
+		</column>
+		<column name="BNa_RachunekNr" type="NVARCHAR(51)" definition="NOT NULL CONSTRAINT DF_BNa_RachunekNr DEFAULT('')">
+			<description>Numer rachunku dla prowizji</description>
+		</column>
+		<column name="BNa_Zagraniczny" type="SMALLINT" definition="NOT NULL">
+			<description>Czy bank jest zagraniczny</description>
+		</column>
+		<column name="BNa_KatID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>Identyfikator domyślnej kategorii dla dokumentów od/dla banku.</details>
+		</column>
+		<column name="BNa_NieRozliczac" type="TINYINT" definition="NOT NULL">
+			<description>Bank standardowo nie podlega rozliczeniu</description>
+		</column>
+		<column name="BNa_Nieaktywny" type="TINYINT" definition="NOT NULL CONSTRAINT DF_BNa_Nieaktywny DEFAULT(0)">
+			<description>Czy bank jest nieaktywny</description>
+		</column>
+		<column name="BNa_TS_Export" type="DATETIME">
+			<description>TimeStamp wykonania eksportu</description>
+		</column>
+		<column name="BNa_ImportAppId" type="VARCHAR(5)">
+			<description>Identyfikator aplikacji / bazy źródłowej</description>
+		</column>
+		<column name="BNa_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<column name="BNa_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego kartotekę</description>
+		</column>
+		<column name="BNa_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BNa_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BNa_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego kartotekę</description>
+		</column>
+		<column name="BNa_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="BNa_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji kartoteki banku</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="BNa_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BNa_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="BNa_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BNa_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="BNa_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_BNa_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="BNa_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_BNa_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="BNa_GIDTyp" type="SMALLINT" filterVisible="false" />
+		<column name="BNa_GIDFirma" type="INTEGER" filterVisible="false" />
+		<column name="BNa_GIDNumer" type="INTEGER" filterVisible="false" />
+		<column name="BNa_GIDLp" type="SMALLINT" filterVisible="false" />
+		<column name="BNa_CDCKontaktOsoba" type="NVARCHAR(140)" definition="NULL" hash="1">
+			<description>Osoba kontaktowa CDC</description>
+		</column>
+		<column name="BNa_CDCKontakt" type="NVARCHAR(140)" definition="NULL" hash="1">
+			<description>Email lub telefon kontaktowowy CDC</description>
+		</column>
+		<column name="BNa_CDCOplatyPonosi" type="TINYINT" definition="NULL">
+			<description>Kto ponosi opłaty CDC</description>
+		</column>
+		<column name="BNa_CDCClientID" type="NVARCHAR(256)">
+			<description>Client ID firmy w systemie bankowym</description>
+		</column>
+		<column name="BNa_CDCSecretKey" type="NVARCHAR(256)">
+			<description>Secret Key firmy w systemie bankowym</description>
+		</column>
+		<primaryKey name="BNa_Primary" columns="BNa_BNaId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_BNaKategoria" localColumns="BNa_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.BnkNazwy:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="BNaKategoria" options="NONCLUSTERED" fields="BNa_KatID">
+			<description>Wg kategorii</description>
+		</index>
+		<index name="BNaAkronim" options="UNIQUE NONCLUSTERED" fields="BNa_Akronim">
+			<description>Indeks wg akronimu banku</description>
+		</index>
+		<index name="BNaNumer" options="UNIQUE NONCLUSTERED" fields="BNa_Numer">
+			<description>Indeks wg numeru kierunkowego banku</description>
+		</index>
+		<index name="BNaGUID" options="UNIQUE NONCLUSTERED" fields="BNa_ImportRowId">
+			<description>Wg unikalnego identyfikatora</description>
+		</index>
+		<index name="BNaGID" options="NONCLUSTERED" fields="BNa_GIDTyp ,BNa_GIDFirma ,BNa_GIDNumer">
+			<description>Wg identyfikatora GID w CDN-XL</description>
+		</index>
+		<index name="BNaGridLookupFilter" options="UNIQUE NONCLUSTERED" fields="BNa_Akronim, BNa_BNaId" includedColumns="BNa_Nazwa1, BNa_Numer">
+			<description>Gridlookupu rejestru kb wg akronimu i id rejestru</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,34 @@
+<table name="DaneKadModRelacje">
+		<description>Tabela wiążąca dane słownikowe</description>
+		<column name="DKR_DkrId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DKR_DkmId_1" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pierwszego składnika powiązania</description>
+		</column>
+		<column name="DKR_DkmId_2" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator drugiego składnika powiązania</description>
+		</column>
+		<column name="DKR_DkmNazwa" type="NVARCHAR(280)">
+			<description>Nazwa czynnika szkodliwego</description>
+		</column>
+		<column name="DKR_DkmRobotnicze" type="TINYINT">
+			<description>Typ czynnika szkodliwego</description>
+		</column>
+		<column name="DKR_Rodzaj" type="TINYINT" definition="NOT NULL CONSTRAINT DF_StanowCzynSzkod DEFAULT(1)">
+			<description>Rodzaj powiązania danych pomiędzy słownikami</description>
+			<details>
+				1 - przypisanie czynników szkodliwych do stanowiska (DKM_Rodzaj=13 do DKM_Rodzaj=1)
+			</details>
+		</column>
+		<primaryKey name="DKR_Primary" columns="DKR_DkrId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DkrDkm1Link" localColumns="DKR_DkmId_1" refTable="DaneKadMod" refColumns="DKM_DkmId" deleteOption="CASCADE">
+			<description>Relacja CDN.DaneKadMod:CDN.DaneKadModRelacje (1:MANY)</description>
+		</foreignKey>
+		<foreignKey name="FK_DkrDkm2Link" localColumns="DKR_DkmId_2" refTable="DaneKadMod" refColumns="DKM_DkmId">
+			<description>Relacja CDN.DaneKadMod:CDN.DaneKadModRelacje (1:MANY)</description>
+		</foreignKey>
+	</table>
+	

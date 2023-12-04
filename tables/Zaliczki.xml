@@ -1,0 +1,72 @@
+<table name="Zaliczki">
+		<description>Lista potencjalnych zaliczek do dokumentu</description>
+		<details>Tabela zawiera informacje o zapisach kasowych, które są planowanymi rozliczeniami do
+			dokumentu</details>
+		<column name="Zal_ZalID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="Zal_DokumentTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Typ dokumentu</description>
+		</column>
+		<column name="Zal_DokumentID" type="INTEGER" definition="NOT NULL">
+			<description>Id dokumentu</description>
+		</column>
+		<column name="Zal_BZpId" type="INTEGER" definition="NOT NULL">
+			<description>Id zapisu kasowego</description>
+		</column>
+		<column name="Zal_Zaznaczenie" type="TINYINT" definition="NOT NULL">
+			<description>Flaga zaznaczenia</description>
+		</column>
+		<column name="Zal_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zaliczki w walucie</description>
+		</column>
+		<column name="Zal_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="Zal_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Zal_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="Zal_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="Zal_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Zal_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="Zal_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Zal_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Zal_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Zal_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Zal_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Zal_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Zal_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Zal_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Zal_Primary" columns="Zal_ZalID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DoRBnkZapis" localColumns="Zal_BZpId" refTable="BnkZapisy" refColumns="BZp_BZpId" deleteOption="CASCADE">
+			<description>Relacja CDN.Zaliczki:CDN.BnkZapisy (MANY:1)</description>
+		</foreignKey>
+		<index name="DoRBnkZapis" options="NONCLUSTERED" fields="Zal_BZpId">
+			<description>Klucz obcy do zapisów kasowych</description>
+		</index>
+		<index name="DoRDokument" options="UNIQUE NONCLUSTERED" fields="Zal_DokumentID ,Zal_DokumentTyp ,Zal_BZpId">
+			<description>Wskaźnik do dokumentu źródłowego</description>
+		</index>
+	</table>
+	

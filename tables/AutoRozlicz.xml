@@ -1,0 +1,157 @@
+<table name="AutoRozlicz">
+		<description>Ewidencja rozliczeń kosztów związanych z używaniem samochodu</description>
+		<details>Tabela zawiera dokonane rozliczenia kosztów użytkowania samochodów, tzn. kwoty
+			wynikające z comiesięcznego porównania wydatków poniesionych z tytułu używania samochodu
+			(AutoKoszty) z kosztami wynikającymi z liczby przejechanych kilomentrów (AutoPrzejazd)</details>
+		<column name="AuR_AuRID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Uwaga - w odróżnieniu od innych przypadków relacja AutoRozlicz do AutoKoszty i AutoPrzejazd
+				NIE jest realizowana poprzez AUR:AURId.
+			</details>
+		</column>
+		<column name="AuR_AuEID" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Identyfikator samochodu</description>
+			<details>
+				Identyfikator pojazdu.
+				Relacja do tabeli AutoEwid (AuR:AuE:Id = AuE:AuEId)
+			</details>
+		</column>
+		<column name="AuR_RokMies" type="INTEGER" definition="NOT NULL">
+			<description>Rok i miesiąc rozliczenia</description>
+			<details>
+				Rok i miesiąc rozliczenia, obliczany jako:
+				100 * Rok + Miesiąc
+			</details>
+		</column>
+		<column name="AuR_PrzejMiesiac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty wynikające z ewidencji przejazdów w miesiącu</description>
+		</column>
+		<column name="AuR_PrzejRok" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty wynikające z ewidencji przejazdów w roku</description>
+		</column>
+		<column name="AuR_KosztMiesiac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty wynikające z ewidencji kosztów w miesiącu</description>
+		</column>
+		<column name="AuR_KosztRok" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty wynikające z ewidencji kosztów w roku</description>
+		</column>
+		<column name="AuR_KsiegMiesiac" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty do zaksięgowania w miesiącu</description>
+		</column>
+		<column name="AuR_KsiegRok" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Koszty do zaksięgowania w roku</description>
+		</column>
+		<column name="AuR_KatId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator kategorii</description>
+			<details>
+				Relacja do tabeli Kategorie.
+				Opis (kategoria) dokumentu może zostac wpisany "z ręki" (AuR:KatId = 0) lub zostac pobrany z
+				listy kategorii (AuR:KatId = Kat:KatId)
+			</details>
+		</column>
+		<column name="AuR_Kategoria" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Kategoria (opis) dokumentu</description>
+		</column>
+		<column name="AuR_Rejestr" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa rejestru Vat dla umieszczenia korekty</description>
+		</column>
+		<column name="AuR_VaNId" type="INTEGER">
+			<description>Wskaźnik do zapisu korekcyjnego Vat</description>
+			<details>Wskaźnik do zapisu korekcyjnego Vat obejmującego część kwoty Vat nie podlegającej
+				odliczeniu (AuR:VaNId = VaN:VaNId)</details>
+		</column>
+		<column name="AuR_KPRId" type="INTEGER">
+			<description>Wskaźnik do dokumentu księgowego w KPR</description>
+			<details>
+				Referencja do tabeli ZapisyKPR.&lt;br&gt;
+				Zapis zaksięgowany posiada AuR_KPRId = KPR_KPRId;&lt;br&gt;
+				Zapis niezaksięgowany posiada AuR_KPRId = NULL;
+			</details>
+		</column>
+		<column name="AuR_DekId" type="INTEGER">
+			<description>Wskaźnik do dokumentu księgowego w Dekrety</description>
+			<details>
+				Relacja do tabeli Dekrety.
+				Zapis zaksięgowany posiada AuR:DekId = Dek:DekId.
+				Zapis niezaksięgowany posiada AuR:DekId = 0
+			</details>
+		</column>
+		<column name="AuR_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="AuR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuR_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuR_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="AuR_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="AuR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="AuR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="AuR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_AuR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_AuR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="AuR_KorektaVat" type="INTEGER" definition="NOT NULL CONSTRAINT DF_AuR_KorektaVat DEFAULT(1)">
+			<description>Czy generować zapis korekcyjny VAT</description>
+		</column>
+		<column name="AuR_ZakID" type="INTEGER">
+			<description>Identyfikator zakładu</description>
+		</column>
+		<primaryKey name="AuR_Primary" columns="AuR_AuRID">
+			<description>Wg identyfikatora rekordu</description>
+			<details>Unikalny indeks wg identyfikatora rekordu.</details>
+		</primaryKey>
+		<foreignKey name="FK_AuRKategorie" localColumns="AuR_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.AutoRozlicz:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_AuRAuto" localColumns="AuR_AuEID" refTable="AutoEwid" refColumns="AuE_AuEID">
+			<description>Relacja CDN.AutoRozlicz:CDN.AutoEwid (MANY:1)</description>
+		</foreignKey>
+		<index name="AuRKategorie" options="NONCLUSTERED" fields="AuR_KatId">
+			<description>Indeks wg kategorii</description>
+			<details>Indeks wiążący zapis w tabeli AutoRozlicz z Kategorią</details>
+		</index>
+		<index name="AuRAuto" options="UNIQUE NONCLUSTERED" fields="AuR_AuEID ,AuR_RokMies">
+			<description>Rozliczenia wg samochodu</description>
+			<details>
+				Indeks wg rozliczeń miesięcznych samochodu.
+				Stanowi podstawę do relacji z zapisami źródłowymi (AutoKoszty i AutoPrzejazd)
+			</details>
+		</index>
+		<index name="AuRRokMies" options="UNIQUE NONCLUSTERED" fields="AuR_RokMies ,AuR_AuEID">
+			<description>Wg rozliczeń w miesiącu</description>
+			<details>Indeks wg wszystkich rozliczeń dokonanych w danym miesiącu.</details>
+		</index>
+		<index name="AuRVatNag" options="NONCLUSTERED" fields="AuR_VaNId">
+			<description>wg zapisu korekcyjnego Vat</description>
+			<details>Indeks do relacji pomiędzy rozliczeniem a zapisem korekcyjnym w rejestrze Vat</details>
+		</index>
+		<index name="AuRKPR" options="UNIQUE NONCLUSTERED" fields="AuR_KPRId ,AuR_AuRID">
+			<description>Wg zapisu księgowego KPR</description>
+			<details>Indeks służący do relacji AutoRozlicz a ZapisyKPR</details>
+		</index>
+		<index name="AuRDekrety" options="UNIQUE NONCLUSTERED" fields="AuR_DekId ,AuR_AuRID">
+			<description>Wg zapisu księgowego do dekretów</description>
+			<details>Indeks służący do relacji AutoRozlicz a Dekrety</details>
+		</index>
+	</table>
+	

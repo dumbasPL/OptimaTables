@@ -1,0 +1,22 @@
+<table name="TraCykliczne">
+		<column name="TrC_GIDNumer" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="TrC_JestCykliczna" type="INTEGER" definition="NOT NULL">
+			<description />
+		</column>
+		<column name="TrC_Grupa" type="INTEGER" definition="">
+			<description />
+		</column>
+		<column name="TrC_DataUtw" type="DATETIME" definition="CONSTRAINT DF_TrC_DataUtw DEFAULT(GetDate())">
+			<description />
+		</column>
+		<column name="TrC_DataMod" type="DATETIME" definition="CONSTRAINT DF_TrC_DataMod DEFAULT(GetDate())">
+			<description />
+		</column>
+		<primaryKey name="TrC_Primary" columns="TrC_GIDNumer">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="TraCykliczneGrupa" options="NONCLUSTERED" fields="TrC_Grupa" />
+	</table>
+	

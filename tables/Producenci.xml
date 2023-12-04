@@ -1,0 +1,60 @@
+<table name="Producenci">
+		<description>Producenci marek</description>
+		<column name="Prd_PrdId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="Prd_Kod" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kod producenta</description>
+		</column>
+		<column name="Prd_Nazwa" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Nazwa producenta</description>
+		</column>
+		<column name="Prd_URL" type="VARCHAR(250)" hash="1">
+			<description>URL strony internetowej producenta</description>
+		</column>
+		<column name="Prd_Logo" type="INTEGER">
+			<description>Powiązanie z id danej binarnej</description>
+		</column>
+		<column name="Prd_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="Prd_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Prd_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Prd_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="Prd_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="Prd_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="Prd_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Prd_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="Prd_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Prd_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="Prd_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_Prd_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="Prd_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_Prd_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="Prd_Primary" columns="Prd_PrdId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="PrdKod" options="UNIQUE NONCLUSTERED" fields="Prd_Kod">
+			<description>Wg kodu</description>
+		</index>
+		<index name="PrdNazwa" options="UNIQUE NONCLUSTERED" fields="Prd_Nazwa, Prd_PrdId">
+			<description>Wg nazwy i id</description>
+		</index>
+	</table>
+	

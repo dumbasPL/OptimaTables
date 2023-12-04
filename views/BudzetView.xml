@@ -1,0 +1,37 @@
+<view name="BudzetView">
+		<description>View dokumentów księgowości budżetowej</description>
+		<column name="BuV_AccId" type="INTEGER" definition="NO_SQL">
+			<description>ID konta budżetowego</description>
+		</column>
+		<column name="BuV_OObId" type="INTEGER" definition="NO_SQL">
+			<description>ID okresu obrachunkowego</description>
+		</column>
+		<column name="BuV_AccNumer" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Numer konta budżetowego</description>
+		</column>
+		<column name="BuV_AccNumerIdx" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Numer konta budżetowego</description>
+		</column>
+		<column name="BuV_AccNazwa" type="NVARCHAR(50)" definition="NO_SQL">
+			<description>Nazwa konta budżetowego</description>
+		</column>
+		<column name="BuV_PlanKwotaWn" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota wydatków planowanych po stronie Wn</description>
+		</column>
+		<column name="BuV_PlanKwotaMa" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota wydatków planowanych po stronie Ma</description>
+		</column>
+		<column name="BuV_RealKwotaWn" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota wydatków rzeczywistych po stronie Wn</description>
+		</column>
+		<column name="BuV_RealKwotaMa" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Kwota wydatków rzeczywistych po stronie Ma</description>
+		</column>
+		<column name="BuV_PrzekKwotaWn" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Róznica kwoty rzeczywistej i zaplanowanej po stronie Wn</description>
+		</column>
+		<column name="BuV_PrzekKwotaMa" type="DECIMAL(15,2)" definition="NO_SQL">
+			<description>Róznica kwoty rzeczywistej i zaplanowanej po stronie Ma</description>
+		</column>
+	</view>
+	

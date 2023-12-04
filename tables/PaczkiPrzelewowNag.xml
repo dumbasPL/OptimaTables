@@ -1,0 +1,69 @@
+<table name="PaczkiPrzelewowNag">
+		<description>Tabela z paczkami zdarzeń K/B</description>
+		<column name="PcPN_PcPNID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PcPN_BRaID" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu w tabeli BnkRachunki</description>
+		</column>
+		<column name="PcPN_Nazwa" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Nazwa paczki</description>
+		</column>
+		<column name="PcPN_Opis" type="NVARCHAR(1024)">
+			<description>Opis dokumentu</description>
+		</column>
+		<column name="PcPN_BnkIdentyfikator" type="NVARCHAR(32)" definition="NOT NULL">
+			<description>Identyfikator paczki w systemie bankowym</description>
+		</column>
+		<column name="PcPN_Status" type="TINYINT" definition="NOT NULL CONSTRAINT DF_PcPN_Status DEFAULT(0)">
+			<description>Status paczki (Bufor = 0, Zatwierdzona = 1, Wysłana = 2, Odrzucona = 4)</description>
+		</column>
+		<column name="PcPN_Podpisy" type="NVARCHAR(MAX)">
+			<description>Wartość podpisu(ów) zakodowana w Base64</description>
+		</column>
+		<column name="PcPN_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora zakładającego</description>
+		</column>
+		<column name="PcPN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PcPN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp założenia</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PcPN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PcPN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego</description>
+		</column>
+		<column name="PcPN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PcPN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego</description>
+		</column>
+		<column name="PcPN_OpeModId" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego</description>
+		</column>
+		<column name="PcPN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PcPN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp modyfikacji</description>
+			<details>Reprezentacja pola datetime na serwerze SQL</details>
+		</column>
+		<column name="PcPN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PcPN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego</description>
+		</column>
+		<column name="PcPN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PcPN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego</description>
+		</column>
+		<primaryKey name="PcPN_Primary" columns="PcPN_PcPNID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_PcPNRachunek" localColumns="PcPN_BRaID" refTable="BnkRachunki" refColumns="BRa_BRaID">
+			<description>Relacja CDN.PaczkiPrzelewowNag:CDN.BnkRachunki (MANY:1)</description>
+		</foreignKey>
+		<index name="PcPNWgNazwy" options="UNIQUE NONCLUSTERED" fields="PcPN_BRaID, PcPN_Nazwa, PcPN_PcPNID">
+			<description>Wg nazwy paczki</description>
+		</index>
+		<index name="PcPNWgIdentyfikatora" options="UNIQUE NONCLUSTERED" fields="PcPN_BnkIdentyfikator">
+			<description>Wg identyfikatora bankowego</description>
+		</index>
+	</table>
+	

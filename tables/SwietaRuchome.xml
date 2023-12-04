@@ -1,0 +1,10 @@
+<table name="SwietaRuchome">
+		<description>Lista świąt ruchomych</description>
+		<column name="SwR_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data święta ruchomego</description>
+		</column>
+		<primaryKey name="SwR_Primary" columns="SwR_Data">
+			<description>Klucz podstawowy, wg daty święta ruchomego</description>
+		</primaryKey>
+	</table>
+	

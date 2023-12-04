@@ -1,0 +1,59 @@
+<table name="PracPracaDni">
+		<description>Tabela dni w kalendarzu (praca pracownika)</description>
+		<column name="PPR_PprId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PPR_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PPR_Data" type="DATETIME" definition="NOT NULL">
+			<description>Data</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PPR_OpeZalId" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="PPR_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PPR_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PPR_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="PPR_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="PPR_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="PPR_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PPR_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="PPR_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PPR_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="PPR_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_PPR_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="PPR_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_PPR_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="PPR_Zrodlo" type="TINYINT" definition="NOT NULL" />
+		<column name="PPR_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PPR_Primary" columns="PPR_PprId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_PPRData" localColumns="PPR_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPracaDni:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="PPRData" options="UNIQUE NONCLUSTERED" fields="PPR_PraId ,PPR_Data">
+			<description>Unikalny indeks po id pracownika i dacie</description>
+		</index>
+	</table>
+	

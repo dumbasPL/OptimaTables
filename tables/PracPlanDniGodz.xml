@@ -1,0 +1,44 @@
+<table name="PracPlanDniGodz">
+		<description>Wejścia/wyjścia planu pracy</description>
+		<column name="PGL_PglId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PGL_PplId" type="INTEGER" definition="NOT NULL">
+			<description>We/wy w dniu</description>
+		</column>
+		<column name="PGL_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Numer porządkowy</description>
+		</column>
+		<column name="PGL_OdGodziny" type="DATETIME" definition="NOT NULL">
+			<description>Godzina wejścia</description>
+		</column>
+		<column name="PGL_DoGodziny" type="DATETIME" definition="NOT NULL">
+			<description>Godzina wyjścia</description>
+		</column>
+		<column name="PGL_Strefa" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator strefy</description>
+		</column>
+		<column name="PGL_DzlId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator wydziału</description>
+		</column>
+		<column name="PGL_PrjId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator projektu</description>
+		</column>
+		<column name="PGL_UwagiPlanu" type="NVARCHAR(1024)" definition="NOT NULL CONSTRAINT DF_PGL_UwagiPlanu DEFAULT('')">
+			<description>Uwagi</description>
+		</column>
+		<column name="PGL_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="PGL_Primary" columns="PGL_PglId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="PGLLp" options="NONCLUSTERED" fields="PGL_Lp" />
+		<index name="PGLPplLink" options="NONCLUSTERED" fields="PGL_PplId">
+			<description>Klucz obcy planu pracy</description>
+		</index>
+		<foreignKey name="FK_PGLPplLink" localColumns="PGL_PplId" refTable="PracPlanDni" refColumns="PPL_PplId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracPlanDniGodz:CDN.PracPlanDni (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

@@ -1,0 +1,31 @@
+<table name="AnkAnkietyOdp">
+		<description>szablony odpowiedzi</description>
+		<column name="AnkAnO_AnkAnOId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="AnkAnO_AnkSpOId" type="INTEGER" definition="NULL">
+			<description>Id odpowiedzi</description>
+		</column>
+		<column name="AnkAnO_AnkAnPId" type="INTEGER" definition="NOT NULL">
+			<description>Pytanie, do którego należy odpowiedź</description>
+		</column>
+		<column name="AnkAnO_Lp" type="INTEGER" definition="NOT NULL">
+			<description>Liczba porządkowa dla odpowiedzi</description>
+		</column>
+		<column name="AnkAnO_Mode" type="TINYINT" definition="NOT NULL">
+			<description> 0 - zwykła odp. 1- odp typu inne</description>
+		</column>
+		<column name="AnkAnO_Punkty" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Punkty za odpowiedź</description>
+		</column>
+		<column name="AnkAnO_Wartosc" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Wartosc odpowiedzi</description>
+		</column>
+		<primaryKey name="AnkAnO_Primary" columns="AnkAnO_AnkAnOId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_AnkAnO_AnkAnP" localColumns="AnkAnO_AnkAnPId" refTable="AnkAnkietyPyt" refColumns="AnkAnP_AnkAnPId" deleteOption="CASCADE">
+			<description>Relacja CDN.AnkAnkietyOdp:CDN.AnkAnkietyPyt (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

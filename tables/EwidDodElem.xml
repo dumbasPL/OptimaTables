@@ -1,0 +1,44 @@
+<table name="EwidDodElem" filterVisible="false">
+		<description>Kwoty dla ewidencji dodatkowej przychodów i kosztów</description>
+		<column name="EDE_EDEID" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator zapisu</description>
+		</column>
+		<column name="EDE_EDNID" type="INTEGER" definition="NOT NULL">
+			<description>Wskaźnik do nagłówka dokumentu</description>
+		</column>
+		<column name="EDE_KatID" type="INTEGER">
+			<description>Identyfikator kategorii</description>
+			<details>Wskaźnik do tabeli Kategorie</details>
+		</column>
+		<column name="EDE_Kwota" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota</description>
+		</column>
+		<column name="EDE_KolumnaKPR" type="TINYINT" definition="NOT NULL">
+			<description>Kolumna w KPiR, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="EDE_KolumnaRYC" type="TINYINT" definition="NOT NULL">
+			<description>Kolumna w ewidencji ryczałtowej, do której zostanie zaksięgowany zapis</description>
+		</column>
+		<column name="EDE_KontoWn" type="VARCHAR(50)">
+			<description>Symbol konta pomocniczego dla księgowania do dziennika</description>
+		</column>
+		<column name="EDE_KontoMa" type="VARCHAR(50)">
+			<description>Symbol konta pomocniczego dla księgowania do dziennika</description>
+		</column>
+		<primaryKey name="EDE_Primary" columns="EDE_EDEID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_EDENaglowek" localColumns="EDE_EDNID" refTable="EwidDodNag" refColumns="EDN_EDNID" deleteOption="CASCADE">
+			<description>Relacja CDN.EwidDodElem:CDN.EwidDodNag (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_EDEKategoria" localColumns="EDE_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.EwidDodElem:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="EDENaglowek" options="UNIQUE NONCLUSTERED" fields="EDE_EDNID ,EDE_EDEID">
+			<description>Wg nagłówka</description>
+		</index>
+		<index name="EDEKategoria" options="NONCLUSTERED" fields="EDE_KatID">
+			<description>Wg kategorii</description>
+		</index>
+	</table>
+	

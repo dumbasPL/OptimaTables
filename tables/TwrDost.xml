@@ -1,0 +1,65 @@
+<table name="TwrDost" filterVisible="false">
+		<description>Lista dostawców towaru</description>
+		<details>Tabela do współpracy z CDN XL - nie będzie wypełniana</details>
+		<column name="TWD_TwrTyp" type="SMALLINT" />
+		<column name="TWD_TwrFirma" type="INTEGER" />
+		<column name="TWD_TwrNumer" type="INTEGER">
+			<details>Unikalny automatycznie nadawany numer elementu.</details>
+		</column>
+		<column name="TWD_TwrLp" type="SMALLINT" />
+		<column name="TWD_KntTyp" type="SMALLINT" />
+		<column name="TWD_KntFirma" type="INTEGER" />
+		<column name="TWD_KntNumer" type="INTEGER">
+			<details>Unikalny automatycznie nadawany numer elementu.</details>
+		</column>
+		<column name="TWD_KntLp" type="SMALLINT" />
+		<column name="TWD_KodTyp" type="SMALLINT" />
+		<column name="TWD_KodFirma" type="INTEGER" />
+		<column name="TWD_KodNumer" type="INTEGER" />
+		<column name="TWD_KodLp" type="SMALLINT" />
+		<column name="TWD_KlasaKnt" type="SMALLINT">
+			<description>Typ kontrahenta</description>
+			<details>
+				Typ kontrachenta - zapis bitowy:
+				00001000 - Odbiorca
+				00010000 - Dostawca
+				00100000 - Akwizytor
+				Oczywiście dopuszczamy mieszanie typów może to być Odbiorco-Dostawca.
+			</details>
+		</column>
+		<column name="TWD_Cena" type="DECIMAL(15,4)">
+			<description>Wartość ceny</description>
+			<details>Wartość jaką posiada cena</details>
+		</column>
+		<column name="TWD_Waluta" type="VARCHAR(3)">
+			<description>Symbol waluty</description>
+			<details>Symbol waluty</details>
+		</column>
+		<column name="TWD_NrKursu" type="SMALLINT">
+			<description>Numer kursu waluty</description>
+		</column>
+		<column name="TWD_DataAkt" type="INTEGER">
+			<description>Data aktualizacji ceny</description>
+		</column>
+		<column name="TWD_Czas" type="TINYINT">
+			<description>Czas dostawy od zamówienia</description>
+		</column>
+		<column name="TWD_KodOrgKnt" type="NVARCHAR(40)">
+			<description>Kod pod jakim występuje u kontrahenta</description>
+			<details>Kod pod jakim ten element jest zapisywany u kontrahenta. potrzebne w przypadku
+				zamówień.</details>
+		</column>
+		<column name="TWD_Notatki" type="NVARCHAR(200)">
+			<description>Adnotacje o dostawcy</description>
+		</column>
+		<primaryKey name="TWD_Primary" columns="TWD_TwrTyp,TWD_TwrFirma,TWD_TwrNumer,TWD_KlasaKnt,TWD_TwrLp">
+			<description>Wg towaru</description>
+		</primaryKey>
+		<index name="TwDKontrah" options="UNIQUE NONCLUSTERED" fields="TWD_KntTyp ,TWD_KntFirma ,TWD_KntNumer ,TWD_TwrTyp ,TWD_TwrFirma ,TWD_TwrNumer">
+			<description>Wg kontrahenta</description>
+		</index>
+		<index name="TwDKod" options="UNIQUE NONCLUSTERED" fields="TWD_KntTyp ,TWD_KntFirma ,TWD_KntNumer ,TWD_KodOrgKnt ,TWD_KodTyp ,TWD_KodFirma ,TWD_KodNumer">
+			<description>wg kodu</description>
+		</index>
+	</table>
+	

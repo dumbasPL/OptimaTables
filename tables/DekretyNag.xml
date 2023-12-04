@@ -1,0 +1,228 @@
+<table name="DekretyNag">
+		<description>Nagłówki dekretów księgowych</description>
+		<column name="DeN_DeNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DeN_Typ" type="INTEGER" definition="NOT NULL">
+			<description>Rodzaj/typ dekretu. Przyjmuje wartosci {1,2}</description>
+			<details>
+				1 - predekret
+				2 - dekret
+				default - 2
+			</details>
+		</column>
+		<column name="DeN_OObId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator okresu obrachunkowego</description>
+		</column>
+		<column name="DeN_DDfId" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DeN_NumerNr" type="INTEGER" definition="NULL">
+			<description />
+		</column>
+		<column name="DeN_NumerString" type="NVARCHAR(31)" definition="NULL">
+			<description />
+		</column>
+		<column name="DeN_NumerPelny" type="COMPUTED|VARCHAR(30)" definition="CDN.FN_NUMERPELNY(DeN_NumerNr,DeN_NumerString)">
+			<description>Pełny numer dokumentu</description>
+			<details>Numer wyliczany funkcją serwerową</details>
+		</column>
+		<column name="DeN_DziId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator dziennika cząstkowego</description>
+		</column>
+		<column name="DeN_Dziennik" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa dziennika cząstkowego</description>
+		</column>
+		<column name="DeN_OrgID" type="INTEGER">
+			<description>Id oryginalnego dekretu (dla strona i księgowań związanych)</description>
+		</column>
+		<column name="DeN_Storno" type="TINYINT">
+			<description>Czy księgowanie jest stornem</description>
+			<details>NULL - nie, 1 - tak</details>
+		</column>
+		<column name="DeN_NrDziennika" type="INTEGER" definition="NOT NULL">
+			<description>Numer zapisu w dzienniku cząstkowym</description>
+		</column>
+		<column name="DeN_NrKsiegi" type="INTEGER" definition="NOT NULL">
+			<description>Numer zapisu w dzienniku</description>
+		</column>
+		<column name="DeN_IdentKsieg" type="VARCHAR(50)" definition="NOT NULL">
+			<description>Identyfikator księgowy</description>
+		</column>
+		<column name="DeN_IdentKsiegNumeracja" type="VARCHAR(50)">
+			<description>Schemat numeracji identyfikatora księgowego</description>
+		</column>
+		<column name="DeN_IdentKsiegDDfID" type="INT">
+			<description>ID schematu numeracji Identyfikatora księgowego</description>
+		</column>
+		<column name="DeN_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Zapis w buforze</description>
+			<details>0 - nie, 1 - tak</details>
+		</column>
+		<column name="DeN_DataDok" type="DATETIME" definition="NOT NULL">
+			<description>Data dokumentu</description>
+		</column>
+		<column name="DeN_DataWys" type="DATETIME" definition="NOT NULL">
+			<description>Data wystawienia dokumentu</description>
+		</column>
+		<column name="DeN_DataOpe" type="DATETIME" definition="NOT NULL">
+			<description>Data dokonania operacji gospodarczej</description>
+		</column>
+		<column name="DeN_Dokument" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Numer dokumentu</description>
+		</column>
+		<column name="DeN_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu</description>
+			<details>
+				Typ związanego podmiotu. Pole techniczne, wskazujące do jakiego rodzaju podmiotu odwołuje
+				się relacja:
+				NULL - brak podmiotu
+				1 - Kontrahent (tabela: Kontrahenci)
+				2 - Bank (tabela: BnkNazwy)
+				3 - Pracownik/Wspólnik (tabela: PracEtaty)
+				5 - Urząd (tabela: Urzedy)
+			</details>
+		</column>
+		<column name="DeN_PodmiotId" type="INTEGER">
+			<description>Identyfikator podmiotu</description>
+		</column>
+		<column name="DeN_KatId" type="INTEGER">
+			<description>Identyfikator kategorii</description>
+		</column>
+		<column name="DeN_Kategoria" type="VARCHAR(256)" definition="NOT NULL">
+			<description>Opis dokumentu księgowego</description>
+		</column>
+		<column name="DeN_KwotaWn" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zaksięgowana po stronie winien</description>
+		</column>
+		<column name="DeN_KwotaMa" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota zaksięgowana po stronie Ma</description>
+		</column>
+		<column name="DeN_Zrodlo" type="TINYINT" definition="NOT NULL">
+			<description>Znacznich pochodzenia zapisu</description>
+			<details>
+				Wskazuje na źródło pochodzenia zapisu. Jeśli DeN_Zrodlo&lt;&gt;0, to zapis został
+				zaksięgowany z ewidencji źródłowej, wg powiązania:&lt;br&gt;
+				1 - TraNag (TrN_DekId=DeN_DeNId);&lt;br&gt;
+				2 - VatNag (VaN_DekId=DeN_DeNId);&lt;br&gt;
+				6 - DeklNag (DkN_DekId=DeN_DeNId);&lt;br&gt;
+				7 - TrwaleHist (SrH_DekId=DeN_DeNId);&lt;br&gt;
+				9 - BnkRaporty (BRp_DekId=DeN_DeNId);&lt;br&gt;
+				10 - ListyPlac (LPL_DekId=DeN_DeNId);&lt;br&gt;
+				11 - NotyOdsNag (NON_DekId=DeN_DeNId);&lt;br&gt;
+				12 - EwidNag (EDN_DekId=DeN_DeNId);&lt;br&gt;
+				13 - BnkRozKwoty (dla różnicy kursowej: BRK_DekId=DeN_DeNId; dla rozliczenia:
+				BRK_Dek2Id=DeN_DeNId);&lt;br&gt;
+				Uwaga: dla Zrodla = 1 i 2, dla faktur zaksięgowanych do rejestru VAT, wskaźnik na DekretyNag
+				jest zapisywany "krzyżowo" w TrN_DekId i VaN_DekId
+			</details>
+		</column>
+		<column name="DeN_WzorzecTyp" type="SMALLINT">
+			<description>Typ wzorca księgowania</description>
+			<details>Relacja warunkowa: 21-SchKsiNag, 22-OkresoweNag, null-zapis z ręki</details>
+		</column>
+		<column name="DeN_WzorzecId" type="INTEGER">
+			<description>Identyfikator wzorca księgowania</description>
+		</column>
+		<column name="DeN_TypRozliczenia" type="TINYINT">
+			<description>Typ rozliczenia. 1 - kompensta, 2 - różnica kursowa, NULL - pozostałe, </description>
+		</column>
+		<column name="DeN_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="DeN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DeN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="DeN_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="DeN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="DeN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="DeN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DeN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="DeN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DeN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="DeN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_DeN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="DeN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_DeN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<column name="DeN_TS_ModB" type="DATETIME" definition="NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby logiki dekretu</details>
+		</column>
+		<column name="DeN_IdentKsiegNr" type="INTEGER" />
+		<column name="DeN_IdentKsiegStr" type="VARCHAR(30)" />
+		<column name="DeN_Korekta" type="TINYINT" definition="NOT NULL CONSTRAINT DF_DeN_Korekta default(0)">
+			<description>Wskazuje, czy dokument jest korektą</description>
+			<details>
+				0 - dokument nie jest korektą
+				1 - korekta miesięczna
+				2 - korekta kwartalna
+			</details>
+		</column>
+		<column name="DeN_OpisKorekta" type="NVARCHAR(254)">
+			<description>Opis dokumentów korekcyjnych</description>
+		</column>
+		<column name="DeN_KorektaZaplaconych" type="TINYINT" definition="NOT NULL constraint DF_DeN_KorektaZaplaconych default(0)">
+			<description>Opis dokumentów korekcyjnych</description>
+		</column>
+		<column name="DeN_TS_Export" type="DATETIME">
+			<description>TimeStamp wykonania eksportu</description>
+		</column>
+		<primaryKey name="DeN_Primary" columns="DeN_DeNId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_DeNPodmiot" localColumns="DeN_PodmiotId,DeN_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.DekretyNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_DeNKategoria" localColumns="DeN_KatId" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.DekretyNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<index name="DeNPodmiot" options="UNIQUE NONCLUSTERED" fields="DeN_PodmiotId ,DeN_PodmiotTyp ,DeN_DataDok ,DeN_DeNId">
+			<description>Wg podmiotu</description>
+		</index>
+		<index name="DeNKategoria" options="UNIQUE NONCLUSTERED" fields="DeN_KatId ,DeN_DataDok ,DeN_DeNId">
+			<description>Wg kategorii</description>
+		</index>
+		<index name="DeNDziennikChrono" options="UNIQUE NONCLUSTERED" fields="DeN_Typ, DeN_DziId ,DeN_DataDok ,DeN_Bufor ,DeN_NrDziennika ,DeN_DeNId">
+			<description>Chronologicznie w dzienniku cząstkowym</description>
+		</index>
+		<index name="DeNKsiegaChrono" options="UNIQUE NONCLUSTERED" fields="DeN_Typ, DeN_OObId ,DeN_DataDok ,DeN_Bufor ,DeN_NrKsiegi ,DeN_DeNId">
+			<description>CHronologicznie w zakresie dziennika</description>
+		</index>
+		<index name="DeNDziennikNumer" options="NONCLUSTERED" fields="DeN_Typ, DeN_DziId ,DeN_Bufor ,DeN_NrDziennika">
+			<description>Pomocniczy indeks do numeracji</description>
+		</index>
+		<index name="DeNKsiegaNumer" options="NONCLUSTERED" fields="DeN_Typ, DeN_OObId ,DeN_Bufor ,DeN_NrKsiegi">
+			<description>Pomocniczy indeks do numeracji</description>
+		</index>
+		<index name="DeNOryginal" options="NONCLUSTERED" fields="DeN_OrgID">
+			<description>Wg oryginalnego dekretu</description>
+		</index>
+		<index name="DeNWzorzec" options="NONCLUSTERED" fields="DeN_WzorzecId ,DeN_WzorzecTyp">
+			<description>Klucz obcy do wzorca, wg którego zaksięgowano</description>
+		</index>
+		<index name="DeNIdentKsieg" options="NONCLUSTERED" fields="DeN_IdentKsieg, DeN_IdentKsiegStr, DeN_IdentKsiegNr" includedColumns="DeN_DeNId, DeN_Storno">
+			<description />
+		</index>
+		<index name="DeN_DETA" options="NONCLUSTERED" fields="DeN_Typ, DeN_OObId, DeN_Bufor, DeN_DziId, DeN_DeNId" includedColumns="DeN_Storno, DeN_NrDziennika, DeN_NrKsiegi, DeN_DataDok, DeN_Dokument, DeN_Kategoria, DeN_IdentKsieg">
+			<description />
+		</index>
+		<index name="DeNNumerPelny" options="NONCLUSTERED" fields="DeN_NumerPelny">
+			<description>Wg numeru pelnego</description>
+		</index>
+	</table>
+	

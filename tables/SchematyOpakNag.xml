@@ -1,0 +1,55 @@
+<table name="SchematyOpakNag">
+		<description>Tabela schamatów opakowań</description>
+		<column name="SON_SONId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SON_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Schemat nieaktywny</description>
+		</column>
+		<column name="SON_TS_XL" type="DATETIME">
+			<description>Time Stamp importu z XL-a</description>
+		</column>
+		<column name="SON_Kod" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Kod schematu</description>
+		</column>
+		<column name="SON_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa schematu opakowania</description>
+		</column>
+		<column name="SON_OpeZalID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora zakładającego kartę</description>
+		</column>
+		<column name="SON_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SON_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp założenia karty</description>
+		</column>
+		<column name="SON_OpeModID" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego kartę</description>
+		</column>
+		<column name="SON_StaModID" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SON_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp modyfikacji karty</description>
+		</column>
+		<column name="SON_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SON_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SON_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SON_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SON_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SON_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SON_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SON_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SON_Primary" columns="SON_SONId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="SONKod" options="UNIQUE NONCLUSTERED" fields="SON_Kod">
+			<description>Klucz wg kodu</description>
+		</index>
+	</table>
+	

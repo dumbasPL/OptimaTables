@@ -1,0 +1,104 @@
+<table name="SchKsiNag">
+		<description>Nagłówki schematów księgowych</description>
+		<column name="SKN_SKNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SKN_Typ" type="SMALLINT" definition="NOT NULL">
+			<description>Typ schematu</description>
+			<details>Określa, czy jest to schemat księgowania rejestru Vat, listy płac itp.</details>
+		</column>
+		<column name="SKN_PodTyp" type="SMALLINT" definition="NOT NULL">
+			<description>Podtyp schematu</description>
+			<details>Określa, czy jest to schemat księgowania rejestru Vat, listy płac itp.</details>
+		</column>
+		<column name="SKN_Symbol" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Symbol schematu księgowego</description>
+		</column>
+		<column name="SKN_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa schematu księgowego</description>
+		</column>
+		<column name="SKN_Uwagi" type="NVARCHAR(255)" definition="NOT NULL">
+			<description>Uwagi dotyczące schematu księgowego</description>
+		</column>
+		<column name="SKN_Dziennik" type="VARCHAR(20)" definition="NOT NULL">
+			<description>Nazwa dziennika, do którego będzie wykonywane księgowanie</description>
+		</column>
+		<column name="SKN_Bufor" type="TINYINT" definition="NOT NULL">
+			<description>Czy księgować do bufora</description>
+		</column>
+		<column name="SKN_DataDok" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis daty dokumentu</description>
+		</column>
+		<column name="SKN_DataWys" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis daty wystawienia</description>
+		</column>
+		<column name="SKN_DataOpe" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis daty operacji</description>
+		</column>
+		<column name="SKN_Dokument" type="VARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny zapis numeru dokumentu</description>
+		</column>
+		<column name="SKN_Opis" type="NVARCHAR(1000)" definition="NOT NULL">
+			<description>Symboliczny opis księgowanego dokumentu</description>
+		</column>
+		<column name="SKN_Warunek" type="NVARCHAR(2000)" definition="NOT NULL">
+			<description>Symboliczny zapis warunku wykonywania księgowania</description>
+		</column>
+		<column name="SKN_DataKonfig" type="TINYINT" definition="NOT NULL">
+			<description>Flaga, pobierz datę księgowania z konfiguracji {1,0}</description>
+		</column>
+		<column name="SKN_DataKsi" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Symboliczny zapis daty księgowania (makro)</description>
+		</column>
+		<column name="SKN_NieAktywny" type="TINYINT" definition="NOT NULL">
+			<description>Schemat nie jest używany i nie powinien pojawiać się na listach</description>
+		</column>
+		<column name="SKN_BrakKontroli" type="TINYINT" definition="NOT NULL">
+			<description>Dla schematu nie należy wykonywać kontroli poprawności</description>
+			<details>
+				Jeżeli property jest zaznaczone, wówczas nie jest wykonywana kontrola poprawności
+				wygenerowania dekretu.
+				Równocześnie wygenerowane dekrety są zazwyczaj krótsze (np. dla list płac następuje
+				grupowanie podobnych składników)
+			</details>
+		</column>
+		<column name="SKN_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="SKN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SKN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SKN_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="SKN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SKN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SKN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SKN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SKN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SKN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SKN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SKN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SKN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SKN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SKN_Primary" columns="SKN_SKNId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="SKNSymbol" options="UNIQUE NONCLUSTERED" fields="SKN_Typ ,SKN_PodTyp ,SKN_Symbol">
+			<description>Według symbolu zestawienia</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,25 @@
+<table name="WszystkoPLFormyPlatnosci">
+		<description>Formy płatności dla wszystko.pl</description>
+		<column name="WPLF_WPLFId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="WPLF_WPLSId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator rekordu w CDN.WszystkoPLStanowiska</description>
+		</column>
+		<column name="WPLF_FPlId" type="INTEGER" definition="NOT NULL">
+			<description>Id formy płatności</description>
+		</column>
+		<column name="WPLF_FormaPlatnosciWPLId" type="INTEGER" definition="NOT NULL">
+			<description>Id formy we wszystko.pl</description>
+		</column>
+		<column name="WPLF_FormaPlatnosciWPL" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa formy we wszystko.pl</description>
+		</column>
+		<primaryKey name="WPLF_Primary" columns="WPLF_WPLFId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<foreignKey name="FK_WszystkoPLFormyPlatnosci" localColumns="WPLF_WPLSId" refTable="WszystkoPLStanowiska" refColumns="WPLS_WPLSId" deleteOption="CASCADE">
+			<description>Relacja CDN.WszystkoPLFormyPlatnosci:CDN.WszystkoPLStanowiska (MANY:1)</description>
+		</foreignKey>
+	</table>
+	

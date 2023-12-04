@@ -1,0 +1,25 @@
+<table name="TypWyplataStaz">
+		<description>Słownik modyfikalnych danych płacowych</description>
+		<column name="TWS_TwsId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="TWS_TwpId" type="INTEGER" definition="NOT NULL">
+			<description>Odnośnik do typu wypłaty</description>
+		</column>
+		<column name="TWS_Staz" type="INTEGER" definition="NOT NULL">
+			<description>Staż pracy</description>
+		</column>
+		<column name="TWS_Procent" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Procent</description>
+		</column>
+		<primaryKey name="TWS_Primary" columns="TWS_TwsId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_TWSTwpLink" localColumns="TWS_TwpId" refTable="TypWyplata" refColumns="TWP_TwpId" deleteOption="CASCADE">
+			<description>Relacja CDN.TypWyplataStaz:CDN.TypWyplata (MANY:1)</description>
+		</foreignKey>
+		<index name="TWSTwpLink" options="NONCLUSTERED" fields="TWS_TwpId">
+			<description>Klucz obcy typu wypłaty</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,34 @@
+<table name="HarmonogramLista">
+		<description>Tabela zapisów harmonogramów spłat pożyczki</description>
+		<column name="HRL_HrlId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="HRL_HrmId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator harmonogramu</description>
+		</column>
+		<column name="HRL_RataKapitalowa" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Kwota raty kapitałowej</description>
+		</column>
+		<column name="HRL_Rok" type="INTEGER" definition="NOT NULL">
+			<description>Rok</description>
+		</column>
+		<column name="HRL_Miesiac" type="SMALLINT" definition="NOT NULL">
+			<description>Miesiąc</description>
+		</column>
+		<column name="HRL_RataOdsetkowa" type="DECIMAL(15,2)" definition="NOT NULL">
+			<description>Rata odsetkowa</description>
+		</column>
+		<column name="HRL_ImportRowId" type="VARCHAR(36)">
+			<description>Identyfikator wiersza w bazie źródłowej</description>
+		</column>
+		<primaryKey name="HRL_Primary" columns="HRL_HrlId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_HRLHrmLink" localColumns="HRL_HrmId" refTable="Harmonogram" refColumns="HRM_HrmId" deleteOption="CASCADE">
+			<description>Relacja CDN.HarmonogramLista:CDN.Harmonogram (MANY:1)</description>
+		</foreignKey>
+		<index name="HRLHrmLink" options="NONCLUSTERED" fields="HRL_HrmId">
+			<description>Klucz obcy harmonogramu</description>
+		</index>
+	</table>
+	

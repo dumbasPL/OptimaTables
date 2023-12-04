@@ -1,0 +1,57 @@
+<table name="SchematyWindykacji">
+		<description>Schematy windykacji</description>
+		<column name="SwN_SwNId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SwN_Kod" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Kod schematu windykacji</description>
+		</column>
+		<column name="SwN_Nazwa" type="NVARCHAR(250)" definition="NOT NULL">
+			<description>Kod schematu windykacji</description>
+		</column>
+		<column name="SwN_Domyslny" type="TINYINT" definition="NOT NULL">
+			<description>Czy domyślny</description>
+		</column>
+		<column name="SwN_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Czy aktywny, czy nie</description>
+		</column>
+		<column name="SwN_OpeZalId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego</description>
+		</column>
+		<column name="SwN_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SwN_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SwN_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego</description>
+		</column>
+		<column name="SwN_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SwN_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SwN_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SwN_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SwN_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SwN_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SwN_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SwN_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SwN_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SwN_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SwN_Primary" columns="SwN_SwNId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<index name="SwN_KodUniqueIndex" options="UNIQUE NONCLUSTERED" fields="SwN_Kod">
+			<description>Kod schematu windykacji musi być unikalny</description>
+		</index>
+	</table>
+	

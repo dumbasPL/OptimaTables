@@ -1,0 +1,305 @@
+<table name="SrsCyklNag">
+		<description>Lista wzorców dla zleceń serwisowych</description>
+		<details>Lista wzorców dla zleceń serwisowych (Moduł Serwis)</details>
+		<column name="SrW_SrWId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="SrW_Kod" type="NVARCHAR(20)" definition="NOT NULL">
+			<description>Kod wzorca</description>
+		</column>
+		<column name="SrW_Nazwa" type="NVARCHAR(50)" definition="NOT NULL">
+			<description>Nazwa wzorca</description>
+		</column>
+		<column name="SrW_DataDok" type="DATETIME">
+			<description>Data utworzenia dokumentu</description>
+		</column>
+		<column name="SrW_DataOstatniej" type="DATETIME">
+			<description>Data ostatniej (poprzedniej) generacji zlecenia</description>
+			<details>Pole występuje na serwerze SQL</details>
+		</column>
+		<column name="SrW_Nieaktywny" type="TINYINT" definition="NOT NULL">
+			<description>Do zaznaczania wzorców nie wykorzystywanych</description>
+		</column>
+		<column name="SrW_PowtarzajCo" type="TINYINT">
+			<description>Dookreślenie, powtarzalności cyklu (co 1,2 ,3 .. miesiące)</description>
+		</column>
+		<column name="SrW_PowtarzajCoData" type="DATETIME">
+			<description>Data początkowa dla okresów niestandardowych</description>
+		</column>
+		<column name="SrW_DataKolejnego" type="DATETIME">
+			<description>Data następnego zlecenia (następnej generacji generacji)</description>
+		</column>
+		<column name="SrW_Przypomnienie" type="TINYINT" definition="NOT NULL">
+			<description>Czy dla wzorca ustawić przypomnienie o terminie kolejnej generacji zlecenia</description>
+		</column>
+		<column name="SrW_CzasPrzypomnienia" type="DATETIME">
+			<description>Data i godzina wyświetlenia przypomnienia</description>
+		</column>
+		<column name="SrW_DDfId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator schematu numeracji zlecenia w tabeli DokDefinicje</description>
+		</column>
+		<column name="SrW_KatID" type="INTEGER">
+			<description>Identyfikator kategorii w tabelii Kategorie</description>
+		</column>
+		<column name="SrW_NumerString" type="VARCHAR(31)" definition="NOT NULL">
+			<description>Stały (parametryzowalny) człon numeru dokumentu</description>
+		</column>
+		<column name="SrW_NumerNr" type="INTEGER" definition="NOT NULL">
+			<description>Autonumerowany człon numeru dokumentu</description>
+		</column>
+		<column name="SrW_PodmiotTyp" type="SMALLINT">
+			<description>Typ podmiotu z którym dokonano transakcji</description>
+			<details>
+				Pole wskazuje do jakiej tabeli odwołuje się klucz obcy PodId: &lt;br&gt;
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="SrW_PodmiotId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator podmiotu</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="SrW_PodNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy kontrahenta</description>
+		</column>
+		<column name="SrW_PodNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy</description>
+		</column>
+		<column name="SrW_PodNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy</description>
+		</column>
+		<column name="SrW_PodKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description> Kraj zamieszkania (siedziby) płatnika</description>
+		</column>
+		<column name="SrW_PodWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Wojewódzwo kontrahenta</description>
+		</column>
+		<column name="SrW_PodPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat kontrahenta</description>
+		</column>
+		<column name="SrW_PodGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina kontrahenta</description>
+		</column>
+		<column name="SrW_PodUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica kontrahenta</description>
+		</column>
+		<column name="SrW_PodNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu</description>
+		</column>
+		<column name="SrW_PodNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu</description>
+		</column>
+		<column name="SrW_PodMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miejscowość kontrahenta</description>
+		</column>
+		<column name="SrW_PodKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy</description>
+		</column>
+		<column name="SrW_PodPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Siedziba poczty</description>
+		</column>
+		<column name="SrW_PodAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Uzupełnienie adresu</description>
+		</column>
+		<column name="SrW_Telefon" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Numer telefonu kontrahenta</description>
+		</column>
+		<column name="SrW_Email" type="NVARCHAR(127)" definition="NOT NULL" hash="1">
+			<description>Email kontrahenta</description>
+		</column>
+		<column name="SrW_OdbiorcaTyp" type="SMALLINT">
+			<description>Typ odbiorcy z którym dokonano transakcji</description>
+			<details>
+				1 - CDN.Kontrahenci (Kontrahenci) &lt;br&gt;
+				2 - CDN.BnkNazwy (Banki) &lt;br&gt;
+				3 - CDN.PracIdx (Pracownicy, Wspólnicy) &lt;br&gt;
+				5 - CDN.Urzedy (Urzędy)
+			</details>
+		</column>
+		<column name="SrW_OdbID" type="INTEGER">
+			<description>Identyfikator użytkownika</description>
+			<details>Wskaźnik do podmiotu - wskazuje na Id podmiotu w tabeli określonej przez PodmiotTyp,
+				lub jest równy 0 (NULL) dla podmiotu wpisanego "z ręki"</details>
+		</column>
+		<column name="SrW_OdbNazwa1" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Pierwsza linia nazwy użytkownika</description>
+		</column>
+		<column name="SrW_OdbNazwa2" type="NVARCHAR(50)" definition="NOT NULL" hash="1">
+			<description>Druga linia nazwy użytkownika</description>
+		</column>
+		<column name="SrW_OdbNazwa3" type="NVARCHAR(250)" definition="NOT NULL" hash="1">
+			<description>Trzecia linia nazwy użytkownika</description>
+		</column>
+		<column name="SrW_OdbKraj" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Kraj zamieszkania (siedziby) użytkownika</description>
+		</column>
+		<column name="SrW_OdbWojewodztwo" type="NVARCHAR(40)" definition="NOT NULL">
+			<description>Województwo użytkownika</description>
+		</column>
+		<column name="SrW_OdbPowiat" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Powiat użytkownika</description>
+		</column>
+		<column name="SrW_OdbGmina" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Gmina użytkownika</description>
+		</column>
+		<column name="SrW_OdbUlica" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Ulica użytkownika</description>
+		</column>
+		<column name="SrW_OdbNrDomu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer domu użytkownika</description>
+		</column>
+		<column name="SrW_OdbNrLokalu" type="NVARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Numer lokalu użytkownika</description>
+		</column>
+		<column name="SrW_OdbMiasto" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Miasto użytkownika</description>
+		</column>
+		<column name="SrW_OdbKodPocztowy" type="VARCHAR(10)" definition="NOT NULL" hash="1">
+			<description>Kod pocztowy użytkownika</description>
+		</column>
+		<column name="SrW_OdbPoczta" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Poczta użytkownika</description>
+		</column>
+		<column name="SrW_OdbAdres2" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Dodatkowa linia nazwy użytkownika</description>
+		</column>
+		<column name="SrW_OdbTelefon" type="VARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Telefon do użytkownika</description>
+		</column>
+		<column name="SrW_OdbEmail" type="NVARCHAR(127)" definition="NOT NULL" hash="1">
+			<description>Email do użytkownika</description>
+		</column>
+		<column name="SrW_ZlecajacyId" type="INTEGER">
+			<description>Identyfikator osoby - przedstawiciela w tabeli KntOsoby</description>
+		</column>
+		<column name="SrW_ZlecajacyNazwisko" type="NVARCHAR(40)" definition="NOT NULL" hash="1">
+			<description>Nazwisko osoby zlecającej</description>
+		</column>
+		<column name="SrW_ZlecajacyTelefon" type="NVARCHAR(40)" hash="1">
+			<description>Telefon zlecającego</description>
+		</column>
+		<column name="SrW_PrzedstawicielId" type="INTEGER">
+			<description>Identyfikator osoby - przedstawiciela w tabeli KntOsoby</description>
+		</column>
+		<column name="SrW_PrzedstawicielNazwisko" type="NVARCHAR(40)" hash="1">
+			<description>Nazwisko osoby przedstawiciela kontrahenta</description>
+		</column>
+		<column name="SrW_PrzedstawicielTelefon" type="NVARCHAR(40)" hash="1">
+			<description>Telefon przedstawiciela kontrahenta</description>
+		</column>
+		<column name="SrW_ProwadzacyTyp" type="SMALLINT">
+			<description>Typ prowadzącego zlecenie (pracownik, operator)</description>
+			<details>
+				3 - pracownik (CDN.PracIdx);
+				8 - operator (CDN.Operatorzy w bazie konfiguracyjnej);
+			</details>
+		</column>
+		<column name="SrW_ProwadzacyId" type="INTEGER">
+			<description>Id prowadzącego zlecenie (pracownik, operator)</description>
+		</column>
+		<column name="SrW_SrUId" type="INTEGER">
+			<description>Id urządzenia</description>
+		</column>
+		<column name="SrW_Opis" type="NVARCHAR(MAX)" definition="NOT NULL">
+			<description>Opis dla wzorca zlecenia</description>
+		</column>
+		<column name="SrW_TypNB" type="TINYINT" definition="NOT NULL">
+			<description>Algorytm liczenia cen: od netto; od brutto</description>
+			<details>e_op_TypNB_Brutto</details>
+		</column>
+		<column name="SrW_ZbiorczeFaCzesci" type="TINYINT" definition="NOT NULL">
+			<description>Fakturowanie zbiorcze części</description>
+		</column>
+		<column name="SrW_ZbiorczeTwrIdCzesci" type="INTEGER">
+			<description>Usługa do zbiorczego fakturowania cześci</description>
+		</column>
+		<column name="SrW_ZbiorczeFaCzynnosci" type="TINYINT" definition="NOT NULL">
+			<description>Fakturowanie zbiorcze czynności</description>
+		</column>
+		<column name="SrW_ZbiorczeTwrIdCzynnosci" type="INTEGER">
+			<description>Usługa do zbiorczego fakturowania czynnosci</description>
+		</column>
+		<column name="SrW_Waluta" type="VARCHAR(3)" definition="NOT NULL CONSTRAINT DF_SrW_Waluta DEFAULT('')" />
+		<column name="SrW_MagId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator magazynu</description>
+		</column>
+		<column name="SrW_Automat" type="TINYINT" definition="NOT NULL CONSTRAINT DF_SrW_Automat DEFAULT(0)">
+			<description>Automatyczne generowanie zleceń</description>
+		</column>
+		<column name="SrW_AutomatEmail" type="TINYINT">
+			<description>Wysyłanie e-mail o wygenerowanym zleceniu</description>
+		</column>
+		<column name="SrW_AutomatEmailSzablonId" type="INTEGER">
+			<description>Szablon domyslny dla e-maila</description>
+		</column>
+		<column name="SrW_AutomatEmailAdres" type="NVARCHAR(127)" hash="1">
+			<description>Email o automatycznie generowanym zleceniu</description>
+		</column>
+		<column name="SrW_AutomatSms" type="TINYINT">
+			<description>Wysyłanie SMS o wygenerowanym zleceniu</description>
+		</column>
+		<column name="SrW_AutomatSmsSzablonId" type="INTEGER">
+			<description>Szablon domyslny dla sms</description>
+		</column>
+		<column name="SrW_AutomatSmsNumerTelefonu" type="NVARCHAR(127)" hash="1">
+			<description>Numer telefonu dla SMS o automatycznie generowanym zleceniu</description>
+		</column>
+		<column name="SrW_OpeZalId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora wprowadzającego dokument</description>
+		</column>
+		<column name="SrW_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrW_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp wprowadzenia zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrW_OpeModId" type="INTEGER" filterVisible="false">
+			<description>Identyfikator operatora modyfikującego dokument</description>
+		</column>
+		<column name="SrW_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SrW_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>Time Stamp ostatniej modyfikacji zapisu</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="SrW_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrW_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SrW_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrW_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SrW_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SrW_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SrW_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SrW_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SrW_Primary" columns="SrW_SrWId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_SrWKategoria" localColumns="SrW_KatID" refTable="Kategorie" refColumns="Kat_KatID">
+			<description>Relacja CDN.SrsCyklNag:CDN.Kategorie (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrWZlecajacy" localColumns="SrW_ZlecajacyId" refTable="KntOsoby" refColumns="KnO_KnOId">
+			<description>Relacja CDN.SrsCyklNag:CDN.KntOsoby (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrWPodmiot" localColumns="SrW_PodmiotId,SrW_PodmiotTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.SrsCyklNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<foreignKey name="FK_SrWOdbiorca" localColumns="SrW_OdbID,SrW_OdbiorcaTyp" refTable="PodmiotyView" refColumns="Pod_PodId,Pod_PodmiotTyp">
+			<description>Relacja CDN.SrsCyklNag:CDN.PodmiotyView (MANY:1)</description>
+		</foreignKey>
+		<index name="SrWKod" options="UNIQUE NONCLUSTERED" fields="SrW_Kod">
+			<description>Wg kodu wzorca</description>
+		</index>
+	</table>
+	

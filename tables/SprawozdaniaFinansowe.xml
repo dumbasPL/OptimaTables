@@ -1,0 +1,104 @@
+<table name="SprawozdaniaFinansowe">
+		<description>Sprawozdania finansowe</description>
+		<column name="SFS_SFSId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="SFS_DABId" type="INT">
+			<description>Klucz obcy do tabeli CDN.DaneBinarne</description>
+			<details />
+		</column>
+		<column name="SFS_ConfigDABId" type="INT">
+			<description>Klucz obcy do tabeli CDN.DaneBinarne</description>
+			<details />
+		</column>
+		<column name="SFS_UPODABId" type="INT">
+			<description>Klucz obcy do tabeli CDN.DaneBinarne</description>
+			<details />
+		</column>
+		<column name="SFS_SchemaVersion" type="nvarchar(11)">
+			<description>Nazwa firmy</description>
+			<details />
+		</column>
+		<column name="SFS_Active" type="INT" definition="NOT NULL CONSTRAINT DF_SFS_Active DEFAULT(1)">
+			<description>Sprawozdanie finansowe jest aktywne,nieaktywne</description>
+			<details />
+		</column>
+		<column name="SFS_DateTo" type="DATETIME">
+			<description>Data do</description>
+		</column>
+		<column name="SFS_PreparationDate" type="DATETIME">
+			<description>Data utworzenia</description>
+		</column>
+		<column name="SFS_CompanyName" type="nvarchar(max)">
+			<description>Nazwa firmy</description>
+			<details />
+		</column>
+		<column name="SFS_Type" type="INT">
+			<description>Typ sprawozdania finansowego</description>
+			<details />
+		</column>
+		<column name="SFS_Status" type="INT">
+			<description>Status sprawozdania; 1 - bufor, 0 - zatwierdzony</description>
+			<details />
+		</column>
+		<column name="SFS_UPODescription" type="nvarchar(max)">
+			<description>Opis UPO</description>
+			<details />
+		</column>
+		<column name="SFS_UPOCode" type="nvarchar(4)">
+			<description>Kod upo</description>
+			<details />
+		</column>
+		<column name="SFS_ReferenceNumber" type="nvarchar(41)">
+			<description>Kod upo</description>
+			<details />
+		</column>
+		<column name="SFS_TS_Oblicz" type="DATETIME">
+			<description>Data i godzina obliczenia zestawienia</description>
+		</column>
+		<column name="SFS_OpeZalID" type="INTEGER">
+			<description>Identyfikator operatora wprowadzającego zapis</description>
+		</column>
+		<column name="SFS_StaZalId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SFS_TS_Zal" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp wprowadzenia zapisu</description>
+			<details>TimeStamp wprowadzenia - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SFS_OpeModID" type="INTEGER">
+			<description>Identyfikator operatora modyfikującego zapis</description>
+		</column>
+		<column name="SFS_StaModId" type="INTEGER">
+			<description>Identyfikator stanowiska (komputera)</description>
+		</column>
+		<column name="SFS_TS_Mod" type="DATETIME" definition="NOT NULL">
+			<description>TimeStamp zmodyfikowania zapisu</description>
+			<details>TimeStamp modyfikacji - reprezentacja na potrzeby serwera MS SQL</details>
+		</column>
+		<column name="SFS_OpeModKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SFS_OpeModKod DEFAULT('')">
+			<description>Kod operatora tworzącego zapis</description>
+		</column>
+		<column name="SFS_OpeModNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SFS_OpeModNazwisko DEFAULT('')">
+			<description>Nazwisko operatora tworzącego zapis</description>
+		</column>
+		<column name="SFS_OpeZalKod" type="VARCHAR(20)" definition="NOT NULL CONSTRAINT DF_SFS_OpeZalKod DEFAULT('')">
+			<description>Kod operatora modyfikującego zapis</description>
+		</column>
+		<column name="SFS_OpeZalNazwisko" type="NVARCHAR(50)" definition="NOT NULL CONSTRAINT DF_SFS_OpeZalNazwisko DEFAULT('')">
+			<description>Nazwisko operatora modyfikującego zapis</description>
+		</column>
+		<primaryKey name="SFS_Primary" columns="SFS_SFSId">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="SFSDABId" options="UNIQUE NONCLUSTERED" fields="SFS_DABId">
+			<description>Według DABId</description>
+		</index>
+		<index name="SFSConfigDABId" options="UNIQUE NONCLUSTERED" fields="SFS_ConfigDABId">
+			<description>Według DABId</description>
+		</index>
+		<index name="SFSUPODABId" options="UNIQUE NONCLUSTERED" fields="SFS_UPODABId">
+			<description>Według DABId</description>
+		</index>
+	</table>
+	

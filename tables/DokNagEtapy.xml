@@ -1,0 +1,85 @@
+<table name="DokNagEtapy">
+		<description>Etapy obiegu dokumentu</description>
+		<details>Elementy dokumentów (faktur, paragonów itp).</details>
+		<column name="DnE_DnEId" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="DnE_DnPrID" type="INTEGER">
+			<description>Id ProcesEtapu</description>
+			<details>Identyfikator do tabeli CDN.DokNagProcesEtapy</details>
+		</column>
+		<column name="DnE_EtapID" type="INTEGER">
+			<description>Id etapu z bazy konfiguracyjnej</description>
+			<details>Identyfikator do tabeli CDN.SekEtapy</details>
+		</column>
+		<column name="DnE_Typ" type="INTEGER">
+			<description>Typ dokumentu; 1 firmowy; 2 wspólny</description>
+		</column>
+		<column name="DnE_OpeId" type="INTEGER" definition="NOT NULL">
+			<description>Operator przypisany do etapu;</description>
+		</column>
+		<column name="DnE_Wykonany" type="SMALLINT" definition="NOT NULL">
+			<description>0- nie; 1 -tak; 2 - bieżący; 3 - pominięty</description>
+		</column>
+		<column name="DnE_Obowiazkowy" type="TINYINT" definition="NOT NULL">
+			<description>Czy etap jest obowiązkowy</description>
+			<details>
+				0 - nie &lt;br&gt;
+				1- tak
+			</details>
+		</column>
+		<column name="DnE_CzyTerminWykonania" type="TINYINT" definition="NOT NULL">
+			<description>Czy ustalono termin wykonania</description>
+			<details>
+				0 - nie
+				1 - tak
+			</details>
+		</column>
+		<column name="DnE_TerminWykonania" type="DATETIME" definition="NOT NULL">
+			<description>Termin wykonania etapu</description>
+		</column>
+		<column name="DnE_TerminOd" type="DATETIME" definition="NOT NULL">
+			<description>Data rozpoczęcia etapu</description>
+		</column>
+		<column name="DnE_TerminDo" type="DATETIME" definition="NOT NULL">
+			<description>Data zakończenia etapu</description>
+			<details>
+				Pole to występuje na serwerze MS SQL.
+
+				Data wystawienia faktury sprzedaży lub data wpływu faktury zakupu
+			</details>
+		</column>
+		<column name="DnE_RezerwujCzas" type="TINYINT" definition="NOT NULL">
+			<description>Czy rezerwować czas w terminarzu</description>
+			<details>
+				0 - nie rezerwuj czasu w terminarzu &lt;br&gt;
+				1 - rezerwuj czas w terminarzu
+			</details>
+		</column>
+		<column name="DnE_Przypomnienie" type="TINYINT" definition="NOT NULL">
+			<description>Czy generować przypomnienie</description>
+			<details>
+				0 - nie przypominaj &lt;br&gt;
+				1 - przypominaj
+			</details>
+		</column>
+		<column name="DnE_CzasPrzypomnienia" type="DATETIME" definition="NOT NULL">
+			<description>Czas przypomnienia przed terminem czynności</description>
+			<details>Pole to występuje na serwerze MS SQL</details>
+		</column>
+		<column name="DnE_Komentarz" type="NVARCHAR(1024)">
+			<description>Komentarz</description>
+		</column>
+		<primaryKey name="DnE_Primary" columns="DnE_DnEId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_DnEProcesEtapy" localColumns="DnE_DnPrID" refTable="DokNagProcesEtapy" refColumns="DnPr_DnPrID" deleteOption="CASCADE">
+			<description>Relacja CDN.DokNagEtapy:CDN.DokNagProcesEtapy (MANY:1)</description>
+		</foreignKey>
+		<index name="DnEProcesEtapy" options="UNIQUE NONCLUSTERED" fields="DnE_DnPrID ,DnE_DnEId" />
+	</table>
+	

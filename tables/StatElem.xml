@@ -1,0 +1,11 @@
+<table name="StatElem">
+		<description>Statystyki pracy rozproszonej</description>
+		<details>Tabela wprowadzona dla wersji rozwojowych, nieużywana w v 13.0.1</details>
+		<column name="StE_StEId" type="INTEGER" definition="IDENTITY(1,1)" />
+		<column name="StE_LiczbaElemEksp" type="INTEGER" definition="NOT NULL" />
+		<column name="StE_LiczbaElemImp" type="INTEGER" definition="NOT NULL" />
+		<column name="StE_StNId" type="INTEGER" definition="NOT NULL" />
+		<column name="StE_TypElem" type="SMALLINT" definition="NOT NULL" />
+		<primaryKey name="StE_Primary" columns="StE_StEId" />
+	</table>
+	

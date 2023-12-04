@@ -1,0 +1,19 @@
+<table name="UsunieteObiekty">
+		<description>Usunięte z bazy obiekty</description>
+		<column name="UOb_UObID" type="INTEGER" definition="IDENTITY(1,1)" filterVisible="false">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="UOb_Typ" type="INTEGER" definition="NOT NULL" filterVisible="false">
+			<description>Typ usuniętego obiektu</description>
+		</column>
+		<column name="UOb_ImportRowId" type="VARCHAR(36)" definition="NOT NULL">
+			<description>Identyfikator wiersza usuniętego obiektu (zgodnie z IOptimaObjectTypeInfo.Type)</description>
+		</column>
+		<primaryKey name="UOb_Primary" columns="UOb_UObID">
+			<description>Wg identyfikatora rekordu</description>
+		</primaryKey>
+		<index name="UObTypIRID" options="UNIQUE NONCLUSTERED" fields="UOb_Typ, UOb_ImportRowId">
+			<description>Wg typu i identyfikatora wiersza</description>
+		</index>
+	</table>
+	

@@ -1,0 +1,33 @@
+<table name="DefinicjaZmianPola">
+		<description>Słownik modyfikalnych danych kadrowych</description>
+		<column name="DZP_DzpId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="DZP_DfzId" type="INTEGER" definition="NOT NULL">
+			<description>Link do definicji zmian</description>
+		</column>
+		<column name="DZP_Nazwa" type="NVARCHAR(61)" />
+		<column name="DZP_Rodzaj" type="TINYINT" definition="NOT NULL">
+			<description>Rodzaj danych w słowniku</description>
+		</column>
+		<column name="DZP_Wartosc" type="DECIMAL(15,2)">
+			<description>Wartość rekordu</description>
+		</column>
+		<column name="DZP_WartoscTekst" type="NVARCHAR(254)" definition="NOT NULL">
+			<description>Wartość</description>
+		</column>
+		<column name="DZP_Nieaktywny" type="TINYINT" definition="NOT NULL" />
+		<column name="DZP_Format" type="NVARCHAR(20)" definition="NOT NULL" />
+		<column name="DZP_Dodatkowe" type="NVARCHAR(254)" definition="NOT NULL" />
+		<column name="DZP_Kolekcja" type="NVARCHAR(128)" definition="NOT NULL" />
+		<column name="DZP_Inne" type="NVARCHAR(128)" definition="NOT NULL" />
+		<primaryKey name="DZP_Primary" columns="DZP_DzpId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<foreignKey name="FK_DZPDfzLink" localColumns="DZP_DfzId" refTable="DefinicjaZmian" refColumns="DFZ_DfzId" deleteOption="CASCADE">
+			<description>Relacja CDN.DefinicjaZmianPola:CDN.DefinicjaZmian (MANY:1)</description>
+		</foreignKey>
+		<index name="DZPDfzLink" options="NONCLUSTERED" fields="DZP_DfzId" />
+		<index name="DFZNazwa" options="UNIQUE NONCLUSTERED" fields="DZP_Nazwa ,DZP_DfzId" />
+	</table>
+	

@@ -1,0 +1,20 @@
+<table name="PrzWyrej">
+		<description>Słownik przyczyny wyrejestrowania z ubezpieczenia</description>
+		<column name="PWR_PwrId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+		</column>
+		<column name="PWR_PrzWyrej3" type="INTEGER" definition="NOT NULL" />
+		<column name="PWR_Poziom" type="INTEGER" definition="NOT NULL" />
+		<column name="PWR_Wybieralny" type="INTEGER" definition="NOT NULL" />
+		<column name="PWR_Opis" type="NVARCHAR(510)" definition="NOT NULL">
+			<description>Opis przyczyny wyrejestrowania z ubezpieczenia</description>
+		</column>
+		<column name="PWR_ZjeId" type="NVARCHAR(128)" definition="NOT NULL constraint DF_PWR_ZjeId default('')" />
+		<primaryKey name="PWR_Primary" columns="PWR_PwrId">
+			<description>Klucz główny</description>
+		</primaryKey>
+		<index name="PWRZjeLink" options="NONCLUSTERED" fields="PWR_ZjeId">
+			<description>Klucz obcy słownika</description>
+		</index>
+	</table>
+	

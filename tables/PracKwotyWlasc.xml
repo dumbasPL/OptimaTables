@@ -1,0 +1,50 @@
+<table name="PracKwotyWlasc">
+		<description>Tabela kwot dochodu / przychodu właściciela</description>
+		<column name="PKW_PkwId" type="INTEGER" definition="IDENTITY(1,1)">
+			<description>Identyfikator rekordu</description>
+			<details>
+				Unikalny identyfikator rekordu.
+				Poprzez to pole realizowane są wszystkie relacje typu 1:MANY do innych tabel.
+			</details>
+		</column>
+		<column name="PKW_PraId" type="INTEGER" definition="NOT NULL">
+			<description>Identyfikator pracownika</description>
+		</column>
+		<column name="PKW_Typ" type="SMALLINT" definition="NOT NULL CONSTRAINT DF_PKW_Typ DEFAULT(0)">
+			<description>Typ kwoty</description>
+			<details>
+				0 - według skali - dochód,
+				1 - podatek liniowy - dochód,
+				2 - ryczałt - przychód,
+				3 - ryczałt - przychód za ubiegły rok.
+			</details>
+		</column>
+		<column name="PKW_Miesiac" type="SMALLINT" definition="NOT NULL">
+			<description>Miesiąc wprowadzonej kwoty</description>
+		</column>
+		<column name="PKW_Rok" type="SMALLINT" definition="NOT NULL">
+			<details>Rok wprowadzonej kwoty</details>
+		</column>
+		<column name="PKW_Wartosc" type="DECIMAL(15,2)" definition="NOT NULL">
+			<details>Kwota dochodu / przychodu</details>
+		</column>
+		<primaryKey name="PKW_Primary" columns="PKW_PkwId">
+			<description>Wg identyfikatora</description>
+		</primaryKey>
+		<foreignKey name="FK_PraId" localColumns="PKW_PraId" refTable="PracKod" refColumns="PRA_PraId" deleteOption="CASCADE">
+			<description>Relacja CDN.PracKwotyWlasc:CDN.PracKod (MANY:1)</description>
+		</foreignKey>
+		<index name="PKWPraId" options="NONCLUSTERED" fields="PKW_PraId">
+			<description>Wg id pracownika</description>
+		</index>
+		<index name="PKWTyp" options="NONCLUSTERED" fields="PKW_Typ">
+			<description>Wg typu kwoty</description>
+		</index>
+		<index name="PKWMiesiac" options="NONCLUSTERED" fields="PKW_Miesiac">
+			<description>Wg miesiąca</description>
+		</index>
+		<index name="PKWRok" options="NONCLUSTERED" fields="PKW_Rok">
+			<description>Wg roku</description>
+		</index>
+	</table>
+	
